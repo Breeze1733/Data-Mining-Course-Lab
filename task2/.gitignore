@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+/.venv/
+/venv/
+/.env*
+/inputs/*
+!/inputs/README.md
+/outputs/
+/data/
+/logs/
+/resources/iter1_baseline/
+~$*.docx
+*.tmp
+*.log
