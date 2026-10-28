@@ -1,6 +1,6 @@
 # 任务1 景区路线自动采集
 
-采集黄山、九寨沟、颐和园的官方游览路线，以及每景区携程25篇、小红书25篇游客路线文本。入口完成采集、来源留存、候选去重和热度筛选；后续清洗与挖掘另行执行。
+采集黄山、九寨沟、颐和园的官方游览路线，以及每景区携程25篇、小红书25篇游客路线文本。采集入口完成来源留存、候选去重和热度筛选；清洗与质量检查由 `src/preprocess_collected.py` 单独执行，输出供后续实验直接读取的数据集。
 
 运行不需要Codex、LLM或模型API Key。官方页面使用代码中的来源清单；携程使用目录入口及少量公开种子链接发现文章；小红书使用站内搜索自动发现笔记。正文由程序批量提取，路线有效性使用关键词、景点节点和正则规则检查。
 
@@ -105,6 +105,31 @@ node src/crawl_xiaohongshu.mjs --area all --target 35
 node --check src/crawl_xiaohongshu.mjs
 ```
 
+## 数据预处理与质量检查
+
+采集完成后，用独立脚本完成实验项目1的清洗、结构化输出和质量检查。该阶段只读 `data/collected/` 与本机快照，不访问网络：
+
+```powershell
+.\.venv\Scripts\python.exe src/preprocess_collected.py
+```
+
+| 输入 | 输出 |
+|---|---|
+| `data/collected/tourist_routes.jsonl` | `data/processed/tourist_routes_clean.jsonl`、`tourist_routes_clean.csv` |
+| `data/collected/official_documents.jsonl` | `data/processed/official_documents_clean.jsonl`、`.csv` |
+| `data/collected/official_routes.jsonl` | `data/processed/official_routes_clean.jsonl`、`.csv` |
+| `data/collected/collection_summary.json` | `data/processed/quality_report.json`、`quality_report.md` |
+
+清洗规则包括：HTML标签与隐藏块移除、HTML实体反转义、不换行空格与全角空格统一、全角数字/字母转半角（保留中文标点与 ①/²/℃ 等语义符号）、话题标签移入 `tags`、@提及与装饰表情移除、平台UI行删除、同篇重复长段落删除、空白与空行统一。路线箭头与 ✅/❌/⚠/❗ 等语义符号保留。
+
+质量检查覆盖：必填字段与URL、各景区/平台数量、清洗后长度分布、残留HTML/网址/控制字符/乱码、近似重复标记、作者与发布日期缺失、官方采集失败的文档，以及任务书要求（每景区至少1条官方路线、3篇游记）。`quality_report.json` 的 `complete` 为 `true` 表示配额、必填字段和关键噪声检查通过；采集阶段的小红书缺额不会伪造补齐，而是保留在报告中。
+
+回归测试不依赖真实采集数据：
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s src -p test_preprocess_collected.py -v
+```
+
 ## 输出、日志与缓存
 
 | 路径 | 内容 |
@@ -116,6 +141,9 @@ node --check src/crawl_xiaohongshu.mjs
 | `data/collected/official_documents.jsonl` | 官方来源文档、日期、来源链与路线分支 |
 | `data/collected/official_routes.jsonl` | 全部官方分支，`ordered_route` 区分有序路线和主题建议 |
 | `data/collected/collection_summary.json` | 数量、缺额、重复剔除、字段缺失及快照哈希检查 |
+| `data/processed/tourist_routes_clean.jsonl`、`tourist_routes_clean.csv` | 清洗后的游客正文、标签、长度、指纹与质量标记 |
+| `data/processed/official_documents_clean.*`、`official_routes_clean.*` | 清洗后的官方文档与路线分支 |
+| `data/processed/quality_report.json`、`quality_report.md` | 清洗规则命中、质量标记、清洗前后样例与配额检查 |
 | `data/raw/pages/`、`data/raw/catalogs/` | 携程正文、部分官方正文与携程目录HTML快照 |
 | `research/official_expansion_pages/` | 官方HTML与图片原件 |
 | `data/raw/xiaohongshu_browser_export.json`、`data/raw/notes/` | 小红书批量正文导出和有效笔记独立快照 |
@@ -143,7 +171,7 @@ node --check src/crawl_xiaohongshu.mjs
 
 提交代码、依赖声明、`package-lock.json`、来源定义和说明文档。仓库根目录的 `.gitignore` 管理根目录环境和通用系统文件；`task1/.gitignore` 管理本任务的虚拟环境、Node依赖、浏览器会话、`data/`、`logs/`、`qa/`，以及研究目录下的采集JSON、HTML和图片快照。原先已跟踪的这些生成文件从Git索引移除，本机文件保留；新克隆使用上述命令自行生成。
 
-旧版 `collect.py`、`assemble.py`、`preprocess.py`、`export_xlsx.mjs` 及 `report.docx` 属于此前实验阶段，不是本轮入口；`sources.json` 是旧版来源配置，继续保留为文本配置。提交课程成果时可以另外打包本机 `data/collected/` 与必要证据，不要打包浏览器会话。
+旧版 `collect.py`、`assemble.py`、`preprocess.py`、`export_xlsx.mjs` 及 `report.docx` 属于此前实验阶段，不是本轮入口；`sources.json` 是旧版来源配置，继续保留为文本配置。提交课程成果时可以另外打包本机 `data/collected/`、`data/processed/` 与必要证据，不要打包浏览器会话。
 
 ## 历史运行参考
 
