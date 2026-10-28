@@ -1,0 +1,4 @@
+# Preprocessing and collection use only the Python standard library.
+# XLSX authoring: bundled Node.js + @oai/artifact-tool (see src/export_xlsx.mjs).
+# DOCX report authoring:
+python-docx>=1.1,<2
