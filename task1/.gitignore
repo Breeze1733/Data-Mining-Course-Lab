@@ -1,0 +1,30 @@
+# 本任务的本地环境与依赖
+__pycache__/
+*.py[cod]
+/.venv/
+/venv/
+/node_modules/
+/.env
+/.env.*
+!/.env.example
+
+# 本任务的浏览器会话
+/.browser-profile/
+/.browser-profile-*/
+/.auth/
+
+# 本任务生成的数据、网页证据、日志和验证缓存
+# research 下的 .py 和 .md 是来源定义与说明，继续跟踪。
+/data/
+/qa/
+/logs/
+/research/*.json
+/research/*.jsonl
+/research/*.html
+/research/*_pages/
+/.verification/
+
+# 本任务的临时文件
+~$*.docx
+*.tmp
+*.log

@@ -141,7 +141,7 @@ node --check src/crawl_xiaohongshu.mjs
 
 ## Git跟踪规则
 
-提交代码、依赖声明、`package-lock.json`、来源定义和说明文档。`.gitignore` 排除虚拟环境、Node依赖、浏览器会话、`data/`、`logs/`、`qa/`，以及研究目录下的采集JSON、HTML和图片快照。原先已跟踪的这些生成文件从Git索引移除，本机文件保留；新克隆使用上述命令自行生成。
+提交代码、依赖声明、`package-lock.json`、来源定义和说明文档。仓库根目录的 `.gitignore` 管理根目录环境和通用系统文件；`task1/.gitignore` 管理本任务的虚拟环境、Node依赖、浏览器会话、`data/`、`logs/`、`qa/`，以及研究目录下的采集JSON、HTML和图片快照。原先已跟踪的这些生成文件从Git索引移除，本机文件保留；新克隆使用上述命令自行生成。
 
 旧版 `collect.py`、`assemble.py`、`preprocess.py`、`export_xlsx.mjs` 及 `report.docx` 属于此前实验阶段，不是本轮入口；`sources.json` 是旧版来源配置，继续保留为文本配置。提交课程成果时可以另外打包本机 `data/collected/` 与必要证据，不要打包浏览器会话。
 
