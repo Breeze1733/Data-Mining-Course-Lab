@@ -131,12 +131,12 @@ def body_parts(d):
  text=re.sub(r'\s*\n\s*','',text)
  return [p for p in re.split(r'(?<=[。！？；])',text) if p.strip()],selector+'; legacy direct text sentences'
 
-def verify_one(meta):
+def verify_one(meta,refresh=False):
  rec=dict(meta);scenic=rec['scenic_area'];ident=article_id(rec['url'])
  rec.update(record_id=f'CTRIP_{ident}',source_platform='携程游记',text_type='travelogue',collected_at=stamp())
  try:
   path=PAGES/f'CTRIP_{ident}.html'
-  if path.exists():raw=path.read_bytes();status='cached_snapshot';final=rec['url']
+  if path.exists() and not refresh:raw=path.read_bytes();status='cached_snapshot';final=rec['url']
   else:
    status,final,raw=get(rec['url'])
    path.write_bytes(raw)

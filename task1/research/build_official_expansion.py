@@ -144,7 +144,7 @@ SOURCES=[
 ]
 
 def run(offline=False):
-    PAGES.mkdir(exist_ok=True)
+    PAGES.mkdir(parents=True,exist_ok=True)
     prior_path=HERE/'official_expansion.json'
     prior={s['evidence_id']:s for s in json.loads(prior_path.read_text('utf-8'))} if prior_path.exists() else {}
     result=[]
@@ -152,8 +152,8 @@ def run(offline=False):
         s=dict(spec); definitions=s.pop('variant_definitions')
         try:
             path=PAGES/(s['evidence_id']+'.html')
-            if offline and s['evidence_id'] in prior:
-                data=path.read_bytes();status=prior[s['evidence_id']]['http_status']
+            if offline:
+                data=path.read_bytes();status=prior.get(s['evidence_id'],{}).get('http_status','offline_snapshot')
             else:
                 req=urllib.request.Request(s['source_url'],headers={'User-Agent':'Mozilla/5.0'})
                 with urllib.request.urlopen(req,timeout=30) as r:
@@ -163,7 +163,7 @@ def run(offline=False):
             ns=tree.xpath(s['xpath'])
             fragment='\n'.join(html.tostring(n,encoding='unicode',with_tail=False) for n in ns)
             text=text_of(fragment)
-            s['http_status']=status;s['collected_at']=prior[s['evidence_id']]['collected_at'] if offline and s['evidence_id'] in prior else datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds')
+            s['http_status']=status;s['collected_at']=(prior.get(s['evidence_id'],{}).get('collected_at') or datetime.fromtimestamp(path.stat().st_mtime,ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds')) if offline else datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds')
             s['snapshot_file']=path.relative_to(HERE.parent).as_posix()
             s['snapshot_sha256']=hashlib.sha256(data).hexdigest()
             s['body_node_count']=len(ns)
@@ -187,14 +187,21 @@ def run(offline=False):
     image_path=PAGES/'YHY_QM2025_0.jpg'
     image_id='YHY-EXP11'
     image_text='颐和园\n「西门入园」\n↓\n畅观堂\n【观赏品种】玉兰\n↓\n玉带桥\n【观赏品种】白花山碧桃、“品虹”桃、“品霞”桃\n↓\n耕织图\n【观赏品种】白花山碧桃、连翘\n【时令美食】水村居茶社\n↓\n石舫\n【观赏品种】樱花\n↓\n画中游\n↓\n「北如意门出园」'
-    if not image_path.exists():
-        with urllib.request.urlopen(urllib.request.Request(image_url,headers={'User-Agent':'Mozilla/5.0'}),timeout=30) as r:image_path.write_bytes(r.read())
+    try:
+        if not image_path.exists():
+            if offline:raise FileNotFoundError('离线快照缺失：'+str(image_path))
+            with urllib.request.urlopen(urllib.request.Request(image_url,headers={'User-Agent':'Mozilla/5.0'}),timeout=30) as r:image_path.write_bytes(r.read())
+    except Exception as e:
+        result.append(dict(evidence_id=image_id,scenic_area='颐和园',source_url=image_page,accepted=False,error=str(e)))
+        (HERE/'official_expansion.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+        print('FAIL',image_id,str(e),flush=True)
+        return
     image_capture_time=prior.get(image_id,{}).get('collected_at') or datetime.fromtimestamp(image_path.stat().st_mtime,ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds')
     result.append(dict(evidence_id=image_id,scenic_area='颐和园',source_url=image_page,
         title='清明 游园赏花宝藏路线来啦 颐和园西门至北如意门',published_at='2025-04-03',
         extractor='official_image_visual_transcription',image_url=image_url,
         extraction_selector='正文第一张长图中“颐和园”标题至“北如意门出园”区域，逐字转录路线节点和观赏品种；图示箭头转录为↓',
-        provenance_note='北京市公园管理中心，来源畅游公园。图片原件与4张局部检查图保留。仅转录目标景区路线节点和花卉，不混入下方天坛公园路线；画中游茶饮商品文字不纳入范围。',
+        provenance_note='北京市公园管理中心，来源畅游公园。下载图片原件并使用代码中预先核对的颐和园路线转录，不执行OCR；不混入下方天坛公园路线。',
         raw_content=image_text,raw_format='text',http_status=200,collected_at=image_capture_time,
         snapshot_file=image_path.relative_to(HERE.parent).as_posix(),snapshot_sha256=hashlib.sha256(image_path.read_bytes()).hexdigest(),
         route_variants=[dict(title='2025清明西门入北如意门出赏花线',source_text=image_text)],

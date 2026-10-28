@@ -1,6 +1,0 @@
-{
-  "previews_written_and_signature_verified": true,
-  "worker_exit_status": 3221226505,
-  "worker_signal": null,
-  "note": "Native renderer exited during shutdown after valid PNGs were saved; XLSX authoring and content verification completed independently."
-}

@@ -1,0 +1,11 @@
+{
+  "name": "scenic-route-data-collection",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=20"},
+  "scripts": {
+    "crawl:xhs": "node src/crawl_xiaohongshu.mjs --area all --target 35",
+    "select": "python src/select_collection.py --per-platform 25"
+  },
+  "dependencies": {"playwright": "1.62.1"}
+}

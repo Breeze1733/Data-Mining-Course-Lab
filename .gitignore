@@ -1,1 +1,33 @@
-task1/data/raw/pages/
+# 本地环境与依赖
+**/__pycache__/
+*.py[cod]
+.venv/
+venv/
+**/node_modules/
+.env
+.env.*
+!.env.example
+
+# 浏览器会话含个人登录状态，永不提交
+task1/.browser-profile/
+task1/.browser-profile-*/
+task1/.auth/
+
+# 采集/分析产生的本地数据、网页证据、日志和缓存
+# 保留 research 下的 .py 和 .md：它们是来源定义和采集范围说明。
+task1/data/
+task1/qa/
+task1/logs/
+task1/research/*.json
+task1/research/*.jsonl
+task1/research/*.html
+task1/research/*_pages/
+task1/research/*.tmp
+task1/.verification/
+
+# 临时文件
+~$*.docx
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
