@@ -14,3 +14,8 @@
 # 通用系统文件；各任务的生成文件由各自的 .gitignore 管理
 .DS_Store
 Thumbs.db
+
+# uv 环境文件
+/.python-version
+/uv.lock
+/pyproject.toml
