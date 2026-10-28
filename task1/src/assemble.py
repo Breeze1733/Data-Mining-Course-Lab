@@ -56,7 +56,7 @@ def main():
         variants=[v for v in s.get('route_variants',[]) if v.get('counts_as_scenic_internal_route',True)]
         body='\n\n'.join(v['source_text'] for v in variants)
         if not body:continue
-        r=dict(record_id=rid,scenic_area='黄山',source_platform='官方' if 'huangshan.com.cn' in s['url'] else '官方推荐转载',source_url=s['url'],title=s['title'],text_type='official_route',collected_at=s['collected_at'],raw_content=body,raw_format='text',extraction_selector=s['xpath']+'; 仅黄山主体路线原文分支',raw_file=s['raw_file'],content_scope='official_huangshan_route_section',author='',published_at=s['published_at'].split(' ')[0],provenance_note=s['official_basis']+'；'+s.get('scope_note',''),snapshot_sha256=sha(path),acquisition_method='urllib.request + lxml XPath',date_note='页面显示日期；保留历史信息，不认定当前有效')
+        r=dict(record_id=rid,scenic_area='黄山',source_platform='官方' if 'huangshan.com.cn' in s['url'] else '官方推荐转载',source_url=s['url'],title=s['title'],text_type='official_route',collected_at=s['collected_at'],raw_content=body,raw_format='text',extraction_selector=s['xpath']+'; 仅黄山主体路线原文分支',raw_file=s['raw_file'],content_scope='official_huangshan_route_section',author='',published_at=s['published_at'].split(' ')[0],provenance_note=s['official_basis']+'；'+s.get('scope_note',''),snapshot_sha256=sha(path),acquisition_method='urllib.request + lxml XPath',date_note='页面显示日期')
         by_url[canonical(r['source_url'])]=r
         for j,v in enumerate(variants,1):
             routes.append(dict(route_id=f'{rid}-R{j}',source_record_id=rid,scenic_area='黄山',source_url=r['source_url'],route_title=v['title'],route_text=v['source_text'],published_at=r['published_at'],scope_note=s.get('scope_note','')))

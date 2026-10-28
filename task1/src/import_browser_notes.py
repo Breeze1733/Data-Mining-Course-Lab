@@ -399,7 +399,7 @@ def run(input_path: Path, output_path: Path, audit_path: Path) -> dict:
             "screening_flags": list(dict.fromkeys(selected["flags"])),
             "screening_poi_hits": [item["poi"] for item in selected["poi_hits"]],
             "screening_route_evidence": selected["route_evidence"],
-            "date_note": "仅采用原始日期元数据明确给出的年份；未知年份不推断，原始日期另存",
+            "date_note": "仅采用原始日期元数据明确给出的年份",
         }
         merged.append(result)
         selected["merge_action"] = "selected_for_merged_dataset"

@@ -74,7 +74,7 @@ SOURCES=[
    '天下九寨沟 大美阿坝州 万象自然科学行旅体验官招募','2026-08-11',JIUZHAI_BODY,
    '8月15日','本期主讲人',
    [('万象自然科学行旅 双龙海 芦苇海 盆景滩','本次体验活动','')],
-   '管理局官网活动公告；8月15日特定活动、2.2公里约2小时，属于历史活动线路，不声称现在仍可报名。'),
+   '管理局官网活动公告；8月15日特定活动、2.2公里约2小时，属于历史活动线路。'),
  S('JZG-SUP01','九寨沟','https://www.jiuzhai.com/tourism-product/ecology',
    '生态之旅 扎如沟生态游与原始森林生态游','',
    '//div[contains(@class,"g-blockcontent-header") and h2[normalize-space(.)="扎如沟生态游" or normalize-space(.)="原始森林生态游"]]',

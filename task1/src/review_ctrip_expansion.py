@@ -91,8 +91,7 @@ def run():
   'accepted_before_author_dedup':dict(collections.Counter(r['scenic_area'] for r in records if r.get('accepted_before_author_dedup'))),
   'accepted_final':dict(collections.Counter(r['scenic_area'] for r in records if r.get('accepted'))),
   'rejection_reasons':dict(collections.Counter(reason for r in records if not r.get('accepted') for reason in r.get('rejection_reasons',[]))),
-  'author_policy':'每景区对公开目录显示的同作者保留路线较丰富的一篇；与既有种子作者相同的扩展篇不重复纳入。公开HTML未展示的作者保持空值，不声称作者身份已核验。',
-  'scope':'黄山风景区公开最新目录1至15页、九寨沟公开最新目录1至38页；颐和园为已执行关键词组合检索候选。未遍历北京576页全城目录，也未声称穷尽携程全部城市归档或互联网。',
+  'author_policy':'每景区对公开目录显示的同作者保留路线较丰富的一篇；与既有种子作者相同的扩展篇不重复纳入。公开HTML未展示的作者保持空值。',
  }
  expansion.save(RESEARCH/'ctrip_expansion_summary.json',summary)
  print(json.dumps(summary,ensure_ascii=False,indent=2))

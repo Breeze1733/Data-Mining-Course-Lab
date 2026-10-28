@@ -193,9 +193,9 @@ def run(skip_discovery=False):
   with ThreadPoolExecutor(max_workers=2) as pool:
    for fut in as_completed([pool.submit(discover_job,j) for j in jobs]):
     found,log=fut.result();discovered.extend(found);logs.append(log)
-    save(logpath,{'scope':'黄山景区公开最新目录1至15页；九寨沟公开最新目录1至38页；颐和园聚焦搜索URL，不代表全站穷尽','candidates':discovered,'requests':logs,'complete':False})
+    save(logpath,{'candidates':discovered,'requests':logs,'complete':False})
     print('DIRECTORY',log['scenic_area'],log['page'],log.get('article_links',0),log.get('error',''),flush=True)
-  save(logpath,{'scope':'黄山景区公开最新目录1至15页；九寨沟公开最新目录1至38页；颐和园聚焦搜索URL，不代表全站穷尽','candidates':discovered,'requests':logs,'complete':True})
+  save(logpath,{'candidates':discovered,'requests':logs,'complete':True})
  existing=json.loads((ROOT/'sources.json').read_text('utf-8')) if (ROOT/'sources.json').exists() else []
  oldids={article_id(s['source_url']) for s in existing if '/travels/' in s.get('source_url','') and re.search(r'/\d+\.html',s['source_url'])}
  unique={article_id(r['url']):r for r in discovered if not r.get('directory_rejection') and article_id(r['url']) not in oldids}

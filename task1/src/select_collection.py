@@ -92,7 +92,7 @@ def xhs_candidates():
         # 此处固化浏览器导出的真实文本；不保存Cookie、评论或AI搜索总结。
         snap.write_text(json.dumps({**r,'source_url':url},ensure_ascii=False,indent=2), 'utf-8')
         rows.append(dict(record_id=record_id, scenic_area=area, source_platform='小红书',
-            text_type='游客游记', source_url=url, title=r.get('title',''), author=r.get('author',''),
+            text_type='游客游记', source_url=url, source_url_with_token=r.get('source_url_with_token',''), title=r.get('title',''), author=r.get('author',''),
             published_at_raw=r.get('published_at_raw',''), collected_at=r['collected_at'],
             raw_content=text, raw_format='text', body_text=text, body_sha256=digest(text),
             snapshot_file=snap.relative_to(ROOT).as_posix(), snapshot_sha256=hashlib.sha256(snap.read_bytes()).hexdigest(),
@@ -126,7 +126,7 @@ def write_csv(path, rows):
     fields = ['record_id','scenic_area','source_platform','text_type','rank_within_scenic_platform',
               'rank_metric','read_count','read_count_display','like_count','like_count_display',
               'title','author','published_at','published_at_raw','collected_at','metric_observed_at',
-              'source_url','snapshot_file','snapshot_sha256','raw_format','raw_content','body_text',
+              'source_url','source_url_with_token','snapshot_file','snapshot_sha256','raw_format','raw_content','body_text',
               'search_keyword','search_sort','selection_scope']
     with path.open('w',encoding='utf-8-sig',newline='') as f:
         writer=csv.DictWriter(f,fieldnames=fields,extrasaction='ignore');writer.writeheader()
@@ -148,7 +148,7 @@ def run(per_platform=25):
     write_jsonl(OUT/'tourist_routes.jsonl',tourists)
     write_csv(OUT/'tourist_routes.csv',tourists)
     selected_ids={(r['scenic_area'],r['record_id']) for r in tourists}
-    pool_fields=['record_id','scenic_area','source_platform','title','read_count','read_count_display','like_count','like_count_display','selected','source_url']
+    pool_fields=['record_id','scenic_area','source_platform','title','read_count','read_count_display','like_count','like_count_display','selected','source_url','source_url_with_token']
     with (OUT/'eligible_candidate_pool.csv').open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.DictWriter(f,fieldnames=pool_fields,extrasaction='ignore');w.writeheader()
         for r in ctrip+xhs:
@@ -186,12 +186,7 @@ def run(per_platform=25):
         official_theme_variants=dict(Counter(r['scenic_area'] for r in routes if not r['ordered_route'])),
         duplicate_exclusions=cd+xd,snapshot_errors=snapshot_errors,missing_required=missing_required,missing_official=missing_official,
         metadata_missing={'author':sum(not r.get('author') for r in tourists),
-                          'publication_date':sum(not (r.get('published_at') or r.get('published_at_raw')) for r in tourists)},
-        official_scope='已核实官方来源清单的全部文档与路线分支；见research/official_search_audit.md和huangshan_official_search_boundary.md',
-        ranking_scope='采集候选池内按平台公开的阅读量或点赞量降序；四舍五入值保留原显示文本，同值按URL稳定排序；不等于全站精确前25',
-        limitations=['小红书只采可见笔记正文，不抓评论、AI总结，不对图片/视频做OCR。',
-                     '相对发布日期保留平台原文，不猜测具体日期。',
-                     '历史官方路线保留发布日期与适用范围。'])
+                          'publication_date':sum(not (r.get('published_at') or r.get('published_at_raw')) for r in tourists)})
     summary['complete']=all(r['shortfall']==0 for r in counts) and not snapshot_errors and not missing_required and not missing_official and len(docs)>0 and all(d.get('accepted') for d in docs)
     (OUT/'collection_summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),'utf-8')
     print(json.dumps(summary,ensure_ascii=False,indent=2))

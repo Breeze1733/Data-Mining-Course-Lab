@@ -62,16 +62,16 @@ def run(offline=False):
                 m=re.search(r'第[四4]天',content)
                 main=content[:m.start()] if m else content
                 variants=[dict(title='黄山主体山岳游 第1至3天',source_text=main.strip())]
-            docs.append({**s,'raw_content':content,'raw_format':'text','collected_at':datetime.fromtimestamp(p.stat().st_mtime,ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds'),'snapshot_file':p.relative_to(ROOT).as_posix(),'snapshot_sha256':hashlib.sha256(data).hexdigest(),'route_variants':variants,'accepted':True,'include_in_main_dataset':True,'provenance_note':'官方旅游平台或政府转引；保留历史日期与适用季节，不推断当前开放。'})
+            docs.append({**s,'raw_content':content,'raw_format':'text','collected_at':datetime.fromtimestamp(p.stat().st_mtime,ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds'),'snapshot_file':p.relative_to(ROOT).as_posix(),'snapshot_sha256':hashlib.sha256(data).hexdigest(),'route_variants':variants,'accepted':True,'include_in_main_dataset':True})
             print('OFFICIAL',s['evidence_id'],len(variants),flush=True)
         except Exception as e:docs.append({**s,'accepted':False,'error':str(e)});print('FAIL',s['evidence_id'],str(e),flush=True)
         if not offline:time.sleep(1)
     routes=[]
     for d in docs:
         if not d.get('accepted'):continue
-        for i,v in enumerate(d.get('route_variants',[]),1):routes.append(dict(route_id=f'{d["evidence_id"]}-R{i}',source_record_id=d['evidence_id'],scenic_area=d['scenic_area'],source_url=d['source_url'],title=v['title'],raw_content=v['source_text'],ordered_route=bool(d.get('include_in_main_dataset')),published_at=d.get('published_at',''),scope_note=d.get('provenance_note','')))
+        for i,v in enumerate(d.get('route_variants',[]),1):routes.append(dict(route_id=f'{d["evidence_id"]}-R{i}',source_record_id=d['evidence_id'],scenic_area=d['scenic_area'],source_url=d['source_url'],title=v['title'],raw_content=v['source_text'],ordered_route=bool(d.get('include_in_main_dataset')),published_at=d.get('published_at','')))
     write_jsonl(ROOT/'data/raw/official_documents.jsonl',docs);write_jsonl(ROOT/'data/raw/official_routes.jsonl',routes)
-    summary={'documents':len(docs),'accepted_documents':sum(d.get('accepted',False) for d in docs),'ordered_route_variants':sum(r['ordered_route'] for r in routes),'supplementary_theme_variants':sum(not r['ordered_route'] for r in routes),'scope':'已核实官方来源清单全量抓取；来源列表和导航检索边界见research/official_search_audit.md。不能据此声称互联网全部历史官方页面均已穷尽。','failures':[{'id':d['evidence_id'],'error':d.get('error')} for d in docs if not d.get('accepted')]}
+    summary={'documents':len(docs),'accepted_documents':sum(d.get('accepted',False) for d in docs),'ordered_route_variants':sum(r['ordered_route'] for r in routes),'supplementary_theme_variants':sum(not r['ordered_route'] for r in routes),'failures':[{'id':d['evidence_id'],'error':d.get('error')} for d in docs if not d.get('accepted')]}
     (ROOT/'research/official_collection_summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),'utf-8');print(json.dumps(summary,ensure_ascii=False))
 
 if __name__=='__main__':

@@ -56,7 +56,7 @@ export async function createCrawler(tab,{area='颐和园',target=55,keyword=`${a
     await pw.locator('a.title[href*="/search_result/"]').filter({hasText:area}).first().waitFor(waitVisible(20000));
     let status=await pw.evaluate(()=>Array.from(document.querySelectorAll('.tags.active')).map(x=>x.textContent));
     if(!status.includes('最多点赞')){await pw.locator('.filter').filter({visible:true}).first().click();await observe();status=await pw.evaluate(()=>Array.from(document.querySelectorAll('.tags.active')).map(x=>x.textContent));}
-    if(!status.includes('最多点赞'))throw Error('点赞排序未成功，拒绝假称按热度采集');
+    if(!status.includes('最多点赞'))throw Error('点赞排序未成功');
     try{await pw.getByText('收起',{exact:true}).click();await observe();}catch{}
     queues[area]=queues[area]||[];
     log.push({kind:'search',area,keyword,sort:'最多点赞',time:new Date().toISOString()});
@@ -94,10 +94,12 @@ export async function createCrawler(tab,{area='颐和园',target=55,keyword=`${a
       try{
         // 优先SPA点击；若虚拟列表移除了该卡片，才用其真实公开URL导航。
         const card=pw.locator('a.title').filter({hasText:c.title});
-        if(await card.count()===1)await card.click();else await tab.goto(c.url);
+        if(await card.count()===1)await card.click();else await tab.goto(c.url,{waitUntil:'domcontentloaded',timeout:15000});
         await observe();
-        await pw.locator('#detail-desc').waitFor(waitVisible(12000));
-        const r=await pw.evaluate(()=>({title:document.querySelector('#detail-title')?.innerText||'',raw_content:document.querySelector('#detail-desc')?.innerText||'',source_url:location.href.split('?')[0],author:document.querySelector('#noteContainer .username,.note-container .username')?.innerText||'',published_at_raw:Array.from(document.querySelectorAll('.note-container .date,#noteContainer .date')).slice(0,1).map(x=>x.innerText).join('')}));
+        // 笔记被删或链接失效时页面只剩外壳，等不到正文容器就直接判失败，不死等。
+        try{await pw.locator('#detail-desc').waitFor(waitVisible(8000));}
+        catch{throw Error('笔记不可访问：页面无正文容器');}
+        const r=await pw.evaluate(()=>({title:document.querySelector('#detail-title')?.innerText||'',raw_content:document.querySelector('#detail-desc')?.innerText||'',source_url:location.href.split('?')[0],source_url_with_token:location.href,author:document.querySelector('#noteContainer .username,.note-container .username')?.innerText||'',published_at_raw:Array.from(document.querySelectorAll('.note-container .date,#noteContainer .date')).slice(0,1).map(x=>x.innerText).join('')}));
         if(canonical(r.source_url)!==canonical(c.url))throw Error('详情URL与目标不符，未入库');
         Object.assign(r,{scenic_area:area,collected_at:new Date().toISOString(),like_count:c.like_count,like_count_display:c.like_count_display,like_count_observed_at:c.like_count_observed_at||began,like_count_source:'搜索卡片可见点赞数',search_keyword:keyword,search_sort:'最多点赞',source_platform:'小红书',raw_format:'text',extraction_selector:'#detail-desc.innerText',content_scope:'visible_note_text_only_no_image_OCR_no_comments'});
         rows.push(r);done.add(canonical(c.url));c.attempted=true;
@@ -128,7 +130,9 @@ if(typeof process!=='undefined'&&process.argv[1]&&path.resolve(process.argv[1])=
   const {createInterface}=await import('node:readline/promises');const rl=createInterface({input:process.stdin,output:process.stdout});await rl.question('');rl.close();
   try{for(const spot of area==='all'?Object.keys(POIS):[area]){
     const crawler=await createCrawler(page,{area:spot,target,retryFailed:process.argv.includes('--retry-failed')});await crawler.prepare();
-    console.log(await crawler.discover({scrolls:12}));
+    // 先把候选池填到目标数量再开始读取，避免读到一半再回头找链接。
+    let round=0;
+    while(crawler.status().queued<target&&round<12){const d=await crawler.discover({scrolls:6});console.log(d);round++;if(!d.added)break;}
     while(crawler.status().route_candidates<target){const r=await crawler.step({batchSize:10});console.log(r);if(!r.processed){const d=await crawler.discover({scrolls:5});console.log(d);if(!d.added)break;}}
   }}finally{await context.close();}
 }
