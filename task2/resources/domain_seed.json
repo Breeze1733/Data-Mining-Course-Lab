@@ -1768,6 +1768,24 @@
    "canonical": "则查洼沟",
    "source": "p2_peripheral_expansion_2026-10-30",
    "note": "则查洼沟口语省写，语料独立出现4次"
+  },
+  {
+   "name": "月沼",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "月沼",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "宏村内景点（月沼/南湖），供消解候选；不进景区内序列"
+  },
+  {
+   "name": "南湖",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "南湖",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "宏村内景点（月沼/南湖），供消解候选；不进景区内序列"
   }
  ],
  "transport": [
@@ -2144,19 +2162,6 @@
  ],
  "domain_stopwords": [
   "上海",
-  "北海公园",
-  "景山公园",
-  "圆明园",
-  "天安门",
-  "香山",
-  "八达岭",
-  "庐山",
-  "泰山",
-  "峨眉山",
-  "九华山",
-  "青城山",
-  "三清山",
-  "武夷山",
   "四姑娘山",
   "知道",
   "下山",

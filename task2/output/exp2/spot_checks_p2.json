@@ -1,7 +1,7 @@
 {
  "round": "p2_peripheral_expansion_2026-10-30",
  "annotator": "本文档作者（LLM 逐条阅读上下文判定）",
- "note": "对 P2 新增词条命中的实体做独立抽检（与历史 spot_checks 相互独立，历史判定未改动）",
+ "note": "对 P2 新增词条命中的实体做独立抽检（与历史 spot_checks 相互独立，历史判定未改动）；另含停用词解除后的10例补充抽检（10/10正确）",
  "n_sampled_pools": {
   "黄山": 12,
   "九寨沟": 12,
@@ -440,11 +440,81 @@
    "context": ",也是崇祯的自缢之处。 第三天:颐和园30元(儿童半价) ,下午北京大学13:00-16:00东侧门入校,8岁以下不用预约。 颐和园推荐",
    "verdict": "correct",
    "note": ""
+  },
+  {
+   "scenic_area": "颐和园",
+   "name": "香山",
+   "context": "咸丰十年(1860年)被英法联军焚毁。2002年7月香山勤政殿复建工程动工",
+   "verdict": "correct",
+   "note": "停用词解除阻后的补充抽检"
+  },
+  {
+   "scenic_area": "颐和园",
+   "name": "北海公园",
+   "context": "恭王府就在什刹海和北海公园的中间",
+   "verdict": "correct",
+   "note": "停用词解除阻后的补充抽检"
+  },
+  {
+   "scenic_area": "颐和园",
+   "name": "圆明园",
+   "context": "军阀把圆明园作为取之不尽的建筑材料场",
+   "verdict": "correct",
+   "note": "停用词解除阻后的补充抽检"
+  },
+  {
+   "scenic_area": "黄山",
+   "name": "南湖",
+   "context": "标志性景点——南湖 游览南湖书院、敬德堂",
+   "verdict": "correct",
+   "note": "停用词解除阻后的补充抽检"
+  },
+  {
+   "scenic_area": "颐和园",
+   "name": "圆明园",
+   "context": "西洋楼遗址景区(含大水法、展览馆、迷宫),门票15元;圆明园盛时全景模型展",
+   "verdict": "correct",
+   "note": "停用词解除阻后的补充抽检"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "name": "峨眉山",
+   "context": "峨眉山 乘坐高铁成都东至峨眉山站",
+   "verdict": "correct",
+   "note": "停用词解除阻后的补充抽检"
+  },
+  {
+   "scenic_area": "颐和园",
+   "name": "景山公园",
+   "context": "市属公园有:颐和园、天坛公园、北海公园、中山公园、景山公园",
+   "verdict": "correct",
+   "note": "停用词解除阻后的补充抽检"
+  },
+  {
+   "scenic_area": "颐和园",
+   "name": "圆明园",
+   "context": "马首在圆明园管理处,龙首据说在台湾",
+   "verdict": "correct",
+   "note": "停用词解除阻后的补充抽检"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "name": "青城山",
+   "context": "11点多已经等着乘坐大巴去青城山了",
+   "verdict": "correct",
+   "note": "停用词解除阻后的补充抽检"
+  },
+  {
+   "scenic_area": "颐和园",
+   "name": "景山",
+   "context": "北京原来没有山,景山是人工堆出来的山",
+   "verdict": "correct",
+   "note": "停用词解除阻后的补充抽检"
   }
  ],
  "review_summary": {
-  "n": 36,
-  "correct": 36,
+  "n": 46,
+  "correct": 46,
   "ambiguous": 0,
   "incorrect": 0
  }

@@ -1,10 +1,10 @@
 {
  "n": 120,
- "accuracy_overall": 0.45,
+ "accuracy_overall": 0.475,
  "accuracy_by_class": {
   "locative": {
    "n": 30,
-   "accuracy": 0.467
+   "accuracy": 0.5
   },
   "object": {
    "n": 30,
@@ -16,7 +16,7 @@
   },
   "set": {
    "n": 30,
-   "accuracy": 0.567
+   "accuracy": 0.633
   }
  },
  "errors": [
@@ -79,16 +79,6 @@
    "gold": "无",
    "gold_kind": "无",
    "note": "“此处只能省略一万字”指文中省略内容，非地点"
-  },
-  {
-   "pronoun": "这里",
-   "class": "locative",
-   "scenic": "颐和园",
-   "rule": "颐和园",
-   "rule_kind": "景区名",
-   "gold": "景山公园",
-   "gold_kind": "POI",
-   "note": "多景点游记（故宫/景山段）"
   },
   {
    "pronoun": "这里",
@@ -241,16 +231,6 @@
    "note": ""
   },
   {
-   "pronoun": "这座",
-   "class": "object",
-   "scenic": "颐和园",
-   "rule": "颐和园",
-   "rule_kind": "景区名",
-   "gold": "圆明园",
-   "gold_kind": "POI",
-   "note": "多景点游记（圆明园段）"
-  },
-  {
    "pronoun": "它",
    "class": "object",
    "scenic": "颐和园",
@@ -289,6 +269,16 @@
    "gold": "佛香阁",
    "gold_kind": "POI",
    "note": "先行词在代词之后（后置命名“名为佛香阁”）"
+  },
+  {
+   "pronoun": "它",
+   "class": "object",
+   "scenic": "颐和园",
+   "rule": "颐和园",
+   "rule_kind": "景区名",
+   "gold": "颐和园",
+   "gold_kind": "景区",
+   "note": ""
   },
   {
    "pronoun": "这条",
@@ -576,16 +566,6 @@
    "scenic": "九寨沟",
    "rule": "preceding_set",
    "rule_kind": "前文POI集合",
-   "gold": "一行5人家庭",
-   "gold_kind": "集合-人",
-   "note": "“其中”指人的集合"
-  },
-  {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "九寨沟",
-   "rule": "preceding_set",
-   "rule_kind": "前文POI集合",
    "gold": "无",
    "gold_kind": "无",
    "note": "承接行程单，无明确集合实体"
@@ -616,19 +596,9 @@
    "scenic": "颐和园",
    "rule": "NONE",
    "rule_kind": "无明确先行词",
-   "gold": "圆明园",
-   "gold_kind": "POI",
-   "note": ""
-  },
-  {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "颐和园",
-   "rule": "NONE",
-   "rule_kind": "无明确先行词",
-   "gold": "圆明园",
-   "gold_kind": "POI",
-   "note": ""
+   "gold": "三副转轮藏",
+   "gold_kind": "集合-其他",
+   "note": "雍和宫/颐和园/智化寺的转轮藏"
   },
   {
    "pronoun": "其中",
@@ -639,16 +609,6 @@
    "gold": "国宝展馆",
    "gold_kind": "其他",
    "note": "虚化“沉寂在其中”"
-  },
-  {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "颐和园",
-   "rule": "NONE",
-   "rule_kind": "无明确先行词",
-   "gold": "几位北京大爷",
-   "gold_kind": "集合-人",
-   "note": ""
   },
   {
    "pronoun": "其中",
@@ -679,6 +639,16 @@
    "gold": "山间雾景",
    "gold_kind": "其他",
    "note": "虚化“走在其中”"
+  },
+  {
+   "pronoun": "其中",
+   "class": "set",
+   "scenic": "黄山",
+   "rule": "preceding_set",
+   "rule_kind": "前文POI集合",
+   "gold": "两种上山方式",
+   "gold_kind": "集合-其他",
+   "note": "徒步 vs 索道"
   }
  ]
 }

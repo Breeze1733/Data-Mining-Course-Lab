@@ -223,7 +223,7 @@ def score(cases: list[dict]) -> None:
         pred, truth = case["resolution"], g["gold_antecedent"]
         # 判定对错：类别一致且指称一致（人称/集合/无先行词按特殊类比较；景区名回退算“POI/景区”粒度）
         canon = {"POI": "POI", "交通": "交通", "景区名": "景区", "他人": "他人", "同行者": "同行者",
-                 "名词集合": "集合-其他", "前文POI集合": "集合-POI", "无明确先行词": "无"}
+                 "名词集合": "集合-其他", "前文POI集合": "集合-POI", "人称集合": "集合-人", "无明确先行词": "无"}
         kind_match = canon.get(case["resolution_kind"]) == g["gold_kind"]
         if g["gold_kind"] in ("POI", "景区"):
             name_match = pred == truth or (case["resolution_kind"] == "景区名" and truth == case["scenic_area"])

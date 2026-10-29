@@ -175,24 +175,53 @@ def main(argv=None) -> int:
                     else:
                         case.update({"resolution": "travel_party", "resolution_kind": "同行者",
                                      "evidence": "一手游记默认指作者及同行者"})
-                else:  # set：“其中”的先行词多为普通名词集合，用 jieba 词性找最近名词
+                else:  # set：“其中”的先行词按优先级：人称集合 > POI枚举 > 唯一POI（"在其中"） > 普通名词
                     import jieba.posseg as pseg
                     cur_sent_start = sentences[si][0]
-                    noun = None
-                    for text_before in (case["sentence"][: doc_start - cur_sent_start],
-                                        case["prev_sentence"]):
-                        if not text_before:
-                            continue
-                        words = [w for w, f in pseg.cut(text_before) if f.startswith("n") and len(w) >= 2]
-                        if words:
-                            noun = words[-1]
-                            break
-                    if noun:
-                        case.update({"resolution": f"noun:{noun}", "resolution_kind": "名词集合",
-                                     "evidence": f"最近的普通名词“{noun}”（jieba 词性）"})
+                    win_start = sentences[si - 1][0] if si >= 1 else cur_sent_start
+                    window_text = text[win_start:doc_start]
+                    pois_in_win = []
+                    for e in pois:
+                        if win_start <= e["start"] < doc_start and e["canonical"] not in pois_in_win:
+                            pois_in_win.append(e["canonical"])
+                    person_set = re.search(
+                        r"[一两二三四五六七八几]\s*[行位群批帮对].{0,4}"
+                        r"(人|游客|朋友|大爷|大妈|阿姨|大叔|同伴|姐妹|哥们)", window_text)
+                    # POI 枚举：窗口内按出现顺序，相邻两个 POI 之间只有顿号/和/与/及等连接
+                    win_pois = sorted((e for e in pois if win_start <= e["start"] < doc_start),
+                                      key=lambda e: e["start"])
+                    enum_set = len(win_pois) >= 2 and any(
+                        re.fullmatch(r"[、和与及/,,\s]{1,3}", text[a["end"]:b["start"]])
+                        for a, b in zip(win_pois, win_pois[1:]))
+                    # 数量词短语紧邻其中（"72个山峰/三副转轮藏/两种上山方式"）→ 优先名词集合
+                    qty_guard = re.search(
+                        r"[一二两三四五六七八九十几\d]+\s*[个座副条种栋项回轮处只名套批]",
+                        text[max(win_start, doc_start - 14):doc_start])
+                    if person_set:
+                        case.update({"resolution": "person_set", "resolution_kind": "人称集合",
+                                     "evidence": "窗口内数量人称短语（一行/几位+人）"})
+                    elif not qty_guard and enum_set:
+                        case.update({"resolution": "preceding_set", "resolution_kind": "前文POI集合",
+                                     "evidence": "窗口内 POI 枚举（顿号/和连接）"})
+                    elif not qty_guard and len(pois_in_win) == 1:
+                        case.update({"resolution": pois_in_win[0], "resolution_kind": "POI",
+                                     "evidence": "窗口内唯一POI，“其中”为'在其中'用法"})
                     else:
-                        case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
-                                     "evidence": "窗口内无 POI 也无普通名词"})
+                        noun = None
+                        for text_before in (case["sentence"][: doc_start - cur_sent_start],
+                                            case["prev_sentence"]):
+                            if not text_before:
+                                continue
+                            words = [w for w, f in pseg.cut(text_before) if f.startswith("n") and len(w) >= 2]
+                            if words:
+                                noun = words[-1]
+                                break
+                        if noun:
+                            case.update({"resolution": f"noun:{noun}", "resolution_kind": "名词集合",
+                                         "evidence": f"最近的普通名词“{noun}”（jieba 词性）"})
+                        else:
+                            case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
+                                         "evidence": "窗口内无 POI 也无普通名词"})
                 fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                 n_cases += 1
 
