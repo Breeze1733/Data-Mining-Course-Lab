@@ -167,3 +167,16 @@
 
 ### 下一步
 U2：`common/regression_check.py`（三份黄金标注固化为一条命令的守护指标，与上次对比）。
+
+---
+
+## 2026-10-30 优化轮 U2：黄金标注回归守护 —— 完成
+
+### 做了什么
+- 新增 `common/regression_check.py`：一条命令完成 ①静态守护（主数据集 271、图谱事实核验 6/6、Agent 6/6、task2/task5 汇总与黄金文件自洽）；②重打分（子进程调用 task4 `annotate_sample.py --score`、task5 `review_and_charts.py --score`，用当前规则系统对黄金集重算）；③三个黄金文件的 SHA256 指纹监控（黄金只允许追加复核，指纹变化必须书面说明后 `--update-state` 留痕）。
+- 状态基准固化在 `metrics/regression_state.json`（随提交入库）。退出码：有退化或黄金变动→1，否则 0。
+- 勘误：annotation_gold.json 中的 `rule_resolution` 是标注时点（v1）快照，不能直接重算当前准确率（23/120≠0.425）；当前准确率必须经 `--score` 对齐重跑得到——守护脚本采用后者。
+- 全链路冒烟重跑全绿，产物字节级无 diff（管线确定性验证通过）。
+
+### 下一步
+U3：报告-数据一致性审计（抽取 docx 中数字并在 output 数据文件中反查）。
