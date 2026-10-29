@@ -81,6 +81,19 @@ def split_multi_suggestions(sugg: str) -> list[str]:
     return [p.strip(" ，,。；;") for p in parts if p.strip(" ，,。；;")]
 
 
+# P4 极性/边界守卫（2026-10-30，依据 review_gold wrong 样例回归）：
+# 1) 平台话术不是旅游建议；2) 呼吁/评论句不是给游客的建议；
+# 3) 联游城市段落的条件对归属价值低（苏州街为颐和园内景点，需排除）。
+PLATFORM_PHRASE_RE = re.compile(r"点赞|收藏|一键三连|评论区|私信|关注我们|转发")
+APPEAL_RE = re.compile(r"管理部门|引起重视|呼吁")
+CITY_SKIP_RE = re.compile(r"青岛|南京|苏州(?!街)|无锡|厦门|天津|杭州|大连|哈尔滨|洛阳|西安")
+
+
+def skip_sentence(sent: str) -> bool:
+    return bool(PLATFORM_PHRASE_RE.search(sent) or APPEAL_RE.search(sent)
+                or CITY_SKIP_RE.search(sent))
+
+
 def extract_from_sentence(sent: str) -> list[dict]:
     pairs = []
     seen_spans = set()
@@ -145,6 +158,8 @@ def extract_from_sentence(sent: str) -> list[dict]:
     # P6 否定建议
     for m in re.finditer(r"((?<!要)不要(?![要不要门票钱票])|(?<![特级区差分别参离告])别(?=[去走买坐赶忘信贪乱省图踩拒绝玩用管抢急费听折腾改])|避免|(?<![不])慎|切勿|(?<![禁])忌)([^。！？；]{1,50})", sent):
         clause = m.group(0).strip()
+        if re.match(r"不要(太多|要好|要太好|不要的)", clause):
+            continue  # 口语夸张比较（"好了不要太多"），非建议
         if WEATHER_RE.search(sent):
             cond_text, cond_type = "天气条件（句内）", "天气"
         elif TIME_RE.search(sent):
@@ -194,6 +209,8 @@ def main(argv=None) -> int:
                 continue  # P1 归属过滤：景区外句子不产出条件建议对
             if not (8 <= len(sent) <= 160):
                 continue
+            if skip_sentence(sent):
+                continue  # 平台话术/呼吁句/联游城市段落守卫
             for p in extract_from_sentence(sent):
                 ctype = p.get("condition_type") or classify_condition(p["condition_text"])
                 for sugg in p["suggestions"]:

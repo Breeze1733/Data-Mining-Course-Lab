@@ -2222,14 +2222,6 @@
   <data key="d6">恐怕不能将其表现的淋漓尽致,所以终于下决心买了一个单反相机,配18-200镜头,这样</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:其他:出售商品的地方">
-  <data key="d0">条件</data>
-  <data key="d1">出售商品的地方</data>
-  <data key="d2">[其他] 出售商品的地方</data>
-  <data key="d5">其他</data>
-  <data key="d6">展品主要在二楼</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:一放暑假">
   <data key="d0">条件</data>
   <data key="d1">一放暑假</data>
@@ -3422,14 +3414,6 @@
   <data key="d6">不要在芦苇海停留</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:是坏人">
-  <data key="d0">条件</data>
-  <data key="d1">是坏人</data>
-  <data key="d2">[其他] 是坏人</data>
-  <data key="d5">其他</data>
-  <data key="d6">在这里是插翅难逃的啦! 心里真的感慨!我们大国的安保也可以做到如此周密了!点赞!</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:遭到破坏">
   <data key="d0">条件</data>
   <data key="d1">遭到破坏</data>
@@ -3828,14 +3812,6 @@
   <data key="d2">[其他] 站在万寿山顶的佛香阁上俯看</data>
   <data key="d5">其他</data>
   <data key="d6">则整个园林将尽收眼底</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:是当作北京游的一个附加">
-  <data key="d0">条件</data>
-  <data key="d1">是当作北京游的一个附加</data>
-  <data key="d2">[其他] 是当作北京游的一个附加</data>
-  <data key="d5">其他</data>
-  <data key="d6">专程游玩就不值得推荐</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:颐和园:其他:想省时间">
@@ -4898,10 +4874,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:出售商品的地方" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:一放暑假" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -5686,10 +5658,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:是坏人" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:遭到破坏" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -6235,10 +6203,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:以此论" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:是当作北京游的一个附加" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>

@@ -1558,22 +1558,6 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "不要把祖宗留下来的宝贵东西毁在我们手上",
-  "condition_type": "一般",
-  "sentence": "希望管理部门引起重视,不要把祖宗留下来的宝贵东西毁在我们手上",
-  "sources": [
-   "CTRIP_3989929"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3989929",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "要是",
   "condition_text": "研究八卦和占卦",
@@ -3842,22 +3826,6 @@
   "frequency": 1
  },
  {
-  "record_id": "CTRIP_3539977",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "出售商品的地方",
-  "suggestion_text": "展品主要在二楼",
-  "condition_type": "其他",
-  "sentence": "我和儿子还游览了青岛邮电博物馆,一楼有青岛各风景区的邮戳可以随便盖,一楼和四楼主要是出售商品的地方,展品主要在二楼",
-  "sources": [
-   "CTRIP_3539977"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "CTRIP_3976836",
   "scenic_area": "黄山",
   "source_platform": "携程游记",
@@ -3948,22 +3916,6 @@
   "suggestion_text": "让我们全家人开心的登顶莲花峰,领略的黄山的壮美,上下山安排的顺序也特别完美",
   "condition_type": "一般",
   "sentence": "也是管家给的建议,让我们全家人开心的登顶莲花峰,领略的黄山的壮美,上下山安排的顺序也特别完美",
-  "sources": [
-   "CTRIP_3976836"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3976836",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "不要太多",
-  "condition_type": "一般",
-  "sentence": "大概看了下每一届国家领导人都来这里住过,怪不得比我上次住的白云宾馆感觉好了不要太多",
   "sources": [
    "CTRIP_3976836"
   ],
@@ -9041,22 +8993,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "是坏人",
-  "suggestion_text": "在这里是插翅难逃的啦! 心里真的感慨!我们大国的安保也可以做到如此周密了!点赞!",
-  "condition_type": "其他",
-  "sentence": "刚进入九寨沟界,就遇到了这个设卡检查,一路只有这一条山路,开了几百公里,如果是坏人,在这里是插翅难逃的啦! 心里真的感慨!我们大国的安保也可以做到如此周密了!点赞!",
-  "sources": [
-   "CTRIP_4033780"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4033780",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "推荐",
   "condition_text": "一般建议",
@@ -10157,22 +10093,6 @@
   "frequency": 1
  },
  {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "帮忙点赞和收藏!",
-  "condition_type": "一般",
-  "sentence": "记得帮忙点赞和收藏!",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "CTRIP_4046620",
   "scenic_area": "颐和园",
   "source_platform": "携程游记",
@@ -10560,38 +10480,6 @@
   "suggestion_text": "则整个园林将尽收眼底",
   "condition_type": "其他",
   "sentence": "颐和园占地面积约4500亩,其中湖水约占三分之二,如果站在万寿山顶的佛香阁上俯看,则整个园林将尽收眼底",
-  "sources": [
-   "CTRIP_3965800"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3965800",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "除非",
-  "condition_text": "是当作北京游的一个附加",
-  "suggestion_text": "专程游玩就不值得推荐",
-  "condition_type": "其他",
-  "sentence": "按照导游的说法,天津本身就不是一个旅游城市,除非是当作北京游的一个附加,专程游玩就不值得推荐",
-  "sources": [
-   "CTRIP_3965800"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3965800",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "是每人再加一百元,送两个景点,不然天津之行真的没得什么好玩",
-  "condition_type": "一般",
-  "sentence": "刚上车,司机就连连诉苦,说这个团费完全是亏损着在做,最好是每人再加一百元,送两个景点,不然天津之行真的没得什么好玩",
   "sources": [
    "CTRIP_3965800"
   ],

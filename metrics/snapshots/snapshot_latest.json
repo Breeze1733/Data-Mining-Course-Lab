@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-30 02:31",
-  "git": "19f140d",
-  "label": "U8: P3其中类v3+停用词解除（消解0.475）",
-  "dirty_files": 15
+  "time": "2026-10-30 02:36",
+  "git": "211f0dd",
+  "label": "U9: P4极性边界守卫（wrong存活10→6）",
+  "dirty_files": 12
  },
  "metrics": {
   "dataset.count": 271,
@@ -27,13 +27,13 @@
   "routes.tourist_total": 228,
   "coref.n": 120,
   "coref.accuracy": 0.475,
-  "cond.pairs": 867,
+  "cond.pairs": 860,
   "cond.review_n": 49,
   "cond.correct": 20,
   "cond.boundary": 16,
   "cond.wrong": 13,
-  "graph.nodes": 574,
-  "graph.edges": 2423,
+  "graph.nodes": 571,
+  "graph.edges": 2420,
   "graph.fact_checks_passed": 6,
   "graph.fact_checks_total": 6,
   "graph.name_alignment_passed": true,
