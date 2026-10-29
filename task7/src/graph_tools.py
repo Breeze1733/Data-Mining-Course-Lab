@@ -161,9 +161,22 @@ class GraphTools:
         return {"poi": poi, "scenic": scenic, "conditions": conds}
 
     # ── 工具6：query_path（P5 多跳动线）──────────────────────────
+    def _resolve_poi(self, scenic: str, name: str):
+        """POI 名解析：精确 → 前缀互含 → 子串。"""
+        labels = {self.poi_label(n): n for n in self.poi_nodes(scenic)}
+        if name in labels:
+            return labels[name]
+        for label, node in labels.items():
+            if label.startswith(name) or name.startswith(label):
+                return node
+        for label, node in labels.items():
+            if name in label or label in name:
+                return node
+        return None
+
     def query_path(self, scenic: str, from_poi: str, to_poi: str) -> dict:
-        src = next((n for n in self.poi_nodes(scenic) if self.poi_label(n) == from_poi), None)
-        dst = next((n for n in self.poi_nodes(scenic) if self.poi_label(n) == to_poi), None)
+        src = self._resolve_poi(scenic, from_poi)
+        dst = self._resolve_poi(scenic, to_poi)
         if src is None or dst is None:
             return {"error": f"{scenic} 中未找到景点：{from_poi if src is None else to_poi}"}
         if src == dst:

@@ -318,9 +318,10 @@ class ReActAgent:
         answer = self._render(plan, trace)
         # 多跳动线问句（"从A…走/回到B"）：调用 query_path 追加动线参考
         import re as _re2
-        pm = _re2.search(r"从([一-龥A-Za-z0-9]{2,10}?)(?:出来|出发|下来|[，,、\s])[^。！？]{0,12}?(?:走|回|到|去|返回)[^。！？]{0,6}?([一-龥A-Za-z0-9]{2,10}?)(?:[？?！！。]|$)", query)
+        pm = _re2.search(r"从([一-龥A-Za-z0-9]{2,10}?)(?:出来|出发|下来|[，,、\s])[^。！？]{0,12}?(?:走|回|到|去|返回)(?:到|回|去|往)?([^。！？，,]{2,12}?)(?:[？?！！。]|$)", query)
         if pm:
             fp, tp = pm.group(1), pm.group(2)
+            fp, tp = fp.strip("的从往回到去"), tp.strip("的从往回到去")
             trace.append({"step": "thought", "thought": f"检测到动线问句：从{fp}到{tp}，调用 query_path 做多跳查询"})
             path_res = self.tools.call("query_path", {"scenic": intent["scenic"], "from_poi": fp, "to_poi": tp}, trace)
             if path_res.get("path"):

@@ -57,8 +57,8 @@ def main() -> int:
                 calls = [t for t in result["trace"] if t.get("step") == "action"
                          and t.get("tool") == "query_path"]
                 checks["path_tool_called"] = bool(calls)
-                checks["path_valid"] = any(
-                    fp in str(t["args"]) and tp in str(t["args"]) for t in calls)
+                checks["path_valid"] = ("动线参考" in result["answer"]
+                                        and fp in result["answer"] and tp in result["answer"])
             elif k == "feasibility":
                 warnings = (result["plan"] or {}).get("feasibility_warnings", [])
                 checks["feasibility_warning"] = bool(warnings) and any(
