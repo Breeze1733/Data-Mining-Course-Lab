@@ -1,4 +1,3 @@
-# 仓库级本地环境与临时文件
 __pycache__/
 *.py[cod]
 /.venv/
@@ -12,8 +11,6 @@ __pycache__/
 *.log
 .DS_Store
 Thumbs.db
-.workbuddy-ai/
 /.python-version
 /uv.lock
 /pyproject.toml
-/.merge_review/
