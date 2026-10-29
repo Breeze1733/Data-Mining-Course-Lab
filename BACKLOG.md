@@ -4,8 +4,8 @@
 
 ## P0 评测地基（最先做）
 - [ ] metrics_snapshot.py + METRICS.md 账本（脚本已完成，随 U1 提交）
-- [ ] common/regression_check.py：三份黄金标注（task2 spot_checks / task4 annotation_gold / task5 review_gold）固化成一条命令的守护指标，与上次对比
-- [ ] 报告-数据一致性审计：自动抽取报告 docx 中的数字并在数据文件中反查
+- [x] common/regression_check.py：三份黄金标注固化成一条命令守护指标，与上次对比（U2 提交 9706bdc）
+- [x] 报告-数据一致性审计 common/report_audit.py：70 项承重声明全通过（U3）
 
 ## P1 句子级叙述焦点建模（总结反思认定的突破点）
 - [ ] 分层抽 300–600 句，五类预标注（黄山/九寨沟/颐和园/景区外/无法判断），10% 自查两遍，落盘 `task2/output/exp2/sentence_attribution.jsonl`
