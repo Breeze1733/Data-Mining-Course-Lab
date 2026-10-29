@@ -1,0 +1,308 @@
+{
+  "summary": {
+    "mode": "cloud",
+    "cases": 34,
+    "passed": 25,
+    "tp": 40,
+    "fp": 3,
+    "fn": 6,
+    "precision": 0.9302,
+    "recall": 0.8696,
+    "f1": 0.8989,
+    "evaluation_scope": "curated boundary regression; not population accuracy"
+  },
+  "details": [
+    {
+      "id": "C01",
+      "text": "早上8点到光明顶，步行30分钟。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C02",
+      "text": "酒店不在附近，步行要40分钟。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C03",
+      "text": "坐高铁，站在窗边。",
+      "passed": false,
+      "false_positive": [],
+      "false_negative": [
+        [
+          "交通方式",
+          1,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "C04",
+      "text": "坐观光车，到站后步行。",
+      "passed": false,
+      "false_positive": [],
+      "false_negative": [
+        [
+          "交通方式",
+          1,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "C05",
+      "text": "云谷索道下站乘缆车。",
+      "passed": false,
+      "false_positive": [],
+      "false_negative": [
+        [
+          "交通方式",
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "C06",
+      "text": "坐云谷索道上山。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C07",
+      "text": "步行街和登山杖。",
+      "passed": false,
+      "false_positive": [
+        [
+          "交通方式",
+          0,
+          2
+        ]
+      ],
+      "false_negative": []
+    },
+    {
+      "id": "C08",
+      "text": "索道票和高铁站。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C09",
+      "text": "西海大峡谷观光缆车。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C10",
+      "text": "7点到9点。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C11",
+      "text": "15:20–15:30。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C12",
+      "text": "下午三点半。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C13",
+      "text": "半小时后到五花海。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C14",
+      "text": "三小时后从长海到五花海。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C15",
+      "text": "Day2 上午到十七孔桥。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C16",
+      "text": "五彩池和黄龙。",
+      "passed": false,
+      "false_positive": [],
+      "false_negative": [
+        [
+          "景点POI",
+          4,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "C17",
+      "text": "先去宏村。",
+      "passed": false,
+      "false_positive": [],
+      "false_negative": [
+        [
+          "景点POI",
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "C18",
+      "text": "先到西海大峡谷再到光明顶。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C19",
+      "text": "游船票和地铁口。",
+      "passed": false,
+      "false_positive": [
+        [
+          "交通方式",
+          4,
+          6
+        ]
+      ],
+      "false_negative": []
+    },
+    {
+      "id": "C20",
+      "text": "登山鞋与步行街。",
+      "passed": false,
+      "false_positive": [
+        [
+          "交通方式",
+          4,
+          6
+        ]
+      ],
+      "false_negative": []
+    },
+    {
+      "id": "C21",
+      "text": "坐游船到十七孔桥。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C22",
+      "text": "7月18日早晨。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C23",
+      "text": "次日返回。",
+      "passed": false,
+      "false_positive": [],
+      "false_negative": [
+        [
+          "时间节点",
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "C24",
+      "text": "上午9点半出发。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C25",
+      "text": "12点半至13点。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C26",
+      "text": "北海公园。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C27",
+      "text": "诺日朗餐厅用餐。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C28",
+      "text": "树正瀑布和树正群海。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C29",
+      "text": "去清晏舫和佛香阁。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C30",
+      "text": "打车后徒步。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C31",
+      "text": "索道检修，选择步行。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C32",
+      "text": "门票80元，海拔1860米。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C33",
+      "text": "第一天上午。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    },
+    {
+      "id": "C34",
+      "text": "2026年10月1日。",
+      "passed": true,
+      "false_positive": [],
+      "false_negative": []
+    }
+  ]
+}

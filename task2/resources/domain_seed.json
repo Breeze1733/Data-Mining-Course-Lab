@@ -1,0 +1,1695 @@
+{
+  "meta": {
+    "built_by": "src/exp2/build_dictionary.py",
+    "method": "jieba词频挖掘（后缀过滤，阈值≥8）+ 人工复核 + 采集种子合并；时间节点由正则规则识别，不入词典",
+    "review_date": "2026-10-29",
+    "counts": {
+      "poi": 128,
+      "transport": 37
+    }
+  },
+  "poi": [
+    {
+      "name": "一线天",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "一线天",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "万寿山",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "万寿山",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "上季节海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "上季节海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "下季节海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "下季节海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "东宫门",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "东宫门",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "东门",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "东门",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "中查沟",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "中查沟",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "丹霞峰",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "丹霞峰",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "乐寿堂",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "乐寿堂",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "九龙瀑",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "九龙瀑",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "云谷",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "云谷景区",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "云谷寺",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "云谷寺",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "五彩池",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "五彩池",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "五彩池畔",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "五彩池畔",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "五花海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "五花海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "仁寿殿",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "仁寿殿",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "佛香阁",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "佛香阁",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "光明顶",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "光明顶",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "则查洼沟",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "则查洼沟",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "北如意门",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "北如意门",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "北宫门",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "北宫门",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "北海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "北海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "十七孔桥",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "十七孔桥",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "半山寺",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "半山寺",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "南湖岛",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "南湖岛",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "卧龙海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "卧龙海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "原始森林",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "原始森林",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "双龙海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "双龙海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "后溪河",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "后溪河",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "听鹂馆",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "听鹂馆",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "四大部洲",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "四大部洲",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "天海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "天海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "天都峰",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "天都峰",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "天鹅海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "天鹅海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "始信峰",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "始信峰",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "季节海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "季节海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "宏村",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "宏村",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "宜芸馆",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "宜芸馆",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "宝云阁",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "宝云阁",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "屯溪老街",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "屯溪老街",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "川主寺",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "川主寺",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "廓如亭",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "廓如亭",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "归心台",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "归心台",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "德和园",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "德和园",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "慈光阁",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "慈光阁",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "扎如沟",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "扎如沟",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "排云亭",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "排云亭",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "排云殿",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "排云殿",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "探海松",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "探海松",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "散花坞",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "散花坞",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "文昌阁",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "文昌阁",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "新建宫门",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "新建宫门",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "日则沟",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "日则沟",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "昆明湖",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "昆明湖",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "景福阁",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "景福阁",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "智慧海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "智慧海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "曙光亭",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "曙光亭",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "松谷庵",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "松谷庵",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "树正寨",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "树正寨",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "树正沟",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "树正沟",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "树正瀑布",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "树正瀑布",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "树正磨坊",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "树正磨坊",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "树正磨房",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "树正磨房",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "树正群海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "树正群海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "梦笔生花",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "梦笔生花",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "沟口",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "沟口",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "清凉台",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "清凉台",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "清心台",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "清心台",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "清晏舫",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "石舫",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "火花海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "火花海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "熊猫海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "熊猫海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "熊猫海瀑布",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "熊猫海瀑布",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "牟尼沟",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "牟尼沟",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "犀牛海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "犀牛海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "狮子峰",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "狮子峰",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "猴子观海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "猴子观海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "玉屏",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "玉屏景区",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "玉屏楼",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "玉屏楼",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "玉带桥",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "玉带桥",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "玉澜堂",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "玉澜堂",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "珍珠滩",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "珍珠滩",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "珍珠滩瀑布",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "珍珠滩瀑布",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "甘海子",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "甘海子",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "画中游",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "画中游",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "界湖桥",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "界湖桥",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "白鹅岭",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "白鹅岭",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "百步云梯",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "百步云梯",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "盆景滩",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "盆景滩",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "知春亭",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "知春亭",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "石笋矼",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "石笋矼",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "石舫",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "石舫",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "神仙池",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "神仙池",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "竖琴松",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "竖琴松",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "箭竹海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "箭竹海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "箭竹海瀑布",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "箭竹海瀑布",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "翡翠谷",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "翡翠谷",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "老虎海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "老虎海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "耕织图",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "耕织图",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "芦苇海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "芦苇海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "芳草海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "芳草海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "苏州街",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "苏州街",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "荷叶寨",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "荷叶寨",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "莲花峰",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "莲花峰",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "西堤",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "西堤",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "西海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "西海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "西海大峡谷",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "西海大峡谷",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "西门",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "西门",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "诺日朗",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "诺日朗",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "诺日朗游客中心",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "诺日朗中心",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "诺日朗瀑布",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "诺日朗瀑布",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "谐趣园",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "谐趣园",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "豳风桥",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "豳风桥",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "迎客松",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "迎客松",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "连理松",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "连理松",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "铜牛",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "铜牛",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "镜海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "镜海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "长廊",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "长廊",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "长海",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "长海",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "随心台",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "随心台",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "雪峰",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "雪峰",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "霁清轩",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "霁清轩",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "静心台",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "静心台",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "颐和园西门",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "颐和园"
+      ],
+      "canonical": "颐和园西门",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "飞来石",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "飞来石",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "鳌鱼峰",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "鳌鱼峰",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "麒麟松",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "麒麟松",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "黄龙",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "九寨沟"
+      ],
+      "canonical": "黄龙",
+      "source": "seed+manual_review_of_mined_candidates"
+    },
+    {
+      "name": "黑虎松",
+      "entity_type": "景点POI",
+      "subtype": "景点",
+      "scenic_areas": [
+        "黄山"
+      ],
+      "canonical": "黑虎松",
+      "source": "seed+manual_review_of_mined_candidates"
+    }
+  ],
+  "transport": [
+    {
+      "name": "索道",
+      "entity_type": "交通方式",
+      "subtype": "索道缆车",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "索道",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "缆车",
+      "entity_type": "交通方式",
+      "subtype": "索道缆车",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "缆车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "观光缆车",
+      "entity_type": "交通方式",
+      "subtype": "索道缆车",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "观光缆车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "玉屏索道",
+      "entity_type": "交通方式",
+      "subtype": "索道缆车",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "玉屏索道",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "云谷索道",
+      "entity_type": "交通方式",
+      "subtype": "索道缆车",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "云谷索道",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "太平索道",
+      "entity_type": "交通方式",
+      "subtype": "索道缆车",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "太平索道",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "西海观光缆车",
+      "entity_type": "交通方式",
+      "subtype": "索道缆车",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "西海观光缆车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "观光车",
+      "entity_type": "交通方式",
+      "subtype": "景区车辆",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "观光车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "景区大巴",
+      "entity_type": "交通方式",
+      "subtype": "景区车辆",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "景区大巴",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "摆渡车",
+      "entity_type": "交通方式",
+      "subtype": "景区车辆",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "摆渡车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "环保车",
+      "entity_type": "交通方式",
+      "subtype": "景区车辆",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "环保车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "接驳车",
+      "entity_type": "交通方式",
+      "subtype": "景区车辆",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "接驳车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "电瓶车",
+      "entity_type": "交通方式",
+      "subtype": "景区车辆",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "电瓶车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "小火车",
+      "entity_type": "交通方式",
+      "subtype": "景区车辆",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "小火车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "大巴",
+      "entity_type": "交通方式",
+      "subtype": "景区车辆",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "大巴",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "巴士",
+      "entity_type": "交通方式",
+      "subtype": "景区车辆",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "巴士",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "公交车",
+      "entity_type": "交通方式",
+      "subtype": "公共交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "公交车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "公交",
+      "entity_type": "交通方式",
+      "subtype": "公共交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "公交",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "地铁",
+      "entity_type": "交通方式",
+      "subtype": "公共交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "地铁",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "班车",
+      "entity_type": "交通方式",
+      "subtype": "公共交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "班车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "出租车",
+      "entity_type": "交通方式",
+      "subtype": "公共交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "出租车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "网约车",
+      "entity_type": "交通方式",
+      "subtype": "公共交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "网约车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "高铁",
+      "entity_type": "交通方式",
+      "subtype": "长途交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "高铁",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "动车",
+      "entity_type": "交通方式",
+      "subtype": "长途交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "动车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "火车",
+      "entity_type": "交通方式",
+      "subtype": "长途交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "火车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "飞机",
+      "entity_type": "交通方式",
+      "subtype": "长途交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "飞机",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "轮渡",
+      "entity_type": "交通方式",
+      "subtype": "水上交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "轮渡",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "渡轮",
+      "entity_type": "交通方式",
+      "subtype": "水上交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "渡轮",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "游船",
+      "entity_type": "交通方式",
+      "subtype": "水上交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "游船",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "游轮",
+      "entity_type": "交通方式",
+      "subtype": "水上交通",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "游轮",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "自驾",
+      "entity_type": "交通方式",
+      "subtype": "自驾",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "自驾",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "包车",
+      "entity_type": "交通方式",
+      "subtype": "自驾",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "包车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "租车",
+      "entity_type": "交通方式",
+      "subtype": "自驾",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "租车",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "步行",
+      "entity_type": "交通方式",
+      "subtype": "步行",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "步行",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "徒步",
+      "entity_type": "交通方式",
+      "subtype": "步行",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "徒步",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "登山",
+      "entity_type": "交通方式",
+      "subtype": "步行",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "登山",
+      "source": "manual_vocabulary"
+    },
+    {
+      "name": "骑行",
+      "entity_type": "交通方式",
+      "subtype": "骑行",
+      "scenic_areas": [
+        "通用"
+      ],
+      "canonical": "骑行",
+      "source": "manual_vocabulary"
+    }
+  ],
+  "domain_stopwords": [
+    "上海",
+    "北海公园",
+    "景山公园",
+    "圆明园",
+    "天安门",
+    "香山",
+    "八达岭",
+    "庐山",
+    "泰山",
+    "峨眉山",
+    "九华山",
+    "青城山",
+    "三清山",
+    "武夷山",
+    "四姑娘山",
+    "知道",
+    "下山",
+    "上山",
+    "爬山",
+    "公园",
+    "味道",
+    "轻松",
+    "专门",
+    "开门",
+    "出门",
+    "入园",
+    "进沟",
+    "进山"
+  ]
+}

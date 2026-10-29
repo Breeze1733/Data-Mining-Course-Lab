@@ -8,7 +8,7 @@
  "by_scenic_area": {
   "九寨沟": {
    "n_official_routes": 9,
-   "n_official_pois": 35,
+   "n_official_pois": 41,
    "n_tourist_routes": 84,
    "official_pois": [
     "沟口",
@@ -19,7 +19,8 @@
     "熊猫海",
     "五花海",
     "镜海",
-    "诺日朗",
+    "诺日朗群海",
+    "诺日朗中心",
     "长海",
     "五彩池",
     "犀牛海",
@@ -38,47 +39,52 @@
     "箭竹海瀑布",
     "熊猫海瀑布",
     "珍珠滩瀑布",
+    "镜海停车场",
+    "诺日朗",
     "火花海",
+    "孔雀河道",
+    "则查洼寨",
+    "金铃海",
     "日则沟",
     "静心台",
     "清心台",
     "归心台",
     "随心台",
-    "树正沟",
-    "树正磨坊"
+    "树正景区",
+    "树正沟"
    ],
-   "coverage_mean": 0.421,
-   "jaccard_mean": 0.394,
-   "order_tau_mean": 0.663,
+   "coverage_mean": 0.38,
+   "jaccard_mean": 0.358,
+   "order_tau_mean": 0.68,
    "n_order_pairs": 84,
    "official_has_time_info": true,
    "official_time_allocation_pct": {
-    "上午": 0.423,
-    "中午": 0.169,
-    "下午": 0.409,
+    "上午": 0.424,
+    "中午": 0.168,
+    "下午": 0.408,
     "晚上": 0.0
    },
    "tourist_time_allocation_pct": {
-    "上午": 0.455,
-    "中午": 0.126,
-    "下午": 0.222,
-    "晚上": 0.197
+    "上午": 0.461,
+    "中午": 0.13,
+    "下午": 0.241,
+    "晚上": 0.167
    },
    "tourist_time_counts": {
-    "上午": 629,
-    "下午": 307,
-    "中午": 174,
-    "晚上": 273,
-    "全天": 13,
-    "凌晨": 16
+    "上午": 663,
+    "下午": 347,
+    "中午": 187,
+    "晚上": 240
    }
   },
   "颐和园": {
    "n_official_routes": 17,
-   "n_official_pois": 31,
+   "n_official_pois": 39,
    "n_tourist_routes": 63,
    "official_pois": [
     "颐和园西门",
+    "畅观堂",
+    "镜桥",
     "玉带桥",
     "耕织图",
     "豳风桥",
@@ -87,6 +93,7 @@
     "东宫门",
     "谐趣园",
     "霁清轩",
+    "须弥灵境遗址",
     "苏州街",
     "仁寿殿",
     "知春亭",
@@ -102,17 +109,22 @@
     "后溪河",
     "西堤",
     "文昌阁",
+    "南如意门",
     "西门",
     "廓如亭",
+    "绣漪桥",
+    "景明楼",
+    "练桥",
     "万寿山",
+    "半壁桥",
     "十七孔桥",
     "铜牛",
     "画中游",
     "北宫门"
    ],
-   "coverage_mean": 0.39,
-   "jaccard_mean": 0.363,
-   "order_tau_mean": 0.25,
+   "coverage_mean": 0.326,
+   "jaccard_mean": 0.301,
+   "order_tau_mean": 0.289,
    "n_order_pairs": 53,
    "official_has_time_info": false,
    "official_time_allocation_pct": {
@@ -122,32 +134,30 @@
     "晚上": null
    },
    "tourist_time_allocation_pct": {
-    "上午": 0.437,
-    "中午": 0.069,
-    "下午": 0.251,
-    "晚上": 0.243
+    "上午": 0.462,
+    "中午": 0.073,
+    "下午": 0.242,
+    "晚上": 0.223
    },
    "tourist_time_counts": {
-    "中午": 27,
-    "下午": 98,
-    "上午": 171,
-    "晚上": 95,
-    "全天": 2,
-    "凌晨": 2
+    "中午": 31,
+    "下午": 103,
+    "上午": 197,
+    "晚上": 95
    }
   },
   "黄山": {
    "n_official_routes": 13,
-   "n_official_pois": 22,
-   "n_tourist_routes": 82,
+   "n_official_pois": 23,
+   "n_tourist_routes": 81,
    "official_pois": [
     "排云亭",
     "西海大峡谷",
     "光明顶",
-    "北海",
-    "西海",
+    "海心亭",
     "鳌鱼峰",
     "迎客松",
+    "北海",
     "黑虎松",
     "飞来石",
     "云谷寺",
@@ -161,13 +171,14 @@
     "莲花峰",
     "天都峰",
     "屯溪老街",
-    "玉屏",
+    "玉屏景区",
+    "西海",
     "曙光亭"
    ],
-   "coverage_mean": 0.438,
-   "jaccard_mean": 0.367,
-   "order_tau_mean": 0.518,
-   "n_order_pairs": 82,
+   "coverage_mean": 0.43,
+   "jaccard_mean": 0.364,
+   "order_tau_mean": 0.521,
+   "n_order_pairs": 81,
    "official_has_time_info": false,
    "official_time_allocation_pct": {
     "上午": null,
@@ -176,18 +187,16 @@
     "晚上": null
    },
    "tourist_time_allocation_pct": {
-    "上午": 0.469,
-    "中午": 0.107,
-    "下午": 0.202,
-    "晚上": 0.222
+    "上午": 0.485,
+    "中午": 0.114,
+    "下午": 0.223,
+    "晚上": 0.178
    },
    "tourist_time_counts": {
-    "晚上": 239,
-    "上午": 504,
-    "下午": 217,
-    "中午": 115,
-    "凌晨": 8,
-    "全天": 2
+    "下午": 255,
+    "上午": 556,
+    "晚上": 204,
+    "中午": 131
    }
   }
  }

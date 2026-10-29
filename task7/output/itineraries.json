@@ -12,7 +12,7 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "谐趣园",
+    "poi": "昆明湖",
     "transport_from_prev": "入园",
     "note": ""
    },
@@ -20,7 +20,7 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "昆明湖",
+    "poi": "西堤",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -28,7 +28,7 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "西堤",
+    "poi": "佛香阁",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -36,7 +36,7 @@
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "佛香阁",
+    "poi": "十七孔桥",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -44,7 +44,7 @@
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "十七孔桥",
+    "poi": "长廊",
     "transport_from_prev": "步行",
     "note": ""
    }
@@ -87,7 +87,7 @@
     "day": 1,
     "period": "上午",
     "poi": "镜海",
-    "transport_from_prev": "步行",
+    "transport_from_prev": "观光车",
     "note": ""
    },
    {
@@ -95,7 +95,7 @@
     "day": 1,
     "period": "上午",
     "poi": "诺日朗",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -166,7 +166,7 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "始信峰",
+    "poi": "迎客松",
     "transport_from_prev": "入园",
     "note": ""
    },
@@ -174,7 +174,7 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "玉屏景区",
+    "poi": "莲花峰",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -182,31 +182,31 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "迎客松",
-    "transport_from_prev": "步行",
+    "poi": "云谷寺",
+    "transport_from_prev": "云谷索道",
     "note": ""
    },
    {
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "莲花峰",
-    "transport_from_prev": "步行",
+    "poi": "西海大峡谷",
+    "transport_from_prev": "索道",
     "note": ""
    },
    {
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "西海大峡谷",
-    "transport_from_prev": "观光缆车",
+    "poi": "飞来石",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 6,
     "day": 1,
     "period": "晚上",
-    "poi": "飞来石",
+    "poi": "始信峰",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -230,24 +230,24 @@
     "order": 9,
     "day": 2,
     "period": "中午",
-    "poi": "天都峰",
-    "transport_from_prev": "步行",
+    "poi": "白鹅岭",
+    "transport_from_prev": "索道",
     "note": ""
    },
    {
     "order": 10,
     "day": 2,
     "period": "下午",
-    "poi": "西海",
-    "transport_from_prev": "索道",
+    "poi": "天都峰",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 11,
     "day": 2,
     "period": "下午",
-    "poi": "云谷寺",
-    "transport_from_prev": "云谷索道",
+    "poi": "猴子观海",
+    "transport_from_prev": "索道",
     "note": ""
    }
   ],
@@ -290,7 +290,7 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "谐趣园",
+    "poi": "昆明湖",
     "transport_from_prev": "入园",
     "note": ""
    },
@@ -298,7 +298,7 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "昆明湖",
+    "poi": "西堤",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -306,7 +306,7 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "西堤",
+    "poi": "佛香阁",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -314,7 +314,7 @@
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "佛香阁",
+    "poi": "十七孔桥",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -322,7 +322,7 @@
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "十七孔桥",
+    "poi": "长廊",
     "transport_from_prev": "步行",
     "note": ""
    }
@@ -397,17 +397,17 @@
    {
     "order": 4,
     "day": 1,
-    "period": "上午",
-    "poi": "西海",
+    "period": "下午",
+    "poi": "西海大峡谷",
     "transport_from_prev": "索道",
     "note": ""
    },
    {
     "order": 5,
     "day": 1,
-    "period": "上午",
-    "poi": "云谷寺",
-    "transport_from_prev": "索道",
+    "period": "下午",
+    "poi": "莲花峰",
+    "transport_from_prev": "步行",
     "note": ""
    }
   ],

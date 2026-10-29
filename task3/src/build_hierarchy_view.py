@@ -82,6 +82,9 @@ def draw_tree(hierarchy: dict, title: str, path: Path):
     plt.close(fig)
 
 
+from time_periods import entity_period
+
+
 def tourist_time_hierarchy() -> dict:
     ents = [json.loads(l) for l in (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8")]
     per_scenic: dict[str, Counter] = defaultdict(Counter)
@@ -93,15 +96,10 @@ def tourist_time_hierarchy() -> dict:
         period_pois = defaultdict(list)
         for e in rec["entities"]:
             if e["type"] == "时间节点":
-                if e["subtype"] == "时段":
-                    current = e["text"]
-                elif e["subtype"] == "时刻":
-                    m = re.match(r"(?:清晨|早上|上午|中午|下午|傍晚|晚上|夜里|深夜|凌晨)?(\d{1,2})[点:：]", e["text"])
-                    if m:
-                        current = period_from_hour(int(m.group(1)))
-                        if current == "未标注时段":
-                            current = None
-            elif e["type"] == "景点POI" and e["subtype"] == "景点" and current:
+                period = entity_period(e)
+                if period:
+                    current = period
+            elif e["type"] == "景点POI" and e["subtype"] == "景点" and e.get("in_scenic", True) and current:
                 bucket = ("上午" if current in ("清晨", "早上", "上午") else "中午" if current == "中午" else
                           "下午" if current in ("下午", "傍晚") else "晚上" if current in ("晚上", "夜里", "深夜") else
                           "全天" if current == "全天" else "未标注时段")

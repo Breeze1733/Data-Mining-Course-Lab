@@ -30,6 +30,9 @@ plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei"]
 plt.rcParams["axes.unicode_minus"] = False
 
 PERIODS = ("上午", "中午", "下午", "晚上")
+sys.path.insert(0, str(ROOT.parent / "common"))
+from entity_identity import build_poi_lookup
+POI_LOOKUP = build_poi_lookup(json.loads((TASK2 / "output/exp2/entity_dictionary.json").read_text(encoding="utf-8"))["poi"])
 
 
 def kendall_tau(a: list, b: list) -> float:
@@ -81,6 +84,7 @@ def official_routes_by_scenic() -> dict[str, list[dict]]:
             # 连续去重后的官方 POI 序列
             seq = []
             for poi in p["pois_in_order"]:
+                poi = POI_LOOKUP.get((p["scenic_area"], poi), poi)
                 if not seq or seq[-1] != poi:
                     seq.append(poi)
             p["norm_sequence"] = seq
@@ -118,6 +122,9 @@ def official_period_allocation(parsed: list[dict]) -> Counter:
     return alloc
 
 
+from time_periods import entity_period
+
+
 def tourist_period_allocation() -> dict[str, Counter]:
     """游客文本的时段分布：时段词出现次数（叙述型）+ 时钟时刻落点。"""
     ents = [json.loads(l) for l in (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8")]
@@ -128,16 +135,9 @@ def tourist_period_allocation() -> dict[str, Counter]:
         for e in rec["entities"]:
             if e["type"] != "时间节点":
                 continue
-            if e["subtype"] == "时段":
-                alloc[rec["scenic_area"]][e["text"]] += 1
-            elif e["subtype"] == "时刻":
-                m = re.match(r"(?:清晨|早上|上午|中午|下午|傍晚|晚上|夜里|深夜|凌晨)?(\d{1,2})[点:：]", e["text"])
-                if m:
-                    hour = int(m.group(1))
-                    bucket = ("清晨" if 5 <= hour < 8 else "上午" if 8 <= hour < 12 else
-                              "中午" if 12 <= hour < 14 else "下午" if 14 <= hour < 18 else
-                              "傍晚" if 18 <= hour < 19 else "晚上" if 19 <= hour < 23 else "深夜")
-                    alloc[rec["scenic_area"]][bucket] += 1
+            bucket = entity_period(e)
+            if bucket:
+                alloc[rec["scenic_area"]][bucket] += 1
     # 归并到四大时段（清晨→上午、傍晚→下午、深夜→晚上）
     merged: dict[str, Counter] = {}
     for scenic, c in alloc.items():

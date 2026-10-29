@@ -89,6 +89,10 @@ def main() -> int:
     fig.savefig(FIGS / "bar_by_scenic.png")
     plt.close(fig)
 
+    if args.iteration == "refined":
+        import shutil
+        for chart in FIGS.glob("*.png"):
+            shutil.copy2(chart, FIGS.parent / chart.name)
     print(json.dumps({"figs": sorted(p.name for p in FIGS.glob("*.png"))}, ensure_ascii=False))
     return 0
 

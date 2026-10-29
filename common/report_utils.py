@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import io
 import sys
+from uuid import uuid4
 from pathlib import Path
 
 from docx import Document
@@ -104,6 +105,7 @@ class ReportBuilder:
 
     def sub(self, text: str):
         p = self.doc.add_paragraph()
+        p.paragraph_format.keep_with_next = True
         p.paragraph_format.space_before = Pt(6)
         p.paragraph_format.space_after = Pt(3)
         p.paragraph_format.line_spacing = 1.3
@@ -143,6 +145,7 @@ class ReportBuilder:
         # 学术三线表：顶线/底线 1.5pt，表头下线 0.75pt，无竖线与内横线
         table = self.doc.add_table(rows=1, cols=len(headers))
         table.alignment = WD_TABLE_ALIGNMENT.CENTER
+        table.autofit = False
         tbl_pr = table._tbl.tblPr
         borders = OxmlElement("w:tblBorders")
         for edge, sz in (("top", 12), ("bottom", 12)):
@@ -168,6 +171,7 @@ class ReportBuilder:
             cell.text = ""
             para = cell.paragraphs[0]
             para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            para.paragraph_format.keep_with_next = True
             _set_font(para.add_run(h), size=font_size, bold=True)
             tc_borders = OxmlElement("w:tcBorders")
             bottom = OxmlElement("w:bottom")
@@ -198,10 +202,18 @@ class ReportBuilder:
                     _set_font(para.add_run(text), size=font_size)
         if widths:
             for i, w in enumerate(widths):
+                table.columns[i].width = Cm(w)
                 for row in table.rows:
                     row.cells[i].width = Cm(w)
         return table
 
     def save(self, path: str | Path):
-        self.doc.save(path)
+        path = Path(path)
+        temporary = path.with_name(f".{path.stem}.{uuid4().hex}.tmp.docx")
+        try:
+            self.doc.save(temporary)
+            temporary.replace(path)
+        finally:
+            if temporary.exists():
+                temporary.unlink()
         print(f"saved: {path}")

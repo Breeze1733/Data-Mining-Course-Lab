@@ -10,10 +10,10 @@ __pycache__/
 ~$*.docx
 *.tmp
 *.log
-
-# 通用系统文件；各任务的生成文件由各自的 .gitignore 管理
 .DS_Store
 Thumbs.db
-
-# 本地 AI 助手的会话与记忆状态
 .workbuddy-ai/
+/.python-version
+/uv.lock
+/pyproject.toml
+/.merge_review/

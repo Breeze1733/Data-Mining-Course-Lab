@@ -87,7 +87,7 @@ def main() -> int:
     for f in fact_checks:
         print(" ", f["pair"], "OK" if f["found"] else "MISS",
               f'w={f["edges"][0]["weight"]:.1f}' if f["found"] else "")
-    return 0
+    return 0 if ok == len(fact_checks) and all(n == 1 for n in components.values()) and not validation["isolated_nodes"] else 1
 
 
 if __name__ == "__main__":

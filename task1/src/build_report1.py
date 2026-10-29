@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -71,7 +72,9 @@ def main():
 
     rb.section("三、实验设计与实现")
     rb.sub("3.1 数据采集（自行采集）")
-    rb.p("三个景区统一为黄山、九寨沟、颐和园。采集在 2026-10-28 至 10-29 完成，全部脚本与来源清单已提交仓库，可从干净克隆复现（见 READ.md）。")
+    rb.p("三个景区统一为黄山、九寨沟、颐和园。主语料采集批次在2026-10-28至10-29完成，采集脚本与来源说明已入库；本报告及下游实验采用保留的主语料批次。")
+    rb.p("本报告统计口径为303条组装输入、271条保留记录。合并后的READ.md另说明每景区两平台各25篇的采集分支，当前为150篇游客文本，不能代替本报告批次。"
+         "该分支保留preprocess_collected.py用于话题标签、元数据、CSV及幂等检查，默认写data/processed_collected，不覆盖主语料或其质量报告。重新联网采集的数量可能随平台变化。")
     rb.table(
         ["来源", "采集方法", "筛选规则", "结果"],
         [
@@ -158,6 +161,7 @@ def main():
     emoji_ex = next(e for e in EXAMPLES if e["record_id"].startswith("XHS") and e["cleaning_counts"].get("emoji_and_decorative_characters_removed", 0) > 0)
 
     def clip(text, n=210):
+        text = re.sub(r'https?://[^\s"<>]+', "[长链接省略]", text)
         text = text.replace("\n", "⏎")
         return text[:n] + ("…" if len(text) > n else "")
 
@@ -174,7 +178,7 @@ def main():
         widths=[3.0, 6.5, 5.5],
         font_size=9,
     )
-    rb.caption("表 4 清洗前后样例（⏎ 表示换行；完整对照见 cleaning_examples.json 与 Excel“清洗前后样例”表）")
+    rb.caption("表 4 清洗前后样例（⏎ 表示换行；长链接为显示省略；完整对照见cleaning_examples.json与Excel表）")
     rb.p("携程样例中标签、实体与页面残留被清除而正文完整；小红书样例中表情符号被剔除，但 ⚠、→、时间表达（如 5:40）全部保留，"
          "路线结构未受破坏。271 组完整对照已随数据集输出。")
 

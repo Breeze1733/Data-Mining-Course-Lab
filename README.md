@@ -41,3 +41,9 @@ Python 环境：`task1/.venv`（复用；依赖见 `task1/requirements.txt`，�
 cd task1
 .\.venv\Scripts\python.exe -X utf8 ..\task2\src\extract_entities.py --iteration refined
 ```
+
+## 合并版本复现
+
+使用已入库的主语料离线重建实验2、3、4、6、7：`python common/run_pipeline.py --reports`。本轮审核依据、两个原始提交、统一案例和合并决策见`review/merge_20261029/README.md`。实验1主数据与实验5条件建议未改变。
+
+实体、路线与图谱共用`common/entity_identity.py`和`task2/resources/poi_aliases.csv`；运行`python common/verify_entity_identity.py`检查别名目标和路线引用。配置化实体接口见task2/README.md，统计口径与主报告分别说明。

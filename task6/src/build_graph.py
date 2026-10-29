@@ -46,15 +46,14 @@ def main() -> int:
     poi_of = {e["name"]: e for e in entries if e["entity_type"] == "景点POI"}
     transport_of = {e["name"]: e for e in entries if e["entity_type"] == "交通方式"}
     # 名称解析：实验3步骤名经过 normalize（剥离“景区”后缀），与词典 canonical 对齐
-    name2canon = {}
-    canon2poi = {}
-    for e in poi_of.values():
-        name2canon.setdefault(e["canonical"], e["canonical"])
-        name2canon.setdefault(normalize(e["canonical"]), e["canonical"])
-        canon2poi[e["canonical"]] = e
+    from entity_identity import build_poi_lookup
+    name2canon = build_poi_lookup(list(poi_of.values()))
+    canonical_areas = defaultdict(set)
+    for entry in poi_of.values():
+        canonical_areas[entry["canonical"]].update(entry["scenic_areas"])
 
     def resolve(scenic: str, name: str) -> str:
-        return name2canon.get(name, name)
+        return name2canon.get((scenic, name), name)
 
     parsed = [json.loads(l) for l in (TASK3 / "output/parsed_routes.jsonl").open(encoding="utf-8")]
     tourists = [json.loads(l) for l in (TASK3 / "output/tourist_routes.jsonl").open(encoding="utf-8")]
@@ -159,7 +158,7 @@ def main() -> int:
         text = m["condition_text"] + " " + m["suggestion_text"]
         pois_in_text = [resolve(scenic, e["canonical"]) for e in matcher.find(text)
                         if e["type"] == "景点POI"
-                        and scenic in canon2poi.get(e["canonical"], {}).get("scenic_areas", [])
+                        and scenic in canonical_areas.get(e["canonical"], set())
                         and node_id("POI", scenic, resolve(scenic, e["canonical"])) in G]
         if pois_in_text:
             for poi in dict.fromkeys(pois_in_text):

@@ -170,7 +170,7 @@ def sample(cases: list[dict]) -> None:
         c = cases[i]
         out.append({
             "case_index": i, "pronoun": c["pronoun"], "pronoun_class": c["pronoun_class"],
-            "scenic_area": c["scenic_area"], "record_id": c["record_id"],
+            "scenic_area": c["scenic_area"], "record_id": c["record_id"], "doc_start": c["doc_start"], "doc_end": c["doc_end"],
             "prev2": c["prev2_sentence"][-60:], "prev": c["prev_sentence"][-70:],
             "sentence": c["sentence"][:120],
             "rule_resolution": c["resolution"], "rule_kind": c["resolution_kind"],
@@ -187,16 +187,23 @@ def sample(cases: list[dict]) -> None:
 
 def fill(cases: list[dict]) -> None:
     data = json.loads((OUT / "annotation_sample.json").read_text(encoding="utf-8"))
+    existing = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
+    anchors = {g["case_index"]: g for g in existing}
     gold_rows = []
     for j, s in enumerate(data["samples"]):
         if j not in GOLD:
             continue
+        case = cases[s["case_index"]]
+        anchor = anchors.get(s["case_index"], {})
+        if any(anchor.get(k) != case[k] for k in ("record_id", "pronoun", "doc_start", "doc_end")):
+            raise ValueError("Cannot reuse indexed labels for a changed sample; annotate it independently")
         ant, kind, note = GOLD[j]
         gold_rows.append({
             "case_index": s["case_index"], "pronoun": s["pronoun"], "pronoun_class": s["pronoun_class"],
             "scenic_area": s["scenic_area"], "record_id": s["record_id"],
             "gold_antecedent": ant, "gold_kind": kind, "note": note,
             "rule_resolution": s["rule_resolution"], "rule_kind": s["rule_kind"],
+            "doc_start": case["doc_start"], "doc_end": case["doc_end"],
         })
     (OUT / "annotation_gold.json").write_text(
         json.dumps({"annotated_by": "课程实验（作者本人）", "n": len(gold_rows), "annotations": gold_rows},
@@ -210,6 +217,9 @@ def score(cases: list[dict]) -> None:
     rows = []
     for g in gold:
         case = cases[g["case_index"]]
+        for field in ("record_id", "pronoun", "doc_start", "doc_end"):
+            if field not in g or case[field] != g[field]:
+                raise ValueError(f"Stale coreference annotation at {g['case_index']}: {field}; re-align the gold set before scoring")
         pred, truth = case["resolution"], g["gold_antecedent"]
         # 判定对错：类别一致且指称一致（人称/集合/无先行词按特殊类比较；景区名回退算“POI/景区”粒度）
         canon = {"POI": "POI", "交通": "交通", "景区名": "景区", "他人": "他人", "同行者": "同行者",

@@ -15,7 +15,7 @@ output/
   parsed_routes.jsonl          46 条结构化路线
   time_hierarchy.jsonl         时间层级视图（含时段推断）
   name_normalization.json      名称归一化规则与示例
-  tourist_routes.jsonl         230 条游客实际路线（POI 序列）
+  tourist_routes.jsonl         228 条游客实际路线（POI 序列）
   official_vs_tourist.json     对比指标（覆盖度/Jaccard/Kendall tau/时间分配）
   time_hierarchy_summary.json  层级聚合统计
   figs/                        对比图与 3 张层级树图
@@ -42,6 +42,8 @@ cd task1
 
 ## 关键结论
 
-- 39 条有序路线全部解析（平均 8.8 步/条）；九寨沟官方是“日程表”，黄山/颐和园是“节点链”。
-- 游客 vs 官方：覆盖度 0.39–0.44，顺序一致性 Kendall tau 九寨沟 0.663 > 黄山 0.518 > 颐和园 0.25，梯度由空间约束强度决定（游客路线已按 in_scenic 在景标记过滤）。
-- 官方路线时间止于闭园，游客 17% 的时间表达落在夜间（演出/晚餐/酒店）。
+- 39 条有序路线全部解析（步骤数见当前parsed_routes.jsonl）；九寨沟官方是“日程表”，黄山/颐和园是“节点链”。
+- 游客 vs 官方：覆盖度 0.326–0.430，顺序一致性 Kendall tau 九寨沟 0.680 > 黄山 0.521 > 颐和园 0.289，梯度由空间约束强度决定（游客路线已按 in_scenic 在景标记过滤）。
+- 官方路线时间止于闭园，游客夜间时间表达占比见official_vs_tourist.json（演出/晚餐/酒店）。
+
+名称归一化统一委托common/entity_identity.py及task2/resources/poi_aliases.csv；游客时段由time_periods.py读取规范化时刻和区间。

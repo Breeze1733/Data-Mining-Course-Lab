@@ -28,7 +28,7 @@ def main():
     rb.section("二、实验环境")
     rb.bullets([
         "Windows 11；Python 3.13（task1/.venv）；networkx 3.x（图构建与 GraphML）；matplotlib（静态图）；pyvis（交互 HTML）。",
-        "输入：task2 实体词典与词频、task3 结构化路线（46 条官方 + 230 条游客）、task5 条件建议映射表（1210 条）。",
+        f"输入：task2 实体词典与词频、task3 官方路线及游客路线（{sum(1 for _ in (ROOT.parent / 'task3/output/tourist_routes.jsonl').open(encoding='utf-8'))} 条游客路线）、task5 条件建议映射表。",
         "运行入口：task6/src/{build_graph, visualize_graph, verify_graph, build_report6}.py。",
     ])
 
@@ -49,7 +49,7 @@ def main():
 
     rb.sub("3.2 融合策略")
     rb.bullets([
-        "实体对齐：以实验2词典 canonical 为唯一键；景区命名空间隔离——五彩池（九寨沟/黄龙）、北海（黄山/北京）"
+        "实体对齐：读取公共别名表poi_aliases.csv，实验3与6使用同一entity_identity.py模块；以景区和词典canonical联合定位；景区命名空间隔离——五彩池（九寨沟/黄龙）、北海（黄山/北京）"
         "不跨景区合并；实验3步骤名经过“景区后缀剥离”归一（玉屏景区→玉屏），图谱侧建同名解析器双向对齐；",
         "来源合并：先后顺序边 = 官方路线（每条权重 1.0）+ 游客序列（每条 0.5），边上保留官方路线 ID 列表与"
         "游客支持计数，回答“这条先后关系是谁说的”；",
@@ -96,7 +96,7 @@ def main():
         f"结构完整性：三个景区子图均为单一连通分量（{VALID['connected_components_per_scenic']}），无孤立节点；",
         "同名异点隔离：五彩池仅存在于九寨沟命名空间、北海仅存在于黄山命名空间（北京北海公园由实验2停用词守卫拦截），未发生跨景区错误合并；",
         f"边类型分布合理：先后顺序 {STATS['by_relation']['先后顺序']:,} 条构成动线主体，条件建议 {STATS['by_relation']['条件建议']:,} 条把 9 类条件经验挂接到具体 POI；",
-        "样例查询：诺日朗→长海（w=12.5）、长海→五彩池（w=26.5）的高权重来自官方路线与游客序列的双重支持，与“Y 形沟右线经典动线”一致。",
+        "样例查询的权重与来源由表3列示；随词典及游客序列重建而变化，权重用于说明来源支持强弱，不代表路线实时可通行。",
     ])
 
     rb.section("五、实验小结")

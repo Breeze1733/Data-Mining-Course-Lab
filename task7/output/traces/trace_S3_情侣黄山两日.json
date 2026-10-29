@@ -40,7 +40,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 11 个 POI：光明顶、迎客松、天都峰、西海、云谷寺、玉屏景区"
+   "summary": "返回 11 个 POI：光明顶、迎客松、天都峰、西海大峡谷、莲花峰、云谷寺"
   },
   {
    "step": "action",
@@ -76,32 +76,32 @@
   },
   {
    "step": "thought",
-   "thought": "编排骨架：模板“北门二日游”覆盖已选 POI 的 55%；覆盖率不足 60%，改用图谱先后边拓扑排序"
+   "thought": "编排骨架：模板“南门二日游”覆盖已选 POI 的 55%；覆盖率不足 60%，改用图谱先后边拓扑排序"
   },
   {
    "step": "action",
-   "thought": "调用工具 query_order，参数 {'scenic': '黄山', 'poi': '始信峰'}",
+   "thought": "调用工具 query_order，参数 {'scenic': '黄山', 'poi': '迎客松'}",
    "tool": "query_order",
    "args": {
     "scenic": "黄山",
-    "poi": "始信峰"
+    "poi": "迎客松"
    }
   },
   {
    "step": "observation",
    "tool": "query_order",
-   "summary": "后继：黑虎松、北海、猴子观海、梦笔生花"
+   "summary": "后继：天都峰、玉屏楼、莲花峰、西海"
   },
   {
    "step": "thought",
-   "thought": "用 query_order 校验首站的官方后继（始信峰）以决定第二站是否符合主流动线"
+   "thought": "用 query_order 校验首站的官方后继（迎客松）以决定第二站是否符合主流动线"
   },
   {
    "step": "final",
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "为您规划黄山两日游（参考官方路线 HS-EXTRA1-R2 冬季南门二日游）：\nD1·上午：始信峰\nD1·上午：玉屏景区（步行前往）\nD1·中午：迎客松（步行前往）\nD1·下午：莲花峰（步行前往）\nD1·下午：西海大峡谷（观光缆车前往）\nD1·晚上：飞来石（步行前往）\nD2·上午：北海（步行前往）\nD2·上午：光明顶（步行前往）\nD2·中午：天都峰（步行前往）\nD2·下午：西海（索道前往）\nD2·下午：云谷寺（云谷索道前往）\n贴士：[人群] 不想分开睡,经济条件也不错；[人群] 和其他游客拼独卫房间或住帐篷；[装备] 可以报身份证号检票,但亲身经历,会比较麻烦；[装备] 肯定会被黑的,有的时候提前讲好价钱到景区了还会多要钱的,要注",
+ "answer": "为您规划黄山两日游（参考官方路线 HS-EXTRA1-R2 冬季南门二日游）：\nD1·上午：迎客松\nD1·上午：莲花峰（步行前往）\nD1·中午：云谷寺（云谷索道前往）\nD1·下午：西海大峡谷（索道前往）\nD1·下午：飞来石（步行前往）\nD1·晚上：始信峰（步行前往）\nD2·上午：北海（步行前往）\nD2·上午：光明顶（步行前往）\nD2·中午：白鹅岭（索道前往）\nD2·下午：天都峰（步行前往）\nD2·下午：猴子观海（索道前往）\n贴士：[人群] 不想分开睡,经济条件也不错；[人群] 和其他游客拼独卫房间或住帐篷；[装备] 可以报身份证号检票,但亲身经历,会比较麻烦；[装备] 肯定会被黑的,有的时候提前讲好价钱到景区了还会多要钱的,要注",
  "plan": {
   "scenic": "黄山",
   "days": 2,
@@ -114,7 +114,7 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "始信峰",
+    "poi": "迎客松",
     "transport_from_prev": "入园",
     "note": ""
    },
@@ -122,7 +122,7 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "玉屏景区",
+    "poi": "莲花峰",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -130,31 +130,31 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "迎客松",
-    "transport_from_prev": "步行",
+    "poi": "云谷寺",
+    "transport_from_prev": "云谷索道",
     "note": ""
    },
    {
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "莲花峰",
-    "transport_from_prev": "步行",
+    "poi": "西海大峡谷",
+    "transport_from_prev": "索道",
     "note": ""
    },
    {
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "西海大峡谷",
-    "transport_from_prev": "观光缆车",
+    "poi": "飞来石",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 6,
     "day": 1,
     "period": "晚上",
-    "poi": "飞来石",
+    "poi": "始信峰",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -178,24 +178,24 @@
     "order": 9,
     "day": 2,
     "period": "中午",
-    "poi": "天都峰",
-    "transport_from_prev": "步行",
+    "poi": "白鹅岭",
+    "transport_from_prev": "索道",
     "note": ""
    },
    {
     "order": 10,
     "day": 2,
     "period": "下午",
-    "poi": "西海",
-    "transport_from_prev": "索道",
+    "poi": "天都峰",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 11,
     "day": 2,
     "period": "下午",
-    "poi": "云谷寺",
-    "transport_from_prev": "云谷索道",
+    "poi": "猴子观海",
+    "transport_from_prev": "索道",
     "note": ""
    }
   ],

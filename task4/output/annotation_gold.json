@@ -12,7 +12,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "镜海",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 7252,
+   "doc_end": 7254
   },
   {
    "case_index": 764,
@@ -24,7 +26,9 @@
    "gold_kind": "景区",
    "note": "“这里的水”指九寨沟当地（夜宿地）",
    "rule_resolution": "九寨沟",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 5024,
+   "doc_end": 5026
   },
   {
    "case_index": 1258,
@@ -36,7 +40,9 @@
    "gold_kind": "设施",
    "note": "“这里都能吃到”指酒店餐厅，非景区",
    "rule_resolution": "九寨沟",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 3996,
+   "doc_end": 3998
   },
   {
    "case_index": 1207,
@@ -48,7 +54,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "原始森林",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 13658,
+   "doc_end": 13660
   },
   {
    "case_index": 1175,
@@ -60,7 +68,9 @@
    "gold_kind": "POI",
    "note": "同句“黄龙”干扰；真先行词为前文“松潘古城”（未收录实体）",
    "rule_resolution": "黄龙",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 2538,
+   "doc_end": 2540
   },
   {
    "case_index": 999,
@@ -72,7 +82,9 @@
    "gold_kind": "景区",
    "note": "多景点游记，“这里”指重庆磁器口",
    "rule_resolution": "九寨沟",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 14062,
+   "doc_end": 14064
   },
   {
    "case_index": 948,
@@ -84,7 +96,9 @@
    "gold_kind": "景区",
    "note": "“这里有13路公交站”指乐山大佛附近；平台主景区标签为九寨沟",
    "rule_resolution": "九寨沟",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 3028,
+   "doc_end": 3030
   },
   {
    "case_index": 909,
@@ -96,7 +110,9 @@
    "gold_kind": "景区",
    "note": "“湖在这里被叫做海子”指九寨沟整体；前句“箭竹海”为干扰",
    "rule_resolution": "箭竹海",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 7152,
+   "doc_end": 7154
   },
   {
    "case_index": 1563,
@@ -108,7 +124,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "五彩池",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 11896,
+   "doc_end": 11898
   },
   {
    "case_index": 780,
@@ -120,7 +138,9 @@
    "gold_kind": "无",
    "note": "“此处只能省略一万字”指文中省略内容，非地点",
    "rule_resolution": "九寨沟",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 832,
+   "doc_end": 834
   },
   {
    "case_index": 34,
@@ -132,7 +152,9 @@
    "gold_kind": "POI",
    "note": "多景点游记（故宫/景山段）",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 1016,
+   "doc_end": 1018
   },
   {
    "case_index": 62,
@@ -144,7 +166,9 @@
    "gold_kind": "POI",
    "note": "多景点游记",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 5821,
+   "doc_end": 5823
   },
   {
    "case_index": 126,
@@ -156,7 +180,9 @@
    "gold_kind": "设施",
    "note": "“这里食客等位”指餐厅",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 10839,
+   "doc_end": 10841
   },
   {
    "case_index": 133,
@@ -168,7 +194,9 @@
    "gold_kind": "景区",
    "note": "多景点游记（清华段）",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 15705,
+   "doc_end": 15707
   },
   {
    "case_index": 1753,
@@ -180,7 +208,9 @@
    "gold_kind": "景区",
    "note": "多景点游记（北大段）",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 876,
+   "doc_end": 878
   },
   {
    "case_index": 1788,
@@ -192,7 +222,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "耕织图",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 2900,
+   "doc_end": 2902
   },
   {
    "case_index": 32,
@@ -204,7 +236,9 @@
    "gold_kind": "景区",
    "note": "",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 1973,
+   "doc_end": 1975
   },
   {
    "case_index": 1774,
@@ -216,7 +250,9 @@
    "gold_kind": "景区",
    "note": "",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 37,
+   "doc_end": 39
   },
   {
    "case_index": 112,
@@ -228,7 +264,9 @@
    "gold_kind": "POI",
    "note": "多景点游记（什刹海段）",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 4574,
+   "doc_end": 4576
   },
   {
    "case_index": 1814,
@@ -240,7 +278,9 @@
    "gold_kind": "POI",
    "note": "多景点游记（长城段）",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 8265,
+   "doc_end": 8267
   },
   {
    "case_index": 705,
@@ -252,7 +292,9 @@
    "gold_kind": "POI",
    "note": "前文以“梦幻景区”代称，该代称未入实体词表",
    "rule_resolution": "黄山",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 6128,
+   "doc_end": 6130
   },
   {
    "case_index": 567,
@@ -264,7 +306,9 @@
    "gold_kind": "集合-POI",
    "note": "入口并列结构，“那里”指多个地点",
    "rule_resolution": "云谷寺",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 7436,
+   "doc_end": 7438
   },
   {
    "case_index": 485,
@@ -276,7 +320,9 @@
    "gold_kind": "景区",
    "note": "",
    "rule_resolution": "黄山",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 2559,
+   "doc_end": 2561
   },
   {
    "case_index": 318,
@@ -288,7 +334,9 @@
    "gold_kind": "设施",
    "note": "“这里的客房”指民宿",
    "rule_resolution": "黄山",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 839,
+   "doc_end": 841
   },
   {
    "case_index": 500,
@@ -300,7 +348,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "光明顶",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 4242,
+   "doc_end": 4244
   },
   {
    "case_index": 600,
@@ -312,7 +362,9 @@
    "gold_kind": "景区",
    "note": "多景区游记（三清山段）",
    "rule_resolution": "黄山",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 3343,
+   "doc_end": 3345
   },
   {
    "case_index": 367,
@@ -324,7 +376,9 @@
    "gold_kind": "设施",
    "note": "",
    "rule_resolution": "黄山",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 1398,
+   "doc_end": 1400
   },
   {
    "case_index": 141,
@@ -336,7 +390,9 @@
    "gold_kind": "POI",
    "note": "“北海宾馆附近”，归一化到北海可接受",
    "rule_resolution": "北海",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 959,
+   "doc_end": 961
   },
   {
    "case_index": 269,
@@ -348,7 +404,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "鳌鱼峰",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 2539,
+   "doc_end": 2541
   },
   {
    "case_index": 703,
@@ -360,7 +418,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "西海大峡谷",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 6059,
+   "doc_end": 6061
   },
   {
    "case_index": 1111,
@@ -372,7 +432,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "五花海",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 2387,
+   "doc_end": 2388
   },
   {
    "case_index": 1026,
@@ -384,7 +446,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "五彩池",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 393,
+   "doc_end": 394
   },
   {
    "case_index": 947,
@@ -396,7 +460,9 @@
    "gold_kind": "路线",
    "note": "“这条路”指前句“一条往南门”的岔道（乐山大佛景区内）",
    "rule_resolution": "东门",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 2808,
+   "doc_end": 2810
   },
   {
    "case_index": 829,
@@ -408,7 +474,9 @@
    "gold_kind": "景区",
    "note": "“这座城市”指成都；同句“动车票”干扰",
    "rule_resolution": "动车",
-   "rule_kind": "交通"
+   "rule_kind": "交通",
+   "doc_start": 10121,
+   "doc_end": 10123
   },
   {
    "case_index": 911,
@@ -420,7 +488,9 @@
    "gold_kind": "POI",
    "note": "前句“下一条沟—查洼沟”；文本变体“查洼沟”未入词典",
    "rule_resolution": "诺日朗中心",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 7995,
+   "doc_end": 7997
   },
   {
    "case_index": 1856,
@@ -432,7 +502,9 @@
    "gold_kind": "POI",
    "note": "前文“则渣洼沟”拼写变体未入词典",
    "rule_resolution": "诺日朗",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 371,
+   "doc_end": 373
   },
   {
    "case_index": 1381,
@@ -444,7 +516,9 @@
    "gold_kind": "路线",
    "note": "指前文山路，非景点",
    "rule_resolution": "黄龙",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 157,
+   "doc_end": 159
   },
   {
    "case_index": 1025,
@@ -456,7 +530,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "五彩池",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 390,
+   "doc_end": 391
   },
   {
    "case_index": 793,
@@ -468,7 +544,9 @@
    "gold_kind": "景区",
    "note": "“它的缠绵悱恻”指红原四季；红原未收录",
    "rule_resolution": "九寨沟",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 6705,
+   "doc_end": 6706
   },
   {
    "case_index": 787,
@@ -480,7 +558,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "九寨沟",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 4275,
+   "doc_end": 4277
   },
   {
    "case_index": 1690,
@@ -492,7 +572,9 @@
    "gold_kind": "POI",
    "note": "多景点游记（圆明园段）",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 1696,
+   "doc_end": 1698
   },
   {
    "case_index": 26,
@@ -504,7 +586,9 @@
    "gold_kind": "POI",
    "note": "同句“长廊”劫持，真先行词为句首主语清晏舫（石舫）",
    "rule_resolution": "长廊",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 651,
+   "doc_end": 652
   },
   {
    "case_index": 1665,
@@ -516,7 +600,9 @@
    "gold_kind": "POI",
    "note": "北京北海，多景点游记",
    "rule_resolution": "北海",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 8723,
+   "doc_end": 8724
   },
   {
    "case_index": 1926,
@@ -528,7 +614,9 @@
    "gold_kind": "路线",
    "note": "指前句路线标题",
    "rule_resolution": "东宫门",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 106,
+   "doc_end": 108
   },
   {
    "case_index": 1664,
@@ -540,7 +628,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "北海",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 8708,
+   "doc_end": 8709
   },
   {
    "case_index": 1773,
@@ -552,7 +642,9 @@
    "gold_kind": "景区",
    "note": "",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 8,
+   "doc_end": 10
   },
   {
    "case_index": 121,
@@ -564,7 +656,9 @@
    "gold_kind": "POI",
    "note": "多景点游记",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 9549,
+   "doc_end": 9551
   },
   {
    "case_index": 1919,
@@ -576,7 +670,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "长廊",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 411,
+   "doc_end": 412
   },
   {
    "case_index": 11,
@@ -588,7 +684,9 @@
    "gold_kind": "POI",
    "note": "先行词在代词之后（后置命名“名为佛香阁”）",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 6872,
+   "doc_end": 6874
   },
   {
    "case_index": 1823,
@@ -600,7 +698,9 @@
    "gold_kind": "景区",
    "note": "",
    "rule_resolution": "颐和园",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 16812,
+   "doc_end": 16813
   },
   {
    "case_index": 398,
@@ -612,7 +712,9 @@
    "gold_kind": "路线",
    "note": "指北大门太平索道进出的线路",
    "rule_resolution": "松谷庵",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 7531,
+   "doc_end": 7533
   },
   {
    "case_index": 426,
@@ -624,7 +726,9 @@
    "gold_kind": "路线",
    "note": "指“往左手那条路”",
    "rule_resolution": "迎客松",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 5706,
+   "doc_end": 5708
   },
   {
    "case_index": 232,
@@ -636,7 +740,9 @@
    "gold_kind": "其他",
    "note": "普通名词“祠堂”，非POI",
    "rule_resolution": "黄山",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 5389,
+   "doc_end": 5390
   },
   {
    "case_index": 1852,
@@ -648,7 +754,9 @@
    "gold_kind": "路线",
    "note": "指本篇所述两日路线",
    "rule_resolution": "光明顶",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 525,
+   "doc_end": 527
   },
   {
    "case_index": 373,
@@ -660,7 +768,9 @@
    "gold_kind": "景区",
    "note": "",
    "rule_resolution": "黄山",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 2649,
+   "doc_end": 2650
   },
   {
    "case_index": 194,
@@ -672,7 +782,9 @@
    "gold_kind": "其他",
    "note": "多景区游记（庐山段）",
    "rule_resolution": "黄山",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 15332,
+   "doc_end": 15333
   },
   {
    "case_index": 442,
@@ -684,7 +796,9 @@
    "gold_kind": "景区",
    "note": "",
    "rule_resolution": "黄山",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 2951,
+   "doc_end": 2952
   },
   {
    "case_index": 326,
@@ -696,7 +810,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "迎客松",
-   "rule_kind": "POI"
+   "rule_kind": "POI",
+   "doc_start": 3421,
+   "doc_end": 3422
   },
   {
    "case_index": 652,
@@ -708,7 +824,9 @@
    "gold_kind": "其他",
    "note": "“它的利用价值”指五步蛇",
    "rule_resolution": "黄山",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 4765,
+   "doc_end": 4766
   },
   {
    "case_index": 521,
@@ -720,7 +838,9 @@
    "gold_kind": "路线",
    "note": "指前文沿江公路",
    "rule_resolution": "黄山",
-   "rule_kind": "景区名"
+   "rule_kind": "景区名",
+   "doc_start": 6478,
+   "doc_end": 6480
   },
   {
    "case_index": 1457,
@@ -732,7 +852,9 @@
    "gold_kind": "他人",
    "note": "服务场景中的“他们”，非同行者",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 4399,
+   "doc_end": 4401
   },
   {
    "case_index": 1052,
@@ -744,7 +866,9 @@
    "gold_kind": "他人",
    "note": "前句“问了当地人”",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 1644,
+   "doc_end": 1646
   },
   {
    "case_index": 815,
@@ -756,7 +880,9 @@
    "gold_kind": "同行者",
    "note": "前句“他们”即同行队伍",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 4518,
+   "doc_end": 4520
   },
   {
    "case_index": 808,
@@ -768,7 +894,9 @@
    "gold_kind": "无",
    "note": "诗化指代“这片土地”，无明确实体",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 3914,
+   "doc_end": 3916
   },
   {
    "case_index": 1108,
@@ -780,7 +908,9 @@
    "gold_kind": "他人",
    "note": "非作者同行者，是同团其他游客",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 1067,
+   "doc_end": 1069
   },
   {
    "case_index": 1357,
@@ -792,7 +922,9 @@
    "gold_kind": "同行者",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 238,
+   "doc_end": 240
   },
   {
    "case_index": 827,
@@ -804,7 +936,9 @@
    "gold_kind": "同行者",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 9026,
+   "doc_end": 9028
   },
   {
    "case_index": 1109,
@@ -816,7 +950,9 @@
    "gold_kind": "他人",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 1071,
+   "doc_end": 1073
   },
   {
    "case_index": 872,
@@ -828,7 +964,9 @@
    "gold_kind": "设施",
    "note": "“他们家招牌”指餐厅店家",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 5595,
+   "doc_end": 5597
   },
   {
    "case_index": 1475,
@@ -840,7 +978,9 @@
    "gold_kind": "他人",
    "note": "规则识别为他人，正确",
    "rule_resolution": "other_person",
-   "rule_kind": "他人"
+   "rule_kind": "他人",
+   "doc_start": 2096,
+   "doc_end": 2098
   },
   {
    "case_index": 86,
@@ -852,7 +992,9 @@
    "gold_kind": "同行者",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 4604,
+   "doc_end": 4606
   },
   {
    "case_index": 1742,
@@ -864,7 +1006,9 @@
    "gold_kind": "他人",
    "note": "前文“他的另一个同事”指导游群体",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 5384,
+   "doc_end": 5386
   },
   {
    "case_index": 90,
@@ -876,7 +1020,9 @@
    "gold_kind": "同行者",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 5077,
+   "doc_end": 5079
   },
   {
    "case_index": 1713,
@@ -888,7 +1034,9 @@
    "gold_kind": "他人",
    "note": "前文“管理者”",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 5899,
+   "doc_end": 5901
   },
   {
    "case_index": 75,
@@ -900,7 +1048,9 @@
    "gold_kind": "同行者",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 3104,
+   "doc_end": 3106
   },
   {
    "case_index": 39,
@@ -912,7 +1062,9 @@
    "gold_kind": "他人",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 465,
+   "doc_end": 467
   },
   {
    "case_index": 1740,
@@ -924,7 +1076,9 @@
    "gold_kind": "他人",
    "note": "历史叙述",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 4312,
+   "doc_end": 4314
   },
   {
    "case_index": 1833,
@@ -936,7 +1090,9 @@
    "gold_kind": "设施",
    "note": "“他们后院”指酒店",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 258,
+   "doc_end": 260
   },
   {
    "case_index": 45,
@@ -948,7 +1104,9 @@
    "gold_kind": "其他",
    "note": "小黄人项目角色",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 4425,
+   "doc_end": 4427
   },
   {
    "case_index": 91,
@@ -960,7 +1118,9 @@
    "gold_kind": "同行者",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 5084,
+   "doc_end": 5086
   },
   {
    "case_index": 512,
@@ -972,7 +1132,9 @@
    "gold_kind": "同行者",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 5661,
+   "doc_end": 5663
   },
   {
    "case_index": 233,
@@ -984,7 +1146,9 @@
    "gold_kind": "他人",
    "note": "前句“见到一些游客”",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 5520,
+   "doc_end": 5522
   },
   {
    "case_index": 361,
@@ -996,7 +1160,9 @@
    "gold_kind": "设施",
    "note": "“他们的管家服务”指酒店",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 256,
+   "doc_end": 258
   },
   {
    "case_index": 712,
@@ -1008,7 +1174,9 @@
    "gold_kind": "集合-POI",
    "note": "人称代词指景点集合，类别跨越 person→POI 集合",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 8406,
+   "doc_end": 8408
   },
   {
    "case_index": 444,
@@ -1020,7 +1188,9 @@
    "gold_kind": "他人",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 1128,
+   "doc_end": 1130
   },
   {
    "case_index": 343,
@@ -1032,7 +1202,9 @@
    "gold_kind": "他人",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 1838,
+   "doc_end": 1840
   },
   {
    "case_index": 676,
@@ -1044,7 +1216,9 @@
    "gold_kind": "他人",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 2677,
+   "doc_end": 2679
   },
   {
    "case_index": 637,
@@ -1056,7 +1230,9 @@
    "gold_kind": "他人",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 5878,
+   "doc_end": 5880
   },
   {
    "case_index": 1850,
@@ -1068,7 +1244,9 @@
    "gold_kind": "他人",
    "note": "角色词“挑山工”不在规则词表（词表只有“挑夫”）",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 465,
+   "doc_end": 467
   },
   {
    "case_index": 684,
@@ -1080,7 +1258,9 @@
    "gold_kind": "同行者",
    "note": "",
    "rule_resolution": "travel_party",
-   "rule_kind": "同行者"
+   "rule_kind": "同行者",
+   "doc_start": 3250,
+   "doc_end": 3252
   },
   {
    "case_index": 1190,
@@ -1092,7 +1272,9 @@
    "gold_kind": "其他",
    "note": "“穿梭在其中”指栈道与水流之间",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 9006,
+   "doc_end": 9008
   },
   {
    "case_index": 1241,
@@ -1104,7 +1286,9 @@
    "gold_kind": "集合-其他",
    "note": "普通名词集合",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 8061,
+   "doc_end": 8063
   },
   {
    "case_index": 1160,
@@ -1116,7 +1300,9 @@
    "gold_kind": "集合-其他",
    "note": "",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 15648,
+   "doc_end": 15650
   },
   {
    "case_index": 867,
@@ -1128,7 +1314,9 @@
    "gold_kind": "集合-其他",
    "note": "",
    "rule_resolution": "preceding_set",
-   "rule_kind": "前文POI集合"
+   "rule_kind": "前文POI集合",
+   "doc_start": 4034,
+   "doc_end": 4036
   },
   {
    "case_index": 1237,
@@ -1140,7 +1328,9 @@
    "gold_kind": "POI",
    "note": "“寺院标志性建筑”即扎如寺（九寨沟周边）",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 5971,
+   "doc_end": 5973
   },
   {
    "case_index": 1013,
@@ -1152,7 +1342,9 @@
    "gold_kind": "集合-其他",
    "note": "“两种方式…其中之一原因”",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 2229,
+   "doc_end": 2231
   },
   {
    "case_index": 1356,
@@ -1164,7 +1356,9 @@
    "gold_kind": "集合-人",
    "note": "“其中”指人的集合",
    "rule_resolution": "preceding_set",
-   "rule_kind": "前文POI集合"
+   "rule_kind": "前文POI集合",
+   "doc_start": 171,
+   "doc_end": 173
   },
   {
    "case_index": 1273,
@@ -1176,7 +1370,9 @@
    "gold_kind": "无",
    "note": "承接行程单，无明确集合实体",
    "rule_resolution": "preceding_set",
-   "rule_kind": "前文POI集合"
+   "rule_kind": "前文POI集合",
+   "doc_start": 355,
+   "doc_end": 357
   },
   {
    "case_index": 1378,
@@ -1188,7 +1384,9 @@
    "gold_kind": "集合-其他",
    "note": "前句“悬冰川、冰斗冰川和平顶冰川”",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 3913,
+   "doc_end": 3915
   },
   {
    "case_index": 755,
@@ -1200,7 +1398,9 @@
    "gold_kind": "其他",
    "note": "虚化“其中的壮美”",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 3616,
+   "doc_end": 3618
   },
   {
    "case_index": 111,
@@ -1212,7 +1412,9 @@
    "gold_kind": "POI",
    "note": "“其中”承接王府整体；多景点游记",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 3347,
+   "doc_end": 3349
   },
   {
    "case_index": 1825,
@@ -1224,7 +1426,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 19194,
+   "doc_end": 19196
   },
   {
    "case_index": 13,
@@ -1236,7 +1440,9 @@
    "gold_kind": "POI",
    "note": "",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 7983,
+   "doc_end": 7985
   },
   {
    "case_index": 1822,
@@ -1248,7 +1454,9 @@
    "gold_kind": "集合-其他",
    "note": "雍和宫/颐和园/智化寺的转轮藏",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 15502,
+   "doc_end": 15504
   },
   {
    "case_index": 1661,
@@ -1260,7 +1468,9 @@
    "gold_kind": "集合-其他",
    "note": "",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 4015,
+   "doc_end": 4017
   },
   {
    "case_index": 1685,
@@ -1272,7 +1482,9 @@
    "gold_kind": "集合-其他",
    "note": "",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 646,
+   "doc_end": 648
   },
   {
    "case_index": 113,
@@ -1284,7 +1496,9 @@
    "gold_kind": "集合-其他",
    "note": "",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 4822,
+   "doc_end": 4824
   },
   {
    "case_index": 23,
@@ -1296,7 +1510,9 @@
    "gold_kind": "集合-其他",
    "note": "",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 1791,
+   "doc_end": 1793
   },
   {
    "case_index": 84,
@@ -1308,7 +1524,9 @@
    "gold_kind": "其他",
    "note": "虚化“沉寂在其中”",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 4492,
+   "doc_end": 4494
   },
   {
    "case_index": 1799,
@@ -1320,7 +1538,9 @@
    "gold_kind": "集合-人",
    "note": "",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 2966,
+   "doc_end": 2968
   },
   {
    "case_index": 655,
@@ -1332,7 +1552,9 @@
    "gold_kind": "集合-其他",
    "note": "",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 5016,
+   "doc_end": 5018
   },
   {
    "case_index": 502,
@@ -1344,7 +1566,9 @@
    "gold_kind": "集合-其他",
    "note": "普通名词集合",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 4405,
+   "doc_end": 4407
   },
   {
    "case_index": 234,
@@ -1356,7 +1580,9 @@
    "gold_kind": "其他",
    "note": "",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 5723,
+   "doc_end": 5725
   },
   {
    "case_index": 204,
@@ -1368,7 +1594,9 @@
    "gold_kind": "集合-其他",
    "note": "",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 19286,
+   "doc_end": 19288
   },
   {
    "case_index": 415,
@@ -1380,7 +1608,9 @@
    "gold_kind": "POI",
    "note": "“倒映其中”指月沼水体；前句POI劫持",
    "rule_resolution": "preceding_set",
-   "rule_kind": "前文POI集合"
+   "rule_kind": "前文POI集合",
+   "doc_start": 2123,
+   "doc_end": 2125
   },
   {
    "case_index": 315,
@@ -1392,7 +1622,9 @@
    "gold_kind": "其他",
    "note": "虚化“走在其中”",
    "rule_resolution": "preceding_set",
-   "rule_kind": "前文POI集合"
+   "rule_kind": "前文POI集合",
+   "doc_start": 553,
+   "doc_end": 555
   },
   {
    "case_index": 263,
@@ -1404,7 +1636,9 @@
    "gold_kind": "集合-其他",
    "note": "后文列举的三大主峰是子集",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 2990,
+   "doc_end": 2992
   },
   {
    "case_index": 569,
@@ -1416,7 +1650,9 @@
    "gold_kind": "集合-其他",
    "note": "",
    "rule_resolution": "preceding_set",
-   "rule_kind": "前文POI集合"
+   "rule_kind": "前文POI集合",
+   "doc_start": 7839,
+   "doc_end": 7841
   },
   {
    "case_index": 290,
@@ -1428,7 +1664,9 @@
    "gold_kind": "集合-其他",
    "note": "徒步 vs 索道",
    "rule_resolution": "preceding_set",
-   "rule_kind": "前文POI集合"
+   "rule_kind": "前文POI集合",
+   "doc_start": 2331,
+   "doc_end": 2333
   },
   {
    "case_index": 177,
@@ -1440,7 +1678,10 @@
    "gold_kind": "集合-其他",
    "note": "“8”字两个环行",
    "rule_resolution": "NONE",
-   "rule_kind": "无明确先行词"
+   "rule_kind": "无明确先行词",
+   "doc_start": 9096,
+   "doc_end": 9098
   }
- ]
+ ],
+ "alignment_policy": "record_id + pronoun + doc_start + doc_end; fail on changed text location"
 }

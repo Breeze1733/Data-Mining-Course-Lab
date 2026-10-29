@@ -1,6 +1,14 @@
-# 实验项目2 的本地中间数据
 __pycache__/
 *.py[cod]
+/.venv/
+/venv/
+/.env*
+/inputs/*
+!/inputs/README.md
+/outputs/
+/data/
+/logs/
+/resources/iter1_baseline/
 ~$*.docx
 *.tmp
-data/
+*.log

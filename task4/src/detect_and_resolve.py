@@ -58,6 +58,7 @@ def main() -> int:
 
     sys.path.insert(0, str(TASK2 / "src"))
     from extract_entities import DictMatcher, load_dictionary
+    from compatibility import contextual_facility_places
 
     entries, stopwords, _ = load_dictionary("refined")
     matcher = DictMatcher(entries, stopwords)
@@ -75,6 +76,8 @@ def main() -> int:
             text = row["clean_content"]
             rec_ents = ents.get(row["record_id"], {}).get("entities", [])
             pois = [e for e in rec_ents if e["type"] == "景点POI" and e["subtype"] == "景点"]
+            pois += contextual_facility_places(text, row["scenic_area"])
+            pois.sort(key=lambda e: (e["start"], e["end"]))
             transports = [e for e in rec_ents if e["type"] == "交通方式"]
             scenic_area = row["scenic_area"]
 

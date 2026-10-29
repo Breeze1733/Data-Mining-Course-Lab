@@ -1,0 +1,512 @@
+{
+  "purpose": "任务边界回归案例，由本次代码审核定义；不是随机语料准确率评估",
+  "cases": [
+    {
+      "id": "C01",
+      "text": "早上8点到光明顶，步行30分钟。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "早上8点",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "type": "景点POI",
+          "surface": "光明顶",
+          "start": 5,
+          "end": 8
+        },
+        {
+          "type": "交通方式",
+          "surface": "步行",
+          "start": 9,
+          "end": 11
+        },
+        {
+          "type": "时间节点",
+          "surface": "30分钟",
+          "start": 11,
+          "end": 15
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "text": "酒店不在附近，步行要40分钟。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "交通方式",
+          "surface": "步行",
+          "start": 7,
+          "end": 9
+        },
+        {
+          "type": "时间节点",
+          "surface": "40分钟",
+          "start": 10,
+          "end": 14
+        }
+      ]
+    },
+    {
+      "id": "C03",
+      "text": "坐高铁，站在窗边。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "交通方式",
+          "surface": "高铁",
+          "start": 1,
+          "end": 3
+        }
+      ]
+    },
+    {
+      "id": "C04",
+      "text": "坐观光车，到站后步行。",
+      "area": "九寨沟",
+      "expected": [
+        {
+          "type": "交通方式",
+          "surface": "观光车",
+          "start": 1,
+          "end": 4
+        },
+        {
+          "type": "交通方式",
+          "surface": "步行",
+          "start": 8,
+          "end": 10
+        }
+      ]
+    },
+    {
+      "id": "C05",
+      "text": "云谷索道下站乘缆车。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "交通方式",
+          "surface": "云谷索道",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "type": "交通方式",
+          "surface": "缆车",
+          "start": 7,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "id": "C06",
+      "text": "坐云谷索道上山。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "交通方式",
+          "surface": "云谷索道",
+          "start": 1,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "id": "C07",
+      "text": "步行街和登山杖。",
+      "area": "黄山",
+      "expected": []
+    },
+    {
+      "id": "C08",
+      "text": "索道票和高铁站。",
+      "area": "黄山",
+      "expected": []
+    },
+    {
+      "id": "C09",
+      "text": "西海大峡谷观光缆车。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "交通方式",
+          "surface": "西海大峡谷观光缆车",
+          "start": 0,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "id": "C10",
+      "text": "7点到9点。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "7点到9点",
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "id": "C11",
+      "text": "15:20–15:30。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "15:20–15:30",
+          "start": 0,
+          "end": 11
+        }
+      ]
+    },
+    {
+      "id": "C12",
+      "text": "下午三点半。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "下午三点半",
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "id": "C13",
+      "text": "半小时后到五花海。",
+      "area": "九寨沟",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "半小时",
+          "start": 0,
+          "end": 3
+        },
+        {
+          "type": "景点POI",
+          "surface": "五花海",
+          "start": 5,
+          "end": 8
+        }
+      ]
+    },
+    {
+      "id": "C14",
+      "text": "三小时后从长海到五花海。",
+      "area": "九寨沟",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "三小时",
+          "start": 0,
+          "end": 3
+        },
+        {
+          "type": "景点POI",
+          "surface": "长海",
+          "start": 5,
+          "end": 7
+        },
+        {
+          "type": "景点POI",
+          "surface": "五花海",
+          "start": 8,
+          "end": 11
+        }
+      ]
+    },
+    {
+      "id": "C15",
+      "text": "Day2 上午到十七孔桥。",
+      "area": "颐和园",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "Day2",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "type": "时间节点",
+          "surface": "上午",
+          "start": 5,
+          "end": 7
+        },
+        {
+          "type": "景点POI",
+          "surface": "十七孔桥",
+          "start": 8,
+          "end": 12
+        }
+      ]
+    },
+    {
+      "id": "C16",
+      "text": "五彩池和黄龙。",
+      "area": "九寨沟",
+      "expected": [
+        {
+          "type": "景点POI",
+          "surface": "五彩池",
+          "start": 0,
+          "end": 3
+        },
+        {
+          "type": "景点POI",
+          "surface": "黄龙",
+          "start": 4,
+          "end": 6
+        }
+      ]
+    },
+    {
+      "id": "C17",
+      "text": "先去宏村。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "景点POI",
+          "surface": "宏村",
+          "start": 2,
+          "end": 4
+        }
+      ]
+    },
+    {
+      "id": "C18",
+      "text": "先到西海大峡谷再到光明顶。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "景点POI",
+          "surface": "西海大峡谷",
+          "start": 2,
+          "end": 7
+        },
+        {
+          "type": "景点POI",
+          "surface": "光明顶",
+          "start": 9,
+          "end": 12
+        }
+      ]
+    },
+    {
+      "id": "C19",
+      "text": "游船票和地铁口。",
+      "area": "颐和园",
+      "expected": []
+    },
+    {
+      "id": "C20",
+      "text": "登山鞋与步行街。",
+      "area": "黄山",
+      "expected": []
+    },
+    {
+      "id": "C21",
+      "text": "坐游船到十七孔桥。",
+      "area": "颐和园",
+      "expected": [
+        {
+          "type": "交通方式",
+          "surface": "游船",
+          "start": 1,
+          "end": 3
+        },
+        {
+          "type": "景点POI",
+          "surface": "十七孔桥",
+          "start": 4,
+          "end": 8
+        }
+      ]
+    },
+    {
+      "id": "C22",
+      "text": "7月18日早晨。",
+      "area": "九寨沟",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "7月18日",
+          "start": 0,
+          "end": 5
+        },
+        {
+          "type": "时间节点",
+          "surface": "早晨",
+          "start": 5,
+          "end": 7
+        }
+      ]
+    },
+    {
+      "id": "C23",
+      "text": "次日返回。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "次日",
+          "start": 0,
+          "end": 2
+        }
+      ]
+    },
+    {
+      "id": "C24",
+      "text": "上午9点半出发。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "上午9点半",
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "id": "C25",
+      "text": "12点半至13点。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "12点半至13点",
+          "start": 0,
+          "end": 8
+        }
+      ]
+    },
+    {
+      "id": "C26",
+      "text": "北海公园。",
+      "area": "颐和园",
+      "expected": []
+    },
+    {
+      "id": "C27",
+      "text": "诺日朗餐厅用餐。",
+      "area": "九寨沟",
+      "expected": []
+    },
+    {
+      "id": "C28",
+      "text": "树正瀑布和树正群海。",
+      "area": "九寨沟",
+      "expected": [
+        {
+          "type": "景点POI",
+          "surface": "树正瀑布",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "type": "景点POI",
+          "surface": "树正群海",
+          "start": 5,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "id": "C29",
+      "text": "去清晏舫和佛香阁。",
+      "area": "颐和园",
+      "expected": [
+        {
+          "type": "景点POI",
+          "surface": "清晏舫",
+          "start": 1,
+          "end": 4
+        },
+        {
+          "type": "景点POI",
+          "surface": "佛香阁",
+          "start": 5,
+          "end": 8
+        }
+      ]
+    },
+    {
+      "id": "C30",
+      "text": "打车后徒步。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "交通方式",
+          "surface": "打车",
+          "start": 0,
+          "end": 2
+        },
+        {
+          "type": "交通方式",
+          "surface": "徒步",
+          "start": 3,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "id": "C31",
+      "text": "索道检修，选择步行。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "交通方式",
+          "surface": "步行",
+          "start": 7,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "id": "C32",
+      "text": "门票80元，海拔1860米。",
+      "area": "黄山",
+      "expected": []
+    },
+    {
+      "id": "C33",
+      "text": "第一天上午。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "第一天",
+          "start": 0,
+          "end": 3
+        },
+        {
+          "type": "时间节点",
+          "surface": "上午",
+          "start": 3,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "id": "C34",
+      "text": "2026年10月1日。",
+      "area": "黄山",
+      "expected": [
+        {
+          "type": "时间节点",
+          "surface": "2026年10月1日",
+          "start": 0,
+          "end": 10
+        }
+      ]
+    }
+  ]
+}
