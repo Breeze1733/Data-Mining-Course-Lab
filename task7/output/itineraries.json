@@ -12,7 +12,7 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "昆明湖",
+    "poi": "谐趣园",
     "transport_from_prev": "入园",
     "note": ""
    },
@@ -20,7 +20,7 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "西堤",
+    "poi": "昆明湖",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -28,7 +28,7 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "佛香阁",
+    "poi": "西堤",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -36,7 +36,7 @@
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "十七孔桥",
+    "poi": "佛香阁",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -44,7 +44,7 @@
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "长廊",
+    "poi": "十七孔桥",
     "transport_from_prev": "步行",
     "note": ""
    }
@@ -140,26 +140,20 @@
   "tips": [
    {
     "cond_type": "装备",
+    "condition": "装备条件（句内）",
+    "suggestion": "避免污染环境,还是文明入厕的好",
+    "frequency": 4
+   },
+   {
+    "cond_type": "装备",
     "condition": "真的没有准备",
     "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
     "frequency": 3
    },
    {
     "cond_type": "装备",
-    "condition": "装备条件（句内）",
-    "suggestion": "避免污染环境,还是文明入厕的好",
-    "frequency": 1
-   },
-   {
-    "cond_type": "装备",
     "condition": "为了加水和休息",
     "suggestion": "就算再老练的司机,走这条路,都需格外小心",
-    "frequency": 1
-   },
-   {
-    "cond_type": "装备",
-    "condition": "枯水如黄龙",
-    "suggestion": "确实可以略过",
     "frequency": 1
    }
   ],
@@ -268,7 +262,7 @@
     "cond_type": "人群",
     "condition": "一般情侣或家庭出来",
     "suggestion": "不想分开睡,经济条件也不错",
-    "frequency": 1
+    "frequency": 2
    },
    {
     "cond_type": "人群",
@@ -280,12 +274,18 @@
     "cond_type": "装备",
     "condition": "没有带身份证",
     "suggestion": "可以报身份证号检票,但亲身经历,会比较麻烦",
-    "frequency": 1
+    "frequency": 3
    },
    {
     "cond_type": "装备",
     "condition": "装备条件（句内）",
     "suggestion": "避免低血糖",
+    "frequency": 3
+   },
+   {
+    "cond_type": "装备",
+    "condition": "有谁也和这个团一起去黄山的朋友看我的流水帐",
+    "suggestion": "千万不要笑我",
     "frequency": 1
    }
   ],
@@ -302,7 +302,7 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "昆明湖",
+    "poi": "谐趣园",
     "transport_from_prev": "入园",
     "note": ""
    },
@@ -310,7 +310,7 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "西堤",
+    "poi": "昆明湖",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -318,7 +318,7 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "佛香阁",
+    "poi": "西堤",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -326,7 +326,7 @@
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "十七孔桥",
+    "poi": "佛香阁",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -334,7 +334,7 @@
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "长廊",
+    "poi": "十七孔桥",
     "transport_from_prev": "步行",
     "note": ""
    }
@@ -342,15 +342,15 @@
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "游客为孩子",
-    "suggestion": "儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途中经过的14号至19号敌楼路段较为平坦,便于行走",
-    "frequency": 1
+    "condition": "游客为初次游览",
+    "suggestion": "第一次去北京是八十年代,是陪父亲去看病,虽说是忧愁,但内心的激动依然占据了上风",
+    "frequency": 3
    },
    {
     "cond_type": "人群",
-    "condition": "游客为初次游览",
-    "suggestion": "第一次去北京是八十年代,是陪父亲去看病,虽说是忧愁,但内心的激动依然占据了上风",
-    "frequency": 1
+    "condition": "游客为孩子",
+    "suggestion": "儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途中经过的14号至19号敌楼路段较为平坦,便于行走",
+    "frequency": 2
    },
    {
     "cond_type": "人群",
@@ -432,14 +432,26 @@
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "恐高",
-    "suggestion": "还是前山上,后山下吧",
-    "frequency": 1
+    "condition": "你是第一次去黄山",
+    "suggestion": "请个人带是必须的",
+    "frequency": 2
    },
    {
     "cond_type": "人群",
-    "condition": "你是第一次去黄山",
-    "suggestion": "请个人带是必须的",
+    "condition": "有恐高症的朋友",
+    "suggestion": "过这儿时最好挑有雾的天气,看不到谷底和深壑",
+    "frequency": 2
+   },
+   {
+    "cond_type": "人群",
+    "condition": "一般情侣或家庭出来",
+    "suggestion": "不想分开睡,经济条件也不错",
+    "frequency": 2
+   },
+   {
+    "cond_type": "人群",
+    "condition": "恐高",
+    "suggestion": "还是前山上,后山下吧",
     "frequency": 1
    },
    {
@@ -452,18 +464,6 @@
     "cond_type": "人群",
     "condition": "腿脚不方便",
     "suggestion": "可以从旁边的山路绕开爬一线天,一样可以到前面",
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "游客为学生",
-    "suggestion": "是全日制大学的学生证",
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "游客为体力有限",
-    "suggestion": "步行上山,体力不好的也可在此处乘缆车上山,直达迎客松即玉屏楼)",
     "frequency": 1
    }
   ],

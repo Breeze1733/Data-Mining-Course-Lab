@@ -18,6 +18,7 @@ import io
 import json
 import sys
 from collections import Counter, defaultdict
+import re
 from pathlib import Path
 
 import networkx as nx
@@ -145,17 +146,59 @@ def main() -> int:
                     else:
                         G.add_edge(u, tn, key="交通方式", relation="交通方式", weight=1)
 
+    _stats: dict = {}
     # ── 条件建议边（实验5映射表 → 句中 POI）──────────────────────
+    # P5 聚类归一：同景区+同类型+归一文本 char-bigram Jaccard>=0.4 的条件合并为一个节点，
+    # 保留代表文本（频次最高）、全部变体与合计频次；边按成员逐条挂接、权重累加。
+    def _norm_cond(t: str) -> str:
+        return re.sub(r"[\s，,。；;、！？!?\[\]（）()【】的了吗呢啊呀]", "", t)
+
+    def _bigrams(t: str) -> set:
+        return {t[i:i + 2] for i in range(len(t) - 1)} if len(t) > 1 else {t}
+
+    def _polarity(m) -> str:
+        t = _norm_cond(m["condition_text"])[:4]
+        return "NEG" if re.search(r"^(不要|不去|别|切勿|避免|慎|忌|没带|没有带|没有|不宜|不建议)", t) else "POS"
+
+    clusters: list[dict] = []
+    reps: list[tuple[str, str, str, str, set]] = []
+    for m in mapping:
+        key_text = _norm_cond(m["condition_text"])
+        bg = _bigrams(key_text)
+        hit = None
+        for scenic0, ctype0, pat0, pol0, bg0, cluster0 in reps:
+            # 极性不同不合并（P4建议/P6避雷，及条件文本自身的否定前缀）
+            if (scenic0 == m["scenic_area"] and ctype0 == m["condition_type"]
+                    and pat0 == m["pattern"] and pol0 == _polarity(m)):
+                inter, union = len(bg0 & bg), len(bg0 | bg)
+                if union and inter / union >= 0.4:
+                    hit = cluster0
+                    break
+        if hit is not None:
+            hit["members"].append(m)
+        else:
+            cluster = {"scenic_area": m["scenic_area"], "condition_type": m["condition_type"],
+                       "members": [m]}
+            reps.append((m["scenic_area"], m["condition_type"], m["pattern"], _polarity(m), bg, cluster))
+            clusters.append(cluster)
+    _stats["cond_raw"] = len(mapping)
+    _stats["cond_clusters"] = len(clusters)
+
     cond_edges = 0
     cond_to_scenic = 0
-    for m in mapping:
-        scenic = m["scenic_area"]
-        cn = node_id("条件", scenic, f'{m["condition_type"]}:{m["condition_text"][:18]}')
+    for cluster in clusters:
+        members = cluster["members"]
+        rep = max(members, key=lambda x: x["frequency"])
+        scenic = rep["scenic_area"]
+        cn = node_id("条件", scenic, f'{rep["condition_type"]}:{_norm_cond(rep["condition_text"])[:18]}')
         if not G.has_node(cn):
-            G.add_node(cn, kind="条件", name=m["condition_text"][:30], label=f'[{m["condition_type"]}] {m["condition_text"][:24]}',
-                       cond_type=m["condition_type"], suggestion=m["suggestion_text"][:100],
-                       frequency=m["frequency"])
-        text = m["condition_text"] + " " + m["suggestion_text"]
+            G.add_node(cn, kind="条件", name=rep["condition_text"][:30],
+                       label=f'[{rep["condition_type"]}] {rep["condition_text"][:24]}',
+                       cond_type=rep["condition_type"], suggestion=rep["suggestion_text"][:100],
+                       frequency=sum(x["frequency"] for x in members),
+                       variants=" | ".join(dict.fromkeys(x["condition_text"] for x in members))[:200])
+        for m in members:
+            text = m["condition_text"] + " " + m["suggestion_text"]
         pois_in_text = [resolve(scenic, e["canonical"]) for e in matcher.find(text)
                         if e["type"] == "景点POI"
                         and scenic in canonical_areas.get(e["canonical"], set())
@@ -173,6 +216,7 @@ def main() -> int:
             G.add_edge(u, cn, key="条件建议", relation="条件建议", weight=m["frequency"])
             cond_to_scenic += 1
 
+    print(json.dumps({"cond_raw_pairs": _stats.get("cond_raw"), "cond_cluster_nodes": _stats.get("cond_clusters")}, ensure_ascii=False))
     # ── 导出与统计 ──────────────────────────────────────────────
     OUT.mkdir(parents=True, exist_ok=True)
     import csv

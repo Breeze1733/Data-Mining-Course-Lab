@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-30 02:36",
-  "git": "211f0dd",
-  "label": "U9: P4极性边界守卫（wrong存活10→6）",
-  "dirty_files": 12
+  "time": "2026-10-30 02:41",
+  "git": "3ea8ed2",
+  "label": "U10: P5条件聚类归一（860对→390条件节点）",
+  "dirty_files": 14
  },
  "metrics": {
   "dataset.count": 271,
@@ -32,8 +32,8 @@
   "cond.correct": 20,
   "cond.boundary": 16,
   "cond.wrong": 13,
-  "graph.nodes": 571,
-  "graph.edges": 2420,
+  "graph.nodes": 564,
+  "graph.edges": 2313,
   "graph.fact_checks_passed": 6,
   "graph.fact_checks_total": 6,
   "graph.name_alignment_passed": true,

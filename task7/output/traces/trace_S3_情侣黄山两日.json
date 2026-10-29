@@ -40,7 +40,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 11 个 POI：光明顶、迎客松、天都峰、西海大峡谷、莲花峰、云谷寺"
+   "summary": "返回 11 个 POI：光明顶、迎客松、天都峰、西海大峡谷、莲花峰、始信峰"
   },
   {
    "step": "action",
@@ -204,7 +204,7 @@
     "cond_type": "人群",
     "condition": "一般情侣或家庭出来",
     "suggestion": "不想分开睡,经济条件也不错",
-    "frequency": 1
+    "frequency": 2
    },
    {
     "cond_type": "人群",
@@ -216,16 +216,22 @@
     "cond_type": "装备",
     "condition": "没有带身份证",
     "suggestion": "可以报身份证号检票,但亲身经历,会比较麻烦",
-    "frequency": 1
+    "frequency": 3
    },
    {
     "cond_type": "装备",
     "condition": "装备条件（句内）",
     "suggestion": "避免低血糖",
+    "frequency": 3
+   },
+   {
+    "cond_type": "装备",
+    "condition": "有谁也和这个团一起去黄山的朋友看我的流水帐",
+    "suggestion": "千万不要笑我",
     "frequency": 1
    }
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }
