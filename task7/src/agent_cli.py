@@ -1,0 +1,328 @@
+"""实验7：旅游规划 Agent（ReAct 模式）。
+
+组成：
+  - LLMClient：任意 OpenAI 兼容接口（config.json 配置 base_url/api_key/model）；
+    未配置时 llm_available=False，Agent 使用内置规则规划器（意图解析、路线编排、文案生成全部离线可复现）。
+  - IntentParser：提取 景区/游客类型/时长/特殊需求/起点 约束（LLM 模式走 Prompt，规则模式走关键词表）。
+  - ReActAgent：思考→行动（调用 GraphTools）→观察→…→最终回答 的显式循环，
+    每一步记录 trace（thought/action/observation），工具调用结果实际参与行程编排。
+运行：python src/agent_cli.py            （交互命令行）
+      python src/run_tests.py            （6 个场景批量测试并落盘证据）
+"""
+from __future__ import annotations
+
+import json
+import re
+import sys
+import time
+import urllib.request
+from pathlib import Path
+
+import networkx as nx
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from graph_tools import AREAS, GraphTools  # noqa: E402
+
+ROOT = Path(__file__).resolve().parents[1]
+
+VISITOR_PATTERNS = [
+    ("老人", r"老人|爸妈|父母|银发|奶奶|爷爷|长辈"),
+    ("孩子", r"孩子|小孩|儿童|带娃|娃|儿子|女儿|幼儿园"),
+    ("亲子", r"亲子|家庭|一家"),
+    ("情侣", r"情侣|夫妻|蜜月|约会|女朋友|男朋友"),
+    ("体力有限", r"体力(不好|差|有限|不足)|腿脚|孕妇|高反"),
+    ("初次游览", r"第一次|首次|没去过"),
+]
+DURATION_PATTERNS = [
+    (2, r"两日|两天|2\s*天|二日|周末游"),
+    (1.5, r"一天半|1\.5\s*天"),
+    (1, r"一日|一天|1\s*天|当日"),
+    (0.5, r"半天|([0-9一二两三])\s*小时"),
+]
+SPECIAL_PATTERNS = [
+    ("看日出", r"日出|朝霞"), ("避开人流", r"人少|避开|错峰|不挤"),
+    ("省力", r"省力|轻松|不累|少走"), ("红叶", r"红叶|秋色|赏秋"),
+    ("拍照片", r"拍照|出片|机位"), ("滑雪", r"滑雪|温泉"),
+]
+
+
+class LLMClient:
+    """OpenAI 兼容 ChatCompletion 客户端；未配置时不可用，Agent 走规则模式。"""
+
+    def __init__(self, config_path: Path | None = None):
+        cfg = {}
+        cfg_path = Path(config_path) if config_path else ROOT / "config.json"
+        if cfg_path.exists():
+            cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
+        self.base_url = str(cfg.get("base_url", "")).rstrip("/")
+        self.api_key = str(cfg.get("api_key", ""))
+        self.model = str(cfg.get("model", ""))
+        # 占位模板（config.example.json）不算已配置
+        placeholder = any(k in self.api_key for k in ("填入", "你的", "placeholder", "xxx"))
+        self.available = bool(self.base_url and self.api_key and self.model) and not placeholder
+
+    def complete(self, system: str, user: str) -> str:
+        if not self.available:
+            raise RuntimeError("LLM 未配置")
+        body = json.dumps({"model": self.model,
+                           "messages": [{"role": "system", "content": system},
+                                        {"role": "user", "content": user}],
+                           "temperature": 0.4}).encode("utf-8")
+        req = urllib.request.Request(
+            f"{self.base_url}/chat/completions", data=body,
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {self.api_key}"})
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        return data["choices"][0]["message"]["content"]
+
+
+INTENT_PROMPT = """你是旅游规划助手。从用户输入中提取约束，输出 JSON：
+{"scenic": "黄山|九寨沟|颐和园|未知", "visitor_type": "老人|孩子|亲子|情侣|体力有限|初次游览|null",
+ "days": 1, "special": ["看日出|避开人流|省力|红叶|拍照片" 中的若干或空数组]}
+只输出 JSON，不要解释。用户输入："""
+
+
+class IntentParser:
+    def __init__(self, llm: LLMClient | None):
+        self.llm = llm
+
+    def parse(self, query: str, trace: list) -> dict:
+        if self.llm and self.llm.available:
+            try:
+                raw = self.llm.complete(INTENT_PROMPT, query)
+                intent = json.loads(re.search(r"\{.*\}", raw, re.S).group())
+                trace.append({"step": "intent", "thought": "调用 LLM 解析用户约束", "via": "llm", "result": intent})
+                return intent
+            except Exception as exc:  # 网络失败回退规则
+                trace.append({"step": "intent", "thought": f"LLM 解析失败（{exc}），回退规则解析", "via": "fallback"})
+        scenic = next((a for a in AREAS if a in query), None)
+        visitor = next((v for v, pat in VISITOR_PATTERNS if re.search(pat, query)), None)
+        days = 1
+        for d, pat in DURATION_PATTERNS:
+            if re.search(pat, query):
+                days = d
+                break
+        special = [s for s, pat in SPECIAL_PATTERNS if re.search(pat, query)]
+        intent = {"scenic": scenic or "未知", "visitor_type": visitor, "days": days, "special": special}
+        trace.append({"step": "intent", "thought": "规则解析用户约束（景区/游客类型/时长/特殊需求）",
+                      "via": "rules", "result": intent})
+        return intent
+
+
+class ReActAgent:
+    """思考→行动→观察循环；规划器在规则模式下同样按“意图→选点→排序→时段→贴士”五步走。"""
+
+    def __init__(self, llm: LLMClient | None = None):
+        self.tools = GraphTools()
+        self.llm = llm
+        self.parser = IntentParser(llm)
+
+    # ── 规则模式规划 ────────────────────────────────────────────
+    def _plan_rule(self, intent: dict, trace: list) -> dict:
+        scenic, days, visitor = intent["scenic"], intent["days"], intent["visitor_type"]
+        limit = {0.5: 5, 1: 8, 1.5: 9, 2: 11}.get(days, 8)
+        pois_res = self.tools.call("query_pois", {"scenic": scenic, "visitor_type": visitor, "limit": limit}, trace)
+        route_res = self.tools.call("query_route", {"scenic": scenic, "days": days if days <= 2 else 2}, trace)
+        cond_res = self.tools.call("query_conditions", {"scenic": scenic, "visitor_type": visitor}, trace)
+        trace.append({"step": "thought", "thought": f"约束={intent}；先查核心 POI（limit={limit}），"
+                     "再取官方路线做编排骨架，最后按游客类型取条件贴士"})
+
+        selected = [p["poi"] for p in pois_res["pois"]]
+        # 模板选择：在与天数匹配的官方路线中选“覆盖已选 POI 比例最高”的一条；覆盖率过低则改用图谱拓扑排序
+        cands = self.tools.routes_by_scenic(scenic, days if days <= 2 else 2)
+        best_route, best_pos, best_cov = None, {}, 0.0
+        for r in cands:
+            pos = {}
+            for st in r["steps"]:
+                for poi in [x["normalized"] for x in st["pois"]]:
+                    pos.setdefault(poi, (st["day"], st["step_no"], st["period"], st["transport"]))
+            cov = sum(1 for poi in selected if poi in pos) / max(1, len(selected))
+            if cov > best_cov:
+                best_route, best_pos, best_cov = r, pos, cov
+        template_cov_low = best_cov < 0.6
+        template_pos = best_pos if not template_cov_low else {}
+        template = best_route["route_title"] if best_route else ""
+        ordered = self._order_pois(scenic, selected, template_pos)
+        trace.append({"step": "thought", "thought": f"编排骨架：模板“{template}”覆盖已选 POI 的 {best_cov:.0%}"
+                     + ("；覆盖率不足 60%，改用图谱先后边拓扑排序" if template_cov_low else "")})
+        # 天数/时段分配：模板 POI 沿用模板；未覆盖的均匀切分天，时段按当日序数映射；住宿节点固定晚上
+        period_cycle = ["上午", "上午", "中午", "下午", "下午", "晚上"]
+        n_days = max(1, int(days) if days else 1)
+        split = (len(ordered) + n_days - 1) // n_days
+        per_day = ([ordered[:split], ordered[split:]] if n_days == 2 else [ordered])             if (template_cov_low and days >= 1) else None
+        itinerary = []
+        day_counter: dict[int, int] = {}
+        for i, poi in enumerate(ordered):
+            day, step, period, transport = template_pos.get(poi, (None, None, "", []))
+            if day is None or not period:
+                if per_day:
+                    day = next(d + 1 for d, chunk in enumerate(per_day) if poi in chunk)
+                    idx = per_day[day - 1].index(poi)
+                    period = period_cycle[min(idx, len(period_cycle) - 1)]
+                else:
+                    day = day or 1
+                    idx = day_counter.get(day, 0)
+                    day_counter[day] = idx + 1
+                    period = period_cycle[min(idx, len(period_cycle) - 1)]
+            is_lodging = any(k in poi for k in ("宾馆", "饭店", "酒店", "民宿"))
+            if is_lodging:
+                period = "晚上"
+            itinerary.append({
+                "order": len(itinerary) + 1, "day": day if days == 2 else 1,
+                "period": period,
+                "poi": poi,
+                "transport_from_prev": (transport[0] if transport else
+                                        (self._transport_between(ordered[i - 1], poi, scenic) if i else "入园")),
+                "note": ("与游客类型适配" if any(
+                    x["poi"] == poi and x["visitor_fit"] > 0 for x in pois_res["pois"]) else "")
+                + ("，建议宿此" if is_lodging else ""),
+            })
+        # 额外邻接参考（工具4，证明图谱查询参与编排）
+        if ordered:
+            order_res = self.tools.call("query_order", {"scenic": scenic, "poi": ordered[0]}, trace)
+            trace.append({"step": "thought", "thought": f"用 query_order 校验首站的官方后继（{order_res.get('poi')}）"
+                         "以决定第二站是否符合主流动线"})
+        other_area_kw = ("慕田峪", "长城", "故宫", "天坛", "香山", "圆明园", "乌镇", "西塘", "三清山",
+                         "庐山", "峨眉", "泰山", "华山", "武夷山", "丽江", "张家界", "八达岭", "十三陵",
+                         "北海公园", "景山", "雍和宫", "恭王府", "什刹海", "南锣鼓巷")
+        suggest_cue = ("建议", "最好", "记得", "不要", "别", "避免", "推荐", "可以", "适合",
+                       "务必", "千万", "小心", "注意", "提前", "预约", "必备", "慎", "尽量")
+        tips = [c for c in cond_res.get("conditions", [])
+                if not any(k in c["condition"] + c["suggestion"] for k in other_area_kw)
+                and (c["cond_type"] == "人群" or any(k in c["suggestion"] for k in suggest_cue))][:6]
+        return {"scenic": scenic, "days": days, "visitor_type": visitor, "special": intent["special"],
+                "itinerary": itinerary, "tips": tips,
+                "template_route": f'{route_res.get("route_id", "")} {route_res.get("route_title", "")}'}
+
+    def _order_pois(self, scenic: str, selected: list[str], template_pos: dict) -> list[str]:
+        """模板全覆盖时按模板排；否则官方先后边拓扑排序（不可达时按入度+度数贪心），剩余按热度补。"""
+        covered = [poi for poi in selected if poi in template_pos]
+        if len(covered) == len(selected) and template_pos:
+            return sorted(selected, key=lambda poi: (template_pos[poi][0], template_pos[poi][1]))
+        G = self.tools.G
+        sub = nx.DiGraph()
+        nodes = [n for n in self.tools.poi_nodes(scenic) if self.tools.poi_label(n) in selected]
+        label_of = {n: self.tools.poi_label(n) for n in nodes}
+        if G.is_multigraph():
+            edge_iter = ((u, v, d) for u, v, _k, d in G.edges(data=True, keys=True))
+        else:
+            edge_iter = G.edges(data=True)
+        for u, v, e in edge_iter:
+            rel = e.get("relation") if isinstance(e, dict) else ""
+            if rel == "先后顺序" and u in label_of and v in label_of and u != v:
+                src = str(e.get("source", "")) + str(e.get("official_routes", ""))
+                if "官方" in src or e.get("official_routes"):
+                    w = float(e.get("weight", 1))
+                    if sub.has_edge(label_of[u], label_of[v]):
+                        sub[label_of[u]][label_of[v]]["w"] += w
+                    else:
+                        sub.add_edge(label_of[u], label_of[v], w=w)
+        ordered_known: list[str] = []
+        if sub.number_of_nodes():
+            try:
+                ordered_known = list(nx.topological_sort(sub))
+            except nx.NetworkXUnfeasible:
+                # 环形路线（如环湖线）会成环：按“流出权重-流入权重”最大者先走，保持主流动线方向
+                temp = sub.copy()
+                out_w = {n: sum(d.get("w", 1) for _, _, d in temp.out_edges(n, data=True)) for n in temp.nodes}
+                in_w = {n: sum(d.get("w", 1) for _, _, d in temp.in_edges(n, data=True)) for n in temp.nodes}
+                while temp.number_of_nodes():
+                    ready = [n for n in temp.nodes if temp.in_degree(n) == 0]
+                    if ready:
+                        n = max(ready, key=lambda x: out_w.get(x, 0))
+                    else:
+                        n = max(temp.nodes, key=lambda x: (out_w.get(x, 0) - in_w.get(x, 0), int(temp.degree(x))))
+                    ordered_known.append(n)
+                    for succ in list(temp.successors(n)):
+                        if temp.has_edge(n, succ):
+                            out_w[succ] = out_w.get(succ, 0) - temp[n][succ].get("w", 1)
+                    temp.remove_node(n)
+        rest = [poi for poi in selected if poi not in ordered_known]
+        deg_of = {x["poi"]: x["degree"] for x in self.tools.query_pois(scenic, limit=30)["pois"]}
+        rest.sort(key=lambda poi: -deg_of.get(poi, 0))
+        return ordered_known + rest
+
+    def _transport_between(self, a: str, b: str, scenic: str) -> str:
+        na = next((n for n in self.tools.poi_nodes(scenic) if self.tools.poi_label(n) == a), None)
+        nb = next((n for n in self.tools.poi_nodes(scenic) if self.tools.poi_label(n) == b), None)
+        if na and nb:
+            for _, v, e in self.tools.G.out_edges(na, data=True):
+                if v == nb and e.get("relation") == "交通方式":
+                    return self.tools.G.nodes[v].get("name", "步行")
+            for _, v, e in self.tools.G.out_edges(nb, data=True):
+                if e.get("relation") == "交通方式":
+                    return self.tools.G.nodes[v].get("name", "步行")
+        return "步行"
+
+    # ── 最终回答生成 ────────────────────────────────────────────
+    POLISH_PROMPT = """你是导游。把下面的结构化行程改写成 150 字以内的中文行程说明，按时间顺序、口语化、
+保留全部景点名与提示。行程 JSON："""
+
+    def _render(self, plan: dict, trace: list) -> str:
+        if self.llm and self.llm.available:
+            try:
+                text = self.llm.complete(self.POLISH_PROMPT, json.dumps(plan, ensure_ascii=False))
+                trace.append({"step": "render", "thought": "调用 LLM 润色行程文案", "via": "llm"})
+                return text
+            except Exception as exc:
+                trace.append({"step": "render", "thought": f"LLM 润色失败（{exc}），使用模板文案", "via": "fallback"})
+        lines = []
+        day_label = {1: "第一天", 2: "第二天"}
+        for it in plan["itinerary"]:
+            head = f'D{it["day"]}·{it["period"]}' if plan["days"] == 2 else it["period"]
+            trans = f'（{it["transport_from_prev"]}前往）' if it["order"] > 1 else ""
+            lines.append(f'{head}：{it["poi"]}{trans}')
+        tips = "；".join(f'[{t["cond_type"]}] {t["suggestion"][:30]}' for t in plan["tips"][:4])
+        day_label = {0.5: "半日", 1: "一日", 1.5: "一日半", 2: "两日"}
+        return (f'为您规划{plan["scenic"]}{day_label.get(plan["days"], plan["days"])}游'
+                f'（参考官方路线 {plan["template_route"]}）：\n' + "\n".join(lines) +
+                (f'\n贴士：{tips}' if tips else ""))
+
+    # ── ReAct 主循环 ────────────────────────────────────────────
+    def run(self, query: str) -> dict:
+        started = time.time()
+        trace: list[dict] = [{"step": "start", "thought": f"接收请求：{query}", "mode":
+                              "llm" if (self.llm and self.llm.available) else "rules"}]
+        intent = self.parser.parse(query, trace)
+        if intent["scenic"] not in AREAS:
+            trace.append({"step": "thought", "thought": "未识别到支持景区，走回退：说明能力边界并列出支持景区"})
+            answer = (f'抱歉，当前仅支持 {"/".join(AREAS)} 三个景区的规划。'
+                      "您可以试试：“带老人颐和园半日游”“九寨沟亲子一日游”“黄山两日看日出”。")
+            trace.append({"step": "final", "thought": "返回能力说明"})
+            return {"query": query, "intent": intent, "trace": trace, "answer": answer, "plan": None,
+                    "elapsed": round(time.time() - started, 2)}
+
+        if intent["days"] == 0.5 and intent["special"]:
+            trace.append({"step": "thought", "thought": "半天+特殊需求（如看日出）存在冲突，提示取舍"})
+        plan = self._plan_rule(intent, trace)
+        answer = self._render(plan, trace)
+        if intent["days"] == 0.5 and "看日出" in intent["special"]:
+            answer = ("提示：半日游难以兼顾看日出——日出需要清晨身处山顶，通常要求前晚住宿山上。"
+                      "建议改为两日行程（首日上山宿山顶，次日看日出后下山），或舍弃看日出安排。\n\n") + answer
+        trace.append({"step": "final", "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"})
+        return {"query": query, "intent": intent, "trace": trace, "answer": answer, "plan": plan,
+                "elapsed": round(time.time() - started, 2)}
+
+
+def main() -> int:
+    sys.stdout.reconfigure(encoding="utf-8")
+    llm = LLMClient()
+    agent = ReActAgent(llm)
+    print(f"旅游规划 Agent（LLM: {'已配置 ' + llm.model if llm.available else '未配置，规则模式'}）")
+    print(f"支持景区：{'/'.join(AREAS)}；输入 q 退出。")
+    while True:
+        try:
+            query = input("\n您想去哪儿玩？> ").strip()
+        except (EOFError, KeyboardInterrupt):
+            break
+        if not query or query.lower() in ("q", "quit", "exit"):
+            break
+        result = agent.run(query)
+        print(result["answer"])
+        print(f"\n[trace] {len(result['trace'])} 步，工具调用 {sum(1 for t in result['trace'] if 'tool' in t)} 次，"
+              f"耗时 {result['elapsed']}s")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

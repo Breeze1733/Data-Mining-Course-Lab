@@ -67,6 +67,10 @@ METADATA_LINE_RE = re.compile(
 )
 TRACKING_QUERY_KEYS = {"from", "source", "spm", "xsec_token", "xsec_source", "share_from_user_hidden", "share_time", "share_id", "app_platform", "app_version", "share_from_user_id", "share_user_id", "xhsshare", "channel", "entry", "appuid", "exsource", "xhs_explore_source", "scm"}
 EXCEL_LIMIT = 32767
+# 携程游记容器内的页面部件：平台公告、行程元数据标签块、内嵌播放器时间戳。
+PLATFORM_NOTICE_RE = re.compile(r"战略方向的调整|停止游记业务的运维")
+TRIP_META_LABELS = {"出发时间", "行程天数", "人均花费", "和谁出行", "游玩时间", "人均费用", "出行天数"}
+PLAYER_TIMESTAMP_RE = re.compile(r"^\d{1,2}:\d{2}\s*/\s*\d{1,2}:\d{2}$")
 
 
 class ArticleHTMLParser(HTMLParser):
@@ -224,10 +228,28 @@ def clean_text(raw_content: str, raw_format: str = "text") -> tuple[str, dict, i
     counts["horizontal_whitespace_runs_normalized"] += original_space_count
     paragraphs: list[str] = []
     long_seen: set[str] = set()
+    drop_next_meta_value = False
     for line in text.split("\n"):
         line = line.strip()
         if not line:
             counts["blank_lines_removed"] += 1
+            continue
+        if PLATFORM_NOTICE_RE.search(line):
+            counts["platform_notice_lines_removed"] += 1
+            continue
+        # 行程元数据块为“标签行 + 值行”交错结构（出发时间/8月/行程天数/7天…），成对剔除。
+        if line.rstrip(":：") in TRIP_META_LABELS:
+            counts["trip_metadata_labels_removed"] += 1
+            drop_next_meta_value = True
+            continue
+        if drop_next_meta_value:
+            drop_next_meta_value = False
+            if len(line) <= 20:
+                counts["trip_metadata_values_removed"] += 1
+                continue
+        drop_next_meta_value = False
+        if PLAYER_TIMESTAMP_RE.match(line):
+            counts["player_timestamp_lines_removed"] += 1
             continue
         if METADATA_LINE_RE.fullmatch(line):
             counts["metadata_lines_removed"] += 1

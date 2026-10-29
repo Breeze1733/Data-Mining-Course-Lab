@@ -1,30 +1,18 @@
-# 本任务的本地环境与依赖
+# 实验项目1 的本地生成数据与环境（data/ 不入库，交付时另行打包）
 __pycache__/
 *.py[cod]
-/.venv/
-/venv/
-/node_modules/
-/.env
-/.env.*
-!/.env.example
+.venv/
+node_modules/
+.browser-profile*/
+logs/
+data/
+qa/
+~$*.docx
+*.tmp
+report_template_backup.docx
 
-# 本任务的浏览器会话
-/.browser-profile/
-/.browser-profile-*/
-/.auth/
-
-# 本任务生成的数据、网页证据、日志和验证缓存
-# research 下的 .py 和 .md 是来源定义与说明，继续跟踪。
-/data/
-/qa/
-/logs/
+# 采集断点缓存与网页快照（research 下的 .py/.md 来源说明继续跟踪）
 /research/*.json
 /research/*.jsonl
 /research/*.html
 /research/*_pages/
-/.verification/
-
-# 本任务的临时文件
-~$*.docx
-*.tmp
-*.log

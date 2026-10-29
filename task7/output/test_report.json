@@ -1,0 +1,150 @@
+{
+ "mode": "rules（未配置 LLM API，内置规划器）",
+ "n_scenarios": 6,
+ "n_passed": 6,
+ "results": [
+  {
+   "scenario": "S1_老人颐和园半日",
+   "query": "带老人去颐和园玩半天，腿脚不方便，走省力的路线",
+   "passed": true,
+   "checks": {
+    "scenic": true,
+    "visitor_type": true,
+    "days": true,
+    "tools_called": true,
+    "tools_used_in_answer": true,
+    "itinerary_size": true,
+    "tips_attached": true
+   },
+   "intent": {
+    "scenic": "颐和园",
+    "visitor_type": "老人",
+    "days": 0.5,
+    "special": [
+     "省力"
+    ]
+   },
+   "n_tool_calls": 4,
+   "answer_head": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 2026清明反向遛弯路线）：\n上午：谐趣园\n上午：昆明湖（步行前往）\n中午：西堤（步行前往）\n下午：佛香阁（步行前往）\n下午：十七孔桥（步行前往）\n贴士：[人群] 带着老人和小孩",
+   "elapsed": 0.0
+  },
+  {
+   "scenario": "S2_亲子九寨沟一日",
+   "query": "带孩子九寨沟一日游，怎么安排？",
+   "passed": true,
+   "checks": {
+    "scenic": true,
+    "visitor_type": true,
+    "days": true,
+    "tools_called": true,
+    "tools_used_in_answer": true,
+    "itinerary_size": true,
+    "tips_attached": true
+   },
+   "intent": {
+    "scenic": "九寨沟",
+    "visitor_type": "孩子",
+    "days": 1,
+    "special": []
+   },
+   "n_tool_calls": 4,
+   "answer_head": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 一日精华游）：\n上午：原始森林\n上午：五花海（观光车前往）\n上午：镜海（步行前往）\n上午：诺日朗（观光车前往）\n下午：长海（观光车前往）\n下午：五彩池（步行前往）\n下午：诺日朗瀑",
+   "elapsed": 0.0
+  },
+  {
+   "scenario": "S3_情侣黄山两日",
+   "query": "情侣黄山两日游，想看日出",
+   "passed": true,
+   "checks": {
+    "scenic": true,
+    "visitor_type": true,
+    "days": true,
+    "tools_called": true,
+    "tools_used_in_answer": true,
+    "itinerary_size": true,
+    "tips_attached": true
+   },
+   "intent": {
+    "scenic": "黄山",
+    "visitor_type": "情侣",
+    "days": 2,
+    "special": [
+     "看日出"
+    ]
+   },
+   "n_tool_calls": 4,
+   "answer_head": "为您规划黄山两日游（参考官方路线 HS-EXTRA1-R2 冬季南门二日游）：\nD1·上午：始信峰\nD1·上午：玉屏景区（步行前往）\nD1·中午：迎客松（步行前往）\nD1·下午：莲花峰（步行前往）\nD1·下午：西海大峡谷（观光缆车前往）\nD",
+   "elapsed": 0.01
+  },
+  {
+   "scenario": "S4_时间紧颐和园",
+   "query": "只有3小时，颐和园快速逛一遍精华",
+   "passed": true,
+   "checks": {
+    "scenic": true,
+    "visitor_type": true,
+    "days": true,
+    "tools_called": true,
+    "tools_used_in_answer": true,
+    "itinerary_size": true,
+    "tips_attached": true
+   },
+   "intent": {
+    "scenic": "颐和园",
+    "visitor_type": null,
+    "days": 0.5,
+    "special": []
+   },
+   "n_tool_calls": 4,
+   "answer_head": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 2026清明反向遛弯路线）：\n上午：谐趣园\n上午：昆明湖（步行前往）\n中午：西堤（步行前往）\n下午：佛香阁（步行前往）\n下午：十七孔桥（步行前往）\n贴士：[人群] 带着老人和小孩",
+   "elapsed": 0.0
+  },
+  {
+   "scenario": "S5_无匹配景区",
+   "query": "帮我规划故宫一日游",
+   "passed": true,
+   "checks": {
+    "scenic": true,
+    "fallback_answer": true,
+    "tools_called": true,
+    "tools_used_in_answer": true
+   },
+   "intent": {
+    "scenic": "未知",
+    "visitor_type": null,
+    "days": 1,
+    "special": []
+   },
+   "n_tool_calls": 0,
+   "answer_head": "抱歉，当前仅支持 黄山/九寨沟/颐和园 三个景区的规划。您可以试试：“带老人颐和园半日游”“九寨沟亲子一日游”“黄山两日看日出”。",
+   "elapsed": 0.0
+  },
+  {
+   "scenario": "S6_冲突约束",
+   "query": "半天时间在黄山看日出再下西海大峡谷",
+   "passed": true,
+   "checks": {
+    "scenic": true,
+    "days": true,
+    "special": true,
+    "conflict_note": true,
+    "tools_called": true,
+    "tools_used_in_answer": true,
+    "itinerary_size": true,
+    "tips_attached": true
+   },
+   "intent": {
+    "scenic": "黄山",
+    "visitor_type": null,
+    "days": 0.5,
+    "special": [
+     "看日出"
+    ]
+   },
+   "n_tool_calls": 4,
+   "answer_head": "提示：半日游难以兼顾看日出——日出需要清晨身处山顶，通常要求前晚住宿山上。建议改为两日行程（首日上山宿山顶，次日看日出后下山），或舍弃看日出安排。\n\n为您规划黄山半日游（参考官方路线 HS-EXTRA1-R2 冬季南门二日游）：\n上午：光明",
+   "elapsed": 0.0
+  }
+ ],
+ "evidence": "每次运行的完整 ReAct trace（含每步 thought/action/observation）见 output/traces/"
+}

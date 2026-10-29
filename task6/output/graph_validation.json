@@ -1,0 +1,258 @@
+{
+ "fact_checks": [
+  {
+   "pair": "颐和园:长廊→佛香阁",
+   "found": true,
+   "edges": [
+    {
+     "from": "长廊",
+     "to": "佛香阁",
+     "relation": "先后顺序",
+     "weight": 7.5,
+     "official_routes": "",
+     "tourist_support": ""
+    },
+    {
+     "from": "佛香阁",
+     "to": "长廊",
+     "relation": "先后顺序",
+     "weight": 2.5,
+     "official_routes": "",
+     "tourist_support": ""
+    }
+   ]
+  },
+  {
+   "pair": "颐和园:昆明湖→十七孔桥",
+   "found": true,
+   "edges": [
+    {
+     "from": "昆明湖",
+     "to": "十七孔桥",
+     "relation": "先后顺序",
+     "weight": 4.0,
+     "official_routes": "",
+     "tourist_support": ""
+    },
+    {
+     "from": "十七孔桥",
+     "to": "昆明湖",
+     "relation": "先后顺序",
+     "weight": 0.5,
+     "official_routes": "",
+     "tourist_support": ""
+    }
+   ]
+  },
+  {
+   "pair": "黄山:迎客松→光明顶",
+   "found": true,
+   "edges": [
+    {
+     "from": "迎客松",
+     "to": "光明顶",
+     "relation": "先后顺序",
+     "weight": 2.5,
+     "official_routes": "",
+     "tourist_support": ""
+    },
+    {
+     "from": "光明顶",
+     "to": "迎客松",
+     "relation": "先后顺序",
+     "weight": 3.5,
+     "official_routes": "",
+     "tourist_support": ""
+    }
+   ]
+  },
+  {
+   "pair": "黄山:光明顶→飞来石",
+   "found": true,
+   "edges": [
+    {
+     "from": "光明顶",
+     "to": "飞来石",
+     "relation": "先后顺序",
+     "weight": 7.0,
+     "official_routes": "HS-O1-R3；HS-EXTRA1-R1；HS-EXTRA2-R1",
+     "tourist_support": 8
+    },
+    {
+     "from": "飞来石",
+     "to": "光明顶",
+     "relation": "先后顺序",
+     "weight": 6.5,
+     "official_routes": "HS-O1-R7；HS-EXTRA1-R2；HS-EXTRA1-R3",
+     "tourist_support": 7
+    }
+   ]
+  },
+  {
+   "pair": "九寨沟:诺日朗→长海",
+   "found": true,
+   "edges": [
+    {
+     "from": "诺日朗",
+     "to": "长海",
+     "relation": "先后顺序",
+     "weight": 12.5,
+     "official_routes": "JZG-EXP01-R1；JZG-EXP02-R1；JZG-EXP03-R1",
+     "tourist_support": 19
+    }
+   ]
+  },
+  {
+   "pair": "九寨沟:长海→五彩池",
+   "found": true,
+   "edges": [
+    {
+     "from": "长海",
+     "to": "五彩池",
+     "relation": "先后顺序",
+     "weight": 26.5,
+     "official_routes": "JZG-EXP01-R1；JZG-EXP01-R2；JZG-EXP01-R3；JZG-EXP02-R1；JZG-EXP03-R1；JZG-EXP04-R1",
+     "tourist_support": 41
+    },
+    {
+     "from": "五彩池",
+     "to": "长海",
+     "relation": "先后顺序",
+     "weight": 1.5,
+     "official_routes": "",
+     "tourist_support": ""
+    }
+   ]
+  }
+ ],
+ "key_poi_nodes_by_degree": {
+  "黄山": [
+   [
+    "光明顶",
+    45
+   ],
+   [
+    "迎客松",
+    41
+   ],
+   [
+    "天都峰",
+    36
+   ],
+   [
+    "西海",
+    35
+   ],
+   [
+    "始信峰",
+    35
+   ],
+   [
+    "玉屏景区",
+    33
+   ],
+   [
+    "飞来石",
+    32
+   ],
+   [
+    "猴子观海",
+    32
+   ]
+  ],
+  "九寨沟": [
+   [
+    "五彩池",
+    42
+   ],
+   [
+    "五花海",
+    40
+   ],
+   [
+    "诺日朗",
+    38
+   ],
+   [
+    "原始森林",
+    38
+   ],
+   [
+    "诺日朗瀑布",
+    37
+   ],
+   [
+    "长海",
+    35
+   ],
+   [
+    "树正寨",
+    34
+   ],
+   [
+    "镜海",
+    32
+   ]
+  ],
+  "颐和园": [
+   [
+    "佛香阁",
+    35
+   ],
+   [
+    "西堤",
+    33
+   ],
+   [
+    "谐趣园",
+    33
+   ],
+   [
+    "昆明湖",
+    33
+   ],
+   [
+    "十七孔桥",
+    30
+   ],
+   [
+    "长廊",
+    28
+   ],
+   [
+    "东宫门",
+    27
+   ],
+   [
+    "石舫",
+    27
+   ]
+  ]
+ },
+ "same_name_isolation": {
+  "五彩池": [
+   "POI:九寨沟:五彩池"
+  ],
+  "北海": [
+   "POI:黄山:北海"
+  ]
+ },
+ "connected_components_per_scenic": {
+  "黄山": 1,
+  "九寨沟": 1,
+  "颐和园": 1
+ },
+ "edge_relation_distribution": {
+  "包含": 127,
+  "条件建议": 726,
+  "先后顺序": 1275,
+  "时段归属": 121,
+  "交通方式": 55
+ },
+ "isolated_nodes": [],
+ "verdict_notes": [
+  "经典先后对（长廊→佛香阁、迎客松→光明顶等）均有先后顺序边支撑，且带官方路线 ID 与游客支持计数；",
+  "五彩池/北海等同名异点按景区命名空间隔离，未跨景区合并；",
+  "各景区子图均为单一连通分量（条件节点挂靠在 POI/景区上），无孤立节点；"
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "total_routes": 46,
+ "ordered_routes": 39,
+ "format_counts": {
+  "九寨沟/arrow_chain": 6,
+  "九寨沟/kv_route_line": 1,
+  "九寨沟/prose": 2,
+  "九寨沟/theme_prose": 7,
+  "颐和园/arrow_chain": 10,
+  "颐和园/numbered_list": 3,
+  "颐和园/numbered_stops": 2,
+  "颐和园/prose": 2,
+  "黄山/arrow_chain": 13
+ },
+ "format_rules": {
+  "arrow_chain": "以 →/—/─ 分隔的链式表达（九寨沟时段+链、颐和园短链、黄山冬游链、黄山FAQ破折号链）",
+  "numbered_stops": "“第一站：…”编号站点列表（颐和园清明遛弯线）",
+  "numbered_list": "阿拉伯数字编号列表",
+  "kv_route_line": "活动路线：…键值字段（九寨沟自然科学行旅）",
+  "prose": "叙述式，无分隔符，含“由…至…”类路线句",
+  "theme_prose": "无固定顺序的主题方案（九寨沟生态/季节主题游）"
+ },
+ "period_marker_styles": [
+  "【上午】式方括号标记",
+  "上午：式冒号标记",
+  "无标记（由时间范围推断）"
+ ]
+}

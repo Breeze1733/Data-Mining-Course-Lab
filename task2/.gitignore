@@ -1,0 +1,6 @@
+# 实验项目2 的本地中间数据
+__pycache__/
+*.py[cod]
+~$*.docx
+*.tmp
+data/

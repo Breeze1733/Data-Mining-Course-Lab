@@ -1,0 +1,454 @@
+[
+ {
+  "scenario": "S1_老人颐和园半日",
+  "scenic": "颐和园",
+  "days": 0.5,
+  "visitor_type": "老人",
+  "special": [
+   "省力"
+  ],
+  "itinerary": [
+   {
+    "order": 1,
+    "day": 1,
+    "period": "上午",
+    "poi": "谐趣园",
+    "transport_from_prev": "入园",
+    "note": ""
+   },
+   {
+    "order": 2,
+    "day": 1,
+    "period": "上午",
+    "poi": "昆明湖",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 3,
+    "day": 1,
+    "period": "中午",
+    "poi": "西堤",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 4,
+    "day": 1,
+    "period": "下午",
+    "poi": "佛香阁",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 5,
+    "day": 1,
+    "period": "下午",
+    "poi": "十七孔桥",
+    "transport_from_prev": "步行",
+    "note": ""
+   }
+  ],
+  "tips": [
+   {
+    "cond_type": "人群",
+    "condition": "游客为老人",
+    "suggestion": "带着老人和小孩",
+    "frequency": 1
+   }
+  ],
+  "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
+ },
+ {
+  "scenario": "S2_亲子九寨沟一日",
+  "scenic": "九寨沟",
+  "days": 1,
+  "visitor_type": "孩子",
+  "special": [],
+  "itinerary": [
+   {
+    "order": 1,
+    "day": 1,
+    "period": "上午",
+    "poi": "原始森林",
+    "transport_from_prev": "入园",
+    "note": ""
+   },
+   {
+    "order": 2,
+    "day": 1,
+    "period": "上午",
+    "poi": "五花海",
+    "transport_from_prev": "观光车",
+    "note": ""
+   },
+   {
+    "order": 3,
+    "day": 1,
+    "period": "上午",
+    "poi": "镜海",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 4,
+    "day": 1,
+    "period": "上午",
+    "poi": "诺日朗",
+    "transport_from_prev": "观光车",
+    "note": ""
+   },
+   {
+    "order": 5,
+    "day": 1,
+    "period": "下午",
+    "poi": "长海",
+    "transport_from_prev": "观光车",
+    "note": ""
+   },
+   {
+    "order": 6,
+    "day": 1,
+    "period": "下午",
+    "poi": "五彩池",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 7,
+    "day": 1,
+    "period": "下午",
+    "poi": "诺日朗瀑布",
+    "transport_from_prev": "徒步",
+    "note": ""
+   },
+   {
+    "order": 8,
+    "day": 1,
+    "period": "下午",
+    "poi": "犀牛海",
+    "transport_from_prev": "观光车",
+    "note": ""
+   }
+  ],
+  "tips": [
+   {
+    "cond_type": "人群",
+    "condition": "没带小孩的",
+    "suggestion": "共享单车会更方便",
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "真的没有准备",
+    "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
+    "frequency": 3
+   },
+   {
+    "cond_type": "装备",
+    "condition": "装备条件（句内）",
+    "suggestion": "避免污染环境,还是文明入厕的好",
+    "frequency": 1
+   }
+  ],
+  "template_route": "JZG-EXP01-R1 一日精华游"
+ },
+ {
+  "scenario": "S3_情侣黄山两日",
+  "scenic": "黄山",
+  "days": 2,
+  "visitor_type": "情侣",
+  "special": [
+   "看日出"
+  ],
+  "itinerary": [
+   {
+    "order": 1,
+    "day": 1,
+    "period": "上午",
+    "poi": "始信峰",
+    "transport_from_prev": "入园",
+    "note": ""
+   },
+   {
+    "order": 2,
+    "day": 1,
+    "period": "上午",
+    "poi": "玉屏景区",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 3,
+    "day": 1,
+    "period": "中午",
+    "poi": "迎客松",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 4,
+    "day": 1,
+    "period": "下午",
+    "poi": "莲花峰",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 5,
+    "day": 1,
+    "period": "下午",
+    "poi": "西海大峡谷",
+    "transport_from_prev": "观光缆车",
+    "note": ""
+   },
+   {
+    "order": 6,
+    "day": 1,
+    "period": "晚上",
+    "poi": "飞来石",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 7,
+    "day": 2,
+    "period": "上午",
+    "poi": "北海",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 8,
+    "day": 2,
+    "period": "上午",
+    "poi": "光明顶",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 9,
+    "day": 2,
+    "period": "中午",
+    "poi": "天都峰",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 10,
+    "day": 2,
+    "period": "下午",
+    "poi": "西海",
+    "transport_from_prev": "索道",
+    "note": ""
+   },
+   {
+    "order": 11,
+    "day": 2,
+    "period": "下午",
+    "poi": "云谷寺",
+    "transport_from_prev": "云谷索道",
+    "note": ""
+   }
+  ],
+  "tips": [
+   {
+    "cond_type": "人群",
+    "condition": "一般情侣或家庭出来",
+    "suggestion": "不想分开睡,经济条件也不错",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为情侣",
+    "suggestion": "和其他游客拼独卫房间或住帐篷",
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "没有带身份证",
+    "suggestion": "可以报身份证号检票,但亲身经历,会比较麻烦",
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "没有人带着的话!自己安排车子的",
+    "suggestion": "肯定会被黑的,有的时候提前讲好价钱到景区了还会多要钱的,要注意!我住的酒店是可以在一个极其优惠的价格内叫到车,所以就让前台小姐姐去帮忙联系",
+    "frequency": 1
+   }
+  ],
+  "template_route": "HS-EXTRA1-R2 冬季南门二日游"
+ },
+ {
+  "scenario": "S4_时间紧颐和园",
+  "scenic": "颐和园",
+  "days": 0.5,
+  "visitor_type": null,
+  "special": [],
+  "itinerary": [
+   {
+    "order": 1,
+    "day": 1,
+    "period": "上午",
+    "poi": "谐趣园",
+    "transport_from_prev": "入园",
+    "note": ""
+   },
+   {
+    "order": 2,
+    "day": 1,
+    "period": "上午",
+    "poi": "昆明湖",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 3,
+    "day": 1,
+    "period": "中午",
+    "poi": "西堤",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 4,
+    "day": 1,
+    "period": "下午",
+    "poi": "佛香阁",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 5,
+    "day": 1,
+    "period": "下午",
+    "poi": "十七孔桥",
+    "transport_from_prev": "步行",
+    "note": ""
+   }
+  ],
+  "tips": [
+   {
+    "cond_type": "人群",
+    "condition": "游客为老人",
+    "suggestion": "带着老人和小孩",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "是第一次来北京",
+    "suggestion": "而且时间有限,只能去玩一个景点",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为初次游览",
+    "suggestion": "第一次去北京是八十年代,是陪父亲去看病,虽说是忧愁,但内心的激动依然占据了上风",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为学生",
+    "suggestion": "拜一下:来都来了,逢考必过",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为体力好的还",
+    "suggestion": "继续沿湖往南走~",
+    "frequency": 1
+   }
+  ],
+  "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
+ },
+ {
+  "scenario": "S6_冲突约束",
+  "scenic": "黄山",
+  "days": 0.5,
+  "visitor_type": null,
+  "special": [
+   "看日出"
+  ],
+  "itinerary": [
+   {
+    "order": 1,
+    "day": 1,
+    "period": "上午",
+    "poi": "光明顶",
+    "transport_from_prev": "入园",
+    "note": ""
+   },
+   {
+    "order": 2,
+    "day": 1,
+    "period": "上午",
+    "poi": "迎客松",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 3,
+    "day": 1,
+    "period": "中午",
+    "poi": "天都峰",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 4,
+    "day": 1,
+    "period": "上午",
+    "poi": "西海",
+    "transport_from_prev": "索道",
+    "note": ""
+   },
+   {
+    "order": 5,
+    "day": 1,
+    "period": "上午",
+    "poi": "云谷寺",
+    "transport_from_prev": "索道",
+    "note": ""
+   }
+  ],
+  "tips": [
+   {
+    "cond_type": "人群",
+    "condition": "恐高",
+    "suggestion": "还是前山上,后山下吧",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "你是第一次去黄山",
+    "suggestion": "请个人带是必须的",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为孩子",
+    "suggestion": "溜娃,湖景房380一晚含双早,性价比超高",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为体力好的话",
+    "suggestion": "从云谷寺索道走后山—前山的经典线路",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "腿脚不方便",
+    "suggestion": "可以从旁边的山路绕开爬一线天,一样可以到前面",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "是大学生出游",
+    "suggestion": "更实惠的是青年客栈),写下这篇游记,也给喜欢自由行的旅友们一点借鉴",
+    "frequency": 1
+   }
+  ],
+  "template_route": "HS-EXTRA1-R2 冬季南门二日游"
+ }
+]
