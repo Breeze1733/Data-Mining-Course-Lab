@@ -68,13 +68,15 @@ class RouteParser:
     def __init__(self, matcher: DictMatcher):
         self.matcher = matcher
 
-    def annotate(self, token: str) -> dict:
+    def annotate(self, token: str, scenic: str | None = None) -> dict:
         """解析单个链节点：POI、交通、时间、备注。"""
         note_parts = PAREN_RE.findall(token)
         core = PAREN_RE.sub("", token).strip(" 　,，。;；")
         pois, transports = [], []
-        for e in self.matcher.find(core):
+        for e in self.matcher.find(core, scenic):
             if e["type"] == "景点POI":
+                if not e.get("in_scenic", True):
+                    continue  # 周边地标（汤口镇/黄龙等后勤提及）不作为路线步骤
                 pois.append({"name": e["canonical"], "mention": e["text"],
                              "normalized": normalize(e["canonical"])})
             elif e["type"] == "交通方式":
@@ -95,16 +97,17 @@ class RouteParser:
             "note": "；".join(n for n in note_parts if not TIME_RANGE_RE.search(n) and not DUR_RE.search(n)),
         }
 
-    def parse_line(self, line: str) -> list[dict]:
+    def parse_line(self, line: str, scenic: str | None = None) -> list[dict]:
         if not CJK_RE.search(line):
             return []
         parts = [p for p in CHAIN_SEP.split(line) if p.strip()]
         if len(parts) == 1:
-            return [self.annotate(line)] if len(line) <= 60 else []
-        return [self.annotate(p) for p in parts if p.strip() and not STOP_TOKEN.match(p.strip())]
+            return [self.annotate(line, scenic)] if len(line) <= 60 else []
+        return [self.annotate(p, scenic) for p in parts if p.strip() and not STOP_TOKEN.match(p.strip())]
 
     def parse(self, route: dict) -> dict:
         text = route["raw_content"]
+        scenic = route.get("scenic_area")
         fmt = classify_format(text, route.get("ordered_route", True))
         steps: list[dict] = []
         day, period = 1, None
@@ -143,7 +146,7 @@ class RouteParser:
                     label, _, val = seg_content.partition("：") if "：" in seg_content else seg_content.partition(":")
                     label = label.rstrip(":：")
                     if label == "活动路线":
-                        for sub in self.parse_line(val):
+                        for sub in self.parse_line(val, scenic):
                             step_no += 1
                             sub.update({"step_no": step_no, "day": day, "period": period})
                             steps.append(sub)
@@ -152,7 +155,7 @@ class RouteParser:
                         if dur:
                             steps[-1]["duration"] = dur.group()
                     continue
-                segs = self.parse_line(seg_content)
+                segs = self.parse_line(seg_content, scenic)
                 if not segs:
                     # 叙述句兜底：整句作为一个潜在步骤（含POI时保留）
                     if fmt in ("prose", "theme_prose") and CJK_RE.search(seg_content):

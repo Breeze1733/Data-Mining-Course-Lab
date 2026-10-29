@@ -54,7 +54,7 @@
     "树正沟"
    ],
    "coverage_mean": 0.38,
-   "jaccard_mean": 0.358,
+   "jaccard_mean": 0.357,
    "order_tau_mean": 0.68,
    "n_order_pairs": 84,
    "official_has_time_info": true,
@@ -79,7 +79,7 @@
   },
   "颐和园": {
    "n_official_routes": 17,
-   "n_official_pois": 39,
+   "n_official_pois": 40,
    "n_tourist_routes": 63,
    "official_pois": [
     "颐和园西门",
@@ -112,6 +112,7 @@
     "南如意门",
     "西门",
     "廓如亭",
+    "颐和园博物馆",
     "绣漪桥",
     "景明楼",
     "练桥",
@@ -122,9 +123,9 @@
     "画中游",
     "北宫门"
    ],
-   "coverage_mean": 0.326,
-   "jaccard_mean": 0.301,
-   "order_tau_mean": 0.289,
+   "coverage_mean": 0.319,
+   "jaccard_mean": 0.296,
+   "order_tau_mean": 0.29,
    "n_order_pairs": 53,
    "official_has_time_info": false,
    "official_time_allocation_pct": {
@@ -175,9 +176,9 @@
     "西海",
     "曙光亭"
    ],
-   "coverage_mean": 0.43,
-   "jaccard_mean": 0.364,
-   "order_tau_mean": 0.521,
+   "coverage_mean": 0.432,
+   "jaccard_mean": 0.363,
+   "order_tau_mean": 0.52,
    "n_order_pairs": 81,
    "official_has_time_info": false,
    "official_time_allocation_pct": {

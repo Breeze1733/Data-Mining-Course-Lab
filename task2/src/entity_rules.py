@@ -48,7 +48,8 @@ class DictMatcher:
         for item in entries:
             if item["entity_type"] != "景点POI":
                 continue
-            for area in item["scenic_areas"]:
+            # scenic_areas=[] 表示"周边地标"：可匹配、可作消解候选，但不属于任何景区内集合
+            for area in (item["scenic_areas"] or ["周边"]):
                 template = templates.get((area, item["name"]))
                 if template:
                     entry = replace(template, canonical=item["canonical"])

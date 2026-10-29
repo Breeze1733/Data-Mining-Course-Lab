@@ -1,14 +1,14 @@
 {
  "n": 120,
- "accuracy_overall": 0.425,
+ "accuracy_overall": 0.45,
  "accuracy_by_class": {
   "locative": {
    "n": 30,
-   "accuracy": 0.4
+   "accuracy": 0.467
   },
   "object": {
    "n": 30,
-   "accuracy": 0.367
+   "accuracy": 0.4
   },
   "person": {
    "n": 30,
@@ -131,16 +131,6 @@
    "note": "多景点游记（北大段）"
   },
   {
-   "pronoun": "这里",
-   "class": "locative",
-   "scenic": "颐和园",
-   "rule": "颐和园",
-   "rule_kind": "景区名",
-   "gold": "荷花市场",
-   "gold_kind": "POI",
-   "note": "多景点游记（什刹海段）"
-  },
-  {
    "pronoun": "此处",
    "class": "locative",
    "scenic": "颐和园",
@@ -149,16 +139,6 @@
    "gold": "金山岭长城",
    "gold_kind": "POI",
    "note": "多景点游记（长城段）"
-  },
-  {
-   "pronoun": "这里",
-   "class": "locative",
-   "scenic": "黄山",
-   "rule": "黄山",
-   "rule_kind": "景区名",
-   "gold": "西海大峡谷",
-   "gold_kind": "POI",
-   "note": "前文以“梦幻景区”代称，该代称未入实体词表"
   },
   {
    "pronoun": "那里",
@@ -219,16 +199,6 @@
    "gold": "成都",
    "gold_kind": "景区",
    "note": "“这座城市”指成都；同句“动车票”干扰"
-  },
-  {
-   "pronoun": "这条",
-   "class": "object",
-   "scenic": "九寨沟",
-   "rule": "诺日朗中心",
-   "rule_kind": "POI",
-   "gold": "则查洼沟",
-   "gold_kind": "POI",
-   "note": "前句“下一条沟—查洼沟”；文本变体“查洼沟”未入词典"
   },
   {
    "pronoun": "这条",

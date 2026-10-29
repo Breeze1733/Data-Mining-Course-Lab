@@ -36,7 +36,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 8 个 POI：五彩池、五花海、诺日朗、原始森林、诺日朗瀑布、长海"
+   "summary": "返回 8 个 POI：五花海、五彩池、诺日朗、原始森林、诺日朗瀑布、长海"
   },
   {
    "step": "action",

@@ -145,8 +145,8 @@ def collect_guards() -> dict:
 DOWN_IS_BAD = {"task4.coref_accuracy", "task5.verdicts", "task2.spot_n", "task5.review_n"}
 
 
-def parse_verdicts(s: str | None) -> tuple[int, ...] | None:
-    if not s or "/" not in s:
+def parse_verdicts(s) -> tuple[int, ...] | None:
+    if not isinstance(s, str) or "/" not in s:
         return None
     try:
         return tuple(int(x) for x in s.split("/"))

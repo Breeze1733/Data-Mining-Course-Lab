@@ -116,7 +116,7 @@
   <data key="d0">景点</data>
   <data key="d1">五彩池</data>
   <data key="d2">五彩池</data>
-  <data key="d3">383</data>
+  <data key="d3">373</data>
   <data key="d4">五彩池</data>
 </node>
 <node id="POI:九寨沟:五彩池畔">
@@ -159,7 +159,7 @@
   <data key="d1">则查洼沟</data>
   <data key="d2">则查洼沟</data>
   <data key="d3">0</data>
-  <data key="d4">则查洼沟</data>
+  <data key="d4">查洼沟</data>
 </node>
 <node id="POI:颐和园:北如意门">
   <data key="d0">景点</data>
@@ -445,7 +445,7 @@
   <data key="d0">景点</data>
   <data key="d1">树正沟</data>
   <data key="d2">树正沟</data>
-  <data key="d3">94</data>
+  <data key="d3">0</data>
   <data key="d4">树正沟</data>
 </node>
 <node id="POI:九寨沟:树正瀑布">
@@ -508,7 +508,7 @@
   <data key="d0">景点</data>
   <data key="d1">火花海</data>
   <data key="d2">火花海</data>
-  <data key="d3">91</data>
+  <data key="d3">0</data>
   <data key="d4">火花海</data>
 </node>
 <node id="POI:九寨沟:熊猫海">
@@ -753,8 +753,8 @@
   <data key="d0">景点</data>
   <data key="d1">西海大峡谷</data>
   <data key="d2">西海大峡谷</data>
-  <data key="d3">174</data>
-  <data key="d4">西海大峡谷</data>
+  <data key="d3">182</data>
+  <data key="d4">梦幻景区</data>
 </node>
 <node id="POI:颐和园:西门">
   <data key="d0">景点</data>
@@ -900,7 +900,7 @@
   <data key="d0">景点</data>
   <data key="d1">黄龙</data>
   <data key="d2">黄龙</data>
-  <data key="d3">561</data>
+  <data key="d3">551</data>
   <data key="d4">黄龙</data>
 </node>
 <node id="POI:黄山:黑虎松">
@@ -909,6 +909,27 @@
   <data key="d2">黑虎松</data>
   <data key="d3">0</data>
   <data key="d4">黑虎松</data>
+</node>
+<node id="POI:九寨沟:扎如寺">
+  <data key="d0">景点</data>
+  <data key="d1">扎如寺</data>
+  <data key="d2">扎如寺</data>
+  <data key="d3">0</data>
+  <data key="d4">扎如寺</data>
+</node>
+<node id="POI:颐和园:颐和园博物馆">
+  <data key="d0">景点</data>
+  <data key="d1">颐和园博物馆</data>
+  <data key="d2">颐和园博物馆</data>
+  <data key="d3">0</data>
+  <data key="d4">颐和园博物馆</data>
+</node>
+<node id="POI:黄山:西递">
+  <data key="d0">景点</data>
+  <data key="d1">西递</data>
+  <data key="d2">西递</data>
+  <data key="d3">0</data>
+  <data key="d4">西递</data>
 </node>
 <node id="POI:黄山:玉屏峰">
   <data key="d0">景点</data>
@@ -4525,6 +4546,10 @@
   <data key="d8">包含</data>
   <data key="d9">1</data>
 </edge>
+<edge source="景区:黄山:黄山" target="POI:黄山:西递" id="包含">
+  <data key="d8">包含</data>
+  <data key="d9">1</data>
+</edge>
 <edge source="景区:黄山:黄山" target="POI:黄山:玉屏峰" id="包含">
   <data key="d8">包含</data>
   <data key="d9">1</data>
@@ -5198,6 +5223,10 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="POI:九寨沟:黄龙" id="包含">
+  <data key="d8">包含</data>
+  <data key="d9">1</data>
+</edge>
+<edge source="景区:九寨沟:九寨沟" target="POI:九寨沟:扎如寺" id="包含">
   <data key="d8">包含</data>
   <data key="d9">1</data>
 </edge>
@@ -6021,6 +6050,10 @@
   <data key="d8">包含</data>
   <data key="d9">1</data>
 </edge>
+<edge source="景区:颐和园:颐和园" target="POI:颐和园:颐和园博物馆" id="包含">
+  <data key="d8">包含</data>
+  <data key="d9">1</data>
+</edge>
 <edge source="景区:颐和园:颐和园" target="POI:颐和园:南如意门" id="包含">
   <data key="d8">包含</data>
   <data key="d9">1</data>
@@ -6423,11 +6456,6 @@
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:下季节海" target="POI:九寨沟:箭竹海" id="先后顺序">
-  <data key="d8">先后顺序</data>
-  <data key="d10">0.5</data>
-  <data key="d11">游客序列</data>
-</edge>
-<edge source="POI:九寨沟:下季节海" target="POI:九寨沟:则查洼沟" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
@@ -7744,19 +7772,19 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="POI:九寨沟:则查洼沟" target="POI:九寨沟:日则沟" id="先后顺序">
+<edge source="POI:九寨沟:则查洼沟" target="POI:九寨沟:五彩池" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">3.5</data>
+  <data key="d10">2.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:则查洼沟" target="POI:九寨沟:长海" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">6.0</data>
+  <data key="d10">7.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:九寨沟:则查洼沟" target="POI:九寨沟:五彩池" id="先后顺序">
+<edge source="POI:九寨沟:则查洼沟" target="POI:九寨沟:日则沟" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">1.0</data>
+  <data key="d10">4.0</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:则查洼沟" target="POI:九寨沟:季节海" id="先后顺序">
@@ -7766,7 +7794,7 @@
 </edge>
 <edge source="POI:九寨沟:则查洼沟" target="POI:九寨沟:树正沟" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">1.5</data>
+  <data key="d10">2.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:则查洼沟" target="POI:九寨沟:五花海" id="先后顺序">
@@ -7794,11 +7822,11 @@
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:九寨沟:则查洼沟" target="条件:九寨沟:其他:有可能先去则查洼沟" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="POI:九寨沟:则查洼沟" target="条件:九寨沟:时间:时间条件（句内）" id="条件建议">
+  <data key="d8">条件建议</data>
+  <data key="d9">3</data>
+</edge>
+<edge source="POI:九寨沟:则查洼沟" target="条件:九寨沟:其他:有可能先去则查洼沟" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7846,7 +7874,7 @@
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:颐和园:北如意门" target="POI:颐和园:豳风桥" id="先后顺序">
+<edge source="POI:颐和园:北如意门" target="POI:颐和园:颐和园博物馆" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
@@ -8090,10 +8118,15 @@
 </edge>
 <edge source="POI:颐和园:十七孔桥" target="POI:颐和园:新建宫门" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">4.0</data>
+  <data key="d10">3.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:颐和园:十七孔桥" target="POI:颐和园:景明楼" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:颐和园:十七孔桥" target="POI:颐和园:颐和园博物馆" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
@@ -8994,22 +9027,17 @@
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:黄山:宏村" target="POI:黄山:黑虎松" id="先后顺序">
+<edge source="POI:黄山:宏村" target="POI:黄山:西递" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">0.5</data>
+  <data key="d10">3.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:黄山:宏村" target="POI:黄山:屯溪老街" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">2.5</data>
+  <data key="d10">1.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:黄山:宏村" target="POI:黄山:百步云梯" id="先后顺序">
-  <data key="d8">先后顺序</data>
-  <data key="d10">0.5</data>
-  <data key="d11">游客序列</data>
-</edge>
-<edge source="POI:黄山:宏村" target="POI:黄山:光明顶" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
@@ -9035,11 +9063,6 @@
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:黄山:宏村" target="POI:黄山:天都峰" id="先后顺序">
-  <data key="d8">先后顺序</data>
-  <data key="d10">0.5</data>
-  <data key="d11">游客序列</data>
-</edge>
-<edge source="POI:黄山:宏村" target="POI:黄山:迎客松" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
@@ -9698,7 +9721,7 @@
 </edge>
 <edge source="POI:九寨沟:日则沟" target="POI:九寨沟:树正沟" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">2.5</data>
+  <data key="d10">1.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:日则沟" target="POI:九寨沟:五花海" id="先后顺序">
@@ -9713,7 +9736,7 @@
 </edge>
 <edge source="POI:九寨沟:日则沟" target="POI:九寨沟:则查洼沟" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">5.5</data>
+  <data key="d10">6.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:日则沟" target="POI:九寨沟:芳草海" id="先后顺序">
@@ -10117,7 +10140,7 @@
 </edge>
 <edge source="POI:九寨沟:树正沟" target="POI:九寨沟:则查洼沟" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">2.0</data>
+  <data key="d10">2.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:树正沟" target="POI:九寨沟:原始森林" id="先后顺序">
@@ -10132,7 +10155,7 @@
 </edge>
 <edge source="POI:九寨沟:树正沟" target="POI:九寨沟:日则沟" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">4.0</data>
+  <data key="d10">3.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:树正沟" target="POI:九寨沟:树正景区" id="先后顺序">
@@ -10670,7 +10693,7 @@
 </edge>
 <edge source="POI:黄山:清凉台" target="POI:黄山:排云亭" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">1.0</data>
+  <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:黄山:清凉台" target="POI:黄山:光明顶" id="先后顺序">
@@ -10680,7 +10703,7 @@
 </edge>
 <edge source="POI:黄山:清凉台" target="POI:黄山:西海大峡谷" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">0.5</data>
+  <data key="d10">1.0</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:黄山:清凉台" target="POI:黄山:始信峰" id="先后顺序">
@@ -11041,7 +11064,7 @@
   <data key="d12">JZG-EXP01-R2；JZG-EXP01-R3</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:犀牛海" target="POI:九寨沟:五彩池" id="先后顺序">
+<edge source="POI:九寨沟:犀牛海" target="POI:九寨沟:则查洼沟" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">1.0</data>
   <data key="d11">游客序列</data>
@@ -11353,7 +11376,7 @@
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:黄山:玉屏景区" target="POI:黄山:一线天" id="先后顺序">
+<edge source="POI:黄山:玉屏景区" target="POI:黄山:西海大峡谷" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
@@ -12112,14 +12135,19 @@
   <data key="d10">1.0</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:九寨沟:盆景滩" target="POI:九寨沟:川主寺" id="先后顺序">
+<edge source="POI:九寨沟:盆景滩" target="POI:九寨沟:扎如寺" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">2.5</data>
+  <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:盆景滩" target="POI:九寨沟:芳草海" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:九寨沟:盆景滩" target="POI:九寨沟:川主寺" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">2.0</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:盆景滩" target="POI:九寨沟:双龙海" id="先后顺序">
@@ -12631,6 +12659,13 @@
   <data key="d12">YHY-EXP06-R1</data>
   <data key="d13">0</data>
 </edge>
+<edge source="POI:颐和园:耕织图" target="POI:颐和园:颐和园博物馆" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">1.0</data>
+  <data key="d11">官方路线</data>
+  <data key="d12">YHY-EXP07-R1</data>
+  <data key="d13">0</data>
+</edge>
 <edge source="POI:颐和园:耕织图" target="POI:颐和园:镜桥" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">1.0</data>
@@ -12710,7 +12745,7 @@
   <data key="d10">1.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:九寨沟:芦苇海" target="POI:九寨沟:诺日朗群海" id="先后顺序">
+<edge source="POI:九寨沟:芦苇海" target="POI:九寨沟:扎如寺" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
@@ -12861,7 +12896,7 @@
 </edge>
 <edge source="POI:颐和园:苏州街" target="POI:颐和园:四大部洲" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">6.5</data>
+  <data key="d10">6.0</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:颐和园:苏州街" target="POI:颐和园:东门" id="先后顺序">
@@ -12882,6 +12917,11 @@
 <edge source="POI:颐和园:苏州街" target="POI:颐和园:昆明湖" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:颐和园:苏州街" target="POI:颐和园:颐和园博物馆" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">1.0</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:颐和园:苏州街" target="POI:颐和园:西堤" id="先后顺序">
@@ -13300,7 +13340,7 @@
 </edge>
 <edge source="POI:黄山:西海大峡谷" target="POI:黄山:排云亭" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">1.5</data>
+  <data key="d10">2.0</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:黄山:西海大峡谷" target="POI:黄山:北海" id="先后顺序">
@@ -13311,6 +13351,11 @@
 <edge source="POI:黄山:西海大峡谷" target="POI:黄山:迎客松" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">1.0</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:黄山:西海大峡谷" target="POI:黄山:一线天" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:黄山:西海大峡谷" target="POI:黄山:天都峰" id="先后顺序">
@@ -13348,7 +13393,7 @@
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:黄山:西海大峡谷" target="POI:黄山:宏村" id="先后顺序">
+<edge source="POI:黄山:西海大峡谷" target="POI:黄山:西递" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
@@ -13506,7 +13551,7 @@
 </edge>
 <edge source="POI:九寨沟:诺日朗" target="POI:九寨沟:则查洼沟" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">2.0</data>
+  <data key="d10">2.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:诺日朗" target="POI:九寨沟:老虎海" id="先后顺序">
@@ -13522,11 +13567,6 @@
 <edge source="POI:九寨沟:诺日朗" target="POI:九寨沟:雪峰" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
-  <data key="d11">游客序列</data>
-</edge>
-<edge source="POI:九寨沟:诺日朗" target="POI:九寨沟:五彩池" id="先后顺序">
-  <data key="d8">先后顺序</data>
-  <data key="d10">1.0</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:诺日朗" target="POI:九寨沟:天鹅海" id="先后顺序">
@@ -13555,6 +13595,11 @@
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:诺日朗" target="POI:九寨沟:树正群海" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:九寨沟:诺日朗" target="POI:九寨沟:五彩池" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
@@ -13589,10 +13634,10 @@
 </edge>
 <edge source="POI:九寨沟:诺日朗中心" target="POI:九寨沟:长海" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">6.0</data>
+  <data key="d10">4.0</data>
   <data key="d11">官方路线</data>
   <data key="d12">JZG-EXP01-R1</data>
-  <data key="d13">10</data>
+  <data key="d13">6</data>
 </edge>
 <edge source="POI:九寨沟:诺日朗中心" target="POI:九寨沟:诺日朗瀑布" id="先后顺序">
   <data key="d8">先后顺序</data>
@@ -13608,6 +13653,11 @@
   <data key="d12">JZG-EXP03-R1；JZG-EXP04-R1</data>
   <data key="d13">1</data>
 </edge>
+<edge source="POI:九寨沟:诺日朗中心" target="POI:九寨沟:则查洼沟" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">3.5</data>
+  <data key="d11">游客序列</data>
+</edge>
 <edge source="POI:九寨沟:诺日朗中心" target="POI:九寨沟:诺日朗群海" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
@@ -13616,11 +13666,6 @@
 <edge source="POI:九寨沟:诺日朗中心" target="POI:九寨沟:原始森林" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">1.0</data>
-  <data key="d11">游客序列</data>
-</edge>
-<edge source="POI:九寨沟:诺日朗中心" target="POI:九寨沟:则查洼沟" id="先后顺序">
-  <data key="d8">先后顺序</data>
-  <data key="d10">1.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:诺日朗中心" target="POI:九寨沟:树正瀑布" id="先后顺序">
@@ -14292,7 +14337,7 @@
 </edge>
 <edge source="POI:九寨沟:镜海" target="POI:九寨沟:长海" id="先后顺序">
   <data key="d8">先后顺序</data>
-  <data key="d10">1.0</data>
+  <data key="d10">1.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:镜海" target="POI:九寨沟:箭竹海" id="先后顺序">
@@ -14316,11 +14361,6 @@
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:镜海" target="POI:九寨沟:盆景滩" id="先后顺序">
-  <data key="d8">先后顺序</data>
-  <data key="d10">0.5</data>
-  <data key="d11">游客序列</data>
-</edge>
-<edge source="POI:九寨沟:镜海" target="POI:九寨沟:则查洼沟" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
@@ -15115,6 +15155,74 @@
   <data key="d8">交通方式</data>
   <data key="d9">1</data>
 </edge>
+<edge source="POI:九寨沟:扎如寺" target="POI:九寨沟:川主寺" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:九寨沟:扎如寺" target="POI:九寨沟:诺日朗群海" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:九寨沟:扎如寺" target="POI:九寨沟:原始森林" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:颐和园:颐和园博物馆" target="POI:颐和园:新建宫门" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:颐和园:颐和园博物馆" target="POI:颐和园:豳风桥" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:颐和园:颐和园博物馆" target="POI:颐和园:四大部洲" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:颐和园:颐和园博物馆" target="时段:颐和园:未标注时段" id="时段归属">
+  <data key="d8">时段归属</data>
+  <data key="d9">1</data>
+</edge>
+<edge source="POI:颐和园:颐和园博物馆" target="条件:颐和园:一般:一般建议" id="条件建议">
+  <data key="d8">条件建议</data>
+  <data key="d9">1</data>
+</edge>
+<edge source="POI:黄山:西递" target="POI:黄山:宏村" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">2.0</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:黄山:西递" target="POI:黄山:黑虎松" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:黄山:西递" target="POI:黄山:光明顶" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:黄山:西递" target="POI:黄山:云谷景区" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:黄山:西递" target="POI:黄山:屯溪老街" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">1.0</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:黄山:西递" target="POI:黄山:迎客松" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
+  <data key="d11">游客序列</data>
+</edge>
 <edge source="POI:黄山:玉屏峰" target="POI:黄山:步仙桥" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
@@ -15286,7 +15394,7 @@
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:黄山:黄山温泉" target="POI:黄山:云谷景区" id="先后顺序">
+<edge source="POI:黄山:黄山温泉" target="POI:黄山:西递" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
@@ -15335,6 +15443,11 @@
 <edge source="POI:九寨沟:诺日朗群海" target="POI:九寨沟:树正瀑布" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">1.0</data>
+  <data key="d11">游客序列</data>
+</edge>
+<edge source="POI:九寨沟:诺日朗群海" target="POI:九寨沟:扎如寺" id="先后顺序">
+  <data key="d8">先后顺序</data>
+  <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
 <edge source="POI:九寨沟:诺日朗群海" target="POI:九寨沟:树正景区" id="先后顺序">
