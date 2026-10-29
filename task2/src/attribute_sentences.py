@@ -30,7 +30,13 @@ ROOT = Path(__file__).resolve().parents[1]
 TASK1 = ROOT.parent / "task1"
 EXP2 = ROOT / "output/exp2"
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+def ensure_utf8_stdout() -> None:
+    """仅在自身作为主脚本运行时包装 stdout；被其他脚本导入时不动其流（避免旧包装器被GC后关闭底层缓冲）。"""
+    enc = getattr(sys.stdout, "encoding", "") or ""
+    if enc.lower().replace("-", "") != "utf8":
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+
+
 SENT_SPLIT = re.compile(r"[。！？；!?\n]+")
 LABELS = ["黄山", "九寨沟", "颐和园", "景区外", "无法判断"]
 
@@ -325,6 +331,7 @@ def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None
 
 
 def main() -> int:
+    ensure_utf8_stdout()
     ap = argparse.ArgumentParser()
     ap.add_argument("--evaluate", action="store_true")
     ap.add_argument("--errors", action="store_true", help="导出 tune 半区 B 的错误样例供特征设计")

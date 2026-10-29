@@ -1201,14 +1201,6 @@
   <data key="d6">早上早点出发进入景区,全程须采用观光车+步行的方式进行游览</data>
   <data key="d7">2</data>
 </node>
-<node id="条件:九寨沟:其他:您时间充足">
-  <data key="d0">条件</data>
-  <data key="d1">您时间充足</data>
-  <data key="d2">[其他] 您时间充足</data>
-  <data key="d5">其他</data>
-  <data key="d6">那么三天的时间您可以把九寨沟县城、九寨沟神仙池景区一并游览完</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:一般:一般建议">
   <data key="d0">条件</data>
   <data key="d1">一般建议</data>
@@ -1289,36 +1281,12 @@
   <data key="d6">第一天出景区时需要拿门票去售票处登记盖章</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:交通:是自驾">
-  <data key="d0">条件</data>
-  <data key="d1">是自驾</data>
-  <data key="d2">[交通] 是自驾</data>
-  <data key="d5">交通</data>
-  <data key="d6">到达黄山市区后,可先去逛逛屯溪老街,再到汤口镇,可选择住汤口镇也可住山上</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:选择住山上">
-  <data key="d0">条件</data>
-  <data key="d1">选择住山上</data>
-  <data key="d2">[其他] 选择住山上</data>
-  <data key="d5">其他</data>
-  <data key="d6">需要提前预定,因为山上住宿有限</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:住汤口镇">
   <data key="d0">条件</data>
   <data key="d1">住汤口镇</data>
   <data key="d2">[其他] 住汤口镇</data>
   <data key="d5">其他</data>
   <data key="d6">早上先到景区入口,再坐缆车上山,大概十几分钟</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:交通:自驾">
-  <data key="d0">条件</data>
-  <data key="d1">自驾</data>
-  <data key="d2">[交通] 自驾</data>
-  <data key="d5">交通</data>
-  <data key="d6">可以从黄山到太平湖,约一小时</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:颐和园:其他:没有2019年起持续几近三年的疫情">
@@ -1329,36 +1297,12 @@
   <data key="d6">应该说每年都会出去,每年都会有新的游记面世,好在第一个目标“三山五岳”实现了之后,百度旅游这一产品退出来历史舞台,于是把之前的游记全部搬运到携程游记里</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:颐和园:时间:时间条件（句内）">
-  <data key="d0">条件</data>
-  <data key="d1">时间条件（句内）</data>
-  <data key="d2">[时间] 时间条件（句内）</data>
-  <data key="d5">时间</data>
-  <data key="d6">有篇文章写香山红叶的</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:说香山公园和颐和园的人声鼎沸代表现代">
-  <data key="d0">条件</data>
-  <data key="d1">说香山公园和颐和园的人声鼎沸代表现代人的富庶自由和对生活大自</data>
-  <data key="d2">[其他] 说香山公园和颐和园的人声鼎沸代表现代人的富庶自由</data>
-  <data key="d5">其他</data>
-  <data key="d6">那么进入圆明园的心境便完全不同对我来说</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:颐和园:其他:把这个伤疤不时揭一揭">
   <data key="d0">条件</data>
   <data key="d1">把这个伤疤不时揭一揭</data>
   <data key="d2">[其他] 把这个伤疤不时揭一揭</data>
   <data key="d5">其他</data>
   <data key="d6">也许是对历史的最好纪念</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:干名园胜景">
-  <data key="d0">条件</data>
-  <data key="d1">干名园胜景</data>
-  <data key="d2">[其他] 干名园胜景</data>
-  <data key="d5">其他</data>
-  <data key="d6">还移植了西方园林建筑,集当时古今中外造园艺术之大成</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:颐和园:其他:它们也会做梦">
@@ -1390,23 +1334,7 @@
   <data key="d1">游客为孩子</data>
   <data key="d2">[人群] 游客为孩子</data>
   <data key="d5">人群</data>
-  <data key="d6">出天安门东地铁口后,走北京工人文化宫西门进去,东门出来就是故宫午门了</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:在靠右这一侧">
-  <data key="d0">条件</data>
-  <data key="d1">在靠右这一侧</data>
-  <data key="d2">[其他] 在靠右这一侧</data>
-  <data key="d5">其他</data>
-  <data key="d6">故宫闭馆时间是17:00,钟表馆和珍宝馆是15:30,浏览整个故宫时间大概在4个小时左右,所以请自行控制时间,一般来说是足够的,钟表馆有时候需要排队</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:人群:游客为老人">
-  <data key="d0">条件</data>
-  <data key="d1">游客为老人</data>
-  <data key="d2">[人群] 游客为老人</data>
-  <data key="d5">人群</data>
-  <data key="d6">带着老人和小孩</data>
+  <data key="d6">儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途中经过的14号至19号敌楼路段较为平坦,便于行走</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:颐和园:其他:干口大缸">
@@ -1449,30 +1377,6 @@
   <data key="d6">因此午门又被称为“五凤楼”,同时呼应了中国历代王朝宫殿的传统,即南方以朱雀门为皇宫正门</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:颐和园:其他:可以">
-  <data key="d0">条件</data>
-  <data key="d1">可以</data>
-  <data key="d2">[其他] 可以</data>
-  <data key="d5">其他</data>
-  <data key="d6">尽量避免雨季旅游</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:下次去北京">
-  <data key="d0">条件</data>
-  <data key="d1">下次去北京</data>
-  <data key="d2">[其他] 下次去北京</data>
-  <data key="d5">其他</data>
-  <data key="d6">最多换一次就好了</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:预约票务:刷身份证就能入园">
-  <data key="d0">条件</data>
-  <data key="d1">刷身份证就能入园</data>
-  <data key="d2">[预约票务] 刷身份证就能入园</data>
-  <data key="d5">预约票务</data>
-  <data key="d6">比较方便</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:颐和园:其他:进入南官房胡同">
   <data key="d0">条件</data>
   <data key="d1">进入南官房胡同</data>
@@ -1487,14 +1391,6 @@
   <data key="d2">[其他] 除去路边的汽车</data>
   <data key="d5">其他</data>
   <data key="d6">似乎就可以梦回数百年前生活时代</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:时间:不是多处的花草树木在这春天竞相开放">
-  <data key="d0">条件</data>
-  <data key="d1">不是多处的花草树木在这春天竞相开放</data>
-  <data key="d2">[时间] 不是多处的花草树木在这春天竞相开放</data>
-  <data key="d5">时间</data>
-  <data key="d6">加上湖面上不时划过的鸟类,整个遗址公园将只有萧瑟</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:颐和园:其他:稍有耐心">
@@ -1689,44 +1585,12 @@
   <data key="d6">时隐时现</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:其他:席地而坐的五位老翁">
-  <data key="d0">条件</data>
-  <data key="d1">席地而坐的五位老翁</data>
-  <data key="d2">[其他] 席地而坐的五位老翁</data>
-  <data key="d5">其他</data>
-  <data key="d6">故人们便把这原出一山的五个山峰统称为“五老峰”</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:装备:轰雷;见瀑布水洒溅玉">
   <data key="d0">条件</data>
   <data key="d1">轰雷;见瀑布水洒溅玉</data>
   <data key="d2">[装备] 轰雷;见瀑布水洒溅玉</data>
   <data key="d5">装备</data>
   <data key="d6">落入深谷</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:包他的车可以到酒店来接">
-  <data key="d0">条件</data>
-  <data key="d1">包他的车可以到酒店来接</data>
-  <data key="d2">[其他] 包他的车可以到酒店来接</data>
-  <data key="d5">其他</data>
-  <data key="d6">送到天沐温泉要150元</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:从迎仙桥汽车站下山后">
-  <data key="d0">条件</data>
-  <data key="d1">从迎仙桥汽车站下山后</data>
-  <data key="d2">[其他] 从迎仙桥汽车站下山后</data>
-  <data key="d5">其他</data>
-  <data key="d6">不管是否在其他车站使用过车票,整张车票就作废了</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:再返回到山上">
-  <data key="d0">条件</data>
-  <data key="d1">再返回到山上</data>
-  <data key="d2">[其他] 再返回到山上</data>
-  <data key="d5">其他</data>
-  <data key="d6">需要在迎仙桥汽车站办理二次进山的手续</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:其他:不去天台景区">
@@ -1833,14 +1697,6 @@
   <data key="d6">菩萨就在身边</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:时间:晚上不住普陀山">
-  <data key="d0">条件</data>
-  <data key="d1">晚上不住普陀山</data>
-  <data key="d2">[时间] 晚上不住普陀山</data>
-  <data key="d5">时间</data>
-  <data key="d6">回朱家尖码头的最后一班轮渡是晚上10点</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:坐缆车">
   <data key="d0">条件</data>
   <data key="d1">坐缆车</data>
@@ -1857,60 +1713,12 @@
   <data key="d6">我能想到的形容词就是险峻、奇异和壮观了</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:其他:是一日游不在古村里住宿">
-  <data key="d0">条件</data>
-  <data key="d1">是一日游不在古村里住宿</data>
-  <data key="d2">[其他] 是一日游不在古村里住宿</data>
-  <data key="d5">其他</data>
-  <data key="d6">建议先游西递再宏村,因为宏村规模比西递大,客运班车车次更多,傍晚游完后便于返回黄山市区及黄山风景区</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:您对古建又感兴趣">
   <data key="d0">条件</data>
   <data key="d1">您对古建又感兴趣</data>
   <data key="d2">[其他] 您对古建又感兴趣</data>
   <data key="d5">其他</data>
   <data key="d6">这里绝对是您的正确之选</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:您想送给文人墨客的朋友">
-  <data key="d0">条件</data>
-  <data key="d1">您想送给文人墨客的朋友</data>
-  <data key="d2">[其他] 您想送给文人墨客的朋友</data>
-  <data key="d5">其他</data>
-  <data key="d6">送一套歙砚徽墨实在是不错的选择,另外可以到歙县县城的歙砚一条街去购买</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:交通:能坐动车就坐动车">
-  <data key="d0">条件</data>
-  <data key="d1">能坐动车就坐动车</data>
-  <data key="d2">[交通] 能坐动车就坐动车</data>
-  <data key="d5">交通</data>
-  <data key="d6">到站后坐班车方便)</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:交通:火车时间很长要坐飞机">
-  <data key="d0">条件</data>
-  <data key="d1">火车时间很长要坐飞机</data>
-  <data key="d2">[交通] 火车时间很长要坐飞机</data>
-  <data key="d5">交通</data>
-  <data key="d6">可以飞到黄山屯溪国际机场,然后换机场大巴再换班车</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:交通:是普速到老火车站或者飞机到机场">
-  <data key="d0">条件</data>
-  <data key="d1">是普速到老火车站或者飞机到机场</data>
-  <data key="d2">[交通] 是普速到老火车站或者飞机到机场</data>
-  <data key="d5">交通</data>
-  <data key="d6">建议先打车或公交到黄山客运总站,再换乘班车前往景区(新国线黄山风景区汽车站)</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:交通:是动车到北站就方便多了">
-  <data key="d0">条件</data>
-  <data key="d1">是动车到北站就方便多了</data>
-  <data key="d2">[交通] 是动车到北站就方便多了</data>
-  <data key="d5">交通</data>
-  <data key="d6">直接买班车票到黄山景区(新国线黄山风景区汽车站)即可</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:其他:是走慈光阁这条路线">
@@ -2001,22 +1809,6 @@
   <data key="d6">或者是游人想延长乘坐滑竿的路程,价格就要按具体路段来行价</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:时间:晚上住在屯溪">
-  <data key="d0">条件</data>
-  <data key="d1">晚上住在屯溪</data>
-  <data key="d2">[时间] 晚上住在屯溪</data>
-  <data key="d5">时间</data>
-  <data key="d6">早上也有发往黄山的大巴,票价30.这里需要注意的是如果在屯溪早上做大巴</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:时间:在屯溪早上做大巴">
-  <data key="d0">条件</data>
-  <data key="d1">在屯溪早上做大巴</data>
-  <data key="d2">[时间] 在屯溪早上做大巴</data>
-  <data key="d5">时间</data>
-  <data key="d6">可以到屯溪汽车站前面小广场坐车,最早一班六点半发车,时间大概1小时20分钟</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:假期">
   <data key="d0">条件</data>
   <data key="d1">假期</data>
@@ -2055,14 +1847,6 @@
   <data key="d2">[人群] 你是第一次去黄山</data>
   <data key="d5">人群</data>
   <data key="d6">请个人带是必须的</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:装备:没有人带着的话!自己安排车子的">
-  <data key="d0">条件</data>
-  <data key="d1">没有人带着的话!自己安排车子的</data>
-  <data key="d2">[装备] 没有人带着的话!自己安排车子的</data>
-  <data key="d5">装备</data>
-  <data key="d6">肯定会被黑的,有的时候提前讲好价钱到景区了还会多要钱的,要注意!我住的酒店是可以在一个极其优惠的价格内叫到车,所以就让前台小姐姐去帮忙联系</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:其他:没有办法住在光明顶又想拍摄日出">
@@ -2129,14 +1913,6 @@
   <data key="d6">那黄山的日落则是一分一秒都不能错过的风景动图</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:其他:嫌背上山行礼太重">
-  <data key="d0">条件</data>
-  <data key="d1">嫌背上山行礼太重</data>
-  <data key="d2">[其他] 嫌背上山行礼太重</data>
-  <data key="d5">其他</data>
-  <data key="d6">也可以到山上租,酒店一般都提供租借服务,50RMB/件</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:脚力不好就会苦了父母">
   <data key="d0">条件</data>
   <data key="d1">脚力不好就会苦了父母</data>
@@ -2153,28 +1929,12 @@
   <data key="d6">我恐高我不敢想</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:人群:游客为孩子">
-  <data key="d0">条件</data>
-  <data key="d1">游客为孩子</data>
-  <data key="d2">[人群] 游客为孩子</data>
-  <data key="d5">人群</data>
-  <data key="d6">溜娃,湖景房380一晚含双早,性价比超高</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:预约票务:输入身份证号人脸识别也是可以的">
   <data key="d0">条件</data>
   <data key="d1">输入身份证号人脸识别也是可以的</data>
   <data key="d2">[预约票务] 输入身份证号人脸识别也是可以的</data>
   <data key="d5">预约票务</data>
   <data key="d6">办好入住,行李送到房间,准备去镇上吃午饭,顺便去派出所看看,能不能办临时身份证,免得影响后面黄山的行程</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:不跟酒店的免费车去">
-  <data key="d0">条件</data>
-  <data key="d1">不跟酒店的免费车去</data>
-  <data key="d2">[其他] 不跟酒店的免费车去</data>
-  <data key="d5">其他</data>
-  <data key="d6">自己可以随时溜达过去,也不远,走路20分程,车程5分钟</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:其他:从前山玉屏索道上">
@@ -2217,22 +1977,6 @@
   <data key="d6">强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下山了(从迎客松方向去天都峰的话),从天都峰顶步行到慈光阁,至少需要4个小时左右,台阶高且陡,恐高的人不建议上天都峰,鲫鱼</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:其他:把车停汤口">
-  <data key="d0">条件</data>
-  <data key="d1">把车停汤口</data>
-  <data key="d2">[其他] 把车停汤口</data>
-  <data key="d5">其他</data>
-  <data key="d6">只能包车去耿城北大门坐太平索道,如果把车停耿城,下山后得从汤口包车回耿城取车</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:把车停耿城">
-  <data key="d0">条件</data>
-  <data key="d1">把车停耿城</data>
-  <data key="d2">[其他] 把车停耿城</data>
-  <data key="d5">其他</data>
-  <data key="d6">下山后得从汤口包车回耿城取车</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:一日游就必须放弃了北海景区、天海景区">
   <data key="d0">条件</data>
   <data key="d1">一日游就必须放弃了北海景区、天海景区</data>
@@ -2271,14 +2015,6 @@
   <data key="d2">[其他] 天都峰开放的话)然后从天都峰步行下山到慈光阁</data>
   <data key="d5">其他</data>
   <data key="d6">就是基本腿废</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:322元一晚">
-  <data key="d0">条件</data>
-  <data key="d1">322元一晚</data>
-  <data key="d2">[其他] 322元一晚</data>
-  <data key="d5">其他</data>
-  <data key="d6">性价比很高</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:其他:是前山上来从天海坐地轨缆车下西海大峡">
@@ -2337,22 +2073,6 @@
   <data key="d6">也可以一开始就从光明顶先去群峰顶,然后再去飞来石,这样就可以免去爬100级台阶之苦</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:其他:行程安排走回头路">
-  <data key="d0">条件</data>
-  <data key="d1">行程安排走回头路</data>
-  <data key="d2">[其他] 行程安排走回头路</data>
-  <data key="d5">其他</data>
-  <data key="d6">还是从前山的索道返程的</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:到景点、宾馆的指示牌能再多一些">
-  <data key="d0">条件</data>
-  <data key="d1">到景点、宾馆的指示牌能再多一些</data>
-  <data key="d2">[其他] 到景点、宾馆的指示牌能再多一些</data>
-  <data key="d5">其他</data>
-  <data key="d6">能再标注些距离和路程时间信息的话</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:体力安全:体力和时间允许">
   <data key="d0">条件</data>
   <data key="d1">体力和时间允许</data>
@@ -2377,14 +2097,6 @@
   <data key="d6">那个字是 “仙”</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:其他:没有酒店提供的羽绒衣">
-  <data key="d0">条件</data>
-  <data key="d1">没有酒店提供的羽绒衣</data>
-  <data key="d2">[其他] 没有酒店提供的羽绒衣</data>
-  <data key="d5">其他</data>
-  <data key="d6">一定要自己带厚棉衣,否则直接被山风吹傻</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:装备:装备条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">装备条件（句内）</data>
@@ -2407,22 +2119,6 @@
   <data key="d2">[时间] 周末节假日车流量大</data>
   <data key="d5">时间</data>
   <data key="d6">只能把车停到几百米前的一个游客中心大平台那里</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:去北大门">
-  <data key="d0">条件</data>
-  <data key="d1">去北大门</data>
-  <data key="d2">[其他] 去北大门</data>
-  <data key="d5">其他</data>
-  <data key="d6">刚才在谭家桥枢纽就要往北九华山方向</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:不在这里住宿过夜">
-  <data key="d0">条件</data>
-  <data key="d1">不在这里住宿过夜</data>
-  <data key="d2">[其他] 不在这里住宿过夜</data>
-  <data key="d5">其他</data>
-  <data key="d6">逢暑假周末或者节假日,上午过来根本找不到正规停车场车位</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:其他:到了明天周六">
@@ -2497,36 +2193,12 @@
   <data key="d6">遇到降水一定带好雨披套装和鞋套,山上呆几天就备几套</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:其他:直接游览黄山之后">
-  <data key="d0">条件</data>
-  <data key="d1">直接游览黄山之后</data>
-  <data key="d2">[其他] 直接游览黄山之后</data>
-  <data key="d5">其他</data>
-  <data key="d6">就有可能真的不想去泰山了</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:仅用手机拍摄黄山的美景">
   <data key="d0">条件</data>
   <data key="d1">仅用手机拍摄黄山的美景</data>
   <data key="d2">[其他] 仅用手机拍摄黄山的美景</data>
   <data key="d5">其他</data>
   <data key="d6">恐怕不能将其表现的淋漓尽致,所以终于下决心买了一个单反相机,配18-200镜头,这样</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:能闭着眼睛围着它逆时针顺时针分别转三">
-  <data key="d0">条件</data>
-  <data key="d1">能闭着眼睛围着它逆时针顺时针分别转三圈</data>
-  <data key="d2">[其他] 能闭着眼睛围着它逆时针顺时针分别转三圈</data>
-  <data key="d5">其他</data>
-  <data key="d6">之后闭眼走到10米开外的大树前并伸手摸到大树</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:宾馆以为我们不去了">
-  <data key="d0">条件</data>
-  <data key="d1">宾馆以为我们不去了</data>
-  <data key="d2">[其他] 宾馆以为我们不去了</data>
-  <data key="d5">其他</data>
-  <data key="d6">再把房间给了别人</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:其他:出售商品的地方">
@@ -2537,14 +2209,6 @@
   <data key="d6">展品主要在二楼</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:人群:是大学生出游">
-  <data key="d0">条件</data>
-  <data key="d1">是大学生出游</data>
-  <data key="d2">[人群] 是大学生出游</data>
-  <data key="d5">人群</data>
-  <data key="d6">更实惠的是青年客栈),写下这篇游记,也给喜欢自由行的旅友们一点借鉴</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:一放暑假">
   <data key="d0">条件</data>
   <data key="d1">一放暑假</data>
@@ -2553,44 +2217,12 @@
   <data key="d6">大人就要准备休年假,带着孩子去哪里转一转</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:其他:回去吃了个早餐">
-  <data key="d0">条件</data>
-  <data key="d1">回去吃了个早餐</data>
-  <data key="d2">[其他] 回去吃了个早餐</data>
-  <data key="d5">其他</data>
-  <data key="d6">走到这里已经中午了,又晒又热又累</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:热">
   <data key="d0">条件</data>
   <data key="d1">热</data>
   <data key="d2">[其他] 热</data>
   <data key="d5">其他</data>
   <data key="d6">海拔不够高,爬山累的不行,手脚都痛,我已经做好不去黄山的准备了</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:武夷山热">
-  <data key="d0">条件</data>
-  <data key="d1">武夷山热</data>
-  <data key="d2">[其他] 武夷山热</data>
-  <data key="d5">其他</data>
-  <data key="d6">爬山把所有的水喝光了还在景区买,其实酒店里放了很多只</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:走600米就可以放到酒店里">
-  <data key="d0">条件</data>
-  <data key="d1">走600米就可以放到酒店里</data>
-  <data key="d2">[其他] 走600米就可以放到酒店里</data>
-  <data key="d5">其他</data>
-  <data key="d6">出去的时候空手会轻松很多</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:后山上山">
-  <data key="d0">条件</data>
-  <data key="d1">后山上山</data>
-  <data key="d2">[其他] 后山上山</data>
-  <data key="d5">其他</data>
-  <data key="d6">年轻人居多,背着物资要走几个小时才能到达晚上住的酒店,带着孩子估计要抓狂</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:其他:你年纪不是大太多">
@@ -2665,14 +2297,6 @@
   <data key="d6">也不妨自行寻觅一处好茶</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:装备:没带帐篷也可以在宾馆附近租帐篷">
-  <data key="d0">条件</data>
-  <data key="d1">没带帐篷也可以在宾馆附近租帐篷</data>
-  <data key="d2">[装备] 没带帐篷也可以在宾馆附近租帐篷</data>
-  <data key="d5">装备</data>
-  <data key="d6">我去的那天节假日300元一晚,不知道平常的价格</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:坐索道">
   <data key="d0">条件</data>
   <data key="d1">坐索道</data>
@@ -2697,14 +2321,6 @@
   <data key="d6">应从这里步行或乘车至此换乘中心换乘</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:交通:你是乘火车或者飞机来黄山">
-  <data key="d0">条件</data>
-  <data key="d1">你是乘火车或者飞机来黄山</data>
-  <data key="d2">[交通] 你是乘火车或者飞机来黄山</data>
-  <data key="d5">交通</data>
-  <data key="d6">就只能够到达黄山市(屯溪),然后我们需要在这里乘坐黄山到汤口的班车前往黄山风景区脚下的汤口镇,在这里换乘“新国线”景区专用交通车进入黄山风景区</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:其他:经济允许">
   <data key="d0">条件</data>
   <data key="d1">经济允许</data>
@@ -2727,14 +2343,6 @@
   <data key="d2">[人群] 游客为情侣</data>
   <data key="d5">人群</data>
   <data key="d6">和其他游客拼独卫房间或住帐篷</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:点菜">
-  <data key="d0">条件</data>
-  <data key="d1">点菜</data>
-  <data key="d2">[其他] 点菜</data>
-  <data key="d5">其他</data>
-  <data key="d6">几乎每道菜的价格都比自助餐还贵</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:其他:你有盒装方便面">
@@ -2785,30 +2393,6 @@
   <data key="d6">仰天怒放,故名“莲花峰”</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:想早一点到">
-  <data key="d0">条件</data>
-  <data key="d1">想早一点到</data>
-  <data key="d2">[其他] 想早一点到</data>
-  <data key="d5">其他</data>
-  <data key="d6">可以在旅行网站上购买旅游大巴车票)正常需要乘坐9h</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:尔盖 --芝麻古藏寨-- 九寨沟 ;">
-  <data key="d0">条件</data>
-  <data key="d1">尔盖 --芝麻古藏寨-- 九寨沟 ;全程719公里</data>
-  <data key="d2">[其他] 尔盖 --芝麻古藏寨-- 九寨沟 ;全程719公</data>
-  <data key="d5">其他</data>
-  <data key="d6">耗时10~12小时</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:世界上有两个桃花源">
-  <data key="d0">条件</data>
-  <data key="d1">世界上有两个桃花源</data>
-  <data key="d2">[其他] 世界上有两个桃花源</data>
-  <data key="d5">其他</data>
-  <data key="d6">那么一个在陶渊明的诗歌中,另一个就在九寨.鲁能胜地</data>
-  <data key="d7">2</data>
-</node>
 <node id="条件:九寨沟:装备:在外面游山玩水">
   <data key="d0">条件</data>
   <data key="d1">在外面游山玩水</data>
@@ -2825,28 +2409,12 @@
   <data key="d6">那床头柜边的蓝牙小音响</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:人群:是一个大家庭出行">
-  <data key="d0">条件</data>
-  <data key="d1">是一个大家庭出行</data>
-  <data key="d2">[人群] 是一个大家庭出行</data>
-  <data key="d5">人群</data>
-  <data key="d6">一定要预约酒店提供的欧美式下茶茶、家庭晚宴</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:生活有开关">
   <data key="d0">条件</data>
   <data key="d1">生活有开关</data>
   <data key="d2">[其他] 生活有开关</data>
   <data key="d5">其他</data>
   <data key="d6">家人们和睦相聚就是以键快乐</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:人群:情侣、闺蜜出游">
-  <data key="d0">条件</data>
-  <data key="d1">情侣、闺蜜出游</data>
-  <data key="d2">[人群] 情侣、闺蜜出游</data>
-  <data key="d5">人群</data>
-  <data key="d6">可以选择热辣沸腾的火锅或者汤鲜肉嫩石锅藏香鸡</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:人群:是家庭出游">
@@ -2993,14 +2561,6 @@
   <data key="d6">的方法啊!下午两点从川主寺的蚕丝文化点出发,我们就开始了为时8个小时的返程之旅</data>
   <data key="d7">3</data>
 </node>
-<node id="条件:九寨沟:其他:要说遗憾">
-  <data key="d0">条件</data>
-  <data key="d1">要说遗憾</data>
-  <data key="d2">[其他] 要说遗憾</data>
-  <data key="d5">其他</data>
-  <data key="d6">那就是没有在五花海多待一会</data>
-  <data key="d7">3</data>
-</node>
 <node id="条件:九寨沟:其他:你出门不掉东西、不皮(四川话">
   <data key="d0">条件</data>
   <data key="d1">你出门不掉东西、不皮(四川话</data>
@@ -3073,14 +2633,6 @@
   <data key="d6">到处是木石花草,翠柏盘根,令人叹为观止</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:交通:我从 重庆 到成都 的动车">
-  <data key="d0">条件</data>
-  <data key="d1">我从 重庆 到成都 的动车</data>
-  <data key="d2">[交通] 我从 重庆 到成都 的动车</data>
-  <data key="d5">交通</data>
-  <data key="d6">就要坐最早六点左右的才能顺利转乘</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:时间允许">
   <data key="d0">条件</data>
   <data key="d1">时间允许</data>
@@ -3121,14 +2673,6 @@
   <data key="d6">其实大半天足矣</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:下次来成都旅游">
-  <data key="d0">条件</data>
-  <data key="d1">下次来成都旅游</data>
-  <data key="d2">[其他] 下次来成都旅游</data>
-  <data key="d5">其他</data>
-  <data key="d6">我想必还会来体验,体验这鹪鹩的魅力</data>
-  <data key="d7">2</data>
-</node>
 <node id="条件:九寨沟:其他:能够顺着台阶下到五彩池边">
   <data key="d0">条件</data>
   <data key="d1">能够顺着台阶下到五彩池边</data>
@@ -3153,44 +2697,12 @@
   <data key="d6">又喜欢早起,安排得当一天时间玩遍九寨沟也是可以的</data>
   <data key="d7">2</data>
 </node>
-<node id="条件:九寨沟:装备:坐车进出的话要有所准备">
-  <data key="d0">条件</data>
-  <data key="d1">坐车进出的话要有所准备</data>
-  <data key="d2">[装备] 坐车进出的话要有所准备</data>
-  <data key="d5">装备</data>
-  <data key="d6">我在回程时碰到小塌方,起码处理6小时以上,如果正好堵在没餐馆的路段</data>
-  <data key="d7">2</data>
-</node>
-<node id="条件:九寨沟:其他:正好堵在没餐馆的路段">
-  <data key="d0">条件</data>
-  <data key="d1">正好堵在没餐馆的路段</data>
-  <data key="d2">[其他] 正好堵在没餐馆的路段</data>
-  <data key="d5">其他</data>
-  <data key="d6">那只好挨饿了,还可能影响你的后续行程哦~</data>
-  <data key="d7">2</data>
-</node>
 <node id="条件:九寨沟:其他:终点是原始森林">
   <data key="d0">条件</data>
   <data key="d1">终点是原始森林</data>
   <data key="d2">[其他] 终点是原始森林</data>
   <data key="d5">其他</data>
   <data key="d6">那么一天的时间会有点紧张</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:交通:一定要坐飞机!了解到她的这个缘由">
-  <data key="d0">条件</data>
-  <data key="d1">一定要坐飞机!了解到她的这个缘由</data>
-  <data key="d2">[交通] 一定要坐飞机!了解到她的这个缘由</data>
-  <data key="d5">交通</data>
-  <data key="d6">我们调整了一下行程,目标指向九寨沟</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:回来早了">
-  <data key="d0">条件</data>
-  <data key="d1">回来早了</data>
-  <data key="d2">[其他] 回来早了</data>
-  <data key="d5">其他</data>
-  <data key="d6">可以换前面的车票提前走</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:不是非要看麻浩崖墓或乌尤寺">
@@ -3345,52 +2857,12 @@
   <data key="d6">不知又能抒发出多么伟大的诗句,描绘出多么壮丽的图卷呢</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:人群:游客为孩子">
-  <data key="d0">条件</data>
-  <data key="d1">游客为孩子</data>
-  <data key="d2">[人群] 游客为孩子</data>
-  <data key="d5">人群</data>
-  <data key="d6">寄存在峨眉山高铁站内(大包30,小包15,可存到次日,存得多可讲价),带背包上山</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:第一站成都玩就建议飞双流)">
-  <data key="d0">条件</data>
-  <data key="d1">第一站成都玩就建议飞双流)</data>
-  <data key="d2">[其他] 第一站成都玩就建议飞双流)</data>
-  <data key="d5">其他</data>
-  <data key="d6">坐地铁到成都东高铁站,高铁站解决午餐</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:不坐大巴">
-  <data key="d0">条件</data>
-  <data key="d1">不坐大巴</data>
-  <data key="d2">[其他] 不坐大巴</data>
-  <data key="d5">其他</data>
-  <data key="d6">坐7座商务车跟人拼车则是100/人(小孩同价)</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:交通:包车的话会直接送到索道检票口)">
-  <data key="d0">条件</data>
-  <data key="d1">包车的话会直接送到索道检票口)</data>
-  <data key="d2">[交通] 包车的话会直接送到索道检票口)</data>
-  <data key="d5">交通</data>
-  <data key="d6">上行索道80,下行索道40,观光车(20,从索道到五彩池的路,一天五千份,可省一小时步行</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:不是跑跑跳跳">
   <data key="d0">条件</data>
   <data key="d1">不是跑跑跳跳</data>
   <data key="d2">[其他] 不是跑跑跳跳</data>
   <data key="d5">其他</data>
   <data key="d6">正常不需要,体质差些氧气瓶一瓶也能解决)</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:人群:没带小孩的">
-  <data key="d0">条件</data>
-  <data key="d1">没带小孩的</data>
-  <data key="d2">[人群] 没带小孩的</data>
-  <data key="d5">人群</data>
-  <data key="d6">共享单车会更方便</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:时间:在合适的季节">
@@ -3401,36 +2873,12 @@
   <data key="d6">天气又帮忙的话,相当不错</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:尔盖花湖景区依然要坐景交车">
-  <data key="d0">条件</data>
-  <data key="d1">尔盖花湖景区依然要坐景交车</data>
-  <data key="d2">[其他] 尔盖花湖景区依然要坐景交车</data>
-  <data key="d5">其他</data>
-  <data key="d6">你想步行都不行</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:去县医院做核酸检测">
-  <data key="d0">条件</data>
-  <data key="d1">去县医院做核酸检测</data>
-  <data key="d2">[其他] 去县医院做核酸检测</data>
-  <data key="d5">其他</data>
-  <data key="d6">那还不如放弃呢!扎尕那住宿从下往上依次为东哇村,业日村,达日村,代巴村</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:时间:时间有限">
   <data key="d0">条件</data>
   <data key="d1">时间有限</data>
   <data key="d2">[时间] 时间有限</data>
   <data key="d5">时间</data>
   <data key="d6">可以放弃</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:尔盖花湖、扎尕那等地与新冠疫情插肩而">
-  <data key="d0">条件</data>
-  <data key="d1">尔盖花湖、扎尕那等地与新冠疫情插肩而过</data>
-  <data key="d2">[其他] 尔盖花湖、扎尕那等地与新冠疫情插肩而过</data>
-  <data key="d5">其他</data>
-  <data key="d6">但对我们没有产生任何影响</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:让我在这些景点中选择">
@@ -3449,14 +2897,6 @@
   <data key="d6">我希望是在这里</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:交通:你自驾来九寨沟">
-  <data key="d0">条件</data>
-  <data key="d1">你自驾来九寨沟</data>
-  <data key="d2">[交通] 你自驾来九寨沟</data>
-  <data key="d5">交通</data>
-  <data key="d6">进入九道拐之前,你就会看见路旁的这一处风景,在四周高山的妥协下出现了一大块平地,不同于高原上的片片草原,这里是一处难得一见的高原湿地,这就是甘海子</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:你的旅途里有佳人作伴">
   <data key="d0">条件</data>
   <data key="d1">你的旅途里有佳人作伴</data>
@@ -3465,52 +2905,12 @@
   <data key="d6">那就权当再议</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:是一人出行去浦东机场的话这个价格偷笑">
-  <data key="d0">条件</data>
-  <data key="d1">是一人出行去浦东机场的话这个价格偷笑了</data>
-  <data key="d2">[其他] 是一人出行去浦东机场的话这个价格偷笑了</data>
-  <data key="d5">其他</data>
-  <data key="d6">还不用经历排队长龙的痛苦</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:在兰州T2航站下机">
-  <data key="d0">条件</data>
-  <data key="d1">在兰州T2航站下机</data>
-  <data key="d2">[其他] 在兰州T2航站下机</data>
-  <data key="d5">其他</data>
-  <data key="d6">要去第5出口,对面就是城际车站</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:各位只是游览观光">
   <data key="d0">条件</data>
   <data key="d1">各位只是游览观光</data>
   <data key="d2">[其他] 各位只是游览观光</data>
   <data key="d5">其他</data>
   <data key="d6">那车票是必须要购买的,不然景区内全程60公里,走是走不下来的</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:交通:是自驾或是徒步">
-  <data key="d0">条件</data>
-  <data key="d1">是自驾或是徒步</data>
-  <data key="d2">[交通] 是自驾或是徒步</data>
-  <data key="d5">交通</data>
-  <data key="d6">那就另当别论了</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:尔盖花湖、九曲黄河第一湾以及川主寺等">
-  <data key="d0">条件</data>
-  <data key="d1">尔盖花湖、九曲黄河第一湾以及川主寺等地</data>
-  <data key="d2">[其他] 尔盖花湖、九曲黄河第一湾以及川主寺等地</data>
-  <data key="d5">其他</data>
-  <data key="d6">详情如下:</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:不能在用餐时间赶到餐厅">
-  <data key="d0">条件</data>
-  <data key="d1">不能在用餐时间赶到餐厅</data>
-  <data key="d2">[其他] 不能在用餐时间赶到餐厅</data>
-  <data key="d5">其他</data>
-  <data key="d6">那景区内就没有其他补给点了</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:此时飘来一朵云">
@@ -3569,28 +2969,12 @@
   <data key="d6">从甘肃的甘南藏族自治州进入四川的阿坝藏族羌族自治州,第二天我们即将游赏的是中国最美水景——黄龙和九寨沟</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:尔盖到松潘途经景观">
-  <data key="d0">条件</data>
-  <data key="d1">尔盖到松潘途经景观</data>
-  <data key="d2">[其他] 尔盖到松潘途经景观</data>
-  <data key="d5">其他</data>
-  <data key="d6">名叫“劦山劦”)</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:不是相关专家">
   <data key="d0">条件</data>
   <data key="d1">不是相关专家</data>
   <data key="d2">[其他] 不是相关专家</data>
   <data key="d5">其他</data>
   <data key="d6">不易分别二者的不同</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:尔盖向东南约160公里到达阿坝州松潘">
-  <data key="d0">条件</data>
-  <data key="d1">尔盖向东南约160公里到达阿坝州松潘县</data>
-  <data key="d2">[其他] 尔盖向东南约160公里到达阿坝州松潘县</data>
-  <data key="d5">其他</data>
-  <data key="d6">继续驱车在山雄峡峻的岷山险道上过隧穿林,直到主峰雪宝鼎脚下,终于看到了黄龙风景区的大门</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:时间:秋季前来">
@@ -3665,14 +3049,6 @@
   <data key="d6">建议可以选择这个路线,目前这个路线还有个好处是上午进的话直接步行上山还可以避开大量坐缆车的人流,毕竟再漂亮的地方人群一嘈杂也就索然无味了!</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:住宿还想体验感好一些">
-  <data key="d0">条件</data>
-  <data key="d1">住宿还想体验感好一些</data>
-  <data key="d2">[其他] 住宿还想体验感好一些</data>
-  <data key="d5">其他</data>
-  <data key="d6">建议可以选当地的几家5星级酒店,硬件和环境都有超5星的水准</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:环保车和徒步">
   <data key="d0">条件</data>
   <data key="d1">环保车和徒步</data>
@@ -3697,36 +3073,12 @@
   <data key="d6">卡坝乡右转036县道前行593乡道,613乡道,沿安子库逆流而上,到三岔口走右边尼欠沟</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:冷鲜牦牛肉的质量好(这个后来在郎木寺">
-  <data key="d0">条件</data>
-  <data key="d1">冷鲜牦牛肉的质量好(这个后来在郎木寺也有相同的体验)</data>
-  <data key="d2">[其他] 冷鲜牦牛肉的质量好(这个后来在郎木寺也有相同的体</data>
-  <data key="d5">其他</data>
-  <data key="d6">口味上佳可媲美进口的原切谷饲,再下点蔬菜,加个特色藏香猪肉熟菜</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:只想走马观花的话干脆住到迭部">
-  <data key="d0">条件</data>
-  <data key="d1">只想走马观花的话干脆住到迭部</data>
-  <data key="d2">[其他] 只想走马观花的话干脆住到迭部</data>
-  <data key="d5">其他</data>
-  <data key="d6">也就26公里的路程,但吃饭/住宿的选择和质量应该好不少</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:经》等">
   <data key="d0">条件</data>
   <data key="d1">经》等</data>
   <data key="d2">[其他] 经》等</data>
   <data key="d5">其他</data>
   <data key="d6">还有千余幅佛教故事石刻画</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:隆务寺">
-  <data key="d0">条件</data>
-  <data key="d1">隆务寺</data>
-  <data key="d2">[其他] 隆务寺</data>
-  <data key="d5">其他</data>
-  <data key="d6">整个寺院区和拉卜楞寺一样规模庞大,随心的边走边看还是最好的游览方式</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:唐代佛阁建于唐开元十九年(731年)">
@@ -3737,28 +3089,12 @@
   <data key="d6">那么比我国现存最早木结构建筑建于建中三年(782年)的山西五台南禅寺大殿早了五十多年,应该是目前国内已知遗存最老的木构了!</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:真的遇到需要应急处理的情况">
-  <data key="d0">条件</data>
-  <data key="d1">真的遇到需要应急处理的情况</data>
-  <data key="d2">[其他] 真的遇到需要应急处理的情况</data>
-  <data key="d5">其他</data>
-  <data key="d6">四川 航空毕竟是地头蛇,哪怕要返航到 成都 机场,总也比其他航空公司方便</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:扫健康码和行程码">
   <data key="d0">条件</data>
   <data key="d1">扫健康码和行程码</data>
   <data key="d2">[其他] 扫健康码和行程码</data>
   <data key="d5">其他</data>
   <data key="d6">倒也不会耽误很久</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:坐3站地铁">
-  <data key="d0">条件</data>
-  <data key="d1">坐3站地铁</data>
-  <data key="d2">[其他] 坐3站地铁</data>
-  <data key="d5">其他</data>
-  <data key="d6">20分钟就能到硕放机场了,所以首选肯定是 无锡 新区站</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:不换酒店">
@@ -3783,30 +3119,6 @@
   <data key="d2">[其他] 吃完药也没有效果</data>
   <data key="d5">其他</data>
   <data key="d6">那就一定要及时吸氧,听闺蜜说她去 香格里拉 的经历,头痛高反一吸氧立马就好,过一阵子就适应了</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:15块一瓶">
-  <data key="d0">条件</data>
-  <data key="d1">15块一瓶</data>
-  <data key="d2">[其他] 15块一瓶</data>
-  <data key="d5">其他</data>
-  <data key="d6">跟我在酒店对面超市买的25块一瓶的一模一样</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:是不吃猪肉的少数民族">
-  <data key="d0">条件</data>
-  <data key="d1">是不吃猪肉的少数民族</data>
-  <data key="d2">[其他] 是不吃猪肉的少数民族</data>
-  <data key="d5">其他</data>
-  <data key="d6">你预备咋办呢?实在不知道网评出的川航美食,是怎么出来的</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:正常开大概1.5小时能到">
-  <data key="d0">条件</data>
-  <data key="d1">正常开大概1.5小时能到</data>
-  <data key="d2">[其他] 正常开大概1.5小时能到</data>
-  <data key="d5">其他</data>
-  <data key="d6">但国庆节真心堵,一段段红色,等我们开到酒店,已经是晚上10点多了</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:不是那么早出发">
@@ -3865,14 +3177,6 @@
   <data key="d6">辅之以导航基本不会迷路</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:看到有超市可以进去多逛逛">
-  <data key="d0">条件</data>
-  <data key="d1">看到有超市可以进去多逛逛</data>
-  <data key="d2">[其他] 看到有超市可以进去多逛逛</data>
-  <data key="d5">其他</data>
-  <data key="d6">及时补充点吃的喝的,有些店里还有水果,也可以买点</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:时间:国庆或者高峰期出游">
   <data key="d0">条件</data>
   <data key="d1">国庆或者高峰期出游</data>
@@ -3887,14 +3191,6 @@
   <data key="d2">[其他] 叫不到车</data>
   <data key="d5">其他</data>
   <data key="d6">走1公里也就到了</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:60元就可以了">
-  <data key="d0">条件</data>
-  <data key="d1">60元就可以了</data>
-  <data key="d2">[其他] 60元就可以了</data>
-  <data key="d5">其他</data>
-  <data key="d6">但我们担心在景区门口叫车不方便,所以就索性包了往返的车</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:阳光好">
@@ -3945,36 +3241,12 @@
   <data key="d6">再坐回诺日朗</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:日朗游客中心午餐比较贵">
-  <data key="d0">条件</data>
-  <data key="d1">日朗游客中心午餐比较贵</data>
-  <data key="d2">[其他] 日朗游客中心午餐比较贵</data>
-  <data key="d5">其他</data>
-  <data key="d6">建议自备午餐</data>
-  <data key="d7">2</data>
-</node>
 <node id="条件:九寨沟:其他:说黄山是天下山的极致">
   <data key="d0">条件</data>
   <data key="d1">说黄山是天下山的极致</data>
   <data key="d2">[其他] 说黄山是天下山的极致</data>
   <data key="d5">其他</data>
   <data key="d6">那么九寨就是天下水的极致</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:你有一颗麻辣的胃那么快来这里寻找中意">
-  <data key="d0">条件</data>
-  <data key="d1">你有一颗麻辣的胃那么快来这里寻找中意的美味吧</data>
-  <data key="d2">[其他] 你有一颗麻辣的胃那么快来这里寻找中意的美味吧</data>
-  <data key="d5">其他</data>
-  <data key="d6">另外还有中式点心也非常可口正宗</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:想睡懒觉也是可以的">
-  <data key="d0">条件</data>
-  <data key="d1">想睡懒觉也是可以的</data>
-  <data key="d2">[其他] 想睡懒觉也是可以的</data>
-  <data key="d5">其他</data>
-  <data key="d6">早餐十点二十才会结束,时间很是充足</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:由金犀牛海、芳草海、九曲彩河组成的湖">
@@ -3993,14 +3265,6 @@
   <data key="d6">我想这里会是怎样的迷人,从客房的户外阳台望出去,是一片姹紫嫣红的秋色,是一片五彩缤的森林</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:装备:想带纪念品的就可以来这里逛逛">
-  <data key="d0">条件</data>
-  <data key="d1">想带纪念品的就可以来这里逛逛</data>
-  <data key="d2">[装备] 想带纪念品的就可以来这里逛逛</data>
-  <data key="d5">装备</data>
-  <data key="d6">街边还设有许多好看的信箱和木椅帐篷很适合拍照打卡哦!</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:人群:游客为家庭">
   <data key="d0">条件</data>
   <data key="d1">游客为家庭</data>
@@ -4015,14 +3279,6 @@
   <data key="d2">[其他] 只有一次国内游的机会</data>
   <data key="d5">其他</data>
   <data key="d6">你会到哪里?我的选择——九寨沟!这是大自然不可多得的杰作,我国目前唯一拥有“世界自然遗产”、“世界生物圈保护区”和“绿色环球21”三顶国际桂冠的风景名胜旅游区</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:交通:乘坐高铁自由行">
-  <data key="d0">条件</data>
-  <data key="d1">乘坐高铁自由行</data>
-  <data key="d2">[交通] 乘坐高铁自由行</data>
-  <data key="d5">交通</data>
-  <data key="d6">一定要留足时间,从景区出来到高铁站最起码要留3个小时</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:不是“偏僻”和“饭难吃”">
@@ -4063,38 +3319,6 @@
   <data key="d2">[其他] 只买单程索道</data>
   <data key="d5">其他</data>
   <data key="d6">意味着你就自己从下车点步行两公里去到山门,正式开始爬山,爬一半,才能坐索道,索道下了,还有最后一段需要自己爬上去,往返索道也是一样)</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:你时间不充足">
-  <data key="d0">条件</data>
-  <data key="d1">你时间不充足</data>
-  <data key="d2">[其他] 你时间不充足</data>
-  <data key="d5">其他</data>
-  <data key="d6">建议以游览前山为先</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:尔盖草原">
-  <data key="d0">条件</data>
-  <data key="d1">尔盖草原</data>
-  <data key="d2">[其他] 尔盖草原</data>
-  <data key="d5">其他</data>
-  <data key="d6">全程是110多公里</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:尔盖草原前行">
-  <data key="d0">条件</data>
-  <data key="d1">尔盖草原前行</data>
-  <data key="d2">[其他] 尔盖草原前行</data>
-  <data key="d5">其他</data>
-  <data key="d6">一路都是草原,似乎与藏北从那曲到拉萨草原风光是一样的,想想这应该是同一片草原吧</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:时间:尔盖是头一天已经预定好的若尔盖大藏阳">
-  <data key="d0">条件</data>
-  <data key="d1">尔盖是头一天已经预定好的若尔盖大藏阳光酒店</data>
-  <data key="d2">[时间] 尔盖是头一天已经预定好的若尔盖大藏阳光酒店</data>
-  <data key="d5">时间</data>
-  <data key="d6">到达之后酒店前台已经没有房间,多亏提前预定了</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:时间:说冬天是上帝寄出的一封信">
@@ -4185,36 +3409,12 @@
   <data key="d6">在这里是插翅难逃的啦! 心里真的感慨!我们大国的安保也可以做到如此周密了!点赞!</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:让他们动起手来">
-  <data key="d0">条件</data>
-  <data key="d1">让他们动起手来</data>
-  <data key="d2">[其他] 让他们动起手来</data>
-  <data key="d5">其他</data>
-  <data key="d6">干什么都成了一种乐趣!</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:遭到破坏">
   <data key="d0">条件</data>
   <data key="d1">遭到破坏</data>
   <data key="d2">[其他] 遭到破坏</data>
   <data key="d5">其他</data>
   <data key="d6">几乎无法修复</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:尔盖通往九寨沟的两条高速正在齐头并进">
-  <data key="d0">条件</data>
-  <data key="d1">尔盖通往九寨沟的两条高速正在齐头并进</data>
-  <data key="d2">[其他] 尔盖通往九寨沟的两条高速正在齐头并进</data>
-  <data key="d5">其他</data>
-  <data key="d6">道路建设者们正日以继夜奋战在崇山峻岭之中,施工场面非常感人!</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:尔盖郎木寺的纳摩大峡谷">
-  <data key="d0">条件</data>
-  <data key="d1">尔盖郎木寺的纳摩大峡谷</data>
-  <data key="d2">[其他] 尔盖郎木寺的纳摩大峡谷</data>
-  <data key="d5">其他</data>
-  <data key="d6">全长576公里,流经陇/蜀之地诸多热门景点,至四川广元汇入嘉陵江</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:用心阅读、用眼记录就足够了">
@@ -4247,14 +3447,6 @@
   <data key="d2">[其他] 脚力稍差</data>
   <data key="d5">其他</data>
   <data key="d6">可以从缆车上站乘观光车到终点(五彩池附近),再一路观景下山,可少走2公里栈道,也不失黄龙精华</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:用一句话来描述">
-  <data key="d0">条件</data>
-  <data key="d1">用一句话来描述</data>
-  <data key="d2">[其他] 用一句话来描述</data>
-  <data key="d5">其他</data>
-  <data key="d6">我想,还是用在茂县公路边看到的四川旅行口号:天府三九大,安逸四川行</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:由山、湖、林、滩、瀑等元素构成">
@@ -4295,30 +3487,6 @@
   <data key="d2">[其他] 要提高可谓举步维艰</data>
   <data key="d5">其他</data>
   <data key="d6">谈何容易</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:坐公交车到肖坝车站在转车去成都">
-  <data key="d0">条件</data>
-  <data key="d1">坐公交车到肖坝车站在转车去成都</data>
-  <data key="d2">[其他] 坐公交车到肖坝车站在转车去成都</data>
-  <data key="d5">其他</data>
-  <data key="d6">说不定还没有这样快,于是就相信了他们的话</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:当地的一些特产和明天去九寨沟路上吃的">
-  <data key="d0">条件</data>
-  <data key="d1">当地的一些特产和明天去九寨沟路上吃的东西</data>
-  <data key="d2">[其他] 当地的一些特产和明天去九寨沟路上吃的东西</data>
-  <data key="d5">其他</data>
-  <data key="d6">然后回宾馆休息</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:赶不上就只好等到明天">
-  <data key="d0">条件</data>
-  <data key="d1">赶不上就只好等到明天</data>
-  <data key="d2">[其他] 赶不上就只好等到明天</data>
-  <data key="d5">其他</data>
-  <data key="d6">上车后发现两个座都靠右,据网上说去九寨沟的路上靠右坐可以看见许多沿途的风景,看来我们还是比较幸运的</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:不去九寨感受这美妙的神奇">
@@ -4449,14 +3617,6 @@
   <data key="d6">总会等到人少的时候</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:去成都">
-  <data key="d0">条件</data>
-  <data key="d1">去成都</data>
-  <data key="d2">[其他] 去成都</data>
-  <data key="d5">其他</data>
-  <data key="d6">不去泡一次茶馆、淘一次耳朵,不算到过成都</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:九寨沟:其他:这种露天茶馆">
   <data key="d0">条件</data>
   <data key="d1">这种露天茶馆</data>
@@ -4479,14 +3639,6 @@
   <data key="d2">[其他] 在我们现有团费的基本上再加300块一个人</data>
   <data key="d5">其他</data>
   <data key="d6">就可以住两晚九寨天堂,但必须提前预定</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:再给我一次机会">
-  <data key="d0">条件</data>
-  <data key="d1">再给我一次机会</data>
-  <data key="d2">[其他] 再给我一次机会</data>
-  <data key="d5">其他</data>
-  <data key="d6">我会对它说,我一定要住在你房里</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:时间更多一些">
@@ -4513,22 +3665,6 @@
   <data key="d6">本人亲测有效组合:葡萄糖口服液+布洛芬(缓解头痛)+少量巧克力</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:九寨沟:其他:怕外面民宿酒店不干净">
-  <data key="d0">条件</data>
-  <data key="d1">怕外面民宿酒店不干净</data>
-  <data key="d2">[其他] 怕外面民宿酒店不干净</data>
-  <data key="d5">其他</data>
-  <data key="d6">可以携带一次性床上四件套隔脏</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:装备:装备条件（句内）">
-  <data key="d0">条件</data>
-  <data key="d1">装备条件（句内）</data>
-  <data key="d2">[装备] 装备条件（句内）</data>
-  <data key="d5">装备</data>
-  <data key="d6">不要想着徒步了,不太现实,最最最主要的是慕田峪这里人少啊</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:颐和园:其他:没有滴滴软件和“美味不用等”软件">
   <data key="d0">条件</data>
   <data key="d1">没有滴滴软件和“美味不用等”软件</data>
@@ -4537,44 +3673,12 @@
   <data key="d6">尽量提前下载到手机上,省排队</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:颐和园:其他:我们约略知道陈寅恪—就是当年被称为清">
-  <data key="d0">条件</data>
-  <data key="d1">我们约略知道陈寅恪—就是当年被称为清华教授之教授的陈先生的学</data>
-  <data key="d2">[其他] 我们约略知道陈寅恪—就是当年被称为清华教授之教授</data>
-  <data key="d5">其他</data>
-  <data key="d6">那我们从陈先生撰写的王静安先生纪念碑铭也就很可以想见王国维先生的学问和为人:“…惟此独立之精神,自由之思想,历千万祀,与天壤而同久,共三光而永光”</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:颐和园:其他:能自行做到乐善、无求那就是佛呢">
   <data key="d0">条件</data>
   <data key="d1">能自行做到乐善、无求那就是佛呢</data>
   <data key="d2">[其他] 能自行做到乐善、无求那就是佛呢</data>
   <data key="d5">其他</data>
   <data key="d6">此处你也可以不用再来了—大约是白话了的“即心即佛”或菩提只向心觅,何劳向外求玄?</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:不可上…”">
-  <data key="d0">条件</data>
-  <data key="d1">不可上…”</data>
-  <data key="d2">[其他] 不可上…”</data>
-  <data key="d5">其他</data>
-  <data key="d6">扶栏往东俯瞰而“苍松如茵出其下…”再往远处眺望是京西城区、西山香山八大处</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:金汤">
-  <data key="d0">条件</data>
-  <data key="d1">金汤</data>
-  <data key="d2">[其他] 金汤</data>
-  <data key="d5">其他</data>
-  <data key="d6">但是闯王李自成当年率军突入北京城</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:确定出行日期">
-  <data key="d0">条件</data>
-  <data key="d1">确定出行日期</data>
-  <data key="d2">[其他] 确定出行日期</data>
-  <data key="d5">其他</data>
-  <data key="d6">要尽可能的提早买票,越早买,你选择的余地就越大,例如,一家人可以选择在同一间里,还有铺位的选择等等</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:颐和园:其他:要在终点站下">
@@ -4593,44 +3697,12 @@
   <data key="d6">可以坐滑车或缆车上去</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:颐和园:其他:计划爬完长城再去定陵">
+<node id="条件:颐和园:装备:装备条件（句内）">
   <data key="d0">条件</data>
-  <data key="d1">计划爬完长城再去定陵</data>
-  <data key="d2">[其他] 计划爬完长城再去定陵</data>
-  <data key="d5">其他</data>
-  <data key="d6">那记住,不管你是乘火车还是坐汽车,早上一定要起早赶上早班车,这样一天下来,时间会宽裕很多,不至于太赶</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:是有圆明园站点的">
-  <data key="d0">条件</data>
-  <data key="d1">是有圆明园站点的</data>
-  <data key="d2">[其他] 是有圆明园站点的</data>
-  <data key="d5">其他</data>
-  <data key="d6">你随便上一辆就好</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:让老外说几个关于中国印象的关键词">
-  <data key="d0">条件</data>
-  <data key="d1">让老外说几个关于中国印象的关键词</data>
-  <data key="d2">[其他] 让老外说几个关于中国印象的关键词</data>
-  <data key="d5">其他</data>
-  <data key="d6">“长城”一定榜上有名</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:你对圆明园没有印象">
-  <data key="d0">条件</data>
-  <data key="d1">你对圆明园没有印象</data>
-  <data key="d2">[其他] 你对圆明园没有印象</data>
-  <data key="d5">其他</data>
-  <data key="d6">去网上搜索信息,出现最多的也是下面这幅颓圮破败的景象</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:人群:是第一次来北京">
-  <data key="d0">条件</data>
-  <data key="d1">是第一次来北京</data>
-  <data key="d2">[人群] 是第一次来北京</data>
-  <data key="d5">人群</data>
-  <data key="d6">而且时间有限,只能去玩一个景点</data>
+  <data key="d1">装备条件（句内）</data>
+  <data key="d2">[装备] 装备条件（句内）</data>
+  <data key="d5">装备</data>
+  <data key="d6">慎重考虑</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:颐和园:其他:昊天">
@@ -4639,14 +3711,6 @@
   <data key="d2">[其他] 昊天</data>
   <data key="d5">其他</data>
   <data key="d6">历象日月星辰,敬授人时”,考古发现新石器时代我国的祭祀遗址有三十多处</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:两个人分立于东西配殿后的回音壁下">
-  <data key="d0">条件</data>
-  <data key="d1">两个人分立于东西配殿后的回音壁下</data>
-  <data key="d2">[其他] 两个人分立于东西配殿后的回音壁下</data>
-  <data key="d5">其他</data>
-  <data key="d6">轻声对话,双方均能清晰地听到对方声音,非常有趣</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:颐和园:其他:细细看">
@@ -4745,44 +3809,12 @@
   <data key="d6">则整个园林将尽收眼底</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:颐和园:其他:干年前">
-  <data key="d0">条件</data>
-  <data key="d1">干年前</data>
-  <data key="d2">[其他] 干年前</data>
-  <data key="d5">其他</data>
-  <data key="d6">有同事来北京天安门看升旗,还能登上开国大典的天安门城楼,还有时任北京的市长亲笔签名的纪念证书,听导游讲,这项服务已经取消很多年了</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:不到长城非好汉是一把尺度">
-  <data key="d0">条件</data>
-  <data key="d1">不到长城非好汉是一把尺度</data>
-  <data key="d2">[其他] 不到长城非好汉是一把尺度</data>
-  <data key="d5">其他</data>
-  <data key="d6">那么从今往后,我们这群好汉就算实至名归了</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:一定要选一个词">
-  <data key="d0">条件</data>
-  <data key="d1">一定要选一个词</data>
-  <data key="d2">[其他] 一定要选一个词</data>
-  <data key="d5">其他</data>
-  <data key="d6">那可能再没有比“震撼”这个词更适合的了</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:颐和园:其他:是当作北京游的一个附加">
   <data key="d0">条件</data>
   <data key="d1">是当作北京游的一个附加</data>
   <data key="d2">[其他] 是当作北京游的一个附加</data>
   <data key="d5">其他</data>
   <data key="d6">专程游玩就不值得推荐</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:二十来分钟">
-  <data key="d0">条件</data>
-  <data key="d1">二十来分钟</data>
-  <data key="d2">[其他] 二十来分钟</data>
-  <data key="d5">其他</data>
-  <data key="d6">那完全就是一次地道的市内游啊</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:颐和园:其他:想省时间">
@@ -4801,20 +3833,12 @@
   <data key="d6">第一次去北京是八十年代,是陪父亲去看病,虽说是忧愁,但内心的激动依然占据了上风</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:颐和园:其他:女儿要辞去北大博雅博后工作">
+<node id="条件:颐和园:时间:时间条件（句内）">
   <data key="d0">条件</data>
-  <data key="d1">女儿要辞去北大博雅博后工作</data>
-  <data key="d2">[其他] 女儿要辞去北大博雅博后工作</data>
-  <data key="d5">其他</data>
-  <data key="d6">去美国加州大学做博士后研究员,作为父母我们主要是陪陪女儿,送送女儿</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:陪陪女儿">
-  <data key="d0">条件</data>
-  <data key="d1">陪陪女儿</data>
-  <data key="d2">[其他] 陪陪女儿</data>
-  <data key="d5">其他</data>
-  <data key="d6">送送女儿</data>
+  <data key="d1">时间条件（句内）</data>
+  <data key="d2">[时间] 时间条件（句内）</data>
+  <data key="d5">时间</data>
+  <data key="d6">上初中时同学相邀一起骑车去了一次颐和园,当时正赶上中午用餐时分,大家一起到颐和园听鹂馆用餐,一人出一元钱,却吃了一顿难忘</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:颐和园:其他:从造景上看">
@@ -4825,60 +3849,12 @@
   <data key="d6">修建治镜阁是为了营造“一水三山”之仙境</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:颐和园:其他:因为这边比八达岭人少">
-  <data key="d0">条件</data>
-  <data key="d1">因为这边比八达岭人少</data>
-  <data key="d2">[其他] 因为这边比八达岭人少</data>
-  <data key="d5">其他</data>
-  <data key="d6">且风景好,我们是在携程上预定了包车,早上7点从酒店出发,到达大概是9点左右,万里长城,慕田峪独秀,红叶季赏秋时间点:9月底—10月中旬初红期</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:颐和园:其他:有阳光">
   <data key="d0">条件</data>
   <data key="d1">有阳光</data>
   <data key="d2">[其他] 有阳光</data>
   <data key="d5">其他</data>
   <data key="d6">每天都能看到,当然必须是下午,夕阳西下的时候</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:广东控制不好">
-  <data key="d0">条件</data>
-  <data key="d1">广东控制不好</data>
-  <data key="d2">[其他] 广东控制不好</data>
-  <data key="d5">其他</data>
-  <data key="d6">很有可能殃及池鱼,犹豫再三,上海宁还是保命要紧,忍痛放弃了福建之行</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:对出租车司机有任何不满意">
-  <data key="d0">条件</data>
-  <data key="d1">对出租车司机有任何不满意</data>
-  <data key="d2">[其他] 对出租车司机有任何不满意</data>
-  <data key="d5">其他</data>
-  <data key="d6">像是拒载啊、不经乘客同意拼车啊、绕路啊等等,都可以拨打咱的投诉电话,电话号码就贴在墙上,大家可以记一下!”于是大家齐刷刷地回头,果不其然,旁边的矮墙上很醒目地张贴了监督投诉电话</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:问避暑山庄到底避不避暑?有位游客阿姨">
-  <data key="d0">条件</data>
-  <data key="d1">问避暑山庄到底避不避暑?有位游客阿姨说得好:以前皇上来这里怕</data>
-  <data key="d2">[其他] 问避暑山庄到底避不避暑?有位游客阿姨说得好:以前</data>
-  <data key="d5">其他</data>
-  <data key="d6">而是来中暑的吧</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:因此要舍弃普宁寺和普陀宗乘之庙">
-  <data key="d0">条件</data>
-  <data key="d1">因此要舍弃普宁寺和普陀宗乘之庙</data>
-  <data key="d2">[其他] 因此要舍弃普宁寺和普陀宗乘之庙</data>
-  <data key="d5">其他</data>
-  <data key="d6">我买的四日套票不就浪费了么?而金山岭的门票和租车预订都是可退的,因此权衡再三,痛下决心,舍金山岭而就俩寺庙,把7月12日的行程提前到11日,金山岭就随缘吧</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:其他:一卡通地铁卡在手">
-  <data key="d0">条件</data>
-  <data key="d1">一卡通地铁卡在手</data>
-  <data key="d2">[其他] 一卡通地铁卡在手</data>
-  <data key="d5">其他</data>
-  <data key="d6">随便你走,是很方便的,所以建议每个去北京旅游的朋友先去买一张地铁卡,每个地铁站都有卖的,押金20块,退卡的时候返回押金</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:天气:天气好">
@@ -4889,12 +3865,12 @@
   <data key="d6">可以直接在这里就能看到云海)</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:其他:不坐网红小火车">
+<node id="条件:黄山:人群:游客为孩子">
   <data key="d0">条件</data>
-  <data key="d1">不坐网红小火车</data>
-  <data key="d2">[其他] 不坐网红小火车</data>
-  <data key="d5">其他</data>
-  <data key="d6">原路返回大概8km)</data>
+  <data key="d1">游客为孩子</data>
+  <data key="d2">[人群] 游客为孩子</data>
+  <data key="d5">人群</data>
+  <data key="d6">借位拍照不一定要爬到最上面)</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:其他:要爬天都峰的还是要从玉屏上">
@@ -4977,14 +3953,6 @@
   <data key="d6">或者是去后山看看,绕不开光明顶,还要再爬一次光明顶,而之前去一环二环</data>
   <data key="d7">1</data>
 </node>
-<node id="条件:黄山:其他:奔着看鱼灯的">
-  <data key="d0">条件</data>
-  <data key="d1">奔着看鱼灯的</data>
-  <data key="d2">[其他] 奔着看鱼灯的</data>
-  <data key="d5">其他</data>
-  <data key="d6">所以傍晚5点到也来得及,89的门票进去古村落外围转转</data>
-  <data key="d7">1</data>
-</node>
 <node id="条件:黄山:人群:游客为老人">
   <data key="d0">条件</data>
   <data key="d1">游客为老人</data>
@@ -5031,14 +3999,6 @@
   <data key="d2">[其他] 干饼干巧克力面包等</data>
   <data key="d5">其他</data>
   <data key="d6">另外准备了雨衣(提前看了天气说要下雨)、纸巾、充电宝,这些提前买好,会省很多,山脚底下能买但很贵且质量不咋地,山上就更别说了</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:黄山:其他:是普通人">
-  <data key="d0">条件</data>
-  <data key="d1">是普通人</data>
-  <data key="d2">[其他] 是普通人</data>
-  <data key="d5">其他</data>
-  <data key="d6">好久没运动那种</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:黄山:其他:出现有可能打乱早起或晚睡者的全盘计划">
@@ -5103,14 +4063,6 @@
   <data key="d2">[其他] 上车就睡觉</data>
   <data key="d5">其他</data>
   <data key="d6">建议坐左边,右边太阳直射</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:九寨沟:其他:订的酒店在某个站点附近">
-  <data key="d0">条件</data>
-  <data key="d1">订的酒店在某个站点附近</data>
-  <data key="d2">[其他] 订的酒店在某个站点附近</data>
-  <data key="d5">其他</data>
-  <data key="d6">需要自己注意</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:九寨沟:其他:要自行去左线或者是游览中线">
@@ -5329,6 +4281,14 @@
   <data key="d6">那就从树正群海这里开始走内侧</data>
   <data key="d7">1</data>
 </node>
+<node id="条件:颐和园:人群:游客为老人">
+  <data key="d0">条件</data>
+  <data key="d1">游客为老人</data>
+  <data key="d2">[人群] 游客为老人</data>
+  <data key="d5">人群</data>
+  <data key="d6">别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景</data>
+  <data key="d7">1</data>
+</node>
 <node id="条件:颐和园:其他:最后不想坐船">
   <data key="d0">条件</data>
   <data key="d1">最后不想坐船</data>
@@ -5343,14 +4303,6 @@
   <data key="d2">[人群] 游客为学生</data>
   <data key="d5">人群</data>
   <data key="d6">拜一下:来都来了,逢考必过</data>
-  <data key="d7">1</data>
-</node>
-<node id="条件:颐和园:人群:游客为体力好的还">
-  <data key="d0">条件</data>
-  <data key="d1">游客为体力好的还</data>
-  <data key="d2">[人群] 游客为体力好的还</data>
-  <data key="d5">人群</data>
-  <data key="d6">继续沿湖往南走~</data>
   <data key="d7">1</data>
 </node>
 <node id="条件:颐和园:其他:没买联票">
@@ -5609,15 +4561,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:选择住山上" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:住汤口镇" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:交通:自驾" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -5693,31 +4637,11 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:天气:天气条件（句内）" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:断若续" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:席地而坐的五位老翁" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:装备:轰雷;见瀑布水洒溅玉" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:包他的车可以到酒店来接" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:从迎仙桥汽车站下山后" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:再返回到山上" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -5769,10 +4693,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:时间:晚上不住普陀山" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:坐缆车" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -5785,31 +4705,15 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:您想送给文人墨客的朋友" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:交通:能坐动车就坐动车" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:交通:火车时间很长要坐飞机" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:交通:是普速到老火车站或者飞机到机场" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:交通:是动车到北站就方便多了" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:时间:时间紧张" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:是独自出行" id="条件建议">
+  <data key="d8">条件建议</data>
+  <data key="d9">1</data>
+</edge>
+<edge source="景区:黄山:黄山" target="条件:黄山:天气:天气条件（句内）" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -5837,14 +4741,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:时间:晚上住在屯溪" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:时间:在屯溪早上做大巴" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:假期" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -5862,10 +4758,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:人群:你是第一次去黄山" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:装备:没有人带着的话!自己安排车子的" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -5893,10 +4785,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:嫌背上山行礼太重" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:脚力不好就会苦了父母" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -5905,15 +4793,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:人群:游客为孩子" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:预约票务:输入身份证号人脸识别也是可以的" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:不跟酒店的免费车去" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -5922,18 +4802,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:不是长期运动爱好登山" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:把车停汤口" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:把车停耿城" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:322元一晚" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -5953,23 +4821,11 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:行程安排走回头路" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:到景点、宾馆的指示牌能再多一些" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:体力安全:体力和时间允许" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:只用一个字来形容黄山" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:没有酒店提供的羽绒衣" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -5982,14 +4838,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:时间:周末节假日车流量大" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:去北大门" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:不在这里住宿过夜" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6021,19 +4869,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:直接游览黄山之后" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:仅用手机拍摄黄山的美景" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:能闭着眼睛围着它逆时针顺时针分别转三" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:宾馆以为我们不去了" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6041,31 +4877,11 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:人群:是大学生出游" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:一放暑假" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:回去吃了个早餐" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:热" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:武夷山热" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:走600米就可以放到酒店里" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:后山上山" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6101,10 +4917,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:装备:没带帐篷也可以在宾馆附近租帐篷" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:坐索道" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -6117,10 +4929,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:交通:你是乘火车或者飞机来黄山" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:经济允许" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -6130,10 +4938,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:人群:游客为情侣" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:点菜" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6161,7 +4965,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:不坐网红小火车" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:人群:游客为孩子" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6181,10 +4985,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:奔着看鱼灯的" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:人群:游客为老人" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -6194,10 +4994,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:干饼干巧克力面包等" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:是普通人" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6465,18 +5261,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:想早一点到" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:尔盖 --芝麻古藏寨-- 九寨沟 ;" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:世界上有两个桃花源" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">2</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:装备:在外面游山玩水" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -6485,15 +5269,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:人群:是一个大家庭出行" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:生活有开关" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:人群:情侣、闺蜜出游" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6581,10 +5357,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:交通:我从 重庆 到成都 的动车" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:分量确实是很足" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -6593,29 +5365,9 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:下次来成都旅游" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">2</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:你全程坐车" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">2</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:装备:坐车进出的话要有所准备" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">2</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:正好堵在没餐馆的路段" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">2</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:交通:一定要坐飞机!了解到她的这个缘由" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:回来早了" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:不是非要看麻浩崖墓或乌尤寺" id="条件建议">
   <data key="d8">条件建议</data>
@@ -6685,27 +5437,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:人群:游客为孩子" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:第一站成都玩就建议飞双流)" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:不坐大巴" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:交通:包车的话会直接送到索道检票口)" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:不是跑跑跳跳" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:人群:没带小孩的" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6713,19 +5445,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:尔盖花湖景区依然要坐景交车" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:去县医院做核酸检测" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:时间:时间有限" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:尔盖花湖、扎尕那等地与新冠疫情插肩而" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6741,23 +5461,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:是一人出行去浦东机场的话这个价格偷笑" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:在兰州T2航站下机" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:各位只是游览观光" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:交通:是自驾或是徒步" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:不能在用餐时间赶到餐厅" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6782,10 +5486,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:细细品味" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:尔盖到松潘途经景观" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6825,10 +5525,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:住宿还想体验感好一些" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:环保车和徒步" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -6841,19 +5537,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:冷鲜牦牛肉的质量好(这个后来在郎木寺" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:只想走马观花的话干脆住到迭部" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:经》等" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:隆务寺" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6861,15 +5545,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:真的遇到需要应急处理的情况" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:扫健康码和行程码" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:坐3站地铁" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6882,18 +5558,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:吃完药也没有效果" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:15块一瓶" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:是不吃猪肉的少数民族" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:正常开大概1.5小时能到" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6913,15 +5577,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:看到有超市可以进去多逛逛" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:叫不到车" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:60元就可以了" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6945,27 +5601,11 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:日朗游客中心午餐比较贵" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">2</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:说黄山是天下山的极致" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:你有一颗麻辣的胃那么快来这里寻找中意" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:想睡懒觉也是可以的" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:时间:深秋季节的到来" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:装备:想带纪念品的就可以来这里逛逛" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6974,10 +5614,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:只有一次国内游的机会" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:交通:乘坐高铁自由行" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -6994,22 +5630,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:只买单程索道" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:你时间不充足" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:尔盖草原" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:尔盖草原前行" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:时间:尔盖是头一天已经预定好的若尔盖大藏阳" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7041,10 +5661,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:让他们动起手来" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:遭到破坏" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -7053,23 +5669,11 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:尔盖通往九寨沟的两条高速正在齐头并进" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:尔盖郎木寺的纳摩大峡谷" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:用心阅读、用眼记录就足够了" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:有机会、有冲动" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:用一句话来描述" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7086,18 +5690,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:要提高可谓举步维艰" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:坐公交车到肖坝车站在转车去成都" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:当地的一些特产和明天去九寨沟路上吃的" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:赶不上就只好等到明天" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7161,10 +5753,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:去成都" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:这种露天茶馆" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -7174,10 +5762,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:在我们现有团费的基本上再加300块一" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:再给我一次机会" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7197,10 +5781,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:怕外面民宿酒店不干净" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:时间:只去一天" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -7214,10 +5794,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:上车就睡觉" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:订的酒店在某个站点附近" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7509,19 +6085,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:时间:时间条件（句内）" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:说香山公园和颐和园的人声鼎沸代表现代" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:把这个伤疤不时揭一揭" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:干名园胜景" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7537,19 +6101,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:一般:一般建议（避雷）" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:人群:游客为孩子" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:在靠右这一侧" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:人群:游客为老人" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7573,27 +6125,11 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:可以" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:下次去北京" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:预约票务:刷身份证就能入园" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:进入南官房胡同" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:除去路边的汽车" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:时间:不是多处的花草树木在这春天竞相开放" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7605,31 +6141,15 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:装备:装备条件（句内）" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:没有滴滴软件和“美味不用等”软件" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:我们约略知道陈寅恪—就是当年被称为清" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:一般:一般建议（避雷）" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:能自行做到乐善、无求那就是佛呢" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:不可上…”" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:金汤" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:确定出行日期" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7641,31 +6161,11 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:计划爬完长城再去定陵" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:是有圆明园站点的" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:让老外说几个关于中国印象的关键词" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:你对圆明园没有印象" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:人群:是第一次来北京" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:装备:装备条件（句内）" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:昊天" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:两个人分立于东西配殿后的回音壁下" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7705,23 +6205,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:干年前" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:不到长城非好汉是一把尺度" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:一定要选一个词" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:是当作北京游的一个附加" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:二十来分钟" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7729,11 +6213,7 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:女儿要辞去北大博雅博后工作" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:陪陪女儿" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:时间:时间条件（句内）" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -7741,39 +6221,15 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:因为这边比八达岭人少" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:有阳光" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:广东控制不好" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:对出租车司机有任何不满意" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:问避暑山庄到底避不避暑?有位游客阿姨" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:因此要舍弃普宁寺和普陀宗乘之庙" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:一卡通地铁卡在手" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:人群:游客为老人" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:人群:游客为学生" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:人群:游客为体力好的还" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -8135,10 +6591,6 @@
   <data key="d8">先后顺序</data>
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
-</edge>
-<edge source="POI:颐和园:东门" target="条件:颐和园:人群:游客为孩子" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
 </edge>
 <edge source="POI:颐和园:东门" target="条件:颐和园:一般:一般建议" id="条件建议">
   <data key="d8">条件建议</data>
@@ -8697,10 +7149,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">4</data>
 </edge>
-<edge source="POI:九寨沟:五彩池" target="条件:九寨沟:交通:包车的话会直接送到索道检票口)" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="POI:九寨沟:五彩池" target="条件:九寨沟:一般:一般建议" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">4</data>
@@ -8865,10 +7313,6 @@
   <data key="d9">1</data>
 </edge>
 <edge source="POI:九寨沟:五花海" target="条件:九寨沟:其他:说九寨沟的海子是大自然的佳作" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">3</data>
-</edge>
-<edge source="POI:九寨沟:五花海" target="条件:九寨沟:其他:要说遗憾" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">3</data>
 </edge>
@@ -9350,10 +7794,6 @@
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:九寨沟:则查洼沟" target="条件:九寨沟:一般:一般建议" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="POI:九寨沟:则查洼沟" target="条件:九寨沟:其他:有可能先去则查洼沟" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -9508,7 +7948,7 @@
 </edge>
 <edge source="POI:颐和园:北宫门" target="条件:颐和园:一般:一般建议" id="条件建议">
   <data key="d8">条件建议</data>
-  <data key="d9">2</data>
+  <data key="d9">1</data>
 </edge>
 <edge source="POI:黄山:北海" target="POI:黄山:黑虎松" id="先后顺序">
   <data key="d8">先后顺序</data>
@@ -9601,10 +8041,6 @@
 <edge source="POI:黄山:北海" target="时段:黄山:未标注时段" id="时段归属">
   <data key="d8">时段归属</data>
   <data key="d9">6</data>
-</edge>
-<edge source="POI:黄山:北海" target="条件:黄山:一般:一般建议" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
 </edge>
 <edge source="POI:黄山:北海" target="条件:黄山:其他:一日游就必须放弃了北海景区、天海景区" id="条件建议">
   <data key="d8">条件建议</data>
@@ -10442,10 +8878,6 @@
   <data key="d8">交通方式</data>
   <data key="d9">3</data>
 </edge>
-<edge source="POI:九寨沟:天鹅海" target="条件:九寨沟:时间:时间条件（句内）" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="POI:九寨沟:天鹅海" target="条件:九寨沟:其他:时间充足" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -10612,14 +9044,6 @@
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:黄山:宏村" target="条件:黄山:一般:一般建议" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">2</data>
-</edge>
-<edge source="POI:黄山:宏村" target="条件:黄山:其他:是一日游不在古村里住宿" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="POI:颐和园:宜芸馆" target="POI:颐和园:乐寿堂" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">3.5</data>
@@ -10695,13 +9119,9 @@
   <data key="d8">交通方式</data>
   <data key="d9">1</data>
 </edge>
-<edge source="POI:黄山:屯溪老街" target="条件:黄山:交通:是自驾" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="POI:黄山:屯溪老街" target="条件:黄山:时间:时间条件（句内）" id="条件建议">
   <data key="d8">条件建议</data>
-  <data key="d9">3</data>
+  <data key="d9">1</data>
 </edge>
 <edge source="POI:九寨沟:川主寺" target="POI:九寨沟:芦苇海" id="先后顺序">
   <data key="d8">先后顺序</data>
@@ -10741,10 +9161,6 @@
 <edge source="POI:九寨沟:川主寺" target="条件:九寨沟:人群:游客为情侣" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">3</data>
-</edge>
-<edge source="POI:九寨沟:川主寺" target="条件:九寨沟:其他:尔盖花湖、九曲黄河第一湾以及川主寺等" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
 </edge>
 <edge source="POI:颐和园:廓如亭" target="POI:颐和园:耕织图" id="先后顺序">
   <data key="d8">先后顺序</data>
@@ -11009,7 +9425,7 @@
 </edge>
 <edge source="POI:黄山:排云亭" target="条件:黄山:一般:一般建议" id="条件建议">
   <data key="d8">条件建议</data>
-  <data key="d9">2</data>
+  <data key="d9">1</data>
 </edge>
 <edge source="POI:黄山:排云亭" target="条件:黄山:其他:是前山上来从天海坐地轨缆车下西海大峡" id="条件建议">
   <data key="d8">条件建议</data>
@@ -11346,11 +9762,11 @@
 </edge>
 <edge source="POI:九寨沟:日则沟" target="条件:九寨沟:时间:时间条件（句内）" id="条件建议">
   <data key="d8">条件建议</data>
-  <data key="d9">5</data>
+  <data key="d9">4</data>
 </edge>
 <edge source="POI:九寨沟:日则沟" target="条件:九寨沟:一般:一般建议" id="条件建议">
   <data key="d8">条件建议</data>
-  <data key="d9">4</data>
+  <data key="d9">3</data>
 </edge>
 <edge source="POI:颐和园:昆明湖" target="POI:颐和园:知春亭" id="先后顺序">
   <data key="d8">先后顺序</data>
@@ -13397,10 +11813,6 @@
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:九寨沟:甘海子" target="条件:九寨沟:交通:你自驾来九寨沟" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="POI:颐和园:画中游" target="POI:颐和园:佛香阁" id="先后顺序">
   <data key="d8">先后顺序</data>
   <data key="d10">2.5</data>
@@ -13897,10 +12309,6 @@
 </edge>
 <edge source="POI:九寨沟:神仙池" target="时段:九寨沟:未标注时段" id="时段归属">
   <data key="d8">时段归属</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="POI:九寨沟:神仙池" target="条件:九寨沟:其他:您时间充足" id="条件建议">
-  <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
 <edge source="POI:黄山:竖琴松" target="POI:黄山:连理松" id="先后顺序">
@@ -14426,10 +12834,6 @@
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
-<edge source="POI:九寨沟:芳草海" target="条件:九寨沟:时间:时间条件（句内）" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
 <edge source="POI:九寨沟:芳草海" target="条件:九寨沟:其他:时间充足" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
@@ -14488,10 +12892,6 @@
 <edge source="POI:颐和园:苏州街" target="时段:颐和园:未标注时段" id="时段归属">
   <data key="d8">时段归属</data>
   <data key="d9">2</data>
-</edge>
-<edge source="POI:颐和园:苏州街" target="条件:颐和园:一般:一般建议" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
 </edge>
 <edge source="POI:颐和园:苏州街" target="条件:颐和园:其他:有阳光" id="条件建议">
   <data key="d8">条件建议</data>
@@ -14975,13 +13375,13 @@
   <data key="d8">交通方式</data>
   <data key="d9">4</data>
 </edge>
-<edge source="POI:黄山:西海大峡谷" target="条件:黄山:一般:一般建议" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">3</data>
-</edge>
 <edge source="POI:黄山:西海大峡谷" target="条件:黄山:时间:时间条件（句内）" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
+</edge>
+<edge source="POI:黄山:西海大峡谷" target="条件:黄山:一般:一般建议" id="条件建议">
+  <data key="d8">条件建议</data>
+  <data key="d9">2</data>
 </edge>
 <edge source="POI:黄山:西海大峡谷" target="条件:黄山:其他:是前山上来从天海坐地轨缆车下西海大峡" id="条件建议">
   <data key="d8">条件建议</data>
@@ -15038,10 +13438,6 @@
 <edge source="POI:颐和园:西门" target="时段:颐和园:未标注时段" id="时段归属">
   <data key="d8">时段归属</data>
   <data key="d9">6</data>
-</edge>
-<edge source="POI:颐和园:西门" target="条件:颐和园:人群:游客为孩子" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
 </edge>
 <edge source="POI:九寨沟:诺日朗" target="POI:九寨沟:长海" id="先后顺序">
   <data key="d8">先后顺序</data>
@@ -15171,11 +13567,11 @@
   <data key="d8">时段归属</data>
   <data key="d9">7</data>
 </edge>
-<edge source="POI:九寨沟:诺日朗" target="条件:九寨沟:时间:时间条件（句内）" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">2</data>
-</edge>
 <edge source="POI:九寨沟:诺日朗" target="条件:九寨沟:其他:坐错了方向可以不下车" id="条件建议">
+  <data key="d8">条件建议</data>
+  <data key="d9">1</data>
+</edge>
+<edge source="POI:九寨沟:诺日朗" target="条件:九寨沟:时间:时间条件（句内）" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
@@ -16177,7 +14573,7 @@
 </edge>
 <edge source="POI:九寨沟:长海" target="条件:九寨沟:一般:一般建议" id="条件建议">
   <data key="d8">条件建议</data>
-  <data key="d9">4</data>
+  <data key="d9">3</data>
 </edge>
 <edge source="POI:九寨沟:长海" target="条件:九寨沟:时间:时间条件（句内）" id="条件建议">
   <data key="d8">条件建议</data>
@@ -16406,7 +14802,7 @@
 </edge>
 <edge source="POI:黄山:飞来石" target="条件:黄山:一般:一般建议" id="条件建议">
   <data key="d8">条件建议</data>
-  <data key="d9">2</data>
+  <data key="d9">1</data>
 </edge>
 <edge source="POI:黄山:飞来石" target="条件:黄山:体力安全:想节省体力" id="条件建议">
   <data key="d8">条件建议</data>
@@ -16596,25 +14992,13 @@
   <data key="d10">0.5</data>
   <data key="d11">游客序列</data>
 </edge>
-<edge source="POI:九寨沟:黄龙" target="条件:九寨沟:时间:时间条件（句内）" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">3</data>
-</edge>
 <edge source="POI:九寨沟:黄龙" target="条件:九寨沟:其他:尔盖" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">1</data>
-</edge>
-<edge source="POI:九寨沟:黄龙" target="条件:九寨沟:其他:尔盖向东南约160公里到达阿坝州松潘" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>
 <edge source="POI:九寨沟:黄龙" target="条件:九寨沟:装备:枯水如黄龙" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
-</edge>
-<edge source="POI:九寨沟:黄龙" target="条件:九寨沟:一般:一般建议" id="条件建议">
-  <data key="d8">条件建议</data>
-  <data key="d9">2</data>
 </edge>
 <edge source="POI:九寨沟:黄龙" target="条件:九寨沟:其他:刚刚是黄龙静的姿态" id="条件建议">
   <data key="d8">条件建议</data>
@@ -16625,6 +15009,10 @@
   <data key="d9">1</data>
 </edge>
 <edge source="POI:九寨沟:黄龙" target="条件:九寨沟:时间:一天就看完" id="条件建议">
+  <data key="d8">条件建议</data>
+  <data key="d9">1</data>
+</edge>
+<edge source="POI:九寨沟:黄龙" target="条件:九寨沟:一般:一般建议" id="条件建议">
   <data key="d8">条件建议</data>
   <data key="d9">1</data>
 </edge>

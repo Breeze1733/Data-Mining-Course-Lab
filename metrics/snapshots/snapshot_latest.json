@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-30 01:09",
-  "git": "0006b82",
-  "label": "基线（优化启动前）",
-  "dirty_files": 1
+  "time": "2026-10-30 02:00",
+  "git": "8d812c1",
+  "label": "U6: P1归属过滤默认接入task4/5后",
+  "dirty_files": 23
  },
  "metrics": {
   "dataset.count": 271,
@@ -27,13 +27,13 @@
   "routes.tourist_total": 228,
   "coref.n": 120,
   "coref.accuracy": 0.425,
-  "cond.pairs": 1210,
+  "cond.pairs": 867,
   "cond.review_n": 49,
   "cond.correct": 20,
   "cond.boundary": 16,
   "cond.wrong": 13,
-  "graph.nodes": 702,
-  "graph.edges": 2545,
+  "graph.nodes": 571,
+  "graph.edges": 2404,
   "graph.fact_checks_passed": 6,
   "graph.fact_checks_total": 6,
   "graph.name_alignment_passed": true,

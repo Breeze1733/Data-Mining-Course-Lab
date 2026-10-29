@@ -53,12 +53,27 @@ def split_sentences(text: str) -> list[tuple[int, int, str]]:
     return [(s, e, t) for s, e, t in sents if t.strip()]
 
 
-def main() -> int:
+def main(argv=None) -> int:
+    import argparse
     import jieba  # noqa: F401  （词典加载依赖 jieba 初始化）
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--no-attribution-filter", action="store_true",
+                    help="关闭 P1 句级归属过滤（默认开启：景区外句中的实体不作消解候选）")
+    args = ap.parse_args(argv)
 
     sys.path.insert(0, str(TASK2 / "src"))
     from extract_entities import DictMatcher, load_dictionary
     from entity_rules import contextual_facility_places
+
+    import bisect
+    attr_spans: dict[str, tuple[list[int], list[str]]] = {}
+    if not args.no_attribution_filter:
+        for line in (TASK2 / "output/exp2/attributed_sentences.jsonl").open(encoding="utf-8"):
+            rec = json.loads(line)
+            starts = [x["start"] for x in rec["labels"]]
+            labels = [x["label"] for x in rec["labels"]]
+            attr_spans[rec["record_id"]] = (starts, labels)
 
     entries, stopwords, _ = load_dictionary("refined")
     matcher = DictMatcher(entries, stopwords)
@@ -103,11 +118,25 @@ def main() -> int:
                     # 候选打分：同句在前 > 前句 > 前两句；POI 优先于交通；距离近优先
                     cands = []
 
+                    def sent_label(offset):
+                        if not attr_filter_on:
+                            return None
+                        starts, labels = attr_spans.get(row["record_id"], ([], []))
+                        i = bisect.bisect_right(starts, offset) - 1
+                        return labels[i] if i >= 0 else None
+
+                    attr_filter_on = bool(attr_spans)
                     def add_pool(pool, scope, is_prev):
                         before = [e for e in pool if e["end"] <= doc_start]
                         if is_prev:
                             before = pool  # 前句实体全部视为“在前”
-                        for e in reversed(before[-6:]):
+                        kept = 0
+                        for e in reversed(before):
+                            if attr_filter_on and sent_label(e["start"]) == "景区外":
+                                continue  # P1 归属过滤：景区外句中的实体不作消解候选
+                            kept += 1
+                            if kept > 6:
+                                break
                             cands.append({
                                 "kind": "POI" if e["type"] == "景点POI" else "交通",
                                 "name": e["canonical"], "scope": scope,

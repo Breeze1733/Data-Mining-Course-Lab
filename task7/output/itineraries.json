@@ -53,7 +53,13 @@
    {
     "cond_type": "人群",
     "condition": "游客为老人",
-    "suggestion": "带着老人和小孩",
+    "suggestion": "别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景",
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "装备条件（句内）",
+    "suggestion": "慎重考虑",
     "frequency": 1
    }
   ],
@@ -133,12 +139,6 @@
   ],
   "tips": [
    {
-    "cond_type": "人群",
-    "condition": "没带小孩的",
-    "suggestion": "共享单车会更方便",
-    "frequency": 1
-   },
-   {
     "cond_type": "装备",
     "condition": "真的没有准备",
     "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
@@ -148,6 +148,18 @@
     "cond_type": "装备",
     "condition": "装备条件（句内）",
     "suggestion": "避免污染环境,还是文明入厕的好",
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "为了加水和休息",
+    "suggestion": "就算再老练的司机,走这条路,都需格外小心",
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "枯水如黄龙",
+    "suggestion": "确实可以略过",
     "frequency": 1
    }
   ],
@@ -272,8 +284,8 @@
    },
    {
     "cond_type": "装备",
-    "condition": "没有人带着的话!自己安排车子的",
-    "suggestion": "肯定会被黑的,有的时候提前讲好价钱到景区了还会多要钱的,要注意!我住的酒店是可以在一个极其优惠的价格内叫到车,所以就让前台小姐姐去帮忙联系",
+    "condition": "装备条件（句内）",
+    "suggestion": "避免低血糖",
     "frequency": 1
    }
   ],
@@ -330,14 +342,8 @@
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "游客为老人",
-    "suggestion": "带着老人和小孩",
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "是第一次来北京",
-    "suggestion": "而且时间有限,只能去玩一个景点",
+    "condition": "游客为孩子",
+    "suggestion": "儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途中经过的14号至19号敌楼路段较为平坦,便于行走",
     "frequency": 1
    },
    {
@@ -348,14 +354,26 @@
    },
    {
     "cond_type": "人群",
+    "condition": "游客为老人",
+    "suggestion": "别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
     "condition": "游客为学生",
     "suggestion": "拜一下:来都来了,逢考必过",
     "frequency": 1
    },
    {
     "cond_type": "人群",
-    "condition": "游客为体力好的还",
-    "suggestion": "继续沿湖往南走~",
+    "condition": "游客为体力差的朋友",
+    "suggestion": "不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "体力一般或者不想走太多",
+    "suggestion": "中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较完整的湖景视角",
     "frequency": 1
    }
   ],
@@ -426,12 +444,6 @@
    },
    {
     "cond_type": "人群",
-    "condition": "游客为孩子",
-    "suggestion": "溜娃,湖景房380一晚含双早,性价比超高",
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
     "condition": "游客为体力好的话",
     "suggestion": "从云谷寺索道走后山—前山的经典线路",
     "frequency": 1
@@ -444,8 +456,14 @@
    },
    {
     "cond_type": "人群",
-    "condition": "是大学生出游",
-    "suggestion": "更实惠的是青年客栈),写下这篇游记,也给喜欢自由行的旅友们一点借鉴",
+    "condition": "游客为学生",
+    "suggestion": "是全日制大学的学生证",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为体力有限",
+    "suggestion": "步行上山,体力不好的也可在此处乘缆车上山,直达迎客松即玉屏楼)",
     "frequency": 1
    }
   ],

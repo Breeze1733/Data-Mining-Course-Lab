@@ -34,38 +34,6 @@
   "frequency": 2
  },
  {
-  "record_id": "JZG-EXP01",
-  "scenic_area": "九寨沟",
-  "source_platform": "官方",
-  "text_type": "official_route",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "您走进景区外的藏家乐,您能品尝到具有藏羌特色的地道饮食餐品:烤全羊,青稞酒,酥油茶,奶茶,手抓肉,羊排,牦牛肉等,前半场",
-  "condition_type": "时间",
-  "sentence": "第一天的游览时间很宽松,不会感到很疲惫,因此可以体验到丰富的娱乐活动,这里推荐您走进景区外的藏家乐,您能品尝到具有藏羌特色的地道饮食餐品:烤全羊,青稞酒,酥油茶,奶茶,手抓肉,羊排,牦牛肉等,前半场在藏家室内吃喝看表演,后半场在室外跳篝火锅庄,过程趣味十足",
-  "sources": [
-   "JZG-EXP01"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "JZG-EXP01",
-  "scenic_area": "九寨沟",
-  "source_platform": "官方",
-  "text_type": "official_route",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "您时间充足",
-  "suggestion_text": "那么三天的时间您可以把九寨沟县城、九寨沟神仙池景区一并游览完",
-  "condition_type": "其他",
-  "sentence": "如果您时间充足,那么三天的时间您可以把九寨沟县城、九寨沟神仙池景区一并游览完",
-  "sources": [
-   "JZG-EXP01"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "JZG-EXP05",
   "scenic_area": "九寨沟",
   "source_platform": "官方",
@@ -312,38 +280,6 @@
   "text_type": "official_route",
   "pattern": "P1_显式条件",
   "trigger": "如果",
-  "condition_text": "是自驾",
-  "suggestion_text": "到达黄山市区后,可先去逛逛屯溪老街,再到汤口镇,可选择住汤口镇也可住山上",
-  "condition_type": "交通",
-  "sentence": "第一天:如果是自驾,到达黄山市区后,可先去逛逛屯溪老街,再到汤口镇,可选择住汤口镇也可住山上",
-  "sources": [
-   "HS-EXTRA2"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "HS-EXTRA2",
-  "scenic_area": "黄山",
-  "source_platform": "官方",
-  "text_type": "official_route",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "选择住山上",
-  "suggestion_text": "需要提前预定,因为山上住宿有限",
-  "condition_type": "其他",
-  "sentence": "如果选择住山上,需要提前预定,因为山上住宿有限",
-  "sources": [
-   "HS-EXTRA2"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "HS-EXTRA2",
-  "scenic_area": "黄山",
-  "source_platform": "官方",
-  "text_type": "official_route",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
   "condition_text": "住汤口镇",
   "suggestion_text": "早上先到景区入口,再坐缆车上山,大概十几分钟",
   "condition_type": "其他",
@@ -364,22 +300,6 @@
   "suggestion_text": "带多一件外套,注意保暖",
   "condition_type": "一般",
   "sentence": "备注:山上温差大,建议带多一件外套,注意保暖",
-  "sources": [
-   "HS-EXTRA2"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "HS-EXTRA2",
-  "scenic_area": "黄山",
-  "source_platform": "官方",
-  "text_type": "official_route",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "自驾",
-  "suggestion_text": "可以从黄山到太平湖,约一小时",
-  "condition_type": "交通",
-  "sentence": "如果自驾,可以从黄山到太平湖,约一小时",
   "sources": [
    "HS-EXTRA2"
   ],
@@ -412,38 +332,6 @@
   "suggestion_text": "应该说每年都会出去,每年都会有新的游记面世,好在第一个目标“三山五岳”实现了之后,百度旅游这一产品退出来历史舞台,于是把之前的游记全部搬运到携程游记里",
   "condition_type": "其他",
   "sentence": "百度旅游里的游记曾经给于我无限遐想和力量,同时也激发了创作和记录旅游的点点滴滴,于是2013年起便在百度旅游里发表年度游记,如果没有2019年起持续几近三年的疫情,应该说每年都会出去,每年都会有新的游记面世,好在第一个目标“三山五岳”实现了之后,百度旅游这一产品退出来历史舞台,于是把之前的游记全部搬",
-  "sources": [
-   "CTRIP_4178417"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4178417",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "有篇文章写香山红叶的",
-  "condition_type": "时间",
-  "sentence": "香山红叶曾经也是心心念念的一片朝圣之地,不仅因为在读小学的时候就记得有篇文章写香山红叶的,记得2018年秋徒步黄山下来去宏村的时候就被宏村背后雷岗山下塔川秋色惊艳到",
-  "sources": [
-   "CTRIP_4178417"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4178417",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "记得2018年秋徒步黄山下来去宏村的时候就被宏村背后雷岗山下塔川秋色惊艳到",
-  "condition_type": "时间",
-  "sentence": "香山红叶曾经也是心心念念的一片朝圣之地,不仅因为在读小学的时候就记得有篇文章写香山红叶的,记得2018年秋徒步黄山下来去宏村的时候就被宏村背后雷岗山下塔川秋色惊艳到",
   "sources": [
    "CTRIP_4178417"
   ],
@@ -504,42 +392,10 @@
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果…的话",
-  "condition_text": "说香山公园和颐和园的人声鼎沸代表现代人的富庶自由和对生活大自然的热爱",
-  "suggestion_text": "那么进入圆明园的心境便完全不同对我来说",
-  "condition_type": "其他",
-  "sentence": "被誉为万园之园的圆明园最早接触的时候是在历史课本里,因为清政府的腐败无能加之英法联军的野蛮粗暴坚船利炮,举世闻名的圆明园就此沉寂在历史的长河里,而大水法那扇残缺的石劵门便也牢牢印记在心里了!如果说香山公园和颐和园的人声鼎沸代表现代人的富庶自由和对生活大自然的热爱的话,那么进入圆明园的心境便完全不同对",
-  "sources": [
-   "CTRIP_4178417"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4178417",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果…的话",
   "condition_text": "把这个伤疤不时揭一揭",
   "suggestion_text": "也许是对历史的最好纪念",
   "condition_type": "其他",
   "sentence": "那是对历史的一段惨痛回忆,俗话说好了伤疤忘了疼,如果把这个伤疤不时揭一揭的话,也许是对历史的最好纪念",
-  "sources": [
-   "CTRIP_4178417"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4178417",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "干名园胜景",
-  "suggestion_text": "还移植了西方园林建筑,集当时古今中外造园艺术之大成",
-  "condition_type": "其他",
-  "sentence": "圆明园不仅汇集了江南若干名园胜景,还移植了西方园林建筑,集当时古今中外造园艺术之大成",
   "sources": [
    "CTRIP_4178417"
   ],
@@ -615,54 +471,6 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "然后返回到七楼缆车下,往右边走去南坡,路经商业步行街用午餐,午餐后爬南坡,看好高铁时间",
-  "condition_type": "一般",
-  "sentence": "先乘北线空中索道到北七楼,再爬一层楼到八楼“好汉坡” 约15分钟,此处风景最好,然后返回到七楼缆车下,往右边走去南坡,路经商业步行街用午餐,午餐后爬南坡,看好高铁时间,提前13分钟就不让进站,南坡大门起码提前30分钟走去高铁站,量力而爬",
-  "sources": [
-   "CTRIP_4178108"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4178108",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "提前13分钟就不让进站,南坡大",
-  "condition_type": "一般",
-  "sentence": "先乘北线空中索道到北七楼,再爬一层楼到八楼“好汉坡” 约15分钟,此处风景最好,然后返回到七楼缆车下,往右边走去南坡,路经商业步行街用午餐,午餐后爬南坡,看好高铁时间,提前13分钟就不让进站,南坡大门起码提前30分钟走去高铁站,量力而爬",
-  "sources": [
-   "CTRIP_4178108"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4178108",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "不要买联票",
-  "condition_type": "一般",
-  "sentence": "8点起床,吃早餐,9点骑行1.2公里到东长安街口,随人流(天安门对面道路走到国家博物馆,不能从天安门前面道路走),B1和3喽可看,后乘1号线2站转4号线到西苑站,出站先吃午餐,颐和园附近没有吃饭的地方,景点里吃的很少,贵而不好吃,骑车到颐和园的新建宫门(从新建宫门进一路向北),不要买联票",
-  "sources": [
-   "CTRIP_4178108"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4178108",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
   "suggestion_text": "带润唇膏",
@@ -680,106 +488,10 @@
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "推荐",
-  "condition_text": "游客为孩子",
-  "suggestion_text": "出天安门东地铁口后,走北京工人文化宫西门进去,东门出来就是故宫午门了",
-  "condition_type": "人群",
-  "sentence": "故宫人很多,推荐出天安门东地铁口后,走北京工人文化宫西门进去,东门出来就是故宫午门了,可以免去天安门的拍长队安检,文化宫的门票是2元,儿童1元,故宫是下午5点停止营业,4:30就开始通知了,因为栏杆隔着,建筑内部看不到太多东西",
-  "sources": [
-   "CTRIP_4144300"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4144300",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "游客为孩子",
-  "suggestion_text": "可以免去天安门的拍长队安检,文化宫的门票是2元,儿",
-  "condition_type": "人群",
-  "sentence": "故宫人很多,推荐出天安门东地铁口后,走北京工人文化宫西门进去,东门出来就是故宫午门了,可以免去天安门的拍长队安检,文化宫的门票是2元,儿童1元,故宫是下午5点停止营业,4:30就开始通知了,因为栏杆隔着,建筑内部看不到太多东西",
-  "sources": [
-   "CTRIP_4144300"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4144300",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "在靠右这一侧",
-  "suggestion_text": "故宫闭馆时间是17:00,钟表馆和珍宝馆是15:30,浏览整个故宫时间大概在4个小时左右,所以请自行控制时间,一般来说是足够的,钟表馆有时候需要排队",
-  "condition_type": "其他",
-  "sentence": "故宫的参观主要是在靠右这一侧,故宫闭馆时间是17:00,钟表馆和珍宝馆是15:30,浏览整个故宫时间大概在4个小时左右,所以请自行控制时间,一般来说是足够的,钟表馆有时候需要排队,可以适当的调整路线,就在珍宝馆的旁边",
-  "sources": [
-   "CTRIP_4144300"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4144300",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "在靠右这一侧",
-  "suggestion_text": "可以适当的调整路线,就在珍宝馆的旁边",
-  "condition_type": "其他",
-  "sentence": "故宫的参观主要是在靠右这一侧,故宫闭馆时间是17:00,钟表馆和珍宝馆是15:30,浏览整个故宫时间大概在4个小时左右,所以请自行控制时间,一般来说是足够的,钟表馆有时候需要排队,可以适当的调整路线,就在珍宝馆的旁边",
-  "sources": [
-   "CTRIP_4144300"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4144300",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
   "condition_text": "一般建议",
   "suggestion_text": "两个游览路线:",
   "condition_type": "一般",
   "sentence": "颐和园推荐两个游览路线:",
-  "sources": [
-   "CTRIP_4144300"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4144300",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "到校园后扫共享单车游玩,因为校园太大了,未名湖和博雅塔等北大标志都在校园北侧,晚上在家园餐厅4楼吃的火锅,性价比很高,强",
-  "condition_type": "时间",
-  "sentence": "下午北大,游玩的话建议到校园后扫共享单车游玩,因为校园太大了,未名湖和博雅塔等北大标志都在校园北侧,晚上在家园餐厅4楼吃的火锅,性价比很高,强烈建议到北大的再校园用餐,不过一楼刷卡的不对外开放",
-  "sources": [
-   "CTRIP_4144300"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4144300",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "游客为老人",
-  "suggestion_text": "带着老人和小孩",
-  "condition_type": "人群",
-  "sentence": "慕田峪长城的西线游被视为游览慕田峪长城的最佳方案,尤其适合带着老人和小孩",
   "sources": [
    "CTRIP_4144300"
   ],
@@ -854,22 +566,6 @@
   "scenic_area": "颐和园",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "的美食去处,于是想探个究竟的,我们早上打车便去了",
-  "condition_type": "时间",
-  "sentence": "在网上查找北京旅游攻略,牛街是推荐的美食去处,于是想探个究竟的,我们早上打车便去了",
-  "sources": [
-   "CTRIP_4100843"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4100843",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
   "condition_text": "说颐和园与恭亲王府是文化古迹与古典园林的展现",
@@ -878,102 +574,6 @@
   "sentence": "如果说颐和园与恭亲王府是文化古迹与古典园林的展现,天坛公园给我最大的感触对天地的敬畏,对自然的敬畏,即便是科技发达的现在",
   "sources": [
    "CTRIP_4100843"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4156664",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "备好手套,否则手会冻僵),到最高的8号敌楼后,拍照打开后,从边上另外一条路返回到缆车,检票做返回缆车下,原路回到八达岭高",
-  "condition_type": "一般",
-  "sentence": "(提醒:部分路段较为陡峭,需要抓住扶杆往上走,建议备好手套,否则手会冻僵),到最高的8号敌楼后,拍照打开后,从边上另外一条路返回到缆车,检票做返回缆车下,原路回到八达岭高铁站,做10:09高铁10:29到达清河站,做地铁8号线到金鱼胡同站下车,步行到故宫(东华门)",
-  "sources": [
-   "CTRIP_4156664"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4156664",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "时间有限的",
-  "condition_type": "时间",
-  "sentence": "(提醒:钟表馆和珍宝馆是故宫存放国宝的地方,需要另外提前预约门票,没有提前预约的无法进入,而且下午16:00要清场,所以建议时间有限的,可以提前预约好钟表馆和珍宝馆的门票,提前结束讲解,自行前往参观)",
-  "sources": [
-   "CTRIP_4156664"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4156664",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "可以提前预约好钟表馆和珍宝馆的门票,提前结束讲解,自行前往参观)",
-  "condition_type": "时间",
-  "sentence": "(提醒:钟表馆和珍宝馆是故宫存放国宝的地方,需要另外提前预约门票,没有提前预约的无法进入,而且下午16:00要清场,所以建议时间有限的,可以提前预约好钟表馆和珍宝馆的门票,提前结束讲解,自行前往参观)",
-  "sources": [
-   "CTRIP_4156664"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4156664",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "四季民福烤鸭,如排队太长",
-  "condition_type": "时间",
-  "sentence": "晚上:故宫结束后,坐地铁回到酒店,步行前往大栅栏,品尝烤鸭(推荐四季民福烤鸭,如排队太长,建议选择其他烤鸭店品尝),吃完逛逛大栅栏商业街(包括:瑞福祥、同仁堂、吴裕泰等百年老店都在这条街上,是北京最繁华的一条街道)",
-  "sources": [
-   "CTRIP_4156664"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4156664",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "建议选择其他烤鸭店品尝),吃完逛逛大栅栏商业街(包括:瑞福祥、同仁堂、吴裕泰等百年老店都在这条",
-  "condition_type": "时间",
-  "sentence": "晚上:故宫结束后,坐地铁回到酒店,步行前往大栅栏,品尝烤鸭(推荐四季民福烤鸭,如排队太长,建议选择其他烤鸭店品尝),吃完逛逛大栅栏商业街(包括:瑞福祥、同仁堂、吴裕泰等百年老店都在这条街上,是北京最繁华的一条街道)",
-  "sources": [
-   "CTRIP_4156664"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4156664",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "不要排错了",
-  "condition_type": "时间",
-  "sentence": "下午:出天安门东地铁站后,看到一边去国博,一边去天安门广场,找到去国博的队伍,开始排队过第一道安检,不要排错了",
-  "sources": [
-   "CTRIP_4156664"
   ],
   "frequency": 1
  },
@@ -1022,22 +622,6 @@
   "sentence": "1. 官方App实时查看排队时长,变形金刚&哈利波特建议早/晚错峰玩",
   "sources": [
    "CTRIP_4156664"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1289220",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "店铺:中友百货、西单商场、君太百货等",
-  "condition_type": "一般",
-  "sentence": "西单商业圈地址:起点缸瓦市,终点西单路口交通:乘22、37、47、105、109、826路,或地铁1号线西单站下推荐店铺:中友百货、西单商场、君太百货等",
-  "sources": [
-   "CTRIP_1289220"
   ],
   "frequency": 1
  },
@@ -1138,182 +722,6 @@
   "frequency": 1
  },
  {
-  "record_id": "CTRIP_4024149",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "可以",
-  "suggestion_text": "尽量避免雨季旅游",
-  "condition_type": "其他",
-  "sentence": "有点小遗憾,但为数不多:一是雨季出行,限制较多,没去长城,如果可以,尽量避免雨季旅游",
-  "sources": [
-   "CTRIP_4024149"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4024149",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "下次去北京",
-  "suggestion_text": "最多换一次就好了",
-  "condition_type": "其他",
-  "sentence": "二是换了三四家酒店,有点费事;如果下次去北京,最多换一次就好了",
-  "sources": [
-   "CTRIP_4024149"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4011856",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "我们的观念,出去玩就是享受的,不是去遭罪的,住的吃的必须要好!!!",
-  "condition_type": "时间",
-  "sentence": "本次出游,由于时间过紧,故宫·军博和北海公园没有去,这给了再去北京充分的理由,这一次痛风伴随了我一路,虽然后面两天吃药后明显减轻,但以后一定会注意的,住宿以后还是要选桔子水晶吧,比较适合我们的观念,出去玩就是享受的,不是去遭罪的,住的吃的必须要好!!!",
-  "sources": [
-   "CTRIP_4011856"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3889684",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "尽量",
-  "condition_text": "一般建议",
-  "suggestion_text": "选在北京西站附近的酒店,经济连锁房间都不大,床也小,高端的价格又贵,后来选了寿州大饭店,一是离西站近,走20分钟就到了",
-  "condition_type": "一般",
-  "sentence": "我们尽量选在北京西站附近的酒店,经济连锁房间都不大,床也小,高端的价格又贵,后来选了寿州大饭店,一是离西站近,走20分钟就到了,二是双床都有1.3米的,三是价格合适,389/晚,四是无条件退,五是离公交站近,订的时候对酒店环境不抱很高期望,去到时觉得非常满意,连洗发水沐浴露都是力士的,可以放心使用,",
-  "sources": [
-   "CTRIP_3889684"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3889684",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "喝的豆浆,必须尝尝",
-  "condition_type": "时间",
-  "sentence": "晚上5点多冲完浪我们就原路返回了,在酒店附近搜到一家庆丰包子铺,吃了我们在北京的第一顿饭,包子感觉吃一个就腻,炸酱面也觉得一般般,豆浆是我喝过最好喝的豆浆,必须尝尝",
-  "sources": [
-   "CTRIP_3889684"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3889684",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "不要排了,当天的票没了,啊~~~~~,旁边有人说在携程还能买到票",
-  "condition_type": "一般",
-  "sentence": "在西站公交总站坐车到德胜门再转877去长城,以为很快就可以上车,谁知公交队排了几百米远,那也只能排罗,正排队时听到治安员说没有买票的不要排了,当天的票没了,啊~~~~~,旁边有人说在携程还能买到票,就即刻上携程买票,前面成功买到3张了,谁知后面就黑了,当天的票全售馨,65000张都没了,没办法,当天",
-  "sources": [
-   "CTRIP_3889684"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3889684",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "就即刻上携程买票,前面成功买到3张了",
-  "condition_type": "一般",
-  "sentence": "在西站公交总站坐车到德胜门再转877去长城,以为很快就可以上车,谁知公交队排了几百米远,那也只能排罗,正排队时听到治安员说没有买票的不要排了,当天的票没了,啊~~~~~,旁边有人说在携程还能买到票,就即刻上携程买票,前面成功买到3张了,谁知后面就黑了,当天的票全售馨,65000张都没了,没办法,当天",
-  "sources": [
-   "CTRIP_3889684"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3889684",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "的安排,当夕阳西下,我们居然看到了金色的鸟巢,因为下过雨,还出现一条绚丽的彩虹,与金色鸟巢交相辉映,这时候,什么都是值的",
-  "condition_type": "一般",
-  "sentence": "一切都是最好的安排,当夕阳西下,我们居然看到了金色的鸟巢,因为下过雨,还出现一条绚丽的彩虹,与金色鸟巢交相辉映,这时候,什么都是值的",
-  "sources": [
-   "CTRIP_3889684"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3889684",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "只要",
-  "condition_text": "刷身份证就能入园",
-  "suggestion_text": "比较方便",
-  "condition_type": "预约票务",
-  "sentence": "天安门就这样一遛走过,很快就进到故宫门口,门口已围着几圈人在排队,顶着烈日,排了半小时的队,才进到故宫,故宫的门票是旅程出发前就买好的,也是只要刷身份证就能入园,比较方便",
-  "sources": [
-   "CTRIP_3889684"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3889684",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "不要吃什么点心",
-  "condition_type": "一般",
-  "sentence": "在王府井附近吃个面,休整一下,面和羊肉串都不错,看碗里就知道,点了个驴打滚,小贵,不怎么样,在北京真的不要吃什么点心",
-  "sources": [
-   "CTRIP_3889684"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3889684",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "一般建议",
-  "suggestion_text": "我们买的,想找家奶茶店也没找着,北京确实很少看到台湾茶饮店,在麦当劳买个冰激淋,居然没有第二份半价,还有我们买了一个就没",
-  "condition_type": "一般",
-  "sentence": "王府井其实也没什么适合我们买的,想找家奶茶店也没找着,北京确实很少看到台湾茶饮店,在麦当劳买个冰激淋,居然没有第二份半价,还有我们买了一个就没了,说是最后一个,还有这样的事?",
-  "sources": [
-   "CTRIP_3889684"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "CTRIP_4132000",
   "scenic_area": "颐和园",
   "source_platform": "携程游记",
@@ -1356,22 +764,6 @@
   "suggestion_text": "的算是酸梅汤,据说是炖的,看着料很足,和比一般喝到的要稠很多,味道不错",
   "condition_type": "一般",
   "sentence": "最好的算是酸梅汤,据说是炖的,看着料很足,和比一般喝到的要稠很多,味道不错",
-  "sources": [
-   "CTRIP_4132000"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4132000",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "不是多处的花草树木在这春天竞相开放",
-  "suggestion_text": "加上湖面上不时划过的鸟类,整个遗址公园将只有萧瑟",
-  "condition_type": "时间",
-  "sentence": "其实游圆明园遗址国家是压抑的,这里已经不是断壁残垣,更多只剩下建筑台基,如果不是多处的花草树木在这春天竞相开放,加上湖面上不时划过的鸟类,整个遗址公园将只有萧瑟",
   "sources": [
    "CTRIP_4132000"
   ],
@@ -1990,44 +1382,12 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适宜",
-  "condition_text": "天气条件（句内）",
-  "suggestion_text": "是享受大自然洗礼的绿色家园,是访古探幽、感悟天人合一的佳境,素有“瓷之源,茶之乡,林之海”的美称",
-  "condition_type": "天气",
-  "sentence": "瑶里风景名胜区集山岳、林海、瀑布、峡谷等自然风光和古镇、古窑址等人文景观为一体,山水、人文俱美,原始、古朴、清静,一年四季气候适宜,是享受大自然洗礼的绿色家园,是访古探幽、感悟天人合一的佳境,素有“瓷之源,茶之乡,林之海”的美称",
-  "sources": [
-   "CTRIP_4019387"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4019387",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "若",
   "condition_text": "断若续",
   "suggestion_text": "时隐时现",
   "condition_type": "其他",
   "sentence": "一水四瀑,首尾相接,从大到小,先急后缓,若断若续,时隐时现",
-  "sources": [
-   "CTRIP_4019387"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4019387",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "席地而坐的五位老翁",
-  "suggestion_text": "故人们便把这原出一山的五个山峰统称为“五老峰”",
-  "condition_type": "其他",
-  "sentence": "五老峰地处庐山东南,因山的绝顶被垭口所断,分成并列的五个山峰,仰望俨若席地而坐的五位老翁,故人们便把这原出一山的五个山峰统称为“五老峰”",
   "sources": [
    "CTRIP_4019387"
   ],
@@ -2060,70 +1420,6 @@
   "suggestion_text": "辽阔的鄱阳湖更是被浓雾遮挡得严严实实",
   "condition_type": "其他",
   "sentence": "我们到含鄱口的时候山间云雾弥漫,仰望西侧的“犁头尖”,云雾缠绕的山峰莽莽苍苍,对面的汉阳峰和南面的五老峰躲在厚厚的云雾中若隐若现,辽阔的鄱阳湖更是被浓雾遮挡得严严实实",
-  "sources": [
-   "CTRIP_4019387"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4019387",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "包他的车可以到酒店来接",
-  "suggestion_text": "送到天沐温泉要150元",
-  "condition_type": "其他",
-  "sentence": "在汽车站外看到有等客回九江的私车,和司机攀谈中得知从牯岭镇到天沐温泉有1小时车程,如果包他的车可以到酒店来接,送到天沐温泉要150元",
-  "sources": [
-   "CTRIP_4019387"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4019387",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "从迎仙桥汽车站下山后",
-  "suggestion_text": "不管是否在其他车站使用过车票,整张车票就作废了",
-  "condition_type": "其他",
-  "sentence": "九华山的观光车票50元一张,有效期是3天,有5个车站,每个车站限乘坐一次,每从一个车站上车,就在车票上打个孔以示已经在此站使用过车票,但如果从迎仙桥汽车站下山后,不管是否在其他车站使用过车票,整张车票就作废了",
-  "sources": [
-   "CTRIP_4019387"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4019387",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "一般建议",
-  "suggestion_text": "修行的安静之地,青山绿水,溪水不断,再加上远离尘嚣,不受外来干扰,十分利于禅修,于是尼庵越建越多,成为尼庵居住群",
-  "condition_type": "一般",
-  "sentence": "闵园是一块非常适合修行的安静之地,青山绿水,溪水不断,再加上远离尘嚣,不受外来干扰,十分利于禅修,于是尼庵越建越多,成为尼庵居住群",
-  "sources": [
-   "CTRIP_4019387"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4019387",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "再返回到山上",
-  "suggestion_text": "需要在迎仙桥汽车站办理二次进山的手续",
-  "condition_type": "其他",
-  "sentence": "从九华街到花台景区需要下山,九华山门票有效期是3天,但下山后如果再返回到山上,需要在迎仙桥汽车站办理二次进山的手续",
   "sources": [
    "CTRIP_4019387"
   ],
@@ -2172,38 +1468,6 @@
   "suggestion_text": "一身轻松,不如来次一个人的旅行",
   "condition_type": "其他",
   "sentence": "多年的工作压力,人累、心累,一旦解脱,一身轻松,不如来次一个人的旅行",
-  "sources": [
-   "CTRIP_3989929"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3989929",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "拿,只好到村里超市花15元买了把",
-  "condition_type": "一般",
-  "sentence": "小雨越来越大,带的伞没记得拿,只好到村里超市花15元买了把",
-  "sources": [
-   "CTRIP_3989929"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3989929",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "来时路过一个地方叫塔川,离宏村2.5公里,我印象是个赏秋地",
-  "condition_type": "一般",
-  "sentence": "记得来时路过一个地方叫塔川,离宏村2.5公里,我印象是个赏秋地",
   "sources": [
    "CTRIP_3989929"
   ],
@@ -2326,44 +1590,12 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "尽量",
-  "condition_text": "一般建议",
-  "suggestion_text": "减少损失,因为使用时间临近原则上都不能退了,等车时的分分钟没消停,手不离机用尽真诚话语打动人心,上传各类订单截图甚至车站",
-  "condition_type": "一般",
-  "sentence": "将错就错重新筹划,当务之急是操作一系列退订尽量减少损失,因为使用时间临近原则上都不能退了,等车时的分分钟没消停,手不离机用尽真诚话语打动人心,上传各类订单截图甚至车站通知拍照,除返程火车票扣手续费外其它总算都搞定",
-  "sources": [
-   "CTRIP_4031821"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4031821",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
   "condition_text": "闲住几日养性又悦目",
   "suggestion_text": "精致的百年庭院给你带来穿越时空的对话,十分享受",
   "condition_type": "其他",
   "sentence": "宾至如家很温馨,回廊小院设计的考究客房舒服,保留了不少老物件很亲切,琴棋书画茶道室样样入扣,如果闲住几日养性又悦目,精致的百年庭院给你带来穿越时空的对话,十分享受",
-  "sources": [
-   "CTRIP_4031821"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4031821",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "屯溪“老干妈土菜馆”,若在北京找不到这样亲民的感觉",
-  "condition_type": "一般",
-  "sentence": "寻到一家在当地很有名的吃臭鳜鱼老店,到安徽必须放不下这一口,店面人气兴旺味道正宗价格也实惠,强烈推荐屯溪“老干妈土菜馆”,若在北京找不到这样亲民的感觉",
   "sources": [
    "CTRIP_4031821"
   ],
@@ -2391,22 +1623,6 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "玩法:第一天大交通到黄山市,首选乘坐高铁出站后去景区的交通有多种选择,夜宿黄山脚下的汤口镇",
-  "condition_type": "时间",
-  "sentence": "推荐玩法:第一天大交通到黄山市,首选乘坐高铁出站后去景区的交通有多种选择,夜宿黄山脚下的汤口镇",
-  "sources": [
-   "CTRIP_4031821"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4031821",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
   "trigger": "最好",
   "condition_text": "时间条件（句内）",
   "suggestion_text": "安排一天半,早上进山夜宿山顶,第三天午后下山返程",
@@ -2414,22 +1630,6 @@
   "sentence": "第二天登山最好安排一天半,早上进山夜宿山顶,第三天午后下山返程",
   "sources": [
    "CTRIP_4031821"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4023752",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "还是有计划旅行好,我们就是因为什么都没有预定,所以本来预定的旅游线路最后全面颠覆,也是够可以的,几乎每天都是临近一天才预",
-  "condition_type": "时间",
-  "sentence": "没有做太多攻略,建议还是有计划旅行好,我们就是因为什么都没有预定,所以本来预定的旅游线路最后全面颠覆,也是够可以的,几乎每天都是临近一天才预定第二天的住宿,所幸的是我们暑假刚刚开始,还不属于最旺季,住宿还是有的",
-  "sources": [
-   "CTRIP_4023752"
   ],
   "frequency": 1
  },
@@ -2460,38 +1660,6 @@
   "suggestion_text": "我们排了快1小时",
   "condition_type": "预约票务",
   "sentence": "如果要去要提前排位,我们排了快1小时",
-  "sources": [
-   "CTRIP_4023752"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4023752",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "当年住的是西湖里面的青旅,环境特别好,可惜后来倒闭了(13年和老公来的时候想住都住不上了)",
-  "condition_type": "时间",
-  "sentence": "08年五一期间和北大一个理科女校友(菲菲)走过华东N市,记忆还有点清晰!记得当年住的是西湖里面的青旅,环境特别好,可惜后来倒闭了(13年和老公来的时候想住都住不上了),就在杭州花圃附近那里",
-  "sources": [
-   "CTRIP_4023752"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4023752",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "就在杭州花圃附近那里",
-  "condition_type": "时间",
-  "sentence": "08年五一期间和北大一个理科女校友(菲菲)走过华东N市,记忆还有点清晰!记得当年住的是西湖里面的青旅,环境特别好,可惜后来倒闭了(13年和老公来的时候想住都住不上了),就在杭州花圃附近那里",
   "sources": [
    "CTRIP_4023752"
   ],
@@ -2534,22 +1702,6 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "旺季要提前预约,很多人走到门口进不去了(因为约满了)",
-  "condition_type": "时间",
-  "sentence": "第二站:从武林馆打车大约需要30分钟,也是排了长队,记得旺季要提前预约,很多人走到门口进不去了(因为约满了)",
-  "sources": [
-   "CTRIP_4023752"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4023752",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P6_否定建议",
   "trigger": "不要",
   "condition_text": "一般建议（避雷）",
@@ -2558,22 +1710,6 @@
   "sentence": "两个小姐妹很棒,一路玩各种游戏不要抱抱",
   "sources": [
    "CTRIP_4023752"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4036408",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "在山上住一夜,正常情况下后山上游北海景区、飞来石,到排云亭下西海大峡谷,经过一环、二环到谷底,坐地轨小火车上来,走十分钟",
-  "condition_type": "一般",
-  "sentence": "游黄山最好在山上住一夜,正常情况下后山上游北海景区、飞来石,到排云亭下西海大峡谷,经过一环、二环到谷底,坐地轨小火车上来,走十分钟到白云宾馆,第二天别去光明顶看日出,因为日出很难看到,没意思",
-  "sources": [
-   "CTRIP_4036408"
   ],
   "frequency": 1
  },
@@ -2742,54 +1878,6 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "晚上不住普陀山",
-  "suggestion_text": "回朱家尖码头的最后一班轮渡是晚上10点",
-  "condition_type": "时间",
-  "sentence": "切记,如果晚上不住普陀山,回朱家尖码头的最后一班轮渡是晚上10点",
-  "sources": [
-   "CTRIP_3991429"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3991429",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "安排两天,一天时间比较紧张,尤其一天的跟团游",
-  "condition_type": "时间",
-  "sentence": "普陀山整个逛完,最好安排两天,一天时间比较紧张,尤其一天的跟团游,一定要谨慎报名,他们甚至不会带旅客把三大寺院逛完,也可以头天提前到达朱家尖入住,第二天早些时间上岛",
-  "sources": [
-   "CTRIP_3991429"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3991429",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "一定要谨慎报名,他们甚至不会带旅客把三大寺院逛完,也可以头天提前到达朱家尖",
-  "condition_type": "时间",
-  "sentence": "普陀山整个逛完,最好安排两天,一天时间比较紧张,尤其一天的跟团游,一定要谨慎报名,他们甚至不会带旅客把三大寺院逛完,也可以头天提前到达朱家尖入住,第二天早些时间上岛",
-  "sources": [
-   "CTRIP_3991429"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3991429",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P6_否定建议",
   "trigger": "忌",
   "condition_text": "一般建议（避雷）",
@@ -2856,22 +1944,6 @@
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
-  "condition_text": "是一日游不在古村里住宿",
-  "suggestion_text": "建议先游西递再宏村,因为宏村规模比西递大,客运班车车次更多,傍晚游完后便于返回黄山市区及黄山风景区",
-  "condition_type": "其他",
-  "sentence": "DAY2,乘坐旅游集散中心的巴士前往西递宏村,这是一条旅游专线,大约一个多小时一班,非常方便,如果是一日游不在古村里住宿,建议先游西递再宏村,因为宏村规模比西递大,客运班车车次更多,傍晚游完后便于返回黄山市区及黄山风景区",
-  "sources": [
-   "CTRIP_4004475"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4004475",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
   "condition_text": "您对古建又感兴趣",
   "suggestion_text": "这里绝对是您的正确之选",
   "condition_type": "其他",
@@ -2910,102 +1982,6 @@
   "sentence": "1,茶叶 ,时值清明,明前绿茶正上市,黄山毛尖、太平猴魁都是绿茶中的名茶,祁门红茶是中国四大红茶之一,在屯溪老街和西递宏村古镇上有很多现场炒制茶叶的小店,还可以现场冲泡品尝,但是真假难辨,我没有买无法推荐,查了下淘宝有很多黄山的店铺卖当季新茶的,可以尝试下,不过这和从当地买感觉还是有差别的",
   "sources": [
    "CTRIP_4004475"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4004475",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "您想送给文人墨客的朋友",
-  "suggestion_text": "送一套歙砚徽墨实在是不错的选择,另外可以到歙县县城的歙砚一条街去购买",
-  "condition_type": "其他",
-  "sentence": "如果您想送给文人墨客的朋友,送一套歙砚徽墨实在是不错的选择,另外可以到歙县县城的歙砚一条街去购买,那里可选择余地更大",
-  "sources": [
-   "CTRIP_4004475"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4004475",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "您想送给文人墨客的朋友",
-  "suggestion_text": "那里可选择余地更大",
-  "condition_type": "其他",
-  "sentence": "如果您想送给文人墨客的朋友,送一套歙砚徽墨实在是不错的选择,另外可以到歙县县城的歙砚一条街去购买,那里可选择余地更大",
-  "sources": [
-   "CTRIP_4004475"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4016094",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "能坐动车就坐动车",
-  "suggestion_text": "到站后坐班车方便)",
-  "condition_type": "交通",
-  "sentence": "1. 普速列车停黄山站,动车组列车停黄山北站(若能坐动车就坐动车,到站后坐班车方便)",
-  "sources": [
-   "CTRIP_4016094"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4016094",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若…的话",
-  "condition_text": "火车时间很长要坐飞机",
-  "suggestion_text": "可以飞到黄山屯溪国际机场,然后换机场大巴再换班车",
-  "condition_type": "交通",
-  "sentence": "2.若火车时间很长要坐飞机的话,可以飞到黄山屯溪国际机场,然后换机场大巴再换班车",
-  "sources": [
-   "CTRIP_4016094"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4016094",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "是普速到老火车站或者飞机到机场",
-  "suggestion_text": "建议先打车或公交到黄山客运总站,再换乘班车前往景区(新国线黄山风景区汽车站)",
-  "condition_type": "交通",
-  "sentence": "1. 如果是普速到老火车站或者飞机到机场,建议先打车或公交到黄山客运总站,再换乘班车前往景区(新国线黄山风景区汽车站)",
-  "sources": [
-   "CTRIP_4016094"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4016094",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "是动车到北站就方便多了",
-  "suggestion_text": "直接买班车票到黄山景区(新国线黄山风景区汽车站)即可",
-  "condition_type": "交通",
-  "sentence": "2.如果是动车到北站就方便多了,直接买班车票到黄山景区(新国线黄山风景区汽车站)即可",
-  "sources": [
-   "CTRIP_4016094"
   ],
   "frequency": 1
  },
@@ -3334,54 +2310,6 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果…的话",
-  "condition_text": "晚上住在屯溪",
-  "suggestion_text": "早上也有发往黄山的大巴,票价30.这里需要注意的是如果在屯溪早上做大巴",
-  "condition_type": "时间",
-  "sentence": "如果晚上住在屯溪的话,早上也有发往黄山的大巴,票价30.这里需要注意的是如果在屯溪早上做大巴,可以到屯溪汽车站前面小广场坐车,最早一班六点半发车,时间大概1小时20分钟",
-  "sources": [
-   "CTRIP_4004430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4004430",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果…的话",
-  "condition_text": "晚上住在屯溪",
-  "suggestion_text": "可以到屯溪汽车站前面小广场坐车,最早一班六点半发车,时间大概1小时20分钟",
-  "condition_type": "时间",
-  "sentence": "如果晚上住在屯溪的话,早上也有发往黄山的大巴,票价30.这里需要注意的是如果在屯溪早上做大巴,可以到屯溪汽车站前面小广场坐车,最早一班六点半发车,时间大概1小时20分钟",
-  "sources": [
-   "CTRIP_4004430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4004430",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "在屯溪早上做大巴",
-  "suggestion_text": "可以到屯溪汽车站前面小广场坐车,最早一班六点半发车,时间大概1小时20分钟",
-  "condition_type": "时间",
-  "sentence": "如果晚上住在屯溪的话,早上也有发往黄山的大巴,票价30.这里需要注意的是如果在屯溪早上做大巴,可以到屯溪汽车站前面小广场坐车,最早一班六点半发车,时间大概1小时20分钟",
-  "sources": [
-   "CTRIP_4004430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4004430",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "时间条件（句内）",
@@ -3484,38 +2412,6 @@
   "suggestion_text": "最好要熟悉的当地人带,我们这次通过我的朋友,带我们游玩黄山(没带我们走弯路,全程没有购物也没有隐形消费,非常热情,有问必答,专业的事交给专业的人做,相对于自己瞎逛要省心很多,也划算很多~~)",
   "condition_type": "人群",
   "sentence": "黄山景区众多,而且城市景点很分散,如果你是第一次去黄山,请个人带是必须的,最好要熟悉的当地人带,我们这次通过我的朋友,带我们游玩黄山(没带我们走弯路,全程没有购物也没有隐形消费,非常热情,有问必答,专业的事交给专业的人做,相对于自己瞎逛要省心很多,也划算很多~~)",
-  "sources": [
-   "CTRIP_3944634"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3944634",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "没有人带着的话!自己安排车子的",
-  "suggestion_text": "肯定会被黑的,有的时候提前讲好价钱到景区了还会多要钱的,要注意!我住的酒店是可以在一个极其优惠的价格内叫到车,所以就让前台小姐姐去帮忙联系",
-  "condition_type": "装备",
-  "sentence": "每次出行,交通是不可回避的问题,我们坐交通工具的时间,占了我们旅游时间的一大部分,所以要提前安排好时间!还有去往景区也是要坐车前往的,如果没有人带着的话!自己安排车子的,肯定会被黑的,有的时候提前讲好价钱到景区了还会多要钱的,要注意!我住的酒店是可以在一个极其优惠的价格内叫到车,所以就让前台小姐姐去",
-  "sources": [
-   "CTRIP_3944634"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3944634",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "自备干粮,晚上可以去屯溪老街寻觅地道的特色徽州美食!",
-  "condition_type": "时间",
-  "sentence": "黄山市的消费还是比较低的,早餐我们在黄山市区吃了一碗特色米粉,不到十五块钱(酒店一般都有自助早餐,驴友可以随意选择)!但是景区的费用是特别的高,午餐建议自备干粮,晚上可以去屯溪老街寻觅地道的特色徽州美食!",
   "sources": [
    "CTRIP_3944634"
   ],
@@ -3944,22 +2840,6 @@
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
-  "condition_text": "嫌背上山行礼太重",
-  "suggestion_text": "也可以到山上租,酒店一般都提供租借服务,50RMB/件",
-  "condition_type": "其他",
-  "sentence": "如果嫌背上山行礼太重,也可以到山上租,酒店一般都提供租借服务,50RMB/件",
-  "sources": [
-   "CTRIP_3735942"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3735942",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
   "condition_text": "脚力不好就会苦了父母",
   "suggestion_text": "负重途步你们懂得",
   "condition_type": "其他",
@@ -4070,76 +2950,12 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "游客为孩子",
-  "suggestion_text": "溜娃,湖景房380一晚含双早,性价比超高",
-  "condition_type": "人群",
-  "sentence": "全程除了杭州绕城西复线,由于出城车多拥堵,其他路段路况良好,下午1点到达千岛湖开元度假村,酒店就建在湖边,设施好,有儿童乐园,特别适合溜娃,湖景房380一晚含双早,性价比超高",
-  "sources": [
-   "CTRIP_3999208"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3999208",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "只要",
   "condition_text": "输入身份证号人脸识别也是可以的",
   "suggestion_text": "办好入住,行李送到房间,准备去镇上吃午饭,顺便去派出所看看,能不能办临时身份证,免得影响后面黄山的行程",
   "condition_type": "预约票务",
   "sentence": "好在现在可以凭电子身份证办理入住,无证只要输入身份证号人脸识别也是可以的,办好入住,行李送到房间,准备去镇上吃午饭,顺便去派出所看看,能不能办临时身份证,免得影响后面黄山的行程",
-  "sources": [
-   "CTRIP_3999208"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3999208",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "天气条件（句内）",
-  "suggestion_text": "准备走千汾线,千岛湖开元度假村--千岛湖大桥--温馨岛--梅岭观景台--小金山观景台--竹里村观景台--酒店",
-  "condition_type": "天气",
-  "sentence": "今天天气不错,虽然没出太阳,至少不下雨,温度也适合,准备走千汾线,千岛湖开元度假村--千岛湖大桥--温馨岛--梅岭观景台--小金山观景台--竹里村观景台--酒店",
-  "sources": [
-   "CTRIP_3999208"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3999208",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "游客为孩子",
-  "suggestion_text": "在酒店用餐",
-  "condition_type": "人群",
-  "sentence": "下午回到酒店,我美美的睡了午觉,娃爸陪着娃继续在儿童乐园消磨时间,晚上去餐厅问了,自助小火锅只有周末有,平时只有中餐厅开,买了个3人套餐,鱼头汤的味道比前一天在邵记吃的好太多了,菜也做的精致,甜点雪媚娘好吃,娃一个人全吃了,用餐价格比镇上也没有贵出太多,但是菜品好太多了,建议在酒店用餐",
-  "sources": [
-   "CTRIP_3999208"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3999208",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "不跟酒店的免费车去",
-  "suggestion_text": "自己可以随时溜达过去,也不远,走路20分程,车程5分钟",
-  "condition_type": "其他",
-  "sentence": "办入住的时候,前台跟我们说,温泉下午三点开始,建议我们三点就去,泡完回酒店吃晚餐,三点是刚换的温泉水,水干净,2:55前台大厅等车,3点准时有车送我们去温泉,轩辕楼送去温泉的车是下午3点、5点、7点,如果不跟酒店的免费车去,自己可以随时溜达过去,也不远,走路20分程,车程5分钟",
   "sources": [
    "CTRIP_3999208"
   ],
@@ -4268,38 +3084,6 @@
   "suggestion_text": "强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下山了(从迎客松方向去天都峰的话),从天都峰顶步行到慈光阁,至少需要4个小时左右,台阶高且陡,恐高的人不建议上天都峰,鲫鱼背就在通往天都峰顶的必经之路上,恐高及体力一般者慎重",
   "condition_type": "其他",
   "sentence": "此条线路如果去天都峰,强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下山了(从迎客松方向去天都峰的话),从天都峰顶步行到慈光阁,至少需要4个小时左右,台阶高且陡,恐高的人不建议上天都峰,鲫鱼背就在通往天都峰顶的必经之路上,恐高及体力一般者慎重",
-  "sources": [
-   "CTRIP_3999208"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3999208",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "把车停汤口",
-  "suggestion_text": "只能包车去耿城北大门坐太平索道,如果把车停耿城,下山后得从汤口包车回耿城取车",
-  "condition_type": "其他",
-  "sentence": "此条线交通不太便利,尤其是自驾游游客,松谷阉在黄山北大门耿城镇,前山玉屏楼下山在黄山南大门汤口镇,两地相隔60公里,如果把车停汤口,只能包车去耿城北大门坐太平索道,如果把车停耿城,下山后得从汤口包车回耿城取车",
-  "sources": [
-   "CTRIP_3999208"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3999208",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "把车停耿城",
-  "suggestion_text": "下山后得从汤口包车回耿城取车",
-  "condition_type": "其他",
-  "sentence": "此条线交通不太便利,尤其是自驾游游客,松谷阉在黄山北大门耿城镇,前山玉屏楼下山在黄山南大门汤口镇,两地相隔60公里,如果把车停汤口,只能包车去耿城北大门坐太平索道,如果把车停耿城,下山后得从汤口包车回耿城取车",
   "sources": [
    "CTRIP_3999208"
   ],
@@ -4518,22 +3302,6 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "只要",
-  "condition_text": "322元一晚",
-  "suggestion_text": "性价比很高",
-  "condition_type": "其他",
-  "sentence": "这家五星级酒店坐落在横江边,接待过国家和国外的领导人,现在含早只要322元一晚,性价比很高",
-  "sources": [
-   "CTRIP_3995811"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3995811",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "适合",
   "condition_text": "一般建议",
@@ -4680,70 +3448,6 @@
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
-  "condition_text": "行程安排走回头路",
-  "suggestion_text": "还是从前山的索道返程的",
-  "condition_type": "其他",
-  "sentence": "如果行程安排走回头路,还是从前山的索道返程的,可以考虑在这里住宿",
-  "sources": [
-   "CTRIP_4110889"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4110889",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "行程安排走回头路",
-  "suggestion_text": "可以考虑在这里住宿",
-  "condition_type": "其他",
-  "sentence": "如果行程安排走回头路,还是从前山的索道返程的,可以考虑在这里住宿",
-  "sources": [
-   "CTRIP_4110889"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4110889",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "到景点、宾馆的指示牌能再多一些",
-  "suggestion_text": "能再标注些距离和路程时间信息的话",
-  "condition_type": "其他",
-  "sentence": "整整二天的黄山风景区登山之旅,给我的感受是,风景区的硬件设施和软件服务都很到位,如果到景点、宾馆的指示牌能再多一些,能再标注些距离和路程时间信息的话,那就更方便游客了",
-  "sources": [
-   "CTRIP_4110889"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4110889",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "到景点、宾馆的指示牌能再多一些",
-  "suggestion_text": "那就更方便游客了",
-  "condition_type": "其他",
-  "sentence": "整整二天的黄山风景区登山之旅,给我的感受是,风景区的硬件设施和软件服务都很到位,如果到景点、宾馆的指示牌能再多一些,能再标注些距离和路程时间信息的话,那就更方便游客了",
-  "sources": [
-   "CTRIP_4110889"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4110889",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
   "condition_text": "体力和时间允许",
   "suggestion_text": "此生真的要爬一次黄山",
   "condition_type": "体力安全",
@@ -4780,22 +3484,6 @@
   "suggestion_text": "那个字是 “仙”",
   "condition_type": "其他",
   "sentence": "如果只用一个字来形容黄山,我想,那个字是 “仙”",
-  "sources": [
-   "CTRIP_3953404"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3953404",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "没有酒店提供的羽绒衣",
-  "suggestion_text": "一定要自己带厚棉衣,否则直接被山风吹傻",
-  "condition_type": "其他",
-  "sentence": "衣物:短袖(可带一件换洗短袖,怕冷的再带薄长袖),长裤,运动鞋,帽子(山上风大,要防风),墨镜,口罩(酒店有送,最好自己也备着,车站都要用),看日出若没有酒店提供的羽绒衣,一定要自己带厚棉衣,否则直接被山风吹傻",
   "sources": [
    "CTRIP_3953404"
   ],
@@ -4876,38 +3564,6 @@
   "suggestion_text": "只能把车停到几百米前的一个游客中心大平台那里",
   "condition_type": "时间",
   "sentence": "如果周末节假日车流量大的话,只能把车停到几百米前的一个游客中心大平台那里",
-  "sources": [
-   "CTRIP_4109335"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4109335",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是…的话",
-  "condition_text": "去北大门",
-  "suggestion_text": "刚才在谭家桥枢纽就要往北九华山方向",
-  "condition_type": "其他",
-  "sentence": "要是去北大门的话,刚才在谭家桥枢纽就要往北九华山方向",
-  "sources": [
-   "CTRIP_4109335"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4109335",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "不在这里住宿过夜",
-  "suggestion_text": "逢暑假周末或者节假日,上午过来根本找不到正规停车场车位",
-  "condition_type": "其他",
-  "sentence": "要是不在这里住宿过夜,逢暑假周末或者节假日,上午过来根本找不到正规停车场车位",
   "sources": [
    "CTRIP_4109335"
   ],
@@ -5046,22 +3702,6 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "忌",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "忌讳犹豫",
-  "condition_type": "一般",
-  "sentence": "看行程、定计划、请年假、订车票、订酒店,许许多多行程安排用半天时间搞定,毕竟旅行最忌讳犹豫",
-  "sources": [
-   "CTRIP_4052444"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4052444",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
   "condition_text": "坐缆车下车就可去了",
@@ -5143,38 +3783,6 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
-  "trigger": "万一",
-  "condition_text": "直接游览黄山之后",
-  "suggestion_text": "就有可能真的不想去泰山了",
-  "condition_type": "其他",
-  "sentence": "在选择出行方式时,发现从牡丹江有直达泰山的火车,而从泰山附近有直达黄山的高铁,这样的话,我们可以先去泰山再去黄山;而且不是有句话说“五岳归来不看山,黄山归来不看岳”么,万一直接游览黄山之后,就有可能真的不想去泰山了,那不是错失了去泰山的机会!而且还可以拿登泰山作为爬黄山的热身",
-  "sources": [
-   "CTRIP_3539977"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3539977",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "万一",
-  "condition_text": "直接游览黄山之后",
-  "suggestion_text": "那不是错失了去泰山的机会!而且还可以拿登泰山作为爬黄山的热身",
-  "condition_type": "其他",
-  "sentence": "在选择出行方式时,发现从牡丹江有直达泰山的火车,而从泰山附近有直达黄山的高铁,这样的话,我们可以先去泰山再去黄山;而且不是有句话说“五岳归来不看山,黄山归来不看岳”么,万一直接游览黄山之后,就有可能真的不想去泰山了,那不是错失了去泰山的机会!而且还可以拿登泰山作为爬黄山的热身",
-  "sources": [
-   "CTRIP_3539977"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3539977",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
   "trigger": "如果",
   "condition_text": "仅用手机拍摄黄山的美景",
   "suggestion_text": "恐怕不能将其表现的淋漓尽致,所以终于下决心买了一个单反相机,配18-200镜头,这样",
@@ -5196,54 +3804,6 @@
   "suggestion_text": "就能将远处的黄山石拍的清楚",
   "condition_type": "其他",
   "sentence": "在物资上,我因为非常喜欢黄山的奇松怪石,觉得如果仅用手机拍摄黄山的美景,恐怕不能将其表现的淋漓尽致,所以终于下决心买了一个单反相机,配18-200镜头,这样,就能将远处的黄山石拍的清楚",
-  "sources": [
-   "CTRIP_3539977"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3539977",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "能闭着眼睛围着它逆时针顺时针分别转三圈",
-  "suggestion_text": "之后闭眼走到10米开外的大树前并伸手摸到大树",
-  "condition_type": "其他",
-  "sentence": "从正阳门进去之后,在主路上有这样一个大石头,远远的就看见很多人围着它转,到跟前看介绍才知道,如果能闭着眼睛围着它逆时针顺时针分别转三圈,之后闭眼走到10米开外的大树前并伸手摸到大树,就能得到泰山山神的保佑,获得全家平安",
-  "sources": [
-   "CTRIP_3539977"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3539977",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "能闭着眼睛围着它逆时针顺时针分别转三圈",
-  "suggestion_text": "就能得到泰山山神的保佑,获得全家平安",
-  "condition_type": "其他",
-  "sentence": "从正阳门进去之后,在主路上有这样一个大石头,远远的就看见很多人围着它转,到跟前看介绍才知道,如果能闭着眼睛围着它逆时针顺时针分别转三圈,之后闭眼走到10米开外的大树前并伸手摸到大树,就能得到泰山山神的保佑,获得全家平安",
-  "sources": [
-   "CTRIP_3539977"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3539977",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "万一",
-  "condition_text": "宾馆以为我们不去了",
-  "suggestion_text": "再把房间给了别人",
-  "condition_type": "其他",
-  "sentence": "说实话,携程旅行的服务真的很到位,我是提前了半个月左右就通过携程网预订了黄山山上的宾馆,在曲阜到黄山市的路上,我就打电话跟宾馆确认了一下房间信息,因为怕我们爬山较慢,万一宾馆以为我们不去了,再把房间给了别人",
   "sources": [
    "CTRIP_3539977"
   ],
@@ -5298,22 +3858,6 @@
   "frequency": 1
  },
  {
-  "record_id": "CTRIP_3539977",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果…的话",
-  "condition_text": "是大学生出游",
-  "suggestion_text": "更实惠的是青年客栈),写下这篇游记,也给喜欢自由行的旅友们一点借鉴",
-  "condition_type": "人群",
-  "sentence": "因为毕竟是普通家庭,出游费用是不得不考虑的因素(当然,因为有老人和孩子,住的宾馆都是双人间,如果是大学生出游的话,更实惠的是青年客栈),写下这篇游记,也给喜欢自由行的旅友们一点借鉴",
-  "sources": [
-   "CTRIP_3539977"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "CTRIP_3976836",
   "scenic_area": "黄山",
   "source_platform": "携程游记",
@@ -5324,22 +3868,6 @@
   "suggestion_text": "大人就要准备休年假,带着孩子去哪里转一转",
   "condition_type": "其他",
   "sentence": "本来今年疫情的事情,不太想出门的,结果办公室里的同事都开始相互打听,暑假谁谁谁去哪里,好像只要一放暑假,大人就要准备休年假,带着孩子去哪里转一转",
-  "sources": [
-   "CTRIP_3976836"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3976836",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "回去吃了个早餐",
-  "suggestion_text": "走到这里已经中午了,又晒又热又累",
-  "condition_type": "其他",
-  "sentence": "主要是回去吃了个早餐,走到这里已经中午了,又晒又热又累",
   "sources": [
    "CTRIP_3976836"
   ],
@@ -5366,92 +3894,12 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "团票都要178/人,大小同价,还是团票,可能也跟临时定有关系",
-  "condition_type": "一般",
-  "sentence": "晚餐有个竹笋炒肉真好吃啊,紧接着赶去看印象大红袍,这门票也是一样的贵,记得团票都要178/人,大小同价,还是团票,可能也跟临时定有关系",
-  "sources": [
-   "CTRIP_3976836"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3976836",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "要是",
   "condition_text": "热",
   "suggestion_text": "海拔不够高,爬山累的不行,手脚都痛,我已经做好不去黄山的准备了",
   "condition_type": "其他",
   "sentence": "实话说,武夷山比我想象得差了那么点意思,消费也不低,一家人差不多花了1500的门票、竹筏还有摆渡车票,景色跟丹霞山很相似,主要是热,海拔不够高,爬山累的不行,手脚都痛,我已经做好不去黄山的准备了",
-  "sources": [
-   "CTRIP_3976836"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3976836",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "是一个隧道里有界碑,一边福建,一边江西,福建的路明显的平坦舒适好走",
-  "condition_type": "一般",
-  "sentence": "从武夷山到三清山的高速路边有一片很漂亮的群山,竹林等等植被丰富,记得是一个隧道里有界碑,一边福建,一边江西,福建的路明显的平坦舒适好走",
-  "sources": [
-   "CTRIP_3976836"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3976836",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "武夷山热",
-  "suggestion_text": "爬山把所有的水喝光了还在景区买,其实酒店里放了很多只",
-  "condition_type": "其他",
-  "sentence": "不是周末,人很少,路边有卖野果的,买点带上,背了好多瓶水,主要是武夷山热,爬山把所有的水喝光了还在景区买,其实酒店里放了很多只",
-  "sources": [
-   "CTRIP_3976836"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3976836",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "只要",
-  "condition_text": "走600米就可以放到酒店里",
-  "suggestion_text": "出去的时候空手会轻松很多",
-  "condition_type": "其他",
-  "sentence": "好处就是背了两天的衣物食品和水上山,只要走600米就可以放到酒店里,出去的时候空手会轻松很多",
-  "sources": [
-   "CTRIP_3976836"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3976836",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "后山上山",
-  "suggestion_text": "年轻人居多,背着物资要走几个小时才能到达晚上住的酒店,带着孩子估计要抓狂",
-  "condition_type": "其他",
-  "sentence": "如果后山上山,年轻人居多,背着物资要走几个小时才能到达晚上住的酒店,带着孩子估计要抓狂",
   "sources": [
    "CTRIP_3976836"
   ],
@@ -5830,38 +4278,6 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "各位需要买手信或纪念品的朋友们",
-  "condition_type": "一般",
-  "sentence": "我推荐各位需要买手信或纪念品的朋友们,可以考虑在宏村里先采一下市场,了解了各种特产的行情后再适当采购,避免后悔哟",
-  "sources": [
-   "CTRIP_898653"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_898653",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "可以考虑在宏村里先采一下市场,了解了各种特产的行情后再适当采购,避免后悔哟",
-  "condition_type": "一般",
-  "sentence": "我推荐各位需要买手信或纪念品的朋友们,可以考虑在宏村里先采一下市场,了解了各种特产的行情后再适当采购,避免后悔哟",
-  "sources": [
-   "CTRIP_898653"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_898653",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
   "condition_text": "有懂茶的",
@@ -5916,22 +4332,6 @@
   "suggestion_text": "但是狮子林酒店严重不推荐,一股很重的霉味,我和老妈一晚上都没睡好",
   "condition_type": "时间",
   "sentence": "北海宾馆的别墅强烈推荐,但是狮子林酒店严重不推荐,一股很重的霉味,我和老妈一晚上都没睡好",
-  "sources": [
-   "CTRIP_1333628"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1333628",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "没带帐篷也可以在宾馆附近租帐篷",
-  "suggestion_text": "我去的那天节假日300元一晚,不知道平常的价格",
-  "condition_type": "装备",
-  "sentence": "如果没带帐篷也可以在宾馆附近租帐篷,我去的那天节假日300元一晚,不知道平常的价格",
   "sources": [
    "CTRIP_1333628"
   ],
@@ -6054,22 +4454,6 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "假如",
-  "condition_text": "你是乘火车或者飞机来黄山",
-  "suggestion_text": "就只能够到达黄山市(屯溪),然后我们需要在这里乘坐黄山到汤口的班车前往黄山风景区脚下的汤口镇,在这里换乘“新国线”景区专用交通车进入黄山风景区",
-  "condition_type": "交通",
-  "sentence": "通常意义上我们所指的黄山就是指黄山风景区,假如你是乘火车或者飞机来黄山,就只能够到达黄山市(屯溪),然后我们需要在这里乘坐黄山到汤口的班车前往黄山风景区脚下的汤口镇,在这里换乘“新国线”景区专用交通车进入黄山风景区",
-  "sources": [
-   "CTRIP_1333628"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1333628",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
@@ -6092,22 +4476,6 @@
   "suggestion_text": "尽量不要睡公卫房",
   "condition_type": "其他",
   "sentence": "如果经济允许,尽量不要睡公卫房",
-  "sources": [
-   "CTRIP_1333628"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1333628",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "不要在住宿上省那么几十块钱,爬山是很辛苦的,晚上能够洗个热水澡,还有热水供应,绝对能够很快的恢复体力,第",
-  "condition_type": "时间",
-  "sentence": "不要在住宿上省那么几十块钱,爬山是很辛苦的,晚上能够洗个热水澡,还有热水供应,绝对能够很快的恢复体力,第二天的游玩才更尽兴",
   "sources": [
    "CTRIP_1333628"
   ],
@@ -6166,38 +4534,6 @@
   "scenic_area": "黄山",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "来黄山自助游的游客尽量选择自带干粮上山",
-  "condition_type": "一般",
-  "sentence": "山顶酒店餐厅的用餐也很贵,一般一盘炒青菜就要30-40元,西红柿鸡蛋汤也要30元左右,一个最便宜的荤菜也要60,贵的要上百,所以建议来黄山自助游的游客尽量选择自带干粮上山",
-  "sources": [
-   "CTRIP_1333628"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1333628",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "点菜",
-  "suggestion_text": "几乎每道菜的价格都比自助餐还贵",
-  "condition_type": "其他",
-  "sentence": "山上没有饭店,要吃就在宾馆,宾馆自助餐是80元/人,如果点菜,几乎每道菜的价格都比自助餐还贵",
-  "sources": [
-   "CTRIP_1333628"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1333628",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
   "condition_text": "你有盒装方便面",
@@ -6236,22 +4572,6 @@
   "suggestion_text": "在上山前就准备好两天的干粮",
   "condition_type": "时间",
   "sentence": "所以最好在上山前就准备好两天的干粮",
-  "sources": [
-   "CTRIP_1333628"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1333628",
-  "scenic_area": "黄山",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "携带的食品最好是高能量的例如:方便面(晚餐和早餐),面包或山下旅馆的小馒头(中餐),巧克力、牛肉干(补充体力的必需品)",
-  "condition_type": "一般",
-  "sentence": "建议携带的食品最好是高能量的例如:方便面(晚餐和早餐),面包或山下旅馆的小馒头(中餐),巧克力、牛肉干(补充体力的必需品),午餐肉、火腿肠或有包装的卤菜(几顿都吃不上肉,带点肉会让你胃口大开),矿泉水",
   "sources": [
    "CTRIP_1333628"
   ],
@@ -6454,55 +4774,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "想早一点到",
-  "suggestion_text": "可以在旅行网站上购买旅游大巴车票)正常需要乘坐9h",
-  "condition_type": "其他",
-  "sentence": "7:40 成都春熙路出发,乘坐 九寨沟 大巴车,票价:158元(如果想早一点到,可以在旅行网站上购买旅游大巴车票)正常需要乘坐9h",
-  "sources": [
-   "CTRIP_3970738"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3970738",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "尔盖 --芝麻古藏寨-- 九寨沟 ;全程719公里",
-  "suggestion_text": "耗时10~12小时",
-  "condition_type": "其他",
-  "sentence": "甘肃 出发(北线): 兰州 -- 临夏 --合作-- 碌曲 -- 若尔盖 --芝麻古藏寨-- 九寨沟 ;全程719公里,耗时10~12小时",
-  "sources": [
-   "CTRIP_3970738"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3970738",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "准备零食",
-  "condition_type": "一般",
-  "sentence": "大巴车途中会休息吃饭,建议准备零食",
-  "sources": [
-   "CTRIP_3970738",
-   "CTRIP_4008520"
-  ],
-  "frequency": 2
- },
- {
-  "record_id": "CTRIP_3970738",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "记得",
   "condition_text": "天气条件（句内）",
@@ -6513,23 +4784,6 @@
    "CTRIP_3970738"
   ],
   "frequency": 1
- },
- {
-  "record_id": "CTRIP_3970738",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "世界上有两个桃花源",
-  "suggestion_text": "那么一个在陶渊明的诗歌中,另一个就在九寨.鲁能胜地",
-  "condition_type": "其他",
-  "sentence": "有人说:如果世界上有两个桃花源,那么一个在陶渊明的诗歌中,另一个就在九寨.鲁能胜地",
-  "sources": [
-   "CTRIP_3970738",
-   "CTRIP_4063694"
-  ],
-  "frequency": 2
  },
  {
   "record_id": "CTRIP_3970738",
@@ -6602,42 +4856,10 @@
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
-  "condition_text": "是一个大家庭出行",
-  "suggestion_text": "一定要预约酒店提供的欧美式下茶茶、家庭晚宴",
-  "condition_type": "人群",
-  "sentence": "如果是一个大家庭出行,一定要预约酒店提供的欧美式下茶茶、家庭晚宴",
-  "sources": [
-   "CTRIP_3970738"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3970738",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
   "condition_text": "生活有开关",
   "suggestion_text": "家人们和睦相聚就是以键快乐",
   "condition_type": "其他",
   "sentence": "如果生活有开关,家人们和睦相聚就是以键快乐",
-  "sources": [
-   "CTRIP_3970738"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3970738",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "情侣、闺蜜出游",
-  "suggestion_text": "可以选择热辣沸腾的火锅或者汤鲜肉嫩石锅藏香鸡",
-  "condition_type": "人群",
-  "sentence": "如果情侣、闺蜜出游,可以选择热辣沸腾的火锅或者汤鲜肉嫩石锅藏香鸡",
   "sources": [
    "CTRIP_3970738"
   ],
@@ -6782,22 +5004,6 @@
   "suggestion_text": "那星星点点的烛光点缀让夜晚都变得更加浪漫了",
   "condition_type": "时间",
   "sentence": "饭后最适合漫步消食,那星星点点的烛光点缀让夜晚都变得更加浪漫了",
-  "sources": [
-   "CTRIP_3971596"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3971596",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "一般建议",
-  "suggestion_text": "徒步探访藏族村寨文化",
-  "condition_type": "一般",
-  "sentence": "从酒店开车过来仅需几分钟车程,安详静谧的空间,最适合徒步探访藏族村寨文化",
   "sources": [
    "CTRIP_3971596"
   ],
@@ -6956,24 +5162,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "避免",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "避免零散预定各个地方的酒店和景点门票,我们提前预定了25号到27号的成都—黄龙—九寨沟三天两晚旅行团,现",
-  "condition_type": "时间",
-  "sentence": "为了避免零散预定各个地方的酒店和景点门票,我们提前预定了25号到27号的成都—黄龙—九寨沟三天两晚旅行团,现在想想,这个决定是非常明智的,一路上的吃住行有导游的安排,确实省了不少心",
-  "sources": [
-   "CTRIP_4005525",
-   "CTRIP_4027753",
-   "CTRIP_4018116"
-  ],
-  "frequency": 3
- },
- {
-  "record_id": "CTRIP_4005525",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
   "condition_text": "有去海拔较高的地方旅行",
@@ -7034,24 +5222,6 @@
   "suggestion_text": "闭着眼睛去感受一下她宁静的气氛该多好啊,可惜池边都围满了人,像城墙一样坚固,根本挤不进去,唉,这就是热门景点旅游的普遍现象了",
   "condition_type": "其他",
   "sentence": "大自然到底是何等垂青这片土地,才给了他们如此美景啊!如果能躺在五彩池边,闭着眼睛去感受一下她宁静的气氛该多好啊,可惜池边都围满了人,像城墙一样坚固,根本挤不进去,唉,这就是热门景点旅游的普遍现象了",
-  "sources": [
-   "CTRIP_4005525",
-   "CTRIP_4027753",
-   "CTRIP_4018116"
-  ],
-  "frequency": 3
- },
- {
-  "record_id": "CTRIP_4005525",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "尽量",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "不要洗澡洗头,以免感冒,睡觉侧着睡,避免睡眠中出现高原反应",
-  "condition_type": "时间",
-  "sentence": "由于这一天是从海拔500米的成都直接上到海拔3千多米,导游特别嘱咐我们尽量不要洗澡洗头,以免感冒,睡觉侧着睡,避免睡眠中出现高原反应",
   "sources": [
    "CTRIP_4005525",
    "CTRIP_4027753",
@@ -7204,42 +5374,6 @@
   "frequency": 3
  },
  {
-  "record_id": "CTRIP_4005525",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "避免",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "避免堵车,我们四点就打车去了北川机场,到机场才下午五点,晚上八点半的飞机,我们在一家自助餐厅度过了旅行最",
-  "condition_type": "时间",
-  "sentence": "由于之前的的士师傅说过,由于重庆路比较窄,单行道多,所以上下班高峰期堵车很严重,为了避免堵车,我们四点就打车去了北川机场,到机场才下午五点,晚上八点半的飞机,我们在一家自助餐厅度过了旅行最后的三个小时",
-  "sources": [
-   "CTRIP_4005525",
-   "CTRIP_4027753",
-   "CTRIP_4018116"
-  ],
-  "frequency": 3
- },
- {
-  "record_id": "CTRIP_4005525",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "要说遗憾",
-  "suggestion_text": "那就是没有在五花海多待一会",
-  "condition_type": "其他",
-  "sentence": "这场说走就走的旅行从成都开始到重庆结束,既让我领略到了大自然的鬼斧神工,又让我感受到了每个城市不同的性格,如果要说遗憾,那就是没有在五花海多待一会",
-  "sources": [
-   "CTRIP_4005525",
-   "CTRIP_4027753",
-   "CTRIP_4018116"
-  ],
-  "frequency": 3
- },
- {
   "record_id": "CTRIP_4002947",
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
@@ -7250,22 +5384,6 @@
   "suggestion_text": "意思是不拖沓),我保证不吼你",
   "condition_type": "其他",
   "sentence": "我点头如捣蒜,好好好,只要你出门不掉东西、不皮(四川话,意思是不拖沓),我保证不吼你",
-  "sources": [
-   "CTRIP_4002947"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4002947",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "尽量",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "开SUV或越野,轿车伤底盘",
-  "condition_type": "时间",
-  "sentence": "因G347茂县—黑水铺设沥青路面交通管制,每天中午1点—3点放行,故选择从米亚罗经G317—G248—S302到黑水,全程196公里,米亚罗隧道封闭施工走临时便道,通行缓慢,翻过雅克夏雪山隧道一直到羊茸哈德藏寨,修边坡、修路,路况极差,尽量开SUV或越野,轿车伤底盘",
   "sources": [
    "CTRIP_4002947"
   ],
@@ -7356,22 +5474,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "不要成为第二个峨眉山猴群,被游客宠得嚣张跋扈",
-  "condition_type": "一般",
-  "sentence": "真希望不要成为第二个峨眉山猴群,被游客宠得嚣张跋扈",
-  "sources": [
-   "CTRIP_4002947"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4002947",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
   "condition_text": "令你愉悦",
@@ -7422,22 +5524,6 @@
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "的景色在路上”的含义",
-  "condition_type": "一般",
-  "sentence": "其实啊,也只有在自驾川西的过程中,你才能深深体会“最好的景色在路上”的含义",
-  "sources": [
-   "CTRIP_4002947"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4002947",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
   "condition_text": "天气条件（句内）",
   "suggestion_text": "就是晴朗中还带着妖娆的云彩",
   "condition_type": "天气",
@@ -7474,38 +5560,6 @@
   "suggestion_text": "那这个景点的风光和运气难免会有很大的关系,镜海就是这样",
   "condition_type": "其他",
   "sentence": "如果只有一面之缘,那这个景点的风光和运气难免会有很大的关系,镜海就是这样",
-  "sources": [
-   "CTRIP_4002947"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4002947",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "坐左边可观海子",
-  "condition_type": "一般",
-  "sentence": "4、观光车采用公交模式运行,大部分景点都设有站台,树正沟建议坐左边可观海子;则查洼沟也坐左边,日则沟就要坐右边,也是风景最集中、最精华的一段",
-  "sources": [
-   "CTRIP_4002947"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4002947",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "则查洼沟也坐左边,日则沟就要坐右边,也是风景最集中、最精华的一段",
-  "condition_type": "一般",
-  "sentence": "4、观光车采用公交模式运行,大部分景点都设有站台,树正沟建议坐左边可观海子;则查洼沟也坐左边,日则沟就要坐右边,也是风景最集中、最精华的一段",
   "sources": [
    "CTRIP_4002947"
   ],
@@ -7572,22 +5626,6 @@
   "sentence": "一组组碧透斑斓的彩池,宛如五彩珍珠镶嵌在原始森林中,池中有池,池外套池,堤联岸接,顺势层叠;池面澄净无尘,望若明镜;池旁池中,到处是木石花草,翠柏盘根,令人叹为观止",
   "sources": [
    "CTRIP_4114244"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4066061",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "我从 重庆 到成都 的动车",
-  "suggestion_text": "就要坐最早六点左右的才能顺利转乘",
-  "condition_type": "交通",
-  "sentence": "意味着如果我从 重庆 到成都 的动车,就要坐最早六点左右的才能顺利转乘",
-  "sources": [
-   "CTRIP_4066061"
   ],
   "frequency": 1
  },
@@ -7702,40 +5740,6 @@
    "CTRIP_4066061"
   ],
   "frequency": 1
- },
- {
-  "record_id": "CTRIP_3996473",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "别",
-  "condition_text": "装备条件（句内）",
-  "suggestion_text": "别忘再点一份甜水面和钟水饺哦,米道老嗲咯,别问我为什么一定要去那里,去就对了~至于成都的景点嘛,金沙遗",
-  "condition_type": "装备",
-  "sentence": "另可去西大街新城市广场附近吃谭豆花和姜蹄花,别忘再点一份甜水面和钟水饺哦,米道老嗲咯,别问我为什么一定要去那里,去就对了~至于成都的景点嘛,金沙遗址,三星堆遗址必去;武侯祠中规中矩,杜甫草堂毫无性价比,四川博物馆真心没什么好藏品;锦里,宽窄巷子商业气氛浓重,个人观点仅供参考",
-  "sources": [
-   "CTRIP_3996473",
-   "CTRIP_4027862"
-  ],
-  "frequency": 2
- },
- {
-  "record_id": "CTRIP_3996473",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "下次来成都旅游",
-  "suggestion_text": "我想必还会来体验,体验这鹪鹩的魅力",
-  "condition_type": "其他",
-  "sentence": "若下次来成都旅游,我想必还会来体验,体验这鹪鹩的魅力",
-  "sources": [
-   "CTRIP_3996473",
-   "CTRIP_4027862"
-  ],
-  "frequency": 2
  },
  {
   "record_id": "CTRIP_3996473",
@@ -7929,57 +5933,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "坐车进出的话要有所准备",
-  "suggestion_text": "我在回程时碰到小塌方,起码处理6小时以上,如果正好堵在没餐馆的路段",
-  "condition_type": "装备",
-  "sentence": "8. 8.茂县段容易遇塌方,如果坐车进出的话要有所准备,我在回程时碰到小塌方,起码处理6小时以上,如果正好堵在没餐馆的路段,那只好挨饿了,还可能影响你的后续行程哦~",
-  "sources": [
-   "CTRIP_3996473",
-   "CTRIP_4027862"
-  ],
-  "frequency": 2
- },
- {
-  "record_id": "CTRIP_3996473",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "坐车进出的话要有所准备",
-  "suggestion_text": "那只好挨饿了,还可能影响你的后续行程哦~",
-  "condition_type": "装备",
-  "sentence": "8. 8.茂县段容易遇塌方,如果坐车进出的话要有所准备,我在回程时碰到小塌方,起码处理6小时以上,如果正好堵在没餐馆的路段,那只好挨饿了,还可能影响你的后续行程哦~",
-  "sources": [
-   "CTRIP_3996473",
-   "CTRIP_4027862"
-  ],
-  "frequency": 2
- },
- {
-  "record_id": "CTRIP_3996473",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "正好堵在没餐馆的路段",
-  "suggestion_text": "那只好挨饿了,还可能影响你的后续行程哦~",
-  "condition_type": "其他",
-  "sentence": "8. 8.茂县段容易遇塌方,如果坐车进出的话要有所准备,我在回程时碰到小塌方,起码处理6小时以上,如果正好堵在没餐馆的路段,那只好挨饿了,还可能影响你的后续行程哦~",
-  "sources": [
-   "CTRIP_3996473",
-   "CTRIP_4027862"
-  ],
-  "frequency": 2
- },
- {
-  "record_id": "CTRIP_3996473",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
@@ -7991,22 +5944,6 @@
    "CTRIP_4027862"
   ],
   "frequency": 2
- },
- {
-  "record_id": "CTRIP_4019798",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "装备条件（句内）",
-  "suggestion_text": "不要再次发生意外",
-  "condition_type": "装备",
-  "sentence": "21年6月再次前往九寨沟,再次订好酒店,买好直飞九寨沟机票,请好假准备前往九寨沟,希望不要再次发生意外",
-  "sources": [
-   "CTRIP_4019798"
-  ],
-  "frequency": 1
  },
  {
   "record_id": "CTRIP_4019798",
@@ -8037,54 +5974,6 @@
   "sentence": "如果终点是原始森林,那么一天的时间会有点紧张",
   "sources": [
    "CTRIP_4019798"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3947275",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "一定要坐飞机!了解到她的这个缘由",
-  "suggestion_text": "我们调整了一下行程,目标指向九寨沟",
-  "condition_type": "交通",
-  "sentence": "宇宙飞船周边还没人说坐过,可暂且一放,这个飞机,却有家里一干人等都坐过的,还时不时炫耀一番,好生讨厌,所以,这次一定去云南,主要是一定要坐飞机!了解到她的这个缘由,我们调整了一下行程,目标指向九寨沟",
-  "sources": [
-   "CTRIP_3947275"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3947275",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "小时候见过一张照片,有很多人站在佛脚的一枚指甲上,让我惊叹不已,引发了我对乐山大佛最原始的向往",
-  "condition_type": "一般",
-  "sentence": "记得小时候见过一张照片,有很多人站在佛脚的一枚指甲上,让我惊叹不已,引发了我对乐山大佛最原始的向往",
-  "sources": [
-   "CTRIP_3947275"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3947275",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "回来早了",
-  "suggestion_text": "可以换前面的车票提前走",
-  "condition_type": "其他",
-  "sentence": "成都流水发车,乐山每20分钟一班,我一下车就买了返程的车票,售票员说如果回来早了,可以换前面的车票提前走",
-  "sources": [
-   "CTRIP_3947275"
   ],
   "frequency": 1
  },
@@ -8301,22 +6190,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "尽量",
-  "condition_text": "一般建议",
-  "suggestion_text": "少的进行人为构筑,这种人与自然和谐共处、相得益彰的作法和效果,正是人类认识自然、改造自然的至高境界",
-  "condition_type": "一般",
-  "sentence": "而在千百年间不同*程度的地质灾害面前,都江堰始终岿然如初,则得益于古人充分运用了天然地貌之利,因势利导,尽量少的进行人为构筑,这种人与自然和谐共处、相得益彰的作法和效果,正是人类认识自然、改造自然的至高境界",
-  "sources": [
-   "CTRIP_3947275"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3947275",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "若",
   "condition_text": "现",
@@ -8495,74 +6368,10 @@
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "建议",
-  "condition_text": "游客为孩子",
-  "suggestion_text": "寄存在峨眉山高铁站内(大包30,小包15,可存到次日,存得多可讲价),带背包上山",
-  "condition_type": "人群",
-  "sentence": "注3:首站先到峨眉山,有部分山路要步行,行李箱建议寄存在峨眉山高铁站内(大包30,小包15,可存到次日,存得多可讲价),带背包上山,建议穿长裤和长袖,背包放大人和小孩外套和打底,以及次日换洗衣物,防寒防晒和日用品,山顶比山脚低13度左右,加上山风正常会比较凉,尤其是晚上和看日出的时候尤其冷",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "游客为孩子",
-  "suggestion_text": "建议穿长裤和长袖,背包放大人和小孩外套",
-  "condition_type": "人群",
-  "sentence": "注3:首站先到峨眉山,有部分山路要步行,行李箱建议寄存在峨眉山高铁站内(大包30,小包15,可存到次日,存得多可讲价),带背包上山,建议穿长裤和长袖,背包放大人和小孩外套和打底,以及次日换洗衣物,防寒防晒和日用品,山顶比山脚低13度左右,加上山风正常会比较凉,尤其是晚上和看日出的时候尤其冷",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
   "condition_text": "一般建议",
   "suggestion_text": "叫景区急救或者到吸氧区缓一下(我们四大两小两瓶氧气瓶就够用了)",
   "condition_type": "一般",
   "sentence": "注6:景区内有吸氧区,氧气瓶都不行时建议叫景区急救或者到吸氧区缓一下(我们四大两小两瓶氧气瓶就够用了)",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "第一站成都玩就建议飞双流)",
-  "suggestion_text": "坐地铁到成都东高铁站,高铁站解决午餐",
-  "condition_type": "其他",
-  "sentence": "简单行程:广州早航班飞成都天府(便宜点,如果第一站成都玩就建议飞双流),坐地铁到成都东高铁站,高铁站解决午餐",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "游客为孩子",
-  "suggestion_text": "共享单车)到嘉兴路(推荐冯四孃的跷脚牛肉、赵鸭子的甜皮鸭、小豆海棠)开始逛吃——乐山大佛——继续逛吃(上中顺)——宵夜推",
-  "condition_type": "人群",
-  "sentence": "简单行程:调闹钟——日出——早餐——云海——下山——乐山——酒店放行李——打车(如果没带小孩建议共享单车)到嘉兴路(推荐冯四孃的跷脚牛肉、赵鸭子的甜皮鸭、小豆海棠)开始逛吃——乐山大佛——继续逛吃(上中顺)——宵夜推荐长药好运油炸",
   "sources": [
    "CTRIP_4137130"
   ],
@@ -8606,139 +6415,11 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "直接入园逛逛,也可以乘船,乘船没那么累也可以看到大佛,但看不了里面的其他点,且没有在佛脚观佛时的震撼感",
-  "condition_type": "一般",
-  "sentence": "乐山大佛个人建议直接入园逛逛,也可以乘船,乘船没那么累也可以看到大佛,但看不了里面的其他点,且没有在佛脚观佛时的震撼感",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "试下长药好运油炸",
-  "condition_type": "一般",
-  "sentence": "上中顺(鞠婆婆绵绵冰、海汇源烧麦鲜肉口味、九九豆腐脑、九妹凤爪)少量多试,逛吃到饱,然后找附近商场逛逛,宵夜建议试下长药好运油炸",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
   "trigger": "推荐",
   "condition_text": "一般建议",
   "suggestion_text": ":酥肉豆腐脑、肥肠夹饼、乐山钵钵鸡、蛋烘糕、酥肉咔饼、红糖锅盔、狼牙土豆、乐山麻辣烫、叶儿粑、夹丝豆腐干、咔咔",
   "condition_type": "一般",
   "sentence": "小食推荐:酥肉豆腐脑、肥肠夹饼、乐山钵钵鸡、蛋烘糕、酥肉咔饼、红糖锅盔、狼牙土豆、乐山麻辣烫、叶儿粑、夹丝豆腐干、咔咔",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "不坐大巴",
-  "suggestion_text": "坐7座商务车跟人拼车则是100/人(小孩同价)",
-  "condition_type": "其他",
-  "sentence": "如果不坐大巴,坐7座商务车跟人拼车则是100/人(小孩同价);",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "游客为孩子",
-  "suggestion_text": "订星宇国际大酒店(618两晚含两张大巴票、藏服体验、包早、一份水果),一天有两班大巴车直接到酒店,1250/1700,至",
-  "condition_type": "人群",
-  "sentence": "建议订星宇国际大酒店(618两晚含两张大巴票、藏服体验、包早、一份水果),一天有两班大巴车直接到酒店,1250/1700,至少提前一星期让酒店查看是否能订到票,确认能订到再下单,小孩的大巴票要另补75(我与酒店沟通让他们代买最后是50/人)",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "8点出头能入园(酒店打车过去6分钟)",
-  "condition_type": "一般",
-  "sentence": "酒店解决早餐后出发,九寨沟景点较多,建议8点出头能入园(酒店打车过去6分钟)",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "阿诺藏餐",
-  "condition_type": "一般",
-  "sentence": "晚饭推荐阿诺藏餐",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "包车的话会直接送到索道检票口)",
-  "suggestion_text": "上行索道80,下行索道40,观光车(20,从索道到五彩池的路,一天五千份,可省一小时步行",
-  "condition_type": "交通",
-  "sentence": "黄龙门票60(入园时间0800-1630,旺季170,淡季60,12月16日-05月31日是淡季),游客中心附近有绿皮车(免费)送至索道检票附近(如果包车的话会直接送到索道检票口),上行索道80,下行索道40,观光车(20,从索道到五彩池的路,一天五千份,可省一小时步行,一定要提前几天订)",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "包车的话会直接送到索道检票口)",
-  "suggestion_text": "一定要提前几天订)",
-  "condition_type": "交通",
-  "sentence": "黄龙门票60(入园时间0800-1630,旺季170,淡季60,12月16日-05月31日是淡季),游客中心附近有绿皮车(免费)送至索道检票附近(如果包车的话会直接送到索道检票口),上行索道80,下行索道40,观光车(20,从索道到五彩池的路,一天五千份,可省一小时步行,一定要提前几天订)",
   "sources": [
    "CTRIP_4137130"
   ],
@@ -8771,38 +6452,6 @@
   "suggestion_text": "游玩是三到四个小时,逛完正常下午",
   "condition_type": "时间",
   "sentence": "景区建议游玩是三到四个小时,逛完正常下午",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "三道街老宅子肥肠鱼",
-  "condition_type": "一般",
-  "sentence": "简单行程:早餐附近串串或者面馆——打车到文殊院——蜀艺剧院川剧表演——洞子口张老二凉粉——宫廷糕点——打车到宽窄巷子——晚饭推荐三道街老宅子肥肠鱼",
-  "sources": [
-   "CTRIP_4137130"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4137130",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "没带小孩的",
-  "suggestion_text": "共享单车会更方便",
-  "condition_type": "人群",
-  "sentence": "没标打车的就主步行也能到,不远,打车的其实如果没带小孩的,共享单车会更方便",
   "sources": [
    "CTRIP_4137130"
   ],
@@ -8893,38 +6542,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "尔盖花湖景区依然要坐景交车",
-  "suggestion_text": "你想步行都不行",
-  "condition_type": "其他",
-  "sentence": "若尔盖花湖景区依然要坐景交车,你想步行都不行",
-  "sources": [
-   "CTRIP_4059371"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4059371",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "去县医院做核酸检测",
-  "suggestion_text": "那还不如放弃呢!扎尕那住宿从下往上依次为东哇村,业日村,达日村,代巴村",
-  "condition_type": "其他",
-  "sentence": "如果去县医院做核酸检测,那还不如放弃呢!扎尕那住宿从下往上依次为东哇村,业日村,达日村,代巴村",
-  "sources": [
-   "CTRIP_4059371"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4059371",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
@@ -8947,22 +6564,6 @@
   "suggestion_text": "可以放弃",
   "condition_type": "时间",
   "sentence": "如果时间有限,可以放弃",
-  "sources": [
-   "CTRIP_4059371"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4059371",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "尔盖花湖、扎尕那等地与新冠疫情插肩而过",
-  "suggestion_text": "但对我们没有产生任何影响",
-  "condition_type": "其他",
-  "sentence": "老天对我们十分眷顾,虽然在若尔盖花湖、扎尕那等地与新冠疫情插肩而过,但对我们没有产生任何影响",
   "sources": [
    "CTRIP_4059371"
   ],
@@ -9007,60 +6608,12 @@
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
-  "condition_text": "你自驾来九寨沟",
-  "suggestion_text": "进入九道拐之前,你就会看见路旁的这一处风景,在四周高山的妥协下出现了一大块平地,不同于高原上的片片草原,这里是一处难得一见的高原湿地,这就是甘海子",
-  "condition_type": "交通",
-  "sentence": "如果你自驾来九寨沟,进入九道拐之前,你就会看见路旁的这一处风景,在四周高山的妥协下出现了一大块平地,不同于高原上的片片草原,这里是一处难得一见的高原湿地,这就是甘海子",
-  "sources": [
-   "CTRIP_3969978"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3969978",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
   "condition_text": "你的旅途里有佳人作伴",
   "suggestion_text": "那就权当再议",
   "condition_type": "其他",
   "sentence": "虽然甘海子在路边就可以饱览,不必进入景区,但里面新增了不少拍照打卡的道具,如果你的旅途里有佳人作伴,那就权当再议",
   "sources": [
    "CTRIP_3969978"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_2117447",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "是一人出行去浦东机场的话这个价格偷笑了",
-  "suggestion_text": "还不用经历排队长龙的痛苦",
-  "condition_type": "其他",
-  "sentence": "点对点接送,两个机场任选,如果是一人出行去浦东机场的话这个价格偷笑了,还不用经历排队长龙的痛苦",
-  "sources": [
-   "CTRIP_2117447"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_2117447",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "下,坐上了私车,也就是黑车,10块,同行拼车的还有两男的游客,一起上车的,觉得应该还安全",
-  "condition_type": "一般",
-  "sentence": "本想打出租车去富侨足疗,问了当地人据说要价50,OMG!在他们的建议下,坐上了私车,也就是黑车,10块,同行拼车的还有两男的游客,一起上车的,觉得应该还安全",
-  "sources": [
-   "CTRIP_2117447"
   ],
   "frequency": 1
  },
@@ -9101,38 +6654,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "在兰州T2航站下机",
-  "suggestion_text": "要去第5出口,对面就是城际车站",
-  "condition_type": "其他",
-  "sentence": "如果在兰州T2航站下机,要去第5出口,对面就是城际车站",
-  "sources": [
-   "CTRIP_3975883"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3975883",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "的酒店之一,但房间的用品旧些",
-  "condition_type": "一般",
-  "sentence": "属最好的酒店之一,但房间的用品旧些",
-  "sources": [
-   "CTRIP_3975883"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3975883",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "推荐",
   "condition_text": "一般建议",
@@ -9155,54 +6676,6 @@
   "suggestion_text": "那车票是必须要购买的,不然景区内全程60公里,走是走不下来的",
   "condition_type": "其他",
   "sentence": "如果各位只是游览观光,那车票是必须要购买的,不然景区内全程60公里,走是走不下来的",
-  "sources": [
-   "CTRIP_4008520"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4008520",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "是自驾或是徒步",
-  "suggestion_text": "那就另当别论了",
-  "condition_type": "交通",
-  "sentence": "但如果是自驾或是徒步,那就另当别论了",
-  "sources": [
-   "CTRIP_4008520"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4008520",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "尔盖花湖、九曲黄河第一湾以及川主寺等地",
-  "suggestion_text": "详情如下:",
-  "condition_type": "其他",
-  "sentence": "同时在九黄机场亦可乘车直达黄龙、牟尼沟、红原瓦切乡、若尔盖花湖、九曲黄河第一湾以及川主寺等地,详情如下:",
-  "sources": [
-   "CTRIP_4008520"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4008520",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "不能在用餐时间赶到餐厅",
-  "suggestion_text": "那景区内就没有其他补给点了",
-  "condition_type": "其他",
-  "sentence": "建议游客自备一些干粮,否则若不能在用餐时间赶到餐厅,那景区内就没有其他补给点了",
   "sources": [
    "CTRIP_4008520"
   ],
@@ -9390,22 +6863,6 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "下,我们晚餐就在“春怡火锅”品尝当地的特色,味道真的很好,给我们留下深刻的记忆!",
-  "condition_type": "一般",
-  "sentence": "在师傅的推荐下,我们晚餐就在“春怡火锅”品尝当地的特色,味道真的很好,给我们留下深刻的记忆!",
-  "sources": [
-   "CTRIP_4059452"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4059452",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
   "trigger": "最好",
   "condition_text": "时间条件（句内）",
   "suggestion_text": "在下午就去游玩、拍照",
@@ -9443,38 +6900,6 @@
   "suggestion_text": "的“牦牛肉汤锅”品尝了当志的特色,非常好!可惜晚上高原的风太刺骨,没能细品小镇的夜景",
   "condition_type": "时间",
   "sentence": "小镇不大,但环境优美,我们下榻在小镇的藏式精品店,晚上在当地人推荐的“牦牛肉汤锅”品尝了当志的特色,非常好!可惜晚上高原的风太刺骨,没能细品小镇的夜景",
-  "sources": [
-   "CTRIP_4059452"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4059452",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "八十年代,在出差去安徽的火车上,乘客聊天中有个去过峨眉山的长者说,峨眉山非常好",
-  "condition_type": "一般",
-  "sentence": "记得八十年代,在出差去安徽的火车上,乘客聊天中有个去过峨眉山的长者说,峨眉山非常好,一定要去",
-  "sources": [
-   "CTRIP_4059452"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4059452",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "一定要去",
-  "condition_type": "一般",
-  "sentence": "记得八十年代,在出差去安徽的火车上,乘客聊天中有个去过峨眉山的长者说,峨眉山非常好,一定要去",
   "sources": [
    "CTRIP_4059452"
   ],
@@ -9550,43 +6975,11 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "尔盖到松潘途经景观",
-  "suggestion_text": "名叫“劦山劦”)",
-  "condition_type": "其他",
-  "sentence": "(若尔盖到松潘途经景观,名叫“劦山劦”)",
-  "sources": [
-   "CTRIP_4057070"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4057070",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
   "trigger": "如果",
   "condition_text": "不是相关专家",
   "suggestion_text": "不易分别二者的不同",
   "condition_type": "其他",
   "sentence": "藏传佛教和苯教虽说一度水火不容,但交锋中难免融合,如今我们看到藏传佛教的一些咒语、仪轨、神像等等,不少就承袭自雍仲苯教,如果不是相关专家,不易分别二者的不同",
-  "sources": [
-   "CTRIP_4057070"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4057070",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "尔盖向东南约160公里到达阿坝州松潘县",
-  "suggestion_text": "继续驱车在山雄峡峻的岷山险道上过隧穿林,直到主峰雪宝鼎脚下,终于看到了黄龙风景区的大门",
-  "condition_type": "其他",
-  "sentence": "若尔盖向东南约160公里到达阿坝州松潘县,继续驱车在山雄峡峻的岷山险道上过隧穿林,直到主峰雪宝鼎脚下,终于看到了黄龙风景区的大门",
   "sources": [
    "CTRIP_4057070"
   ],
@@ -9790,75 +7183,11 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
-  "trigger": "如果…的话",
-  "condition_text": "住宿还想体验感好一些",
-  "suggestion_text": "建议可以选当地的几家5星级酒店,硬件和环境都有超5星的水准",
-  "condition_type": "其他",
-  "sentence": "如果住宿还想体验感好一些的话,建议可以选当地的几家5星级酒店,硬件和环境都有超5星的水准",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
   "trigger": "要是",
   "condition_text": "环保车和徒步",
   "suggestion_text": "环保车在每个景点都有站点,但有些站点并不是每个车都去尤其是往里面的景点,这个上车时注意问清楚",
   "condition_type": "其他",
   "sentence": "B.景区内部交通-主要是环保车和徒步,环保车在每个景点都有站点,但有些站点并不是每个车都去尤其是往里面的景点,这个上车时注意问清楚",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "第一天可以一早坐早班车直接进到日则沟最里面的芳草海(或天鹅海),然后徒步沿步道一路下山去诺日朗",
-  "condition_type": "时间",
-  "sentence": "时间安排上不太赶的话,建议第一天可以一早坐早班车直接进到日则沟最里面的芳草海(或天鹅海),然后徒步沿步道一路下山去诺日朗,可以最大程度的避开部分人流",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "可以最大程度的避开部分人",
-  "condition_type": "时间",
-  "sentence": "时间安排上不太赶的话,建议第一天可以一早坐早班车直接进到日则沟最里面的芳草海(或天鹅海),然后徒步沿步道一路下山去诺日朗,可以最大程度的避开部分人流",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "可以离开人多的观景台下到栈道,沿右手边往里走进去一点,你会感受到长海的那份开阔和静美",
-  "condition_type": "一般",
-  "sentence": "第二天还是一早坐早班车直接到则查洼沟最里面的长海,长海现在沿岸边修了一段栈道,建议可以离开人多的观景台下到栈道,沿右手边往里走进去一点,你会感受到长海的那份开阔和静美",
   "sources": [
    "CTRIP_4032329"
   ],
@@ -9933,54 +7262,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "冷鲜牦牛肉的质量好(这个后来在郎木寺也有相同的体验)",
-  "suggestion_text": "口味上佳可媲美进口的原切谷饲,再下点蔬菜,加个特色藏香猪肉熟菜",
-  "condition_type": "其他",
-  "sentence": "C.食-建议城中就餐可以点火锅,主要是冷鲜牦牛肉的质量好(这个后来在郎木寺也有相同的体验),口味上佳可媲美进口的原切谷饲,再下点蔬菜,加个特色藏香猪肉熟菜,就是卫生,适口营养的一餐了",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "冷鲜牦牛肉的质量好(这个后来在郎木寺也有相同的体验)",
-  "suggestion_text": "就是卫生,适口营养的一餐了",
-  "condition_type": "其他",
-  "sentence": "C.食-建议城中就餐可以点火锅,主要是冷鲜牦牛肉的质量好(这个后来在郎木寺也有相同的体验),口味上佳可媲美进口的原切谷饲,再下点蔬菜,加个特色藏香猪肉熟菜,就是卫生,适口营养的一餐了",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "只想走马观花的话干脆住到迭部",
-  "suggestion_text": "也就26公里的路程,但吃饭/住宿的选择和质量应该好不少",
-  "condition_type": "其他",
-  "sentence": "所以建议还是要通过携程等代理预定,这样应该会有一定的约束和保证,或者如果只想走马观花的话干脆住到迭部,也就26公里的路程,但吃饭/住宿的选择和质量应该好不少",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
@@ -10016,22 +7297,6 @@
   "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
-  "suggestion_text": "可以步行浏览,其实都在一个不大的镇上",
-  "condition_type": "一般",
-  "sentence": "郎木寺和格儿底寺到了后景点停车不是太方便,建议可以步行浏览,其实都在一个不大的镇上",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
   "suggestion_text": "可以顺路往回走,去看下大路僧舍后边山坡上的大经堂,文思学院等原汁原味的寺院,一定会有意外的收获和体验",
   "condition_type": "一般",
   "sentence": "四川这边的格儿底寺相对比较朴实,一般游客车子会直接进到纳摩峡谷入口处的广场看过对应的大殿后徒步走下峡谷,建议可以顺路往回走,去看下大路僧舍后边山坡上的大经堂,文思学院等原汁原味的寺院,一定会有意外的收获和体验",
@@ -10048,89 +7313,9 @@
   "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
-  "suggestion_text": "还是同扎尕那类似",
-  "condition_type": "一般",
-  "sentence": "晚餐郎木寺镇上各种中餐馆都有,建议还是同扎尕那类似,可以点火锅,主要是当地的冷鲜牦牛肉的质量好",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "可以点火锅,主要是当地的冷鲜牦牛肉的质量好",
-  "condition_type": "一般",
-  "sentence": "晚餐郎木寺镇上各种中餐馆都有,建议还是同扎尕那类似,可以点火锅,主要是当地的冷鲜牦牛肉的质量好",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "可以考虑有一定口碑水准的民宿,这也是后来在拉卜楞寺的对比心得",
-  "condition_type": "一般",
-  "sentence": "建议可以考虑有一定口碑水准的民宿,这也是后来在拉卜楞寺的对比心得",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
   "suggestion_text": "可以和当地的藏民一样,完整的转一下经,也就是除了3.5公里转经廊外继续沿寺院外墙绕整个寺院一周,差不多6-7公里,途中可",
   "condition_type": "一般",
   "sentence": "有一定体力的,建议可以和当地的藏民一样,完整的转一下经,也就是除了3.5公里转经廊外继续沿寺院外墙绕整个寺院一周,差不多6-7公里,途中可以从后山的通道进入寺院区再次探访下,也是一种别样的体验",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "住有一定水准的民宿,软硬件接近沿海的水平,要比前面郎木寺正规的准星级宾馆好不少",
-  "condition_type": "一般",
-  "sentence": "D.住-建议住有一定水准的民宿,软硬件接近沿海的水平,要比前面郎木寺正规的准星级宾馆好不少",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "同仁新开的一家准高星级宾馆,房间硬件/床品有准5星的水准,早餐也算中规中矩",
-  "condition_type": "一般",
-  "sentence": "D.住-这个重点推荐同仁新开的一家准高星级宾馆,房间硬件/床品有准5星的水准,早餐也算中规中矩",
   "sources": [
    "CTRIP_4032329"
   ],
@@ -10163,38 +7348,6 @@
   "suggestion_text": "要尽快去",
   "condition_type": "一般",
   "sentence": "另外和日寺,尤其是石经所处的小山已经在修游客专用步道,主石经墙外围也已有围栏隔离,估计离商业经营不远了,有兴趣的话建议要尽快去",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "同仁这家新开的准高星级宾馆,房间硬件/床品有准5星的水准,软件管理也还过得去",
-  "condition_type": "一般",
-  "sentence": "D.住-这个继续推荐同仁这家新开的准高星级宾馆,房间硬件/床品有准5星的水准,软件管理也还过得去",
-  "sources": [
-   "CTRIP_4032329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4032329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "隆务寺",
-  "suggestion_text": "整个寺院区和拉卜楞寺一样规模庞大,随心的边走边看还是最好的游览方式",
-  "condition_type": "其他",
-  "sentence": "B.景区内部交通-内部交通的话主要是隆务寺,整个寺院区和拉卜楞寺一样规模庞大,随心的边走边看还是最好的游览方式",
   "sources": [
    "CTRIP_4032329"
   ],
@@ -10269,60 +7422,12 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "我们10月份来 九寨沟",
-  "condition_type": "一般",
-  "sentence": "2021年于我而言是特别的一年,上半年刚刚结束了14天的蜜月之旅,在蜜月旅途中,我们游玩了2天 成都 ,其中在 都江堰 ,讲解员强烈推荐我们10月份来 九寨沟",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "万一",
-  "condition_text": "真的遇到需要应急处理的情况",
-  "suggestion_text": "四川 航空毕竟是地头蛇,哪怕要返航到 成都 机场,总也比其他航空公司方便",
-  "condition_type": "其他",
-  "sentence": "一直听说九黄机场“十飞九黄”,虽然是玩笑的成分居多,但也体现了高原机场的飞行难度,万一真的遇到需要应急处理的情况, 四川 航空毕竟是地头蛇,哪怕要返航到 成都 机场,总也比其他航空公司方便",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "要是",
   "condition_text": "扫健康码和行程码",
   "suggestion_text": "倒也不会耽误很久",
   "condition_type": "其他",
   "sentence": "防疫措施主要是扫健康码和行程码,倒也不会耽误很久",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "只要",
-  "condition_text": "坐3站地铁",
-  "suggestion_text": "20分钟就能到硕放机场了,所以首选肯定是 无锡 新区站",
-  "condition_type": "其他",
-  "sentence": "(2) 无锡 有3个火车站, 无锡 新区站是离机场最近的火车站,只要坐3站地铁,20分钟就能到硕放机场了,所以首选肯定是 无锡 新区站",
   "sources": [
    "CTRIP_4055037"
   ],
@@ -10355,38 +7460,6 @@
   "suggestion_text": "就可以一直吸氧了",
   "condition_type": "其他",
   "sentence": "服务:房间里有吸氧,只要付60元开机费,就可以一直吸氧了",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "玩黄龙的话,住在 松潘 古城",
-  "condition_type": "一般",
-  "sentence": "其他参考:其实也看到很多游记里推荐玩黄龙的话,住在 松潘 古城,那里海拔相对比较低,而且商业配套更丰富,那里还是一处人文景点,有古城墙,是 文成 公主入藏时经过的古城,还立了 文成 公主和松赞干布的雕像",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "那里海拔相对比较低,而且商业配套更丰富,那里还是一处人文景点,有古城墙,是 文成 公主入藏",
-  "condition_type": "一般",
-  "sentence": "其他参考:其实也看到很多游记里推荐玩黄龙的话,住在 松潘 古城,那里海拔相对比较低,而且商业配套更丰富,那里还是一处人文景点,有古城墙,是 文成 公主入藏时经过的古城,还立了 文成 公主和松赞干布的雕像",
   "sources": [
    "CTRIP_4055037"
   ],
@@ -10461,70 +7534,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "只要",
-  "condition_text": "15块一瓶",
-  "suggestion_text": "跟我在酒店对面超市买的25块一瓶的一模一样",
-  "condition_type": "其他",
-  "sentence": "景区只要15块一瓶,跟我在酒店对面超市买的25块一瓶的一模一样",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "扫健康码和行程码",
-  "suggestion_text": "倒也不会耽误很久,除了人多了一点",
-  "condition_type": "其他",
-  "sentence": "我8点从家里打车,8:30就到火车站了,防疫措施主要是扫健康码和行程码,倒也不会耽误很久,除了人多了一点",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "是不吃猪肉的少数民族",
-  "suggestion_text": "你预备咋办呢?实在不知道网评出的川航美食,是怎么出来的",
-  "condition_type": "其他",
-  "sentence": "川航近期推出了红红火火飞机餐,简直太难吃了,肉没几块,还各种糊糊状,红椒肉丝也没味道,我就想问问,如果是不吃猪肉的少数民族,你预备咋办呢?实在不知道网评出的川航美食,是怎么出来的",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "正常开大概1.5小时能到",
-  "suggestion_text": "但国庆节真心堵,一段段红色,等我们开到酒店,已经是晚上10点多了",
-  "condition_type": "其他",
-  "sentence": "从机场到 九寨沟 沟口的酒店如果正常开大概1.5小时能到,但国庆节真心堵,一段段红色,等我们开到酒店,已经是晚上10点多了",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "时间条件（句内）",
@@ -10576,41 +7585,9 @@
   "pattern": "P4_建议推断",
   "trigger": "尽量",
   "condition_text": "一般建议",
-  "suggestion_text": "吃得饱一点",
-  "condition_type": "一般",
-  "sentence": "酒店的早餐虽然中式、西式、面条都有,但口味真的差强人意,但也要尽量吃得饱一点",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "尽量",
-  "condition_text": "一般建议",
   "suggestion_text": "少走点路,努力地继续往前挪动,在还剩1公里的地方,我们跟他说放我们下车自己走过去吧,因为实在是走比车快了",
   "condition_type": "一般",
   "sentence": "司机小哥人非常好,想让我们尽量少走点路,努力地继续往前挪动,在还剩1公里的地方,我们跟他说放我们下车自己走过去吧,因为实在是走比车快了",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "不要急,耐心等待,第一班车一定要等到有座位再上车,因为一般第一部车拉的距离会比较远,最远的地方甚至要行车",
-  "condition_type": "一般",
-  "sentence": "景区的运送速度还是很快的,哪怕你看到很多人排队,也不要急,耐心等待,第一班车一定要等到有座位再上车,因为一般第一部车拉的距离会比较远,最远的地方甚至要行车半小时,没有座位会很不方便",
   "sources": [
    "CTRIP_4055037"
   ],
@@ -10675,22 +7652,6 @@
   "suggestion_text": "徐徐等待,还是可以找到很多机会近距离观赏五彩池,并且打卡合影留念",
   "condition_type": "其他",
   "sentence": "但只要你慢慢行走,徐徐等待,还是可以找到很多机会近距离观赏五彩池,并且打卡合影留念",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "到购物中心贩卖旅游纪念品的铺面里去买,会比专门卖餐食的地方便宜,一桶是10块钱,也会帮你泡好的",
-  "condition_type": "一般",
-  "sentence": "泡面建议到购物中心贩卖旅游纪念品的铺面里去买,会比专门卖餐食的地方便宜,一桶是10块钱,也会帮你泡好的",
   "sources": [
    "CTRIP_4055037"
   ],
@@ -10783,22 +7744,6 @@
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
-  "condition_text": "看到有超市可以进去多逛逛",
-  "suggestion_text": "及时补充点吃的喝的,有些店里还有水果,也可以买点",
-  "condition_type": "其他",
-  "sentence": "2.回来的路上如果看到有超市可以进去多逛逛,及时补充点吃的喝的,有些店里还有水果,也可以买点",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
   "condition_text": "国庆或者高峰期出游",
   "suggestion_text": "还是建议住得离沟口越近越好,现在沟口小镇上蛮繁华的,KFC、巴蜀大将火锅,汽锅鱼好像都有,吃喝不愁,关键是万一叫不到车,走1公里也就到了",
   "condition_type": "时间",
@@ -10867,22 +7812,6 @@
   "suggestion_text": "这个纸包鱼的,我们不太能吃辣就选了豆豉味的,还挺下饭的",
   "condition_type": "一般",
   "sentence": "相对而言,还是很推荐这个纸包鱼的,我们不太能吃辣就选了豆豉味的,还挺下饭的",
-  "sources": [
-   "CTRIP_4055037"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4055037",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "只要",
-  "condition_text": "60元就可以了",
-  "suggestion_text": "但我们担心在景区门口叫车不方便,所以就索性包了往返的车",
-  "condition_type": "其他",
-  "sentence": "提前跟酒店前台约了师傅接送我们,往返黄龙是300元,其实单程只要60元就可以了,但我们担心在景区门口叫车不方便,所以就索性包了往返的车",
   "sources": [
    "CTRIP_4055037"
   ],
@@ -11118,23 +8047,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "日朗游客中心午餐比较贵",
-  "suggestion_text": "建议自备午餐",
-  "condition_type": "其他",
-  "sentence": "*若日朗游客中心午餐比较贵,建议自备午餐",
-  "sources": [
-   "CTRIP_4002122",
-   "CTRIP_4018975"
-  ],
-  "frequency": 2
- },
- {
-  "record_id": "CTRIP_4002122",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "推荐",
   "condition_text": "一般建议",
@@ -11165,74 +8077,6 @@
   "frequency": 2
  },
  {
-  "record_id": "CTRIP_4002122",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "李长青三大炮、凉糕、牛肉焦饼、张飞牛肉、蛋烘糕",
-  "condition_type": "一般",
-  "sentence": "悠然的时光过后两人直奔武侯祠和锦里,因为是两个地道的吃货,对三国文化没有什么太大兴趣所以没有进武侯祠,只是在锦里大吃一通,锦里真是成都小吃的荟萃,种类太多了应接不暇,两人果断决定在此解决晚餐,美食推荐李长青三大炮、凉糕、牛肉焦饼、张飞牛肉、蛋烘糕",
-  "sources": [
-   "CTRIP_4002122",
-   "CTRIP_4018975"
-  ],
-  "frequency": 2
- },
- {
-  "record_id": "CTRIP_4002122",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "巷子酸奶还不错,这也是在宽窄巷子唯一买的吃的东西",
-  "condition_type": "一般",
-  "sentence": "因为乘坐的大巴在宽窄巷子停车,两人顺路逛逛了,人不多,典型的后开发商业街,在熊猫邮局买了几张很有意思的明信片和熊猫小挂件,推荐巷子酸奶还不错,这也是在宽窄巷子唯一买的吃的东西",
-  "sources": [
-   "CTRIP_4002122",
-   "CTRIP_4018975"
-  ],
-  "frequency": 2
- },
- {
-  "record_id": "CTRIP_4002122",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "的,大排长队,强烈推荐椒盐小桃酥,花椒味道很浓郁,开始有点不太能接受,但越吃越爱吃",
-  "condition_type": "一般",
-  "sentence": "在成都不购物是不行的,最后一站是文殊院,最后一餐的美食选择了成都小吃和钟水饺,担担面、叶儿耙、红糖锅盔、糖油果子、棒棒鸡,吃的心满意足后直奔宫廷糕点铺,这也是小伙伴推荐的,大排长队,强烈推荐椒盐小桃酥,花椒味道很浓郁,开始有点不太能接受,但越吃越爱吃,就是比较油,减肥的妹妹要注意",
-  "sources": [
-   "CTRIP_4002122",
-   "CTRIP_4018975"
-  ],
-  "frequency": 2
- },
- {
-  "record_id": "CTRIP_4002122",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "就是比较油,减肥的妹妹要注意",
-  "condition_type": "一般",
-  "sentence": "在成都不购物是不行的,最后一站是文殊院,最后一餐的美食选择了成都小吃和钟水饺,担担面、叶儿耙、红糖锅盔、糖油果子、棒棒鸡,吃的心满意足后直奔宫廷糕点铺,这也是小伙伴推荐的,大排长队,强烈推荐椒盐小桃酥,花椒味道很浓郁,开始有点不太能接受,但越吃越爱吃,就是比较油,减肥的妹妹要注意",
-  "sources": [
-   "CTRIP_4002122",
-   "CTRIP_4018975"
-  ],
-  "frequency": 2
- },
- {
   "record_id": "CTRIP_3970034",
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
@@ -11254,75 +8098,11 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "一定要提前一天预约哦!",
-  "condition_type": "时间",
-  "sentence": "从重庆直飞九寨沟,一个半小时,吃个早饭的时间就到啦!下机后,酒店会安排有专车接送,十分方便,记得,一定要提前一天预约哦!",
-  "sources": [
-   "CTRIP_3970034"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3970034",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "你有一颗麻辣的胃那么快来这里寻找中意的美味吧",
-  "suggestion_text": "另外还有中式点心也非常可口正宗",
-  "condition_type": "其他",
-  "sentence": "在中式餐区,还有各种烧烤以及川西特色的麻辣烫和钵钵鸡,如果你有一颗麻辣的胃那么快来这里寻找中意的美味吧,另外还有中式点心也非常可口正宗",
-  "sources": [
-   "CTRIP_3970034"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3970034",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "想睡懒觉也是可以的",
-  "suggestion_text": "早餐十点二十才会结束,时间很是充足",
-  "condition_type": "其他",
-  "sentence": "酒店的早餐也是在这里,如果想睡懒觉也是可以的,早餐十点二十才会结束,时间很是充足",
-  "sources": [
-   "CTRIP_3970034"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3970034",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "时间条件（句内）",
   "suggestion_text": "从最高点往下走,这样不会太累,时间也会充裕",
   "condition_type": "时间",
   "sentence": "九寨沟景区面积非常大,必须花上一天的时间才能游完精华点,景区的公共交通工具会在每个景点停留,建议从最高点往下走,这样不会太累,时间也会充裕",
-  "sources": [
-   "CTRIP_3970034"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3970034",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "我们重庆人的胃口,加上九寨的早晚温差很大,所以晚上吃火锅还能驱寒哦!",
-  "condition_type": "时间",
-  "sentence": "游完九寨沟已是下午六点多了,回到酒店刚好是晚餐时间,决定和朋友一起在酒店的中餐厅吃热辣沸腾的火锅,正好酒店推出的火锅套餐也很适合我们重庆人的胃口,加上九寨的早晚温差很大,所以晚上吃火锅还能驱寒哦!",
   "sources": [
    "CTRIP_3970034"
   ],
@@ -11355,22 +8135,6 @@
   "suggestion_text": "我想这里会是怎样的迷人,从客房的户外阳台望出去,是一片姹紫嫣红的秋色,是一片五彩缤的森林",
   "condition_type": "时间",
   "sentence": "如果深秋季节的到来,我想这里会是怎样的迷人,从客房的户外阳台望出去,是一片姹紫嫣红的秋色,是一片五彩缤的森林",
-  "sources": [
-   "CTRIP_3970034"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3970034",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "想带纪念品的就可以来这里逛逛",
-  "suggestion_text": "街边还设有许多好看的信箱和木椅帐篷很适合拍照打卡哦!",
-  "condition_type": "装备",
-  "sentence": "在酒店大堂背后,还有一条藏寨风情的小街道,街道一旁是餐厅,一边是当地特色手作卖店,如果想带纪念品的就可以来这里逛逛,街边还设有许多好看的信箱和木椅帐篷很适合拍照打卡哦!",
   "sources": [
    "CTRIP_3970034"
   ],
@@ -11477,22 +8241,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "乘坐高铁自由行",
-  "suggestion_text": "一定要留足时间,从景区出来到高铁站最起码要留3个小时",
-  "condition_type": "交通",
-  "sentence": "顺便说一句,如果乘坐高铁自由行,一定要留足时间,从景区出来到高铁站最起码要留3个小时",
-  "sources": [
-   "CTRIP_3007155"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3007155",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
@@ -11549,38 +8297,6 @@
   "sentence": "请不要老得太快,却明白得太迟",
   "sources": [
    "CTRIP_3007155"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4062730",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "在酒店多住一晚再回程",
-  "condition_type": "一般",
-  "sentence": "出于安全的考虑,从 成都 坐大巴或者自驾前往的朋友建议在酒店多住一晚再回程",
-  "sources": [
-   "CTRIP_4062730"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4062730",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "在 茂县 、叠溪镇或者 松潘 可以稍作停留,除了让司机可以休息下以免疲劳驾驶,还可以感受下 阿坝 州不同地域的文化气息",
-  "condition_type": "一般",
-  "sentence": "PS:推荐在 茂县 、叠溪镇或者 松潘 可以稍作停留,除了让司机可以休息下以免疲劳驾驶,还可以感受下 阿坝 州不同地域的文化气息,感受大美 川西 风景",
-  "sources": [
-   "CTRIP_4062730"
   ],
   "frequency": 1
  },
@@ -11719,22 +8435,6 @@
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "建议",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "去看民宿对面的千古情表演,震撼到一生难忘!",
-  "condition_type": "时间",
-  "sentence": "晚上建议去看民宿对面的千古情表演,震撼到一生难忘!",
-  "sources": [
-   "CTRIP_4040789"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4040789",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
   "condition_text": "一般建议",
   "suggestion_text": "长时间游玩",
   "condition_type": "一般",
@@ -11777,38 +8477,6 @@
   "frequency": 1
  },
  {
-  "record_id": "CTRIP_3993965",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "大家提前在网上预订住宿",
-  "condition_type": "一般",
-  "sentence": "春节期间游客较多,建议大家提前在网上预订住宿",
-  "sources": [
-   "CTRIP_3993965"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3977651",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "下车上个洗手间,活动一下哦~下午18点过就到了,整个车程比以前坐普通大巴舒适太多了,果断又定了回程车票!",
-  "condition_type": "时间",
-  "sentence": "一路上窗外的风景也不错,空气也比较清新,小助手姐姐给我们发了矿泉水,还给我们讲解了风土人情,中午我们在茂县吃午饭,价格和市区里的差不多,我们吃的面12元一碗,整个路程停了三次车,停车休息的时候最好下车上个洗手间,活动一下哦~下午18点过就到了,整个车程比以前坐普通大巴舒适太多了,果断又定了回程车票!",
-  "sources": [
-   "CTRIP_3977651"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "CTRIP_3977651",
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
@@ -11837,22 +8505,6 @@
   "sentence": "服装建议大家穿纯色或者亮色系的衣服,拍照出来很好看的",
   "sources": [
    "CTRIP_3977651"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3950329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "时间富裕的可以留足一天给这里,羌寨和羌族文化还是值得一看,地方有点大,一两个小时玩不了",
-  "condition_type": "时间",
-  "sentence": "茂县是个物产丰富的地方,苹果李子樱桃枇杷啥的,是个农业示范基地,带一句,这里羌族人多,还有古羌城的景点(4A)和博物馆,有时间也可以游览下,建议时间富裕的可以留足一天给这里,羌寨和羌族文化还是值得一看,地方有点大,一两个小时玩不了",
-  "sources": [
-   "CTRIP_3950329"
   ],
   "frequency": 1
  },
@@ -11953,134 +8605,6 @@
   "frequency": 1
  },
  {
-  "record_id": "CTRIP_3950329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "你时间不充足",
-  "suggestion_text": "建议以游览前山为先",
-  "condition_type": "其他",
-  "sentence": "订票:目前情况是游玩当天直接定都来得及,各大网站订都差不多,但不要理会下车点或者山门前那些忽悠你去后山的人,青城山前后山各有特色,如果你时间不充足,建议以游览前山为先",
-  "sources": [
-   "CTRIP_3950329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3950329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "慎",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "慎重选择这条路)",
-  "condition_type": "一般",
-  "sentence": "(自驾慎重选择这条路)",
-  "sources": [
-   "CTRIP_3950329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3950329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "一定翻到最后,点家常菜,非常实惠,我们点了京酱肉丝和糖醋莲白,分量杠杠的,来饭就是一桶)五星好评!",
-  "condition_type": "一般",
-  "sentence": "午餐:茂县石磨豆花家常菜(门口可停车,看菜单记得一定翻到最后,点家常菜,非常实惠,我们点了京酱肉丝和糖醋莲白,分量杠杠的,来饭就是一桶)五星好评!",
-  "sources": [
-   "CTRIP_3950329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3950329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "性价比超高且店家人超好,关于游九寨和周边,有问必答,给我们很多帮助,而且饭菜是真可口,还送自酿的青稞酒,山珍木耳,提供",
-  "condition_type": "一般",
-  "sentence": "这个酒店强烈推荐,性价比超高且店家人超好,关于游九寨和周边,有问必答,给我们很多帮助,而且饭菜是真可口,还送自酿的青稞酒,山珍木耳,提供泡脚设备",
-  "sources": [
-   "CTRIP_3950329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3950329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "新修过的,干净卫生,院内停车,服务也好",
-  "condition_type": "一般",
-  "sentence": "强烈推荐,新修过的,干净卫生,院内停车,服务也好,可以点菜吃,有早餐,性价比很高,不到100一晚)",
-  "sources": [
-   "CTRIP_3950329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3950329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "可以点菜吃,有早餐,性价比很高,不到100一晚)",
-  "condition_type": "一般",
-  "sentence": "强烈推荐,新修过的,干净卫生,院内停车,服务也好,可以点菜吃,有早餐,性价比很高,不到100一晚)",
-  "sources": [
-   "CTRIP_3950329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3950329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "门头很普通,当地人都去,估计只做早间生意,络绎不绝,干拌杂酱面一绝)",
-  "condition_type": "一般",
-  "sentence": "早餐:玉带面(强烈推荐,门头很普通,当地人都去,估计只做早间生意,络绎不绝,干拌杂酱面一绝)",
-  "sources": [
-   "CTRIP_3950329"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3950329",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "带点简易衣架、洗衣液,备用一套洗漱用品以及一个泡脚桶,因为不是所有酒店都能提供所有你需要的东西",
-  "condition_type": "一般",
-  "sentence": "另外建议带点简易衣架、洗衣液,备用一套洗漱用品以及一个泡脚桶,因为不是所有酒店都能提供所有你需要的东西",
-  "sources": [
-   "CTRIP_3950329"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "CTRIP_3977904",
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
@@ -12107,54 +8631,6 @@
   "suggestion_text": "了炕洋芋(就是烤土豆),醪糟蛋花汤,手撕包菜",
   "condition_type": "一般",
   "sentence": "我们点了手抓,老板推荐了炕洋芋(就是烤土豆),醪糟蛋花汤,手撕包菜",
-  "sources": [
-   "CTRIP_3977904"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3977904",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "尔盖草原",
-  "suggestion_text": "全程是110多公里",
-  "condition_type": "其他",
-  "sentence": "这一天的主题景点是尕海、花湖、若尔盖草原,全程是110多公里",
-  "sources": [
-   "CTRIP_3977904"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3977904",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "尔盖草原前行",
-  "suggestion_text": "一路都是草原,似乎与藏北从那曲到拉萨草原风光是一样的,想想这应该是同一片草原吧",
-  "condition_type": "其他",
-  "sentence": "在尕海参观之后,接着沿着若尔盖草原前行,一路都是草原,似乎与藏北从那曲到拉萨草原风光是一样的,想想这应该是同一片草原吧",
-  "sources": [
-   "CTRIP_3977904"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3977904",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "尔盖是头一天已经预定好的若尔盖大藏阳光酒店",
-  "suggestion_text": "到达之后酒店前台已经没有房间,多亏提前预定了",
-  "condition_type": "时间",
-  "sentence": "在若尔盖是头一天已经预定好的若尔盖大藏阳光酒店,到达之后酒店前台已经没有房间,多亏提前预定了",
   "sources": [
    "CTRIP_3977904"
   ],
@@ -12501,22 +8977,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "慎",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "慎重选择前往,或者选择包车前往,对于大巴车还是慎重选择",
-  "condition_type": "一般",
-  "sentence": "但是后来的事实证明,我这次的举动不算太明智,九寨黄龙之行路途太过艰辛,对于晕车的朋友慎重选择前往,或者选择包车前往,对于大巴车还是慎重选择",
-  "sources": [
-   "CTRIP_3984446"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3984446",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "千万",
   "condition_text": "游客为体力有限",
@@ -12587,22 +9047,6 @@
   "suggestion_text": "在这里是插翅难逃的啦! 心里真的感慨!我们大国的安保也可以做到如此周密了!点赞!",
   "condition_type": "其他",
   "sentence": "刚进入九寨沟界,就遇到了这个设卡检查,一路只有这一条山路,开了几百公里,如果是坏人,在这里是插翅难逃的啦! 心里真的感慨!我们大国的安保也可以做到如此周密了!点赞!",
-  "sources": [
-   "CTRIP_4033780"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4033780",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "只要",
-  "condition_text": "让他们动起手来",
-  "suggestion_text": "干什么都成了一种乐趣!",
-  "condition_type": "其他",
-  "sentence": "一路上山路颠波,我们两辆车已经像是饱经了风霜,令人惊喜的是,民宿老板家院子里还可以洗车,老板娘热情的给我准备好长水管和洗衣粉等工具,经过长途跋涉的孩子们一下了来了劲头,争相着要洗车,忙得不亦乐乎,小孩子就这一点好,只要让他们动起手来,干什么都成了一种乐趣!",
   "sources": [
    "CTRIP_4033780"
   ],
@@ -12728,91 +9172,11 @@
   "pattern": "P4_建议推断",
   "trigger": "记得",
   "condition_text": "一般建议",
-  "suggestion_text": "住是在春熙路附近的,但具体很多都忘记了",
-  "condition_type": "一般",
-  "sentence": "飞到成都,在地图上找招待所(我们基本找招待所住,一般是20多块钱一晚,省点,吃的也是),记得住是在春熙路附近的,但具体很多都忘记了",
-  "sources": [
-   "CTRIP_4026940"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4026940",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "大概20元一个人吧,但是没有洗手间,5块热水冲凉,这时候才发现在大学冲冷水是可以赚钱的",
-  "condition_type": "时间",
-  "sentence": "晚上的落脚点是松潘古城,那时候那里只有2条街吧,都很原始的,住的是非常简单,就是一张床,有被子,记得大概20元一个人吧,但是没有洗手间,5块热水冲凉,这时候才发现在大学冲冷水是可以赚钱的",
-  "sources": [
-   "CTRIP_4026940"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4026940",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
   "suggestion_text": "是买3等还是4等,6个人一间房间,顺流而下,三峡,我们来了",
   "condition_type": "一般",
   "sentence": "一下车,去找点吃的,结果辣的没有办法形容,在城市里,好好逛了一下,然后到朝天门买船票,不记得是买3等还是4等,6个人一间房间,顺流而下,三峡,我们来了",
   "sources": [
    "CTRIP_4026940"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4107245",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "尔盖通往九寨沟的两条高速正在齐头并进",
-  "suggestion_text": "道路建设者们正日以继夜奋战在崇山峻岭之中,施工场面非常感人!",
-  "condition_type": "其他",
-  "sentence": "此行川西北/甘南,我们亲眼所见从甘肃文县和四川若尔盖通往九寨沟的两条高速正在齐头并进,道路建设者们正日以继夜奋战在崇山峻岭之中,施工场面非常感人!",
-  "sources": [
-   "CTRIP_4107245"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4107245",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "尔盖郎木寺的纳摩大峡谷",
-  "suggestion_text": "全长576公里,流经陇/蜀之地诸多热门景点,至四川广元汇入嘉陵江",
-  "condition_type": "其他",
-  "sentence": "白龙江是川北/甘南的重要河流,它源自四川若尔盖郎木寺的纳摩大峡谷,全长576公里,流经陇/蜀之地诸多热门景点,至四川广元汇入嘉陵江",
-  "sources": [
-   "CTRIP_4107245"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4107245",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "慎",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "慎行,翻山涉水近300公里,行车约6个半小时,终于安全“到家了”",
-  "condition_type": "时间",
-  "sentence": "至此,我们下午从剑门关两走高速、溯流两江、三换国道,一路慎行,翻山涉水近300公里,行车约6个半小时,终于安全“到家了”",
-  "sources": [
-   "CTRIP_4107245"
   ],
   "frequency": 1
  },
@@ -12893,22 +9257,6 @@
   "sentence": "如果脚力稍差,可以从缆车上站乘观光车到终点(五彩池附近),再一路观景下山,可少走2公里栈道,也不失黄龙精华",
   "sources": [
    "CTRIP_4107245"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4072998",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "用一句话来描述",
-  "suggestion_text": "我想,还是用在茂县公路边看到的四川旅行口号:天府三九大,安逸四川行",
-  "condition_type": "其他",
-  "sentence": "如果用一句话来描述,我想,还是用在茂县公路边看到的四川旅行口号:天府三九大,安逸四川行",
-  "sources": [
-   "CTRIP_4072998"
   ],
   "frequency": 1
  },
@@ -13077,102 +9425,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "打车去文君楼,花费十五元,大约二十分钟到达文君楼酒店,办理了住宿手续,每晚180元,条件还是不错的,回到房间后先洗了个热",
-  "condition_type": "一般",
-  "sentence": "LP说我们坐公交去,由于带的东西较多,坐公交不便,况又下起了雨,我建议打车去文君楼,花费十五元,大约二十分钟到达文君楼酒店,办理了住宿手续,每晚180元,条件还是不错的,回到房间后先洗了个热水澡,解除了一路坐车的疲劳",
-  "sources": [
-   "CTRIP_1098121"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1098121",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "避免",
-  "condition_text": "装备条件（句内）",
-  "suggestion_text": "避免少早许多冤枉路,少花许多本不该花的钱",
-  "condition_type": "装备",
-  "sentence": "我们坐了公交车,在青羊宫下车,穿过文化公园,文化公园其实是免费出入的,起初我们不知道,所以说出门在外一定要多问,才能接触到更多信息,对你有所帮助,从而避免少早许多冤枉路,少花许多本不该花的钱",
-  "sources": [
-   "CTRIP_1098121"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1098121",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "乐山最著名的西坝豆腐,菜量不是很大,价格却是比较贵的,30元1份",
-  "condition_type": "一般",
-  "sentence": "看了附近的几家饭店,最后我们选择三江饭店,就在乐山大佛北门的东边,她们推荐乐山最著名的西坝豆腐,菜量不是很大,价格却是比较贵的,30元1份",
-  "sources": [
-   "CTRIP_1098121"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1098121",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "坐公交车到肖坝车站在转车去成都",
-  "suggestion_text": "说不定还没有这样快,于是就相信了他们的话",
-  "condition_type": "其他",
-  "sentence": "又一想如果坐公交车到肖坝车站在转车去成都,说不定还没有这样快,于是就相信了他们的话",
-  "sources": [
-   "CTRIP_1098121"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1098121",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "当地的一些特产和明天去九寨沟路上吃的东西",
-  "suggestion_text": "然后回宾馆休息",
-  "condition_type": "其他",
-  "sentence": "下车之后去红旗连锁超市买些东西,主要是当地的一些特产和明天去九寨沟路上吃的东西,然后回宾馆休息",
-  "sources": [
-   "CTRIP_1098121"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1098121",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "赶不上就只好等到明天",
-  "suggestion_text": "上车后发现两个座都靠右,据网上说去九寨沟的路上靠右坐可以看见许多沿途的风景,看来我们还是比较幸运的",
-  "condition_type": "其他",
-  "sentence": "从这里到九寨沟只有早上这4班车,若赶不上就只好等到明天,上车后发现两个座都靠右,据网上说去九寨沟的路上靠右坐可以看见许多沿途的风景,看来我们还是比较幸运的",
-  "sources": [
-   "CTRIP_1098121"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1098121",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P6_否定建议",
   "trigger": "不要",
   "condition_text": "一般建议（避雷）",
@@ -13307,22 +9559,6 @@
   "suggestion_text": "水面上的波纹泛着彩色的光,直耀人的眼睛,让人眼花缭乱",
   "condition_type": "其他",
   "sentence": "若是有风吹来,水面上的波纹泛着彩色的光,直耀人的眼睛,让人眼花缭乱",
-  "sources": [
-   "CTRIP_1098121"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1098121",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "尽量",
-  "condition_text": "一般建议",
-  "suggestion_text": "到机场只有八公里,但出租车司机却要四十元,说是这里的统一价格,只要去机场都是四十元",
-  "condition_type": "一般",
-  "sentence": "尽量到机场只有八公里,但出租车司机却要四十元,说是这里的统一价格,只要去机场都是四十元",
   "sources": [
    "CTRIP_1098121"
   ],
@@ -13573,86 +9809,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "一般建议",
-  "suggestion_text": "生活的城市等等,更增加了我对那里的向往之情",
-  "condition_type": "一般",
-  "sentence": "”那时候起就下定决心,一定要去四川,也从此,我把目光更多的投向那个地方,最后的香格里拉——稻城亚丁、九寨沟的美、成都的小吃和茶馆文化、最适合生活的城市等等,更增加了我对那里的向往之情",
-  "sources": [
-   "CTRIP_1146676"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1146676",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "一般建议",
-  "suggestion_text": "生活的地方",
-  "condition_type": "一般",
-  "sentence": "许久以前就听闻,成都是个非常适合生活的地方,那儿的人过得悠闲自在,街头巷尾到处都是露天茶馆,成都人最大的爱好就是泡茶馆、打麻将",
-  "sources": [
-   "CTRIP_1146676"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1146676",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "一般建议",
-  "suggestion_text": "那儿的人过得悠闲自在,街头巷尾到处都是露天茶馆,成都人最大的爱好就是泡茶馆、打麻将",
-  "condition_type": "一般",
-  "sentence": "许久以前就听闻,成都是个非常适合生活的地方,那儿的人过得悠闲自在,街头巷尾到处都是露天茶馆,成都人最大的爱好就是泡茶馆、打麻将",
-  "sources": [
-   "CTRIP_1146676"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1146676",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "去成都",
-  "suggestion_text": "不去泡一次茶馆、淘一次耳朵,不算到过成都",
-  "condition_type": "其他",
-  "sentence": "书上说,如果去成都,不去泡一次茶馆、淘一次耳朵,不算到过成都;据说,在飞机上都能听到麻将声",
-  "sources": [
-   "CTRIP_1146676"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1146676",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "去成都",
-  "suggestion_text": "据说,在飞机上都能听到麻将声",
-  "condition_type": "其他",
-  "sentence": "书上说,如果去成都,不去泡一次茶馆、淘一次耳朵,不算到过成都;据说,在飞机上都能听到麻将声",
-  "sources": [
-   "CTRIP_1146676"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1146676",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P6_否定建议",
   "trigger": "不要",
   "condition_text": "一般建议（避雷）",
@@ -13707,22 +9863,6 @@
   "suggestion_text": "就可以住两晚九寨天堂,但必须提前预定",
   "condition_type": "其他",
   "sentence": "两天后才听另一个团的人说,只要在我们现有团费的基本上再加300块一个人,就可以住两晚九寨天堂,但必须提前预定",
-  "sources": [
-   "CTRIP_1146676"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_1146676",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "再给我一次机会",
-  "suggestion_text": "我会对它说,我一定要住在你房里",
-  "condition_type": "其他",
-  "sentence": "看来,我们跟九寨天堂是擦肩而过了——曾经,有一座酒店摆在我的面前,我却没有珍惜,现在是后悔莫及,老天如果再给我一次机会,我会对它说,我一定要住在你房里",
   "sources": [
    "CTRIP_1146676"
   ],
@@ -13846,43 +9986,11 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": ":可以去藏餐吧,感受一下尝酥油茶配手抓牛肉",
-  "condition_type": "一般",
-  "sentence": "✅美食推荐:可以去藏餐吧,感受一下尝酥油茶配手抓牛肉",
-  "sources": [
-   "CTRIP_4173182"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4173182",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "游客为体力有限",
   "suggestion_text": "索道上山(80元/人),然后步行下山观景",
   "condition_type": "人群",
   "sentence": "黄龙景区是“世界自然遗产”,以钙华彩池、雪山、峡谷闻名,体力一般的建议索道上山(80元/人),然后步行下山观景",
-  "sources": [
-   "CTRIP_4173182"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4173182",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": ":当地特色的羌族美食(比如洋芋糍粑、酸菜土豆泥,玉米搅团等)",
-  "condition_type": "一般",
-  "sentence": "✅美食推荐:当地特色的羌族美食(比如洋芋糍粑、酸菜土豆泥,玉米搅团等)",
   "sources": [
    "CTRIP_4173182"
   ],
@@ -13937,150 +10045,6 @@
   "frequency": 1
  },
  {
-  "record_id": "CTRIP_4173182",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "怕外面民宿酒店不干净",
-  "suggestion_text": "可以携带一次性床上四件套隔脏",
-  "condition_type": "其他",
-  "sentence": "旅游小技巧:如果怕外面民宿酒店不干净,可以携带一次性床上四件套隔脏;外出不愿洗内裤、袜子,也可以多带几套一次性的,穿完就扔,便宜不心疼",
-  "sources": [
-   "CTRIP_4173182"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4173182",
-  "scenic_area": "九寨沟",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "怕外面民宿酒店不干净",
-  "suggestion_text": "外出不愿洗内裤、袜子,也可以多带几套一次性的,穿完就扔,便宜不心疼",
-  "condition_type": "其他",
-  "sentence": "旅游小技巧:如果怕外面民宿酒店不干净,可以携带一次性床上四件套隔脏;外出不愿洗内裤、袜子,也可以多带几套一次性的,穿完就扔,便宜不心疼",
-  "sources": [
-   "CTRIP_4173182"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "尽量",
-  "condition_text": "一般建议",
-  "suggestion_text": "选择里市中心地铁站也就是天安门比较近的地方",
-  "condition_type": "一般",
-  "sentence": "1. 酒店尽量选择里市中心地铁站也就是天安门比较近的地方,建议崇文门或者宣武门附近,交通便利用餐方便,价格适中",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "尽量",
-  "condition_text": "一般建议",
-  "suggestion_text": "建议崇文门或者宣武门附近,交通便利用餐方便,价格适中",
-  "condition_type": "一般",
-  "sentence": "1. 酒店尽量选择里市中心地铁站也就是天安门比较近的地方,建议崇文门或者宣武门附近,交通便利用餐方便,价格适中",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "的住宿地点",
-  "condition_type": "一般",
-  "sentence": "不建议前门附近,人比较多价格偏高,人还特别杂多;还有一个我比较推荐的住宿地点,那就是交道口和北新桥附近,属于东城区,西邻南锣鼓巷后海钟鼓楼,东邻雍和宫,国子监,孔庙和簋街",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "那就是交道口和北新桥附近,属于东城区,西邻南锣鼓巷后海钟鼓楼,东邻雍和宫,国子监,孔庙和簋街",
-  "condition_type": "一般",
-  "sentence": "不建议前门附近,人比较多价格偏高,人还特别杂多;还有一个我比较推荐的住宿地点,那就是交道口和北新桥附近,属于东城区,西邻南锣鼓巷后海钟鼓楼,东邻雍和宫,国子监,孔庙和簋街",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "提前预约,其他景点不需要预约",
-  "condition_type": "一般",
-  "sentence": "2.景点预约,需要预约的景点,第一个就是故宫硕大的紫禁城,需要实名制预约最好提前预约,其他景点不需要预约",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "的博物馆有:国家博物馆(必打卡),自然博物馆(喜欢动植物标本的,大恐龙标本的,里面还有一个小型海洋馆),军事博物馆(喜欢",
-  "condition_type": "一般",
-  "sentence": "第二种博物馆来一趟大 北京 怎么能不去看看博物馆,在每座博物馆的官网都可以预约,个人建议的博物馆有:国家博物馆(必打卡),自然博物馆(喜欢动植物标本的,大恐龙标本的,里面还有一个小型海洋馆),军事博物馆(喜欢军事的朋友)以及首都博物馆(对北京这座城市可以加深了解)",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "避免",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "避免中坑,很多华而不实的线路,尤其是几十元就什么都包含的线路确实有风险,在选择的时候,还是需要多加小心",
-  "condition_type": "一般",
-  "sentence": "3.北京一日游的预订说心里话, 北京交通便利只有长城和十三陵在郊区需要一个长城的一日游,避免中坑,很多华而不实的线路,尤其是几十元就什么都包含的线路确实有风险,在选择的时候,还是需要多加小心",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "CTRIP_3941430",
   "scenic_area": "颐和园",
   "source_platform": "携程游记",
@@ -14118,54 +10082,6 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "从这里进入天坛公园,因为距离可参观的地方实在是太远了",
-  "condition_type": "一般",
-  "sentence": "博物馆出来之后,距离天坛公园的西门非常近,但并不推荐从这里进入天坛公园,因为距离可参观的地方实在是太远了,可以选择公交或者打车(同样是滴滴,出租车等不起)到天坛南门,从这里进入比较好,节省体力的同时,还不会漏掉好看的建筑",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "可以选择公交或者打车(同样是滴滴,出租车等不起)到天坛南门,从这里",
-  "condition_type": "一般",
-  "sentence": "博物馆出来之后,距离天坛公园的西门非常近,但并不推荐从这里进入天坛公园,因为距离可参观的地方实在是太远了,可以选择公交或者打车(同样是滴滴,出租车等不起)到天坛南门,从这里进入比较好,节省体力的同时,还不会漏掉好看的建筑",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "装备条件（句内）",
-  "suggestion_text": "不要想着徒步了,不太现实,最最最主要的是慕田峪这里人少啊",
-  "condition_type": "装备",
-  "sentence": "因为长城比较远,不适合公共交通或者打车(打车挺贵的),之前做功课的时候看了好多的长城一日游,首要问题是去那个长城八达岭还是慕田峪长城?最终选择慕田峪,风景基本上差不多,都有缆车,带着小朋友就不要想着徒步了,不太现实,最最最主要的是慕田峪这里人少啊",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
   "suggestion_text": "上去看看非常的漂亮",
@@ -14187,22 +10103,6 @@
   "suggestion_text": "还是办一张,办不了的把户口本页复印也",
   "condition_type": "一般",
   "sentence": "2.小朋友能办身份证的话最好还是办一张,办不了的把户口本页复印也",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "不要相信兜售东西的小商贩,每个景点附近都有正规的商店或者打车的地方",
-  "condition_type": "一般",
-  "sentence": "3.不要相信兜售东西的小商贩,每个景点附近都有正规的商店或者打车的地方",
   "sources": [
    "CTRIP_3941430"
   ],
@@ -14248,54 +10148,6 @@
   "pattern": "P4_建议推断",
   "trigger": "推荐",
   "condition_text": "一般建议",
-  "suggestion_text": "几个餐厅可以根据自己口味喜好自行选择:",
-  "condition_type": "一般",
-  "sentence": "这里推荐几个餐厅可以根据自己口味喜好自行选择:",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "四季民福,烤鸭很好吃服务也很好",
-  "condition_type": "一般",
-  "sentence": "(和导游学的)烤鸭第一家推荐四季民福,烤鸭很好吃服务也很好",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "大董烤鸭,除了价格不好,价格太贵之外都很好",
-  "condition_type": "一般",
-  "sentence": "第二家推荐大董烤鸭,除了价格不好,价格太贵之外都很好",
-  "sources": [
-   "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3941430",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
   "suggestion_text": "1949全鸭季了",
   "condition_type": "一般",
   "sentence": "第三家推荐1949全鸭季了",
@@ -14317,22 +10169,6 @@
   "sentence": "记得帮忙点赞和收藏!",
   "sources": [
    "CTRIP_3941430"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4046620",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "的综合性医院--北京协和医院",
-  "condition_type": "一般",
-  "sentence": "王府井步行街东侧有国内最好的综合性医院--北京协和医院",
-  "sources": [
-   "CTRIP_4046620"
   ],
   "frequency": 1
  },
@@ -14374,38 +10210,6 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "我们约略知道陈寅恪—就是当年被称为清华教授之教授的陈先生的学问和为人",
-  "suggestion_text": "那我们从陈先生撰写的王静安先生纪念碑铭也就很可以想见王国维先生的学问和为人:“…惟此独立之精神,自由之思想,历千万祀,与天壤而同久,共三光而永光”",
-  "condition_type": "其他",
-  "sentence": "如果我们约略知道陈寅恪—就是当年被称为清华教授之教授的陈先生的学问和为人,那我们从陈先生撰写的王静安先生纪念碑铭也就很可以想见王国维先生的学问和为人:“…惟此独立之精神,自由之思想,历千万祀,与天壤而同久,共三光而永光”;而梁启超则评价王国维先生: 不独为中国所有而为全世界之所有之学人",
-  "sources": [
-   "CTRIP_4046620"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4046620",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "我们约略知道陈寅恪—就是当年被称为清华教授之教授的陈先生的学问和为人",
-  "suggestion_text": "而梁启超则评价王国维先生: 不独为中国所有而为全世界之所有之学人",
-  "condition_type": "其他",
-  "sentence": "如果我们约略知道陈寅恪—就是当年被称为清华教授之教授的陈先生的学问和为人,那我们从陈先生撰写的王静安先生纪念碑铭也就很可以想见王国维先生的学问和为人:“…惟此独立之精神,自由之思想,历千万祀,与天壤而同久,共三光而永光”;而梁启超则评价王国维先生: 不独为中国所有而为全世界之所有之学人",
-  "sources": [
-   "CTRIP_4046620"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4046620",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
   "trigger": "若",
   "condition_text": "能自行做到乐善、无求那就是佛呢",
   "suggestion_text": "此处你也可以不用再来了—大约是白话了的“即心即佛”或菩提只向心觅,何劳向外求玄?",
@@ -14413,150 +10217,6 @@
   "sentence": "看到大悲寺门楣的对联“乐善人皆佛、无求我亦仙”,这言下之意世人若能自行做到乐善、无求那就是佛呢,此处你也可以不用再来了—大约是白话了的“即心即佛”或菩提只向心觅,何劳向外求玄?",
   "sources": [
    "CTRIP_4046620"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4046620",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "而住持大觉寺",
-  "condition_type": "一般",
-  "sentence": "康熙年间高僧迦陵性音在雍亲王登基大宝之前与其过从甚密,也因为雍亲王推荐而住持大觉寺;然而,雍正登基不久迦陵即离京南下去了江西庐山",
-  "sources": [
-   "CTRIP_4046620"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4046620",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "然而,雍正登基不久迦陵即离京南下去了江西庐山",
-  "condition_type": "一般",
-  "sentence": "康熙年间高僧迦陵性音在雍亲王登基大宝之前与其过从甚密,也因为雍亲王推荐而住持大觉寺;然而,雍正登基不久迦陵即离京南下去了江西庐山",
-  "sources": [
-   "CTRIP_4046620"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4046620",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "不可上…”",
-  "suggestion_text": "扶栏往东俯瞰而“苍松如茵出其下…”再往远处眺望是京西城区、西山香山八大处",
-  "condition_type": "其他",
-  "sentence": "漫步千年古道,秋季的山林红叶渲染,登临鹫峰环顾四周,峰峦回转、天地空阔;一直再往西登上望京塔,西向妙高峰等群峰雄峙“乱峰丛叠,若不可上…”,扶栏往东俯瞰而“苍松如茵出其下…”再往远处眺望是京西城区、西山香山八大处",
-  "sources": [
-   "CTRIP_4046620"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4046620",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "金汤",
-  "suggestion_text": "但是闯王李自成当年率军突入北京城",
-  "condition_type": "其他",
-  "sentence": "八达岭虽然崇山峻岭,长城也是固若金汤,但是闯王李自成当年率军突入北京城,就是突破延庆长城豁口经居庸关而入京",
-  "sources": [
-   "CTRIP_4046620"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4046620",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "金汤",
-  "suggestion_text": "就是突破延庆长城豁口经居庸关而入京",
-  "condition_type": "其他",
-  "sentence": "八达岭虽然崇山峻岭,长城也是固若金汤,但是闯王李自成当年率军突入北京城,就是突破延庆长城豁口经居庸关而入京",
-  "sources": [
-   "CTRIP_4046620"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4114227",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "一旦",
-  "condition_text": "确定出行日期",
-  "suggestion_text": "要尽可能的提早买票,越早买,你选择的余地就越大,例如,一家人可以选择在同一间里,还有铺位的选择等等",
-  "condition_type": "其他",
-  "sentence": "买票:现在的火车票提前两个月就可以买了,所以,选择火车出行的朋友,一旦确定出行日期,要尽可能的提早买票,越早买,你选择的余地就越大,例如,一家人可以选择在同一间里,还有铺位的选择等等",
-  "sources": [
-   "CTRIP_4114227"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4114227",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "提前打听清楚可以退卡的站点,以便行程结束时及时把卡退掉",
-  "condition_type": "一般",
-  "sentence": "不必要一次性充太多,因为每个地铁站都可以续充的;有一点要注意的是退卡不是每个地铁站都可以退的,所以,你最好提前打听清楚可以退卡的站点,以便行程结束时及时把卡退掉",
-  "sources": [
-   "CTRIP_4114227"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4114227",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "游客为孩子",
-  "suggestion_text": "买联票,天坛的主要景点(见上图下摆)是要凭票入内的",
-  "condition_type": "人群",
-  "sentence": "天坛联票 成人:35,儿童:28.建议买联票,天坛的主要景点(见上图下摆)是要凭票入内的",
-  "sources": [
-   "CTRIP_4114227"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4114227",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "坐滑车或缆车",
-  "condition_type": "一般",
-  "sentence": "从八达岭站到爬长城的地方之间还有一段路,有免费的接驳车,上了车,乘务员会说徒步登城要花4、5个小时,会很累等等之类的话,建议坐滑车或缆车",
-  "sources": [
-   "CTRIP_4114227"
   ],
   "frequency": 1
  },
@@ -14629,38 +10289,6 @@
   "scenic_area": "颐和园",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "计划爬完长城再去定陵",
-  "suggestion_text": "那记住,不管你是乘火车还是坐汽车,早上一定要起早赶上早班车,这样一天下来,时间会宽裕很多,不至于太赶",
-  "condition_type": "其他",
-  "sentence": "说明:如果计划爬完长城再去定陵,那记住,不管你是乘火车还是坐汽车,早上一定要起早赶上早班车,这样一天下来,时间会宽裕很多,不至于太赶",
-  "sources": [
-   "CTRIP_4114227"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4114227",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "只要",
-  "condition_text": "是有圆明园站点的",
-  "suggestion_text": "你随便上一辆就好",
-  "condition_type": "其他",
-  "sentence": "出了这个门右拐直行大约7、8分钟你就会看到公交站台,有很多路车都到圆明园的,只要是有圆明园站点的,你随便上一辆就好",
-  "sources": [
-   "CTRIP_4114227"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4114227",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
@@ -14710,91 +10338,11 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "让老外说几个关于中国印象的关键词",
-  "suggestion_text": "“长城”一定榜上有名",
-  "condition_type": "其他",
-  "sentence": "如果让老外说几个关于中国印象的关键词,“长城”一定榜上有名",
-  "sources": [
-   "CTRIP_3969287"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3969287",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "你对圆明园没有印象",
-  "suggestion_text": "去网上搜索信息,出现最多的也是下面这幅颓圮破败的景象",
-  "condition_type": "其他",
-  "sentence": "圆明园是清代的皇家园林,曾被称为“园中之园”和“一切造园艺术的典范”,然而这座园中之园在我们的印象里却是下面一幅颓圮破败的景象,如果你对圆明园没有印象,去网上搜索信息,出现最多的也是下面这幅颓圮破败的景象",
-  "sources": [
-   "CTRIP_3969287"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3969287",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "是第一次来北京",
-  "suggestion_text": "而且时间有限,只能去玩一个景点",
-  "condition_type": "人群",
-  "sentence": "如果是第一次来北京,而且时间有限,只能去玩一个景点,那我想绝多数人会选择故宫",
-  "sources": [
-   "CTRIP_3969287"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3969287",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "是第一次来北京",
-  "suggestion_text": "那我想绝多数人会选择故宫",
-  "condition_type": "人群",
-  "sentence": "如果是第一次来北京,而且时间有限,只能去玩一个景点,那我想绝多数人会选择故宫",
-  "sources": [
-   "CTRIP_3969287"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3969287",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
   "trigger": "若",
   "condition_text": "昊天",
   "suggestion_text": "历象日月星辰,敬授人时”,考古发现新石器时代我国的祭祀遗址有三十多处",
   "condition_type": "其他",
   "sentence": "中国人祭天的习俗最早出现在帝尧时期,《史记》记载:“乃命羲和,钦若昊天,历象日月星辰,敬授人时”,考古发现新石器时代我国的祭祀遗址有三十多处",
-  "sources": [
-   "CTRIP_3969287"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3969287",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "两个人分立于东西配殿后的回音壁下",
-  "suggestion_text": "轻声对话,双方均能清晰地听到对方声音,非常有趣",
-  "condition_type": "其他",
-  "sentence": "祈年殿向南来到了回音壁,这是一圈圆形的围墙,墙体坚硬光滑,可以很好地反射声波,又因圆周曲率精确,声波可以沿墙内面连续反射,向前传播,如果两个人分立于东西配殿后的回音壁下,轻声对话,双方均能清晰地听到对方声音,非常有趣",
   "sources": [
    "CTRIP_3969287"
   ],
@@ -14849,25 +10397,6 @@
   "suggestion_text": "找找儿时游园的感觉",
   "condition_type": "其他",
   "sentence": "我和老婆用了四天(有的是半天)时间,走马观花玩了个大概,当然主要是为散步、遛弯,找找儿时游园的感觉",
-  "sources": [
-   "CTRIP_4076734",
-   "CTRIP_4076286",
-   "CTRIP_4076390",
-   "CTRIP_4076360"
-  ],
-  "frequency": 4
- },
- {
-  "record_id": "CTRIP_4076734",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "公交出行",
-  "condition_type": "时间",
-  "sentence": "东宫门、新建宫门、北宫门、西门都有停车场,不过赶上节假日,车位还是会很紧张,建议公交出行",
   "sources": [
    "CTRIP_4076734",
    "CTRIP_4076286",
@@ -15041,124 +10570,12 @@
   "scenic_area": "颐和园",
   "source_platform": "携程游记",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "的北京炸酱面一消费下来,29元一碗,份量颇足,对吃惯四川小面百种调料的我来说,这味道实在难以下咽",
-  "condition_type": "一般",
-  "sentence": "北京的小吃素来闻名于世,本来想在小吃街挨个尝下鲜,结果在第一家导游推荐的北京炸酱面一消费下来,29元一碗,份量颇足,对吃惯四川小面百种调料的我来说,这味道实在难以下咽,就着茶水吃完,肚子对后面的所有小吃都不再有任何兴趣",
-  "sources": [
-   "CTRIP_3965800"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3965800",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "就着茶水吃完,肚子对后",
-  "condition_type": "一般",
-  "sentence": "北京的小吃素来闻名于世,本来想在小吃街挨个尝下鲜,结果在第一家导游推荐的北京炸酱面一消费下来,29元一碗,份量颇足,对吃惯四川小面百种调料的我来说,这味道实在难以下咽,就着茶水吃完,肚子对后面的所有小吃都不再有任何兴趣",
-  "sources": [
-   "CTRIP_3965800"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3965800",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "干年前",
-  "suggestion_text": "有同事来北京天安门看升旗,还能登上开国大典的天安门城楼,还有时任北京的市长亲笔签名的纪念证书,听导游讲,这项服务已经取消很多年了",
-  "condition_type": "其他",
-  "sentence": "想起若干年前,有同事来北京天安门看升旗,还能登上开国大典的天安门城楼,还有时任北京的市长亲笔签名的纪念证书,听导游讲,这项服务已经取消很多年了",
-  "sources": [
-   "CTRIP_3965800"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3965800",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "不到长城非好汉是一把尺度",
-  "suggestion_text": "那么从今往后,我们这群好汉就算实至名归了",
-  "condition_type": "其他",
-  "sentence": "如果不到长城非好汉是一把尺度,那么从今往后,我们这群好汉就算实至名归了",
-  "sources": [
-   "CTRIP_3965800"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3965800",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "的圆明园",
-  "condition_type": "一般",
-  "sentence": "于是自行在鸟巢附近下车,约了老婆的一个在北京的同学一起,去了导游很不屑推荐的圆明园",
-  "sources": [
-   "CTRIP_3965800"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3965800",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "一定要选一个词",
-  "suggestion_text": "那可能再没有比“震撼”这个词更适合的了",
-  "condition_type": "其他",
-  "sentence": "走进紫禁城,才真真正正感觉到什么叫皇家的威严和气派,所有的词汇用在这里都显得苍白无力,它是皇权的象征,更是国家主权的宣示,雄据华夏大地,傲视环球,唯我独尊!如果一定要选一个词,那可能再没有比“震撼”这个词更适合的了",
-  "sources": [
-   "CTRIP_3965800"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3965800",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "除非",
   "condition_text": "是当作北京游的一个附加",
   "suggestion_text": "专程游玩就不值得推荐",
   "condition_type": "其他",
   "sentence": "按照导游的说法,天津本身就不是一个旅游城市,除非是当作北京游的一个附加,专程游玩就不值得推荐",
-  "sources": [
-   "CTRIP_3965800"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3965800",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "只要",
-  "condition_text": "二十来分钟",
-  "suggestion_text": "那完全就是一次地道的市内游啊",
-  "condition_type": "其他",
-  "sentence": "想想来都来了,还是去看看吧,从北京南站坐地铁或轻轨去天津,只要二十来分钟,那完全就是一次地道的市内游啊",
   "sources": [
    "CTRIP_3965800"
   ],
@@ -15229,54 +10646,6 @@
   "frequency": 1
  },
  {
-  "record_id": "CTRIP_4076742",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "女儿要辞去北大博雅博后工作",
-  "suggestion_text": "去美国加州大学做博士后研究员,作为父母我们主要是陪陪女儿,送送女儿",
-  "condition_type": "其他",
-  "sentence": "这次去北京,主要是女儿要辞去北大博雅博后工作,去美国加州大学做博士后研究员,作为父母我们主要是陪陪女儿,送送女儿",
-  "sources": [
-   "CTRIP_4076742"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4076742",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "陪陪女儿",
-  "suggestion_text": "送送女儿",
-  "condition_type": "其他",
-  "sentence": "这次去北京,主要是女儿要辞去北大博雅博后工作,去美国加州大学做博士后研究员,作为父母我们主要是陪陪女儿,送送女儿",
-  "sources": [
-   "CTRIP_4076742"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4076742",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "几年前有事到北京,早晨到清华大学信步闲游,碰到了一个学子,给我鞠了一躬,问了老师好后,向我打听xx去处,我既兴奋又尴尬",
-  "condition_type": "一般",
-  "sentence": "记得几年前有事到北京,早晨到清华大学信步闲游,碰到了一个学子,给我鞠了一躬,问了老师好后,向我打听xx去处,我既兴奋又尴尬,忙向前指了指后,告诉他再问问其他人",
-  "sources": [
-   "CTRIP_4076742"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "CTRIP_4126899",
   "scenic_area": "颐和园",
   "source_platform": "携程游记",
@@ -15319,22 +10688,6 @@
   "suggestion_text": "最近去颐和园是在疫情期间的2020年10月28日的下午,虽然身居京城却是有几十年没有光顾过了",
   "condition_type": "时间",
   "sentence": "时间荏苒,转眼几十年一晃而过,记得最近去颐和园是在疫情期间的2020年10月28日的下午,虽然身居京城却是有几十年没有光顾过了",
-  "sources": [
-   "CTRIP_4126899"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4126899",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "以前都是从正门,也就是东大门进,但是现在乘坐地铁距颐和园的北宫门最近,于是从这里进园居然直接到了后山的苏州街",
-  "condition_type": "一般",
-  "sentence": "记得以前都是从正门,也就是东大门进,但是现在乘坐地铁距颐和园的北宫门最近,于是从这里进园居然直接到了后山的苏州街",
   "sources": [
    "CTRIP_4126899"
   ],
@@ -15410,70 +10763,6 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "因为这边比八达岭人少",
-  "suggestion_text": "且风景好,我们是在携程上预定了包车,早上7点从酒店出发,到达大概是9点左右,万里长城,慕田峪独秀,红叶季赏秋时间点:9月底—10月中旬初红期",
-  "condition_type": "其他",
-  "sentence": "我们选择去慕田峪长城主要是因为这边比八达岭人少,且风景好,我们是在携程上预定了包车,早上7点从酒店出发,到达大概是9点左右,万里长城,慕田峪独秀,红叶季赏秋时间点:9月底—10月中旬初红期;10月中旬—11月初盛红期;11月初—11月中下旬末红期",
-  "sources": [
-   "CTRIP_4035354"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4035354",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "因为这边比八达岭人少",
-  "suggestion_text": "10月中旬—11月初盛红期",
-  "condition_type": "其他",
-  "sentence": "我们选择去慕田峪长城主要是因为这边比八达岭人少,且风景好,我们是在携程上预定了包车,早上7点从酒店出发,到达大概是9点左右,万里长城,慕田峪独秀,红叶季赏秋时间点:9月底—10月中旬初红期;10月中旬—11月初盛红期;11月初—11月中下旬末红期",
-  "sources": [
-   "CTRIP_4035354"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4035354",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "因为这边比八达岭人少",
-  "suggestion_text": "11月初—11月中下旬末红期",
-  "condition_type": "其他",
-  "sentence": "我们选择去慕田峪长城主要是因为这边比八达岭人少,且风景好,我们是在携程上预定了包车,早上7点从酒店出发,到达大概是9点左右,万里长城,慕田峪独秀,红叶季赏秋时间点:9月底—10月中旬初红期;10月中旬—11月初盛红期;11月初—11月中下旬末红期",
-  "sources": [
-   "CTRIP_4035354"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4035354",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "拍的风景在16-20,因为人少,所以也能拍出很好的照片哦",
-  "condition_type": "一般",
-  "sentence": "爬长城的线路:缆车单程100,往返120,考虑后续行程,我们选择往返缆车,直达14号烽火台,慕田峪长城一共有20个烽火台,20后面就是没有修缮维护的野长城,禁止通行,最好拍的风景在16-20,因为人少,所以也能拍出很好的照片哦",
-  "sources": [
-   "CTRIP_4035354"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4035354",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
   "trigger": "只要",
   "condition_text": "有阳光",
   "suggestion_text": "每天都能看到,当然必须是下午,夕阳西下的时候",
@@ -15501,22 +10790,6 @@
   "frequency": 1
  },
  {
-  "record_id": "CTRIP_4035354",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "从南门进、北门出,依次参观圜丘、回音壁、皇穹宇、丹陛桥、斋宫、祈年殿和皇乾殿后离开",
-  "condition_type": "一般",
-  "sentence": "游览建议从南门进、北门出,依次参观圜丘、回音壁、皇穹宇、丹陛桥、斋宫、祈年殿和皇乾殿后离开",
-  "sources": [
-   "CTRIP_4035354"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "CTRIP_4049952",
   "scenic_area": "颐和园",
   "source_platform": "携程游记",
@@ -15529,70 +10802,6 @@
   "sentence": "乐寿堂就是慈禧的寝宫,乐寿堂前临昆明湖,背倚万寿山,东达仁寿殿,西接长廊,是园内位置最好的居住和游乐的地方,院内花卉植有玉兰、海棠、牡丹等,名花满院,寓“玉堂富贵”之意",
   "sources": [
    "CTRIP_4049952"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4030611",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "广东控制不好",
-  "suggestion_text": "很有可能殃及池鱼,犹豫再三,上海宁还是保命要紧,忍痛放弃了福建之行",
-  "condition_type": "其他",
-  "sentence": "等到2021年暑假,原本计划去福建武夷山+漳州土楼+泉州兜一圈的,然后5月下旬广东突然爆出本土病例,还是印度变异传播性更强的毒株!看看地图,福建就是广东的隔壁邻居,要是广东控制不好,很有可能殃及池鱼,犹豫再三,上海宁还是保命要紧,忍痛放弃了福建之行",
-  "sources": [
-   "CTRIP_4030611"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4030611",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "对出租车司机有任何不满意",
-  "suggestion_text": "像是拒载啊、不经乘客同意拼车啊、绕路啊等等,都可以拨打咱的投诉电话,电话号码就贴在墙上,大家可以记一下!”于是大家齐刷刷地回头,果不其然,旁边的矮墙上很醒目地张贴了监督投诉电话",
-  "condition_type": "其他",
-  "sentence": "见我们等得无聊,大叔还主动和我们唠起了嗑:“各位如果对出租车司机有任何不满意,像是拒载啊、不经乘客同意拼车啊、绕路啊等等,都可以拨打咱的投诉电话,电话号码就贴在墙上,大家可以记一下!”于是大家齐刷刷地回头,果不其然,旁边的矮墙上很醒目地张贴了监督投诉电话",
-  "sources": [
-   "CTRIP_4030611"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4030611",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "若",
-  "condition_text": "问避暑山庄到底避不避暑?有位游客阿姨说得好:以前皇上来这里怕不是避暑",
-  "suggestion_text": "而是来中暑的吧",
-  "condition_type": "其他",
-  "sentence": "更要命的是,白天的避暑山庄已然没有了夜晚的凉爽,反而走起了闷热路线,若问避暑山庄到底避不避暑?有位游客阿姨说得好:以前皇上来这里怕不是避暑,而是来中暑的吧",
-  "sources": [
-   "CTRIP_4030611"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4030611",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果…的话",
-  "condition_text": "因此要舍弃普宁寺和普陀宗乘之庙",
-  "suggestion_text": "我买的四日套票不就浪费了么?而金山岭的门票和租车预订都是可退的,因此权衡再三,痛下决心,舍金山岭而就俩寺庙,把7月12日的行程提前到11日,金山岭就随缘吧",
-  "condition_type": "其他",
-  "sentence": "我们本来是想7月11日去金山岭,7月12日去外八庙中的两个寺庙,然而天气预报显示7月12日暴雨的可能性灰常大,如果因此要舍弃普宁寺和普陀宗乘之庙的话,我买的四日套票不就浪费了么?而金山岭的门票和租车预订都是可退的,因此权衡再三,痛下决心,舍金山岭而就俩寺庙,把7月12日的行程提前到11日,金山岭就随",
-  "sources": [
-   "CTRIP_4030611"
   ],
   "frequency": 1
  },
@@ -15618,54 +10827,6 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "第一时间抢票",
-  "condition_type": "一般",
-  "sentence": "景点预订:北京门票都可以通过微信公众号提前预约,门票预定取消也都很方便,热门的天安门升国旗和故宫一定要提前预约,特别是故宫博物院门票每日20:00放票,可提前7天预约,最好第一时间抢票",
-  "sources": [
-   "CTRIP_4112830"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4112830",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "优先考虑地铁出行",
-  "condition_type": "一般",
-  "sentence": "交通方式:打车和地铁都挺方便的,不过在天安门和故宫附近网约车上车点较少,且叫车较慢,建议优先考虑地铁出行",
-  "sources": [
-   "CTRIP_4112830"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4112830",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "查询当日升国旗时间(和日出时间一致)",
-  "condition_type": "一般",
-  "sentence": "天安门升国旗:升国旗不需要门票,但需要提前预约,进天安门广场也需要提前预约,记得查询当日升国旗时间(和日出时间一致)",
-  "sources": [
-   "CTRIP_4112830"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4112830",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
   "suggestion_text": "稍作调整",
@@ -15673,86 +10834,6 @@
   "sentence": "上车后可以跟司机沟通下去看升国旗的,下车点可以根据司机建议稍作调整",
   "sources": [
    "CTRIP_4112830"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_4112830",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "记得",
-  "condition_text": "一般建议",
-  "suggestion_text": "要穿舒适的防滑鞋子登城+备好饮用水",
-  "condition_type": "一般",
-  "sentence": "八达岭长城:跟着旅游团巴士过去长城景区的,没有乘坐缆车,自己徒步爬了比较短的南城,往返约2小时,长度比预期要短,但是真的很陡,台阶有的很高,确实不好爬,记得要穿舒适的防滑鞋子登城+备好饮用水",
-  "sources": [
-   "CTRIP_4112830"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3962193",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "只要",
-  "condition_text": "一卡通地铁卡在手",
-  "suggestion_text": "随便你走,是很方便的,所以建议每个去北京旅游的朋友先去买一张地铁卡,每个地铁站都有卖的,押金20块,退卡的时候返回押金",
-  "condition_type": "其他",
-  "sentence": "先来说说北京的交通,北京的地铁线路超级发达,大部分景点可以地铁直达,不管去多远的地儿,只要一卡通地铁卡在手,随便你走,是很方便的,所以建议每个去北京旅游的朋友先去买一张地铁卡,每个地铁站都有卖的,押金20块,退卡的时候返回押金",
-  "sources": [
-   "CTRIP_3962193"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3962193",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "的位置在国家体育场南路的小桥上,有一条小河,能拍到水中的倒影,配上鸟巢美轮美轮的灯光夜景,简直美如画啊!",
-  "condition_type": "时间",
-  "sentence": "晚上我们去鸟巢水立方看夜景,别说,真的很美,在鸟笼式的灯光映衬下非常夺目漂亮,给大家支个招,拍鸟巢最好的位置在国家体育场南路的小桥上,有一条小河,能拍到水中的倒影,配上鸟巢美轮美轮的灯光夜景,简直美如画啊!",
-  "sources": [
-   "CTRIP_3962193"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3962193",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "拿一张地图,否则很容易迷路",
-  "condition_type": "一般",
-  "sentence": "圆明园很大,最好拿一张地图,否则很容易迷路",
-  "sources": [
-   "CTRIP_3962193"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "CTRIP_3962193",
-  "scenic_area": "颐和园",
-  "source_platform": "携程游记",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "去爬南长城",
-  "condition_type": "一般",
-  "sentence": "不过南长城也有自己的优势,比较陡峭,挑战难度比较大,风景也是不遑多让,关键是南长城的人少啊,想自由洒脱一点那就建议去爬南长城",
-  "sources": [
-   "CTRIP_3962193"
   ],
   "frequency": 1
  },
@@ -15837,22 +10918,6 @@
   "frequency": 1
  },
  {
-  "record_id": "XHS_6a10349e00000000060233b0",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "不坐网红小火车",
-  "suggestion_text": "原路返回大概8km)",
-  "condition_type": "其他",
-  "sentence": "12:00网红小火车到达天海站8(如果不坐网红小火车,原路返回大概8km)",
-  "sources": [
-   "XHS_6a10349e00000000060233b0"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "XHS_6810bb2d000000002002ab2b",
   "scenic_area": "黄山",
   "source_platform": "小红书",
@@ -15889,60 +10954,12 @@
   "scenic_area": "黄山",
   "source_platform": "小红书",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "带自热火锅或米饭,一两份就行",
-  "condition_type": "一般",
-  "sentence": "关于干粮:建议带自热火锅或米饭,一两份就行",
-  "sources": [
-   "XHS_69f832f500000000230056c5"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69f832f500000000230056c5",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
   "condition_text": "背包有空间",
   "suggestion_text": "可以带点面包、香蕉、香肠——主要是用来逗猴的! 黄山逗猴是最好玩的一个环节",
   "condition_type": "其他",
   "sentence": "如果背包有空间,可以带点面包、香蕉、香肠——主要是用来逗猴的! 黄山逗猴是最好玩的一个环节",
-  "sources": [
-   "XHS_69f832f500000000230056c5"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69f832f500000000230056c5",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "别",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "别坐错大巴",
-  "condition_type": "一般",
-  "sentence": "我们走的是云谷上、玉屏下,别坐错大巴",
-  "sources": [
-   "XHS_69f832f500000000230056c5"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69f832f500000000230056c5",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "走一环二环下坡路(从山顶走到谷底),再从谷底坐网红小火车上到山顶",
-  "condition_type": "一般",
-  "sentence": "西海大峡谷都是很陡的坡,建议走一环二环下坡路(从山顶走到谷底),再从谷底坐网红小火车上到山顶",
   "sources": [
    "XHS_69f832f500000000230056c5"
   ],
@@ -16065,22 +11082,6 @@
   "scenic_area": "黄山",
   "source_platform": "小红书",
   "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "不要晚于2点出发,小火车5点关闭)",
-  "condition_type": "一般",
-  "sentence": "(⚠去西海峡谷不要晚于2点出发,小火车5点关闭)",
-  "sources": [
-   "XHS_69c8ce5300000000210055d2"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69c8ce5300000000210055d2",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "适合",
   "condition_text": "时间条件（句内）",
@@ -16119,22 +11120,6 @@
   "suggestion_text": "冲锋衣,爬山热了可以脱掉中间层",
   "condition_type": "一般",
   "sentence": "外套:山顶有风 最好冲锋衣,爬山热了可以脱掉中间层",
-  "sources": [
-   "XHS_69c8ce5300000000210055d2"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69c8ce5300000000210055d2",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "提前一两周看好晴天后,早定山顶酒店",
-  "condition_type": "一般",
-  "sentence": "5建议提前一两周看好晴天后,早定山顶酒店",
   "sources": [
    "XHS_69c8ce5300000000210055d2"
   ],
@@ -16253,22 +11238,6 @@
   "frequency": 1
  },
  {
-  "record_id": "XHS_69e4cd1f000000002301229e",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "可以先坐火车下到谷底,再从一环二环爬上来,这样可以不走重复的路",
-  "condition_type": "一般",
-  "sentence": "推荐可以先坐火车下到谷底,再从一环二环爬上来,这样可以不走重复的路",
-  "sources": [
-   "XHS_69e4cd1f000000002301229e"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "XHS_688a0687000000002302e41d",
   "scenic_area": "黄山",
   "source_platform": "小红书",
@@ -16297,86 +11266,6 @@
   "sentence": "务必计算好时间,目标1点开始徒步,建议最晚12:30要坐上交通车",
   "sources": [
    "XHS_688a0687000000002302e41d"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6a4868080000000007020cc8",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "晚上直接住高铁站下方粗麻布酒店",
-  "condition_type": "时间",
-  "sentence": "臭鳜鱼和鲜笋刀板香现点现做,鳜鱼很嫩滑,笋很鲜脆汤也好喝,腊肉略咸口最好配饭;晚上直接住高铁站下方粗麻布酒店",
-  "sources": [
-   "XHS_6a4868080000000007020cc8"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6a4868080000000007020cc8",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "奔着看鱼灯的",
-  "suggestion_text": "所以傍晚5点到也来得及,89的门票进去古村落外围转转",
-  "condition_type": "其他",
-  "sentence": "呈坎主要是奔着看鱼灯的,所以傍晚5点到也来得及,89的门票进去古村落外围转转,可以10元请阿婆给讲解,等6点半左右蹲好点位看鱼灯,会从广场开始绕一圈到桥上再回去,中间放烟花,回广场后感兴趣的可以参与进去手持鱼灯,整个环节很热闹参与感强,看完就可以拼车去黄山脚下酒店~",
-  "sources": [
-   "XHS_6a4868080000000007020cc8"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6a4868080000000007020cc8",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "要是",
-  "condition_text": "奔着看鱼灯的",
-  "suggestion_text": "可以10元请阿婆给讲解,等6点半左右蹲好点位看鱼灯,会从广场开始绕一圈到桥上再回去,中间放烟花,回广场后感兴趣的可以参与进去手持鱼灯,整个环节很热闹参与感强,看完就可以拼车去黄山脚下酒店~",
-  "condition_type": "其他",
-  "sentence": "呈坎主要是奔着看鱼灯的,所以傍晚5点到也来得及,89的门票进去古村落外围转转,可以10元请阿婆给讲解,等6点半左右蹲好点位看鱼灯,会从广场开始绕一圈到桥上再回去,中间放烟花,回广场后感兴趣的可以参与进去手持鱼灯,整个环节很热闹参与感强,看完就可以拼车去黄山脚下酒店~",
-  "sources": [
-   "XHS_6a4868080000000007020cc8"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6a4868080000000007020cc8",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "别",
-  "condition_text": "装备条件（句内）",
-  "suggestion_text": "别踩空,爬山时遇上好几个脚崴伤的,我自己是带了护踝,也带了髌骨带想着护膝,但没用还一直掉,避雷",
-  "condition_type": "装备",
-  "sentence": "上山带登山杖就行,注意别踩空,爬山时遇上好几个脚崴伤的,我自己是带了护踝,也带了髌骨带想着护膝,但没用还一直掉,避雷;回到酒店后用了狼牙棒按摩,后面几天身体不会咋疼;",
-  "sources": [
-   "XHS_6a4868080000000007020cc8"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6a4868080000000007020cc8",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "吃了泡泡馄饨,店名一碗泡泡,当场擀饺子皮,入口即化,走的时候打包了炒面高铁吃,手擀面很不错",
-  "condition_type": "一般",
-  "sentence": "喝卡夫卡,买了太平猴魁茶,听老板推荐吃了泡泡馄饨,店名一碗泡泡,当场擀饺子皮,入口即化,走的时候打包了炒面高铁吃,手擀面很不错",
-  "sources": [
-   "XHS_6a4868080000000007020cc8"
   ],
   "frequency": 1
  },
@@ -16455,22 +11344,6 @@
   "suggestion_text": "食用人群:",
   "condition_type": "一般",
   "sentence": "本攻略适合食用人群:",
-  "sources": [
-   "XHS_6aa8cad1000000001103522b"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6aa8cad1000000001103522b",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "订离两个换乘中心步行距离5min以内的住宿",
-  "condition_type": "一般",
-  "sentence": "⚠很多酒店/民宿名字里写了【南大门换乘中心店】但其实离换乘中心都有段距离!订之前自己用导航确认一下比较靠谱,就算提供接送站服务大多数也要从6:30开始送人,如果需要很早出发最好订离两个换乘中心步行距离5min以内的住宿;",
   "sources": [
    "XHS_6aa8cad1000000001103522b"
   ],
@@ -16583,22 +11456,6 @@
   "suggestion_text": "走平缓点路线,最后都能到迎客松",
   "condition_type": "一般",
   "sentence": "这个路线下山的部分比较多相对容易点,攻打光明顶完得好好休息下,还有百步云梯建议走平缓点路线,最后都能到迎客松",
-  "sources": [
-   "XHS_699db4740000000022039268"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_699db4740000000022039268",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "选择屯溪老街or黄山北站",
-  "condition_type": "时间",
-  "sentence": "如果只爬一天住宿建议选择屯溪老街or黄山北站",
   "sources": [
    "XHS_699db4740000000022039268"
   ],
@@ -16765,38 +11622,6 @@
   "frequency": 1
  },
  {
-  "record_id": "XHS_6ac4f2f50000000002012ec2",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "是普通人",
-  "suggestion_text": "好久没运动那种",
-  "condition_type": "其他",
-  "sentence": "是的,如果是普通人,好久没运动那种,一定要带这个,几十块钱提前买一个也好,下山回酒店按摩1小时,第二天早上起床你会来感谢我的......",
-  "sources": [
-   "XHS_6ac4f2f50000000002012ec2"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6ac4f2f50000000002012ec2",
-  "scenic_area": "黄山",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "是普通人",
-  "suggestion_text": "一定要带这个,几十块钱提前买一个也好,下山回酒店按摩1小时,第二天早上起床你会来感谢我的......",
-  "condition_type": "其他",
-  "sentence": "是的,如果是普通人,好久没运动那种,一定要带这个,几十块钱提前买一个也好,下山回酒店按摩1小时,第二天早上起床你会来感谢我的......",
-  "sources": [
-   "XHS_6ac4f2f50000000002012ec2"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "XHS_6ad9efbf000000002c014e3f",
   "scenic_area": "黄山",
   "source_platform": "小红书",
@@ -16909,38 +11734,6 @@
   "frequency": 1
  },
  {
-  "record_id": "XHS_6ab489710000000018017e17",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "尽量",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "提前订,越临近越贵",
-  "condition_type": "时间",
-  "sentence": "彩林季是旺季,一定要提前线上预约,住宿也尽量提前订,越临近越贵",
-  "sources": [
-   "XHS_6ab489710000000018017e17"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69079d88000000000701514e",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "起飞时间提前6小时以上",
-  "condition_type": "一般",
-  "sentence": "到绵阳的大巴在通力行买的,建议起飞时间提前6小时以上",
-  "sources": [
-   "XHS_69079d88000000000701514e"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "XHS_69180253000000000703235e",
   "scenic_area": "九寨沟",
   "source_platform": "小红书",
@@ -17047,22 +11840,6 @@
   "suggestion_text": "建议坐左边,右边太阳直射",
   "condition_type": "其他",
   "sentence": "如果上车就睡觉,建议坐左边,右边太阳直射",
-  "sources": [
-   "XHS_696cd185000000000c034dae"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_696cd185000000000c034dae",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P1_显式条件",
-  "trigger": "如果",
-  "condition_text": "订的酒店在某个站点附近",
-  "suggestion_text": "需要自己注意",
-  "condition_type": "其他",
-  "sentence": "司机会喊有没有下车的,如果订的酒店在某个站点附近,需要自己注意",
   "sources": [
    "XHS_696cd185000000000c034dae"
   ],
@@ -17277,22 +12054,6 @@
   "frequency": 1
  },
  {
-  "record_id": "XHS_69042313000000000402be51",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P6_否定建议",
-  "trigger": "不要",
-  "condition_text": "一般建议（避雷）",
-  "suggestion_text": "不要在车上睡觉错过了!高铁站前往九寨沟的车坐右侧,回程车坐左侧!",
-  "condition_type": "一般",
-  "sentence": "对了,高铁站前往九寨沟景区路上的彩林雪山可真的太美了,大家不要在车上睡觉错过了!高铁站前往九寨沟的车坐右侧,回程车坐左侧!",
-  "sources": [
-   "XHS_69042313000000000402be51"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "XHS_689b5f99000000001c00a124",
   "scenic_area": "九寨沟",
   "source_platform": "小红书",
@@ -17337,38 +12098,6 @@
   "sentence": "中线:从犀牛海开始一直到芦苇滩,全程徒步,移步换景,美不胜收,强烈建议全部走下来",
   "sources": [
    "XHS_6995996f000000001b0161bd"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6995996f000000001b0161bd",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "开头大巴进入的时候观测一下哪些景点感兴趣,这样回头就可以选择了,不想去的就坐上车绕过",
-  "condition_type": "一般",
-  "sentence": "中线建议开头大巴进入的时候观测一下哪些景点感兴趣,这样回头就可以选择了,不想去的就坐上车绕过",
-  "sources": [
-   "XHS_6995996f000000001b0161bd"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6aa7a78500000000270171d6",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "能够坐在【左边】可以看到沿途的风景",
-  "condition_type": "时间",
-  "sentence": "早上8:00景区大巴车开始运送,[礼物R]大巴车一般就会分到右线,大家不用担心,最好能够坐在【左边】可以看到沿途的风景",
-  "sources": [
-   "XHS_6aa7a78500000000270171d6"
   ],
   "frequency": 1
  },
@@ -17513,86 +12242,6 @@
   "sentence": "修改完后记得点保存整页!",
   "sources": [
    "XHS_6ad5c9e60000000027015bba"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69cd2898000000002800aace",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "调味很一般,五花肉还烤得很焦)",
-  "condition_type": "一般",
-  "sentence": "-晚饭:亲家烧烤(不推荐,调味很一般,五花肉还烤得很焦)",
-  "sources": [
-   "XHS_69cd2898000000002800aace"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69cd2898000000002800aace",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "老板娘非常好,房间很干净而且暖气很足)",
-  "condition_type": "一般",
-  "sentence": "- 入住:初见山舍民宿(推荐,老板娘非常好,房间很干净而且暖气很足)",
-  "sources": [
-   "XHS_69cd2898000000002800aace"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69cd2898000000002800aace",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "这位松州靓仔@松潘小少爷 [赞R][赞R]全程开车很稳不飙车,有小伙伴不舒服的情况也会贴心停车休息)",
-  "condition_type": "一般",
-  "sentence": "- 包车:民宿老板娘帮忙约好,松潘古城接头→雪宝顶→九寨沟,4人拼车130/人(这里非常推荐这位松州靓仔@松潘小少爷 [赞R][赞R]全程开车很稳不飙车,有小伙伴不舒服的情况也会贴心停车休息)",
-  "sources": [
-   "XHS_69cd2898000000002800aace"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69cd2898000000002800aace",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "性价比不高)",
-  "condition_type": "一般",
-  "sentence": "- 入住:缦居酒店(距景区走路10-15分钟,300元/晚,但不是很推荐,性价比不高)",
-  "sources": [
-   "XHS_69cd2898000000002800aace"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69cd2898000000002800aace",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "味道一般靠shua评)",
-  "condition_type": "一般",
-  "sentence": "- 午餐:明红蹄花(不推荐,味道一般靠shua评)",
-  "sources": [
-   "XHS_69cd2898000000002800aace"
   ],
   "frequency": 1
  },
@@ -18177,54 +12826,6 @@
   "scenic_area": "九寨沟",
   "source_platform": "小红书",
   "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "一般建议",
-  "suggestion_text": "晚到休息",
-  "condition_type": "一般",
-  "sentence": "21:35–23:55 乘坐川航 3U8739 从广州飞往成都双流,然后打车前往成都东站旁的龙之梦瑞峰国际酒店, 酒店楼下有便利店和宵夜,适合晚到休息",
-  "sources": [
-   "XHS_69118ec300000000050335b8"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69118ec300000000050335b8",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": ":景区停车场 ¥10/小时",
-  "condition_type": "一般",
-  "sentence": "停车建议:景区停车场 ¥10/小时;民宿包停 ¥80/天,而且民宿老板非常热心把我送到了景区门口,比起自己慢慢找车位省了不少时间",
-  "sources": [
-   "XHS_69118ec300000000050335b8"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69118ec300000000050335b8",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "一般建议",
-  "suggestion_text": "民宿包停 ¥80/天,而且民宿老板非常热心把我送到了景区门口,比起自己慢慢找车位省了不少时间",
-  "condition_type": "一般",
-  "sentence": "停车建议:景区停车场 ¥10/小时;民宿包停 ¥80/天,而且民宿老板非常热心把我送到了景区门口,比起自己慢慢找车位省了不少时间",
-  "sources": [
-   "XHS_69118ec300000000050335b8"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69118ec300000000050335b8",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "如果",
   "condition_text": "可以的话尽量坐左侧靠窗",
@@ -18247,38 +12848,6 @@
   "suggestion_text": "非常舒服",
   "condition_type": "其他",
   "sentence": "乘车建议:接驳车上山约半小时,如果可以的话尽量坐左侧靠窗,上山能看到大部份风景,如果没那么冷可以开点窗,非常舒服",
-  "sources": [
-   "XHS_69118ec300000000050335b8"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69118ec300000000050335b8",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": ":【汉庭九寨沟游客中心店】,离景区近,而且楼下有很多吃的",
-  "condition_type": "一般",
-  "sentence": "住宿推荐:【汉庭九寨沟游客中心店】,离景区近,而且楼下有很多吃的,可以试一下耗牛火锅(一个人也可以吃哦)",
-  "sources": [
-   "XHS_69118ec300000000050335b8"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_69118ec300000000050335b8",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "推荐",
-  "condition_text": "一般建议",
-  "suggestion_text": "可以试一下耗牛火锅(一个人也可以吃哦)",
-  "condition_type": "一般",
-  "sentence": "住宿推荐:【汉庭九寨沟游客中心店】,离景区近,而且楼下有很多吃的,可以试一下耗牛火锅(一个人也可以吃哦)",
   "sources": [
    "XHS_69118ec300000000050335b8"
   ],
@@ -18333,38 +12902,6 @@
   "frequency": 1
  },
  {
-  "record_id": "XHS_68db48e70000000013006068",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "选择自行打车前往",
-  "condition_type": "一般",
-  "sentence": "[一R]无论住在哪个寨子,必须七点半之前到达入口,酒店送达可能会晚,所以最好选择自行打车前往",
-  "sources": [
-   "XHS_68db48e70000000013006068"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_68e74fbd0000000005038baf",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "建议",
-  "condition_text": "天气条件（句内）",
-  "suggestion_text": "或避雷呢?什么方面的都好,线路、天气、着装、住宿什么的都非常感谢!",
-  "condition_type": "天气",
-  "sentence": "想问问大家有没有游玩建议或避雷呢?什么方面的都好,线路、天气、着装、住宿什么的都非常感谢!",
-  "sources": [
-   "XHS_68e74fbd0000000005038baf"
-  ],
-  "frequency": 1
- },
- {
   "record_id": "XHS_68e74fbd0000000005038baf",
   "scenic_area": "九寨沟",
   "source_platform": "小红书",
@@ -18377,22 +12914,6 @@
   "sentence": "1一个人的话推荐自由行还是报小团呢?",
   "sources": [
    "XHS_68e74fbd0000000005038baf"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6aa5670b0000000026009cf5",
-  "scenic_area": "九寨沟",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "适合",
-  "condition_text": "时间条件（句内）",
-  "suggestion_text": "体力好、时间紧的旅行者",
-  "condition_type": "时间",
-  "sentence": "返程高铁补觉,全程765元,适合体力好、时间紧的旅行者",
-  "sources": [
-   "XHS_6aa5670b0000000026009cf5"
   ],
   "frequency": 1
  },
@@ -18599,22 +13120,6 @@
   "suggestion_text": "拜一下:来都来了,逢考必过",
   "condition_type": "人群",
   "sentence": "学生党路过记得拜一下:来都来了,逢考必过",
-  "sources": [
-   "XHS_6a8c75be00000000340053ea"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6a8c75be00000000340053ea",
-  "scenic_area": "颐和园",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P5_人群可以",
-  "trigger": "可以",
-  "condition_text": "游客为体力好的还",
-  "suggestion_text": "继续沿湖往南走~",
-  "condition_type": "人群",
-  "sentence": "我最后从新建宫门直接出去打车吃饭,全程逛了3个小时多点,步数不到2万,体力好的还可以继续沿湖往南走~",
   "sources": [
    "XHS_6a8c75be00000000340053ea"
   ],
@@ -19271,22 +13776,6 @@
   "suggestion_text": "不要硬打卡全部点位,挑重点慢走细逛",
   "condition_type": "一般",
   "sentence": "园子面积巨大,不要硬打卡全部点位,挑重点慢走细逛",
-  "sources": [
-   "XHS_6ae22af4000000003402822f"
-  ],
-  "frequency": 1
- },
- {
-  "record_id": "XHS_6ae22af4000000003402822f",
-  "scenic_area": "颐和园",
-  "source_platform": "小红书",
-  "text_type": "travelogue",
-  "pattern": "P4_建议推断",
-  "trigger": "最好",
-  "condition_text": "一般建议",
-  "suggestion_text": "备点干粮",
-  "condition_type": "一般",
-  "sentence": "园内饮品小吃不便宜,18元一个三明治,最好备点干粮",
   "sources": [
    "XHS_6ae22af4000000003402822f"
   ],

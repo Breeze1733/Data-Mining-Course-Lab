@@ -166,12 +166,32 @@ def norm(s: str) -> str:
     return re.sub(r"[\s，,。；;、！？!?\[\]（）()【】]+", "", s)
 
 
-def main() -> int:
+def main(argv=None) -> int:
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--no-attribution-filter", action="store_true",
+                    help="关闭 P1 句级归属过滤（默认开启：景区外句子不产出条件建议对）")
+    args = ap.parse_args(argv)
+
+    attr = None
+    if not args.no_attribution_filter:
+        import sys as _sys
+        _sys.path.insert(0, str(ROOT.parent / "task2/src"))
+        from attribute_sentences import Attributor, SENT_SPLIT as ATTR_SPLIT
+        attr = Attributor()
+
     rows = [json.loads(l) for l in (TASK1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8")]
     all_pairs = []
     for row in rows:
         text = row["clean_content"]
-        for sent in (s.strip() for s in SENT_SPLIT.split(text)):
+        raw_sents = [s.strip() for s in SENT_SPLIT.split(text)]
+        sent_labels = None
+        if attr is not None:
+            sent_labels = attr.attribute_record(row["scenic_area"], raw_sents,
+                                                text_type=row.get("text_type", "travelogue"))
+        for sent, sent_lab in zip(raw_sents, sent_labels or [None] * len(raw_sents)):
+            if sent_lab == "景区外":
+                continue  # P1 归属过滤：景区外句子不产出条件建议对
             if not (8 <= len(sent) <= 160):
                 continue
             for p in extract_from_sentence(sent):
