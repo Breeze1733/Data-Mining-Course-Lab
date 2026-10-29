@@ -1,0 +1,155 @@
+{
+  "generated_at": "2026-10-29T01:22:10+08:00",
+  "stage": "data_collection_only",
+  "counts": [
+    {
+      "scenic_area": "黄山",
+      "platform": "携程",
+      "eligible_candidates": 52,
+      "selected": 25,
+      "target": 25,
+      "shortfall": 0
+    },
+    {
+      "scenic_area": "黄山",
+      "platform": "小红书",
+      "eligible_candidates": 35,
+      "selected": 25,
+      "target": 25,
+      "shortfall": 0
+    },
+    {
+      "scenic_area": "九寨沟",
+      "platform": "携程",
+      "eligible_candidates": 66,
+      "selected": 25,
+      "target": 25,
+      "shortfall": 0
+    },
+    {
+      "scenic_area": "九寨沟",
+      "platform": "小红书",
+      "eligible_candidates": 35,
+      "selected": 25,
+      "target": 25,
+      "shortfall": 0
+    },
+    {
+      "scenic_area": "颐和园",
+      "platform": "携程",
+      "eligible_candidates": 31,
+      "selected": 25,
+      "target": 25,
+      "shortfall": 0
+    },
+    {
+      "scenic_area": "颐和园",
+      "platform": "小红书",
+      "eligible_candidates": 35,
+      "selected": 25,
+      "target": 25,
+      "shortfall": 0
+    }
+  ],
+  "tourist_records": 150,
+  "official_documents": 22,
+  "official_accepted": 22,
+  "official_ordered_route_variants": {
+    "九寨沟": 9,
+    "颐和园": 17,
+    "黄山": 13
+  },
+  "official_theme_variants": {
+    "九寨沟": 7
+  },
+  "duplicate_exclusions": [
+    {
+      "record_id": "CTRIP_4011658",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4001839",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4012458",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4002044",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4005282",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4018975",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4017011",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_3996573",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4011508",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4007284",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4023882",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4004632",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4011146",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4016771",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4023695",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    },
+    {
+      "record_id": "CTRIP_4018116",
+      "scenic_area": "九寨沟",
+      "reason": "duplicate_url_or_body"
+    }
+  ],
+  "snapshot_errors": [],
+  "missing_required": [],
+  "missing_official": [],
+  "metadata_missing": {
+    "author": 22,
+    "publication_date": 0
+  },
+  "complete": true
+}

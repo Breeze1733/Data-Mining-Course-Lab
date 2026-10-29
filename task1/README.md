@@ -12,6 +12,8 @@ data/collected/       人类可读的 Excel 交付版
 report.docx           实验项目1报告
 ```
 
+`data/` 默认整体忽略，只放行交付物与实验 2–7 的公共输入（见 `.gitignore` 末尾的 `!` 规则）。HTML 快照、`records.jsonl`、切分文本、CSV 副本均可由 `src/` 下的脚本再生，不入库。
+
 ## 运行方法
 
 环境准备（Windows，PowerShell 7+，Python 3.10+，Node 20+ 仅采集阶段需要）：

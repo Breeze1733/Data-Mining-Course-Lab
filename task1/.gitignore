@@ -1,11 +1,10 @@
-# 实验项目1 的本地生成数据与环境（data/ 不入库，交付时另行打包）
+# 实验项目1 的本地环境与临时文件
 __pycache__/
 *.py[cod]
 .venv/
 node_modules/
 .browser-profile*/
 logs/
-data/
 qa/
 ~$*.docx
 *.tmp
@@ -16,3 +15,22 @@ report_template_backup.docx
 /research/*.jsonl
 /research/*.html
 /research/*_pages/
+
+# data/ 默认全部忽略：HTML 快照、中间产物、切分文本都可由 src/ 下的脚本再生。
+# 只放行交付物与实验 2-7 的公共输入。
+data/**
+!data/raw/
+!data/raw/official_documents.jsonl
+!data/raw/official_routes.jsonl
+!data/collected/
+!data/collected/collection_summary.json
+!data/collected/candidate_audit.jsonl
+!data/collected/eligible_candidate_pool.csv
+!data/collected/official_documents.jsonl
+!data/collected/official_routes.jsonl
+!data/collected/scenic_guide_dataset.xlsx
+!data/processed/
+!data/processed/dataset_clean.jsonl
+!data/processed/quality_report.json
+!data/processed/cleaning_examples.json
+!data/processed/rejected_records.jsonl

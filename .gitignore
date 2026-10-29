@@ -1,16 +1,19 @@
-# 仓库根目录的本地环境与临时文件
-/__pycache__/
-/*.py[cod]
+# 仓库级本地环境与临时文件
+__pycache__/
+*.py[cod]
 /.venv/
 /venv/
 /node_modules/
 /.env
 /.env.*
 !/.env.example
-/~$*.docx
-/*.tmp
-/*.log
+~$*.docx
+*.tmp
+*.log
 
 # 通用系统文件；各任务的生成文件由各自的 .gitignore 管理
 .DS_Store
 Thumbs.db
+
+# 本地 AI 助手的会话与记忆状态
+.workbuddy-ai/
