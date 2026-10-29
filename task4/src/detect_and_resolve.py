@@ -58,7 +58,7 @@ def main() -> int:
 
     sys.path.insert(0, str(TASK2 / "src"))
     from extract_entities import DictMatcher, load_dictionary
-    from compatibility import contextual_facility_places
+    from entity_rules import contextual_facility_places
 
     entries, stopwords, _ = load_dictionary("refined")
     matcher = DictMatcher(entries, stopwords)

@@ -21,6 +21,29 @@ OUT = ROOT / "output"
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 
+def verify_names(graph):
+    sys.path.insert(0, str(ROOT.parent / "common"))
+    from entity_identity import aliases, canonical_name, build_poi_lookup
+    entries = json.loads((ROOT.parent / "task2/output/exp2/entity_dictionary.json").read_text(encoding="utf-8"))["poi"]
+    names = {(area, e["canonical"]) for e in entries for area in e["scenic_areas"]}
+    lookup = build_poi_lookup(entries)
+    unresolved = [(area, name) for area, name in aliases() if (area, canonical_name(name, area)) not in names]
+    missing = [name for name, data in graph.nodes(data=True) if not data.get("kind") or not data.get("name")]
+    references = 0
+    absent = []
+    for line in (ROOT.parent / "task3/output/parsed_routes.jsonl").open(encoding="utf-8"):
+        route = json.loads(line)
+        for step in route["steps"]:
+            for poi in step["pois"]:
+                references += 1
+                name = lookup.get((route["scenic_area"], poi["normalized"]), poi["normalized"])
+                if f"POI:{route['scenic_area']}:{name}" not in graph:
+                    absent.append([route["route_id"], name])
+    return {"alias_rows": len(aliases()), "route_poi_references_checked": references,
+            "unresolved_alias_targets": unresolved, "graph_nodes_without_identity": missing,
+            "route_references_missing_from_graph": absent, "passed": not (unresolved or missing or absent)}
+
+
 def main() -> int:
     G = nx.read_graphml(OUT / "knowledge_graph.graphml")
 
@@ -65,7 +88,9 @@ def main() -> int:
     components = {scenic: nx.number_connected_components(
         undirected.subgraph([n for n in G if f":{scenic}:" in n])) for scenic in ("黄山", "九寨沟", "颐和园")}
 
+    alignment = verify_names(G)
     validation = {
+        "name_alignment": alignment,
         "fact_checks": fact_checks,
         "key_poi_nodes_by_degree": {k: [(n, d) for n, d, _ in v] for k, v in key_nodes.items()},
         "same_name_isolation": same_name_check,
@@ -87,7 +112,7 @@ def main() -> int:
     for f in fact_checks:
         print(" ", f["pair"], "OK" if f["found"] else "MISS",
               f'w={f["edges"][0]["weight"]:.1f}' if f["found"] else "")
-    return 0 if ok == len(fact_checks) and all(n == 1 for n in components.values()) and not validation["isolated_nodes"] else 1
+    return 0 if ok == len(fact_checks) and all(n == 1 for n in components.values()) and not validation["isolated_nodes"] and alignment["passed"] else 1
 
 
 if __name__ == "__main__":

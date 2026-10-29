@@ -44,14 +44,15 @@ def bar_chart(freq: dict[str, int], title: str, path: Path, color: str, topn: in
 
 def wordcloud_chart(freq: dict[str, int], title: str, path: Path, color: str):
     wc = WordCloud(font_path=FONT, width=1200, height=700, background_color="white",
-                   colormap=color, max_words=120, prefer_horizontal=0.95)
+                   colormap=color, max_words=120, prefer_horizontal=0.95, random_state=42)
     wc.generate_from_frequencies(freq)
     fig, ax = plt.subplots(figsize=(8, 4.8), dpi=150)
     ax.imshow(wc, interpolation="bilinear")
     ax.axis("off")
     ax.set_title(title, fontsize=13)
     fig.tight_layout()
-    fig.savefig(path)
+    with path.open("wb") as output:
+        fig.savefig(output, format="png")
     plt.close(fig)
 
 

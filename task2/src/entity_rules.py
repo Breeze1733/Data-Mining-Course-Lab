@@ -1,8 +1,4 @@
-"""Share the configurable rules with the record-oriented task3–7 interface.
-
-The seed preserves curated aliases and out-of-area POIs. Root scenic names are
-excluded from the downstream POI layer. Offsets always address clean_content.
-"""
+"""最终实体识别规则：领域词典、交通过滤、时间归一化与区间消解。"""
 from __future__ import annotations
 
 import json
@@ -47,13 +43,13 @@ class DictMatcher:
         self.entries = entries
         self.stopwords = stopwords
         self.by_name = {e["name"]: e for e in entries}
-        cloud = {(e.area, e.surface): e for e in load_poi_gazetteer(RES / "poi_gazetteer.csv")}
+        templates = {(e.area, e.surface): e for e in load_poi_gazetteer(RES / "poi_gazetteer.csv")}
         pois = []
         for item in entries:
             if item["entity_type"] != "景点POI":
                 continue
             for area in item["scenic_areas"]:
-                template = cloud.get((area, item["name"]))
+                template = templates.get((area, item["name"]))
                 if template:
                     entry = replace(template, canonical=item["canonical"])
                 else:
@@ -61,15 +57,15 @@ class DictMatcher:
                                      item["canonical"], "其他", "", "domain_seed", 10, "")
                 pois.append(entry)
         transports = []
-        cloud_transport = {e.surface: e for e in load_transport_lexicon(RES / "transport_lexicon.csv")}
+        transport_templates = {e.surface: e for e in load_transport_lexicon(RES / "transport_lexicon.csv")}
         for item in entries:
             if item["entity_type"] != "交通方式":
                 continue
-            entry = cloud_transport.get(item["name"])
+            entry = transport_templates.get(item["name"])
             if entry is None:
                 entry = TransportEntry("DOMAIN-" + item["name"], item["name"],
                                        item["canonical"], "其他", 8, False, "", "", "", "domain_seed")
-            # Keep the local compound-word guards, including words the cloud missed.
+            # Prevent transport names from matching inside unrelated compound words.
             guards = {"步行": "街", "登山": "杖|鞋|口|服|包|靴", "地铁": "站|口"}
             extra = guards.get(entry.surface, "")
             if extra:

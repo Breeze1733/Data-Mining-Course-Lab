@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TASK2 = ROOT.parent / "task2"
 OUT = ROOT / "output"
 sys.path.insert(0, str(TASK2 / "src"))
-from extract_entities import DictMatcher, TIME_COMBINED, TIME_PATTERNS, load_dictionary  # noqa: E402
+from extract_entities import DictMatcher, load_dictionary  # noqa: E402
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 

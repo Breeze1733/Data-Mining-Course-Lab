@@ -1,10 +1,10 @@
-"""Regressions discovered while comparing the two independent implementations."""
+"""Regressions discovered for the production entity rules."""
 import unittest
 
-from compatibility import DictMatcher, refined_dictionary, time_entities, contextual_facility_places, resolve_record_entities
+from entity_rules import DictMatcher, refined_dictionary, time_entities, contextual_facility_places, resolve_record_entities
 
 
-class MergeRegressions(unittest.TestCase):
+class EntityRuleTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         entries, stopwords, _ = refined_dictionary()
@@ -47,7 +47,7 @@ class MergeRegressions(unittest.TestCase):
         entities = resolve_record_entities(self.matcher.find(text, "黄山") + time_entities(text))
         self.assertEqual([e["text"] for e in entities], ["天都峰"])
 
-    def test_configurable_overlap_policy_preserves_poi(self):
+    def test_overlap_policy_preserves_poi(self):
         from dictionary import Candidate, Gazetteer
         duration = Candidate(0, 3, "5 天", "时间节点", "时长", "5天", "5天", "regex", "DURATION")
         poi = Candidate(2, 5, "天都峰", "景点POI", "山峰", "天都峰", "天都峰", "dictionary_longest_match", "POI")

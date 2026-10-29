@@ -34,4 +34,4 @@ cd task1
 - 融合：canonical+景区命名空间对齐（五彩池/北海不跨景区合并）；先后边=官方 1.0/条+游客 0.5/条，保留路线 ID 溯源。
 - 验证：6/6 已知事实核验通过，各景区子图单连通，无孤立节点；核心节点（光明顶/五彩池/佛香阁）与领域常识一致。
 
-公共别名与图谱引用一致性检查：在根目录运行`python common/verify_entity_identity.py`。本轮7条别名、489处官方路线POI引用全部对齐，无缺身份属性的节点。
+地点别名与路线引用检查由src/verify_graph.py统一执行，结果写入output/graph_validation.json。

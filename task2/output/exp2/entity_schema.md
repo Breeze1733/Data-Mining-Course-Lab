@@ -1,7 +1,6 @@
 # 实体类型与边界规范
 
-主语料接口保留跨景区实体并标记 in_scenic；景区根名不进入 POI。时长不计作时间节点。
-配置接口保留根景区标记并按景区隔离；两种接口均使用模块化时间与交通规则。
+保留跨景区实体并标记in_scenic；景区根名不进入POI。时长单列，不计作时间节点。
 
 ```csv
 type,subtype,definition,left_boundary,right_boundary,positive_examples,negative_examples,confusables,normalization,cross_area_policy

@@ -37,7 +37,7 @@ def main():
     rb.bullets([
         "Windows 11；Python 3.13（task1/.venv）；matplotlib 绘图；openpyxl 导出 Excel。",
         "输入：task1/data/processed/dataset_clean.jsonl（271 条，含官方路线与游记）。",
-        "运行入口：task5/src/{extract_conditionals, review_and_charts, export_mapping_xlsx, build_report5}.py。",
+        "项目复现统一运行仓库根目录的python run.py，顺序完成条件建议抽取、历史标注计分、图表、Excel及报告生成。",
     ])
 
     rb.section("三、实验设计与实现")

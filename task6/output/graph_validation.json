@@ -1,4 +1,12 @@
 {
+ "name_alignment": {
+  "alias_rows": 7,
+  "route_poi_references_checked": 489,
+  "unresolved_alias_targets": [],
+  "graph_nodes_without_identity": [],
+  "route_references_missing_from_graph": [],
+  "passed": true
+ },
  "fact_checks": [
   {
    "pair": "颐和园:长廊→佛香阁",
@@ -144,15 +152,15 @@
     42
    ],
    [
+    "西海大峡谷",
+    35
+   ],
+   [
     "始信峰",
     35
    ],
    [
     "天都峰",
-    35
-   ],
-   [
-    "西海大峡谷",
     35
    ],
    [
@@ -174,11 +182,11 @@
     45
    ],
    [
-    "五彩池",
+    "诺日朗",
     45
    ],
    [
-    "诺日朗",
+    "五彩池",
     45
    ],
    [
@@ -220,11 +228,11 @@
     33
    ],
    [
-    "长廊",
+    "十七孔桥",
     31
    ],
    [
-    "十七孔桥",
+    "长廊",
     31
    ],
    [

@@ -1,6 +1,6 @@
 """时间节点识别：正则、区间合并与归一化。
 
-口径（用户已确认）:
+口径:
     - 时刻/时刻区间/时段/日期/日期区间/月份区间/相对日/季节/节日/重复 属于时间节点；
     - 时长（2小时/半小时/个来小时）保留为 TIME 子类，但 counts_as_time_node=False，
       词频与图表单独分列，供项目 3 的停留时长复用；
@@ -14,9 +14,17 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-from dictionary import Candidate
-from offsets import trim_span
-from schema import TYPE_TIME
+from dictionary import Candidate, TYPE_TIME
+
+EDGE_TRIM = ' \t\r\n，,。；;、：:→➡➔⇒-—–~～()（）[]【】<>《》"\'“”‘’'
+
+
+def trim_span(text: str, start: int, end: int) -> tuple[int, int]:
+    while start < end and text[start] in EDGE_TRIM:
+        start += 1
+    while end > start and text[end - 1] in EDGE_TRIM:
+        end -= 1
+    return start, end
 
 PERIODS = ("凌晨", "清晨", "早晨", "早上", "上午", "中午", "正午", "下午", "傍晚", "晚上", "夜里", "夜间")
 PERIOD_RE = re.compile("|".join(PERIODS))

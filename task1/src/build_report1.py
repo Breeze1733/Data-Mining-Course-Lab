@@ -67,14 +67,13 @@ def main():
         "操作系统：Windows 11；Python 3.13（venv 虚拟环境）。",
         "采集工具：Python 标准库 urllib + lxml 6.1（官方页面、携程游记）；Node.js 20 + Playwright 1.62（驱动本机 Microsoft Edge，用于小红书登录态下的笔记发现与正文提取）。",
         "清洗与分析库：Python 标准库（re、html.parser、unicodedata、hashlib、difflib）完成全部清洗规则，不依赖额外 NLP 工具；openpyxl 用于 Excel 导出。",
-        "运行入口：src/build_records.py（组装）→ src/preprocess.py（清洗与质量检查）→ src/export_dataset_xlsx.py（Excel 交付版）；一键采集入口 run_collection.ps1。",
+        "项目复现统一运行仓库根目录的python run.py。采集与预处理脚本保留用于数据准备，复现时使用已入库主语料。",
     ])
 
     rb.section("三、实验设计与实现")
     rb.sub("3.1 数据采集（自行采集）")
     rb.p("三个景区统一为黄山、九寨沟、颐和园。主语料采集批次在2026-10-28至10-29完成，采集脚本与来源说明已入库；本报告及下游实验采用保留的主语料批次。")
-    rb.p("本报告统计口径为303条组装输入、271条保留记录。合并后的READ.md另说明每景区两平台各25篇的采集分支，当前为150篇游客文本，不能代替本报告批次。"
-         "该分支保留preprocess_collected.py用于话题标签、元数据、CSV及幂等检查，默认写data/processed_collected，不覆盖主语料或其质量报告。重新联网采集的数量可能随平台变化。")
+    rb.p("本报告采用已保存的303条组装输入、271条保留记录。项目复现统一从已入库的主语料开始，运行仓库根目录的run.py；来源采集及清洗方法作为数据准备过程保留。")
     rb.table(
         ["来源", "采集方法", "筛选规则", "结果"],
         [
@@ -117,7 +116,7 @@ def main():
 
     rb.sub("3.4 结构化输出与质量检查")
     rb.p("清洗后数据集共 271 条，字段覆盖标识、来源、内容、统计与质量五个层面（清洗前后内容、字符数、保留率 retention_ratio、质量标记等），"
-         "输出五种文件：dataset_clean.csv（utf-8-sig，Excel 可直接打开）、dataset_clean.jsonl（无损主文件）、"
+         "输出六种文件：dataset_clean.csv（utf-8-sig，Excel 可直接打开）、dataset_clean.jsonl（无损主文件）、"
          "scenic_guide_dataset.xlsx（5 个工作表的人类可读交付版）、quality_report.json（全量质量指标）、"
          "cleaning_examples.json（271 组清洗前后对照）与 rejected_records.jsonl（32 条拒绝记录及原因）。")
     rb.p("质量检查项：①覆盖配额——每个景区至少 1 条官方路线和 3 篇游记；②空值/缺失必填字段；③精确与近似重复；"

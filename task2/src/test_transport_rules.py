@@ -5,7 +5,7 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-from transport_rules import TransportRules
+from dictionary import Gazetteer, load_transport_lexicon
 
 RESOURCES = Path(__file__).resolve().parents[1] / "resources"
 
@@ -13,10 +13,10 @@ RESOURCES = Path(__file__).resolve().parents[1] / "resources"
 class TransportRuleTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.rules = TransportRules.load(RESOURCES / "transport_lexicon.csv")
+        cls.rules = Gazetteer([], load_transport_lexicon(RESOURCES / "transport_lexicon.csv"))
 
     def surfaces(self, text: str) -> list[str]:
-        return [candidate.surface for candidate in self.rules.extract(text)]
+        return [candidate.surface for candidate in self.rules.iter_transport_matches(text)]
 
     def test_basic_modes(self) -> None:
         self.assertIn("大巴", self.surfaces("坐大巴上山"))
@@ -33,7 +33,7 @@ class TransportRuleTests(unittest.TestCase):
         self.assertEqual(self.surfaces("换乘观光车"), ["观光车"])
 
     def test_named_cableway(self) -> None:
-        items = self.rules.extract("坐云谷索道上山")
+        items = self.rules.iter_transport_matches("坐云谷索道上山")
         self.assertEqual(len(items), 1)
         self.assertEqual(items[0].surface, "云谷索道")
         self.assertEqual(items[0].normalized, "索道")
