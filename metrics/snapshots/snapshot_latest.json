@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-30 02:48",
-  "git": "5161187",
-  "label": "U12: P5多跳query_path+S8（Agent 8/8）",
-  "dirty_files": 7
+  "time": "2026-10-30 02:53",
+  "git": "30e8d52",
+  "label": "收尾终态（final-opt）",
+  "dirty_files": 14
  },
  "metrics": {
   "dataset.count": 271,
