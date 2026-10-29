@@ -27,7 +27,7 @@
 
 ## P5 图谱
 - [ ] 528 个条件节点聚类归一（同类型+相近文本合并，保留频次与来源）
-- [ ] Agent 多跳查询工具
+- [x] Agent 多跳查询工具 query_path + S8 场景（U12，Agent 8/8）
 
 ## P6 Agent
 - [x] 行程可行性校验（U11：query_poi_conditions 工具+规划器校验+S7 场景，Agent 7/7）

@@ -36,6 +36,8 @@ TOOL_SCHEMAS = [
      "params": {"scenic": "str", "poi": "str"}},
     {"name": "query_poi_conditions", "description": "查询某 POI 挂接的条件建议节点（用于行程可行性校验：封山/轮休/不建议类提示）",
      "params": {"scenic": "str", "poi": "str"}},
+    {"name": "query_path", "description": "多跳查询：两 POI 之间沿官方+游客先后顺序边的最短动线（途经节点序列）",
+     "params": {"scenic": "str", "from_poi": "str", "to_poi": "str"}},
 ]
 
 
@@ -157,6 +159,22 @@ class GraphTools:
                           "cond_type": d.get("cond_type"), "frequency": int(float(e.get("weight", 1) or 1))})
         conds.sort(key=lambda c: -c["frequency"])
         return {"poi": poi, "scenic": scenic, "conditions": conds}
+
+    # ── 工具6：query_path（P5 多跳动线）──────────────────────────
+    def query_path(self, scenic: str, from_poi: str, to_poi: str) -> dict:
+        src = next((n for n in self.poi_nodes(scenic) if self.poi_label(n) == from_poi), None)
+        dst = next((n for n in self.poi_nodes(scenic) if self.poi_label(n) == to_poi), None)
+        if src is None or dst is None:
+            return {"error": f"{scenic} 中未找到景点：{from_poi if src is None else to_poi}"}
+        if src == dst:
+            return {"from": from_poi, "to": to_poi, "path": [from_poi], "hops": 0}
+        try:
+            path = nx.shortest_path(self.G, src, dst, weight=None)
+        except nx.NetworkXNoPath:
+            return {"from": from_poi, "to": to_poi, "path": [], "hops": None,
+                    "note": "先后顺序图中无有向路径（可反向查询或分段游览）"}
+        labels = [self.poi_label(n) for n in path]
+        return {"from": from_poi, "to": to_poi, "path": labels, "hops": len(labels) - 1}
 
     # ── 统一调用入口（记录 trace；trace 传入时同步 action/observation 两步）──
     def call(self, tool: str, args: dict, trace: list | None = None) -> dict:

@@ -316,6 +316,18 @@ class ReActAgent:
             trace.append({"step": "thought", "thought": "半天+特殊需求（如看日出）存在冲突，提示取舍"})
         plan = self._plan_rule(intent, trace)
         answer = self._render(plan, trace)
+        # 多跳动线问句（"从A…走/回到B"）：调用 query_path 追加动线参考
+        import re as _re2
+        pm = _re2.search(r"从([一-龥A-Za-z0-9]{2,10}?)(?:出来|出发|下来|[，,、\s])[^。！？]{0,12}?(?:走|回|到|去|返回)[^。！？]{0,6}?([一-龥A-Za-z0-9]{2,10}?)(?:[？?！！。]|$)", query)
+        if pm:
+            fp, tp = pm.group(1), pm.group(2)
+            trace.append({"step": "thought", "thought": f"检测到动线问句：从{fp}到{tp}，调用 query_path 做多跳查询"})
+            path_res = self.tools.call("query_path", {"scenic": intent["scenic"], "from_poi": fp, "to_poi": tp}, trace)
+            if path_res.get("path"):
+                seq = " → ".join(path_res["path"])
+                answer += f'\n动线参考（图谱先后顺序边，{path_res["hops"]} 跳）：{seq}'
+            elif path_res.get("hops", 1) is None:
+                answer += f'\n动线参考：图谱先后顺序图中 {fp} 与 {tp} 之间没有有向路径（可反向查询或分段游览）。'
         if intent["days"] == 0.5 and "看日出" in intent["special"]:
             answer = ("提示：半日游难以兼顾看日出——日出需要清晨身处山顶，通常要求前晚住宿山上。"
                       "建议改为两日行程（首日上山宿山顶，次日看日出后下山），或舍弃看日出安排。\n\n") + answer
