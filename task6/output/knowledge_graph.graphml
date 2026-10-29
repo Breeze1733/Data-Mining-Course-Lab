@@ -1284,7 +1284,7 @@
   <data key="d2">[一般] 一般建议（避雷）</data>
   <data key="d5">一般</data>
   <data key="d6">别忘了,来颐和园,赏西堤桃花只是其中之一</data>
-  <data key="d7">11</data>
+  <data key="d7">13</data>
   <data key="d8">一般建议（避雷）</data>
 </node>
 <node id="条件:黄山:一般:一般建议避雷">
@@ -1293,7 +1293,7 @@
   <data key="d2">[一般] 一般建议（避雷）</data>
   <data key="d5">一般</data>
   <data key="d6">避免道路上的拥堵,节省体力时间,又可游玩精华景区</data>
-  <data key="d7">18</data>
+  <data key="d7">19</data>
   <data key="d8">一般建议（避雷）</data>
 </node>
 <node id="条件:黄山:一般:一般建议">
@@ -1322,6 +1322,15 @@
   <data key="d6">早上先到景区入口,再坐缆车上山,大概十几分钟</data>
   <data key="d7">1</data>
   <data key="d8">住汤口镇</data>
+</node>
+<node id="条件:颐和园:时间:时间条件句内">
+  <data key="d0">条件</data>
+  <data key="d1">时间条件（句内）</data>
+  <data key="d2">[时间] 时间条件（句内）</data>
+  <data key="d5">时间</data>
+  <data key="d6">不建议冬季游玩颐和园,没有夏天花开柳绿好看</data>
+  <data key="d7">2</data>
+  <data key="d8">时间条件（句内）</data>
 </node>
 <node id="条件:颐和园:其他:没有2019年起持续几近三年疫情">
   <data key="d0">条件</data>
@@ -2219,7 +2228,7 @@
   <data key="d1">装备条件（句内）</data>
   <data key="d2">[装备] 装备条件（句内）</data>
   <data key="d5">装备</data>
-  <data key="d6">避免低血糖</data>
+  <data key="d6">不建议身体不适的情况下登山,登山当天吃早饭,途中注意补充水和碳水化物,避免低血糖</data>
   <data key="d7">3</data>
   <data key="d8">装备条件（句内）</data>
 </node>
@@ -2547,6 +2556,15 @@
   <data key="d7">1</data>
   <data key="d8">生活有开关</data>
 </node>
+<node id="条件:九寨沟:一般:一般建议避雷">
+  <data key="d0">条件</data>
+  <data key="d1">一般建议（避雷）</data>
+  <data key="d2">[一般] 一般建议（避雷）</data>
+  <data key="d5">一般</data>
+  <data key="d6">不要找理由,想干什么就去</data>
+  <data key="d7">33</data>
+  <data key="d8">一般建议（避雷）</data>
+</node>
 <node id="条件:九寨沟:人群:是家庭出游">
   <data key="d0">条件</data>
   <data key="d1">是家庭出游</data>
@@ -2600,15 +2618,6 @@
   <data key="d6">还可以试试石锅藏香鸡</data>
   <data key="d7">1</data>
   <data key="d8">用餐人少</data>
-</node>
-<node id="条件:九寨沟:一般:一般建议避雷">
-  <data key="d0">条件</data>
-  <data key="d1">一般建议（避雷）</data>
-  <data key="d2">[一般] 一般建议（避雷）</data>
-  <data key="d5">一般</data>
-  <data key="d6">不要找理由,想干什么就去</data>
-  <data key="d7">28</data>
-  <data key="d8">一般建议（避雷）</data>
 </node>
 <node id="条件:九寨沟:其他:今天否定自己想法">
   <data key="d0">条件</data>
@@ -2733,7 +2742,7 @@
   <data key="d2">[装备] 装备条件（句内）</data>
   <data key="d5">装备</data>
   <data key="d6">避免污染环境,还是文明入厕的好</data>
-  <data key="d7">4</data>
+  <data key="d7">7</data>
   <data key="d8">装备条件（句内）</data>
 </node>
 <node id="条件:九寨沟:其他:令你愉悦">
@@ -3960,6 +3969,15 @@
   <data key="d7">1</data>
   <data key="d8">能自行做到乐善、无求那就是佛呢</data>
 </node>
+<node id="条件:颐和园:天气:天气条件句内">
+  <data key="d0">条件</data>
+  <data key="d1">天气条件（句内）</data>
+  <data key="d2">[天气] 天气条件（句内）</data>
+  <data key="d5">天气</data>
+  <data key="d6">不建议雨雪天走这一线--这天降温大风,特别是下行过了大半时,终于明白什么是寒风凛冽,庆幸已经快到山下了,风</data>
+  <data key="d7">1</data>
+  <data key="d8">天气条件（句内）</data>
+</node>
 <node id="条件:颐和园:其他:要在终点站下">
   <data key="d0">条件</data>
   <data key="d1">要在终点站下</data>
@@ -4112,15 +4130,6 @@
   <data key="d6">第一次去北京是八十年代,是陪父亲去看病,虽说是忧愁,但内心的激动依然占据了上风</data>
   <data key="d7">3</data>
   <data key="d8">游客为初次游览</data>
-</node>
-<node id="条件:颐和园:时间:时间条件句内">
-  <data key="d0">条件</data>
-  <data key="d1">时间条件（句内）</data>
-  <data key="d2">[时间] 时间条件（句内）</data>
-  <data key="d5">时间</data>
-  <data key="d6">上初中时同学相邀一起骑车去了一次颐和园,当时正赶上中午用餐时分,大家一起到颐和园听鹂馆用餐,一人出一元钱,却吃了一顿难忘</data>
-  <data key="d7">9</data>
-  <data key="d8">时间条件（句内）</data>
 </node>
 <node id="条件:颐和园:其他:从造景上看">
   <data key="d0">条件</data>
@@ -5578,6 +5587,10 @@
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:一般:一般建议避雷" id="条件建议">
+  <data key="d9">条件建议</data>
+  <data key="d10">1</data>
+</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:人群:是家庭出游" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
@@ -5587,10 +5600,6 @@
   <data key="d10">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:用餐人少" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:一般:一般建议避雷" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
@@ -6386,6 +6395,10 @@
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:时间:时间条件句内" id="条件建议">
+  <data key="d9">条件建议</data>
+  <data key="d10">1</data>
+</edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:没有2019年起持续几近三年疫情" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
@@ -6454,6 +6467,10 @@
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:天气:天气条件句内" id="条件建议">
+  <data key="d9">条件建议</data>
+  <data key="d10">1</data>
+</edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:要在终点站下" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
@@ -6503,10 +6520,6 @@
   <data key="d10">1</data>
 </edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:人群:游客为初次游览" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:时间:时间条件句内" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>

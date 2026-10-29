@@ -1,10 +1,10 @@
 {
- "updated_at": "2026-10-30 02:31",
+ "updated_at": "2026-10-30 02:45",
  "guards": {
   "dataset.count": 271,
   "graph.fact_checks": "6/6",
   "graph.name_alignment_passed": true,
-  "agent.passed": "6/6",
+  "agent.passed": "7/7",
   "task2.spot_n": 53,
   "task2.spot_self_consistent": true,
   "task5.review_n": 49,

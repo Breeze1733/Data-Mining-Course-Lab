@@ -182,6 +182,26 @@ class ReActAgent:
             order_res = self.tools.call("query_order", {"scenic": scenic, "poi": ordered[0]}, trace)
             trace.append({"step": "thought", "thought": f"用 query_order 校验首站的官方后继（{order_res.get('poi')}）"
                          "以决定第二站是否符合主流动线"})
+        # P6 行程可行性校验：已选 POI 挂接的条件节点中含封禁/不建议类 → 提示（不删站，保行程完整）
+        feasibility_warnings = []
+        seen_warn = set()
+        import re as _re
+        CLOSURE_RE = _re.compile(r"封山|封闭|轮休|停运|关闭|不开放|暂停|停止接待|限流|不建议|不宜|不去|不适合|慎入|谨慎")
+        for poi in ordered[:10]:
+            pc = self.tools.call("query_poi_conditions", {"scenic": scenic, "poi": poi}, trace)
+            for c in pc.get("conditions", []):
+                text = c["condition"] + c["suggestion"]
+                if CLOSURE_RE.search(text):
+                    w = f'{poi}：{c["condition"][:26]}——{c["suggestion"][:40]}'
+                    if w not in seen_warn:
+                        seen_warn.add(w)
+                        feasibility_warnings.append(w)
+        trace.append({"step": "thought", "thought": f"可行性校验：{len(feasibility_warnings)} 条封禁/不建议提示"
+                     + ("；已附加到对应站点" if feasibility_warnings else "")})
+        for it in itinerary:
+            hit = [w for w in feasibility_warnings if w.startswith(f'{it["poi"]}：')]
+            if hit:
+                it["note"] = (it["note"] + "；" if it["note"] else "") + "⚠ " + hit[0][len(it["poi"]) + 1:52]
         other_area_kw = ("慕田峪", "长城", "故宫", "天坛", "香山", "圆明园", "乌镇", "西塘", "三清山",
                          "庐山", "峨眉", "泰山", "华山", "武夷山", "丽江", "张家界", "八达岭", "十三陵",
                          "北海公园", "景山", "雍和宫", "恭王府", "什刹海", "南锣鼓巷")
@@ -191,7 +211,7 @@ class ReActAgent:
                 if not any(k in c["condition"] + c["suggestion"] for k in other_area_kw)
                 and (c["cond_type"] == "人群" or any(k in c["suggestion"] for k in suggest_cue))][:6]
         return {"scenic": scenic, "days": days, "visitor_type": visitor, "special": intent["special"],
-                "itinerary": itinerary, "tips": tips,
+                "itinerary": itinerary, "tips": tips, "feasibility_warnings": feasibility_warnings,
                 "template_route": f'{route_res.get("route_id", "")} {route_res.get("route_title", "")}'}
 
     def _order_pois(self, scenic: str, selected: list[str], template_pos: dict) -> list[str]:

@@ -101,6 +101,80 @@
    "thought": "用 query_order 校验首站的官方后继（光明顶）以决定第二站是否符合主流动线"
   },
   {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '光明顶'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "黄山",
+    "poi": "光明顶"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 9 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '迎客松'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "黄山",
+    "poi": "迎客松"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 7 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '天都峰'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "黄山",
+    "poi": "天都峰"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 11 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '西海大峡谷'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "黄山",
+    "poi": "西海大峡谷"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 1 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '莲花峰'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "黄山",
+    "poi": "莲花峰"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 6 条条件建议"
+  },
+  {
+   "step": "thought",
+   "thought": "可行性校验：8 条封禁/不建议提示；已附加到对应站点"
+  },
+  {
    "step": "final",
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
@@ -120,7 +194,7 @@
     "period": "上午",
     "poi": "光明顶",
     "transport_from_prev": "入园",
-    "note": ""
+    "note": "⚠ 去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下"
    },
    {
     "order": 2,
@@ -128,7 +202,7 @@
     "period": "上午",
     "poi": "迎客松",
     "transport_from_prev": "步行",
-    "note": ""
+    "note": "⚠ 莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘"
    },
    {
     "order": 3,
@@ -136,7 +210,7 @@
     "period": "中午",
     "poi": "天都峰",
     "transport_from_prev": "步行",
-    "note": ""
+    "note": "⚠ 莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘"
    },
    {
     "order": 4,
@@ -152,7 +226,7 @@
     "period": "下午",
     "poi": "莲花峰",
     "transport_from_prev": "步行",
-    "note": ""
+    "note": "⚠ 莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘"
    }
   ],
   "tips": [
@@ -192,6 +266,16 @@
     "suggestion": "可以从旁边的山路绕开爬一线天,一样可以到前面",
     "frequency": 1
    }
+  ],
+  "feasibility_warnings": [
+   "光明顶：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
+   "光明顶：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
+   "迎客松：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
+   "迎客松：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
+   "天都峰：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
+   "天都峰：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
+   "莲花峰：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
+   "莲花峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲"
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
  },

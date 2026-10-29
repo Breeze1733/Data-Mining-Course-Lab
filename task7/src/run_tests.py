@@ -1,6 +1,6 @@
-"""实验7：Agent 多场景批量测试（6 场景，证据落盘）。
+"""实验7：Agent 多场景批量测试（7 场景，证据落盘）。
 
-场景覆盖：不同景区 × 游客类型 × 时长、特殊需求、无匹配景区回退、半日+特殊需求冲突提示。
+场景覆盖：不同景区 × 游客类型 × 时长、特殊需求、无匹配景区回退、半日+特殊需求冲突提示、条件节点可行性提示。
 输出：output/traces/trace_*.json、itineraries.json、test_report.json
 """
 from __future__ import annotations
@@ -29,6 +29,8 @@ SCENARIOS = [
      "expect": {"scenic": "未知", "fallback": True}},
     {"id": "S6_冲突约束", "query": "半天时间在黄山看日出再下西海大峡谷",
      "expect": {"scenic": "黄山", "days": 0.5, "special": ["看日出"], "conflict_note": True}},
+    {"id": "S7_可行性提示", "query": "九寨沟一日游，想去原始森林看看",
+     "expect": {"scenic": "九寨沟", "days": 1, "feasibility": True}},
 ]
 
 
@@ -48,6 +50,10 @@ def main() -> int:
                 checks["fallback_answer"] = result["plan"] is None and "仅支持" in result["answer"]
             elif k == "conflict_note":
                 checks["conflict_note"] = any("冲突" in t.get("thought", "") for t in result["trace"])
+            elif k == "feasibility":
+                warnings = (result["plan"] or {}).get("feasibility_warnings", [])
+                checks["feasibility_warning"] = bool(warnings) and any(
+                    "原始森林" in w for w in warnings)
             else:
                 checks[k] = intent.get(k) == v
         tool_calls = [t for t in result["trace"] if t.get("step") == "action"]

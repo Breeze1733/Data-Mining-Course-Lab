@@ -93,6 +93,80 @@
    "thought": "用 query_order 校验首站的官方后继（谐趣园）以决定第二站是否符合主流动线"
   },
   {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '谐趣园'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "颐和园",
+    "poi": "谐趣园"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 0 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '昆明湖'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "颐和园",
+    "poi": "昆明湖"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 1 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '西堤'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "颐和园",
+    "poi": "西堤"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 0 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '佛香阁'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "颐和园",
+    "poi": "佛香阁"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 3 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '十七孔桥'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "颐和园",
+    "poi": "十七孔桥"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 2 条条件建议"
+  },
+  {
+   "step": "thought",
+   "thought": "可行性校验：0 条封禁/不建议提示"
+  },
+  {
    "step": "final",
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
@@ -183,6 +257,7 @@
     "frequency": 1
    }
   ],
+  "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
  "elapsed": 0.0

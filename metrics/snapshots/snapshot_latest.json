@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-30 02:41",
-  "git": "3ea8ed2",
-  "label": "U10: P5条件聚类归一（860对→390条件节点）",
-  "dirty_files": 14
+  "time": "2026-10-30 02:45",
+  "git": "a57b274",
+  "label": "U11: P6可行性校验（Agent 7/7，不建议类召回+16对）",
+  "dirty_files": 24
  },
  "metrics": {
   "dataset.count": 271,
@@ -27,18 +27,18 @@
   "routes.tourist_total": 228,
   "coref.n": 120,
   "coref.accuracy": 0.475,
-  "cond.pairs": 860,
+  "cond.pairs": 876,
   "cond.review_n": 49,
   "cond.correct": 20,
   "cond.boundary": 16,
   "cond.wrong": 13,
-  "graph.nodes": 564,
-  "graph.edges": 2313,
+  "graph.nodes": 565,
+  "graph.edges": 2314,
   "graph.fact_checks_passed": 6,
   "graph.fact_checks_total": 6,
   "graph.name_alignment_passed": true,
-  "agent.passed": 6,
-  "agent.total": 6,
+  "agent.passed": 7,
+  "agent.total": 7,
   "agent.mode": "rules（未配置 LLM API，内置规划器）"
  }
 }

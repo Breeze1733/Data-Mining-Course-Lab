@@ -310,6 +310,22 @@
   "scenic_area": "颐和园",
   "source_platform": "携程游记",
   "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "时间条件（句内）",
+  "suggestion_text": "不建议冬季游玩颐和园,没有夏天花开柳绿好看",
+  "condition_type": "时间",
+  "sentence": "2、不建议冬季游玩颐和园,没有夏天花开柳绿好看",
+  "sources": [
+   "CTRIP_3996366"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "CTRIP_3996366",
+  "scenic_area": "颐和园",
+  "source_platform": "携程游记",
+  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "建议",
   "condition_text": "一般建议",
@@ -3479,9 +3495,9 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P6_否定建议",
-  "trigger": "避免",
+  "trigger": "不建议",
   "condition_text": "装备条件（句内）",
-  "suggestion_text": "避免低血糖",
+  "suggestion_text": "不建议身体不适的情况下登山,登山当天吃早饭,途中注意补充水和碳水化物,避免低血糖",
   "condition_type": "装备",
   "sentence": "身体准备:犯肠胃炎体力减半登黄山算是对我的意志力的挑战了,爬两步喘几口仿佛提前体验一把五十年后的状态,因此不建议身体不适的情况下登山,登山当天吃早饭,途中注意补充水和碳水化物,避免低血糖",
   "sources": [
@@ -3516,6 +3532,22 @@
   "suggestion_text": "这一段经常好几公里大堵车",
   "condition_type": "时间",
   "sentence": "今天是周四工作日车还不算太多,没有出现堵车,要是周末节假日来的话,这一段经常好几公里大堵车",
+  "sources": [
+   "CTRIP_4109335"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "CTRIP_4109335",
+  "scenic_area": "黄山",
+  "source_platform": "携程游记",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "时间条件（句内）",
+  "suggestion_text": "不建议周末节假日来",
+  "condition_type": "时间",
+  "sentence": "所以不建议周末节假日来",
   "sources": [
    "CTRIP_4109335"
   ],
@@ -4663,6 +4695,22 @@
   "source_platform": "携程游记",
   "text_type": "travelogue",
   "pattern": "P6_否定建议",
+  "trigger": "不宜",
+  "condition_text": "天气条件（句内）",
+  "suggestion_text": "不宜在河中洗衣、游玩,以免发生意外",
+  "condition_type": "天气",
+  "sentence": "下雨前夕,不宜在河中洗衣、游玩,以免发生意外",
+  "sources": [
+   "CTRIP_1333628"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "CTRIP_1333628",
+  "scenic_area": "黄山",
+  "source_platform": "携程游记",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
   "trigger": "不要",
   "condition_text": "一般建议（避雷）",
   "suggestion_text": "不要移动,特别注意不要后退,以防不测",
@@ -4812,6 +4860,22 @@
   "suggestion_text": "家人们和睦相聚就是以键快乐",
   "condition_type": "其他",
   "sentence": "如果生活有开关,家人们和睦相聚就是以键快乐",
+  "sources": [
+   "CTRIP_3970738"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "CTRIP_3970738",
+  "scenic_area": "九寨沟",
+  "source_platform": "携程游记",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不宜",
+  "condition_text": "一般建议（避雷）",
+  "suggestion_text": "不宜过余辛辣的情况,既满足了口舌之欲,有保证了身体的舒适安康",
+  "condition_type": "一般",
+  "sentence": "采用清淡的清油红锅,搭配清香甘甜的菌汤鸳鸯锅,以符合高原地区,不宜过余辛辣的情况,既满足了口舌之欲,有保证了身体的舒适安康",
   "sources": [
    "CTRIP_3970738"
   ],
@@ -8557,6 +8621,22 @@
   "frequency": 1
  },
  {
+  "record_id": "CTRIP_3950329",
+  "scenic_area": "九寨沟",
+  "source_platform": "携程游记",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "一般建议（避雷）",
+  "suggestion_text": "不建议久留",
+  "condition_type": "一般",
+  "sentence": "山梁海拔4000左右,风呼啦呼啦的吹,没有保暖措施的不建议久留",
+  "sources": [
+   "CTRIP_3950329"
+  ],
+  "frequency": 1
+ },
+ {
   "record_id": "CTRIP_3977904",
   "scenic_area": "九寨沟",
   "source_platform": "携程游记",
@@ -8903,6 +8983,38 @@
   "suggestion_text": "提前做核酸,成都前往九寨沟沿途每路过一个县都会检查一次健康码,并扫场所码,总共是",
   "condition_type": "一般",
   "sentence": "1、强烈建议最近 成都 自驾去 九寨沟 游览的朋友,提前做核酸,成都前往九寨沟沿途每路过一个县都会检查一次健康码,并扫场所码,总共是五个关卡,带上48小时核酸证明通关无压力",
+  "sources": [
+   "CTRIP_4050446"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "CTRIP_4050446",
+  "scenic_area": "九寨沟",
+  "source_platform": "携程游记",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不宜",
+  "condition_text": "装备条件（句内）",
+  "suggestion_text": "不宜剧烈运动,不宜过量饮酒",
+  "condition_type": "装备",
+  "sentence": "1、 九寨沟属于高海拔地区,不宜剧烈运动,不宜过量饮酒,可以提前备好常用药品以便不时之需",
+  "sources": [
+   "CTRIP_4050446"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "CTRIP_4050446",
+  "scenic_area": "九寨沟",
+  "source_platform": "携程游记",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不宜",
+  "condition_text": "装备条件（句内）",
+  "suggestion_text": "可以提前备好常用药品以便不时之需",
+  "condition_type": "装备",
+  "sentence": "1、 九寨沟属于高海拔地区,不宜剧烈运动,不宜过量饮酒,可以提前备好常用药品以便不时之需",
   "sources": [
    "CTRIP_4050446"
   ],
@@ -10141,6 +10253,22 @@
   "frequency": 1
  },
  {
+  "record_id": "CTRIP_4046620",
+  "scenic_area": "颐和园",
+  "source_platform": "携程游记",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "天气条件（句内）",
+  "suggestion_text": "不建议雨雪天走这一线--这天降温大风,特别是下行过了大半时,终于明白什么是寒风凛冽,庆幸已经快到山下了,风",
+  "condition_type": "天气",
+  "sentence": "不建议雨雪天走这一线--这天降温大风,特别是下行过了大半时,终于明白什么是寒风凛冽,庆幸已经快到山下了,风在下山以后-山谷里,人竟是站不稳…来时还是漫天灰蒙蒙厚厚的云层,待到下山北风去处竟已经是蓝天白云、晴空万里…",
+  "sources": [
+   "CTRIP_4046620"
+  ],
+  "frequency": 1
+ },
+ {
   "record_id": "CTRIP_4114227",
   "scenic_area": "颐和园",
   "source_platform": "携程游记",
@@ -10368,6 +10496,22 @@
   "suggestion_text": "只能下山后,从两侧再爬",
   "condition_type": "其他",
   "sentence": "现在如果想去后山山顶,只能下山后,从两侧再爬",
+  "sources": [
+   "CTRIP_4076734"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "CTRIP_4076734",
+  "scenic_area": "颐和园",
+  "source_platform": "携程游记",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "一般建议（避雷）",
+  "suggestion_text": "不建议走",
+  "condition_type": "一般",
+  "sentence": "再往上,基本沿着佛香阁的外墙,已经没有正经路了,就是这种行人踩出来的山路,没有台阶,只能手脚并用,岁数大的人不建议走",
   "sources": [
    "CTRIP_4076734"
   ],
@@ -10896,6 +11040,22 @@
   "suggestion_text": "换乘中心边上的鲜牛肉火锅",
   "condition_type": "时间",
   "sentence": "晚上一定要来顿火锅! 推荐换乘中心边上的鲜牛肉火锅",
+  "sources": [
+   "XHS_69f832f500000000230056c5"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "XHS_69f832f500000000230056c5",
+  "scenic_area": "黄山",
+  "source_platform": "小红书",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "一般建议（避雷）",
+  "suggestion_text": "不建议买",
+  "condition_type": "一般",
+  "sentence": "路上有人卖茶叶,说实话不怎么样,不建议买",
   "sources": [
    "XHS_69f832f500000000230056c5"
   ],
@@ -11658,6 +11818,22 @@
   "scenic_area": "九寨沟",
   "source_platform": "小红书",
   "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "装备条件（句内）",
+  "suggestion_text": "不建议去原始森林,它和九寨沟看水的核心特色不符,还存在耗时、景色普通等问题,具体原因如下￼￼￼:",
+  "condition_type": "装备",
+  "sentence": "一日游的客人不建议去原始森林,它和九寨沟看水的核心特色不符,还存在耗时、景色普通等问题,具体原因如下￼￼￼:",
+  "sources": [
+   "XHS_69180253000000000703235e"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "XHS_69180253000000000703235e",
+  "scenic_area": "九寨沟",
+  "source_platform": "小红书",
+  "text_type": "travelogue",
   "pattern": "P1_显式条件",
   "trigger": "若",
   "condition_text": "从这里步行到箭竹海还得走7公里左右",
@@ -11728,6 +11904,22 @@
   "suggestion_text": "建议坐左边,右边太阳直射",
   "condition_type": "其他",
   "sentence": "如果上车就睡觉,建议坐左边,右边太阳直射",
+  "sources": [
+   "XHS_696cd185000000000c034dae"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "XHS_696cd185000000000c034dae",
+  "scenic_area": "九寨沟",
+  "source_platform": "小红书",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "一般建议（避雷）",
+  "suggestion_text": "不建议在这里买东西",
+  "condition_type": "一般",
+  "sentence": "不建议在这里买东西",
   "sources": [
    "XHS_696cd185000000000c034dae"
   ],
@@ -12130,6 +12322,22 @@
   "sentence": "修改完后记得点保存整页!",
   "sources": [
    "XHS_6ad5c9e60000000027015bba"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "XHS_6ab74f85000000001402eb46",
+  "scenic_area": "九寨沟",
+  "source_platform": "小红书",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "一般建议（避雷）",
+  "suggestion_text": "不建议在景区内买!",
+  "condition_type": "一般",
+  "sentence": "⚠挂件踩坑提醒:景区里挂件卖15元,不建议在景区内买!",
+  "sources": [
+   "XHS_6ab74f85000000001402eb46"
   ],
   "frequency": 1
  },
@@ -12790,6 +12998,22 @@
   "frequency": 1
  },
  {
+  "record_id": "XHS_68db48e70000000013006068",
+  "scenic_area": "九寨沟",
+  "source_platform": "小红书",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "一般建议（避雷）",
+  "suggestion_text": "不建议步行,下坡路滑,而且走过原始森里的话,这里风景就显得很一般了",
+  "condition_type": "一般",
+  "sentence": "▫12:14 步行前往 五彩池(10分钟路程),这里不建议步行,下坡路滑,而且走过原始森里的话,这里风景就显得很一般了",
+  "sources": [
+   "XHS_68db48e70000000013006068"
+  ],
+  "frequency": 1
+ },
+ {
   "record_id": "XHS_68e74fbd0000000005038baf",
   "scenic_area": "九寨沟",
   "source_platform": "小红书",
@@ -13434,6 +13658,22 @@
   "scenic_area": "颐和园",
   "source_platform": "小红书",
   "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "时间条件（句内）",
+  "suggestion_text": "不建议买联票,只买门票即可",
+  "condition_type": "时间",
+  "sentence": "门票:旺季是30元/人,淡季是20元/人,目前这个时期是旺季,可搜索微信小程序自行购票,不建议买联票,只买门票即可",
+  "sources": [
+   "XHS_6a9434700000000026000841"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "XHS_6a9434700000000026000841",
+  "scenic_area": "颐和园",
+  "source_platform": "小红书",
+  "text_type": "travelogue",
   "pattern": "P4_建议推断",
   "trigger": "适合",
   "condition_text": "一般建议",
@@ -13648,6 +13888,22 @@
   "suggestion_text": "拍出桥身连同倒影,氛围感会更加拉满",
   "condition_type": "时间",
   "sentence": "用3x长焦镜头,拍石围栏与桥同框,超有气势,要是下午傍晚时分,拍出桥身连同倒影,氛围感会更加拉满",
+  "sources": [
+   "XHS_6ae22af4000000003402822f"
+  ],
+  "frequency": 1
+ },
+ {
+  "record_id": "XHS_6ae22af4000000003402822f",
+  "scenic_area": "颐和园",
+  "source_platform": "小红书",
+  "text_type": "travelogue",
+  "pattern": "P6_否定建议",
+  "trigger": "不建议",
+  "condition_text": "一般建议（避雷）",
+  "suggestion_text": "不建议东宫门进,旅行团扎堆,人山人海",
+  "condition_type": "一般",
+  "sentence": "不建议东宫门进,旅行团扎堆,人山人海",
   "sources": [
    "XHS_6ae22af4000000003402822f"
   ],

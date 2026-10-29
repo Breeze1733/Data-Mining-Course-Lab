@@ -34,6 +34,8 @@ TOOL_SCHEMAS = [
      "params": {"scenic": "str", "visitor_type": "str(可选)", "limit": "int(可选,默认6)"}},
     {"name": "query_order", "description": "查询某 POI 在图谱中的先后顺序邻接（官方+游客加权）",
      "params": {"scenic": "str", "poi": "str"}},
+    {"name": "query_poi_conditions", "description": "查询某 POI 挂接的条件建议节点（用于行程可行性校验：封山/轮休/不建议类提示）",
+     "params": {"scenic": "str", "poi": "str"}},
 ]
 
 
@@ -140,6 +142,21 @@ class GraphTools:
         successors.sort(key=lambda x: -x["weight"])
         predecessors.sort(key=lambda x: -x["weight"])
         return {"poi": poi, "next": successors[:6], "prev": predecessors[:6]}
+
+    # ── 工具5：query_poi_conditions（P6 行程可行性）──────────────
+    def query_poi_conditions(self, scenic: str, poi: str) -> dict:
+        node = next((n for n in self.poi_nodes(scenic) if self.poi_label(n) == poi), None)
+        if node is None:
+            return {"error": f"{scenic} 中未找到景点：{poi}"}
+        conds = []
+        for u, v, e in self.G.out_edges(node, data=True):
+            if e.get("relation") != "条件建议" or not self.G.has_node(v):
+                continue
+            d = self.G.nodes[v]
+            conds.append({"condition": d.get("name", ""), "suggestion": d.get("suggestion", ""),
+                          "cond_type": d.get("cond_type"), "frequency": int(float(e.get("weight", 1) or 1))})
+        conds.sort(key=lambda c: -c["frequency"])
+        return {"poi": poi, "scenic": scenic, "conditions": conds}
 
     # ── 统一调用入口（记录 trace；trace 传入时同步 action/observation 两步）──
     def call(self, tool: str, args: dict, trace: list | None = None) -> dict:
