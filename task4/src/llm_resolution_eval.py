@@ -42,8 +42,8 @@ PROMPT = """你是中文指代消解助手。下面的游记片段中有一个�
 额外选项：
 - SCENIC：代词指整个景区本身（候选都不对且语境是景区整体）
 - NONE：无明确先行词（指代悬空、诗化指代或指前文未列出的内容）
-
-要求：判断代词实际指代的对象，只输出一个编号、SCENIC 或 NONE，不要解释。"""
+{extra_options}
+要求：判断代词实际指代的对象，只输出一个编号、SCENIC、NONE 或上述类型词，不要解释。"""
 
 
 def fmt_candidates(cands: list[dict]) -> str:
@@ -59,6 +59,9 @@ def parse_answer(text: str, n_cands: int) -> str:
     up = t.upper()
     if "SCENIC" in up:
         return "SCENIC"
+    for tok in ("OTHER_PERSON", "PARTY", "SET_PRECEDING", "SET_OTHER", "ROUTE", "FACILITY"):
+        if tok in up:
+            return tok
     if "NONE" in up:
         return "NONE"
     m = re.search(r"\d+", t)
@@ -72,6 +75,10 @@ def parse_answer(text: str, n_cands: int) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0, help="只跑前 N 例（0=全部 120）")
+    ap.add_argument("--extended", action="store_true",
+                    help="v2：扩展选项空间（候选池+SCENIC+NONE+人称/集合/路线/设施类型词表，与规则法同词汇）")
+    ap.add_argument("--output", type=str, default="",
+                    help="输出文件名（默认 llm_resolution_eval.json；v2 用 llm_resolution_eval_v2.json）")
     args = ap.parse_args()
 
     llm = LLMClient(config_path=TASK7 / "config.json")
@@ -91,12 +98,21 @@ def main() -> int:
     canon = {"CAND": None, "SCENIC": "景区名", "NONE": "无明确先行词"}  # CAND 的 kind 按候选补
     results, failures = [], []
     t0 = time.time()
+    extended = args.extended
     for gitem in rows:
         c = cases[gitem["case_index"]]
+        extra = ""
+        if extended:
+            extra = """- OTHER_PERSON：指服务角色/当地人/其他游客等他人（他们/她们/他们一家）
+- PARTY：指作者及同行者（我们一行人等）
+- SET_PRECEDING：指前文枚举的 POI 集合
+- SET_OTHER：指前文的普通名词集合（如"72座峰""6顿餐"）
+- ROUTE：指某条道路/线路本身
+- FACILITY：指酒店/餐厅/民宿等设施"""
         prompt = PROMPT.format(
             pronoun=c["pronoun"], cls=c["pronoun_class"], sentence=c["sentence"],
             prev=c["prev_sentence"] or "（无）", prev2=c["prev2_sentence"] or "（无）",
-            candidates=fmt_candidates(c.get("candidates", [])))
+            candidates=fmt_candidates(c.get("candidates", [])), extra_options=extra)
         answer_text, parsed = "", "UNPARSED"
         for attempt in (1, 2):
             try:
@@ -116,6 +132,10 @@ def main() -> int:
             pred_name = cand["name"]
         elif parsed == "SCENIC":
             pred_kind, pred_name = "景区名", c["scenic_area"]
+        elif extended and parsed in ("OTHER_PERSON", "PARTY", "SET_PRECEDING", "SET_OTHER", "ROUTE", "FACILITY"):
+            pred_kind = {"OTHER_PERSON": "他人", "PARTY": "同行者", "SET_PRECEDING": "前文POI集合",
+                         "SET_OTHER": "名词集合", "ROUTE": "路线", "FACILITY": "设施"}[parsed]
+            pred_name = parsed
         else:
             pred_kind, pred_name = "无明确先行词", "NONE"
         kind_map = {"POI": "POI", "交通": "交通", "景区名": "景区", "无明确先行词": "无"}
@@ -138,14 +158,17 @@ def main() -> int:
         sub = [r for r in results if r["class"] == cls]
         by_class[cls] = {"n": len(sub), "accuracy": round(sum(r["correct"] for r in sub) / len(sub), 3)} if sub else {"n": 0, "accuracy": None}
     payload = {
-        "mode": f"llm-restricted ({llm.model}, temperature=0, 选项空间=候选池+SCENIC+NONE)",
+        "mode": (f"llm-restricted-extended ({llm.model}, temperature=0, 选项空间=候选池+SCENIC+NONE+类型词表)"
+                 if extended else
+                 f"llm-restricted ({llm.model}, temperature=0, 选项空间=候选池+SCENIC+NONE)"),
         "n": n, "accuracy_overall": round(acc, 3), "accuracy_by_class": by_class,
         "failures": failures,
         "rule_baseline": json.loads((OUT / "evaluation.json").read_text(encoding="utf-8"))["accuracy_overall"],
         "elapsed_s": round(time.time() - t0, 1),
         "results": results,
     }
-    (OUT / "llm_resolution_eval.json").write_text(
+    out_name = args.output or ("llm_resolution_eval_v2.json" if extended else "llm_resolution_eval.json")
+    (OUT / out_name).write_text(
         json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"LLM 受限消解：{acc:.3f}（规则基线 {payload['rule_baseline']}），失败 {len(failures)} 例，耗时 {payload['elapsed_s']}s")
     print("分类:", by_class)

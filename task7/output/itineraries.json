@@ -370,12 +370,6 @@
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "游客为初次游览",
-    "suggestion": "第一次去北京是八十年代,是陪父亲去看病,虽说是忧愁,但内心的激动依然占据了上风",
-    "frequency": 3
-   },
-   {
-    "cond_type": "人群",
     "condition": "游客为孩子",
     "suggestion": "儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途中经过的14号至19号敌楼路段较为平坦,便于行走",
     "frequency": 2
@@ -402,6 +396,12 @@
     "cond_type": "人群",
     "condition": "体力一般或者不想走太多",
     "suggestion": "中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较完整的湖景视角",
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "装备条件（句内）",
+    "suggestion": "慎重考虑",
     "frequency": 1
    }
   ],
@@ -583,12 +583,6 @@
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "游客为情侣",
-    "suggestion": "的方法啊!下午两点从川主寺的蚕丝文化点出发,我们就开始了为时8个小时的返程之旅",
-    "frequency": 4
-   },
-   {
-    "cond_type": "人群",
     "condition": "游客为恐高",
     "suggestion": "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满",
     "frequency": 3
@@ -609,6 +603,12 @@
     "cond_type": "人群",
     "condition": "是家庭出游",
     "suggestion": "不妨选择吃一顿丰盛的中餐",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为情侣",
+    "suggestion": "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!",
     "frequency": 1
    },
    {
@@ -698,12 +698,6 @@
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "游客为情侣",
-    "suggestion": "的方法啊!下午两点从川主寺的蚕丝文化点出发,我们就开始了为时8个小时的返程之旅",
-    "frequency": 4
-   },
-   {
-    "cond_type": "人群",
     "condition": "游客为恐高",
     "suggestion": "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满",
     "frequency": 3
@@ -724,6 +718,12 @@
     "cond_type": "人群",
     "condition": "是家庭出游",
     "suggestion": "不妨选择吃一顿丰盛的中餐",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为情侣",
+    "suggestion": "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!",
     "frequency": 1
    },
    {

@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-30 23:48",
-  "git": "d933634",
-  "label": "第3轮基线（第2轮终态复测）",
-  "dirty_files": 0
+  "time": "2026-10-31 00:05",
+  "git": "f4d562e",
+  "label": "U19/20: 新鲜抽检+四类守卫（条件对842）",
+  "dirty_files": 23
  },
  "metrics": {
   "dataset.count": 271,
@@ -27,13 +27,13 @@
   "routes.tourist_total": 228,
   "coref.n": 120,
   "coref.accuracy": 0.583,
-  "cond.pairs": 876,
+  "cond.pairs": 842,
   "cond.review_n": 49,
   "cond.correct": 20,
   "cond.boundary": 16,
   "cond.wrong": 13,
-  "graph.nodes": 565,
-  "graph.edges": 2314,
+  "graph.nodes": 560,
+  "graph.edges": 2309,
   "graph.fact_checks_passed": 6,
   "graph.fact_checks_total": 6,
   "graph.name_alignment_passed": true,

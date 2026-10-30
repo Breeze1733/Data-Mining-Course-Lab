@@ -84,14 +84,18 @@ def split_multi_suggestions(sugg: str) -> list[str]:
 # P4 极性/边界守卫（2026-10-30，依据 review_gold wrong 样例回归）：
 # 1) 平台话术不是旅游建议；2) 呼吁/评论句不是给游客的建议；
 # 3) 联游城市段落的条件对归属价值低（苏州街为颐和园内景点，需排除）。
-PLATFORM_PHRASE_RE = re.compile(r"点赞|收藏|一键三连|评论区|私信|关注我们|转发")
+PLATFORM_PHRASE_RE = re.compile(r"点赞|收藏|一键三连|评论区|私信|关注我们|转发|推荐阅读")
+# U20 守卫（依据 review_r2 新鲜抽检 8 wrong 归因）：
+LYRICAL_RE = re.compile(r"人生|岁月|初心|青春|梦想|心态|老得太快|明白得太迟|否定了自己|自己的想法")
+COGNITIVE_RE = re.compile(r"^(不要|别)(认为|觉得|以为|担心)")
+RHETORIC_P1_RE = re.compile(r"^如果说")
 APPEAL_RE = re.compile(r"管理部门|引起重视|呼吁")
 CITY_SKIP_RE = re.compile(r"青岛|南京|苏州(?!街)|无锡|厦门|天津|杭州|大连|哈尔滨|洛阳|西安")
 
 
 def skip_sentence(sent: str) -> bool:
     return bool(PLATFORM_PHRASE_RE.search(sent) or APPEAL_RE.search(sent)
-                or CITY_SKIP_RE.search(sent))
+                or CITY_SKIP_RE.search(sent) or LYRICAL_RE.search(sent))
 
 
 def extract_from_sentence(sent: str) -> list[dict]:
@@ -105,6 +109,8 @@ def extract_from_sentence(sent: str) -> list[dict]:
         if not rest:
             continue
         trigger = m.group(1) + ("…的话" if m.group(3) else "")
+        if RHETORIC_P1_RE.match(trigger) and rest.startswith(("那么", "那 ")):
+            continue  # "如果说X,那么Y"为对仗修辞，非条件建议
         for sugg in split_multi_suggestions(rest):
             pairs.append({"pattern": "P1_显式条件", "trigger": trigger,
                           "condition_text": cond, "suggestions": [sugg], "sentence": sent})
@@ -129,6 +135,8 @@ def extract_from_sentence(sent: str) -> list[dict]:
     # P4 建议类（带人群/情境推断）
     for m in re.finditer(r"((?<![不])建议(?!的话)|推荐|(?<![的])最好|尽量|务必|记得|千万|不妨|(?<![不合舒])适合|(?<![舒])适宜)([^。！？；]{1,60})", sent):
         clause = m.group(2).strip()
+        if m.group(1) == "最好" and clause.startswith("的"):
+            continue  # "最好的天气,就是…"为形容词用法，非建议（"最好是+建议"保留）
         crowd = crowd_subtype(clause) or crowd_subtype(sent)
         if crowd:
             cond_text, cond_type = f"游客为{crowd}", "人群"
@@ -138,11 +146,16 @@ def extract_from_sentence(sent: str) -> list[dict]:
             cond_text, cond_type = "时间条件（句内）", "时间"
         else:
             cond_text, cond_type = "一般建议", "一般"
+        emitted = False
         for sugg in split_multi_suggestions(clause):
+            if re.match(r"^[第其][一二三四五六七八九十]", sugg.strip()):
+                continue  # 列举项（"第二,房卡"）非建议
             pairs.append({"pattern": "P4_建议推断", "trigger": m.group(1),
                           "condition_text": cond_text, "suggestions": [sugg], "sentence": sent,
                           "condition_type": cond_type})
-        return pairs
+            emitted = True
+        if emitted:
+            return pairs
 
     # P5 人群主语 + 可以
     for m in re.finditer(
@@ -160,6 +173,8 @@ def extract_from_sentence(sent: str) -> list[dict]:
         clause = m.group(0).strip()
         if re.match(r"不要(太多|要好|要太好|不要的)", clause):
             continue  # 口语夸张比较（"好了不要太多"），非建议
+        if COGNITIVE_RE.match(clause):
+            continue  # "不要认为/觉得/以为"极性反转的修辞，非避雷建议
         if WEATHER_RE.search(sent):
             cond_text, cond_type = "天气条件（句内）", "天气"
         elif TIME_RE.search(sent):

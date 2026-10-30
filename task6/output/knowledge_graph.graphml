@@ -1221,7 +1221,7 @@
   <data key="d2">[时间] 时间条件（句内）</data>
   <data key="d5">时间</data>
   <data key="d6">早上早点出发进入景区,全程须采用观光车+步行的方式进行游览</data>
-  <data key="d7">47</data>
+  <data key="d7">42</data>
   <data key="d8">时间条件（句内）</data>
 </node>
 <node id="条件:九寨沟:一般:一般建议">
@@ -1230,7 +1230,7 @@
   <data key="d2">[一般] 一般建议</data>
   <data key="d5">一般</data>
   <data key="d6">不要在熊猫海坐车去五花海</data>
-  <data key="d7">129</data>
+  <data key="d7">123</data>
   <data key="d8">一般建议</data>
 </node>
 <node id="条件:九寨沟:其他:说九寨是一个栖息灵魂“童话世界”">
@@ -1257,17 +1257,8 @@
   <data key="d2">[天气] 天气条件（句内）</data>
   <data key="d5">天气</data>
   <data key="d6">避暑旅游</data>
-  <data key="d7">10</data>
+  <data key="d7">8</data>
   <data key="d8">天气条件（句内）</data>
-</node>
-<node id="条件:九寨沟:其他:错过九寨沟秋">
-  <data key="d0">条件</data>
-  <data key="d1">错过九寨沟的秋</data>
-  <data key="d2">[其他] 错过九寨沟的秋</data>
-  <data key="d5">其他</data>
-  <data key="d6">那真的是人生一大遗憾</data>
-  <data key="d7">1</data>
-  <data key="d8">错过九寨沟的秋</data>
 </node>
 <node id="条件:颐和园:一般:一般建议">
   <data key="d0">条件</data>
@@ -1275,7 +1266,7 @@
   <data key="d2">[一般] 一般建议</data>
   <data key="d5">一般</data>
   <data key="d6">搞明白,的确是一件很美妙的事情</data>
-  <data key="d7">66</data>
+  <data key="d7">59</data>
   <data key="d8">一般建议</data>
 </node>
 <node id="条件:颐和园:一般:一般建议避雷">
@@ -1302,7 +1293,7 @@
   <data key="d2">[一般] 一般建议</data>
   <data key="d5">一般</data>
   <data key="d6">午后上山,与一日游旅客错峰出游</data>
-  <data key="d7">79</data>
+  <data key="d7">76</data>
   <data key="d8">一般建议</data>
 </node>
 <node id="条件:黄山:其他:第二天还要上山">
@@ -1563,7 +1554,7 @@
   <data key="d2">[时间] 时间条件（句内）</data>
   <data key="d5">时间</data>
   <data key="d6">需要提前1个月预订</data>
-  <data key="d7">27</data>
+  <data key="d7">25</data>
   <data key="d8">时间条件（句内）</data>
 </node>
 <node id="条件:黄山:其他:要住在山上">
@@ -2562,7 +2553,7 @@
   <data key="d2">[一般] 一般建议（避雷）</data>
   <data key="d5">一般</data>
   <data key="d6">不要找理由,想干什么就去</data>
-  <data key="d7">33</data>
+  <data key="d7">32</data>
   <data key="d8">一般建议（避雷）</data>
 </node>
 <node id="条件:九寨沟:人群:是家庭出游">
@@ -2618,15 +2609,6 @@
   <data key="d6">还可以试试石锅藏香鸡</data>
   <data key="d7">1</data>
   <data key="d8">用餐人少</data>
-</node>
-<node id="条件:九寨沟:其他:今天否定自己想法">
-  <data key="d0">条件</data>
-  <data key="d1">今天否定了自己的想法</data>
-  <data key="d2">[其他] 今天否定了自己的想法</data>
-  <data key="d5">其他</data>
-  <data key="d6">明天你可能再也不会有什么想法了</data>
-  <data key="d7">3</data>
-  <data key="d8">今天否定了自己的想法</data>
 </node>
 <node id="条件:九寨沟:其他:有去海拔较高地方旅行">
   <data key="d0">条件</data>
@@ -2708,15 +2690,6 @@
   <data key="d6">那远处的雪山就是大山般的父亲</data>
   <data key="d7">3</data>
   <data key="d8">长海是母亲</data>
-</node>
-<node id="条件:九寨沟:人群:游客为情侣">
-  <data key="d0">条件</data>
-  <data key="d1">游客为情侣</data>
-  <data key="d2">[人群] 游客为情侣</data>
-  <data key="d5">人群</data>
-  <data key="d6">的方法啊!下午两点从川主寺的蚕丝文化点出发,我们就开始了为时8个小时的返程之旅</data>
-  <data key="d7">4</data>
-  <data key="d8">游客为情侣</data>
 </node>
 <node id="条件:九寨沟:其他:你出门不掉东西不皮四川话">
   <data key="d0">条件</data>
@@ -3023,15 +2996,6 @@
   <data key="d6">但我们去的那天,虽有太阳,却灰蒙蒙的,心情就打了折扣</data>
   <data key="d7">1</data>
   <data key="d8">碰上蓝天白云、凉风习习还好</data>
-</node>
-<node id="条件:九寨沟:其他:不是1987年决定重修那座塔">
-  <data key="d0">条件</data>
-  <data key="d1">不是1987年决定重修那座塔</data>
-  <data key="d2">[其他] 不是1987年决定重修那座塔</data>
-  <data key="d5">其他</data>
-  <data key="d6">可能法门寺就不会有今天的这般荣耀和繁华了</data>
-  <data key="d7">1</data>
-  <data key="d8">不是1987年决定重修那座塔</data>
 </node>
 <node id="条件:九寨沟:其他:在原寺遗址上重建寺院">
   <data key="d0">条件</data>
@@ -3483,6 +3447,15 @@
   <data key="d7">1</data>
   <data key="d8">坐错了方向可以不下车</data>
 </node>
+<node id="条件:九寨沟:人群:游客为情侣">
+  <data key="d0">条件</data>
+  <data key="d1">游客为情侣</data>
+  <data key="d2">[人群] 游客为情侣</data>
+  <data key="d5">人群</data>
+  <data key="d6">楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!</data>
+  <data key="d7">1</data>
+  <data key="d8">游客为情侣</data>
+</node>
 <node id="条件:九寨沟:其他:说黄山是天下山极致">
   <data key="d0">条件</data>
   <data key="d1">说黄山是天下山的极致</data>
@@ -3752,15 +3725,6 @@
   <data key="d6">谈何容易</data>
   <data key="d7">1</data>
   <data key="d8">要提高可谓举步维艰</data>
-</node>
-<node id="条件:九寨沟:其他:不去九寨感受这美妙神奇">
-  <data key="d0">条件</data>
-  <data key="d1">不去九寨感受这美妙的神奇</data>
-  <data key="d2">[其他] 不去九寨感受这美妙的神奇</data>
-  <data key="d5">其他</data>
-  <data key="d6">真乃人生憾事</data>
-  <data key="d7">1</data>
-  <data key="d8">不去九寨感受这美妙的神奇</data>
 </node>
 <node id="条件:九寨沟:其他:不信">
   <data key="d0">条件</data>
@@ -4121,15 +4085,6 @@
   <data key="d6">可从东宫门进</data>
   <data key="d7">1</data>
   <data key="d8">想省时间</data>
-</node>
-<node id="条件:颐和园:人群:游客为初次游览">
-  <data key="d0">条件</data>
-  <data key="d1">游客为初次游览</data>
-  <data key="d2">[人群] 游客为初次游览</data>
-  <data key="d5">人群</data>
-  <data key="d6">第一次去北京是八十年代,是陪父亲去看病,虽说是忧愁,但内心的激动依然占据了上风</data>
-  <data key="d7">3</data>
-  <data key="d8">游客为初次游览</data>
 </node>
 <node id="条件:颐和园:其他:从造景上看">
   <data key="d0">条件</data>
@@ -5571,10 +5526,6 @@
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:错过九寨沟秋" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:装备:在外面游山玩水" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
@@ -5603,10 +5554,6 @@
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:今天否定自己想法" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">3</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:有去海拔较高地方旅行" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">3</data>
@@ -5634,10 +5581,6 @@
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:说九寨沟海子是大自然佳作" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">3</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:人群:游客为情侣" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:你出门不掉东西不皮四川话" id="条件建议">
   <data key="d9">条件建议</data>
@@ -5736,10 +5679,6 @@
   <data key="d10">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:碰上蓝天白云凉风习习还好" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:不是1987年决定重修那座塔" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
@@ -5919,6 +5858,10 @@
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:人群:游客为情侣" id="条件建议">
+  <data key="d9">条件建议</data>
+  <data key="d10">1</data>
+</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:说黄山是天下山极致" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
@@ -6004,10 +5947,6 @@
   <data key="d10">1</data>
 </edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:要提高可谓举步维艰" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:不去九寨感受这美妙神奇" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
@@ -6516,10 +6455,6 @@
   <data key="d10">1</data>
 </edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:以此论" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:人群:游客为初次游览" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>

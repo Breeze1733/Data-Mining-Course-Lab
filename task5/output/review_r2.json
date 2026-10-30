@@ -1,0 +1,311 @@
+{
+ "note": "第2轮优化后当前抽取（876对）的新鲜分层抽检（seed=20261030，每层≤4例共30例），标注者=本文档作者",
+ "n": 30,
+ "review_summary": {
+  "correct": 19,
+  "wrong": 8,
+  "boundary": 3
+ },
+ "samples": [
+  {
+   "idx": 0,
+   "record_id": "CTRIP_1098121",
+   "condition_text": "一般建议（避雷）",
+   "suggestion_text": "不要把头和手伸出车外,防止在会车的时候出现事故,尤其是家长要管好自己的孩子,晕车的旅客要忍一忍",
+   "sentence": "车上有经验的老驾驶员告诉我们都把车窗关上,不要把头和手伸出车外,防止在会车的时候出现事故,尤其是家长要管好自己的孩子,晕车的旅客要忍一忍",
+   "pattern": "P6_否定建议",
+   "scenic_area": "九寨沟",
+   "verdict": "correct"
+  },
+  {
+   "idx": 1,
+   "record_id": "CTRIP_4109335",
+   "condition_text": "腿脚不方便",
+   "suggestion_text": "可以从旁边的山路绕开爬一线天,一样可以到前面",
+   "sentence": "如果腿脚不方便,可以从旁边的山路绕开爬一线天,一样可以到前面",
+   "pattern": "P1_显式条件",
+   "scenic_area": "黄山",
+   "verdict": "correct"
+  },
+  {
+   "idx": 2,
+   "record_id": "CTRIP_3007155",
+   "condition_text": "一般建议（避雷）",
+   "suggestion_text": "不要老得太快,却明白得太迟",
+   "sentence": "请不要老得太快,却明白得太迟",
+   "pattern": "P6_否定建议",
+   "scenic_area": "九寨沟",
+   "verdict": "wrong"
+  },
+  {
+   "idx": 3,
+   "record_id": "CTRIP_4027753",
+   "condition_text": "今天否定了自己的想法",
+   "suggestion_text": "明天你可能再也不会有什么想法了",
+   "sentence": "如果今天否定了自己的想法,明天你可能再也不会有什么想法了",
+   "pattern": "P1_显式条件",
+   "scenic_area": "九寨沟",
+   "verdict": "wrong"
+  },
+  {
+   "idx": 4,
+   "record_id": "CTRIP_4076734",
+   "condition_text": "细细看",
+   "suggestion_text": "可能十天半月也未必能看完",
+   "sentence": "里面可玩、可看的东西实在太多,如果细细看的话,可能十天半月也未必能看完",
+   "pattern": "P1_显式条件",
+   "scenic_area": "颐和园",
+   "verdict": "boundary"
+  },
+  {
+   "idx": 5,
+   "record_id": "CTRIP_4050842",
+   "condition_text": "一般建议",
+   "suggestion_text": "买往返票",
+   "sentence": "大门票和索道票分开购买,门票150元,索道票65元-75元不等,建议买往返票",
+   "pattern": "P4_建议推断",
+   "scenic_area": "黄山",
+   "verdict": "correct"
+  },
+  {
+   "idx": 6,
+   "record_id": "CTRIP_3941430",
+   "condition_text": "没有滴滴软件和“美味不用等”软件",
+   "suggestion_text": "尽量提前下载到手机上,省排队",
+   "sentence": "4.如果没有滴滴软件和“美味不用等”软件,尽量提前下载到手机上,省排队",
+   "pattern": "P1_显式条件",
+   "scenic_area": "颐和园",
+   "verdict": "correct"
+  },
+  {
+   "idx": 7,
+   "record_id": "CTRIP_3947556",
+   "condition_text": "一般建议（避雷）",
+   "suggestion_text": "不要犹豫,索道是大部分人唯一的选择,专业选手请忽略",
+   "sentence": "下车步行至云谷寺索道站,不要犹豫,索道是大部分人唯一的选择,专业选手请忽略",
+   "pattern": "P6_否定建议",
+   "scenic_area": "黄山",
+   "verdict": "boundary"
+  },
+  {
+   "idx": 8,
+   "record_id": "CTRIP_1146676",
+   "condition_text": "时间条件（句内）",
+   "suggestion_text": "学过一首诗,里面有一句“羌笛何须怨杨柳”,晚上的表演,真正欣赏了一次羌笛的表演,高难度的吹奏,中间不能间断,一口气绵延悠",
+   "sentence": "以前只记得学过一首诗,里面有一句“羌笛何须怨杨柳”,晚上的表演,真正欣赏了一次羌笛的表演,高难度的吹奏,中间不能间断,一口气绵延悠长,强",
+   "pattern": "P4_建议推断",
+   "scenic_area": "九寨沟",
+   "verdict": "wrong"
+  },
+  {
+   "idx": 9,
+   "record_id": "CTRIP_4114227",
+   "condition_text": "一般建议",
+   "suggestion_text": "摸好后赶紧把手揣兜里把福气带回家哦!",
+   "sentence": "等待进入假山摸康熙御笔福字碑的人群,记得摸好后赶紧把手揣兜里把福气带回家哦!",
+   "pattern": "P4_建议推断",
+   "scenic_area": "颐和园",
+   "verdict": "correct"
+  },
+  {
+   "idx": 10,
+   "record_id": "CTRIP_4050842",
+   "condition_text": "只是贪方便",
+   "suggestion_text": "就选择住在光明顶附近",
+   "sentence": "总结一下,如果只是贪方便,就选择住在光明顶附近",
+   "pattern": "P1_显式条件",
+   "scenic_area": "黄山",
+   "verdict": "correct"
+  },
+  {
+   "idx": 11,
+   "record_id": "XHS_6a2fc7380000000008033fa0",
+   "condition_text": "一般建议",
+   "suggestion_text": "放空的一个停顿点",
+   "sentence": "西堤六桥之一,体量小、人极少,两岸水草贴面,是西堤段最适合放空的一个停顿点",
+   "pattern": "P4_建议推断",
+   "scenic_area": "颐和园",
+   "verdict": "correct"
+  },
+  {
+   "idx": 12,
+   "record_id": "XHS_690c4ddf000000000703a3c1",
+   "condition_text": "一般建议",
+   "suggestion_text": "走左边,不绕五花海一圈九寨沟约等于白来",
+   "sentence": "从熊猫海到五花海下车后走栈道分长线和短线,工作人员会拿大喇叭喊左边风景好右边路线短,他没骗人,想看风景务必走左边,不绕五花海一圈九寨沟约等于白来",
+   "pattern": "P4_建议推断",
+   "scenic_area": "九寨沟",
+   "verdict": "correct"
+  },
+  {
+   "idx": 13,
+   "record_id": "XHS_689b5f99000000001c00a124",
+   "condition_text": "游客为体力不足",
+   "suggestion_text": "观光车➕缆车下)",
+   "sentence": "3:40-5:40 徒步下山 沿途有很多钙化池(体力不足可以观光车➕缆车下)",
+   "pattern": "P5_人群可以",
+   "scenic_area": "九寨沟",
+   "verdict": "correct"
+  },
+  {
+   "idx": 14,
+   "record_id": "CTRIP_4052444",
+   "condition_text": "时间条件（句内）",
+   "suggestion_text": "第二,房卡",
+   "sentence": "下午4点多我们就到了白云宾馆,这里贴士一下,白云分A、B区,最好定A区因为餐厅在这,B区过来还有走至少10分钟,宾馆整体水平可以,但是我还是要提两点,第一没有所谓的管家服务;第二,房卡居然无法开门,反复跑前台,最后还是客房服务员发现是门锁没电导致的,这个应该差评了,本来登上就累,还让客人反复爬楼",
+   "pattern": "P4_建议推断",
+   "scenic_area": "黄山",
+   "verdict": "wrong"
+  },
+  {
+   "idx": 15,
+   "record_id": "CTRIP_3944634",
+   "condition_text": "一般建议（避雷）",
+   "suggestion_text": "不要让的士师傅拉,小心被宰",
+   "sentence": "和朋友纯自由行:很自由,但很麻烦,要自己提前订房订票,找车,做攻略什么的,花的时间和费用过大,纯自由行的注意不要让的士师傅拉,小心被宰",
+   "pattern": "P6_否定建议",
+   "scenic_area": "黄山",
+   "verdict": "correct"
+  },
+  {
+   "idx": 16,
+   "record_id": "XHS_6ae22af4000000003402822f",
+   "condition_text": "下午傍晚时分",
+   "suggestion_text": "拍出桥身连同倒影,氛围感会更加拉满",
+   "sentence": "用3x长焦镜头,拍石围栏与桥同框,超有气势,要是下午傍晚时分,拍出桥身连同倒影,氛围感会更加拉满",
+   "pattern": "P1_显式条件",
+   "scenic_area": "颐和园",
+   "verdict": "correct"
+  },
+  {
+   "idx": 17,
+   "record_id": "JZG-SUP01",
+   "condition_text": "说九寨是一个栖息灵魂的“童话世界”",
+   "suggestion_text": "那么扎如就是一座翻飞激情的生态花园",
+   "sentence": "如果说九寨是一个栖息灵魂的“童话世界”,那么扎如就是一座翻飞激情的生态花园",
+   "pattern": "P1_显式条件",
+   "scenic_area": "九寨沟",
+   "verdict": "wrong"
+  },
+  {
+   "idx": 18,
+   "record_id": "XHS_6ab51bbd000000001c02d84a",
+   "condition_text": "一般建议（避雷）",
+   "suggestion_text": "不要从东宫门进!进门全是上坡,全程累到崩溃,新手避雷",
+   "sentence": "2. 不要从东宫门进!进门全是上坡,全程累到崩溃,新手避雷",
+   "pattern": "P6_否定建议",
+   "scenic_area": "颐和园",
+   "verdict": "correct"
+  },
+  {
+   "idx": 19,
+   "record_id": "XHS_6add7f8300000000240356f4",
+   "condition_text": "没有座位可以坐下一辆",
+   "suggestion_text": "上车坐左边能看景点",
+   "sentence": "10:36上车:车很多很快,如果没有座位可以坐下一辆,上车坐左边能看景点",
+   "pattern": "P1_显式条件",
+   "scenic_area": "九寨沟",
+   "verdict": "correct"
+  },
+  {
+   "idx": 20,
+   "record_id": "CTRIP_4144300",
+   "condition_text": "游客为孩子",
+   "suggestion_text": "儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途中经过的14号至19号敌楼路段较为平坦,便于行走",
+   "sentence": "适合儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途中经过的14号至19号敌楼路段较为平坦,便于行走",
+   "pattern": "P4_建议推断",
+   "scenic_area": "颐和园",
+   "verdict": "correct"
+  },
+  {
+   "idx": 21,
+   "record_id": "CTRIP_1333628",
+   "condition_text": "天气条件（句内）",
+   "suggestion_text": "不要认为雨天登黄山就很没意思",
+   "sentence": "黄山的雨天是多,但不要认为雨天登黄山就很没意思",
+   "pattern": "P6_否定建议",
+   "scenic_area": "黄山",
+   "verdict": "wrong"
+  },
+  {
+   "idx": 22,
+   "record_id": "CTRIP_3953404",
+   "condition_text": "游客为体力好的话",
+   "suggestion_text": "从云谷寺索道走后山—前山的经典线路",
+   "sentence": "时间充裕、体力好的话可以从云谷寺索道走后山—前山的经典线路",
+   "pattern": "P5_人群可以",
+   "scenic_area": "黄山",
+   "verdict": "correct"
+  },
+  {
+   "idx": 23,
+   "record_id": "CTRIP_898653",
+   "condition_text": "有恐高症的朋友",
+   "suggestion_text": "就不会太害怕了",
+   "sentence": "---我们真的是“爬山”呀,手脚并用哟,特别是过鲫鱼背和天桥时,要是有恐高症的朋友,过这儿时最好挑有雾的天气,看不到谷底和深壑,就不会太害怕了",
+   "pattern": "P1_显式条件",
+   "scenic_area": "黄山",
+   "verdict": "correct"
+  },
+  {
+   "idx": 24,
+   "record_id": "CTRIP_4002947",
+   "condition_text": "天气条件（句内）",
+   "suggestion_text": "就是晴朗中还带着妖娆的云彩",
+   "sentence": "最好的天气,就是晴朗中还带着妖娆的云彩",
+   "pattern": "P4_建议推断",
+   "scenic_area": "九寨沟",
+   "verdict": "wrong"
+  },
+  {
+   "idx": 25,
+   "record_id": "XHS_6a9434700000000026000841",
+   "condition_text": "时间条件（句内）",
+   "suggestion_text": "不建议买联票,只买门票即可",
+   "sentence": "门票:旺季是30元/人,淡季是20元/人,目前这个时期是旺季,可搜索微信小程序自行购票,不建议买联票,只买门票即可",
+   "pattern": "P6_否定建议",
+   "scenic_area": "颐和园",
+   "verdict": "correct"
+  },
+  {
+   "idx": 26,
+   "record_id": "CTRIP_3969287",
+   "condition_text": "一般建议",
+   "suggestion_text": "阅读:(四大古都)",
+   "sentence": "推荐阅读:(四大古都)",
+   "pattern": "P4_建议推断",
+   "scenic_area": "颐和园",
+   "verdict": "wrong"
+  },
+  {
+   "idx": 27,
+   "record_id": "CTRIP_3941430",
+   "condition_text": "一般建议（避雷）",
+   "suggestion_text": "慎,避免贪小便宜,吃大亏",
+   "sentence": "5.旅游有风险,选择需谨慎,避免贪小便宜,吃大亏",
+   "pattern": "P6_否定建议",
+   "scenic_area": "颐和园",
+   "verdict": "boundary"
+  },
+  {
+   "idx": 28,
+   "record_id": "XHS_6ac1171c000000001500f3ef",
+   "condition_text": "一般建议（避雷）",
+   "suggestion_text": "不要听向导说的从双龙海走下去",
+   "sentence": "芦苇海本身没有观光车上下点,所以到达方式是到了盆景滩后再向上走几百米(注意不要听向导说的从双龙海走下去,那样要走两公里多哦)",
+   "pattern": "P6_否定建议",
+   "scenic_area": "九寨沟",
+   "verdict": "correct"
+  },
+  {
+   "idx": 29,
+   "record_id": "XHS_6ac4f2f50000000002012ec2",
+   "condition_text": "一般建议",
+   "suggestion_text": "是离汤口镇南门游客中心(白色椭圆天桥)近一点的地方,爬完回去休息非常方便",
+   "sentence": "住宿最好是离汤口镇南门游客中心(白色椭圆天桥)近一点的地方,爬完回去休息非常方便",
+   "pattern": "P4_建议推断",
+   "scenic_area": "黄山",
+   "verdict": "correct"
+  }
+ ]
+}
