@@ -138,7 +138,9 @@ def main() -> int:
             pred_name = parsed
         else:
             pred_kind, pred_name = "无明确先行词", "NONE"
-        kind_map = {"POI": "POI", "交通": "交通", "景区名": "景区", "无明确先行词": "无"}
+        kind_map = {"POI": "POI", "交通": "交通", "景区名": "景区", "无明确先行词": "无",
+                    "他人": "他人", "同行者": "同行者", "前文POI集合": "集合-POI",
+                    "名词集合": "集合-其他", "路线": "路线", "设施": "设施"}
         kind_match = kind_map.get(pred_kind) == gitem["gold_kind"]
         if gitem["gold_kind"] in ("POI", "景区"):
             name_match = pred_name == gitem["gold_antecedent"]

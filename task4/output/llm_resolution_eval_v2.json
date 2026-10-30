@@ -1,28 +1,28 @@
 {
  "mode": "llm-restricted-extended (gemini-3.8-flash-high, temperature=0, 选项空间=候选池+SCENIC+NONE+类型词表)",
- "n": 6,
- "accuracy_overall": 0.5,
+ "n": 120,
+ "accuracy_overall": 0.633,
  "accuracy_by_class": {
   "locative": {
-   "n": 6,
-   "accuracy": 0.5
+   "n": 30,
+   "accuracy": 0.7
   },
   "object": {
-   "n": 0,
-   "accuracy": null
+   "n": 30,
+   "accuracy": 0.767
   },
   "person": {
-   "n": 0,
-   "accuracy": null
+   "n": 30,
+   "accuracy": 0.633
   },
   "set": {
-   "n": 0,
-   "accuracy": null
+   "n": 30,
+   "accuracy": 0.433
   }
  },
  "failures": [],
  "rule_baseline": 0.583,
- "elapsed_s": 81.9,
+ "elapsed_s": 1106.5,
  "results": [
   {
    "case_index": 963,
@@ -52,7 +52,7 @@
    "llm_answer_raw": "FACILITY",
    "pred": "FACILITY",
    "pred_kind": "设施",
-   "correct": false
+   "correct": true
   },
   {
    "case_index": 1207,
@@ -83,6 +83,1147 @@
    "pred": "磁器口",
    "pred_kind": "POI",
    "correct": false
+  },
+  {
+   "case_index": 948,
+   "class": "locative",
+   "gold": "乐山大佛景区",
+   "gold_kind": "景区",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 909,
+   "class": "locative",
+   "gold": "九寨沟",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "九寨沟",
+   "pred_kind": "景区名",
+   "correct": true
+  },
+  {
+   "case_index": 1563,
+   "class": "locative",
+   "gold": "五彩池",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "五彩池",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 780,
+   "class": "locative",
+   "gold": "无",
+   "gold_kind": "无",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": true
+  },
+  {
+   "case_index": 34,
+   "class": "locative",
+   "gold": "景山公园",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "景山公园",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 62,
+   "class": "locative",
+   "gold": "南锣鼓巷",
+   "gold_kind": "POI",
+   "llm_answer_raw": "SCENIC",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "correct": false
+  },
+  {
+   "case_index": 126,
+   "class": "locative",
+   "gold": "全聚德烤鸭店",
+   "gold_kind": "设施",
+   "llm_answer_raw": "FACILITY",
+   "pred": "FACILITY",
+   "pred_kind": "设施",
+   "correct": true
+  },
+  {
+   "case_index": 133,
+   "class": "locative",
+   "gold": "清华大学校园",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "correct": false
+  },
+  {
+   "case_index": 1753,
+   "class": "locative",
+   "gold": "北京大学",
+   "gold_kind": "景区",
+   "llm_answer_raw": "0",
+   "pred": "北京大学",
+   "pred_kind": "POI",
+   "correct": false
+  },
+  {
+   "case_index": 1788,
+   "class": "locative",
+   "gold": "耕织图",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "耕织图",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 32,
+   "class": "locative",
+   "gold": "颐和园",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "correct": true
+  },
+  {
+   "case_index": 1774,
+   "class": "locative",
+   "gold": "颐和园",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "correct": true
+  },
+  {
+   "case_index": 112,
+   "class": "locative",
+   "gold": "荷花市场",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "荷花市场",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 1814,
+   "class": "locative",
+   "gold": "金山岭长城",
+   "gold_kind": "POI",
+   "llm_answer_raw": "SCENIC",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "correct": false
+  },
+  {
+   "case_index": 705,
+   "class": "locative",
+   "gold": "西海大峡谷",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "西海大峡谷",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 567,
+   "class": "locative",
+   "gold": "慈光阁/云谷寺/北大门/西大门",
+   "gold_kind": "集合-POI",
+   "llm_answer_raw": "SET_PRECEDING",
+   "pred": "SET_PRECEDING",
+   "pred_kind": "前文POI集合",
+   "correct": true
+  },
+  {
+   "case_index": 485,
+   "class": "locative",
+   "gold": "黄山",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "黄山",
+   "pred_kind": "景区名",
+   "correct": true
+  },
+  {
+   "case_index": 318,
+   "class": "locative",
+   "gold": "雲亼民宿",
+   "gold_kind": "设施",
+   "llm_answer_raw": "FACILITY",
+   "pred": "FACILITY",
+   "pred_kind": "设施",
+   "correct": true
+  },
+  {
+   "case_index": 500,
+   "class": "locative",
+   "gold": "光明顶",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "光明顶",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 600,
+   "class": "locative",
+   "gold": "三清山",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "黄山",
+   "pred_kind": "景区名",
+   "correct": false
+  },
+  {
+   "case_index": 367,
+   "class": "locative",
+   "gold": "雲亼民宿",
+   "gold_kind": "设施",
+   "llm_answer_raw": "FACILITY",
+   "pred": "FACILITY",
+   "pred_kind": "设施",
+   "correct": true
+  },
+  {
+   "case_index": 141,
+   "class": "locative",
+   "gold": "北海",
+   "gold_kind": "POI",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 269,
+   "class": "locative",
+   "gold": "鳌鱼峰",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "鳌鱼峰",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 703,
+   "class": "locative",
+   "gold": "西海大峡谷",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "西海大峡谷",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 1111,
+   "class": "object",
+   "gold": "五花海",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "五花海",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 1026,
+   "class": "object",
+   "gold": "五彩池",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "五彩池",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 947,
+   "class": "object",
+   "gold": "南门方向岔路",
+   "gold_kind": "路线",
+   "llm_answer_raw": "ROUTE",
+   "pred": "ROUTE",
+   "pred_kind": "路线",
+   "correct": true
+  },
+  {
+   "case_index": 829,
+   "class": "object",
+   "gold": "成都",
+   "gold_kind": "景区",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 911,
+   "class": "object",
+   "gold": "则查洼沟",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "则查洼沟",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 1856,
+   "class": "object",
+   "gold": "则查洼沟",
+   "gold_kind": "POI",
+   "llm_answer_raw": "5",
+   "pred": "则查洼沟",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 1381,
+   "class": "object",
+   "gold": "进沟山路（G248）",
+   "gold_kind": "路线",
+   "llm_answer_raw": "ROUTE",
+   "pred": "ROUTE",
+   "pred_kind": "路线",
+   "correct": true
+  },
+  {
+   "case_index": 1025,
+   "class": "object",
+   "gold": "五彩池",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "五彩池",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 793,
+   "class": "object",
+   "gold": "红原",
+   "gold_kind": "景区",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 787,
+   "class": "object",
+   "gold": "雅克夏雪山",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "雅克夏雪山",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 1690,
+   "class": "object",
+   "gold": "圆明园",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "圆明园",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 26,
+   "class": "object",
+   "gold": "石舫",
+   "gold_kind": "POI",
+   "llm_answer_raw": "1",
+   "pred": "石舫",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 1665,
+   "class": "object",
+   "gold": "北海",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "北海",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 1926,
+   "class": "object",
+   "gold": "半日精华线",
+   "gold_kind": "路线",
+   "llm_answer_raw": "ROUTE",
+   "pred": "ROUTE",
+   "pred_kind": "路线",
+   "correct": true
+  },
+  {
+   "case_index": 1664,
+   "class": "object",
+   "gold": "北海",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "北海",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 1773,
+   "class": "object",
+   "gold": "颐和园",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "correct": true
+  },
+  {
+   "case_index": 121,
+   "class": "object",
+   "gold": "天安门广场",
+   "gold_kind": "POI",
+   "llm_answer_raw": "SCENIC",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "correct": false
+  },
+  {
+   "case_index": 1919,
+   "class": "object",
+   "gold": "长廊",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "长廊",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 11,
+   "class": "object",
+   "gold": "佛香阁",
+   "gold_kind": "POI",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 1823,
+   "class": "object",
+   "gold": "颐和园",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "correct": true
+  },
+  {
+   "case_index": 398,
+   "class": "object",
+   "gold": "太平索道线路",
+   "gold_kind": "路线",
+   "llm_answer_raw": "ROUTE",
+   "pred": "ROUTE",
+   "pred_kind": "路线",
+   "correct": true
+  },
+  {
+   "case_index": 426,
+   "class": "object",
+   "gold": "往莲花峰的岔路",
+   "gold_kind": "路线",
+   "llm_answer_raw": "ROUTE",
+   "pred": "ROUTE",
+   "pred_kind": "路线",
+   "correct": true
+  },
+  {
+   "case_index": 232,
+   "class": "object",
+   "gold": "祠堂",
+   "gold_kind": "其他",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 1852,
+   "class": "object",
+   "gold": "两日行程路线",
+   "gold_kind": "路线",
+   "llm_answer_raw": "ROUTE",
+   "pred": "ROUTE",
+   "pred_kind": "路线",
+   "correct": true
+  },
+  {
+   "case_index": 373,
+   "class": "object",
+   "gold": "黄山",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "黄山",
+   "pred_kind": "景区名",
+   "correct": true
+  },
+  {
+   "case_index": 194,
+   "class": "object",
+   "gold": "庐山老别墅",
+   "gold_kind": "其他",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 442,
+   "class": "object",
+   "gold": "黄山",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "黄山",
+   "pred_kind": "景区名",
+   "correct": true
+  },
+  {
+   "case_index": 326,
+   "class": "object",
+   "gold": "迎客松",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "迎客松",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 652,
+   "class": "object",
+   "gold": "五步蛇",
+   "gold_kind": "其他",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 521,
+   "class": "object",
+   "gold": "X063公路",
+   "gold_kind": "路线",
+   "llm_answer_raw": "ROUTE",
+   "pred": "ROUTE",
+   "pred_kind": "路线",
+   "correct": true
+  },
+  {
+   "case_index": 1457,
+   "class": "person",
+   "gold": "藏餐厅主人一家",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 1052,
+   "class": "person",
+   "gold": "当地人",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 815,
+   "class": "person",
+   "gold": "同行者",
+   "gold_kind": "同行者",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": false
+  },
+  {
+   "case_index": 808,
+   "class": "person",
+   "gold": "无",
+   "gold_kind": "无",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": false
+  },
+  {
+   "case_index": 1108,
+   "class": "person",
+   "gold": "同团迟到的两名游客",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 1357,
+   "class": "person",
+   "gold": "同行者（两老母亲）",
+   "gold_kind": "同行者",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 827,
+   "class": "person",
+   "gold": "同行者（郭枫）",
+   "gold_kind": "同行者",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": false
+  },
+  {
+   "case_index": 1109,
+   "class": "person",
+   "gold": "同团迟到的两名游客",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 872,
+   "class": "person",
+   "gold": "硬石餐厅",
+   "gold_kind": "设施",
+   "llm_answer_raw": "FACILITY",
+   "pred": "FACILITY",
+   "pred_kind": "设施",
+   "correct": true
+  },
+  {
+   "case_index": 1475,
+   "class": "person",
+   "gold": "车上导游",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 86,
+   "class": "person",
+   "gold": "同行者",
+   "gold_kind": "同行者",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 1742,
+   "class": "person",
+   "gold": "司机与导游们",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 90,
+   "class": "person",
+   "gold": "同行者",
+   "gold_kind": "同行者",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 1713,
+   "class": "person",
+   "gold": "景区管理者",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 75,
+   "class": "person",
+   "gold": "同行者",
+   "gold_kind": "同行者",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 39,
+   "class": "person",
+   "gold": "周围的小朋友",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 1740,
+   "class": "person",
+   "gold": "蒙古大军",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 1833,
+   "class": "person",
+   "gold": "云川酒店",
+   "gold_kind": "设施",
+   "llm_answer_raw": "FACILITY",
+   "pred": "FACILITY",
+   "pred_kind": "设施",
+   "correct": true
+  },
+  {
+   "case_index": 45,
+   "class": "person",
+   "gold": "格鲁一家（虚构角色）",
+   "gold_kind": "其他",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 91,
+   "class": "person",
+   "gold": "同行者",
+   "gold_kind": "同行者",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 512,
+   "class": "person",
+   "gold": "同行者（老婆和大老爷）",
+   "gold_kind": "同行者",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 233,
+   "class": "person",
+   "gold": "往山坡走的游客",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 361,
+   "class": "person",
+   "gold": "黄山酒店",
+   "gold_kind": "设施",
+   "llm_answer_raw": "FACILITY",
+   "pred": "FACILITY",
+   "pred_kind": "设施",
+   "correct": true
+  },
+  {
+   "case_index": 712,
+   "class": "person",
+   "gold": "光明顶/迎客松等景点",
+   "gold_kind": "集合-POI",
+   "llm_answer_raw": "SET_PRECEDING",
+   "pred": "SET_PRECEDING",
+   "pred_kind": "前文POI集合",
+   "correct": true
+  },
+  {
+   "case_index": 444,
+   "class": "person",
+   "gold": "酒店前台",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 343,
+   "class": "person",
+   "gold": "馄饨店主一家",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 676,
+   "class": "person",
+   "gold": "隔壁的金华人游客",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 637,
+   "class": "person",
+   "gold": "上山的游客",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 1850,
+   "class": "person",
+   "gold": "挑山工",
+   "gold_kind": "他人",
+   "llm_answer_raw": "OTHER_PERSON",
+   "pred": "OTHER_PERSON",
+   "pred_kind": "他人",
+   "correct": true
+  },
+  {
+   "case_index": 684,
+   "class": "person",
+   "gold": "同行者（老外）",
+   "gold_kind": "同行者",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 1190,
+   "class": "set",
+   "gold": "水上步栈道",
+   "gold_kind": "其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": false
+  },
+  {
+   "case_index": 1241,
+   "class": "set",
+   "gold": "五次重要会议",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 1160,
+   "class": "set",
+   "gold": "窟龛与雕像",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 867,
+   "class": "set",
+   "gold": "二十余栋景观套房",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 1237,
+   "class": "set",
+   "gold": "扎如寺",
+   "gold_kind": "POI",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 1013,
+   "class": "set",
+   "gold": "两种进酒店方式",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 1356,
+   "class": "set",
+   "gold": "一行5人家庭",
+   "gold_kind": "集合-人",
+   "llm_answer_raw": "PARTY",
+   "pred": "PARTY",
+   "pred_kind": "同行者",
+   "correct": false
+  },
+  {
+   "case_index": 1273,
+   "class": "set",
+   "gold": "无",
+   "gold_kind": "无",
+   "llm_answer_raw": "SET_PRECEDING",
+   "pred": "SET_PRECEDING",
+   "pred_kind": "前文POI集合",
+   "correct": false
+  },
+  {
+   "case_index": 1378,
+   "class": "set",
+   "gold": "冰川地貌类型",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 755,
+   "class": "set",
+   "gold": "雪山景色",
+   "gold_kind": "其他",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 111,
+   "class": "set",
+   "gold": "恭王府",
+   "gold_kind": "POI",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": false
+  },
+  {
+   "case_index": 1825,
+   "class": "set",
+   "gold": "圆明园",
+   "gold_kind": "POI",
+   "llm_answer_raw": "SCENIC",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "correct": false
+  },
+  {
+   "case_index": 13,
+   "class": "set",
+   "gold": "圆明园",
+   "gold_kind": "POI",
+   "llm_answer_raw": "SCENIC",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "correct": false
+  },
+  {
+   "case_index": 1822,
+   "class": "set",
+   "gold": "三副转轮藏",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 1661,
+   "class": "set",
+   "gold": "718联合厂拆分后的各厂",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 1685,
+   "class": "set",
+   "gold": "明长城各段",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 113,
+   "class": "set",
+   "gold": "东四胡同群",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 23,
+   "class": "set",
+   "gold": "南长城敌楼",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_PRECEDING",
+   "pred": "SET_PRECEDING",
+   "pred_kind": "前文POI集合",
+   "correct": false
+  },
+  {
+   "case_index": 84,
+   "class": "set",
+   "gold": "国宝展馆",
+   "gold_kind": "其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": false
+  },
+  {
+   "case_index": 1799,
+   "class": "set",
+   "gold": "几位北京大爷",
+   "gold_kind": "集合-人",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": false
+  },
+  {
+   "case_index": 655,
+   "class": "set",
+   "gold": "6顿餐",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 502,
+   "class": "set",
+   "gold": "五个补给站",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 234,
+   "class": "set",
+   "gold": "宅内陈列",
+   "gold_kind": "其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": false
+  },
+  {
+   "case_index": 204,
+   "class": "set",
+   "gold": "馆藏品",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 415,
+   "class": "set",
+   "gold": "月沼",
+   "gold_kind": "POI",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 315,
+   "class": "set",
+   "gold": "山间雾景",
+   "gold_kind": "其他",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 263,
+   "class": "set",
+   "gold": "72座峰",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 569,
+   "class": "set",
+   "gold": "72个山峰",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
+  },
+  {
+   "case_index": 290,
+   "class": "set",
+   "gold": "两种上山方式",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_PRECEDING",
+   "pred": "SET_PRECEDING",
+   "pred_kind": "前文POI集合",
+   "correct": false
+  },
+  {
+   "case_index": 177,
+   "class": "set",
+   "gold": "两个环线",
+   "gold_kind": "集合-其他",
+   "llm_answer_raw": "SET_OTHER",
+   "pred": "SET_OTHER",
+   "pred_kind": "名词集合",
+   "correct": true
   }
- ]
+ ],
+ "scoring_note": "v1 打分器 kind_map 缺扩展类型映射导致低计；本文件为按规则口径离线重算后的正确结果（结果明细未变）"
 }
