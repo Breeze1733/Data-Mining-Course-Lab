@@ -160,8 +160,14 @@ def main(argv=None) -> int:
                         add_pool([e for e in pois
                                   if sentences[si - 2][0] <= e["start"] < sentences[si - 2][1]], "前两句", True)
                     if not cands:
-                        case.update({"resolution": scenic_area, "resolution_kind": "景区名",
-                                     "evidence": "窗口内无实体，回退到景区名"})
+                        # 设施回退：窗口内无实体但提及酒店/餐厅/民宿等 → "这里/那里"多指该设施（U16，2例黄金回归）
+                        if re.search(r"酒店|民宿|餐厅|饭馆|烤鸭店|客栈|宾馆|农家乐|店家",
+                                     case["sentence"] + case["prev_sentence"]):
+                            case.update({"resolution": "facility", "resolution_kind": "设施",
+                                         "evidence": "窗口无实体但提及住宿/餐饮设施"})
+                        else:
+                            case.update({"resolution": scenic_area, "resolution_kind": "景区名",
+                                         "evidence": "窗口内无实体，回退到景区名"})
                     else:
                         cands.sort(key=lambda c: (0 if c["kind"] == "POI" else 1,
                                                   {"同句": 0, "前句": 1, "前两句": 2}[c["scope"]],

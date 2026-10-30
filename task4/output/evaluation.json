@@ -1,10 +1,10 @@
 {
  "n": 120,
- "accuracy_overall": 0.567,
+ "accuracy_overall": 0.583,
  "accuracy_by_class": {
   "locative": {
    "n": 30,
-   "accuracy": 0.5
+   "accuracy": 0.567
   },
   "object": {
    "n": 30,
@@ -20,16 +20,6 @@
   }
  },
  "errors": [
-  {
-   "pronoun": "这里",
-   "class": "locative",
-   "scenic": "九寨沟",
-   "rule": "九寨沟",
-   "rule_kind": "景区名",
-   "gold": "酒店的中餐厅",
-   "gold_kind": "设施",
-   "note": "“这里都能吃到”指酒店餐厅，非景区"
-  },
   {
    "pronoun": "那里",
    "class": "locative",
@@ -159,16 +149,6 @@
    "gold": "三清山",
    "gold_kind": "景区",
    "note": "多景区游记（三清山段）"
-  },
-  {
-   "pronoun": "这里",
-   "class": "locative",
-   "scenic": "黄山",
-   "rule": "黄山",
-   "rule_kind": "景区名",
-   "gold": "雲亼民宿",
-   "gold_kind": "设施",
-   "note": ""
   },
   {
    "pronoun": "这座",

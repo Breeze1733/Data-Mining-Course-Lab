@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-30 23:37",
-  "git": "03965ce",
-  "label": "U15: P4对立建议标记（联票组4行互带来源）",
-  "dirty_files": 11
+  "time": "2026-10-30 23:40",
+  "git": "db2dfbf",
+  "label": "U16: 设施回退（消解0.583）",
+  "dirty_files": 8
  },
  "metrics": {
   "dataset.count": 271,
@@ -26,7 +26,7 @@
   "routes.official_total": 39,
   "routes.tourist_total": 228,
   "coref.n": 120,
-  "coref.accuracy": 0.567,
+  "coref.accuracy": 0.583,
   "cond.pairs": 876,
   "cond.review_n": 49,
   "cond.correct": 20,
