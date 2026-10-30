@@ -14,3 +14,6 @@ Thumbs.db
 /.python-version
 /uv.lock
 /pyproject.toml
+
+# LLM API 配置（含密钥，严禁入库）
+/task7/config.json
