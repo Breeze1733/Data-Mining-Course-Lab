@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-30 23:18",
-  "git": "723face",
-  "label": "U13: person/object类改进（消解0.567）",
-  "dirty_files": 16
+  "time": "2026-10-30 23:37",
+  "git": "03965ce",
+  "label": "U15: P4对立建议标记（联票组4行互带来源）",
+  "dirty_files": 11
  },
  "metrics": {
   "dataset.count": 271,

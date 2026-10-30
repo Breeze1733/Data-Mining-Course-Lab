@@ -177,6 +177,63 @@ def extract_from_sentence(sent: str) -> list[dict]:
     return pairs
 
 
+# P4 对立建议自动标记（U15）：同景区内"否定式 vs 肯定式"同核建议共存并互带来源引用。
+NEG_PREFIX_RE = re.compile(r"^(不要|不宜|不建议|别|切勿|避免|慎|忌|最好不|无法|不能)")
+AFF_HEDGE_RE = re.compile(r"^(最好|建议|推荐|可以|记得|务必|千万|尽量|不妨|适合|适宜)")
+
+
+def _norm_sugg(s: str) -> str:
+    return re.sub(r"[\s，,。；;、！？!?]+", "", s)
+
+
+def mark_opposing(mapping: list[dict]) -> list[dict]:
+    for idx, row in enumerate(mapping):
+        row["row_id"] = idx
+    by_scenic: dict[str, list[dict]] = {}
+    for row in mapping:
+        by_scenic.setdefault(row["scenic_area"], []).append(row)
+    marked = 0
+    seen_pairs: set[tuple[int, int]] = set()
+    for scenic, rows in by_scenic.items():
+        for a in rows:
+            na = _norm_sugg(a["suggestion_text"])
+            ma = NEG_PREFIX_RE.match(na)
+            if not ma or len(na) - ma.end() < 3:
+                continue
+            core_a = na[ma.end():]
+            for b in rows:
+                if b["row_id"] == a["row_id"]:
+                    continue
+                nb = _norm_sugg(b["suggestion_text"])
+                mb = NEG_PREFIX_RE.match(nb)
+                if mb:
+                    continue  # 对面必须是肯定式
+                core_b = AFF_HEDGE_RE.sub("", nb)
+                if len(core_b) < 3:
+                    continue
+                # 最长公共前缀作为对齐词项
+                lcp = 0
+                for ca, cb in zip(core_a, core_b):
+                    if ca != cb:
+                        break
+                    lcp += 1
+                if lcp < 3:
+                    continue
+                key = tuple(sorted((a["row_id"], b["row_id"])))
+                if key in seen_pairs:
+                    continue
+                seen_pairs.add(key)
+                term = core_a[:lcp]
+                a.setdefault("opposing", {"term": term, "with": []})["with"].append(
+                    {"row_id": b["row_id"], "suggestion": b["suggestion_text"][:40],
+                     "sources": b.get("sources", [b.get("record_id", [])])[:2]})
+                b.setdefault("opposing", {"term": term, "with": []})["with"].append(
+                    {"row_id": a["row_id"], "suggestion": a["suggestion_text"][:40],
+                     "sources": a.get("sources", [a.get("record_id", [])])[:2]})
+                marked += 1
+    return mapping
+
+
 def norm(s: str) -> str:
     return re.sub(r"[\s，,。；;、！？!?\[\]（）()【】]+", "", s)
 
@@ -235,6 +292,15 @@ def main(argv=None) -> int:
             continue
         merged[key] = {**p, "sources": [p["record_id"]]}
     mapping = list(merged.values())
+    mapping = mark_opposing(mapping)
+    _opp = [r for r in mapping if r.get("opposing")]
+    (OUT / "opposing_pairs.json").write_text(json.dumps({
+        "note": "P4 对立建议自动标记：同景区内否定式与肯定式同核建议共存（互带 row_id 与来源）",
+        "n_marked_rows": len(_opp),
+        "pairs": [{"scenic_area": r["scenic_area"], "term": r["opposing"]["term"],
+                   "suggestion": r["suggestion_text"][:60],
+                   "opposing_with": r["opposing"]["with"], "sources": r.get("sources", [])[:3]}
+                  for r in _opp]}, ensure_ascii=False, indent=1), encoding="utf-8")
     for m in mapping:
         m["frequency"] = len(m["sources"])
         m["sources"] = list(dict.fromkeys(m["sources"]))[:10]
