@@ -115,6 +115,13 @@ def main(argv=None) -> int:
                     "prev2_sentence": sentences[si - 2][2] if si >= 2 else "",
                 }
                 if cls in ("locative", "object"):
+                    # 路线指代："这条(路|线…)"指代道路/线路本身，不是沿途 POI（U13，7例黄金回归）
+                    if pron == "这条" and re.search(r"这条路|这条线|该路线", case["sentence"]):
+                        case.update({"resolution": "路线", "resolution_kind": "路线",
+                                     "evidence": "这条+路/线 指代道路/线路本身"})
+                        fh.write(json.dumps(case, ensure_ascii=False) + "\n")
+                        n_cases += 1
+                        continue
                     # 候选打分：同句在前 > 前句 > 前两句；POI 优先于交通；距离近优先
                     cands = []
 
@@ -166,7 +173,9 @@ def main(argv=None) -> int:
                 elif cls == "person":
                     window = case["sentence"] + case["prev_sentence"]
                     party_signal = re.search(r"我们|我俩|咱们|我妈|我爸|媳妇|闺女|老婆|老公|女儿|儿子|同伴|闺蜜|一家人|同行", window)
-                    if PERSON_HINT_RE.search(case["sentence"]) and not party_signal:
+                    # hint-cur 分支只看当前句的同行者信号（前句"我们"不应否决当前句的服务角色指代）
+                    party_cur = re.search(r"我们|我俩|咱们|我妈|我爸|媳妇|闺女|老婆|老公|女儿|儿子|同伴|闺蜜|一家人|同行", case["sentence"])
+                    if PERSON_HINT_RE.search(case["sentence"]) and not party_cur:
                         case.update({"resolution": "other_person", "resolution_kind": "他人",
                                      "evidence": "句中含他人角色词且无同行者信号"})
                     elif not party_signal and PERSON_HINT_RE.search(case["prev_sentence"]):

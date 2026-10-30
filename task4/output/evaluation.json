@@ -1,6 +1,6 @@
 {
  "n": 120,
- "accuracy_overall": 0.475,
+ "accuracy_overall": 0.567,
  "accuracy_by_class": {
   "locative": {
    "n": 30,
@@ -8,11 +8,11 @@
   },
   "object": {
    "n": 30,
-   "accuracy": 0.4
+   "accuracy": 0.667
   },
   "person": {
    "n": 30,
-   "accuracy": 0.367
+   "accuracy": 0.467
   },
   "set": {
    "n": 30,
@@ -171,16 +171,6 @@
    "note": ""
   },
   {
-   "pronoun": "这条",
-   "class": "object",
-   "scenic": "九寨沟",
-   "rule": "东门",
-   "rule_kind": "POI",
-   "gold": "南门方向岔路",
-   "gold_kind": "路线",
-   "note": "“这条路”指前句“一条往南门”的岔道（乐山大佛景区内）"
-  },
-  {
    "pronoun": "这座",
    "class": "object",
    "scenic": "九寨沟",
@@ -201,16 +191,6 @@
    "note": "前文“则渣洼沟”拼写变体未入词典"
   },
   {
-   "pronoun": "这条",
-   "class": "object",
-   "scenic": "九寨沟",
-   "rule": "黄龙",
-   "rule_kind": "POI",
-   "gold": "进沟山路（G248）",
-   "gold_kind": "路线",
-   "note": "指前文山路，非景点"
-  },
-  {
    "pronoun": "它",
    "class": "object",
    "scenic": "九寨沟",
@@ -221,16 +201,6 @@
    "note": "“它的缠绵悱恻”指红原四季；红原未收录"
   },
   {
-   "pronoun": "这座",
-   "class": "object",
-   "scenic": "九寨沟",
-   "rule": "九寨沟",
-   "rule_kind": "景区名",
-   "gold": "雅克夏雪山",
-   "gold_kind": "POI",
-   "note": ""
-  },
-  {
    "pronoun": "它",
    "class": "object",
    "scenic": "颐和园",
@@ -239,16 +209,6 @@
    "gold": "石舫",
    "gold_kind": "POI",
    "note": "同句“长廊”劫持，真先行词为句首主语清晏舫（石舫）"
-  },
-  {
-   "pronoun": "这条",
-   "class": "object",
-   "scenic": "颐和园",
-   "rule": "东宫门",
-   "rule_kind": "POI",
-   "gold": "半日精华线",
-   "gold_kind": "路线",
-   "note": "指前句路线标题"
   },
   {
    "pronoun": "这座",
@@ -281,26 +241,6 @@
    "note": ""
   },
   {
-   "pronoun": "这条",
-   "class": "object",
-   "scenic": "黄山",
-   "rule": "松谷庵",
-   "rule_kind": "POI",
-   "gold": "太平索道线路",
-   "gold_kind": "路线",
-   "note": "指北大门太平索道进出的线路"
-  },
-  {
-   "pronoun": "这条",
-   "class": "object",
-   "scenic": "黄山",
-   "rule": "迎客松",
-   "rule_kind": "POI",
-   "gold": "往莲花峰的岔路",
-   "gold_kind": "路线",
-   "note": "指“往左手那条路”"
-  },
-  {
    "pronoun": "它",
    "class": "object",
    "scenic": "黄山",
@@ -309,16 +249,6 @@
    "gold": "祠堂",
    "gold_kind": "其他",
    "note": "普通名词“祠堂”，非POI"
-  },
-  {
-   "pronoun": "这条",
-   "class": "object",
-   "scenic": "黄山",
-   "rule": "光明顶",
-   "rule_kind": "POI",
-   "gold": "两日行程路线",
-   "gold_kind": "路线",
-   "note": "指本篇所述两日路线"
   },
   {
    "pronoun": "它",
@@ -339,26 +269,6 @@
    "gold": "五步蛇",
    "gold_kind": "其他",
    "note": "“它的利用价值”指五步蛇"
-  },
-  {
-   "pronoun": "这条",
-   "class": "object",
-   "scenic": "黄山",
-   "rule": "黄山",
-   "rule_kind": "景区名",
-   "gold": "X063公路",
-   "gold_kind": "路线",
-   "note": "指前文沿江公路"
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "九寨沟",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "藏餐厅主人一家",
-   "gold_kind": "他人",
-   "note": "服务场景中的“他们”，非同行者"
   },
   {
    "pronoun": "他们",
@@ -389,26 +299,6 @@
    "gold": "无",
    "gold_kind": "无",
    "note": "诗化指代“这片土地”，无明确实体"
-  },
-  {
-   "pronoun": "她们",
-   "class": "person",
-   "scenic": "九寨沟",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "同团迟到的两名游客",
-   "gold_kind": "他人",
-   "note": "非作者同行者，是同团其他游客"
-  },
-  {
-   "pronoun": "她们",
-   "class": "person",
-   "scenic": "九寨沟",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "同团迟到的两名游客",
-   "gold_kind": "他人",
-   "note": ""
   },
   {
    "pronoun": "他们",

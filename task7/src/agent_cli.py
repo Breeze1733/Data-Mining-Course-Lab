@@ -70,7 +70,8 @@ class LLMClient:
                            "temperature": 0.4}).encode("utf-8")
         req = urllib.request.Request(
             f"{self.base_url}/chat/completions", data=body,
-            headers={"Content-Type": "application/json", "Authorization": f"Bearer {self.api_key}"})
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {self.api_key}",
+                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) scenic-guide-agent/1.0"})
         with urllib.request.urlopen(req, timeout=60) as resp:
             data = json.loads(resp.read().decode("utf-8"))
         return data["choices"][0]["message"]["content"]

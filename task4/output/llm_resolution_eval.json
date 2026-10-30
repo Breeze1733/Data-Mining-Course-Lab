@@ -1,0 +1,108 @@
+{
+ "mode": "llm-restricted (gemini-3.8-flash-high, temperature=0, 选项空间=候选池+SCENIC+NONE)",
+ "n": 8,
+ "accuracy_overall": 0.5,
+ "accuracy_by_class": {
+  "locative": {
+   "n": 8,
+   "accuracy": 0.5
+  },
+  "object": {
+   "n": 0,
+   "accuracy": null
+  },
+  "person": {
+   "n": 0,
+   "accuracy": null
+  },
+  "set": {
+   "n": 0,
+   "accuracy": null
+  }
+ },
+ "failures": [],
+ "rule_baseline": 0.475,
+ "elapsed_s": 98.7,
+ "results": [
+  {
+   "case_index": 963,
+   "class": "locative",
+   "gold": "镜海",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "镜海",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 764,
+   "class": "locative",
+   "gold": "九寨沟",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "九寨沟",
+   "pred_kind": "景区名",
+   "correct": true
+  },
+  {
+   "case_index": 1258,
+   "class": "locative",
+   "gold": "酒店的中餐厅",
+   "gold_kind": "设施",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 1207,
+   "class": "locative",
+   "gold": "原始森林",
+   "gold_kind": "POI",
+   "llm_answer_raw": "0",
+   "pred": "原始森林",
+   "pred_kind": "POI",
+   "correct": true
+  },
+  {
+   "case_index": 1175,
+   "class": "locative",
+   "gold": "松潘古城",
+   "gold_kind": "POI",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 999,
+   "class": "locative",
+   "gold": "磁器口",
+   "gold_kind": "景区",
+   "llm_answer_raw": "0",
+   "pred": "磁器口",
+   "pred_kind": "POI",
+   "correct": false
+  },
+  {
+   "case_index": 948,
+   "class": "locative",
+   "gold": "乐山大佛景区",
+   "gold_kind": "景区",
+   "llm_answer_raw": "NONE",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "correct": false
+  },
+  {
+   "case_index": 909,
+   "class": "locative",
+   "gold": "九寨沟",
+   "gold_kind": "景区",
+   "llm_answer_raw": "SCENIC",
+   "pred": "九寨沟",
+   "pred_kind": "景区名",
+   "correct": true
+  }
+ ]
+}

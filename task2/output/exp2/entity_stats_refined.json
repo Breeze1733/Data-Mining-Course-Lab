@@ -1,22 +1,22 @@
 {
  "iteration": "refined",
  "dictionary_size": {
-  "poi": 217,
+  "poi": 219,
   "transport": 50,
   "stopwords": 15
  },
  "records": 271,
- "total_entities": 22891,
- "entities_per_record_mean": 84.47,
+ "total_entities": 22940,
+ "entities_per_record_mean": 84.65,
  "segmentation_tokens_total": 473549,
  "by_scenic_area": {
   "九寨沟": {
    "时间节点": 3416,
    "交通方式": 1386,
-   "景点POI": 4944
+   "景点POI": 4953
   },
   "颐和园": {
-   "景点POI": 3826,
+   "景点POI": 3866,
    "时间节点": 1104,
    "交通方式": 583
   },
@@ -31,7 +31,7 @@
   "时间节点/时段": 987,
   "交通方式/景区车辆": 586,
   "交通方式/步行": 667,
-  "景点POI/景点": 12386,
+  "景点POI/景点": 12435,
   "时间节点/时刻区间": 237,
   "时间节点/相对日": 1035,
   "时间节点/季节": 278,

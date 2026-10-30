@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-30 02:48",
+ "updated_at": "2026-10-30 23:19",
  "guards": {
   "dataset.count": 271,
   "graph.fact_checks": "6/6",
@@ -11,7 +11,7 @@
   "task5.review_self_consistent": true,
   "task5.verdicts": "20/16/13",
   "task4.score_rerun_ok": true,
-  "task4.coref_accuracy": 0.475,
+  "task4.coref_accuracy": 0.567,
   "task4.coref_n": 120,
   "task5.score_rerun_ok": true
  },

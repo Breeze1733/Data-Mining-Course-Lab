@@ -1786,6 +1786,24 @@
    "canonical": "南湖",
    "source": "p2_peripheral_expansion_2026-10-30",
    "note": "宏村内景点（月沼/南湖），供消解候选；不进景区内序列"
+  },
+  {
+   "name": "雅克夏雪山",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "雅克夏雪山",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "成都-九寨沟沿线雪山（G248），语料9次"
+  },
+  {
+   "name": "天安门广场",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "天安门广场",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "北京地标广场，语料40次"
   }
  ],
  "transport": [

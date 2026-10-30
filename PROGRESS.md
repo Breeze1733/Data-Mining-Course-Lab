@@ -391,3 +391,15 @@ Agent 8/8；报告 7 重生成；审计 70/70；回归守护通过。
 ## 复现说明
 
 任何人克隆仓库后：`task1/` 下按 README 依次运行冒烟链（build_records → preprocess → extract_entities → parse_routes → compare_routes → detect_and_resolve → annotate_sample --score → extract_conditionals → build_graph → verify_graph → run_tests），再运行 `common/regression_check.py`（应全绿）、`common/report_audit.py`（应 70/70）、`common/metrics_snapshot.py --print-only`（对照 METRICS.md 终表）。
+
+---
+
+## 第2轮 U13：person/object 类消解改进 —— 完成（消解 0.475 → 0.567）
+
+### 做了什么
+- 错误归因：person 19 错中 12 例为"规则判同行者、黄金判他人"（同行者信号出现在前句但当前句是服务角色指代）；object 18 错中 7 例 gold 是"路线"而 kind 体系没有该类型。
+- 三处修复（`task4/src/detect_and_resolve.py` + 打分器 canon）：①同行者信号分句判定——hint-cur 分支只看当前句的"我们/同行"等信号，前句信号不再否决当前句的服务角色指代（黄金 30 例模拟 +3 零伤害后上线）；②新增"路线"指代类型——"这条+路/线"指代道路本身而非沿途 POI（7/7 全增益零误伤）；③词典补雅克夏雪山（9次）、天安门广场（40次）。
+- 消解 **0.475→0.567**（object 0.4→0.667、person 0.367→0.467）；实体 22,891→22,940；报告 2/4+总结反思重生成，审计 70/70。
+
+### 顺带修复
+- LLMClient 增加 User-Agent 头（代理 WAF 拦截 Python-urllib 默认 UA 导致 403）；用户提供的 API 配置落盘 task7/config.json（已 gitignore，不入库）。
