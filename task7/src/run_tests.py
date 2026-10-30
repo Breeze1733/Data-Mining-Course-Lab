@@ -40,7 +40,12 @@ def main() -> int:
     sys.stdout.reconfigure(encoding="utf-8")
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "traces").mkdir(exist_ok=True)
-    llm = LLMClient()
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--rules", action="store_true",
+                    help="强制规则模式（规范产物默认口径；LLM 模式结果另存 test_report_llm.json）")
+    args = ap.parse_args()
+    llm = LLMClient(config_path=ROOT / "config.nokey.json") if args.rules else LLMClient()
     results = []
     for sc in SCENARIOS:
         agent = ReActAgent(llm)

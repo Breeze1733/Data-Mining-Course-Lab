@@ -403,3 +403,25 @@ Agent 8/8；报告 7 重生成；审计 70/70；回归守护通过。
 
 ### 顺带修复
 - LLMClient 增加 User-Agent 头（代理 WAF 拦截 Python-urllib 默认 UA 导致 403）；用户提供的 API 配置落盘 task7/config.json（已 gitignore，不入库）。
+
+---
+
+## 第2轮 U14：P3/P6 LLM 实测（用户提供 API key 解阻）—— 完成
+
+### 前置修复
+- LLMClient 加 User-Agent 头（代理 WAF 拦截 Python-urllib 默认 UA）；IntentParser 温度改 0（解析需要稳定）；run_tests 加 `--rules` 开关——规范产物 test_report.json 保持规则模式口径（无 key 可复现），LLM 模式结果另存 test_report_llm.json；时长解析补 三天/三天半/四天/五天（修复"蜜月…三天"被解析成 1 天的真 bug）。
+
+### P3 LLM 受限消解（task4/src/llm_resolution_eval.py，120 例，temperature=0，17分钟）
+- **LLM 0.267 vs 规则 0.567（规则决定性胜出）**，0 调用失败。
+- 结构性原因：受限选项空间（候选池+SCENIC+NONE）无法表达规则已覆盖的语言学类型——他人 0/15、同行者 0/9、集合类 0/21、设施 0/7、路线 0/7 全部结构性不可达；纯实体选择（POI 20/33、locative 0.533、object 0.467）也不及规则的候选打分。
+- 诚实注记：该后台运行在 U13 修复前启动，候选池为旧版（少 2 个新词条），但差距主体是类型空间结构性缺失，结论不受影响。
+
+### P6 LLM 意图解析 vs 规则（task7/src/llm_intent_eval.py，20 问句×2 模式，期望意图预登记）
+- **规则 0.85 vs LLM 0.60，模式一致率 0.55**；scenic 字段两模式全对一致（1.0）。
+- LLM 系统性弱点：时长换算（半天/3小时→0.5）、游客术语归一（孩子/亲子）；即使 temperature=0 仍稳定出错（非方差问题）。
+- 规则胜 4 例（含"蜜月…三天"），LLM 胜 2 例（"腿脚不好→省力"这类软语义）。
+- Agent LLM 润色实测：文案自然且能把可行性提示融入表达；LLM 模式 run_tests 4/8（失败均在意图字段），规则模式 8/8——**规范口径维持规则模式**。
+
+### 结论
+- 课程实验的核心论断得到实证支撑：**在词典/规则已充分工程化的受限任务上，LLM 直调不优于规则系统**；LLM 的价值在润色与软语义（special 推断），可作可选增强而非默认。
+- key 不入库（task7/config.json 已 gitignore）；全部实验脚本与逐例结果随仓库交付。

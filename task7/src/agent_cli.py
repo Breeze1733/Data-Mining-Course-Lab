@@ -34,6 +34,10 @@ VISITOR_PATTERNS = [
     ("初次游览", r"第一次|首次|没去过"),
 ]
 DURATION_PATTERNS = [
+    (3.5, r"三天半|3\.5\s*天"),
+    (3, r"三天|3\s*天"),
+    (4, r"四天|4\s*天"),
+    (5, r"五天|5\s*天"),
     (2, r"两日|两天|2\s*天|二日|周末游"),
     (1.5, r"一天半|1\.5\s*天"),
     (1, r"一日|一天|1\s*天|当日"),
@@ -61,13 +65,13 @@ class LLMClient:
         placeholder = any(k in self.api_key for k in ("填入", "你的", "placeholder", "xxx"))
         self.available = bool(self.base_url and self.api_key and self.model) and not placeholder
 
-    def complete(self, system: str, user: str) -> str:
+    def complete(self, system: str, user: str, temperature: float = 0.4) -> str:
         if not self.available:
             raise RuntimeError("LLM 未配置")
         body = json.dumps({"model": self.model,
                            "messages": [{"role": "system", "content": system},
                                         {"role": "user", "content": user}],
-                           "temperature": 0.4}).encode("utf-8")
+                           "temperature": temperature}).encode("utf-8")
         req = urllib.request.Request(
             f"{self.base_url}/chat/completions", data=body,
             headers={"Content-Type": "application/json", "Authorization": f"Bearer {self.api_key}",
@@ -90,7 +94,7 @@ class IntentParser:
     def parse(self, query: str, trace: list) -> dict:
         if self.llm and self.llm.available:
             try:
-                raw = self.llm.complete(INTENT_PROMPT, query)
+                raw = self.llm.complete(INTENT_PROMPT, query, temperature=0)
                 intent = json.loads(re.search(r"\{.*\}", raw, re.S).group())
                 trace.append({"step": "intent", "thought": "调用 LLM 解析用户约束", "via": "llm", "result": intent})
                 return intent
