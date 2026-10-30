@@ -15,19 +15,6 @@
    "mode": "rules"
   },
   {
-   "step": "intent",
-   "thought": "规则解析用户约束（景区/游客类型/时长/特殊需求）",
-   "via": "rules",
-   "result": {
-    "scenic": "黄山",
-    "visitor_type": "情侣",
-    "days": 2,
-    "special": [
-     "看日出"
-    ]
-   }
-  },
-  {
    "step": "action",
    "thought": "调用工具 query_pois，参数 {'scenic': '黄山', 'visitor_type': '情侣', 'limit': 11}",
    "tool": "query_pois",

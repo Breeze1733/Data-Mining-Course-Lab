@@ -74,7 +74,7 @@ def main() -> int:
     for query, expect in BATTERY:
         dummy: list = []
         i_rule = rule_parser.parse(query, dummy)
-        i_llm = llm_parser.parse(query, dummy)
+        i_llm = llm_parser.parse(query, dummy)  # llm 可用时 parse 返回混合模式结果
         ok_rule, f_rule = score(i_rule, expect)
         ok_llm, f_llm = score(i_llm, expect)
         agree = all(i_rule.get(k) == i_llm.get(k) for k in ("scenic", "visitor_type", "days", "special"))
@@ -86,6 +86,7 @@ def main() -> int:
     n = len(rows)
     payload = {
         "model": llm.model,
+        "mode": "hybrid（规则精确字段优先 + LLM 补缺省）vs rules",
         "n": n,
         "rule_accuracy": round(sum(r["rule_ok"] for r in rows) / n, 3),
         "llm_accuracy": round(sum(r["llm_ok"] for r in rows) / n, 3),

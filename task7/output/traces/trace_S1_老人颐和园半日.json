@@ -15,19 +15,6 @@
    "mode": "rules"
   },
   {
-   "step": "intent",
-   "thought": "规则解析用户约束（景区/游客类型/时长/特殊需求）",
-   "via": "rules",
-   "result": {
-    "scenic": "颐和园",
-    "visitor_type": "老人",
-    "days": 0.5,
-    "special": [
-     "省力"
-    ]
-   }
-  },
-  {
    "step": "thought",
    "thought": "半天+特殊需求（如看日出）存在冲突，提示取舍"
   },
@@ -258,5 +245,5 @@
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 0.02
+ "elapsed": 0.01
 }

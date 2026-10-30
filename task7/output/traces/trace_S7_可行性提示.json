@@ -13,17 +13,6 @@
    "mode": "rules"
   },
   {
-   "step": "intent",
-   "thought": "规则解析用户约束（景区/游客类型/时长/特殊需求）",
-   "via": "rules",
-   "result": {
-    "scenic": "九寨沟",
-    "visitor_type": null,
-    "days": 1,
-    "special": []
-   }
-  },
-  {
    "step": "action",
    "thought": "调用工具 query_pois，参数 {'scenic': '九寨沟', 'visitor_type': None, 'limit': 8}",
    "tool": "query_pois",
@@ -328,5 +317,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 0.01
+ "elapsed": 0.0
 }

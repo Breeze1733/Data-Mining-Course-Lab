@@ -1,0 +1,63 @@
+{
+ "mode": "llm-fewshot (gemini-3.8-flash-high, temperature=0, 合成few-shot示例5条)",
+ "n": 6,
+ "failures": 0,
+ "tune_acc": 1.0,
+ "holdout_acc": 1.0,
+ "full_acc": 1.0,
+ "baseline_A": 0.4566,
+ "baseline_B": 0.796,
+ "baseline_B_holdout": 0.746,
+ "elapsed_s": 59.5,
+ "failures_detail": [],
+ "results": [
+  {
+   "sid": 0,
+   "gold": "九寨沟",
+   "pred": "九寨沟",
+   "half": "holdout",
+   "record_label": "九寨沟",
+   "raw": "九寨沟"
+  },
+  {
+   "sid": 1,
+   "gold": "景区外",
+   "pred": "景区外",
+   "half": "tune",
+   "record_label": "颐和园",
+   "raw": "景区外"
+  },
+  {
+   "sid": 2,
+   "gold": "黄山",
+   "pred": "黄山",
+   "half": "tune",
+   "record_label": "黄山",
+   "raw": "黄山"
+  },
+  {
+   "sid": 3,
+   "gold": "九寨沟",
+   "pred": "九寨沟",
+   "half": "tune",
+   "record_label": "九寨沟",
+   "raw": "九寨沟"
+  },
+  {
+   "sid": 4,
+   "gold": "景区外",
+   "pred": "景区外",
+   "half": "holdout",
+   "record_label": "颐和园",
+   "raw": "景区外"
+  },
+  {
+   "sid": 5,
+   "gold": "景区外",
+   "pred": "景区外",
+   "half": "holdout",
+   "record_label": "黄山",
+   "raw": "景区外"
+  }
+ ]
+}

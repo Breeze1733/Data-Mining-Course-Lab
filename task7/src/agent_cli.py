@@ -92,14 +92,31 @@ class IntentParser:
         self.llm = llm
 
     def parse(self, query: str, trace: list) -> dict:
+        llm_intent = None
         if self.llm and self.llm.available:
             try:
                 raw = self.llm.complete(INTENT_PROMPT, query, temperature=0)
-                intent = json.loads(re.search(r"\{.*\}", raw, re.S).group())
-                trace.append({"step": "intent", "thought": "调用 LLM 解析用户约束", "via": "llm", "result": intent})
-                return intent
+                llm_intent = json.loads(re.search(r"\{.*\}", raw, re.S).group())
             except Exception as exc:  # 网络失败回退规则
                 trace.append({"step": "intent", "thought": f"LLM 解析失败（{exc}），回退规则解析", "via": "fallback"})
+        if llm_intent is not None:
+            rule_intent = self._parse_rules(query)
+            # 混合：规则精确字段（时长正则/景区词表/人群词表）优先，规则缺省处用 LLM 补（U18）
+            merged = dict(rule_intent)
+            if merged.get("scenic") in (None, "未知") and llm_intent.get("scenic"):
+                merged["scenic"] = llm_intent["scenic"]
+            if not merged.get("visitor_type") and llm_intent.get("visitor_type"):
+                merged["visitor_type"] = llm_intent["visitor_type"]
+            if merged.get("days") == 1 and llm_intent.get("days") not in (None, 1):
+                merged["days"] = llm_intent["days"]
+            if not merged.get("special") and llm_intent.get("special"):
+                merged["special"] = llm_intent["special"]
+            trace.append({"step": "intent", "thought": "混合解析：规则精确字段优先，LLM 补缺省", "via": "hybrid",
+                          "rule": rule_intent, "llm": llm_intent, "result": merged})
+            return merged
+        return self._parse_rules(query)
+
+    def _parse_rules(self, query: str) -> dict:
         scenic = next((a for a in AREAS if a in query), None)
         visitor = next((v for v, pat in VISITOR_PATTERNS if re.search(pat, query)), None)
         days = 1
@@ -108,10 +125,7 @@ class IntentParser:
                 days = d
                 break
         special = [s for s, pat in SPECIAL_PATTERNS if re.search(pat, query)]
-        intent = {"scenic": scenic or "未知", "visitor_type": visitor, "days": days, "special": special}
-        trace.append({"step": "intent", "thought": "规则解析用户约束（景区/游客类型/时长/特殊需求）",
-                      "via": "rules", "result": intent})
-        return intent
+        return {"scenic": scenic or "未知", "visitor_type": visitor, "days": days, "special": special}
 
 
 class ReActAgent:

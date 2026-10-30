@@ -1,16 +1,16 @@
 {
  "mode": "llm",
  "n_scenarios": 8,
- "n_passed": 4,
+ "n_passed": 8,
  "results": [
   {
    "scenario": "S1_老人颐和园半日",
    "query": "带老人去颐和园玩半天，腿脚不方便，走省力的路线",
-   "passed": false,
+   "passed": true,
    "checks": {
     "scenic": true,
     "visitor_type": true,
-    "days": false,
+    "days": true,
     "tools_called": true,
     "tools_used_in_answer": true,
     "itinerary_size": true,
@@ -19,22 +19,22 @@
    "intent": {
     "scenic": "颐和园",
     "visitor_type": "老人",
-    "days": 1,
+    "days": 0.5,
     "special": [
      "省力"
     ]
    },
-   "n_tool_calls": 12,
-   "answer_head": "叔叔阿姨好！咱们今天走省力路线：上午入园看佛香阁、漫步西堤；中午到东宫门；下午逛谐趣园和长廊；晚上赏石舫、昆明湖与十七孔桥。\n\n导游提醒：咱别从中轴线爬山，太累心脏，沿湖走才省力；出行装备请慎重考虑；雨雪大风天及冬季寒冷难行且景色稍逊，不建",
-   "elapsed": 28.21
+   "n_tool_calls": 9,
+   "answer_head": "叔叔阿姨好！今天咱们走省力路线：上午入园先逛谐趣园，漫步昆明湖；中午去西堤漫步；下午远眺佛香阁，切记千万别走中轴线爬山受累，沿湖走到十七孔桥就好。\n\n导游叮嘱：登山及保暖装备需慎重备齐；不建议冬季和雨雪大风天游玩，沿湖风大且景致稍逊，咱们跟",
+   "elapsed": 30.17
   },
   {
    "scenario": "S2_亲子九寨沟一日",
    "query": "带孩子九寨沟一日游，怎么安排？",
-   "passed": false,
+   "passed": true,
    "checks": {
     "scenic": true,
-    "visitor_type": false,
+    "visitor_type": true,
     "days": true,
     "tools_called": true,
     "tools_used_in_answer": true,
@@ -43,13 +43,13 @@
    },
    "intent": {
     "scenic": "九寨沟",
-    "visitor_type": "亲子",
+    "visitor_type": "孩子",
     "days": 1,
     "special": []
    },
    "n_tool_calls": 12,
-   "answer_head": "带娃玩九寨大半天足矣，咱们不去原始森林！上午乘车先赏五花海、镜海，再步行至诺日朗。亲子出游中午务必吃顿丰盛中餐，别为省钱挨饿，身体最要紧。下午乘车游长海，接着徒步打卡五彩池和诺日朗瀑布，最后乘车看犀牛海。全程记得文明入厕，保护好童话环境哦！",
-   "elapsed": 32.1
+   "answer_head": "大家看过来！今天咱们九寨沟一日游：不去原始森林，其实大半天足矣。上午乘车打卡五花海、镜海，步行至诺日朗。下午坐车游长海，步行赏五彩池，徒步看诺日朗瀑布，最后乘车游犀牛海。\n\n温馨提示：走山路司机需格外小心；景区内文明入厕勿污染；带娃千万别省",
+   "elapsed": 26.58
   },
   {
    "scenario": "S3_情侣黄山两日",
@@ -73,17 +73,17 @@
     ]
    },
    "n_tool_calls": 14,
-   "answer_head": "两位好！咱们黄山浪漫两日游这样走：\n\n**D1**：上午打卡**迎客松**、**莲花峰**，中午至**云谷寺**，下午游**西海大峡谷**、**飞来石**，晚抵**始信峰**。\n**D2**：上午登**北海**与**光明顶**看日出，中午经",
-   "elapsed": 30.03
+   "answer_head": "哈喽两位！黄山两日游行程来啦：\n\nD1上午打卡迎客松、莲花峰，中午至云谷寺，下午游西海大峡谷、飞来石，晚宿始信峰；D2上午逛北海，去光明顶看日出，中午到白鹅岭，下午登天都峰、看猴子观海。\n\n提示：莲花峰若封山可选登天都峰，但无法乘索道下山；",
+   "elapsed": 27.15
   },
   {
    "scenario": "S4_时间紧颐和园",
    "query": "只有3小时，颐和园快速逛一遍精华",
-   "passed": false,
+   "passed": true,
    "checks": {
     "scenic": true,
     "visitor_type": true,
-    "days": false,
+    "days": true,
     "tools_called": true,
     "tools_used_in_answer": true,
     "itinerary_size": true,
@@ -92,12 +92,12 @@
    "intent": {
     "scenic": "颐和园",
     "visitor_type": null,
-    "days": 1,
+    "days": 0.5,
     "special": []
    },
-   "n_tool_calls": 12,
-   "answer_head": "为您规划颐和园一日游（参考官方路线 YHY-EXP05-R1 2026清明反向遛弯路线）：\n上午：佛香阁\n上午：西堤（步行前往）\n中午：东宫门（步行前往）\n下午：谐趣园（步行前往）\n下午：长廊（步行前往）\n晚上：石舫（步行前往）\n晚上：昆明",
-   "elapsed": 17.58
+   "n_tool_calls": 9,
+   "answer_head": "大家上午好！咱们入园先逛谐趣园，漫步昆明湖；中午走西堤，体力一般推荐乘船过湖；下午游佛香阁，学生朋友记得拜拜“逢考必过”，老人别硬爬中轴线、体力弱可改去画中游；最后漫步十七孔桥。初次游览放平心态，带娃尽量选平缓路段，咱们轻松出发！",
+   "elapsed": 32.18
   },
   {
    "scenario": "S5_无匹配景区",
@@ -117,17 +117,17 @@
    },
    "n_tool_calls": 0,
    "answer_head": "抱歉，当前仅支持 黄山/九寨沟/颐和园 三个景区的规划。您可以试试：“带老人颐和园半日游”“九寨沟亲子一日游”“黄山两日看日出”。",
-   "elapsed": 7.06
+   "elapsed": 7.34
   },
   {
    "scenario": "S6_冲突约束",
    "query": "半天时间在黄山看日出再下西海大峡谷",
-   "passed": false,
+   "passed": true,
    "checks": {
     "scenic": true,
-    "days": false,
+    "days": true,
     "special": true,
-    "conflict_note": false,
+    "conflict_note": true,
     "tools_called": true,
     "tools_used_in_answer": true,
     "itinerary_size": true,
@@ -136,14 +136,14 @@
    "intent": {
     "scenic": "黄山",
     "visitor_type": null,
-    "days": 1,
+    "days": 0.5,
     "special": [
      "看日出"
     ]
    },
-   "n_tool_calls": 12,
-   "answer_head": "大家早上好！今天行程带大家看日出：上午游西海大峡谷、赏迎客松；中午登莲花峰；下午登光明顶、攀天都峰；晚上走访始信峰，坐索道至云谷寺赏猴子观海。\n\n**温馨提示**：首次来黄山建议请向导，恐高朋友请留心；若遇莲花峰封山可选登天都峰，但爬天都峰",
-   "elapsed": 34.72
+   "n_tool_calls": 9,
+   "answer_head": "提示：半日游难以兼顾看日出——日出需要清晨身处山顶，通常要求前晚住宿山上。建议改为两日行程（首日上山宿山顶，次日看日出后下山），或舍弃看日出安排。\n\n大家早上好！咱们建议乘云谷索道上山，上午先登【光明顶】，再漫步去看【迎客松】。中午咱们挑战",
+   "elapsed": 24.44
   },
   {
    "scenario": "S7_可行性提示",
@@ -165,8 +165,8 @@
     "special": []
    },
    "n_tool_calls": 12,
-   "answer_head": "大家早！今天九寨沟一日游走起：\n\n上午入园，提示大家不去原始森林，其实大半天足矣；咱们乘车直奔五花海，再看镜海，随后步行到诺日朗。\n\n下午坐车探访长海，漫步至五彩池，徒步观赏壮丽的诺日朗瀑布，最后乘车打卡犀牛海返程。\n\n精华景点全涵盖，祝大",
-   "elapsed": 22.95
+   "answer_head": "各位游客好！今天九寨沟一日游：提示大家不去原始森林，其实大半天足矣！上午咱们乘车游览五花海、镜海，步行到诺日朗；下午坐车打卡长海，步行游五彩池，接着徒步看诺日朗瀑布，最后乘车去犀牛海。容易晕车的朋友请备好药，咱们出发！",
+   "elapsed": 35.55
   },
   {
    "scenario": "S8_多跳动线",
@@ -188,8 +188,8 @@
     "special": []
    },
    "n_tool_calls": 13,
-   "answer_head": "大家早上好！今天九寨一日游这样玩：上午入园，建议大家**不去原始森林**（大半天足矣更省时），乘车打卡**五花海**、**镜海**，再漫步至**诺日朗**。下午坐车游**长海**，步行赏**五彩池**，徒步看**诺日朗瀑布**，最后乘车看*",
-   "elapsed": 24.34
+   "answer_head": "大家跟我走！咱们上午出发，特别提示：时间紧大半天足矣，不去原始森林；我们直接乘车游览五花海、赏镜海，步行至诺日朗。下午乘车打卡长海，步行观赏五彩池，接着徒步去诺日朗瀑布，最后坐车游览犀牛海，轻松拿下九寨精华一日游！\n动线参考（图谱先后顺序边",
+   "elapsed": 26.63
   }
  ],
  "evidence": "每次运行的完整 ReAct trace（含每步 thought/action/observation）见 output/traces/"

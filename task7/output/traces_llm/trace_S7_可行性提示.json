@@ -1,0 +1,349 @@
+{
+ "query": "九寨沟一日游，想去原始森林看看",
+ "intent": {
+  "scenic": "九寨沟",
+  "visitor_type": null,
+  "days": 1,
+  "special": []
+ },
+ "trace": [
+  {
+   "step": "start",
+   "thought": "接收请求：九寨沟一日游，想去原始森林看看",
+   "mode": "llm"
+  },
+  {
+   "step": "intent",
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 1,
+    "special": []
+   },
+   "llm": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 1,
+    "special": []
+   },
+   "result": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 1,
+    "special": []
+   }
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_pois，参数 {'scenic': '九寨沟', 'visitor_type': None, 'limit': 8}",
+   "tool": "query_pois",
+   "args": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "limit": 8
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_pois",
+   "summary": "返回 8 个 POI：五彩池、五花海、诺日朗、原始森林、诺日朗瀑布、长海"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_route，参数 {'scenic': '九寨沟', 'days': 1}",
+   "tool": "query_route",
+   "args": {
+    "scenic": "九寨沟",
+    "days": 1
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_route",
+   "summary": "路线 一日精华游，共 21 步"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_conditions，参数 {'scenic': '九寨沟', 'visitor_type': None}",
+   "tool": "query_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "visitor_type": null
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_conditions",
+   "summary": "返回 6 条条件建议"
+  },
+  {
+   "step": "thought",
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'days': 1, 'special': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+  },
+  {
+   "step": "thought",
+   "thought": "编排骨架：模板“2016版一日游”覆盖已选 POI 的 100%"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_order，参数 {'scenic': '九寨沟', 'poi': '原始森林'}",
+   "tool": "query_order",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "原始森林"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_order",
+   "summary": "后继：芳草海、箭竹海、五彩池、日则沟"
+  },
+  {
+   "step": "thought",
+   "thought": "用 query_order 校验首站的官方后继（原始森林）以决定第二站是否符合主流动线"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '原始森林'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "原始森林"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 6 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '五花海'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "五花海"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 3 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '镜海'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "镜海"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 5 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "诺日朗"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 3 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '长海'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "长海"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 2 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '五彩池'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "五彩池"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 5 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗瀑布'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "诺日朗瀑布"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 2 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '犀牛海'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "犀牛海"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 6 条条件建议"
+  },
+  {
+   "step": "thought",
+   "thought": "可行性校验：1 条封禁/不建议提示；已附加到对应站点"
+  },
+  {
+   "step": "render",
+   "thought": "调用 LLM 润色行程文案",
+   "via": "llm"
+  },
+  {
+   "step": "final",
+   "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
+  }
+ ],
+ "answer": "各位游客好！今天九寨沟一日游：提示大家不去原始森林，其实大半天足矣！上午咱们乘车游览五花海、镜海，步行到诺日朗；下午坐车打卡长海，步行游五彩池，接着徒步看诺日朗瀑布，最后乘车去犀牛海。容易晕车的朋友请备好药，咱们出发！",
+ "plan": {
+  "scenic": "九寨沟",
+  "days": 1,
+  "visitor_type": null,
+  "special": [],
+  "itinerary": [
+   {
+    "order": 1,
+    "day": 1,
+    "period": "上午",
+    "poi": "原始森林",
+    "transport_from_prev": "入园",
+    "note": "⚠ 不去原始森林——其实大半天足矣"
+   },
+   {
+    "order": 2,
+    "day": 1,
+    "period": "上午",
+    "poi": "五花海",
+    "transport_from_prev": "观光车",
+    "note": ""
+   },
+   {
+    "order": 3,
+    "day": 1,
+    "period": "上午",
+    "poi": "镜海",
+    "transport_from_prev": "观光车",
+    "note": ""
+   },
+   {
+    "order": 4,
+    "day": 1,
+    "period": "上午",
+    "poi": "诺日朗",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 5,
+    "day": 1,
+    "period": "下午",
+    "poi": "长海",
+    "transport_from_prev": "观光车",
+    "note": ""
+   },
+   {
+    "order": 6,
+    "day": 1,
+    "period": "下午",
+    "poi": "五彩池",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 7,
+    "day": 1,
+    "period": "下午",
+    "poi": "诺日朗瀑布",
+    "transport_from_prev": "徒步",
+    "note": ""
+   },
+   {
+    "order": 8,
+    "day": 1,
+    "period": "下午",
+    "poi": "犀牛海",
+    "transport_from_prev": "观光车",
+    "note": ""
+   }
+  ],
+  "tips": [
+   {
+    "cond_type": "人群",
+    "condition": "游客为情侣",
+    "suggestion": "的方法啊!下午两点从川主寺的蚕丝文化点出发,我们就开始了为时8个小时的返程之旅",
+    "frequency": 4
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为恐高",
+    "suggestion": "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满",
+    "frequency": 3
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为体力有限",
+    "suggestion": "不要在芦苇海停留",
+    "frequency": 3
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为晕车",
+    "suggestion": "买好晕车贴或者晕车药",
+    "frequency": 2
+   },
+   {
+    "cond_type": "人群",
+    "condition": "是家庭出游",
+    "suggestion": "不妨选择吃一顿丰盛的中餐",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为家庭",
+    "suggestion": "三二家庭聚会,里面所使用的水果都是应季水果,吃起来新鲜可口,在如此童话森林中来一场英式下午茶会,应该是旅行中最难忘的回忆",
+    "frequency": 1
+   }
+  ],
+  "feasibility_warnings": [
+   "原始森林：不去原始森林——其实大半天足矣"
+  ],
+  "template_route": "JZG-EXP01-R1 一日精华游"
+ },
+ "elapsed": 35.55
+}

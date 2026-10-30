@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-30 23:40",
-  "git": "db2dfbf",
-  "label": "U16: 设施回退（消解0.583）",
-  "dirty_files": 8
+  "time": "2026-10-30 23:48",
+  "git": "d933634",
+  "label": "第3轮基线（第2轮终态复测）",
+  "dirty_files": 0
  },
  "metrics": {
   "dataset.count": 271,
