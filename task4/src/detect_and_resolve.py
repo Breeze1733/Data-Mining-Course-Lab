@@ -69,7 +69,7 @@ def main(argv=None) -> int:
     import bisect
     attr_spans: dict[str, tuple[list[int], list[str]]] = {}
     if not args.no_attribution_filter:
-        for line in (TASK2 / "output/exp2/attributed_sentences.jsonl").open(encoding="utf-8"):
+        for line in (ROOT / "output/attribution/attributed_sentences.jsonl").open(encoding="utf-8"):
             rec = json.loads(line)
             starts = [x["start"] for x in rec["labels"]]
             labels = [x["label"] for x in rec["labels"]]

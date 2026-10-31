@@ -6,7 +6,7 @@ few-shot 示例为本次新写的合成例（不取自 495 句，避免泄漏）
 句子本身与记录级主景区标签（同方案B可用的特征）。temperature=0。
 
 用法：python src/llm_attribution_eval.py [--limit 0]
-输出：task2/output/exp2/llm_attribution_eval.json
+输出：task4/output/attribution/llm_attribution_eval.json
 需 task7/config.json；规则/特征基线见 attribution_eval.json。
 """
 from __future__ import annotations
@@ -21,7 +21,7 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-EXP2 = ROOT / "output/exp2"
+ATTR = ROOT / "output/attribution"
 TASK7 = ROOT.parent / "task7"
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
@@ -73,7 +73,7 @@ def main() -> int:
         print("[abort] LLM 未配置")
         return 1
 
-    gold = [json.loads(l) for l in (EXP2 / "sentence_attribution.jsonl").open(encoding="utf-8")]
+    gold = [json.loads(l) for l in (ATTR / "sentence_attribution.jsonl").open(encoding="utf-8")]
     rows = gold[: args.limit] if args.limit else gold
 
     rng = random.Random(42)
@@ -108,7 +108,7 @@ def main() -> int:
         return sum(1 for r in sub if r["pred"] == r["gold"]) / len(sub)
 
     # 方案A/B 基线引用（attribution_eval.json 由 attribute_sentences.py --evaluate 生成）
-    base = json.loads((EXP2 / "attribution_eval.json").read_text(encoding="utf-8"))
+    base = json.loads((ATTR / "attribution_eval.json").read_text(encoding="utf-8"))
     payload = {
         "mode": f"llm-fewshot ({llm.model}, temperature=0, 合成few-shot示例5条)",
         "n": len(results), "failures": len(failures),
@@ -120,7 +120,7 @@ def main() -> int:
         "failures_detail": failures,
         "results": results,
     }
-    (EXP2 / "llm_attribution_eval.json").write_text(
+    (ATTR / "llm_attribution_eval.json").write_text(
         json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"方案C LLM: tune {payload['tune_acc']} / holdout {payload['holdout_acc']} / 全量 {payload['full_acc']}"
           f"（A={payload['baseline_A']}, B={payload['baseline_B']}，失败 {len(failures)}，{payload['elapsed_s']}s）")

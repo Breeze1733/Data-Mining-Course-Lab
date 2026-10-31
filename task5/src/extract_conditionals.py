@@ -263,7 +263,7 @@ def main(argv=None) -> int:
     attr = None
     if not args.no_attribution_filter:
         import sys as _sys
-        _sys.path.insert(0, str(ROOT.parent / "task2/src"))
+        _sys.path.insert(0, str(ROOT.parent / "task4/src"))
         from attribute_sentences import Attributor, SENT_SPLIT as ATTR_SPLIT
         attr = Attributor()
 

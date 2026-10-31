@@ -2,7 +2,7 @@
 """P1 句子级叙述焦点：分层抽样器。
 
 从 task1/data/processed/dataset_clean.jsonl 分句，按 景区 × 文本类型 分层随机抽样，
-输出句子池 task2/output/exp2/sentence_pool.jsonl（含 doc 级字符偏移），供人工（LLM）预标注。
+输出句子池 task4/output/attribution/sentence_pool.jsonl（含 doc 级字符偏移），供人工（LLM）预标注。
 
 分层设计：官方路线句是结构化清单，"景区外漂移"问题主要发生在游记（携程/小红书），
 因此游记层加大权重：每景区 official 10 句 + travelogue 155 句 ≈ 495 句。
@@ -19,7 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TASK1 = ROOT.parent / "task1"
-OUT = ROOT / "output/exp2"
+OUT = ROOT / "output/attribution"
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 SENT_SPLIT = re.compile(r"[。！？；!?\n]+")

@@ -26,9 +26,10 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[1]  # task4/
 TASK1 = ROOT.parent / "task1"
-EXP2 = ROOT / "output/exp2"
+ATTR = ROOT / "output/attribution"
+EXP2 = ROOT.parent / "task2/output/exp2"  # 词典是实验2 的产物（只读引用）
 
 def ensure_utf8_stdout() -> None:
     """仅在自身作为主脚本运行时包装 stdout；被其他脚本导入时不动其流（避免旧包装器被GC后关闭底层缓冲）。"""
@@ -286,7 +287,7 @@ def run_all(output_path: Path | None) -> dict[tuple[str, int], str]:
 
 
 def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None) -> dict:
-    gold_rows = [json.loads(l) for l in (EXP2 / "sentence_attribution.jsonl").open(encoding="utf-8")]
+    gold_rows = [json.loads(l) for l in (ATTR / "sentence_attribution.jsonl").open(encoding="utf-8")]
     rng = random.Random(42)
     idx = list(range(len(gold_rows)))
     rng.shuffle(idx)
@@ -344,8 +345,8 @@ def main() -> int:
         print(f"全量归属 -> {out_path}")
 
     if args.evaluate:
-        res = evaluate(lookup, EXP2 / "attribution_errors.jsonl" if args.errors else None)
-        (EXP2 / "attribution_eval.json").write_text(
+        res = evaluate(lookup, ATTR / "attribution_errors.jsonl" if args.errors else None)
+        (ATTR / "attribution_eval.json").write_text(
             json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
         for half in ("tune", "holdout", "full"):
             a, b = res[half]["A"], res[half]["B"]
