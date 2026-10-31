@@ -162,7 +162,7 @@ def main() -> int:
         records.append(row)
 
     out = ROOT / "data/raw/records.jsonl"
-    with out.open("w", encoding="utf-8") as handle:
+    with out.open("w", encoding="utf-8", newline="\n") as handle:
         for row in records:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
 
