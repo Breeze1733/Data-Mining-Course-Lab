@@ -707,8 +707,22 @@ Agent 9/9；其余指标零变化（task7 改动不触图谱/管线）。
 
 - 全仓扫描确认：调用 LLM API 的代码仅在 task7（agent_cli.py / run_tests.py / llm_intent_eval.py）；
   实验1–6 管线与评估为纯静态。task4 的 LLM 对比实验脚本与逐例产物已随 cca7e5b 移除，
-  task4/output/ 残留的 llm_eval_v2_run.log、llm_resolution_eval_v2.json 为历史实验存档
-  （报告不引用，盘点见 docs/README.md）。
+  相关残留产物（含 task7 旧 8 场景的 test_report_llm.json、traces_llm/、review_r2_draft.json）
+  已于同日清理，盘点与结论见 docs/README.md「LLM 接入范围」。
 - **口径修复**：tests/run.py 的场景测试步骤固定 `--rules`——此前不带该开关，有 key 的机器上
   run.py 会产出 LLM 模式的 test_report.json（非确定性文案），与"规范产物规则模式、无 key 可复现"
   的声明（U14）存在缝隙；修复后规范产物固定规则模式（9/9），报告7 重生成，审计 70/70、守护零退化。
+
+---
+
+## 2026-10-31（补2）产物清理：仓库只保留与当前代码对应的产物
+
+- 全仓盘点（99 个被跟踪产物 ↔ 生成脚本对照）后清理 6 项陈旧产物：
+  task4 的 llm_resolution_eval_v2.json 与未跟踪的 llm_eval_v2_run.log（LLM 实验脚本已于 cca7e5b 移除）、
+  task7 的 test_report_llm.json 与 traces_llm/（旧 8 场景时代，现行代码不再写该目录）、
+  task5 的 review_r2_draft.json（U19 抽检的中间草稿，终版 review_r2.json 保留）。
+- **补齐交付物生成器**：task4 新增 build_resolved_examples.py（并入 run.py 链）——消解后文本改写示例
+  （任务书实验4 交付项）此前是初版遗留、反映旧规则结果，现由当前规则结果与人工标注重新生成（6 例）。
+- **链路补全**：tests/run.py 补 attribute_sentences --output 步骤（此前 attributed_sentences.jsonl 不在链内，
+  词典变更后不会自动重算——U23 发现的陈旧问题由此根治）；task7 场景测试撤销 --rules 固定，
+  配置 key 时按 LLM 模式出规范产物属预期行为（对 task7 的非确定性网开一面）。

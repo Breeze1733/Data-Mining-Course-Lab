@@ -17,7 +17,7 @@
   不依赖外部服务；LLM 模式的运行证据由手动运行产生，不入规范产物。
 - **历史说明**：第2/3轮曾在实验4 做过 LLM 对比实验（受限消解、扩展空间消解、方案C 归属 few-shot），
   其脚本与逐例产物已随 commit cca7e5b 移除（实验1–6 统一纯静态口径）；实验结论保留在 PROGRESS 第2/3轮
-  与 DECISIONS D3。task4/output/ 下残留的 llm_eval_v2_run.log 与 llm_resolution_eval_v2.json 为该轮
-  实验的存档证据（无脚本可重建，不属管线产物，报告不引用）。
+  与 DECISIONS D3。该轮产物（llm_resolution_eval_v2.json、llm_eval_v2_run.log）及 task7 旧 8 场景时代的
+  test_report_llm.json、traces_llm/、review_r2_draft.json 已于 2026-10-31 清理，仓库只保留与当前代码对应的产物。
 - task1 的 `build_official_expansion.py` 与 `tests/task1/test_collection.py` 命中 "urlopen" 为网页抓取
   （采集爬虫），不是 LLM API。

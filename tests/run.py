@@ -26,6 +26,8 @@ def main():
         ("task3/src/parse_routes.py", []),
         ("task3/src/compare_routes.py", []),
         ("task3/src/build_hierarchy_view.py", []),
+        ("task4/src/attribute_sentences.py", ["--output", "task4/output/attribution/attributed_sentences.jsonl"]),
+        ("task4/src/build_resolved_examples.py", []),
         ("task4/src/detect_and_resolve.py", []),
         ("task4/src/annotate_sample.py", ["--score"]),
         ("task5/src/extract_conditionals.py", []),
@@ -35,8 +37,7 @@ def main():
         ("task6/src/build_graph.py", []),
         ("task6/src/verify_graph.py", []),
         ("task6/src/visualize_graph.py", []),
-        # --rules：规范产物（test_report.json/traces/）固定规则模式口径，无 key 可复现；LLM 模式证据由手动运行另存
-        ("task7/src/run_tests.py", ["--rules"]),
+        ("task7/src/run_tests.py", []),
     ]
     for script, arguments in steps:
         print(f"Running {script}", flush=True)

@@ -143,7 +143,7 @@ def main():
     rb.sub("4.3 消解后的文本示例")
     rows = [[e["pronoun"], e["antecedent"], e["after"][:80]] for e in EXAMPLES[:5]]
     rb.table(["代词", "消解为", "消解后句子（节选，【】标出替换位置）"], rows, widths=[1.5, 2.5, 11.0], font_size=9)
-    rb.caption("表 3 规则消解正确的文本改写示例（完整 6 例见 resolved_examples.json）")
+    rb.caption(f"表 3 规则消解正确的文本改写示例（完整 {len(EXAMPLES)} 例见 resolved_examples.json，由 build_resolved_examples.py 从当前规则结果生成）")
     rb.p("正确案例集中在“前句明确提及单个 POI、代词紧跟其后”的句式（如“过了黄龙寺就看到了五彩池，已经有很多人在那里了”）；"
          "这印证了规则法的适用边界——局部、单候选、强邻接的指代。")
 

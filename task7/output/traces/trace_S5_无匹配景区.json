@@ -11,7 +11,33 @@
   {
    "step": "start",
    "thought": "接收请求：帮我规划故宫一日游",
-   "mode": "rules"
+   "mode": "llm"
+  },
+  {
+   "step": "intent",
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "未知",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   },
+   "llm": {
+    "scenic": "未知",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   },
+   "result": {
+    "scenic": "未知",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   }
   },
   {
    "step": "thought",
@@ -24,5 +50,5 @@
  ],
  "answer": "抱歉，当前仅支持 黄山/九寨沟/颐和园 三个景区的规划。您可以试试：“带老人颐和园半日游”“九寨沟亲子一日游”“黄山两日看日出”。",
  "plan": null,
- "elapsed": 0.0
+ "elapsed": 5.59
 }

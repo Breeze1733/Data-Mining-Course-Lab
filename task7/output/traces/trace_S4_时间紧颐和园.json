@@ -11,7 +11,33 @@
   {
    "step": "start",
    "thought": "接收请求：只有3小时，颐和园快速逛一遍精华",
-   "mode": "rules"
+   "mode": "llm"
+  },
+  {
+   "step": "intent",
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "颐和园",
+    "visitor_type": null,
+    "days": 0.5,
+    "month": null,
+    "special": []
+   },
+   "llm": {
+    "scenic": "颐和园",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   },
+   "result": {
+    "scenic": "颐和园",
+    "visitor_type": null,
+    "days": 0.5,
+    "month": null,
+    "special": []
+   }
   },
   {
    "step": "action",
@@ -157,11 +183,16 @@
    "thought": "可行性校验：0 条封禁/不建议提示"
   },
   {
+   "step": "render",
+   "thought": "调用 LLM 润色行程文案",
+   "via": "llm"
+  },
+  {
    "step": "final",
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 2026清明反向遛弯路线）：\n上午：谐趣园\n上午：昆明湖（步行前往）\n中午：西堤（步行前往）\n下午：佛香阁（步行前往）\n下午：十七孔桥（步行前往）\n贴士：[人群] 儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途；[人群] 别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果；[人群] 拜一下:来都来了,逢考必过；[人群] 不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明",
+ "answer": "大家上午好！咱们半天玩转颐和园：上午入园先逛谐趣园，漫步昆明湖；中午赏西堤春色；下午打卡佛香阁，学生朋友记得拜拜“逢考必过”，最后漫步十七孔桥。\n\n贴心提醒：带娃走平路更轻松；老人及体力一般的朋友别硬爬高，建议乘船游湖既省力视野又好，或去画中游远眺西山，轻松不费腿！",
  "plan": {
   "scenic": "颐和园",
   "days": 0.5,
@@ -251,5 +282,5 @@
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 0.01
+ "elapsed": 22.1
 }

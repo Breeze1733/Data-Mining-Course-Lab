@@ -11,7 +11,33 @@
   {
    "step": "start",
    "thought": "接收请求：九寨沟一日游，想去原始森林看看",
-   "mode": "rules"
+   "mode": "llm"
+  },
+  {
+   "step": "intent",
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   },
+   "llm": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   },
+   "result": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   }
   },
   {
    "step": "action",
@@ -199,11 +225,16 @@
    "thought": "可行性校验：1 条封禁/不建议提示；已附加到对应站点"
   },
   {
+   "step": "render",
+   "thought": "调用 LLM 润色行程文案",
+   "via": "llm"
+  },
+  {
    "step": "final",
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 一日精华游）：\n上午：原始森林\n上午：五花海（观光车前往）\n上午：镜海（观光车前往）\n上午：诺日朗（步行前往）\n下午：长海（观光车前往）\n下午：五彩池（步行前往）\n下午：诺日朗瀑布（徒步前往）\n下午：犀牛海（观光车前往）\n贴士：[人群] 一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了；[人群] 不要在芦苇海停留；[人群] 买好晕车贴或者晕车药；[人群] 不妨选择吃一顿丰盛的中餐",
+ "answer": "游客朋友们好！今天咱们九寨一日游：提示大家不去原始森林，其实大半天足矣。上午乘车打卡五花海、镜海，再步行至诺日朗；下午坐车前往长海，步行赏五彩池，接着徒步看诺日朗瀑布，最后坐车游犀牛海。容易晕车请备好晕车药，体力有限的话芦苇海就别停留啦！",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -319,5 +350,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 0.0
+ "elapsed": 30.2
 }
