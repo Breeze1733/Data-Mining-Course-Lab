@@ -20,19 +20,20 @@ class CollectionEntrypointTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
-        (self.root/'research').mkdir()
+        (self.root/'data'/'crawl').mkdir(parents=True)
         self.addCleanup(self.tmp.cleanup)
 
     def test_missing_offline_snapshots_never_trigger_network(self):
         builder = official.load_base()
         with patch.object(official, 'ROOT', self.root), \
              patch.object(official, 'load_base', return_value=builder), \
-             patch.object(builder, 'HERE', self.root/'research'), \
-             patch.object(builder, 'PAGES', self.root/'research/official_expansion_pages'), \
+             patch.object(builder, 'ROOT', self.root), \
+             patch.object(builder, 'HERE', self.root/'data'/'crawl'), \
+             patch.object(builder, 'PAGES', self.root/'data'/'crawl'/'official_expansion_pages'), \
              patch('urllib.request.urlopen') as request, redirect_stdout(StringIO()):
             official.run(offline=True)
         request.assert_not_called()
-        report = json.loads((self.root/'research/official_collection_summary.json').read_text('utf-8'))
+        report = json.loads((self.root/'data'/'crawl'/'official_collection_summary.json').read_text('utf-8'))
         self.assertEqual(report['accepted_documents'], 0)
         self.assertEqual(len(report['failures']), len(builder.SOURCES)+4)
 
@@ -41,13 +42,14 @@ class CollectionEntrypointTests(unittest.TestCase):
         source = builder.S('TEST', '九寨沟', 'https://example.org/route', '测试路线', '', '//*[@id="body"]',
                            variants=[('测试方案', '', '')])
         fixture = '<html><div id="body">长海→五彩池→诺日朗</div></html>'.encode()
-        with patch.object(builder, 'HERE', self.root/'research'), \
-             patch.object(builder, 'PAGES', self.root/'research/official_expansion_pages'), \
+        with patch.object(builder, 'ROOT', self.root), \
+             patch.object(builder, 'HERE', self.root/'data'/'crawl'), \
+             patch.object(builder, 'PAGES', self.root/'data'/'crawl'/'official_expansion_pages'), \
              patch.object(builder, 'SOURCES', [source]), \
              patch('urllib.request.urlopen', side_effect=lambda *a, **k: Response(fixture)) as request, \
              patch.object(builder.time, 'sleep'), redirect_stdout(StringIO()):
             builder.run(offline=False)
-        rows = json.loads((self.root/'research/official_expansion.json').read_text('utf-8'))
+        rows = json.loads((self.root/'data'/'crawl'/'official_expansion.json').read_text('utf-8'))
         self.assertTrue(all(r['accepted'] for r in rows))
         self.assertEqual(request.call_count, 2)  # HTML与官方图片原件
         self.assertTrue((self.root/rows[0]['snapshot_file']).is_file())
@@ -57,13 +59,13 @@ class CollectionEntrypointTests(unittest.TestCase):
             return {**meta, 'record_id':'CTRIP_'+base.article_id(meta['url']),
                     'collected_at':base.stamp(), 'accepted':False}
         with patch.object(ctrip, 'ROOT', self.root), \
-             patch.object(ctrip, 'OUT', self.root/'research/ctrip_ranked_candidates.json'), \
+             patch.object(ctrip, 'OUT', self.root/'data'/'crawl'/'ctrip_ranked_candidates.json'), \
              patch.object(base, 'verify_one', side_effect=verify) as article, \
              patch.object(base, 'get', return_value=(200, '', b'<html/>')), redirect_stdout(StringIO()):
             ctrip.run(area='颐和园', max_pages=1)
         self.assertEqual(article.call_count, len(base.BEIJING_SEEDS))
         self.assertEqual({c.args[0]['url'] for c in article.call_args_list}, set(base.BEIJING_SEEDS))
-        self.assertTrue((self.root/'research/ctrip_ranked_log.json').is_file())
+        self.assertTrue((self.root/'data'/'crawl'/'ctrip_ranked_log.json').is_file())
 
     def test_ctrip_retry_refreshes_a_failed_cached_page(self):
         pages = self.root/'data/raw/pages'

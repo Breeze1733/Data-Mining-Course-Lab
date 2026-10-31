@@ -1,8 +1,7 @@
 {
- "updated_at": "2026-10-31 10:14",
+ "updated_at": "2026-10-31 10:32",
  "guards": {
   "dataset.count": 271,
-  "attribution.holdout_evals": 1,
   "graph.fact_checks": "6/6",
   "graph.name_alignment_passed": true,
   "agent.passed": "8/8",

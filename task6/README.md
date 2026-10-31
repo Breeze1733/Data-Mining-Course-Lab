@@ -22,10 +22,10 @@ report.docx           实验项目6报告
 
 ```powershell
 cd task1
-.\.venv\Scripts\python.exe -X utf8 ..\task6\src\build_graph.py
-.\.venv\Scripts\python.exe -X utf8 ..\task6\src\visualize_graph.py
-.\.venv\Scripts\python.exe -X utf8 ..\task6\src\verify_graph.py
-.\.venv\Scripts\python.exe -X utf8 ..\task6\src\build_report6.py
+..\.venv\Scripts\python.exe -X utf8 ..\task6\src\build_graph.py
+..\.venv\Scripts\python.exe -X utf8 ..\task6\src\visualize_graph.py
+..\.venv\Scripts\python.exe -X utf8 ..\task6\src\verify_graph.py
+..\.venv\Scripts\python.exe -X utf8 ..\task6\src\build_report6.py
 ```
 
 ## 关键结论

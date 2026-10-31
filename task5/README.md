@@ -24,10 +24,10 @@ report.docx                  实验项目5报告
 
 ```powershell
 cd task1
-.\.venv\Scripts\python.exe -X utf8 ..\task5\src\extract_conditionals.py
-.\.venv\Scripts\python.exe -X utf8 ..\task5\src\review_and_charts.py
-.\.venv\Scripts\python.exe -X utf8 ..\task5\src\export_mapping_xlsx.py
-.\.venv\Scripts\python.exe -X utf8 ..\task5\src\build_report5.py
+..\.venv\Scripts\python.exe -X utf8 ..\task5\src\extract_conditionals.py
+..\.venv\Scripts\python.exe -X utf8 ..\task5\src\review_and_charts.py
+..\.venv\Scripts\python.exe -X utf8 ..\task5\src\export_mapping_xlsx.py
+..\.venv\Scripts\python.exe -X utf8 ..\task5\src\build_report5.py
 ```
 
 ## 关键结论

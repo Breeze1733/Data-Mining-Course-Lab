@@ -23,11 +23,11 @@ report.docx             实验项目4报告
 
 ```powershell
 cd task1
-.\.venv\Scripts\python.exe -X utf8 ..\task4\src\detect_and_resolve.py     # 检测 + 消解
-.\.venv\Scripts\python.exe -X utf8 ..\task4\src\annotate_sample.py --sample  # 生成抽样
-.\.venv\Scripts\python.exe -X utf8 ..\task4\src\annotate_sample.py --fill    # 写入人工判定
-.\.venv\Scripts\python.exe -X utf8 ..\task4\src\annotate_sample.py --score   # 评估
-.\.venv\Scripts\python.exe -X utf8 ..\task4\src\build_report4.py
+..\.venv\Scripts\python.exe -X utf8 ..\task4\src\detect_and_resolve.py     # 检测 + 消解
+..\.venv\Scripts\python.exe -X utf8 ..\task4\src\annotate_sample.py --sample  # 生成抽样
+..\.venv\Scripts\python.exe -X utf8 ..\task4\src\annotate_sample.py --fill    # 写入人工判定
+..\.venv\Scripts\python.exe -X utf8 ..\task4\src\annotate_sample.py --score   # 评估
+..\.venv\Scripts\python.exe -X utf8 ..\task4\src\build_report4.py
 ```
 
 ## 关键结论

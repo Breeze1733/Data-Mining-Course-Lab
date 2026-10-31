@@ -28,8 +28,8 @@ report.docx            实验项目7报告
 
 ```powershell
 cd task1
-.\.venv\Scripts\python.exe -X utf8 ..\task7\src\run_tests.py      # 批量测试
-.\.venv\Scripts\python.exe -X utf8 ..\task7\src\agent_cli.py      # 交互命令行
+..\.venv\Scripts\python.exe -X utf8 ..\task7\src\run_tests.py      # 批量测试
+..\.venv\Scripts\python.exe -X utf8 ..\task7\src\agent_cli.py      # 交互命令行
 ```
 
 ## 工具清单

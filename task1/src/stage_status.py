@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 AREAS = ('黄山', '九寨沟', '颐和园')
-STATE = ROOT / 'research/stage_state.json'
+STATE = ROOT / 'data/crawl/stage_state.json'
 
 
 def _load(name, rel):

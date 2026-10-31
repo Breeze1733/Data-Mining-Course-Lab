@@ -12,7 +12,7 @@ from lxml import html
 import expand_ctrip as base
 
 ROOT=base.ROOT
-OUT=ROOT/'research/ctrip_ranked_candidates.json'
+OUT=ROOT/'data/crawl/ctrip_ranked_candidates.json'
 
 def number(text):
     m=re.search(r'(\d+(?:\.\d+)?)\s*(万|千|[wWkK])?',str(text).replace(',',''))
@@ -27,7 +27,7 @@ def metrics(raw):
 
 def dump(rows,logs):
     base.save(OUT,list(rows.values()))
-    base.save(ROOT/'research/ctrip_ranked_log.json',logs)
+    base.save(ROOT/'data/crawl/ctrip_ranked_log.json',logs)
 
 def store_article(meta,rows,refresh=False):
     meta={k:v for k,v in meta.items() if k!='error'}
@@ -42,13 +42,13 @@ def run(area='all',pool_size=40,max_pages=120,offline=False,retry_failed=False):
     rows={}
     if OUT.exists():rows={r['record_id']:r for r in json.loads(OUT.read_text('utf-8'))}
     # 首轮已实际抓取的目录/文章可以直接复用，不二次请求文章正文。
-    for p in [ROOT/'research/ctrip_expansion.json']:
+    for p in [ROOT/'data/crawl/ctrip_expansion.json']:
         if p.exists():
             for r in json.loads(p.read_text('utf-8')):
                 if r.get('raw_file') and (ROOT/r['raw_file']).exists():
                     r={**r,**metrics((ROOT/r['raw_file']).read_bytes())}
                     rows.setdefault(r['record_id'],r)
-    logpath=ROOT/'research/ctrip_ranked_log.json'
+    logpath=ROOT/'data/crawl/ctrip_ranked_log.json'
     logs=json.loads(logpath.read_text('utf-8')) if logpath.exists() else []
     if retry_failed and not offline:
         for old in list(rows.values()):

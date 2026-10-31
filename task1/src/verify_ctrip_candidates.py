@@ -59,7 +59,8 @@ def fetch_one(item):
 
 if __name__=='__main__':
     result=[]
-    p=Path(__file__).with_name('ctrip_candidates.json')
+    p=Path(__file__).resolve().parents[1]/'data'/'crawl'/'ctrip_candidates.json'
+    p.parent.mkdir(parents=True, exist_ok=True)
     for c in CANDIDATES:
         item=fetch_one(c)
         result.append(item)

@@ -10,7 +10,8 @@ from zoneinfo import ZoneInfo
 from lxml import html
 from html.parser import HTMLParser
 
-HERE = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
+HERE = ROOT / 'data' / 'crawl'
 PAGES = HERE / 'official_expansion_pages'
 
 class Text(HTMLParser):
@@ -164,7 +165,7 @@ def run(offline=False):
             fragment='\n'.join(html.tostring(n,encoding='unicode',with_tail=False) for n in ns)
             text=text_of(fragment)
             s['http_status']=status;s['collected_at']=(prior.get(s['evidence_id'],{}).get('collected_at') or datetime.fromtimestamp(path.stat().st_mtime,ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds')) if offline else datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(timespec='seconds')
-            s['snapshot_file']=path.relative_to(HERE.parent).as_posix()
+            s['snapshot_file']=path.relative_to(ROOT).as_posix()
             s['snapshot_sha256']=hashlib.sha256(data).hexdigest()
             s['body_node_count']=len(ns)
             s['page_title']=''.join(tree.xpath('//title/text()')).strip()
@@ -203,7 +204,7 @@ def run(offline=False):
         extraction_selector='正文第一张长图中“颐和园”标题至“北如意门出园”区域，逐字转录路线节点和观赏品种；图示箭头转录为↓',
         provenance_note='北京市公园管理中心，来源畅游公园。下载图片原件并使用代码中预先核对的颐和园路线转录，不执行OCR；不混入下方天坛公园路线。',
         raw_content=image_text,raw_format='text',http_status=200,collected_at=image_capture_time,
-        snapshot_file=image_path.relative_to(HERE.parent).as_posix(),snapshot_sha256=hashlib.sha256(image_path.read_bytes()).hexdigest(),
+        snapshot_file=image_path.relative_to(ROOT).as_posix(),snapshot_sha256=hashlib.sha256(image_path.read_bytes()).hexdigest(),
         route_variants=[dict(title='2025清明西门入北如意门出赏花线',source_text=image_text)],
         accepted=True,include_in_main_dataset=True))
     (HERE/'official_expansion.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')

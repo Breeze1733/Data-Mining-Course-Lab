@@ -1,7 +1,7 @@
 """Offline final review of the expansion snapshots and author diversity.
 
 Never changes sources.json. All excluded articles and snapshots stay in the
-research ledger; the output manifest contains accepted independent authors.
+data/crawl ledger; the output manifest contains accepted independent authors.
 """
 import collections
 import hashlib
@@ -12,7 +12,7 @@ from lxml import html
 import expand_ctrip as expansion
 
 ROOT=Path(__file__).resolve().parents[1]
-RESEARCH=ROOT/'research'
+CRAWL=ROOT/'data/crawl'
 
 MANUAL_REJECT={
  'CTRIP_4100903':'原文自称“开局一张图，内容全靠编”，不作为实游证据',
@@ -24,7 +24,7 @@ def score(r):
  return min(r.get('poi_count',0),20)/20+min(r.get('route_paragraph_count',0),10)/10+min(r.get('route_density',0),1)*0.8
 
 def run():
- path=RESEARCH/'ctrip_expansion.json'
+ path=CRAWL/'ctrip_expansion.json'
  old=json.loads(path.read_text('utf-8'))
  records=[]
  for r in old:
@@ -38,7 +38,7 @@ def run():
    n['accepted']=False;n.setdefault('rejection_reasons',[]).append('manual_promotional_or_fiction_exclusion');n['manual_review_note']=MANUAL_REJECT[n['record_id']]
   n['accepted_before_author_dedup']=bool(n.get('accepted'))
   records.append(n)
- discoveries=json.loads((RESEARCH/'ctrip_expansion_discovery.json').read_text('utf-8'))['candidates']
+ discoveries=json.loads((CRAWL/'ctrip_expansion_discovery.json').read_text('utf-8'))['candidates']
  author_lookup={expansion.article_id(r['url']):r['author'] for r in discoveries if r.get('author')}
  for r in records:
   if not r.get('author'):r['author']=author_lookup.get(expansion.article_id(r['url']),'')
@@ -80,8 +80,8 @@ def run():
    r['accepted']=False;r['rejection_reasons'].append('duplicate_article_body');r['duplicate_of']=seen[key]
   else:seen[key]=r['record_id']
  expansion.save(path,records)
- expansion.save(RESEARCH/'ctrip_expansion_sources.json',expansion.manifest(records))
- expansion.save(RESEARCH/'ctrip_author_lookup.json',lookup)
+ expansion.save(CRAWL/'ctrip_expansion_sources.json',expansion.manifest(records))
+ expansion.save(CRAWL/'ctrip_author_lookup.json',lookup)
  summary={
   'reviewed_at':expansion.stamp(),
   'directory_pages_observed':53,
@@ -93,7 +93,7 @@ def run():
   'rejection_reasons':dict(collections.Counter(reason for r in records if not r.get('accepted') for reason in r.get('rejection_reasons',[]))),
   'author_policy':'每景区对公开目录显示的同作者保留路线较丰富的一篇；与既有种子作者相同的扩展篇不重复纳入。公开HTML未展示的作者保持空值。',
  }
- expansion.save(RESEARCH/'ctrip_expansion_summary.json',summary)
+ expansion.save(CRAWL/'ctrip_expansion_summary.json',summary)
  print(json.dumps(summary,ensure_ascii=False,indent=2))
 
 if __name__=='__main__':run()

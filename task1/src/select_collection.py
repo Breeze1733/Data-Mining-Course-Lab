@@ -38,7 +38,7 @@ def canonical(url):
 
 def ctrip_candidates():
     rows, audit = [], []
-    for r in read_json(ROOT/'research/ctrip_ranked_candidates.json', []):
+    for r in read_json(ROOT/'data/crawl/ctrip_ranked_candidates.json', []):
         if not r.get('accepted'):
             audit.append(dict(scenic_area=r['scenic_area'], platform='携程', url=r.get('url',''),
                               accepted=False, reasons=r.get('rejection_reasons', ['crawler_rejected'])))

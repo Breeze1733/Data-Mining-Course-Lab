@@ -510,3 +510,20 @@ Agent 8/8；报告 7 重生成；审计 70/70；回归守护通过。
   P3-v2 修正结论（同词表 LLM 0.633 > 规则 0.583，混合上限≈0.683）、条件对 842（新鲜抽检 wrong 8→3）。
 - 守护零退化；两处评估口径勘误均以"保留明细+重算+注记"处理。
 - 剩余方向（LLM 混合生产化）受 D3 约束为可选增强；**第3轮收束**。
+
+---
+
+## 2026-10-31 目录规范化（task1 重组 + Python 环境迁根）
+
+- task1 拆散 `research/`：2 个脚本并入 `src/`，4 篇来源审计笔记迁 `docs/`，
+  爬虫断点/候选池/日志迁 `data/crawl/`（`data/**` 规则默认忽略，不入库）。
+  入库的 3 个 JSONL 及快照索引中的 `snapshot_file` 路径同步改写为
+  `data/crawl/official_expansion_pages/`，快照文件本体随迁，哈希校验不受影响。
+- Python 环境收敛为仓库根目录共享：`task1/.venv` → 根 `.venv`，`requirements.txt` 迁根目录
+  （它本就是全项目依赖，不止 task1 使用；`common/regression_check.py` 的解释器路径同步更新）。
+  经用户确认，依赖升级至 requirements.txt 约束内最新：pip 26.2.2、matplotlib 3.11.2、
+  networkx 3.7、numpy 2.5.4、python-docx 1.2.0、tzdata 2026.6（jieba 0.42.1、wordcloud 1.9.6、
+  pyvis 0.3.2、openpyxl 3.1.5、lxml 6.1.3 保持/落在约束内）。
+- 验证：task1 全部 13 个单测通过；`py_compile`/`node --check` 通过；`stage_status.py` 冒烟
+  读数与重组前一致（官方 22/22，携程池 149，小红书池 105）；`common/regression_check.py`
+  回归守护全绿，含升级后重打分 task4/task5 无退化。

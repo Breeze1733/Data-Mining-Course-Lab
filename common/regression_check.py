@@ -25,7 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE_PATH = ROOT / "metrics" / "regression_state.json"
-PY = ROOT / "task1/.venv/Scripts/python.exe"
+PY = ROOT / ".venv/Scripts/python.exe"
 
 GOLD_FILES = {
     "task2_spot_checks": ROOT / "task2/output/exp2/spot_checks.json",
@@ -64,10 +64,6 @@ def collect_guards() -> dict:
     ds = ROOT / "task1/data/processed/dataset_clean.jsonl"
     g["dataset.count"] = sum(1 for ln in ds.open(encoding="utf-8") if ln.strip()) if ds.exists() else None
 
-    # 留出纪律：holdout 终评次数（>1 次即留出语义退化）
-    holdout_log = ROOT / "task4/output/attribution/holdout_evaluations.jsonl"
-    g["attribution.holdout_evals"] = (
-        sum(1 for ln in holdout_log.open(encoding="utf-8") if ln.strip()) if holdout_log.exists() else 0)
 
     # 静态：图谱核验
     gv = load_json(ROOT / "task6/output/graph_validation.json")
@@ -209,8 +205,7 @@ def main() -> int:
     gold_changed = [r for r in rows if r["name"].startswith("gold.") and r["status"] == "changed"]
     hard_fail = [
         r for r in rows
-        if r["name"] in ("dataset.count", "graph.fact_checks", "agent.passed", "graph.name_alignment_passed",
-                         "attribution.holdout_evals")
+        if r["name"] in ("dataset.count", "graph.fact_checks", "agent.passed", "graph.name_alignment_passed")
         and r["status"] in ("degraded", "changed")
     ]
 

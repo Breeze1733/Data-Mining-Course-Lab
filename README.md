@@ -4,7 +4,7 @@
 
 ## 复现
 
-使用同一个Python环境，安装`task1/requirements.txt`中的依赖后，在仓库根目录运行：
+使用仓库根目录的同一个Python环境（`.venv`），安装`requirements.txt`中的依赖后，在仓库根目录运行：
 
 ```powershell
 python run.py

@@ -30,7 +30,7 @@ function Show-Stage {
 function Get-StageStatus {
     & $PythonExe src/stage_status.py $PerPlatform > $null
     if ($LASTEXITCODE -ne 0) { throw '阶段状态检查失败。' }
-    return Get-Content 'research/stage_state.json' -Encoding UTF8 -Raw | ConvertFrom-Json
+    return Get-Content 'data/crawl/stage_state.json' -Encoding UTF8 -Raw | ConvertFrom-Json
 }
 
 function Show-Progress {
@@ -39,7 +39,7 @@ function Show-Progress {
 }
 
 try {
-    New-Item -ItemType Directory -Force -Path 'logs', 'research', 'data/raw' > $null
+    New-Item -ItemType Directory -Force -Path 'logs', 'data/crawl', 'data/raw' > $null
     $runLog = Join-Path $PSScriptRoot ('logs/collection_{0}_{1}.log' -f (Get-Date -Format 'yyyyMMdd_HHmmss'), ([guid]::NewGuid().ToString('N').Substring(0,8)))
     Start-Transcript -LiteralPath $runLog > $null
     $transcriptStarted = $true

@@ -20,9 +20,9 @@ from urllib.parse import urljoin
 from lxml import html
 
 ROOT=Path(__file__).resolve().parents[1]
-RESEARCH=ROOT/'research'
+CRAWL=ROOT/'data/crawl'
 PAGES=ROOT/'data/raw/pages'
-RESEARCH.mkdir(parents=True,exist_ok=True)
+CRAWL.mkdir(parents=True,exist_ok=True)
 PAGES.mkdir(parents=True,exist_ok=True)
 LOCK=threading.Lock()
 NEXT_REQUEST=0.0
@@ -180,9 +180,9 @@ def manifest(records):
  return [dict(record_id=r['record_id'],scenic_area=r['scenic_area'],source_platform='携程游记',source_url=r['url'],text_type='travelogue',extractor='ctrip',raw_file=r['raw_file'],published_at=r.get('published_at',''),date_note='平台显示日期，可能为更新日期',content_scope='article_body',selection_note=f"扩展目录筛选；目标POI {r['poi_count']}，路线段落 {r['route_paragraph_count']}，正文需复核",collected_at=r['collected_at'],expected_title=r['title'],author_hint=r.get('author','')) for r in records if r.get('accepted')]
 
 def run(skip_discovery=False):
- logpath=RESEARCH/'ctrip_expansion_discovery.json'
- resultpath=RESEARCH/'ctrip_expansion.json'
- manifestpath=RESEARCH/'ctrip_expansion_sources.json'
+ logpath=CRAWL/'ctrip_expansion_discovery.json'
+ resultpath=CRAWL/'ctrip_expansion.json'
+ manifestpath=CRAWL/'ctrip_expansion_sources.json'
  previous=json.loads(resultpath.read_text('utf-8')) if resultpath.exists() else []
  records={r['url']:r for r in previous}
  discovered=[];logs=[]

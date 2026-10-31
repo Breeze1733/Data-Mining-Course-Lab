@@ -26,10 +26,10 @@ report.docx             实验项目3报告
 
 ```powershell
 cd task1
-.\.venv\Scripts\python.exe -X utf8 ..\task3\src\parse_routes.py          # 结构化解析
-.\.venv\Scripts\python.exe -X utf8 ..\task3\src\compare_routes.py        # 官方 vs 游客对比
-.\.venv\Scripts\python.exe -X utf8 ..\task3\src\build_hierarchy_view.py  # 时间层级与树图
-.\.venv\Scripts\python.exe -X utf8 ..\task3\src\build_report3.py         # 报告
+..\.venv\Scripts\python.exe -X utf8 ..\task3\src\parse_routes.py          # 结构化解析
+..\.venv\Scripts\python.exe -X utf8 ..\task3\src\compare_routes.py        # 官方 vs 游客对比
+..\.venv\Scripts\python.exe -X utf8 ..\task3\src\build_hierarchy_view.py  # 时间层级与树图
+..\.venv\Scripts\python.exe -X utf8 ..\task3\src\build_report3.py         # 报告
 ```
 
 ## 输入 → 输出

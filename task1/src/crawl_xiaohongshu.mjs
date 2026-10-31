@@ -9,8 +9,8 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const EXPORT=path.join(ROOT,'data/raw/xiaohongshu_browser_export.json');
-const LOG=path.join(ROOT,'research/xiaohongshu_crawl_log.json');
-const QUEUE=path.join(ROOT,'research/xiaohongshu_queue.json');
+const LOG=path.join(ROOT,'data/crawl/xiaohongshu_crawl_log.json');
+const QUEUE=path.join(ROOT,'data/crawl/xiaohongshu_queue.json');
 export function parseLikes(value){
   const s=String(value??'').trim().replaceAll(',','');
   const m=s.match(/^(\d+(?:\.\d+)?)\s*(万|w|W|千|k|K)?\+?$/);

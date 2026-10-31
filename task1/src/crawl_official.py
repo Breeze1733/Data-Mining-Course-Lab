@@ -14,7 +14,7 @@ from collect import extract
 ROOT=Path(__file__).resolve().parents[1]
 
 def load_base():
-    spec=importlib.util.spec_from_file_location('official_specs',ROOT/'research/build_official_expansion.py')
+    spec=importlib.util.spec_from_file_location('official_specs',ROOT/'src/build_official_expansion.py')
     mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod);return mod
 
 def write_jsonl(path,rows):
@@ -22,7 +22,7 @@ def write_jsonl(path,rows):
 
 def run(offline=False):
     base=load_base();base.run(offline)
-    docs=json.loads((ROOT/'research/official_expansion.json').read_text('utf-8'))
+    docs=json.loads((ROOT/'data/crawl/official_expansion.json').read_text('utf-8'))
     configurations=[
         dict(evidence_id='HS-O1',scenic_area='黄山',source_url='https://wap.huangshan.com.cn/detail/strategy/fjqlyzx',title='黄山风景区常见旅游咨询 一日游与二日游',published_at='2021-02-13',xpath='//div[contains(concat(" ",@class," ")," article-con ")]',kind='q20'),
         dict(evidence_id='HS-EXTRA1',scenic_area='黄山',source_url='https://www.ahsz.gov.cn/public/2655573/195153231.html',title='黄山冬季南北门一日及二日游推荐',published_at='2024-11-29',xpath='//*[contains(concat(" ",normalize-space(@class)," ")," j-fontContent ")]',kind='winter'),
@@ -72,7 +72,7 @@ def run(offline=False):
         for i,v in enumerate(d.get('route_variants',[]),1):routes.append(dict(route_id=f'{d["evidence_id"]}-R{i}',source_record_id=d['evidence_id'],scenic_area=d['scenic_area'],source_url=d['source_url'],title=v['title'],raw_content=v['source_text'],ordered_route=bool(d.get('include_in_main_dataset')),published_at=d.get('published_at','')))
     write_jsonl(ROOT/'data/raw/official_documents.jsonl',docs);write_jsonl(ROOT/'data/raw/official_routes.jsonl',routes)
     summary={'documents':len(docs),'accepted_documents':sum(d.get('accepted',False) for d in docs),'ordered_route_variants':sum(r['ordered_route'] for r in routes),'supplementary_theme_variants':sum(not r['ordered_route'] for r in routes),'failures':[{'id':d['evidence_id'],'error':d.get('error')} for d in docs if not d.get('accepted')]}
-    (ROOT/'research/official_collection_summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),'utf-8');print(json.dumps(summary,ensure_ascii=False))
+    (ROOT/'data/crawl/official_collection_summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),'utf-8');print(json.dumps(summary,ensure_ascii=False))
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--offline',action='store_true');run(p.parse_args().offline)

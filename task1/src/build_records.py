@@ -2,7 +2,7 @@
 
 输入（全部为本机已有快照，不发网络请求）：
   data/raw/official_documents.jsonl            官方文档（include_in_main_dataset=true 的进入主数据集）
-  research/ctrip_ranked_candidates.json        携程候选（accepted=true 且快照存在的进入）
+  data/crawl/ctrip_ranked_candidates.json      携程候选（accepted=true 且快照存在的进入）
   data/raw/xiaohongshu_browser_export.json     小红书笔记导出（全部进入，短文本由清洗阶段按长度规则淘汰）
 
 携程记录的 raw_content 取正文容器（travel-content-wrapper，缺省时 rich-text-container）
@@ -145,7 +145,7 @@ def build_xhs(notes: list[dict]) -> list[dict]:
 
 def main() -> int:
     docs = [json.loads(line) for line in (ROOT / "data/raw/official_documents.jsonl").open(encoding="utf-8") if line.strip()]
-    candidates = json.loads((ROOT / "research/ctrip_ranked_candidates.json").read_text(encoding="utf-8"))
+    candidates = json.loads((ROOT / "data/crawl/ctrip_ranked_candidates.json").read_text(encoding="utf-8"))
     notes = json.loads((ROOT / "data/raw/xiaohongshu_browser_export.json").read_text(encoding="utf-8"))
 
     official = build_official(docs)

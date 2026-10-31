@@ -440,7 +440,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Screen logged-in Xiaohongshu DOM exports without rewriting source text.")
     parser.add_argument("--input", type=Path, default=ROOT / "data/raw/xiaohongshu_browser_export.json")
     parser.add_argument("--output", type=Path, default=ROOT / "data/raw/xiaohongshu.json")
-    parser.add_argument("--audit", type=Path, default=ROOT / "research/xiaohongshu_screening.json")
+    parser.add_argument("--audit", type=Path, default=ROOT / "data/crawl/xiaohongshu_screening.json")
     args = parser.parse_args()
     print(json.dumps(run(args.input, args.output, args.audit), ensure_ascii=False))
 

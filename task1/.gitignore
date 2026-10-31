@@ -1,7 +1,6 @@
 # 实验项目1 的本地环境与临时文件
 __pycache__/
 *.py[cod]
-.venv/
 node_modules/
 .browser-profile*/
 logs/
@@ -10,13 +9,8 @@ qa/
 *.tmp
 report_template_backup.docx
 
-# 采集断点缓存与网页快照（research 下的 .py/.md 来源说明继续跟踪）
-/research/*.json
-/research/*.jsonl
-/research/*.html
-/research/*_pages/
-
-# data/ 默认全部忽略：HTML 快照、中间产物、切分文本都可由 src/ 下的脚本再生。
+# data/ 默认全部忽略：HTML 快照、中间产物、爬虫工作区（data/crawl/ 的断点缓存、
+# 候选池、抓取日志）都可由 src/ 下的脚本再生。
 # 只放行交付物与实验 2-7 的公共输入。
 data/**
 !data/raw/
