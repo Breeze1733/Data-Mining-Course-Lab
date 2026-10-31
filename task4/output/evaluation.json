@@ -19,19 +19,19 @@
    "accuracy": 0.556
   }
  },
- "accuracy_by_round": {
-  "1": {
+ "accuracy_by_split": {
+  "dev": {
    "n": 120,
    "accuracy": 0.725
   },
-  "2": {
+  "test": {
    "n": 60,
    "accuracy": 0.367
   }
  },
- "errors_by_round": {
-  "1": 33,
-  "2": 38
+ "errors_by_split": {
+  "dev": 33,
+  "test": 38
  },
  "errors": [
   {

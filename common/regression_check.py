@@ -30,7 +30,7 @@ PY = ROOT / ".venv/Scripts/python.exe"
 GOLD_FILES = {
     "task2_spot_checks": ROOT / "task2/output/exp2/spot_checks.json",
     "task4_annotation_gold": ROOT / "task4/output/annotation_gold.json",
-    "task5_review_gold": ROOT / "task5/output/review_gold.json",
+    "task5_review_dev": ROOT / "task5/output/review_dev.json",
 }
 
 
@@ -97,7 +97,7 @@ def collect_guards() -> dict:
         g["task2.spot_self_consistent"] = False
 
     # 静态自洽：task5 复核汇总 vs 人工标注评测集重算
-    rg = load_json(ROOT / "task5/output/review_gold.json")
+    rg = load_json(ROOT / "task5/output/review_dev.json")
     rs5 = load_json(ROOT / "task5/output/review_summary.json")
     if rg and rs5:
         counts = {}

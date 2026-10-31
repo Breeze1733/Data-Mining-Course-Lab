@@ -125,13 +125,13 @@ def fill(pairs: list[dict]) -> None:
             continue
         verdict, note = VERDICTS[key]
         rows.append({**s, "verdict": verdict, "note": note})
-    (OUT / "review_gold.json").write_text(
+    (OUT / "review_dev.json").write_text(
         json.dumps({"n": len(rows), "reviews": rows}, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"review written: {len(rows)}")
 
 
 def score() -> None:
-    data = json.loads((OUT / "review_gold.json").read_text(encoding="utf-8"))["reviews"]
+    data = json.loads((OUT / "review_dev.json").read_text(encoding="utf-8"))["reviews"]
     c = Counter(r["verdict"] for r in data)
     by_pattern = defaultdict(lambda: Counter())
     for r in data:

@@ -243,7 +243,7 @@ def sample(cases: list[dict]) -> None:
             "sentence": c["sentence"][:120],
             "rule_resolution": c["resolution"], "rule_kind": c["resolution_kind"],
         })
-    (OUT / "annotation_sample.json").write_text(
+    (OUT / "annotation_sample_dev.json").write_text(
         json.dumps({"seed": SEED, "n_per_cell": N_PER_CELL, "samples": out}, ensure_ascii=False, indent=1),
         encoding="utf-8")
     for j, s in enumerate(out):
@@ -276,7 +276,7 @@ def expand_sample(cases: list[dict]) -> None:
             "sentence": c["sentence"][:120],
             "rule_resolution": c["resolution"], "rule_kind": c["resolution_kind"],
         })
-    (OUT / "annotation_sample_expand.json").write_text(
+    (OUT / "annotation_sample_test.json").write_text(
         json.dumps({"seed": SEED_EXPAND, "n_per_cell": N_PER_CELL_EXPAND, "samples": out},
                    ensure_ascii=False, indent=1), encoding="utf-8")
     for j, s in enumerate(out):
@@ -287,7 +287,7 @@ def expand_sample(cases: list[dict]) -> None:
 
 
 def fill(cases: list[dict]) -> None:
-    data = json.loads((OUT / "annotation_sample.json").read_text(encoding="utf-8"))
+    data = json.loads((OUT / "annotation_sample_dev.json").read_text(encoding="utf-8"))
     existing = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
     anchors = {g["case_index"]: g for g in existing}
     gold_rows = []
@@ -314,7 +314,7 @@ def fill(cases: list[dict]) -> None:
 
 def fill_expand(cases: list[dict]) -> None:
     """扩容标注合并：既有 120 行原样保留（追加式），新增行来自 EXPAND_GOLD + 扩容抽样文件。"""
-    data = json.loads((OUT / "annotation_sample_expand.json").read_text(encoding="utf-8"))
+    data = json.loads((OUT / "annotation_sample_test.json").read_text(encoding="utf-8"))
     gold_doc = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))
     existing = gold_doc["annotations"]
     anchors = {g["case_index"] for g in existing}
@@ -335,7 +335,7 @@ def fill_expand(cases: list[dict]) -> None:
             "gold_antecedent": ant, "gold_kind": kind, "note": note,
             "rule_resolution": s["rule_resolution"], "rule_kind": s["rule_kind"],
             "doc_start": case["doc_start"], "doc_end": case["doc_end"],
-            "round": 2,
+            "split": "test",
         })
     merged = existing + new_rows
     gold_doc["annotations"] = merged
@@ -370,18 +370,21 @@ def score(cases: list[dict]) -> None:
     for r in rows:
         by_class[r["pronoun_class"]][1] += 1
         by_class[r["pronoun_class"]][0] += r["correct"]
-    # 分轮口径：round 1 = 原始 120 例（迭代开发集），round 2 = 扩容 60 例（一次性 holdout）
-    by_round = defaultdict(lambda: [0, 0])
+    # split 口径（学术界通行的 dev/test 划分）：dev = 120 例（迭代开发集），test = 60 例（held-out 测试集）
+    def split_of(r):
+        if "split" in r:
+            return r["split"]
+        return "test" if r.get("round") == 2 else "dev"
+    by_split = defaultdict(lambda: [0, 0])
     for r in rows:
-        rd = r.get("round", 1)
-        by_round[rd][1] += 1
-        by_round[rd][0] += r["correct"]
+        by_split[split_of(r)][1] += 1
+        by_split[split_of(r)][0] += r["correct"]
     result = {
         "n": len(rows),
         "accuracy_overall": round(acc_overall, 3),
         "accuracy_by_class": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_class.items())},
-        "accuracy_by_round": {str(k): {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_round.items())},
-        "errors_by_round": {str(k): v[1] - v[0] for k, v in sorted(by_round.items())},
+        "accuracy_by_split": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_split.items())},
+        "errors_by_split": {k: v[1] - v[0] for k, v in sorted(by_split.items())},
         "errors": [
             {"pronoun": r["pronoun"], "class": r["pronoun_class"], "scenic": r["scenic_area"],
              "rule": r["rule_resolution"], "rule_kind": r["rule_kind"],

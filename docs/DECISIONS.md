@@ -85,5 +85,9 @@
 4. 打分器 canon 与判定逻辑不变（历史可比）；0.483 取代 0.583 成为守护指标 task4.coref_accuracy 的新基准，
    已 --update-state 留痕（本轮变更见 PROGRESS U21）。
 
+**补注（2026-10-31）**：文件与字段已按学术界通行的 dev/test 口径更名——annotation_sample_dev/test.json、
+人工标注评测集行内 `split` 字段（dev/test）取代 round 字段，实验5 的 review_gold/review_fresh 相应更名为
+review_dev.json/review_test.json；两文件为不同的样本（守护夹具 vs 独立测试），并非新旧版本，均予保留。
+
 **扩容的直接发现**：留出集 28.3% vs 开发集 58.3%——证实了此前 0.425→0.583 的提升中相当一部分
 是对开发集的适应；四大错误机制占比：回退景区名 31%、判同行者 27%、集合类机制 23%、实体体系外先行词 19%。

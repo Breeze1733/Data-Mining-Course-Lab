@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-31 14:53",
+ "updated_at": "2026-10-31 15:49",
  "guards": {
   "dataset.count": 271,
   "graph.fact_checks": "6/6",
@@ -17,8 +17,8 @@
  },
  "gold.sha256": {
   "task2_spot_checks": "d7ee3d95b6a4caeec4161807b0bfbd35b4279409644431c5ca9cbe9849eef7d7",
-  "task4_annotation_gold": "eff0ce7aad8c438092f830b70377f718c43fad2c24de232e2db9a614cbedef00",
-  "task5_review_gold": "a87e0aa7398fa49a71be695f00917a1b280be6f0c7ba2ad2d1340790e5ed9279"
+  "task4_annotation_gold": "fca6a76a54c19e06487b11f968038a78b8cb0284eef4314011ec3b14551ecde2",
+  "task5_review_dev": "a87e0aa7398fa49a71be695f00917a1b280be6f0c7ba2ad2d1340790e5ed9279"
  },
- "notes": "黄金判定历史只允许追加复核；指纹变化必须在优化记录中说明。"
+ "notes": "人工标注判定历史只允许追加复核；指纹变化必须在优化记录中说明。"
 }

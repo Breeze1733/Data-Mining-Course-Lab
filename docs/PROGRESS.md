@@ -726,3 +726,20 @@ Agent 9/9；其余指标零变化（task7 改动不触图谱/管线）。
 - **链路补全**：tests/run.py 补 attribute_sentences --output 步骤（此前 attributed_sentences.jsonl 不在链内，
   词典变更后不会自动重算——U23 发现的陈旧问题由此根治）；task7 场景测试撤销 --rules 固定，
   配置 key 时按 LLM 模式出规范产物属预期行为（对 task7 的非确定性网开一面）。
+
+---
+
+## 2026-10-31（补3）产物命名按学术界惯例统一为 dev/test/gold 口径
+
+- 人工核验参考答案 = **gold**（annotation_gold.json / 原 review_gold.json），迭代用样本 = **dev**，
+  独立评估样本 = **test（held-out）**——机器学习评测数据的标准三分命名，文件名与字段名同步：
+  review_gold.json → **review_dev.json**（49 例，回归守护夹具，路径已同步 regression_check/review_and_charts）；
+  review_fresh.json（原 review_r2.json）→ **review_test.json**（30 例独立抽检）；
+  annotation_sample(_expand).json → **annotation_sample_dev/test.json**；
+  人工标注评测集行内 round 字段 → **split（"dev"/"test"）**，evaluation.json 的
+  accuracy_by_round/errors_by_round → accuracy_by_split/errors_by_split。
+- 语义澄清：49 例与 30 例**不是新旧版本**——前者是迭代与守护的 dev 夹具（报告5 引用口径），
+  后者是只做终评的独立测试样本，两者同时交付，角色对应论文中的 dev/test set。
+- baseline/refined 保留（任务书要求的两轮迭代对比的两个实验组，baseline 为学术标准用语）。
+- 打分器与报告4 迁移到 split 口径（数字不变：dev 0.725 / test 0.367 / 总体 0.606）；
+  审计 70/70、守护经 --update-state 留痕后全绿（人工标注评测文件路径与指纹变更）。
