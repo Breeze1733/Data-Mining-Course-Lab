@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-31 14:37",
-  "git": "13a012f",
+  "time": "2026-10-31 14:58",
+  "git": "bdae25a",
   "label": "未命名时点",
-  "dirty_files": 29
+  "dirty_files": 17
  },
  "metrics": {
   "dataset.count": 271,
@@ -37,8 +37,8 @@
   "graph.fact_checks_passed": 6,
   "graph.fact_checks_total": 6,
   "graph.name_alignment_passed": true,
-  "agent.passed": 8,
-  "agent.total": 8,
+  "agent.passed": 9,
+  "agent.total": 9,
   "agent.mode": "llm"
  }
 }

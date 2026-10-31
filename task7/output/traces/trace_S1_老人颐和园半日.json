@@ -4,6 +4,7 @@
   "scenic": "颐和园",
   "visitor_type": "老人",
   "days": 0.5,
+  "month": null,
   "special": [
    "省力"
   ]
@@ -22,6 +23,7 @@
     "scenic": "颐和园",
     "visitor_type": "老人",
     "days": 0.5,
+    "month": null,
     "special": [
      "省力"
     ]
@@ -30,6 +32,7 @@
     "scenic": "颐和园",
     "visitor_type": "老人",
     "days": 1,
+    "month": null,
     "special": [
      "省力"
     ]
@@ -38,6 +41,7 @@
     "scenic": "颐和园",
     "visitor_type": "老人",
     "days": 0.5,
+    "month": null,
     "special": [
      "省力"
     ]
@@ -92,7 +96,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '颐和园', 'visitor_type': '老人', 'days': 0.5, 'special': ['省力']}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '颐和园', 'visitor_type': '老人', 'days': 0.5, 'month': None, 'special': ['省力']}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -200,7 +204,7 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "叔叔阿姨好！咱们半日省力游安排好啦：上午入园先逛清幽的谐趣园，接着漫步昆明湖；中午慢走西堤；下午游览佛香阁，最后打卡十七孔桥。\n\n温馨提示：咱们千万别走中轴线爬山去佛香阁，太耗体力，沿湖看景才省力；另外冬季风大、雨雪降温天游玩体验欠佳，请大家慎重考虑出行并注意保暖安全！",
+ "answer": "叔叔阿姨好！咱们半日省力游这样走：上午先逛谐趣园，漫步昆明湖；中午游览西堤；下午去看佛香阁，咱千万别走中轴线爬山，太累心脏，沿湖走更舒心；最后到十七孔桥散步。\n\n贴心提醒：出行装备需慎重考虑；此线路不建议冬季或遇降温雨雪大风天游玩，风大景逊，保暖安全第一！",
  "plan": {
   "scenic": "颐和园",
   "days": 0.5,
@@ -208,6 +212,7 @@
   "special": [
    "省力"
   ],
+  "trip_month": null,
   "itinerary": [
    {
     "order": 1,
@@ -279,5 +284,5 @@
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 24.48
+ "elapsed": 23.65
 }

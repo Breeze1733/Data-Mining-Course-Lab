@@ -4,6 +4,7 @@
   "scenic": "颐和园",
   "visitor_type": null,
   "days": 0.5,
+  "month": null,
   "special": []
  },
  "trace": [
@@ -20,18 +21,21 @@
     "scenic": "颐和园",
     "visitor_type": null,
     "days": 0.5,
+    "month": null,
     "special": []
    },
    "llm": {
     "scenic": "颐和园",
     "visitor_type": null,
     "days": 1,
+    "month": null,
     "special": []
    },
    "result": {
     "scenic": "颐和园",
     "visitor_type": null,
     "days": 0.5,
+    "month": null,
     "special": []
    }
   },
@@ -80,7 +84,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '颐和园', 'visitor_type': None, 'days': 0.5, 'special': []}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '颐和园', 'visitor_type': None, 'days': 0.5, 'month': None, 'special': []}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -188,12 +192,13 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家上午好！咱们上午先游清幽的谐趣园，漫步昆明湖；中午打卡西堤；下午探访佛香阁，学生朋友记得拜拜逢考必过！老人和体力弱的慎重爬高别走中轴线，带娃选平缓路，体力一般推荐乘船过湖，或去画中游远眺；最后漫步至十七孔桥。省力又赏全景，咱们出发！",
+ "answer": "大家上午好！咱们颐和园半日游这样玩：上午先逛精巧的谐趣园，漫步昆明湖；中午打卡西堤；下午来到佛香阁，学生朋友记得拜拜逢考必过，老人和体力弱的朋友别硬爬山，可去半山腰画中游或乘船过湖，省力景又美；最后漫步十七孔桥。带娃尽量走平缓平坦路段，装备选择也要慎重考虑哦！",
  "plan": {
   "scenic": "颐和园",
   "days": 0.5,
   "visitor_type": null,
   "special": [],
+  "trip_month": null,
   "itinerary": [
    {
     "order": 1,
@@ -277,5 +282,5 @@
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 21.28
+ "elapsed": 20.87
 }

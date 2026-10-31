@@ -4,6 +4,7 @@
   "scenic": "九寨沟",
   "visitor_type": null,
   "days": 1,
+  "month": null,
   "special": []
  },
  "trace": [
@@ -20,18 +21,21 @@
     "scenic": "九寨沟",
     "visitor_type": null,
     "days": 1,
+    "month": null,
     "special": []
    },
    "llm": {
     "scenic": "九寨沟",
     "visitor_type": null,
     "days": 1,
+    "month": null,
     "special": []
    },
    "result": {
     "scenic": "九寨沟",
     "visitor_type": null,
     "days": 1,
+    "month": null,
     "special": []
    }
   },
@@ -80,7 +84,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'days': 1, 'special': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'days': 1, 'month': None, 'special': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -230,12 +234,13 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家早上好！今天九寨一日游行程：提示大家大半天足矣，原始森林建议不去。咱们上午乘车直奔五花海、镜海，步行至诺日朗；下午乘车打卡长海，步行观五彩池，徒步赏诺日朗瀑布，最后乘车游犀牛海。晕车请备药，体力有限芦苇海不停，恐高坐索道别睁眼，家庭出游建议吃中餐。咱们出发！",
+ "answer": "大家早上好！咱们九寨一日游这样玩：上午入园，建议不去原始森林，其实大半天足矣；接着坐车游五花海、镜海，步行到诺日朗。下午乘车登长海，步行赏五彩池，徒步看诺日朗瀑布，最后坐车游犀牛海。\n\n提示：晕车备好药贴；恐高乘索道请闭眼；体力弱勿停芦苇海；用餐推荐丰盛中餐或应季水果下午茶，微辣菜品也很香！",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
   "visitor_type": null,
   "special": [],
+  "trip_month": null,
   "itinerary": [
    {
     "order": 1,
@@ -345,5 +350,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 19.71
+ "elapsed": 24.05
 }

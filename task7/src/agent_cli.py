@@ -48,6 +48,30 @@ SPECIAL_PATTERNS = [
     ("省力", r"省力|轻松|不累|少走"), ("红叶", r"红叶|秋色|赏秋"),
     ("拍照片", r"拍照|出片|机位"), ("滑雪", r"滑雪|温泉"),
 ]
+# 出行月份（规则口径）：月份短语/季节词/节假日 → 代表月份（U24 时段可行性）
+TRIP_MONTH_PATTERNS = [
+    (10, r"(?<!\d)10月|十月|秋季|秋天|国庆"), (11, r"(?<!\d)11月|十一月"), (12, r"(?<!\d)12月|十二月|冬季|冬天"),
+    (1, r"(?<!\d)1月|一月|寒假|元旦"), (2, r"(?<!\d)2月|二月|春节"), (3, r"(?<!\d)3月|三月"),
+    (4, r"(?<!\d)4月|四月|春季|春天"), (5, r"(?<!\d)5月|五月|五一"), (6, r"(?<!\d)6月|六月"),
+    (7, r"(?<!\d)7月|七月|暑假|夏季|夏天"), (8, r"(?<!\d)8月|八月"), (9, r"(?<!\d)9月|九月"),
+]
+SEASON_MONTHS = {"冬季": {12, 1, 2}, "冬天": {12, 1, 2}, "夏季": {6, 7, 8}, "夏天": {6, 7, 8},
+                 "春季": {3, 4, 5}, "春天": {3, 4, 5}, "秋季": {9, 10, 11}, "秋天": {9, 10, 11}}
+
+
+def extract_condition_months(text: str) -> set:
+    """条件文本中的月份集合：单月/月份区间（4-11月份、10月中旬-11月中旬）/季节词。"""
+    months = set()
+    for m in re.finditer(r"(1[0-2]|[1-9])\s*月?[^，。；、！？]{0,3}?[-—~到至]\s*(1[0-2]|[1-9])\s*月", text):
+        a, b = int(m.group(1)), int(m.group(2))
+        if a <= b:
+            months.update(range(a, b + 1))
+    for m in re.finditer(r"(1[0-2]|[1-9])\s*月(?:份|底|初|中旬|上旬|下旬)?", text):
+        months.add(int(m.group(1)))
+    for w, ms in SEASON_MONTHS.items():
+        if w in text:
+            months.update(ms)
+    return months
 
 
 class LLMClient:
@@ -83,7 +107,8 @@ class LLMClient:
 
 INTENT_PROMPT = """你是旅游规划助手。从用户输入中提取约束，输出 JSON：
 {"scenic": "黄山|九寨沟|颐和园|未知", "visitor_type": "老人|孩子|亲子|情侣|体力有限|初次游览|null",
- "days": 1, "special": ["看日出|避开人流|省力|红叶|拍照片" 中的若干或空数组]}
+ "days": 1, "month": 出行月份数字(1-12)或null,
+ "special": ["看日出|避开人流|省力|红叶|拍照片" 中的若干或空数组]}
 只输出 JSON，不要解释。用户输入："""
 
 
@@ -111,6 +136,11 @@ class IntentParser:
                 merged["days"] = llm_intent["days"]
             if not merged.get("special") and llm_intent.get("special"):
                 merged["special"] = llm_intent["special"]
+            if merged.get("month") is None and llm_intent.get("month"):
+                try:
+                    merged["month"] = int(llm_intent["month"])
+                except (TypeError, ValueError):
+                    pass
             trace.append({"step": "intent", "thought": "混合解析：规则精确字段优先，LLM 补缺省", "via": "hybrid",
                           "rule": rule_intent, "llm": llm_intent, "result": merged})
             return merged
@@ -125,7 +155,9 @@ class IntentParser:
                 days = d
                 break
         special = [s for s, pat in SPECIAL_PATTERNS if re.search(pat, query)]
-        return {"scenic": scenic or "未知", "visitor_type": visitor, "days": days, "special": special}
+        month = next((m for m, pat in TRIP_MONTH_PATTERNS if re.search(pat, query)), None)
+        return {"scenic": scenic or "未知", "visitor_type": visitor, "days": days,
+                "month": month, "special": special}
 
 
 class ReActAgent:
@@ -201,20 +233,54 @@ class ReActAgent:
             order_res = self.tools.call("query_order", {"scenic": scenic, "poi": ordered[0]}, trace)
             trace.append({"step": "thought", "thought": f"用 query_order 校验首站的官方后继（{order_res.get('poi')}）"
                          "以决定第二站是否符合主流动线"})
-        # P6 行程可行性校验：已选 POI 挂接的条件节点中含封禁/不建议类 → 提示（不删站，保行程完整）
+        # P6 行程可行性校验（U24 时段化）：封禁/不建议类按 U11 提示；条件文本含月份窗口时按出行月份判定——
+        # 封禁类月份命中 → 升级为时段冲突；正类窗口（开放/适合/精华）且出行月不在窗口 → 出行时段提示
         feasibility_warnings = []
         seen_warn = set()
         import re as _re
         CLOSURE_RE = _re.compile(r"封山|封闭|轮休|停运|关闭|不开放|暂停|停止接待|限流|不建议|不宜|不去|不适合|慎入|谨慎")
+        WINDOW_RE = _re.compile(r"开放|适合|最美|精华|推荐|值得|绝佳")
+        trip_month = intent.get("month")
         for poi in ordered[:10]:
             pc = self.tools.call("query_poi_conditions", {"scenic": scenic, "poi": poi}, trace)
             for c in pc.get("conditions", []):
                 text = c["condition"] + c["suggestion"]
+                months = extract_condition_months(text)
                 if CLOSURE_RE.search(text):
                     w = f'{poi}：{c["condition"][:26]}——{c["suggestion"][:40]}'
+                    if months and trip_month and trip_month in months:
+                        w = f'{poi}（时段冲突，您出行的{trip_month}月适逢条件所述月份）：{c["condition"][:26]}——{c["suggestion"][:40]}'
                     if w not in seen_warn:
                         seen_warn.add(w)
                         feasibility_warnings.append(w)
+                elif (months and trip_month and trip_month not in months
+                      and WINDOW_RE.search(text)):
+                    span = "/".join(str(m) for m in sorted(months))
+                    w = (f'{poi}（时段提示）：条件建议集中于{span}月，您计划的{trip_month}月'
+                         f'不在其中——{c["condition"][:24]}，请先确认当期开放情况')
+                    if w not in seen_warn:
+                        seen_warn.add(w)
+                        feasibility_warnings.append(w)
+        # 景区级时段窗口：直查图谱全部条件节点（query_conditions 按 visitor/limit 截断，会漏一般类）
+        if trip_month:
+            n_win = 0
+            for n, d in self.tools.G.nodes(data=True):
+                if d.get("kind") != "条件" or f":{scenic}:" not in n:
+                    continue
+                text = (d.get("name") or "") + (d.get("suggestion") or "")
+                months = extract_condition_months(text)
+                if (months and trip_month not in months
+                        and WINDOW_RE.search(text) and not CLOSURE_RE.search(text)):
+                    span = "/".join(str(m) for m in sorted(months))
+                    w = (f'{scenic}（时段提示）：条件建议集中于{span}月，您计划的{trip_month}月'
+                         f'不在其中——{(d.get("name") or "")[:24]}，请确认当期景点开放情况')
+                    n_win += 1
+                    if w not in seen_warn:
+                        seen_warn.add(w)
+                        feasibility_warnings.append(w)
+            if n_win:
+                trace.append({"step": "thought", "thought": f"时段窗口扫描：{n_win} 条条件节点含月份窗口"
+                              f"且与出行月 {trip_month} 不符，已生成时段提示"})
         trace.append({"step": "thought", "thought": f"可行性校验：{len(feasibility_warnings)} 条封禁/不建议提示"
                      + ("；已附加到对应站点" if feasibility_warnings else "")})
         for it in itinerary:
@@ -230,6 +296,7 @@ class ReActAgent:
                 if not any(k in c["condition"] + c["suggestion"] for k in other_area_kw)
                 and (c["cond_type"] == "人群" or any(k in c["suggestion"] for k in suggest_cue))][:6]
         return {"scenic": scenic, "days": days, "visitor_type": visitor, "special": intent["special"],
+                "trip_month": intent.get("month"),
                 "itinerary": itinerary, "tips": tips, "feasibility_warnings": feasibility_warnings,
                 "template_route": f'{route_res.get("route_id", "")} {route_res.get("route_title", "")}'}
 

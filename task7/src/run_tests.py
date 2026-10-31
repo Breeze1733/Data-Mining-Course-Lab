@@ -33,6 +33,9 @@ SCENARIOS = [
      "expect": {"scenic": "九寨沟", "days": 1, "feasibility": True}},
     {"id": "S8_多跳动线", "query": "九寨沟从长海出来怎么走回诺日朗中心？",
      "expect": {"scenic": "九寨沟", "path_query": ("长海", "诺日朗中心")}},
+    {"id": "S9_冬季时段提示", "query": "12月去黄山两天，想上莲花峰，冬季去要注意什么？",
+     "expect": {"scenic": "黄山", "days": 2, "month": 12,
+                "feasibility_keyword": "莲花峰", "seasonal_note": True}},
 ]
 
 
@@ -68,6 +71,12 @@ def main() -> int:
                 warnings = (result["plan"] or {}).get("feasibility_warnings", [])
                 checks["feasibility_warning"] = bool(warnings) and any(
                     "原始森林" in w for w in warnings)
+            elif k == "feasibility_keyword":
+                warnings = (result["plan"] or {}).get("feasibility_warnings", [])
+                checks["feasibility_keyword"] = bool(warnings) and any(v in w for w in warnings)
+            elif k == "seasonal_note":
+                warnings = (result["plan"] or {}).get("feasibility_warnings", [])
+                checks["seasonal_note"] = any("时段提示" in w for w in warnings)
             else:
                 checks[k] = intent.get(k) == v
         tool_calls = [t for t in result["trace"] if t.get("step") == "action"]

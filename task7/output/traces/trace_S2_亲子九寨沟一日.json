@@ -4,6 +4,7 @@
   "scenic": "九寨沟",
   "visitor_type": "孩子",
   "days": 1,
+  "month": null,
   "special": []
  },
  "trace": [
@@ -20,18 +21,21 @@
     "scenic": "九寨沟",
     "visitor_type": "孩子",
     "days": 1,
+    "month": null,
     "special": []
    },
    "llm": {
     "scenic": "九寨沟",
     "visitor_type": "亲子",
     "days": 1,
+    "month": null,
     "special": []
    },
    "result": {
     "scenic": "九寨沟",
     "visitor_type": "孩子",
     "days": 1,
+    "month": null,
     "special": []
    }
   },
@@ -80,7 +84,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': '孩子', 'days': 1, 'special': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': '孩子', 'days': 1, 'month': None, 'special': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -230,12 +234,13 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "家长和小朋友们好！咱们九寨沟一日游走起：\n\n上午提示**不去原始森林**（大半天足矣），乘车打卡**五花海**、**镜海**，步行至**诺日朗**。别为了省钱不吃，身体才是根本！\n\n下午坐车看**长海**，步行赏**五彩池**，徒步观**诺日朗瀑布**，再乘车到**犀牛海**。\n\n请文明入厕勿污染，司机加水休息行车格外小心！",
+ "answer": "带娃的朋友看过来！咱们九寨一日游按时间这么玩：上午其实大半天足矣，建议不去原始森林，直接游五花海、镜海、诺日朗；下午游长海、五彩池，徒步诺日朗瀑布，最后乘车看犀牛海。\n\n温馨提示：请文明入厕免污染；没带吃的别为省钱不吃，身体是根本；司机加水休息走这条路需格外小心！",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
   "visitor_type": "孩子",
   "special": [],
+  "trip_month": null,
   "itinerary": [
    {
     "order": 1,
@@ -327,5 +332,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 20.78
+ "elapsed": 28.4
 }

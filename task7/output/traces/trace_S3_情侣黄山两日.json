@@ -4,6 +4,7 @@
   "scenic": "黄山",
   "visitor_type": "情侣",
   "days": 2,
+  "month": null,
   "special": [
    "看日出"
   ]
@@ -22,6 +23,7 @@
     "scenic": "黄山",
     "visitor_type": "情侣",
     "days": 2,
+    "month": null,
     "special": [
      "看日出"
     ]
@@ -30,6 +32,7 @@
     "scenic": "黄山",
     "visitor_type": "情侣",
     "days": 2,
+    "month": null,
     "special": [
      "看日出"
     ]
@@ -38,6 +41,7 @@
     "scenic": "黄山",
     "visitor_type": "情侣",
     "days": 2,
+    "month": null,
     "special": [
      "看日出"
     ]
@@ -88,7 +92,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '黄山', 'visitor_type': '情侣', 'days': 2, 'special': ['看日出']}；先查核心 POI（limit=11），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '黄山', 'visitor_type': '情侣', 'days': 2, 'month': None, 'special': ['看日出']}；先查核心 POI（limit=11），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -266,7 +270,7 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "情侣朋友们好！黄山2日浪漫行程来啦：\n\nD1上午打卡迎客松、莲花峰，中午乘索道至云谷寺，下午游西海大峡谷、飞来石（可抄近路），晚登始信峰；D2北海携手看日出，登光明顶，经白鹅岭，下午挑战天都峰与猴子观海。\n\n提醒：莲花峰若封山改登天都峰，但登天都无索道需步行下山；带好身份证、吃早餐防低血糖，建议订独卫房更惬意！",
+ "answer": "小两口看过来！D1上午登迎客松、莲花峰，中午到云谷寺，下午游西海大峡谷、飞来石，晚抵始信峰。D2上午赴北海、光明顶看日出，中午过白鹅岭，下午打卡天都峰与猴子观海。\n\n提示：若莲花峰封山可选天都峰，但登天都无法坐索道下山；记得带身份证、吃早饭防低血糖，情侣尽早订房免分开！",
  "plan": {
   "scenic": "黄山",
   "days": 2,
@@ -274,6 +278,7 @@
   "special": [
    "看日出"
   ],
+  "trip_month": null,
   "itinerary": [
    {
     "order": 1,
@@ -410,5 +415,5 @@
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
  },
- "elapsed": 23.14
+ "elapsed": 26.9
 }
