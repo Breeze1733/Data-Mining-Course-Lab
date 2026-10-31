@@ -700,3 +700,15 @@ Agent 9/9；其余指标零变化（task7 改动不触图谱/管线）。
 
 `python tests/run.py`（全链重建 + 65 单测）→ `common/regression_check.py`（应全绿，Agent 9/9）
 → `common/report_audit.py`（应 70/70）→ `common/metrics_snapshot.py --print-only`（对照本表终值）。
+
+---
+
+## 2026-10-31（补）LLM 接入盘点与规范口径收口
+
+- 全仓扫描确认：调用 LLM API 的代码仅在 task7（agent_cli.py / run_tests.py / llm_intent_eval.py）；
+  实验1–6 管线与评估为纯静态。task4 的 LLM 对比实验脚本与逐例产物已随 cca7e5b 移除，
+  task4/output/ 残留的 llm_eval_v2_run.log、llm_resolution_eval_v2.json 为历史实验存档
+  （报告不引用，盘点见 docs/README.md）。
+- **口径修复**：tests/run.py 的场景测试步骤固定 `--rules`——此前不带该开关，有 key 的机器上
+  run.py 会产出 LLM 模式的 test_report.json（非确定性文案），与"规范产物规则模式、无 key 可复现"
+  的声明（U14）存在缝隙；修复后规范产物固定规则模式（9/9），报告7 重生成，审计 70/70、守护零退化。

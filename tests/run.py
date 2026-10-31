@@ -35,7 +35,8 @@ def main():
         ("task6/src/build_graph.py", []),
         ("task6/src/verify_graph.py", []),
         ("task6/src/visualize_graph.py", []),
-        ("task7/src/run_tests.py", []),
+        # --rules：规范产物（test_report.json/traces/）固定规则模式口径，无 key 可复现；LLM 模式证据由手动运行另存
+        ("task7/src/run_tests.py", ["--rules"]),
     ]
     for script, arguments in steps:
         print(f"Running {script}", flush=True)
