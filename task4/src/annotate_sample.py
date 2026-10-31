@@ -22,6 +22,9 @@ OUT = ROOT / "output"
 FIGS = OUT / "figs"
 N_PER_CELL = 10
 SEED = 42
+# 扩容轮：在既有 120 例之外追加标注（每格 5 例，独立种子，排除已标注 case）
+N_PER_CELL_EXPAND = 5
+SEED_EXPAND = 43
 
 sys.stdout.reconfigure(encoding="utf-8")
 plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei"]
@@ -152,6 +155,71 @@ GOLD: dict[int, tuple[str, str, str]] = {
 }
 
 
+# ── 扩容轮人工判定（--expand-sample 打印上下文后逐条填写：key = 扩容样本序号，value = (antecedent, kind, note)）──
+EXPAND_GOLD: dict[int, tuple[str, str, str]] = {
+    0: ("九寨沟", "景区", "“这里的水”指夜宿地九寨沟当地，同第1例口径"),
+    1: ("诺日朗", "POI", "“汇合点在这里”指诺日朗换乘中心"),
+    2: ("郎木寺", "景区", "多景点游记（郎木寺段）"),
+    3: ("无", "无", "“那边”指附近拍照点，文本无足够线索确定具体位置"),
+    4: ("就餐的餐馆", "设施", "“这里的消费”指等位就餐的餐厅"),
+    5: ("佛香阁", "POI", "“站在这里”指佛香阁制高点"),
+    6: ("颐和园", "景区", "“这里”指园内游人稀少处，属颐和园范围"),
+    7: ("紫禁城", "景区", "多景点游记（故宫/紫禁城段）"),
+    8: ("避暑山庄", "景区", "多景点游记（承德避暑山庄段）"),
+    9: ("三里屯太古里", "景区", "多景点游记（三里屯段），前句明名“北京三里屯太古里”"),
+    10: ("云谷寺", "POI", "“到那里时”指车抵达的云谷寺山门"),
+    11: ("玉屏楼宾馆", "POI", "景区内酒店，参照第27例（北海宾馆→POI）口径"),
+    12: ("泰安", "景区", "多景区游记（泰安/泰山段），“这里”指泰安当地"),
+    13: ("山上的大平台", "设施", "文本未给出平台专名，指山上可供饮食与过夜的公共平台"),
+    14: ("西海岸景区", "景区", "同句“西海岸景区”，多景区游记（三清山段）"),
+    15: ("无", "无", "“其它”为限定词非回指代词，检测误触发"),
+    16: ("那群大型飞鸟", "其他", "指前句的飞鸟群，非实体体系内对象"),
+    17: ("九寨沟", "景区", "“它的美”指九寨沟美景整体（参照第38例口径）"),
+    18: ("无", "无", "“其它海子”为限定结构非回指代词，检测误触发"),
+    19: ("黄龙", "景区", "“它”指黄龙（联游景区段）"),
+    20: ("长廊", "POI", "先行词为“廊上斑驳的画”，归至长廊实体"),
+    21: ("界湖桥", "POI", "“这座桥”承前指界湖桥（清漪园时期名柳桥）"),
+    22: ("青芝岫（乐寿堂大石头）", "其他", "“它”指青芝岫巨石，未入实体体系"),
+    23: ("紫禁城", "景区", "“这座皇城”指紫禁城，多景点游记（故宫段）"),
+    24: ("圆明园残石", "其他", "“它们”指圆明园遗址残石，虚化集体指代"),
+    25: ("本次两日徒步路线", "路线", "“这条路线”指本篇所述行程路线"),
+    26: ("祠堂", "其他", "“它”承前指祠堂（普通名词）"),
+    27: ("黄山温泉", "POI", "“它”承前指黄山温泉"),
+    28: ("送客松", "POI", "“记住它”指后置命名的送客松"),
+    29: ("黄山", "景区", "“它的美”指黄山（参照第38例口径）"),
+    30: ("当地人", "他人", "同句“当地人说”，指当地居民"),
+    31: ("沈阳6人老年团队", "他人", "前句“6人老年人团队”，非作者同行者"),
+    32: ("图旅影像馆", "设施", "“他们家”指租赁商铺店家"),
+    33: ("三个川大男孩", "他人", "前句偶遇的川大学生，非同行者"),
+    34: ("同路几个小姑娘", "他人", "前句“遇见…几个小姑娘”，非作者队伍"),
+    35: ("同行者", "同行者", "“她们两个”即作者同行家人"),
+    36: ("两个胜利者（英法联军）", "他人", "历史叙述，前句“两个胜利者”"),
+    37: ("同行者", "同行者", ""),
+    38: ("等879路的一队人", "他人", "同句“站了一队人”"),
+    39: ("江南官吏", "他人", "同句主语“江南官吏”，历史叙述"),
+    40: ("抬滑竿的年轻人", "他人", "同句“抬滑竿的…年轻人”"),
+    41: ("望秀山客栈", "设施", "“他们”指望秀山客栈（代订服务方）"),
+    42: ("挑山工", "他人", "承前句挑山工重担语境，“对比他们”指挑山工"),
+    43: ("挑山工", "他人", "前句“挑山工…挑上来”，问价对象为挑山工"),
+    44: ("迎面来的登山者", "他人", "同句“从下面上来的人”"),
+    45: ("没有下来的两组人", "集合-人", "“其中”承接前句“两组人”"),
+    46: ("岩溶层色调", "其他", "“其中”指岩溶层金黄主色调之中，普通名词"),
+    47: ("白石海", "POI", "“倒映其中”指白石海湖面（前句明名），参照第114例口径"),
+    48: ("墨海", "POI", "“倒映其中”指墨海湖面（前句明名）"),
+    49: ("九寨沟Y形沟域", "其他", "“其中”指Y形沟谷范围，普通指称"),
+    50: ("颐和园占地面积", "其他", "“其中”指占地面积整体中的一部分（湖水），普通名词整体-部分"),
+    51: ("展馆内的著名国宝", "集合-其他", "“其中”承接国宝列举"),
+    52: ("胁侍塑像的图案", "其他", "“其中”指塑像衣纹图案之中"),
+    53: ("太和殿/中和殿/保和殿三大殿", "集合-POI", "“其中”承接三大殿枚举"),
+    54: ("外八庙十二座寺庙群", "集合-其他", "“其中”承接十二座寺庙（普通名词集合）"),
+    55: ("《名松谱》收录的黄山松树", "集合-其他", "“其中”承接松树集合（普通名词）"),
+    56: ("费用合计", "其他", "“其中”承接费用总额（账目承接）"),
+    57: ("田园画卷（篁岭村景致）", "其他", "虚化“置身其中”，指前述田园景致"),
+    58: ("黄山全部景观", "其他", "整体-部分：黄山景观全体中的一部分"),
+    59: ("登过的六座山", "集合-其他", "“其中”承接六座山（普通名词集合）"),
+}
+
+
 def load_cases() -> list[dict]:
     return [json.loads(l) for l in (OUT / "pronoun_cases.jsonl").open(encoding="utf-8")]
 
@@ -185,6 +253,39 @@ def sample(cases: list[dict]) -> None:
         print(f"    本句: {s['sentence']}")
 
 
+def expand_sample(cases: list[dict]) -> None:
+    """扩容抽样：排除已标注 case，每格再抽 N_PER_CELL_EXPAND 例（独立种子）。"""
+    gold = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
+    annotated = {g["case_index"] for g in gold}
+    cells: dict[tuple[str, str], list[int]] = defaultdict(list)
+    for i, c in enumerate(cases):
+        if i in annotated:
+            continue
+        cells[(c["pronoun_class"], c["scenic_area"])].append(i)
+    rng = random.Random(SEED_EXPAND)
+    picks = []
+    for cell in sorted(cells):
+        picks.extend(rng.sample(cells[cell], min(N_PER_CELL_EXPAND, len(cells[cell]))))
+    out = []
+    for i in picks:
+        c = cases[i]
+        out.append({
+            "case_index": i, "pronoun": c["pronoun"], "pronoun_class": c["pronoun_class"],
+            "scenic_area": c["scenic_area"], "record_id": c["record_id"], "doc_start": c["doc_start"], "doc_end": c["doc_end"],
+            "prev2": c["prev2_sentence"][-60:], "prev": c["prev_sentence"][-70:],
+            "sentence": c["sentence"][:120],
+            "rule_resolution": c["resolution"], "rule_kind": c["resolution_kind"],
+        })
+    (OUT / "annotation_sample_expand.json").write_text(
+        json.dumps({"seed": SEED_EXPAND, "n_per_cell": N_PER_CELL_EXPAND, "samples": out},
+                   ensure_ascii=False, indent=1), encoding="utf-8")
+    for j, s in enumerate(out):
+        print(f"{j:2d} [{s['pronoun_class']}/{s['pronoun']}|{s['scenic_area']}] 规则→{s['rule_resolution']}({s['rule_kind']})")
+        print(f"    前2: {s['prev2']}")
+        print(f"    前1: {s['prev']}")
+        print(f"    本句: {s['sentence']}")
+
+
 def fill(cases: list[dict]) -> None:
     data = json.loads((OUT / "annotation_sample.json").read_text(encoding="utf-8"))
     existing = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
@@ -211,6 +312,40 @@ def fill(cases: list[dict]) -> None:
     print(f"gold written: {len(gold_rows)}")
 
 
+def fill_expand(cases: list[dict]) -> None:
+    """扩容标注合并：既有 120 行原样保留（追加式），新增行来自 EXPAND_GOLD + 扩容抽样文件。"""
+    data = json.loads((OUT / "annotation_sample_expand.json").read_text(encoding="utf-8"))
+    gold_doc = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))
+    existing = gold_doc["annotations"]
+    anchors = {g["case_index"] for g in existing}
+    new_rows = []
+    for j, s in enumerate(data["samples"]):
+        if j not in EXPAND_GOLD:
+            continue
+        if s["case_index"] in anchors:
+            raise ValueError(f"case_index {s['case_index']} already annotated; expansion samples must be disjoint")
+        case = cases[s["case_index"]]
+        for k in ("record_id", "pronoun", "doc_start", "doc_end"):
+            if s[k] != case[k]:
+                raise ValueError(f"Expand sample stale at j={j}: {k}")
+        ant, kind, note = EXPAND_GOLD[j]
+        new_rows.append({
+            "case_index": s["case_index"], "pronoun": s["pronoun"], "pronoun_class": s["pronoun_class"],
+            "scenic_area": s["scenic_area"], "record_id": s["record_id"],
+            "gold_antecedent": ant, "gold_kind": kind, "note": note,
+            "rule_resolution": s["rule_resolution"], "rule_kind": s["rule_kind"],
+            "doc_start": case["doc_start"], "doc_end": case["doc_end"],
+            "round": 2,
+        })
+    merged = existing + new_rows
+    gold_doc["annotations"] = merged
+    gold_doc["n"] = len(merged)
+    gold_doc["expansion"] = {"seed": SEED_EXPAND, "n_per_cell": N_PER_CELL_EXPAND, "n_added": len(new_rows)}
+    (OUT / "annotation_gold.json").write_text(
+        json.dumps(gold_doc, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"gold expanded: +{len(new_rows)} -> {len(merged)}")
+
+
 def score(cases: list[dict]) -> None:
     gold = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
     FIGS.mkdir(parents=True, exist_ok=True)
@@ -235,10 +370,18 @@ def score(cases: list[dict]) -> None:
     for r in rows:
         by_class[r["pronoun_class"]][1] += 1
         by_class[r["pronoun_class"]][0] += r["correct"]
+    # 分轮口径：round 1 = 原始 120 例（迭代开发集），round 2 = 扩容 60 例（一次性 holdout）
+    by_round = defaultdict(lambda: [0, 0])
+    for r in rows:
+        rd = r.get("round", 1)
+        by_round[rd][1] += 1
+        by_round[rd][0] += r["correct"]
     result = {
         "n": len(rows),
         "accuracy_overall": round(acc_overall, 3),
         "accuracy_by_class": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_class.items())},
+        "accuracy_by_round": {str(k): {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_round.items())},
+        "errors_by_round": {str(k): v[1] - v[0] for k, v in sorted(by_round.items())},
         "errors": [
             {"pronoun": r["pronoun"], "class": r["pronoun_class"], "scenic": r["scenic_area"],
              "rule": r["rule_resolution"], "rule_kind": r["rule_kind"],
@@ -276,6 +419,10 @@ if __name__ == "__main__":
     parser.add_argument("--sample", action="store_true")
     parser.add_argument("--fill", action="store_true")
     parser.add_argument("--score", action="store_true")
+    parser.add_argument("--expand-sample", action="store_true",
+                        help="扩容抽样：排除已标注 case，每格再抽 N_PER_CELL_EXPAND 例")
+    parser.add_argument("--fill-expand", action="store_true",
+                        help="把 EXPAND_GOLD 判定追加合并进 annotation_gold.json（既有行不动）")
     args = parser.parse_args()
     cases = load_cases()
     if args.sample:
@@ -284,3 +431,7 @@ if __name__ == "__main__":
         fill(cases)
     elif args.score:
         score(cases)
+    elif args.expand_sample:
+        expand_sample(cases)
+    elif args.fill_expand:
+        fill_expand(cases)

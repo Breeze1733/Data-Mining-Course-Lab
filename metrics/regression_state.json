@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-31 10:32",
+ "updated_at": "2026-10-31 14:05",
  "guards": {
   "dataset.count": 271,
   "graph.fact_checks": "6/6",
@@ -11,14 +11,14 @@
   "task5.review_self_consistent": true,
   "task5.verdicts": "20/16/13",
   "task4.score_rerun_ok": true,
-  "task4.coref_accuracy": 0.583,
-  "task4.coref_n": 120,
+  "task4.coref_accuracy": 0.483,
+  "task4.coref_n": 180,
   "task5.score_rerun_ok": true
  },
  "gold.sha256": {
   "task2_spot_checks": "d7ee3d95b6a4caeec4161807b0bfbd35b4279409644431c5ca9cbe9849eef7d7",
-  "task4_annotation_gold": "a3413ab53fe51f6673a2a67e5430298fddf72832f189fd9c3fc7334f3af9f360",
+  "task4_annotation_gold": "eff0ce7aad8c438092f830b70377f718c43fad2c24de232e2db9a614cbedef00",
   "task5_review_gold": "a87e0aa7398fa49a71be695f00917a1b280be6f0c7ba2ad2d1340790e5ed9279"
  },
- "notes": "黄金判定历史只允许追加复核；指纹变化必须在 PROGRESS.md 说明。"
+ "notes": "黄金判定历史只允许追加复核；指纹变化必须在优化记录中说明。"
 }

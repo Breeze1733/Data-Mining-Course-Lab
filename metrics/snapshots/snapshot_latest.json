@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-31 13:51",
-  "git": "e4c97ba",
+  "time": "2026-10-31 14:05",
+  "git": "6ee8c81",
   "label": "未命名时点",
-  "dirty_files": 10
+  "dirty_files": 11
  },
  "metrics": {
   "dataset.count": 271,
@@ -25,8 +25,8 @@
   "tau.huangshan": 0.52,
   "routes.official_total": 39,
   "routes.tourist_total": 228,
-  "coref.n": 120,
-  "coref.accuracy": 0.583,
+  "coref.n": 180,
+  "coref.accuracy": 0.483,
   "cond.pairs": 843,
   "cond.review_n": 49,
   "cond.correct": 20,
