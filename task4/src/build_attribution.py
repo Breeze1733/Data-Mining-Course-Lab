@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """P1 句子级叙述焦点：把人工预标注与句子池合并为正式产物 sentence_attribution.jsonl。
 
-预标注流程（见 DECISIONS.md D1 口径）：
+预标注流程（五类口径见下）：
   1. sample_sentences.py 生成分层句子池（495 句，seed=42）；
   2. 标注者（本文档作者，LLM 逐句阅读判定）输出 labels_working.json；
   3. 自查两遍：①随机 50 句（seed=42）独立重判，逐条对比；②关键词分组一致性审计
@@ -41,7 +41,7 @@ def main() -> int:
     meta = {
         "labeled_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
         "annotator": "本文档作者（LLM 逐句阅读判定）",
-        "rubric": "DECISIONS.md D1：景区内(黄山/九寨沟/颐和园)/景区外/无法判断 五类口径",
+        "rubric": "景区内(黄山/九寨沟/颐和园)/景区外/无法判断 五类口径",
         "sampling": "sample_sentences.py：3景区×(official 10 + travelogue 155)，seed=42，共495句",
         "self_check": {
             "pass1": "随机50句(seed=42)独立重判：50/50 与原判一致，0 处修改",

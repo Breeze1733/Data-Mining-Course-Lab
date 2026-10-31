@@ -1,6 +1,9 @@
 """Regressions discovered for the production entity rules."""
 import unittest
 
+import sys as _sys
+from pathlib import Path as _P
+_sys.path.insert(0, str(_P(__file__).resolve().parents[2] / "task2/src"))
 from entity_rules import DictMatcher, refined_dictionary, time_entities, contextual_facility_places, resolve_record_entities
 
 

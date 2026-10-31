@@ -1,6 +1,6 @@
 # 实验2 游览步骤的实体识别
 
-统一复现入口为仓库根目录的`python run.py`。
+统一复现入口为仓库根目录的`python tests/run.py`。
 
 输入：`task1/data/processed/dataset_clean.jsonl`。
 输出：`output/exp2/`中的实体JSONL、类型定义、词频统计、图表与抽检结果；最终实体供实验3至7使用。

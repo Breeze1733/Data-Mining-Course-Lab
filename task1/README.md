@@ -1,6 +1,6 @@
 # 实验1 景区指南数据采集与预处理
 
-项目复现统一在仓库根目录运行`python run.py`，使用已经入库的主语料。
+项目复现统一在仓库根目录运行`python tests/run.py`，使用已经入库的主语料。
 
 - `data/processed/dataset_clean.jsonl`：271条清洗后正文，是后续实验的统一输入。
 - `data/raw/official_routes.jsonl`：46条官方路线分支，供实验3解析。

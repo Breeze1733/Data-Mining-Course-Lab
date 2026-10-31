@@ -4,6 +4,9 @@ from __future__ import annotations
 
 import unittest
 
+import sys as _sys
+from pathlib import Path as _P
+_sys.path.insert(0, str(_P(__file__).resolve().parents[2] / "task2/src"))
 from dictionary import Gazetteer, POIEntry, TransportEntry
 
 

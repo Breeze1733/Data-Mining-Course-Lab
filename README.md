@@ -7,7 +7,7 @@
 使用仓库根目录的同一个Python环境（`.venv`），安装`requirements.txt`中的依赖后，在仓库根目录运行：
 
 ```powershell
-python run.py
+python tests/run.py
 ```
 
 程序读取已入库的`task1/data/processed/dataset_clean.jsonl`，顺序执行实体识别及下游实验，更新各实验输出与图表。默认离线运行，不重新联网采集，也不重填人工标注。Agent未配置API时使用规则模式。

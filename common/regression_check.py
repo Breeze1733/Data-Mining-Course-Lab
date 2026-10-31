@@ -10,7 +10,7 @@
      task2 抽检 / task5 复核汇总与黄金文件自洽；
   2. 重打分：task4 --score（当前消解器 vs 120 例黄金）、task5 --score（当前条件对复核汇总）；
   3. 黄金文件指纹：三个黄金文件的 SHA256 与上次不同即告警（黄金只允许追加复核，
-     不允许为好看而改判——改判必须先在 PROGRESS.md 说明并 --update-state 留痕）。
+     不允许为好看而改判——改判必须先在优化记录中说明并 --update-state 留痕）。
 
 退出码：0 = 无退化；1 = 有守护指标退化或黄金指纹变化。
 状态存 metrics/regression_state.json（随提交入库，作为"上次认可状态"）。
@@ -231,7 +231,7 @@ def main() -> int:
     if hard_fail:
         problems.append("硬守护异常（数据集/图谱/Agent）: " + ", ".join(r["name"] for r in hard_fail))
     if gold_changed:
-        problems.append("黄金文件指纹变化（须在 PROGRESS.md 说明后 --update-state）: "
+        problems.append("黄金文件指纹变化（须在优化记录中说明后 --update-state）: "
                         + ", ".join(r["name"].split(".", 1)[1] for r in gold_changed))
 
     if problems:
@@ -249,7 +249,7 @@ def main() -> int:
             "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "guards": {k: v for k, v in now.items() if k != "gold.sha256"},
             "gold.sha256": now["gold.sha256"],
-            "notes": "黄金判定历史只允许追加复核；指纹变化必须在 PROGRESS.md 说明。",
+            "notes": "黄金判定历史只允许追加复核；指纹变化必须在优化记录中说明。",
         }
         STATE_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"[state] 已更新基准 -> {STATE_PATH.relative_to(ROOT)}")

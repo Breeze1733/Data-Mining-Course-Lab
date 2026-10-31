@@ -1,4 +1,8 @@
 """采集入口的冷启动和断点行为回归检查，不访问真实网站。"""
+import sys as _sys
+from pathlib import Path as _P
+_sys.path.insert(0, str(_P(__file__).resolve().parents[2] / "task1/src"))
+_sys.path.insert(0, str(_P(__file__).resolve().parents[2] / "task1/scripts"))
 from contextlib import redirect_stdout
 from io import BytesIO, StringIO
 import json
