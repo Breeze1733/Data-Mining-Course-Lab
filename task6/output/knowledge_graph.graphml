@@ -1266,7 +1266,7 @@
   <data key="d2">[一般] 一般建议</data>
   <data key="d5">一般</data>
   <data key="d6">搞明白,的确是一件很美妙的事情</data>
-  <data key="d7">58</data>
+  <data key="d7">57</data>
   <data key="d8">一般建议</data>
 </node>
 <node id="条件:颐和园:一般:一般建议避雷">
@@ -2016,6 +2016,15 @@
   <data key="d7">1</data>
   <data key="d8">脚力不好就会苦了父母</data>
 </node>
+<node id="条件:黄山:其他:是跟我们反方向">
+  <data key="d0">条件</data>
+  <data key="d1">是跟我们反方向</data>
+  <data key="d2">[其他] 是跟我们反方向</data>
+  <data key="d5">其他</data>
+  <data key="d6">可能比较高能</data>
+  <data key="d7">1</data>
+  <data key="d8">是跟我们反方向</data>
+</node>
 <node id="条件:黄山:其他:是往下走">
   <data key="d0">条件</data>
   <data key="d1">是往下走</data>
@@ -2177,6 +2186,15 @@
   <data key="d6">也可以一开始就从光明顶先去群峰顶,然后再去飞来石,这样就可以免去爬100级台阶之苦</data>
   <data key="d7">1</data>
   <data key="d8">想节省体力</data>
+</node>
+<node id="条件:黄山:其他:不想爬莲花峰">
+  <data key="d0">条件</data>
+  <data key="d1">不想爬莲花峰</data>
+  <data key="d2">[其他] 不想爬莲花峰</data>
+  <data key="d5">其他</data>
+  <data key="d6">就向右直接去玉屏楼看迎客松</data>
+  <data key="d7">1</data>
+  <data key="d8">不想爬莲花峰</data>
 </node>
 <node id="条件:黄山:体力安全:体力和时间允许">
   <data key="d0">条件</data>
@@ -3870,6 +3888,15 @@
   <data key="d7">1</data>
   <data key="d8">还是有高反反应</data>
 </node>
+<node id="条件:颐和园:体力安全:体力可以">
+  <data key="d0">条件</data>
+  <data key="d1">体力可以</data>
+  <data key="d2">[体力安全] 体力可以</data>
+  <data key="d5">体力安全</data>
+  <data key="d6">建议上去看看非常的漂亮</data>
+  <data key="d7">1</data>
+  <data key="d8">体力可以</data>
+</node>
 <node id="条件:颐和园:其他:没有滴滴软件和“美味不用等”软件">
   <data key="d0">条件</data>
   <data key="d1">没有滴滴软件和“美味不用等”软件</data>
@@ -5026,6 +5053,10 @@
   <data key="d10">1</data>
 </edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:脚力不好就会苦父母" id="条件建议">
+  <data key="d9">条件建议</data>
+  <data key="d10">1</data>
+</edge>
+<edge source="景区:黄山:黄山" target="条件:黄山:其他:是跟我们反方向" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
@@ -6326,6 +6357,10 @@
   <data key="d10">1</data>
 </edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:没有”由此上溯到一千八百四十年" id="条件建议">
+  <data key="d9">条件建议</data>
+  <data key="d10">1</data>
+</edge>
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:体力安全:体力可以" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
@@ -11466,6 +11501,10 @@
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
+<edge source="POI:黄山:玉屏楼" target="条件:黄山:其他:不想爬莲花峰" id="条件建议">
+  <data key="d9">条件建议</data>
+  <data key="d10">1</data>
+</edge>
 <edge source="POI:黄山:玉屏楼" target="条件:黄山:人群:游客为体力有限" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
@@ -12925,6 +12964,10 @@
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
+<edge source="POI:黄山:莲花峰" target="条件:黄山:其他:不想爬莲花峰" id="条件建议">
+  <data key="d9">条件建议</data>
+  <data key="d10">1</data>
+</edge>
 <edge source="POI:黄山:莲花峰" target="条件:黄山:其他:新莲初开" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
@@ -13919,6 +13962,10 @@
   <data key="d10">1</data>
 </edge>
 <edge source="POI:黄山:迎客松" target="条件:黄山:其他:一日游就必须放弃北海景区天海景区" id="条件建议">
+  <data key="d9">条件建议</data>
+  <data key="d10">1</data>
+</edge>
+<edge source="POI:黄山:迎客松" target="条件:黄山:其他:不想爬莲花峰" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>

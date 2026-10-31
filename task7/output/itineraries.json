@@ -64,6 +64,12 @@
     "frequency": 1
    },
    {
+    "cond_type": "体力安全",
+    "condition": "体力可以",
+    "suggestion": "建议上去看看非常的漂亮",
+    "frequency": 1
+   },
+   {
     "cond_type": "天气",
     "condition": "天气条件（句内）",
     "suggestion": "不建议雨雪天走这一线--这天降温大风,特别是下行过了大半时,终于明白什么是寒风凛冽,庆幸已经快到山下了,风",

@@ -102,7 +102,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
     pairs = []
     seen_spans = set()
 
-    # P1/P2/P3：显式条件
+    # P1/P2/P3：显式条件（含“…的话就/可以/建议Y”无逗号紧邻变体，U25：+4 例真实建议）
     for m in re.finditer(r"(如果|假如|假若|若是|(?<![宛仿相如自普兰沉聊日的])若|要是|万一|一旦|只要|除非)([^。！？；]{1,40}?)(的话)?[，,]", sent):
         cond = (m.group(2) or "").strip()
         rest = sent[m.end():].strip()
@@ -114,6 +114,18 @@ def extract_from_sentence(sent: str) -> list[dict]:
         for sugg in split_multi_suggestions(rest):
             pairs.append({"pattern": "P1_显式条件", "trigger": trigger,
                           "condition_text": cond, "suggestions": [sugg], "sentence": sent})
+        seen_spans.add(m.start())
+    for m in re.finditer(r"(如果|要是|若|假如)([^。！？；，]{1,40}?的话)(?=[就才可以建议最好也])", sent):
+        if m.start() in seen_spans:
+            continue
+        trigger = m.group(1) + "…的话(紧邻)"
+        rest = sent[m.start(2) + len(m.group(2)):]
+        if not rest or RHETORIC_P1_RE.match(trigger):
+            continue
+        for sugg in split_multi_suggestions(rest):
+            pairs.append({"pattern": "P1_显式条件", "trigger": trigger,
+                          "condition_text": m.group(2).rstrip("的话").strip(),
+                          "suggestions": [sugg], "sentence": sent})
         seen_spans.add(m.start())
 
     # P3 当/遇到…时
