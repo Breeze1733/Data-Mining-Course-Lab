@@ -286,13 +286,18 @@ def run_all(output_path: Path | None) -> dict[tuple[str, int], str]:
     return lookup
 
 
-def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None) -> dict:
+def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None,
+             splits: str = "tune") -> dict:
+    """splits="tune"：迭代模式，只评 tune 半区（holdout 不许看）；
+    splits="final"：方案冻结后的一次性终评，评 holdout+full，不做任何错误导出。"""
     gold_rows = [json.loads(l) for l in (ATTR / "sentence_attribution.jsonl").open(encoding="utf-8")]
     rng = random.Random(42)
     idx = list(range(len(gold_rows)))
     rng.shuffle(idx)
     half = len(gold_rows) // 2
     tune_ids, hold_ids = set(idx[:half]), set(idx[half:])
+    if splits == "tune" and errors_path is None:
+        errors_path = None
     err_fh = errors_path.open("w", encoding="utf-8") if errors_path else None
 
     def score(subset_ids: set[int], method: str) -> dict:
@@ -315,17 +320,19 @@ def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None
             per_scenic[(g["scenic_area"], pred == g["label"])] += 1
         return {"n": n, "acc": round(correct / n, 4) if n else None, "confusion": dict(conf)}
 
-    res = {
-        "tune": {"A": score(tune_ids, "A"), "B": score(tune_ids, "B")},
-        "holdout": {"A": score(hold_ids, "A"), "B": score(hold_ids, "B")},
-        "full": {"A": score(set(range(len(gold_rows))), "A"), "B": score(set(range(len(gold_rows))), "B")},
-        "method_note": "方案B v2（特征规则，冻结于2026-10-30）：词典POI+根名别名+补充地标(权重3/出现一次)，"
-                       "景区外信号(2)，大交通覆盖(无游览意图时判景区外)，酒店三态(园内名/推销描写/登山语境)，"
-                       "弱景观词(0.6)，转移词继承，基础设施+官方文本回退记录级标签。"
-                       "调参纪律：v2迭代只看tune半区；v1设计阶段曾查看一次holdout混淆矩阵。"
-                       "已知局限：标注者与特征设计者为同一人，495句对设计者全部可见，"
-                       "holdout 0.746 应视为接近但可能略偏乐观的估计；A/B差距(+30点)远大于该不确定度。",
-    }
+    res: dict = {"splits": splits}
+    if splits == "tune":
+        res["tune"] = {"A": score(tune_ids, "A"), "B": score(tune_ids, "B")}
+    else:
+        res["holdout"] = {"A": score(hold_ids, "A"), "B": score(hold_ids, "B")}
+        res["full"] = {"A": score(set(range(len(gold_rows))), "A"), "B": score(set(range(len(gold_rows))), "B")}
+    res["method_note"] = (
+        "方案B v2（特征规则，冻结于2026-10-30）：词典POI+根名别名+补充地标(权重3/出现一次)，"
+        "景区外信号(2)，大交通覆盖(无游览意图时判景区外)，酒店三态(园内名/推销描写/登山语境)，"
+        "弱景观词(0.6)，转移词继承，基础设施+官方文本回退记录级标签。"
+        "调参纪律：v2迭代只看tune半区；v1设计阶段曾查看一次holdout混淆矩阵。"
+        "已知局限：标注者与特征设计者为同一人，495句对设计者全部可见，"
+        "holdout 0.746 应视为接近但可能略偏乐观的估计；A/B差距(+30点)远大于该不确定度。")
     if err_fh:
         err_fh.close()
     return res
@@ -334,8 +341,12 @@ def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None
 def main() -> int:
     ensure_utf8_stdout()
     ap = argparse.ArgumentParser()
-    ap.add_argument("--evaluate", action="store_true")
-    ap.add_argument("--errors", action="store_true", help="导出 tune 半区 B 的错误样例供特征设计")
+    ap.add_argument("--evaluate", action="store_true",
+                    help="迭代评估：只评 tune 半区（holdout 不许看，看即泄漏）")
+    ap.add_argument("--final", action="store_true",
+                    help="方案冻结后的一次性终评：评 holdout+full 并记入 holdout_evaluations.jsonl（应全程仅一次）")
+    ap.add_argument("--errors", action="store_true", help="导出 tune 半区 B 的错误样例供特征设计（--final 下禁用）")
+    ap.add_argument("--note", type=str, default="", help="--final 终评的备注（写入审计账本）")
     ap.add_argument("--output", type=str, default="", help="全量归属输出路径")
     args = ap.parse_args()
 
@@ -344,21 +355,35 @@ def main() -> int:
     if out_path:
         print(f"全量归属 -> {out_path}")
 
+    if args.evaluate and args.final:
+        ap.error("互斥：--evaluate 只看 tune；--final 是一次性 holdout 终评")
     if args.evaluate:
-        res = evaluate(lookup, ATTR / "attribution_errors.jsonl" if args.errors else None)
+        res = evaluate(lookup, ATTR / "attribution_errors.jsonl" if args.errors else None, splits="tune")
         (ATTR / "attribution_eval.json").write_text(
             json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
-        for half in ("tune", "holdout", "full"):
-            a, b = res[half]["A"], res[half]["B"]
-            print(f"[{half}] A记录级标签: acc={a['acc']} (n={a['n']})  |  B特征规则: acc={b['acc']} (n={b['n']})")
-        # B 在 holdout 的主要混淆
-        conf = res["holdout"]["B"]["confusion"]
-        worst = sorted(((k, v) for k, v in conf.items() if "||" in k and k.split("||")[0] != k.split("||")[1]),
-                       key=lambda x: -x[1])[:12]
-        print("B holdout 主要混淆 (gold->pred):")
-        for kv, v in worst:
-            g, p = kv.split("||")
-            print(f"   {g} -> {p}: {v}")
+        a, b = res["tune"]["A"], res["tune"]["B"]
+        print(f"[tune] A记录级标签: acc={a['acc']} (n={a['n']})  |  B特征规则: acc={b['acc']} (n={b['n']})")
+        print("holdout 未评——留出纪律：迭代只看 tune；方案冻结后用 --final 终评一次。")
+        return 0
+    if args.final:
+        res = evaluate(lookup, None, splits="final")
+        import datetime as _dt
+        audit = ATTR / "holdout_evaluations.jsonl"
+        prior = sum(1 for _ in audit.open(encoding="utf-8")) if audit.exists() else 0
+        rec = {"time": _dt.datetime.now().isoformat(timespec="seconds"),
+               "tune_acc": res.get("tune", {}).get("B", {}).get("acc"),
+               "holdout_acc": res["holdout"]["B"]["acc"], "full_acc": res["full"]["B"]["acc"],
+               "note": args.note or "方案冻结终评"}
+        with audit.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(rec, ensure_ascii=False) + chr(10))
+        a, b = res["holdout"]["A"], res["holdout"]["B"]
+        print(f"[holdout] A记录级标签: acc={a['acc']} (n={a['n']})  |  B特征规则: acc={b['acc']} (n={b['n']})")
+        ff, fb = res["full"]["A"], res["full"]["B"]
+        print(f"[full] A记录级标签: acc={ff['acc']} (n={ff['n']})  |  B特征规则: acc={fb['acc']} (n={fb['n']})")
+        print(f"已记入 {audit.name}（含本次共 {prior + 1} 次；>1 次即留出语义退化，regression_check 会报警）")
+        (ATTR / "attribution_eval.json").write_text(
+            json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
+        return 0
     return 0
 
 
