@@ -66,7 +66,9 @@ def main():
          f"共抽取 {STATS['raw_pairs']:,} 对，按（景区 + 条件归一文本 + 建议归一文本）去重后保留 "
          f"{STATS['after_dedup']:,} 对（合并重复 {STATS['duplicates_merged']} 对，保留来源与频次）。"
          "映射表字段：条件类型/条件描述/建议内容/触发词/抽取模式/景区/频次/来源记录，"
-         "输出 conditional_mapping_table.xlsx（1210 行）与 mapping_table.json。")
+         "输出 conditional_mapping_table.xlsx（1210 行）与 mapping_table.json。"
+         "抽取前有一道句级归属过滤（默认开启，--no-attribution-filter 可关）：特征规则判定句子叙述焦点，"
+         "景区外句子不产出条件建议对——这是 1,210→842 条去噪的主要机制之一，与实验4 的消解候选过滤共用同一实现。")
 
     rb.section("四、实验结果与分析")
     rb.sub("4.1 类型与景区分布")
