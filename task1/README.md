@@ -15,7 +15,6 @@
 - `scripts/`：采集爬虫与配套（`crawl_official.py`、`crawl_ctrip_ranked.py`、`crawl_xiaohongshu.mjs`、`expand_ctrip.py`、`select_collection.py`、`stage_status.py`、`import_browser_notes.py`）及旧版入口（`collect.py`、`assemble.py`等，仅供历史参考）。
 - `research/`：来源考证与搜索边界审计笔记（`official_sources.md`等，任务书要求的来源说明）。
 - `data/`：只入库下游实验的输入与交付审计文件——`processed/dataset_clean.jsonl`（实验2-7统一输入）、`raw/official_routes.jsonl`（实验3输入）、`processed/quality_report.json`等清洗审计文件，以及`collected/`的汇总、候选审计与`scenic_guide_dataset.xlsx`交付簿。HTML快照、爬虫工作区`crawl/`与中间产物不入库。
-- `sources.json`：旧版采集来源清单，已停止跟踪（本地保留，不随仓库分发）。
 - `run_collection.ps1`：三平台联网采集总入口（日常复现不需要运行）。
 - `package.json`、`package-lock.json`：浏览器采集（Playwright/Node）的依赖清单，入库；`node_modules/` 由 `npm install` 生成，不入库。
 - `logs/`：采集运行日志。
