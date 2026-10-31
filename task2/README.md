@@ -14,11 +14,3 @@
 baseline与refined是同一程序的两次词典迭代，保留其结果以满足任务书的优化前后对比要求。下游统一读取`entities_refined.jsonl`，不需要选择代码版本或切换数据口径。
 
 地点别名通过`common/entity_identity.py`统一处理。实体写出前检查字符位置和区间重叠；历史抽检仅在文档、类型、原文及位置一致时继承判定。
-
-## 延伸机制说明（不属于实验2 四项任务）
-
-`task4/src/attribute_sentences.py`、`task4/src/build_attribution.py`、`task4/src/sample_sentences.py` 与
-`task4/output/attribution/`（495 句标注集、全量归属、评估数据）是**句级归属**环节：判定每句叙述焦点
-属于哪个景区，供实验4（消解候选过滤）与实验5（条件对过滤）共用——实验2 的任务书四项任务
-（实体识别/规范表/词频可视化/成果输出）均不包含它，实体识别本身为纯 jieba+词典+规则，全程无 LLM。
-权重在标注集上按 seed=42 对半分迭代（tune 调参、holdout 一次终评）。详见 DECISIONS.md D2 与 review/。
