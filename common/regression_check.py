@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""黄金标注回归守护：一条命令输出全部守护指标，并与上次认可状态对比。
+"""人工标注评测回归守护：一条命令输出全部守护指标，并与上次认可状态对比。
 
 用法（建议每次冒烟链全绿后运行）：
     python common/regression_check.py                 # 重打分 + 对比 + 输出结论
@@ -7,12 +7,12 @@
 
 守护内容：
   1. 静态守护：主数据集 271 条；图谱事实核验 6/6 与名称对齐；Agent 场景 6/6；
-     task2 抽检 / task5 复核汇总与黄金文件自洽；
-  2. 重打分：task4 --score（当前消解器 vs 120 例黄金）、task5 --score（当前条件对复核汇总）；
-  3. 黄金文件指纹：三个黄金文件的 SHA256 与上次不同即告警（黄金只允许追加复核，
+     task2 抽检 / task5 复核汇总与人工标注评测文件自洽；
+  2. 重打分：task4 --score（当前消解器 vs 120 例人工标注评测集）、task5 --score（当前条件对复核汇总）；
+  3. 人工标注评测文件指纹：三个人工标注评测文件的 SHA256 与上次不同即告警（该文件只允许追加复核，
      不允许为好看而改判——改判必须先在优化记录中说明并 --update-state 留痕）。
 
-退出码：0 = 无退化；1 = 有守护指标退化或黄金指纹变化。
+退出码：0 = 无退化；1 = 有守护指标退化或人工标注评测文件指纹变化。
 状态存 metrics/regression_state.json（随提交入库，作为"上次认可状态"）。
 """
 import argparse
@@ -96,7 +96,7 @@ def collect_guards() -> dict:
         g["task2.spot_n"] = None
         g["task2.spot_self_consistent"] = False
 
-    # 静态自洽：task5 复核汇总 vs 黄金重算
+    # 静态自洽：task5 复核汇总 vs 人工标注评测集重算
     rg = load_json(ROOT / "task5/output/review_gold.json")
     rs5 = load_json(ROOT / "task5/output/review_summary.json")
     if rg and rs5:
@@ -117,7 +117,7 @@ def collect_guards() -> dict:
         g["task5.review_self_consistent"] = False
         g["task5.verdicts"] = None
 
-    # 重打分：task4 消解（当前消解器 vs 120 例黄金）
+    # 重打分：task4 消解（当前消解器 vs 120 例人工标注评测集）
     ok4, out4 = run_scorer(ROOT / "task4", "../task4/src/annotate_sample.py", "--score")
     ev = load_json(ROOT / "task4/output/evaluation.json") if ok4 else None
     g["task4.score_rerun_ok"] = ok4
@@ -126,7 +126,7 @@ def collect_guards() -> dict:
     if not ok4:
         g["task4.score_error_tail"] = out4
 
-    # 重打分：task5 条件对（review_summary 由黄金重算生成，上面已读）
+    # 重打分：task5 条件对（review_summary 由人工标注评测集重算生成，上面已读）
     ok5, out5 = run_scorer(ROOT / "task5", "../task5/src/review_and_charts.py", "--score")
     g["task5.score_rerun_ok"] = ok5
     if not ok5:
@@ -137,7 +137,7 @@ def collect_guards() -> dict:
         g["task5.verdicts"] = f"{v.get('correct', 0)}/{v.get('boundary', 0)}/{v.get('wrong', 0)}"
         g["task5.review_n"] = rs5b.get("n")
 
-    # 黄金文件指纹
+    # 人工标注评测文件指纹
     g["gold.sha256"] = {k: sha256(p) for k, p in GOLD_FILES.items()}
     return g
 
@@ -193,7 +193,7 @@ VERDICT_MARK = {"same": "=", "new": "+", "improved": "↑", "degraded": "↓", "
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="黄金标注回归守护")
+    ap = argparse.ArgumentParser(description="人工标注评测回归守护")
     ap.add_argument("--update-state", action="store_true", help="把当前状态固化为新基准（需先人工确认无退化）")
     args = ap.parse_args()
 
@@ -219,19 +219,19 @@ def main() -> int:
 
     problems = []
     if not now.get("task4.score_rerun_ok", True):
-        problems.append("task4 重打分失败（黄金对齐断裂？）: " + str(now.get("task4.score_error_tail", ""))[:300])
+        problems.append("task4 重打分失败（人工标注评测集对齐断裂？）: " + str(now.get("task4.score_error_tail", ""))[:300])
     if not now.get("task5.score_rerun_ok", True):
         problems.append("task5 重打分失败: " + str(now.get("task5.score_error_tail", ""))[:300])
     if now.get("task2.spot_self_consistent") is False:
         problems.append("task2 抽检汇总与样本重算不一致")
     if now.get("task5.review_self_consistent") is False:
-        problems.append("task5 复核汇总与黄金重算不一致")
+        problems.append("task5 复核汇总与人工标注评测集重算不一致")
     if degraded:
         problems.append("守护指标退化: " + ", ".join(r["name"] for r in degraded))
     if hard_fail:
         problems.append("硬守护异常（数据集/图谱/Agent）: " + ", ".join(r["name"] for r in hard_fail))
     if gold_changed:
-        problems.append("黄金文件指纹变化（须在优化记录中说明后 --update-state）: "
+        problems.append("人工标注评测文件指纹变化（须在优化记录中说明后 --update-state）: "
                         + ", ".join(r["name"].split(".", 1)[1] for r in gold_changed))
 
     if problems:
@@ -249,7 +249,7 @@ def main() -> int:
             "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "guards": {k: v for k, v in now.items() if k != "gold.sha256"},
             "gold.sha256": now["gold.sha256"],
-            "notes": "黄金判定历史只允许追加复核；指纹变化必须在优化记录中说明。",
+            "notes": "人工标注判定历史只允许追加复核；指纹变化必须在优化记录中说明。",
         }
         STATE_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"[state] 已更新基准 -> {STATE_PATH.relative_to(ROOT)}")

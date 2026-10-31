@@ -125,7 +125,7 @@ def build_claims() -> dict[str, list[dict]]:
         ],
         "task4/report.docx": [
             {"name": "代词案例数", "variants": v_int(count_lines(ROOT / "task4/output/pronoun_cases.jsonl")), "required": True},
-            {"name": "黄金样本数", "variants": v_int(EVAL.get("n")), "required": True},
+            {"name": "人工标注样本数", "variants": v_int(EVAL.get("n")), "required": True},
             {"name": "总体准确率", "variants": v_pct(EVAL.get("accuracy_overall")), "required": True},
             {"name": "错误数", "variants": v_int(n_eval - correct_eval), "required": False},
             {"name": "locative准确率", "variants": v_pct((acc.get("locative") or {}).get("accuracy")), "required": True},
@@ -167,7 +167,7 @@ def build_claims() -> dict[str, list[dict]]:
             {"name": "数据集规模", "variants": v_int((Q1.get("profile") or {}).get("text_types", {}).get("travelogue"))
                 + v_int(Q1.get("accepted_records")), "required": True},
             {"name": "消解准确率", "variants": v_pct(EVAL.get("accuracy_overall")), "required": True},
-            {"name": "消解黄金样本", "variants": v_int(EVAL.get("n")), "required": True},
+            {"name": "消解人工标注样本", "variants": v_int(EVAL.get("n")), "required": True},
             {"name": "实体抽检正确", "variants": v_int((SPOT.get("review_summary") or {}).get("correct")), "required": True},
             {"name": "条件复核样本", "variants": v_int(n_rev), "required": True},
         ],

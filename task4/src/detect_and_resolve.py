@@ -119,7 +119,7 @@ def main(argv=None) -> int:
                     "prev2_sentence": sentences[si - 2][2] if si >= 2 else "",
                 }
                 if cls in ("locative", "object"):
-                    # 路线指代："这条(路|线…)"指代道路/线路本身，不是沿途 POI（U13，7例黄金回归）；
+                    # 路线指代："这条(路|线…)"指代道路/线路本身，不是沿途 POI（U13，7例人工标注集回归）；
                     # "这条沟"指代窗口内带"沟"的水系/沟谷 POI（U22，则查洼沟例）
                     if pron == "这条" and re.search(r"这条路|这条线|该路线", case["sentence"]):
                         case.update({"resolution": "路线", "resolution_kind": "路线",
@@ -138,7 +138,7 @@ def main(argv=None) -> int:
                             fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                             n_cases += 1
                             continue
-                    # “其它”为限定词（其+它），非回指代词（U22，黄金集留出2例）
+                    # “其它”为限定词（其+它），非回指代词（U22，人工标注评测集留出2例）
                     if pron in ("它", "它们") and doc_start > 0 and text[doc_start - 1] == "其":
                         case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
                                      "evidence": "“其它”为限定词，非回指代词，检测保留但消解为无"})
@@ -190,7 +190,7 @@ def main(argv=None) -> int:
                     if si >= 2:
                         add_pool([e for e in pois
                                   if sentences[si - 2][0] <= e["start"] < sentences[si - 2][1]], "前两句", True)
-                    # 后置命名："…名为X"的 X 是代词先行词的同位专名（U22，黄金集1例）
+                    # 后置命名："…名为X"的 X 是代词先行词的同位专名（U22，人工标注评测集1例）
                     tail = case["sentence"][max(0, doc_end - cur_sent_start):]
                     if re.search(r"名为|称之为|称作|叫做|叫作", tail):
                         after = [e for e in pois if e["start"] >= doc_end and e["start"] < cur_sent_end]
@@ -203,7 +203,7 @@ def main(argv=None) -> int:
                             fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                             n_cases += 1
                             continue
-                    # 命名句："X在这里被叫做Y"指称的是范围而非窗口实体（U22，黄金集1例）
+                    # 命名句："X在这里被叫做Y"指称的是范围而非窗口实体（U22，人工标注评测集1例）
                     if re.search(r"被叫做|被称作|被叫作|被唤作", case["sentence"]):
                         if focus == "景区外":
                             case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
@@ -215,7 +215,7 @@ def main(argv=None) -> int:
                         n_cases += 1
                         continue
                     if not cands:
-                        # 设施回退：窗口内无实体但提及酒店/餐厅/民宿等 → "这里/那里"多指该设施（U16，2例黄金回归）
+                        # 设施回退：窗口内无实体但提及酒店/餐厅/民宿等 → "这里/那里"多指该设施（U16，2例人工标注集回归）
                         if re.search(r"酒店|民宿|餐厅|饭馆|烤鸭店|客栈|宾馆|农家乐|店家|客房",
                                      case["sentence"] + case["prev_sentence"]):
                             case.update({"resolution": "facility", "resolution_kind": "设施",
@@ -244,7 +244,7 @@ def main(argv=None) -> int:
                     party_signal3 = PARTY_RE.search(window3)
                     # hint-cur 分支只看当前句的同行者信号（前句"我们"不应否决当前句的服务角色指代）
                     party_cur = PARTY_RE.search(case["sentence"])
-                    # “他们(家|自家|后院|店里)”指店家设施而非人（U22，黄金集4例）
+                    # “他们(家|自家|后院|店里)”指店家设施而非人（U22，人工标注评测集4例）
                     if re.search(r"(他们|她们)(家|自家|后院|店里)", case["sentence"]):
                         case.update({"resolution": "facility", "resolution_kind": "设施",
                                      "evidence": "“他们家/后院/店里”指店家设施"})
@@ -288,7 +288,7 @@ def main(argv=None) -> int:
                     qty_guard = re.search(
                         r"[一二两三四五六七八九十几\d]+\s*[个座副条种栋项回轮处只名套批]",
                         window_text)
-                    # 可替代方式："可以X也可以Y"的"其中"承接方式集合而非 POI 枚举（U22，黄金集1例）
+                    # 可替代方式："可以X也可以Y"的"其中"承接方式集合而非 POI 枚举（U22，人工标注评测集1例）
                     alternatives = re.search(r"可以[^，。？！;；]{1,12}也可以", window_text)
                     if person_set:
                         case.update({"resolution": "person_set", "resolution_kind": "人称集合",
