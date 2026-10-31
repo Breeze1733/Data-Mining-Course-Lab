@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-31 01:10",
-  "git": "2c7b17d",
-  "label": "第3轮收束终态",
-  "dirty_files": 5
+  "time": "2026-10-31 13:51",
+  "git": "e4c97ba",
+  "label": "未命名时点",
+  "dirty_files": 10
  },
  "metrics": {
   "dataset.count": 271,
@@ -27,18 +27,18 @@
   "routes.tourist_total": 228,
   "coref.n": 120,
   "coref.accuracy": 0.583,
-  "cond.pairs": 842,
+  "cond.pairs": 843,
   "cond.review_n": 49,
   "cond.correct": 20,
   "cond.boundary": 16,
   "cond.wrong": 13,
-  "graph.nodes": 560,
-  "graph.edges": 2309,
+  "graph.nodes": 561,
+  "graph.edges": 2311,
   "graph.fact_checks_passed": 6,
   "graph.fact_checks_total": 6,
   "graph.name_alignment_passed": true,
   "agent.passed": 8,
   "agent.total": 8,
-  "agent.mode": "rules（未配置 LLM API，内置规划器）"
+  "agent.mode": "llm"
  }
 }
