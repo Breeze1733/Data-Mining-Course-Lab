@@ -28,7 +28,7 @@ function Show-Stage {
 }
 
 function Get-StageStatus {
-    & $PythonExe src/stage_status.py $PerPlatform > $null
+    & $PythonExe scripts/stage_status.py $PerPlatform > $null
     if ($LASTEXITCODE -ne 0) { throw '阶段状态检查失败。' }
     return Get-Content 'data/crawl/stage_state.json' -Encoding UTF8 -Raw | ConvertFrom-Json
 }
@@ -63,7 +63,7 @@ try {
     # 各阶段串行执行。直接调用可让输出实时可见、$LASTEXITCODE 立即可读，
     # 且 Ctrl+C 能连子进程一起终止，不会留下孤儿进程继续写数据。
     if ($needOfficial) {
-        $officialArgs = @('src/crawl_official.py')
+        $officialArgs = @('scripts/crawl_official.py')
         if ($Offline) { $officialArgs += '--offline' }
         Write-Host '--- 官方来源 开始 ---'
         & $PythonExe @officialArgs
@@ -75,7 +75,7 @@ try {
     }
 
     if ($needCtrip) {
-        $ctripArgs = @('src/crawl_ctrip_ranked.py', '--area', 'all', '--max-pages', '120', '--pool-size', [string][Math]::Max(35, $PerPlatform + 10))
+        $ctripArgs = @('scripts/crawl_ctrip_ranked.py', '--area', 'all', '--max-pages', '120', '--pool-size', [string][Math]::Max(35, $PerPlatform + 10))
         if ($Offline) { $ctripArgs += '--offline' }
         if ($RetryFailed) { $ctripArgs += '--retry-failed' }
         Write-Host '--- 携程 开始 ---'
@@ -88,7 +88,7 @@ try {
     }
 
     if ($needXhs) {
-        $xhsArgs = @('src/crawl_xiaohongshu.mjs', '--area', 'all', '--target', [string]($PerPlatform + 10))
+        $xhsArgs = @('scripts/crawl_xiaohongshu.mjs', '--area', 'all', '--target', [string]($PerPlatform + 10))
         if ($RetryFailed) { $xhsArgs += '--retry-failed' }
         Write-Host '--- 小红书 开始 ---'
         & $NodeExe @xhsArgs
@@ -100,7 +100,7 @@ try {
     }
 
     Write-Host '--- 汇总 开始 ---'
-    & $PythonExe src/select_collection.py --per-platform $PerPlatform
+    & $PythonExe scripts/select_collection.py --per-platform $PerPlatform
     $code = $LASTEXITCODE
     Write-Host ("--- 汇总 结束，退出码 {0} ---" -f $code)
     if ($code -ne 0) { throw '采集尚有缺额或快照问题，请查看 data/collected/collection_summary.json。' }

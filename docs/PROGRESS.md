@@ -538,3 +538,15 @@ Agent 8/8；报告 7 重生成；审计 70/70；回归守护通过。
   official_routes.jsonl、quality_report.json 等 12 个）；HTML 快照与爬虫工作区不入库。
 - 新增 `.gitattributes` 对 `task1/data/**` 关闭换行转换：本机 autocrlf=true 会在重新克隆时改写
   白名单文件的字节，统一按原始字节入库；8 个历史文件的 CRLF 已归一为 LF（内容零差异）。
+
+
+---
+
+## 2026-10-31 目录重构 —— 完成
+
+- 归属环节从 task2 整体迁至 task4（src+output），task5 跨目录 import 同步；实验1–6 统一纯静态口径（LLM 仅 task7）。
+- task1 爬虫迁至 `task1/scripts/`；旧版入口（collect/assemble/browser_dom_extract/export_xlsx.mjs）与 sources.json 停止跟踪。
+- 报告生成器（build_report1-7 + build_summary_doc + report_utils）迁至 `local/`（gitignore，不随仓库分发），run.py 报告段自动探测。
+- 散落 md 归入 `docs/`（PROGRESS/METRICS/DECISIONS/TOKENS/BACKLOG + review/）。
+- task2 的 p2 冗余版本清理（expand_dictionary_p2→expand_dictionary，spot_check_p2 及其产物删除，正典为 spot_check.py --reconcile）。
+- 八份 README 重写（是什么/结构/输入输出/运行命令），.gitattributes 恢复，全链路 run.py --no-reports + 审计 70/70 + 回归零退化验证通过。

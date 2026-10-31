@@ -8,11 +8,11 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from report_utils import ReportBuilder
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "output"
+OUT = ROOT / "task3/output"
 FIGS = OUT / "figs"
 
 PARSED = [json.loads(l) for l in (OUT / "parsed_routes.jsonl").open(encoding="utf-8")]
@@ -154,7 +154,7 @@ def main():
          "顺序一致性的景区梯度由空间基础设施约束强度决定，时间维度的“晚上空白”是官方指南最普遍的盲区。"
          "这些结构化路线与时段数据将直接作为实验6知识图谱的边（先后顺序、时间归属）。")
 
-    rb.save(ROOT / "report.docx")
+    rb.save(ROOT / "task3/report.docx")
 
 
 if __name__ == "__main__":

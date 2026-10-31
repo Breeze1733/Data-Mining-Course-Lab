@@ -8,11 +8,11 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from report_utils import ReportBuilder
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "output"
+OUT = ROOT / "task5/output"
 FIGS = OUT / "figs"
 
 STATS = json.loads((OUT / "extraction_stats.json").read_text(encoding="utf-8"))
@@ -110,7 +110,7 @@ def main():
          "负向约束而非触发词本身；条件类型里“一般建议”占比最高反映了游记的建议表达习惯；"
          "对立建议现象提示知识融合必须保留来源与频次。映射表将作为边属性（条件关系）进入实验6知识图谱。")
 
-    rb.save(ROOT / "report.docx")
+    rb.save(ROOT / "task5/report.docx")
 
 
 if __name__ == "__main__":

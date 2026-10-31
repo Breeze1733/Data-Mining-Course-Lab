@@ -1281,6 +1281,522 @@
    "source": "seed+manual_review_of_mined_candidates"
   },
   {
+   "name": "扎如寺",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "九寨沟"
+   ],
+   "canonical": "扎如寺",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "九寨沟景区内景点（扎如生态游线路终点），语料20次"
+  },
+  {
+   "name": "颐和园博物馆",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "颐和园"
+   ],
+   "canonical": "颐和园博物馆",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "颐和园文昌院内展馆，官方路线出现"
+  },
+  {
+   "name": "梦幻景区",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "黄山"
+   ],
+   "canonical": "西海大峡谷",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "游客对西海大峡谷的代称，task4黄金注释"
+  },
+  {
+   "name": "松潘古城",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "松潘古城",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "task4黄金注释'真先行词松潘古城未收录'"
+  },
+  {
+   "name": "磁器口",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "磁器口",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "task4黄金：'这里'指重庆磁器口"
+  },
+  {
+   "name": "乐山大佛景区",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "乐山大佛景区",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "task4黄金：'这里有13路公交站'指乐山大佛附近"
+  },
+  {
+   "name": "乐山大佛",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "乐山大佛景区",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "同上，短写法归一到全称"
+  },
+  {
+   "name": "景山公园",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "景山公园",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "task4黄金：多景点游记景山段"
+  },
+  {
+   "name": "景山",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "景山公园",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "景山公园短写法"
+  },
+  {
+   "name": "南锣鼓巷",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "南锣鼓巷",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "task4黄金×2"
+  },
+  {
+   "name": "荷花市场",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "荷花市场",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "task4黄金"
+  },
+  {
+   "name": "北京大学",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "北京大学",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "task4黄金：'这里'指北大"
+  },
+  {
+   "name": "清华大学",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "清华大学",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "task4黄金（注：gold原文'清华大学校园'仍不相等，边界如实保留）"
+  },
+  {
+   "name": "清华",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "清华大学",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "清华大学短写法"
+  },
+  {
+   "name": "故宫",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "故宫",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料190次"
+  },
+  {
+   "name": "天坛",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "天坛",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料81次"
+  },
+  {
+   "name": "圆明园",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "圆明园",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料160次"
+  },
+  {
+   "name": "北海公园",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "北海公园",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料28次；与黄山'北海'(北海景区)不同名冲突，长词优先"
+  },
+  {
+   "name": "恭王府",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "恭王府",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料45次"
+  },
+  {
+   "name": "什刹海",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "什刹海",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料28次"
+  },
+  {
+   "name": "烟袋斜街",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "烟袋斜街",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料10次"
+  },
+  {
+   "name": "后海",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "后海",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料20次"
+  },
+  {
+   "name": "大栅栏",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "大栅栏",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料39次"
+  },
+  {
+   "name": "王府井",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "王府井",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料30次"
+  },
+  {
+   "name": "雍和宫",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "雍和宫",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料20次"
+  },
+  {
+   "name": "国子监",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "国子监",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料23次"
+  },
+  {
+   "name": "香山公园",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "香山公园",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料14次"
+  },
+  {
+   "name": "香山",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "香山公园",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "香山公园短写法"
+  },
+  {
+   "name": "八达岭长城",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "八达岭长城",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料23次"
+  },
+  {
+   "name": "慕田峪长城",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "慕田峪长城",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料14次"
+  },
+  {
+   "name": "鸟巢",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "鸟巢",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料53次"
+  },
+  {
+   "name": "水立方",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "水立方",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料32次"
+  },
+  {
+   "name": "国家博物馆",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "国家博物馆",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料32次"
+  },
+  {
+   "name": "三星堆博物馆",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "三星堆博物馆",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料33次"
+  },
+  {
+   "name": "三星堆",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "三星堆博物馆",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "三星堆博物馆短写法"
+  },
+  {
+   "name": "都江堰",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "都江堰",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料82次"
+  },
+  {
+   "name": "青城山",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "青城山",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料42次"
+  },
+  {
+   "name": "峨眉山",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "峨眉山",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料38次"
+  },
+  {
+   "name": "杜甫草堂",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "杜甫草堂",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料11次"
+  },
+  {
+   "name": "宽窄巷子",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "宽窄巷子",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料48次"
+  },
+  {
+   "name": "武侯祠",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "武侯祠",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料38次"
+  },
+  {
+   "name": "锦里",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "锦里",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料41次"
+  },
+  {
+   "name": "洪崖洞",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "洪崖洞",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料9次"
+  },
+  {
+   "name": "西递",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "黄山"
+   ],
+   "canonical": "西递",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料40次；与宏村同为黄山联游惯例（in_scenic 跟随宏村先例）"
+  },
+  {
+   "name": "徽州古城",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "徽州古城",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料7次"
+  },
+  {
+   "name": "千岛湖",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "千岛湖",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料21次"
+  },
+  {
+   "name": "苏堤",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "苏堤",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料14次（杭州西湖）"
+  },
+  {
+   "name": "汤口镇",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "汤口镇",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料82次；黄山门户集散地，非景区内游览点"
+  },
+  {
+   "name": "汤口",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "汤口镇",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "汤口镇短写法"
+  },
+  {
+   "name": "黄龙五彩池",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "黄龙五彩池",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "语料10次；与九寨沟五彩池同名异点，独立canonical消歧"
+  },
+  {
+   "name": "则渣洼沟",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "九寨沟"
+   ],
+   "canonical": "则查洼沟",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "则查洼沟常见异写，语料16次"
+  },
+  {
+   "name": "查洼沟",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "九寨沟"
+   ],
+   "canonical": "则查洼沟",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "则查洼沟口语省写，语料独立出现4次"
+  },
+  {
+   "name": "月沼",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "月沼",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "宏村内景点（月沼/南湖），供消解候选；不进景区内序列"
+  },
+  {
+   "name": "南湖",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "南湖",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "宏村内景点（月沼/南湖），供消解候选；不进景区内序列"
+  },
+  {
+   "name": "雅克夏雪山",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "雅克夏雪山",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "成都-九寨沟沿线雪山（G248），语料9次"
+  },
+  {
+   "name": "天安门广场",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "天安门广场",
+   "source": "p2_peripheral_expansion_2026-10-30",
+   "note": "北京地标广场，语料40次"
+  },
+  {
    "name": "玉屏峰",
    "entity_type": "景点POI",
    "subtype": "景点",
@@ -2169,34 +2685,21 @@
   }
  ],
  "domain_stopwords": [
-  "三清山",
   "上山",
   "上海",
   "下山",
   "专门",
-  "九华山",
   "入园",
-  "八达岭",
   "公园",
   "出门",
-  "北海公园",
   "味道",
   "四姑娘山",
-  "圆明园",
-  "天安门",
-  "峨眉山",
-  "庐山",
   "开门",
-  "景山公园",
-  "武夷山",
-  "泰山",
   "爬山",
   "知道",
   "轻松",
   "进山",
-  "进沟",
-  "青城山",
-  "香山"
+  "进沟"
  ],
  "source": "resources/domain_seed.json + CSV resources"
 }

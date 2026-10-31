@@ -5,11 +5,11 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from report_utils import ReportBuilder
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "output"
+OUT = ROOT / "task7/output"
 
 REPORT = json.loads((OUT / "test_report.json").read_text(encoding="utf-8"))
 ITIN = json.loads((OUT / "itineraries.json").read_text(encoding="utf-8"))
@@ -108,7 +108,7 @@ def main():
          "与前序实验一致的教训是：多景点游记的归属歧义会沿着数据链路传播（实体→图谱→Agent 回答），"
          "句子级归属校正是全链路收益最大的下一步改进。")
 
-    rb.save(ROOT / "report.docx")
+    rb.save(ROOT / "task7/report.docx")
 
 
 if __name__ == "__main__":

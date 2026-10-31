@@ -8,7 +8,7 @@
  "records": 271,
  "total_entities": 22940,
  "entities_per_record_mean": 84.65,
- "segmentation_tokens_total": 473549,
+ "segmentation_tokens_total": 473154,
  "by_scenic_area": {
   "九寨沟": {
    "时间节点": 3416,

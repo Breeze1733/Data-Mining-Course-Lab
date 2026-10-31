@@ -5,11 +5,11 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from report_utils import ReportBuilder
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "output"
+OUT = ROOT / "task6/output"
 FIGS = OUT / "figs"
 
 STATS = json.loads((OUT / "graph_stats.json").read_text(encoding="utf-8"))
@@ -28,7 +28,7 @@ def main():
     rb.section("二、实验环境")
     rb.bullets([
         "Windows 11；Python 3.13（task1/.venv）；networkx 3.x（图构建与 GraphML）；matplotlib（静态图）；pyvis（交互 HTML）。",
-        f"输入：task2 实体词典与词频、task3 官方路线及游客路线（{sum(1 for _ in (ROOT.parent / 'task3/output/tourist_routes.jsonl').open(encoding='utf-8'))} 条游客路线）、task5 条件建议映射表。",
+        f"输入：task2 实体词典与词频、task3 官方路线及游客路线（{sum(1 for _ in (ROOT / 'task3/output/tourist_routes.jsonl').open(encoding='utf-8'))} 条游客路线）、task5 条件建议映射表。",
         "运行入口：task6/src/{build_graph, visualize_graph, verify_graph, build_report6}.py。",
     ])
 
@@ -106,7 +106,7 @@ def main():
          "连通性检查与同名隔离检查。图谱质量控制：条件节点经聚类归一（{} 个，876 对建议归并保留主条目与频次）；"
          "游客序列以 0.5 权重折算进入先后边、官方 1.0 保持主导，实验7 查询工具按最小权重阈值取用。".format(STATS["by_kind"].get("条件", 0)))
 
-    rb.save(ROOT / "report.docx")
+    rb.save(ROOT / "task6/report.docx")
 
 
 if __name__ == "__main__":

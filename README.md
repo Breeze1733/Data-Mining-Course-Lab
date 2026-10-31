@@ -23,5 +23,8 @@ python run.py
 | task5 | 条件建议抽取 | task5/report.docx |
 | task6 | 知识图谱融合 | task6/report.docx |
 | task7 | 旅游规划Agent | task7/report.docx |
+| docs | 过程账本（PROGRESS/METRICS/DECISIONS/TOKENS/review） | — |
+| task1/scripts | 采集爬虫 | — |
+| common | 回归守护/审计/快照等评测基础设施 | — |
 
-总结反思为根目录的`实验总结反思.docx`。公共名称映射及报告排版工具在`common`，地点别名在`task2/resources/poi_aliases.csv`，由实体、路线和图谱统一读取。
+总结反思为根目录的`实验总结反思.docx`。公共名称映射在`task2/resources`、`common/entity_identity.py`，地点别名在`task2/resources/poi_aliases.csv`，由实体、路线和图谱统一读取。

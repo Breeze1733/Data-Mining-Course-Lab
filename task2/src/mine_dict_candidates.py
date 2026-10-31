@@ -61,7 +61,7 @@ GENERIC_STOP = {
 
 
 def mine(top_n: int) -> list[dict]:
-    sys.path.insert(0, str(TASK1 / "src"))
+    sys.path.insert(0, str(TASK1 / "scripts"))
     entries, stopwords, _ = refined_dictionary()
     dict_names = {e["name"] for e in entries}
     dict_canon = {e.get("canonical") for e in entries}

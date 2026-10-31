@@ -45,11 +45,12 @@ def main():
         subprocess.run([executable, "-X", "utf8", str(ROOT / script), *arguments],
                        cwd=ROOT, env=env, check=True)
     if not args.no_reports:
-        for task in range(1, 8):
-            subprocess.run([args.document_python, "-X", "utf8", str(ROOT / f"task{task}/src/build_report{task}.py")],
-                           cwd=ROOT, env=env, check=True)
-        subprocess.run([args.document_python, "-X", "utf8", str(ROOT / "common/build_summary_doc.py")],
-                       cwd=ROOT, env=env, check=True)
+        local_scripts = [ROOT / f"local/build_report{t}.py" for t in range(1, 8)] + [ROOT / "local/build_summary_doc.py"]
+        if all(p.exists() for p in local_scripts):
+            for script in local_scripts:
+                subprocess.run([args.document_python, "-X", "utf8", str(script)], cwd=ROOT, env=env, check=True)
+        else:
+            print("local/ 报告生成脚本不存在（未随仓库分发），跳过报告再生成。")
 
 
 if __name__ == "__main__":

@@ -9,11 +9,11 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from report_utils import ReportBuilder
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "output"
+OUT = ROOT / "task4/output"
 FIGS = OUT / "figs"
 
 EVAL = json.loads((OUT / "evaluation.json").read_text(encoding="utf-8"))
@@ -139,7 +139,7 @@ def main():
          "窗口级规则与句级归属过滤的组合把准确率稳定在 0.583，“景区外指代”与“普通名词先行词”两类难例的"
          "增益路径已由混合方案量化。标注集与误差分类可直接用于对比实验；消解后的文本改写示例验证了输出链路的可用性。")
 
-    rb.save(ROOT / "report.docx")
+    rb.save(ROOT / "task4/report.docx")
 
 
 if __name__ == "__main__":

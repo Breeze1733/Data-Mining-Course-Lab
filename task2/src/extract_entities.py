@@ -21,7 +21,7 @@ def load_dictionary(iteration: str):
         return refined_dictionary()
     if iteration != "baseline":
         raise ValueError(f"未知迭代: {iteration}")
-    sys.path.insert(0, str(TASK1 / "src"))
+    sys.path.insert(0, str(TASK1 / "scripts"))
     from expand_ctrip import NODES
     entries = [{"name": poi, "entity_type": "景点POI", "subtype": "景点",
                 "scenic_areas": [area], "canonical": poi, "source": "seed"}

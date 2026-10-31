@@ -11,14 +11,15 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from report_utils import ReportBuilder
 
 ROOT = Path(__file__).resolve().parents[1]
-QR = json.loads((ROOT / "data/processed/quality_report.json").read_text(encoding="utf-8"))
-EXAMPLES = json.loads((ROOT / "data/processed/cleaning_examples.json").read_text(encoding="utf-8"))
-ROWS = [json.loads(l) for l in (ROOT / "data/processed/dataset_clean.jsonl").open(encoding="utf-8")]
-REJECTED = [json.loads(l) for l in (ROOT / "data/processed/rejected_records.jsonl").open(encoding="utf-8")]
+T1 = ROOT / "task1"
+QR = json.loads((T1 / "data/processed/quality_report.json").read_text(encoding="utf-8"))
+EXAMPLES = json.loads((T1 / "data/processed/cleaning_examples.json").read_text(encoding="utf-8"))
+ROWS = [json.loads(l) for l in (T1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8")]
+REJECTED = [json.loads(l) for l in (T1 / "data/processed/rejected_records.jsonl").open(encoding="utf-8")]
 
 COV = QR["coverage_by_scenic_area"]
 PROF = QR["profile"]
@@ -51,7 +52,7 @@ def fmt(n):
 
 
 def main():
-    out = ROOT / "report.docx"
+    out = ROOT / "task1/report.docx"
     rb = ReportBuilder("《数据挖掘》探索性实验报告", "—实验项目1 景区指南数据采集与预处理")
 
     rb.section("一、实验目的与任务")

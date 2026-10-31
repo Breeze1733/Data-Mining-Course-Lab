@@ -5,7 +5,7 @@
     python common/metrics_snapshot.py --label "基线"        # 快照并追加到 METRICS.md
     python common/metrics_snapshot.py --print-only          # 只打印，不落盘
 
-每运行一次，向根目录 METRICS.md 的账本表追加一行（一行一个时点），
+每运行一次，向docs/METRICS.md 的账本表追加一行（一行一个时点），
 并把完整指标 JSON 存到 metrics/snapshots/<时间戳>.json 与 snapshot_latest.json。
 后续优化一律以 METRICS.md 中的记录为对照基线。
 """
@@ -221,7 +221,7 @@ LEDGER_HEADER = [name for name, _ in LEDGER_COLUMNS]
 
 
 def append_to_metrics_md(m: dict, meta: dict) -> Path:
-    path = ROOT / "METRICS.md"
+    path = ROOT / "docs/METRICS.md"
     cells = _row_cells(m, meta)
     lines = []
     if not path.exists():

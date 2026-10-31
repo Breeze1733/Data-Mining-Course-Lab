@@ -9,7 +9,7 @@
 - `src/entity_rules.py`、`dictionary.py`、`time_rules.py`：词典匹配、交通语境、时间归一化和区间消解。
 - `resources/`：领域词表、POI及交通规则、时间规则、实体定义和地点别名。
 - `src/build_dictionary.py`、`visualize.py`、`spot_check.py`、`iter_compare.py`：词典、图表、抽检和迭代统计。
-- `src/build_report2.py`：从当前结果生成实验报告。
+- 报告再生成脚本在 `../local/`（不随仓库分发）。
 
 baseline与refined是同一程序的两次词典迭代，保留其结果以满足任务书的优化前后对比要求。下游统一读取`entities_refined.jsonl`，不需要选择代码版本或切换数据口径。
 
