@@ -17,8 +17,8 @@ baseline与refined是同一程序的两次词典迭代，保留其结果以满�
 
 ## 延伸机制说明（不属于实验2 四项任务）
 
-`src/attribute_sentences.py`、`src/build_attribution.py`、`src/llm_attribution_eval.py` 与
-`output/exp2/sentence_attribution*.jsonl` 是**句级归属**环节：判定每句叙述焦点属于哪个景区，
-供实验4（消解候选过滤）与实验5（条件对过滤）共用——实验2 的任务书四项任务（实体识别/规范表/
-词频可视化/成果输出）均不包含它。方案B 为特征规则（生产），方案C（LLM，0.887）仅作评估上界
-（llm_attribution_eval.py，需 task7/config.json）。详见 DECISIONS.md D2/D3 与 review/retrospective_*.md。
+`task4/src/attribute_sentences.py`、`task4/src/build_attribution.py`、`task4/src/sample_sentences.py` 与
+`task4/output/attribution/`（495 句标注集、全量归属、评估数据）是**句级归属**环节：判定每句叙述焦点
+属于哪个景区，供实验4（消解候选过滤）与实验5（条件对过滤）共用——实验2 的任务书四项任务
+（实体识别/规范表/词频可视化/成果输出）均不包含它，实体识别本身为纯 jieba+词典+规则，全程无 LLM。
+权重在标注集上按 seed=42 对半分迭代（tune 调参、holdout 一次终评）。详见 DECISIONS.md D2 与 review/。
