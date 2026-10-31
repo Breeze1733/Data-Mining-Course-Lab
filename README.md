@@ -1,30 +1,27 @@
-# 数据挖掘探索性实验
+# 《数据挖掘》探索性实验：景区游览指南的程序性知识挖掘
 
-景区游览指南的程序性知识挖掘，按实验项目存放于task1至task7。
+黄山 / 九寨沟 / 颐和园三景区多源文本的程序性知识挖掘：采集清洗 → 实体识别 → 路线解析 →
+共指消解 → 条件建议抽取 → 知识图谱 → 旅游规划 Agent。
+
+## 目录结构
+
+| 目录 | 内容 |
+|---|---|
+| `task1/`–`task7/` | 实验1–7 源码（`src/`）、产物（`output/`）、报告（`report.docx`）；task1 含采集脚本与数据 |
+| `common/` | 评测守护：指标快照、人工标注评测集回归守护、报告-数据一致性审计 |
+| `tests/` | 链路重建入口 `run.py` + 65 个单元测试 |
+| `docs/` | 过程账本（PROGRESS / METRICS / DECISIONS / BACKLOG / review） |
+| `metrics/` | 指标快照（`snapshot_latest.json` 为最新） |
 
 ## 复现
 
-使用仓库根目录的同一个Python环境（`.venv`），安装`requirements.txt`中的依赖后，在仓库根目录运行：
-
-```powershell
-python tests/run.py
+```bash
+pip install -r requirements.txt
+python tests/run.py                              # 全链路重建 + 单元测试
+python common/regression_check.py                # 守护指标零退化
+python common/report_audit.py                    # 报告-数据一致性（应 70/70）
 ```
 
-程序读取已入库的`task1/data/processed/dataset_clean.jsonl`，顺序执行实体识别及下游实验，更新各实验输出与图表。默认离线运行，不重新联网采集，也不重填人工标注。Agent未配置API时使用规则模式。
-
-实验2的baseline和refined由同一个识别器运行，分别用于迭代对比和最终下游输入；正式结果统一保存在各任务的`output`目录。
-
-| 目录 | 实验 | 报告 |
-|---|---|---|
-| task1 | 数据采集与预处理 | task1/report.docx |
-| task2 | 实体识别 | task2/report.docx |
-| task3 | 路线层级结构 | task3/report.docx |
-| task4 | 共指消解 | task4/report.docx |
-| task5 | 条件建议抽取 | task5/report.docx |
-| task6 | 知识图谱融合 | task6/report.docx |
-| task7 | 旅游规划Agent | task7/report.docx |
-| docs | 过程账本（PROGRESS/METRICS/DECISIONS/TOKENS/review） | — |
-| task1/scripts | 采集爬虫 | — |
-| common | 回归守护/审计/快照等评测基础设施 | — |
-
-总结反思为根目录的`实验总结反思.docx`。公共名称映射在`task2/resources`、`common/entity_identity.py`，地点别名在`task2/resources/poi_aliases.csv`，由实体、路线和图谱统一读取。
+实验1–6 为纯静态管线（jieba+词典+正则+规则，无 key 可复现）；实验7 Agent 在配置
+`task7/config.json`（OpenAI 兼容接口）时启用 LLM，未配置自动回退规则规划器。
+最终指标见 `docs/METRICS.md` 终表。
