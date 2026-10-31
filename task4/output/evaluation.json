@@ -1,49 +1,39 @@
 {
  "n": 180,
- "accuracy_overall": 0.483,
+ "accuracy_overall": 0.606,
  "accuracy_by_class": {
   "locative": {
    "n": 45,
-   "accuracy": 0.489
+   "accuracy": 0.556
   },
   "object": {
    "n": 45,
-   "accuracy": 0.533
+   "accuracy": 0.667
   },
   "person": {
    "n": 45,
-   "accuracy": 0.4
+   "accuracy": 0.644
   },
   "set": {
    "n": 45,
-   "accuracy": 0.511
+   "accuracy": 0.556
   }
  },
  "accuracy_by_round": {
   "1": {
    "n": 120,
-   "accuracy": 0.583
+   "accuracy": 0.725
   },
   "2": {
    "n": 60,
-   "accuracy": 0.283
+   "accuracy": 0.367
   }
  },
  "errors_by_round": {
-  "1": 50,
-  "2": 43
+  "1": 33,
+  "2": 38
  },
  "errors": [
-  {
-   "pronoun": "这座",
-   "class": "object",
-   "scenic": "颐和园",
-   "rule": "颐和园",
-   "rule_kind": "景区名",
-   "gold": "佛香阁",
-   "gold_kind": "POI",
-   "note": "先行词在代词之后（后置命名“名为佛香阁”）"
-  },
   {
    "pronoun": "他们",
    "class": "person",
@@ -80,16 +70,6 @@
    "scenic": "颐和园",
    "rule": "travel_party",
    "rule_kind": "同行者",
-   "gold": "周围的小朋友",
-   "gold_kind": "他人",
-   "note": ""
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "颐和园",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
    "gold": "格鲁一家（虚构角色）",
    "gold_kind": "其他",
    "note": "小黄人项目角色"
@@ -113,16 +93,6 @@
    "gold": "紫禁城",
    "gold_kind": "景区",
    "note": "“这座皇城”指紫禁城，多景点游记（故宫段）"
-  },
-  {
-   "pronoun": "这里",
-   "class": "locative",
-   "scenic": "颐和园",
-   "rule": "颐和园",
-   "rule_kind": "景区名",
-   "gold": "南锣鼓巷",
-   "gold_kind": "POI",
-   "note": "多景点游记"
   },
   {
    "pronoun": "其中",
@@ -153,16 +123,6 @@
    "gold": "恭王府",
    "gold_kind": "POI",
    "note": "“其中”承接王府整体；多景点游记"
-  },
-  {
-   "pronoun": "这座",
-   "class": "object",
-   "scenic": "颐和园",
-   "rule": "颐和园",
-   "rule_kind": "景区名",
-   "gold": "天安门广场",
-   "gold_kind": "POI",
-   "note": "多景点游记"
   },
   {
    "pronoun": "这里",
@@ -290,29 +250,9 @@
    "scenic": "黄山",
    "rule": "preceding_set",
    "rule_kind": "前文POI集合",
-   "gold": "两种上山方式",
-   "gold_kind": "集合-其他",
-   "note": "徒步 vs 索道"
-  },
-  {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "黄山",
-   "rule": "preceding_set",
-   "rule_kind": "前文POI集合",
    "gold": "山间雾景",
    "gold_kind": "其他",
    "note": "虚化“走在其中”"
-  },
-  {
-   "pronoun": "这里",
-   "class": "locative",
-   "scenic": "黄山",
-   "rule": "黄山",
-   "rule_kind": "景区名",
-   "gold": "雲亼民宿",
-   "gold_kind": "设施",
-   "note": "“这里的客房”指民宿"
   },
   {
    "pronoun": "他们",
@@ -323,16 +263,6 @@
    "gold": "馄饨店主一家",
    "gold_kind": "他人",
    "note": ""
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "黄山",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "黄山酒店",
-   "gold_kind": "设施",
-   "note": "“他们的管家服务”指酒店"
   },
   {
    "pronoun": "其中",
@@ -403,16 +333,6 @@
    "gold": "西海岸景区",
    "gold_kind": "景区",
    "note": "同句“西海岸景区”，多景区游记（三清山段）"
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "黄山",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "望秀山客栈",
-   "gold_kind": "设施",
-   "note": "“他们”指望秀山客栈（代订服务方）"
   },
   {
    "pronoun": "他们",
@@ -555,46 +475,6 @@
    "note": "“倒映其中”指白石海湖面（前句明名），参照第114例口径"
   },
   {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "九寨沟",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "当地人",
-   "gold_kind": "他人",
-   "note": "同句“当地人说”，指当地居民"
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "九寨沟",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "图旅影像馆",
-   "gold_kind": "设施",
-   "note": "“他们家”指租赁商铺店家"
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "九寨沟",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "硬石餐厅",
-   "gold_kind": "设施",
-   "note": "“他们家招牌”指餐厅店家"
-  },
-  {
-   "pronoun": "这里",
-   "class": "locative",
-   "scenic": "九寨沟",
-   "rule": "箭竹海",
-   "rule_kind": "POI",
-   "gold": "九寨沟",
-   "gold_kind": "景区",
-   "note": "“湖在这里被叫做海子”指九寨沟整体；前句“箭竹海”为干扰"
-  },
-  {
    "pronoun": "这里",
    "class": "locative",
    "scenic": "九寨沟",
@@ -633,26 +513,6 @@
    "gold": "九寨沟Y形沟域",
    "gold_kind": "其他",
    "note": "“其中”指Y形沟谷范围，普通指称"
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "九寨沟",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "当地人",
-   "gold_kind": "他人",
-   "note": "前句“问了当地人”"
-  },
-  {
-   "pronoun": "它",
-   "class": "object",
-   "scenic": "九寨沟",
-   "rule": "九寨沟",
-   "rule_kind": "景区名",
-   "gold": "无",
-   "gold_kind": "无",
-   "note": "“其它”为限定词非回指代词，检测误触发"
   },
   {
    "pronoun": "那里",
@@ -775,16 +635,6 @@
    "note": "同句“站了一队人”"
   },
   {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "颐和园",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "景区管理者",
-   "gold_kind": "他人",
-   "note": "前文“管理者”"
-  },
-  {
    "pronoun": "它",
    "class": "object",
    "scenic": "颐和园",
@@ -823,16 +673,6 @@
    "gold": "紫禁城",
    "gold_kind": "景区",
    "note": "多景点游记（故宫/紫禁城段）"
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "颐和园",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "蒙古大军",
-   "gold_kind": "他人",
-   "note": "历史叙述"
   },
   {
    "pronoun": "他们",
@@ -893,66 +733,6 @@
    "gold": "胁侍塑像的图案",
    "gold_kind": "其他",
    "note": "“其中”指塑像衣纹图案之中"
-  },
-  {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "颐和园",
-   "rule": "NONE",
-   "rule_kind": "无明确先行词",
-   "gold": "三副转轮藏",
-   "gold_kind": "集合-其他",
-   "note": "雍和宫/颐和园/智化寺的转轮藏"
-  },
-  {
-   "pronoun": "它",
-   "class": "object",
-   "scenic": "颐和园",
-   "rule": "颐和园",
-   "rule_kind": "景区名",
-   "gold": "颐和园",
-   "gold_kind": "景区",
-   "note": ""
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "颐和园",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "云川酒店",
-   "gold_kind": "设施",
-   "note": "“他们后院”指酒店"
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "黄山",
-   "rule": "travel_party",
-   "rule_kind": "同行者",
-   "gold": "挑山工",
-   "gold_kind": "他人",
-   "note": "角色词“挑山工”不在规则词表（词表只有“挑夫”）"
-  },
-  {
-   "pronoun": "这条",
-   "class": "object",
-   "scenic": "九寨沟",
-   "rule": "诺日朗",
-   "rule_kind": "POI",
-   "gold": "则查洼沟",
-   "gold_kind": "POI",
-   "note": "前文“则渣洼沟”拼写变体未入词典"
-  },
-  {
-   "pronoun": "它",
-   "class": "object",
-   "scenic": "九寨沟",
-   "rule": "五花海",
-   "rule_kind": "POI",
-   "gold": "无",
-   "gold_kind": "无",
-   "note": "“其它海子”为限定结构非回指代词，检测误触发"
   },
   {
    "pronoun": "它",
