@@ -106,7 +106,7 @@ def build_claims() -> dict[str, list[dict]]:
             {"name": "refined 交通", "variants": v_int(sum_by_prefix(ER.get("by_subtype", {}), "交通方式")), "required": True},
             {"name": "refined 时间", "variants": v_int(sum_by_prefix(ER.get("by_subtype", {}), "时间节点")), "required": True},
             {"name": "refined 合计", "variants": v_int(ER.get("total_entities")), "required": True},
-            {"name": "抽检叙述(54→53例/53正确)", "regex": r"54 例.*53 例.*53 正确", "required": True},
+            {"name": "抽检叙述(53例/53正确)", "regex": r"抽检53例：53正确", "required": True},
         ],
         "task3/report.docx": [
             {"name": "官方路线总数", "variants": v_int(count_lines(ROOT / "task3/output/parsed_routes.jsonl")), "required": True},
