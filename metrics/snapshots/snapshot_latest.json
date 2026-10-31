@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-31 14:27",
-  "git": "af4e767",
+  "time": "2026-10-31 14:37",
+  "git": "13a012f",
   "label": "未命名时点",
-  "dirty_files": 19
+  "dirty_files": 29
  },
  "metrics": {
   "dataset.count": 271,
@@ -27,13 +27,13 @@
   "routes.tourist_total": 228,
   "coref.n": 180,
   "coref.accuracy": 0.606,
-  "cond.pairs": 843,
+  "cond.pairs": 830,
   "cond.review_n": 49,
   "cond.correct": 20,
   "cond.boundary": 16,
   "cond.wrong": 13,
-  "graph.nodes": 561,
-  "graph.edges": 2311,
+  "graph.nodes": 555,
+  "graph.edges": 2305,
   "graph.fact_checks_passed": 6,
   "graph.fact_checks_total": 6,
   "graph.name_alignment_passed": true,

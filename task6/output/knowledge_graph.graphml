@@ -1230,7 +1230,7 @@
   <data key="d2">[一般] 一般建议</data>
   <data key="d5">一般</data>
   <data key="d6">不要在熊猫海坐车去五花海</data>
-  <data key="d7">123</data>
+  <data key="d7">119</data>
   <data key="d8">一般建议</data>
 </node>
 <node id="条件:九寨沟:其他:说九寨是一个栖息灵魂“童话世界”">
@@ -1266,7 +1266,7 @@
   <data key="d2">[一般] 一般建议</data>
   <data key="d5">一般</data>
   <data key="d6">搞明白,的确是一件很美妙的事情</data>
-  <data key="d7">59</data>
+  <data key="d7">58</data>
   <data key="d8">一般建议</data>
 </node>
 <node id="条件:颐和园:一般:一般建议避雷">
@@ -1284,7 +1284,7 @@
   <data key="d2">[一般] 一般建议（避雷）</data>
   <data key="d5">一般</data>
   <data key="d6">避免道路上的拥堵,节省体力时间,又可游玩精华景区</data>
-  <data key="d7">19</data>
+  <data key="d7">18</data>
   <data key="d8">一般建议（避雷）</data>
 </node>
 <node id="条件:黄山:一般:一般建议">
@@ -1385,15 +1385,6 @@
   <data key="d6">共鸣混响,体会那时的环绕立体声,和珅大人的聪明才智非同一般啊</data>
   <data key="d7">1</data>
   <data key="d8">干口大缸</data>
-</node>
-<node id="条件:颐和园:其他:说颐和园与恭亲王府是文化古迹与古典园">
-  <data key="d0">条件</data>
-  <data key="d1">说颐和园与恭亲王府是文化古迹与古典园林的展现</data>
-  <data key="d2">[其他] 说颐和园与恭亲王府是文化古迹与古典园林的展现</data>
-  <data key="d5">其他</data>
-  <data key="d6">天坛公园给我最大的感触对天地的敬畏,对自然的敬畏,即便是科技发达的现在</data>
-  <data key="d7">1</data>
-  <data key="d8">说颐和园与恭亲王府是文化古迹与古典园林的展现</data>
 </node>
 <node id="条件:颐和园:其他:进入广场都必须安检">
   <data key="d0">条件</data>
@@ -1799,15 +1790,6 @@
   <data key="d6">建议先游西递再宏村,因为宏村规模比西递大,客运班车车次更多,傍晚游完后便于返回黄山市区及黄山风景区</data>
   <data key="d7">1</data>
   <data key="d8">是一日游不在古村里住宿</data>
-</node>
-<node id="条件:黄山:其他:您对古建又感兴趣">
-  <data key="d0">条件</data>
-  <data key="d1">您对古建又感兴趣</data>
-  <data key="d2">[其他] 您对古建又感兴趣</data>
-  <data key="d5">其他</data>
-  <data key="d6">这里绝对是您的正确之选</data>
-  <data key="d7">1</data>
-  <data key="d8">您对古建又感兴趣</data>
 </node>
 <node id="条件:黄山:其他:是走慈光阁这条路线">
   <data key="d0">条件</data>
@@ -2286,15 +2268,6 @@
   <data key="d7">1</data>
   <data key="d8">不去看飞来石</data>
 </node>
-<node id="条件:黄山:其他:到高峰期">
-  <data key="d0">条件</data>
-  <data key="d1">到了高峰期</data>
-  <data key="d2">[其他] 到了高峰期</data>
-  <data key="d5">其他</data>
-  <data key="d6">就只能停在那里了</data>
-  <data key="d7">1</data>
-  <data key="d8">到了高峰期</data>
-</node>
 <node id="条件:黄山:其他:坐缆车下车就可去">
   <data key="d0">条件</data>
   <data key="d1">坐缆车下车就可去了</data>
@@ -2562,7 +2535,7 @@
   <data key="d2">[一般] 一般建议（避雷）</data>
   <data key="d5">一般</data>
   <data key="d6">不要找理由,想干什么就去</data>
-  <data key="d7">32</data>
+  <data key="d7">31</data>
   <data key="d8">一般建议（避雷）</data>
 </node>
 <node id="条件:九寨沟:人群:是家庭出游">
@@ -3006,15 +2979,6 @@
   <data key="d7">1</data>
   <data key="d8">碰上蓝天白云、凉风习习还好</data>
 </node>
-<node id="条件:九寨沟:其他:在原寺遗址上重建寺院">
-  <data key="d0">条件</data>
-  <data key="d1">在原寺遗址上重建的寺院</data>
-  <data key="d2">[其他] 在原寺遗址上重建的寺院</data>
-  <data key="d5">其他</data>
-  <data key="d6">其精华是法门寺博物馆</data>
-  <data key="d7">1</data>
-  <data key="d8">在原寺遗址上重建的寺院</data>
-</node>
 <node id="条件:九寨沟:其他:他们能如我们今天这样看到此般情景">
   <data key="d0">条件</data>
   <data key="d1">他们能如我们今天这样看到此般情景</data>
@@ -3258,15 +3222,6 @@
   <data key="d7">1</data>
   <data key="d8">《创世纪》的作者看见迭部的美景</data>
 </node>
-<node id="条件:九寨沟:其他:路">
-  <data key="d0">条件</data>
-  <data key="d1">路</data>
-  <data key="d2">[其他] 路</data>
-  <data key="d5">其他</data>
-  <data key="d6">卡坝乡右转036县道前行593乡道,613乡道,沿安子库逆流而上,到三岔口走右边尼欠沟</data>
-  <data key="d7">1</data>
-  <data key="d8">路</data>
-</node>
 <node id="条件:九寨沟:其他:经》等">
   <data key="d0">条件</data>
   <data key="d1">经》等</data>
@@ -3275,15 +3230,6 @@
   <data key="d6">还有千余幅佛教故事石刻画</data>
   <data key="d7">1</data>
   <data key="d8">经》等</data>
-</node>
-<node id="条件:九寨沟:其他:唐代佛阁建于唐开元十九年731年左右">
-  <data key="d0">条件</data>
-  <data key="d1">唐代佛阁建于唐开元十九年(731年)左右的推断成立</data>
-  <data key="d2">[其他] 唐代佛阁建于唐开元十九年(731年)左右的推断成</data>
-  <data key="d5">其他</data>
-  <data key="d6">那么比我国现存最早木结构建筑建于建中三年(782年)的山西五台南禅寺大殿早了五十多年,应该是目前国内已知遗存最老的木构了!</data>
-  <data key="d7">1</data>
-  <data key="d8">唐代佛阁建于唐开元十九年(731年)左右的推断成立</data>
 </node>
 <node id="条件:九寨沟:其他:扫健康码和行程码">
   <data key="d0">条件</data>
@@ -5007,10 +4953,6 @@
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:您对古建又感兴趣" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:其他:是独自出行" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
@@ -5140,10 +5082,6 @@
   <data key="d10">1</data>
 </edge>
 <edge source="景区:黄山:黄山" target="条件:黄山:时间:到明天周末或者节假日" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:其他:到高峰期" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
@@ -5691,10 +5629,6 @@
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:在原寺遗址上重建寺院" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:他们能如我们今天这样看到此般情景" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
@@ -5799,15 +5733,7 @@
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:路" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
 <edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:经》等" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:其他:唐代佛阁建于唐开元十九年731年左右" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>
@@ -6372,10 +6298,6 @@
   <data key="d10">1</data>
 </edge>
 <edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:干口大缸" id="条件建议">
-  <data key="d9">条件建议</data>
-  <data key="d10">1</data>
-</edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:其他:说颐和园与恭亲王府是文化古迹与古典园" id="条件建议">
   <data key="d9">条件建议</data>
   <data key="d10">1</data>
 </edge>

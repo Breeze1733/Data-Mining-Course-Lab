@@ -12,9 +12,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from report_utils import ReportBuilder
 
+
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "task4/output"
 FIGS = OUT / "figs"
+ATTR_EVAL = json.loads((ROOT / "task4/output/attribution/attribution_eval.json").read_text(encoding="utf-8"))
+ATTR_B = ATTR_EVAL["full"]["B"]["acc"]
+ATTR_TUNE = ATTR_EVAL["tune"]["B"]["acc"]
+ATTR_HOLD = ATTR_EVAL["holdout"]["B"]["acc"]
 
 EVAL = json.loads((OUT / "evaluation.json").read_text(encoding="utf-8"))
 GOLD = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))
@@ -76,11 +81,11 @@ def main():
          "集合类针对“其中”的部分格本质——先行词多为普通名词集合（“6顿餐”“72座峰”“五种冰川地貌”），"
          "POI 词典无法覆盖，改用 jieba 词性标注取代词前最近的普通名词。")
 
-    rb.p("消解候选前置过滤——句级归属过滤默认开启（--no-attribution-filter 可关）：由特征规则判定每句的"
+    rb.p(f"消解候选前置过滤——句级归属过滤默认开启（--no-attribution-filter 可关）：由特征规则判定每句的"
          "叙述焦点（景区专名命中 +3/次；联游景区/城市地标/住宿餐饮/往返大交通等景区外信号 +2/次；"
          "索道/观光车/门票等园内基础设施 +1 仅证明在园内；转移词“接着/然后/下一站/回到”在无专名冲突时"
          "继承前句标签），景区外句子中的实体不进入消解候选。权重在 495 句标注集上按 seed=42 对半分迭代"
-         "（tune 半区调参、holdout 半区仅一次评估，无泄漏），实验5 的条件抽取同样采用该过滤。")
+         f"（tune 半区调参、holdout 半区仅一次评估，无泄漏）；v3 增补文博词汇（青铜器/馆藏/出土/造像等，同句只计一次）与国道/省道等公路词汇两类景区外信号后，495 句总体 {ATTR_B:.1%}（tune {ATTR_TUNE:.1%} / holdout {ATTR_HOLD:.1%}），实验5 的条件抽取同样采用该过滤。")
 
     rb.p("本轮上游改动后复跑，公共别名表统一耕织图景区与耕织图；对北海宾馆附近等明确位置短语，仅向共指候选补入地点线索，不作为POI实体或图谱同一对象。该处理避免了设施过滤对局部指代线索的损伤。")
 
@@ -144,7 +149,7 @@ def main():
 
     rb.sub("4.4 工程要点与后续规划")
     rb.bullets([
-        f"规则法在留出集上 {rd['2']['accuracy']:.1%}、开发集上 {rd['1']['accuracy']:.1%}，叠加句级归属过滤（方案B 0.796）后生产链路稳定；"
+        f"规则法在留出集上 {rd['2']['accuracy']:.1%}、开发集上 {rd['1']['accuracy']:.1%}，叠加句级归属过滤（方案B {ATTR_B:.1%}）后生产链路稳定；"
         "开发/留出双口径同时报告，后续规则改动以留出集为最终对照；",
         "篇章级信号作为下一层增强：归属特征（地名类型、景区外信号强度、转移词序列）可持续扩充，"
         "在 495 句标注集上以离线确定性分类器迭代（holdout 直接验证）；",

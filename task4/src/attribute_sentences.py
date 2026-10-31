@@ -68,8 +68,7 @@ IN_AREA_HOTELS = ["白云宾馆", "光明顶山庄", "北海宾馆", "西海饭�
                   "天海山庄", "白鹅山庄", "玉屏楼宾馆", "排云楼宾馆", "云谷山庄"]
 
 # 景区外信号 v2：联游景区/城市/餐饮购物/大交通
-OUTSIDE_LANDMARKS = [
-    "黄龙", "川主寺", "松潘", "叠溪海子", "牟尼沟", "神仙池", "中查", "鲁能胜地",
+OUTSIDE_LANDMARKS = [    "黄龙", "川主寺", "松潘", "叠溪海子", "牟尼沟", "神仙池", "中查", "鲁能胜地",
     "若尔盖", "红原", "月亮湾", "达古冰川", "汶川", "茂县", "都江堰", "二王庙",
     "青城山", "峨眉", "乐山大佛", "凌云大佛", "三星堆", "宽窄巷子", "锦里",
     "春熙路", "杜甫草堂", "武侯祠", "文殊院", "青羊宫", "九黄机场", "漳扎",
@@ -99,6 +98,13 @@ OUTSIDE_LANDMARKS = [
     "一卡通", "高速费", "收费站", "加油站", "导航", "机场大巴",
     "步行街", "商场", "超市", "纪念品", "特产", "免税", "礼品卡", "摊贩",
 ]
+# v3 文博词汇：寺/殿/馆藏/出土类描述多出现在城市人文景点与博物馆段落（弱景区外信号，调参定权重）
+MUSEUM_WORDS = [
+    "青铜器", "玉器", "瓷器", "陶器", "馆藏", "藏品", "出土", "造像", "供奉", "碑刻",
+    "佛像", "菩萨像", "舍利", "石窟", "窟龛", "殿内", "大殿", "正殿", "配殿", "藏经",
+    "展馆", "展厅", "陈列", "文物", "古迹", "祠堂", "牌坊", "庙宇", "寺院",
+]
+
 # 基础设施词：证明"在景区游览语境"，但不指明哪个景区
 INFRA_WORDS = [
     "索道", "缆车", "观光车", "环保车", "摆渡车", "景区大巴", "中转车",
@@ -115,11 +121,12 @@ WEAK_SCENIC_WORDS = {
                "藏民", "藏文化", "高原", "碧蓝", "碧绿", "沟内", "钙华", "海子"],
     "颐和园": ["园内", "游园", "御苑", "御题", "皇家", "乾隆", "慈禧", "光绪", "园中园", "湖"],
 }
+MUSEUM_W = 2.0  # v3 文博词汇景区外信号权重（tune 半区定参；0 关闭）
 TRANSITION_RE = re.compile(r"^(接着|然后|随后|下一站|继续|回到|返程|前往|乘(车|坐)|坐(车|上))")
 # 大交通覆盖：出现即判景区外，除非句中带游览意图词，或交通词紧跟 景区/园内/沟内（园内交通）
 TRANSPORT_RE = re.compile(
     r"班车|大巴|公交|地铁|高铁|动车|火车|飞机|机场|航班|登机|值机|地勤|"
-    r"打车|包车|拼车|自驾|发往|班次|一卡通|高速|登机牌")
+    r"打车|包车|拼车|自驾|发往|班次|一卡通|高速|登机牌|国道|省道|县道|乡道")
 TOURISM_INTENT_RE = re.compile(r"爬山|登山|游玩|游览|旅游|旅行|上山|赏|逛园|景区游")
 HOTEL_RE = re.compile(r"酒店|宾馆|民宿|客栈|旅舍|招待所")
 HOTEL_DESC_RE = re.compile(r"外观|装修|房间|性价比|推荐|管家|前台|隔音|床位|泳池|温泉|早餐|房型|设施|卫生|榻榻米")
@@ -142,7 +149,8 @@ def load_dict() -> tuple[dict[str, list[str]], dict[str, list[str]]]:
 
 
 class Attributor:
-    def __init__(self, poi_weight=POI_W, outside_weight=OUTSIDE_W, weak_weight=WEAK_W):
+    def __init__(self, poi_weight=POI_W, outside_weight=OUTSIDE_W, weak_weight=WEAK_W,
+                 museum_weight=None):
         self.scenic2poi, self.poi2scenic = load_dict()
         for scenic, names in SUPPLEMENT_POI.items():
             for n in names:
@@ -159,6 +167,7 @@ class Attributor:
         self.poi_w = poi_weight
         self.outside_w = outside_weight
         self.weak_w = weak_weight
+        self.museum_w = MUSEUM_W if museum_weight is None else museum_weight
 
     def sentence_scores(self, sent: str) -> dict:
         scores = {"黄山": 0.0, "九寨沟": 0.0, "颐和园": 0.0}
@@ -174,6 +183,11 @@ class Attributor:
         for kw in OUTSIDE_LANDMARKS:
             if kw in sent:
                 outside += self.outside_w
+        if self.museum_w:
+            for kw in MUSEUM_WORDS:
+                if kw in sent:
+                    outside += self.museum_w
+                    break  # 同类词汇成段出现只计一次，避免长文博段落刷分
         for kw in INFRA_WORDS:
             if kw in sent:
                 infra = True
@@ -285,20 +299,39 @@ def run_all(output_path: Path | None) -> dict[tuple[str, int], str]:
     return lookup
 
 
-def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None) -> dict:
-    """在 495 句标注集上评估方案A（记录级标签）与方案B（特征规则）的准确率与混淆。"""
+def tune_holdout_split() -> tuple[set[str], set[str]]:
+    """495 句按 seed=42 对半分：前半 tune（特征迭代），后半 holdout（只做终评，U5 纪律）。"""
+    gold_rows = [json.loads(l) for l in (ATTR / "sentence_attribution.jsonl").open(encoding="utf-8")]
+    sids = sorted(g["sid"] for g in gold_rows)
+    import random
+    rng = random.Random(42)
+    rng.shuffle(sids)
+    half = len(sids) // 2
+    return set(sids[:half]), set(sids[half:])
+
+
+def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None,
+             splits: tuple[set[str], set[str]] | None = None) -> dict:
+    """在 495 句标注集上评估方案A（记录级标签）与方案B（特征规则）的准确率与混淆。
+
+    splits=(tune_sids, holdout_sids) 时额外输出分半口径；错误导出仅含 tune 半区（holdout 不参与迭代）。
+    """
     gold_rows = [json.loads(l) for l in (ATTR / "sentence_attribution.jsonl").open(encoding="utf-8")]
     err_fh = errors_path.open("w", encoding="utf-8") if errors_path else None
 
-    def score(method: str) -> dict:
+    def score(method: str, scope: str = "full") -> dict:
         correct = n = 0
         conf: Counter = Counter()
         for g in gold_rows:
+            if scope == "tune" and splits and g["sid"] not in splits[0]:
+                continue
+            if scope == "holdout" and splits and g["sid"] not in splits[1]:
+                continue
             pred = g["scenic_area"] if method == "A" else lookup.get((g["record_id"], g["start"]), "无法判断")
             n += 1
             if pred == g["label"]:
                 correct += 1
-            elif err_fh and method == "B":
+            elif err_fh and method == "B" and scope == "full":
                 err_fh.write(json.dumps(
                     {"gold": g["label"], "pred": pred, "sid": g["sid"],
                      "record": g["record_id"], "text": g["sentence"]}, ensure_ascii=False) + chr(10))
@@ -307,9 +340,14 @@ def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None
 
     res = {
         "full": {"A": score("A"), "B": score("B")},
-        "method_note": ("方案B v2（特征规则）：词典POI+根名别名+补充地标(权重3/次)，景区外信号(2)，"
-                        "大交通覆盖，酒店三态，弱景观词(0.6)，转移词继承，基础设施+官方文本回退记录级标签。"),
+        "method_note": ("方案B v3（特征规则）：词典POI+根名别名+补充地标(权重3/次)，景区外信号(2)，"
+                        "文博词汇景区外信号(2，同句只计一次，v3)，大交通覆盖(v3 增国道/省道/县道/乡道)，酒店三态，"
+                        "弱景观词(0.6)，转移词继承，基础设施+官方文本回退记录级标签；"
+                        "tune/holdout=seed42 对半分，v3 仅在 tune 半区迭代，holdout 只做终评。"),
     }
+    if splits:
+        res["tune"] = {"A": score("A", "tune"), "B": score("B", "tune")}
+        res["holdout"] = {"A": score("A", "holdout"), "B": score("B", "holdout")}
     if err_fh:
         err_fh.close()
     return res
@@ -321,19 +359,26 @@ def main() -> int:
     ap.add_argument("--evaluate", action="store_true", help="在 495 句标注集上评估 A/B 准确率")
     ap.add_argument("--errors", action="store_true", help="导出方案B 的错误样例供特征设计")
     ap.add_argument("--output", type=str, default="", help="全量归属输出路径")
+    ap.add_argument("--museum-w", type=float, default=None, help="文博词汇景区外信号权重（缺省=模块默认2.0，0=关闭）")
     args = ap.parse_args()
 
     out_path = Path(args.output) if args.output else None
+    global MUSEUM_W
+    if args.museum_w is not None:
+        MUSEUM_W = args.museum_w
     lookup = run_all(out_path)
     if out_path:
         print(f"全量归属 -> {out_path}")
 
     if args.evaluate:
-        res = evaluate(lookup, ATTR / "attribution_errors.jsonl" if args.errors else None)
+        res = evaluate(lookup, ATTR / "attribution_errors.jsonl" if args.errors else None,
+                       splits=tune_holdout_split())
         (ATTR / "attribution_eval.json").write_text(
             json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
         a, b = res["full"]["A"], res["full"]["B"]
-        print(f"A记录级标签: acc={a['acc']} (n={a['n']})  |  B特征规则: acc={b['acc']} (n={b['n']})")
+        t, h = res["tune"]["B"], res["holdout"]["B"]
+        print(f"A记录级标签: acc={a['acc']} (n={a['n']})  |  B特征规则: acc={b['acc']} (n={b['n']})  "
+              f"| B tune={t['acc']}(n={t['n']}) holdout={h['acc']}(n={h['n']})")
         conf = res["full"]["B"]["confusion"]
         worst = sorted(((k, v) for k, v in conf.items() if "||" in k and k.split("||")[0] != k.split("||")[1]),
                        key=lambda x: -x[1])[:12]
