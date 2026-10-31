@@ -343,4 +343,5 @@ def main() -> int:
             print(f"   {g} -> {pr}: {v}")
     return 0
 
-
+if __name__ == "__main__":
+    sys.exit(main())
