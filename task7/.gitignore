@@ -1,0 +1,6 @@
+# Python 临时产物
+__pycache__/
+*.py[cod]
+
+# LLM API 配置（含密钥，严禁入库）
+config.json

@@ -1,10 +1,11 @@
-# 采集运行态：浏览器登录 profile、运行日志、Excel 人工核对产物
+# 浏览器采集运行态与本地依赖
 .browser-profile*/
 logs/
 qa/
+node_modules/
 
-# data/ 默认全部忽略：HTML 快照、爬虫工作区（data/crawl/）、中间产物都可由 src/ 再生。
-# 只放行交付物与实验 2-7 的公共输入。
+# data/ 默认全部忽略：HTML 快照、爬虫工作区、中间产物体量大且无需入库。
+# 只跟踪下游实验的输入与交付审计文件。
 data/**
 !data/raw/
 !data/raw/official_documents.jsonl

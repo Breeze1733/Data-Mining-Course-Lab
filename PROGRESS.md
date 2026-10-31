@@ -527,3 +527,14 @@ Agent 8/8；报告 7 重生成；审计 70/70；回归守护通过。
 - 验证：task1 全部 13 个单测通过；`py_compile`/`node --check` 通过；`stage_status.py` 冒烟
   读数与重组前一致（官方 22/22，携程池 149，小红书池 105）；`common/regression_check.py`
   回归守护全绿，含升级后重打分 task4/task5 无退化。
+
+---
+
+## 2026-10-31（补）ignore 分层与数据跟踪口径
+
+- 各 task 恢复独立 `.gitignore`，职责分层：task 自身运行态由本地规则管（task7 的 `config.json`
+  密钥规则只在 task7 本地），根目录 `.gitignore` 只保留全局兜底。
+- `task1/data` 维持白名单口径：只跟踪下游输入与交付审计文件（dataset_clean.jsonl、
+  official_routes.jsonl、quality_report.json 等 12 个）；HTML 快照与爬虫工作区不入库。
+- 新增 `.gitattributes` 对 `task1/data/**` 关闭换行转换：本机 autocrlf=true 会在重新克隆时改写
+  白名单文件的字节，统一按原始字节入库；8 个历史文件的 CRLF 已归一为 LF（内容零差异）。

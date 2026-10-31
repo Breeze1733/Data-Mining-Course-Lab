@@ -13,9 +13,7 @@
 
 - `src/`：全部代码——官方/携程/小红书采集（`crawl_*.py`、`crawl_*.mjs`、`collect.py`）、组装与清洗（`assemble.py`、`build_records.py`、`preprocess.py`）、筛选汇总（`select_collection.py`、`import_browser_notes.py`）、导出与报告（`export_*`、`build_report1.py`）及`test_*.py`测试。
 - `docs/`：来源考证与搜索边界审计笔记（`official_sources.md`等4篇）。
-- `data/raw/`：原始网页快照与采集中间产物（HTML不入库，可由脚本再生）。
-- `data/crawl/`：爬虫工作区——断点状态、候选池、抓取日志，全部可再生成，不入库。
-- `data/collected/`、`data/processed/`：筛选汇总产物与清洗后语料，交付物入库。
+- `data/`：只入库下游实验的输入与交付审计文件——`processed/dataset_clean.jsonl`（实验2-7统一输入）、`raw/official_routes.jsonl`（实验3输入）、`processed/quality_report.json`等清洗审计文件，以及`collected/`的汇总、候选审计与`scenic_guide_dataset.xlsx`交付簿。HTML快照、爬虫工作区`crawl/`与中间产物不入库。
 - `sources.json`：采集来源清单（流水线输入配置）。
 - `run_collection.ps1`：三平台联网采集总入口（日常复现不需要运行）。
 - `package.json`、`node_modules/`：仅浏览器采集（Playwright/Node）使用。
