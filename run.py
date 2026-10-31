@@ -13,8 +13,6 @@ ROOT = Path(__file__).resolve().parent
 
 def main():
     parser = argparse.ArgumentParser(__doc__)
-    parser.add_argument("--no-reports", action="store_true")
-    parser.add_argument("--document-python", default=sys.executable)
     args = parser.parse_args()
     env = {**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8", "PYTHONHASHSEED": "0"}
     steps = [
@@ -41,16 +39,8 @@ def main():
     ]
     for script, arguments in steps:
         print(f"Running {script}", flush=True)
-        executable = args.document_python if script.endswith("export_mapping_xlsx.py") else sys.executable
-        subprocess.run([executable, "-X", "utf8", str(ROOT / script), *arguments],
+        subprocess.run([sys.executable, "-X", "utf8", str(ROOT / script), *arguments],
                        cwd=ROOT, env=env, check=True)
-    if not args.no_reports:
-        local_scripts = [ROOT / f"local/build_report{t}.py" for t in range(1, 8)] + [ROOT / "local/build_summary_doc.py"]
-        if all(p.exists() for p in local_scripts):
-            for script in local_scripts:
-                subprocess.run([args.document_python, "-X", "utf8", str(script)], cwd=ROOT, env=env, check=True)
-        else:
-            print("local/ 报告生成脚本不存在（未随仓库分发），跳过报告再生成。")
 
 
 if __name__ == "__main__":

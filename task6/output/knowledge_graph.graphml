@@ -1791,6 +1791,15 @@
   <data key="d7">1</data>
   <data key="d8">一定要描述大峡谷的景色</data>
 </node>
+<node id="条件:黄山:其他:是一日游不在古村里住宿">
+  <data key="d0">条件</data>
+  <data key="d1">是一日游不在古村里住宿</data>
+  <data key="d2">[其他] 是一日游不在古村里住宿</data>
+  <data key="d5">其他</data>
+  <data key="d6">建议先游西递再宏村,因为宏村规模比西递大,客运班车车次更多,傍晚游完后便于返回黄山市区及黄山风景区</data>
+  <data key="d7">1</data>
+  <data key="d8">是一日游不在古村里住宿</data>
+</node>
 <node id="条件:黄山:其他:您对古建又感兴趣">
   <data key="d0">条件</data>
   <data key="d1">您对古建又感兴趣</data>
@@ -9151,6 +9160,10 @@
   <data key="d11">0.5</data>
   <data key="d12">游客序列</data>
 </edge>
+<edge source="POI:黄山:宏村" target="条件:黄山:其他:是一日游不在古村里住宿" id="条件建议">
+  <data key="d9">条件建议</data>
+  <data key="d10">1</data>
+</edge>
 <edge source="POI:颐和园:宜芸馆" target="POI:颐和园:乐寿堂" id="先后顺序">
   <data key="d9">先后顺序</data>
   <data key="d11">3.5</data>
@@ -15054,6 +15067,10 @@
   <data key="d9">先后顺序</data>
   <data key="d11">0.5</data>
   <data key="d12">游客序列</data>
+</edge>
+<edge source="POI:黄山:西递" target="条件:黄山:其他:是一日游不在古村里住宿" id="条件建议">
+  <data key="d9">条件建议</data>
+  <data key="d10">1</data>
 </edge>
 <edge source="POI:黄山:玉屏峰" target="POI:黄山:步仙桥" id="先后顺序">
   <data key="d9">先后顺序</data>

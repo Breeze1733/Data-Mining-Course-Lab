@@ -10,7 +10,7 @@
 python run.py
 ```
 
-程序读取已入库的`task1/data/processed/dataset_clean.jsonl`，顺序执行实体识别及下游实验，更新图表和实验报告。默认离线运行，不重新联网采集，也不重填人工标注。Agent未配置API时使用规则模式。
+程序读取已入库的`task1/data/processed/dataset_clean.jsonl`，顺序执行实体识别及下游实验，更新各实验输出与图表。默认离线运行，不重新联网采集，也不重填人工标注。Agent未配置API时使用规则模式。
 
 实验2的baseline和refined由同一个识别器运行，分别用于迭代对比和最终下游输入；正式结果统一保存在各任务的`output`目录。
 
