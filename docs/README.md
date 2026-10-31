@@ -21,3 +21,16 @@
   test_report_llm.json、traces_llm/、review_r2_draft.json 已于 2026-10-31 清理，仓库只保留与当前代码对应的产物。
 - task1 的 `build_official_expansion.py` 与 `tests/task1/test_collection.py` 命中 "urlopen" 为网页抓取
   （采集爬虫），不是 LLM API。
+
+## 产物命名约定
+
+产物文件名只描述内容与角色，**不带轮次/版本号**：历史文件 review_r2.json（r2 即"第二轮"）已更名为
+`review_fresh.json`（30 例新鲜抽检的人工判定）。仓库中成对出现的名字是不同的实验对象，不是同一产物
+的多个版本：
+
+- `entities_baseline/refined.jsonl`、`entity_stats_baseline/refined.json` 及对应词云图——任务书实验2
+  明确要求"根据可视化调整停用词、重新识别并优化"的两轮迭代，baseline 与 refined 是对比实验的两个实验组；
+- `annotation_sample.json` / `annotation_sample_expand.json`——消解评测的开发集抽样与留出集抽样
+  （DECISIONS D4），内容不同、各有唯一职责；
+- `metrics/snapshots/snapshot_YYYYMMDD_HHMM.json`——指标账本每时点一条的记录，文件名是时间戳
+  （`snapshot_latest.json` 为滚动指针），由 `metrics_snapshot.py` 动态生成。

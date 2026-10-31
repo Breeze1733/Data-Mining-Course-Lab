@@ -85,7 +85,7 @@ def split_multi_suggestions(sugg: str) -> list[str]:
 # 1) 平台话术不是旅游建议；2) 呼吁/评论句不是给游客的建议；
 # 3) 联游城市段落的条件对归属价值低（苏州街为颐和园内景点，需排除）。
 PLATFORM_PHRASE_RE = re.compile(r"点赞|收藏|一键三连|评论区|私信|关注我们|转发|推荐阅读")
-# U20 守卫（依据 review_r2 新鲜抽检 8 wrong 归因）：
+# U20 守卫（依据 review_fresh 新鲜抽检 8 wrong 归因）：
 LYRICAL_RE = re.compile(r"人生|岁月|初心|青春|梦想|心态|老得太快|明白得太迟|否定了自己|自己的想法")
 COGNITIVE_RE = re.compile(r"^(不要|别)(认为|觉得|以为|担心)")
 RHETORIC_P1_RE = re.compile(r"^如果说")
