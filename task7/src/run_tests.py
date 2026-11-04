@@ -49,6 +49,9 @@ def main() -> int:
                     help="强制规则模式（规范产物默认口径；LLM 模式结果另存 test_report_llm.json）")
     args = ap.parse_args()
     llm = LLMClient(config_path=ROOT / "config.nokey.json") if args.rules else LLMClient()
+    online = llm.available and not args.rules
+    trace_dir = OUT / ("traces_llm" if online else "traces")
+    trace_dir.mkdir(exist_ok=True)
     results = []
     for sc in SCENARIOS:
         agent = ReActAgent(llm)
@@ -81,7 +84,20 @@ def main() -> int:
                 checks[k] = intent.get(k) == v
         tool_calls = [t for t in result["trace"] if t.get("step") == "action"]
         checks["tools_called"] = len(tool_calls) >= (0 if sc["expect"].get("fallback") else 3)
-        checks["tools_used_in_answer"] = True
+
+        def answer_covers_plan(res):
+            """P14：最终回答必须覆盖计划内容（真实检查，非恒真）——
+            有计划时回答需提及至少 60% 行程站点名；回退场景需列出全部支持景区。"""
+            plan = res.get("plan")
+            if plan is None:
+                return all(a in res["answer"] for a in ("黄山", "九寨沟", "颐和园"))
+            pois = [it["poi"] for it in plan["itinerary"]]
+            if not pois:
+                return False
+            hit = sum(1 for poi in pois if poi in res["answer"])
+            return hit >= max(1, int(0.6 * len(pois)))
+
+        checks["tools_used_in_answer"] = answer_covers_plan(result)
         if result["plan"]:
             n_pois = len(result["plan"]["itinerary"])
             expected_n = {0.5: (3, 6), 1: (5, 9), 2: (8, 12)}[sc["expect"].get("days", 1)]
@@ -92,25 +108,36 @@ def main() -> int:
                         "checks": checks, "intent": intent,
                         "n_tool_calls": len(tool_calls), "answer_head": result["answer"][:120],
                         "elapsed": result["elapsed"]})
-        (OUT / "traces" / f'trace_{sc["id"]}.json').write_text(
+        (trace_dir / f'trace_{sc["id"]}.json').write_text(
             json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f'{"PASS" if passed else "FAIL"} {sc["id"]} | tools={len(tool_calls)} | {result["elapsed"]}s')
 
     report = {
-        "mode": "llm" if llm.available else "rules（未配置 LLM API，内置规划器）",
+        "mode": ("llm（在线模式）" if online else
+                 "rules（--rules 强制离线）" if args.rules else
+                 "rules（未配置 LLM API，内置规划器）"),
         "n_scenarios": len(SCENARIOS),
         "n_passed": sum(1 for r in results if r["passed"]),
         "results": results,
         "evidence": "每次运行的完整 ReAct trace（含每步 thought/action/observation）见 output/traces/",
     }
-    (OUT / "test_report.json").write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
+    # 在线模式单独记录，不覆盖离线验收证据（提示词 §2.3）
+    suffix = "_llm" if online else ""
+    trace_dir = OUT / ("traces" if not online else "traces_llm")
+    trace_dir.mkdir(exist_ok=True)
+    (OUT / f"test_report{suffix}.json").write_text(
+        json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
     plans = []
     for sc in SCENARIOS:
-        t = json.loads((OUT / "traces" / f'trace_{sc["id"]}.json').read_text(encoding="utf-8"))
+        t = json.loads((trace_dir / f'trace_{sc["id"]}.json').read_text(encoding="utf-8"))
         if t.get("plan"):
             plans.append({"scenario": sc["id"], **t["plan"]})
-    (OUT / "itineraries.json").write_text(json.dumps(plans, ensure_ascii=False, indent=1), encoding="utf-8")
+    (OUT / f"itineraries{suffix}.json").write_text(json.dumps(plans, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({k: report[k] for k in ("mode", "n_scenarios", "n_passed")}, ensure_ascii=False))
+    failed = [r["scenario"] for r in results if not r["passed"]]
+    if failed:
+        print(f"FAILED scenarios: {failed}", file=sys.stderr)
+        return 1
     return 0
 
 
