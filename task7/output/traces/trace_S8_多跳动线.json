@@ -63,7 +63,7 @@
   },
   {
    "step": "thought",
-   "thought": "编排骨架：模板“2016版一日游”覆盖已选 POI 的 100%"
+   "thought": "编排骨架：模板“2016版一日游”覆盖已选 POI 的 100%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
   },
   {
    "step": "action",

@@ -63,7 +63,7 @@
   },
   {
    "step": "thought",
-   "thought": "编排骨架：模板“2016版一日游”覆盖已选 POI 的 100%"
+   "thought": "编排骨架：模板“2016版一日游”覆盖已选 POI 的 100%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
   },
   {
    "step": "action",
@@ -302,5 +302,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 0.01
+ "elapsed": 0.0
 }

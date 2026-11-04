@@ -63,7 +63,7 @@
   },
   {
    "step": "thought",
-   "thought": "编排骨架：模板“2016版二日游”覆盖已选 POI 的 83%"
+   "thought": "编排骨架：模板“2016版二日游”覆盖已选 POI 的 83%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
   },
   {
    "step": "action",
@@ -380,5 +380,5 @@
   ],
   "template_route": "JZG-EXP01-R2 二日舒适游"
  },
- "elapsed": 0.01
+ "elapsed": 0.0
 }

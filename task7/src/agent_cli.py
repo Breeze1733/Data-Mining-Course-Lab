@@ -196,7 +196,8 @@ class ReActAgent:
                      "再取官方路线做编排骨架，最后按游客类型取条件贴士"})
 
         selected = [p["poi"] for p in pois_res["pois"]]
-        # 模板选择：在与天数匹配的官方路线中选“覆盖已选 POI 比例最高”的一条；覆盖率过低则改用图谱拓扑排序
+        # 模板选择（P11）：query_route 返回的路线作为首选候选参与覆盖率竞争——
+        # 工具结果真实进入决策；未入选时 trace 如实说明原因
         cands = self.tools.routes_by_scenic(scenic, days if days <= 2 else 2)
         best_route, best_pos, best_cov = None, {}, 0.0
         for r in cands:
@@ -211,7 +212,10 @@ class ReActAgent:
         template_pos = best_pos if not template_cov_low else {}
         template = best_route["route_title"] if best_route else ""
         ordered = self._order_pois(scenic, selected, template_pos)
+        qr_selected = bool(best_route) and best_route.get("route_id") == route_res.get("route_id")
         trace.append({"step": "thought", "thought": f"编排骨架：模板“{template}”覆盖已选 POI 的 {best_cov:.0%}"
+                     + ("；query_route 返回的路线入选" if qr_selected else
+                        "；query_route 返回的路线覆盖率不足，另选覆盖最高者")
                      + ("；覆盖率不足 60%，改用图谱先后边拓扑排序" if template_cov_low else "")})
         # 天数/时段分配（P05/P06）：n_days 对 0.5/1/1.5/2/3/3.5/4/5 全部成立；
         # 2 日且模板全覆盖时沿用模板的天与时段，否则按切分块分配；半日时段封顶于上午/中午（P06）；

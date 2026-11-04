@@ -69,7 +69,7 @@
   },
   {
    "step": "thought",
-   "thought": "编排骨架：模板“APEC世界文化遗产经典线”覆盖已选 POI 的 60%"
+   "thought": "编排骨架：模板“APEC世界文化遗产经典线”覆盖已选 POI 的 60%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
   },
   {
    "step": "action",
