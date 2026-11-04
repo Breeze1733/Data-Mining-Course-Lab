@@ -188,33 +188,36 @@ def main() -> int:
     cond_to_scenic = 0
     for cluster in clusters:
         members = cluster["members"]
-        rep = max(members, key=lambda x: x["frequency"])
+        rep = sorted(members, key=lambda x: (-x["frequency"], x["condition_text"]))[0]
         scenic = rep["scenic_area"]
-        cn = node_id("条件", scenic, f'{rep["condition_type"]}:{_norm_cond(rep["condition_text"])[:18]}')
+        # P02：ID 纳入抽取模式——推断型标签（“时间条件（句内）”）的 P4 建议与 P6 避雷是
+        # 不同语义节点，聚类已按 pattern 分离，节点身份必须同步携带，否则互相碰撞
+        cn = node_id("条件", scenic,
+                     f'{rep["pattern"]}:{rep["condition_type"]}:{_norm_cond(rep["condition_text"])}')
         if not G.has_node(cn):
             G.add_node(cn, kind="条件", name=rep["condition_text"][:30],
-                       label=f'[{rep["condition_type"]}] {rep["condition_text"][:24]}',
+                       label=f'[{rep["condition_type"]}|{rep["pattern"].split("_")[0]}] {rep["condition_text"][:24]}',
                        cond_type=rep["condition_type"], suggestion=rep["suggestion_text"][:100],
                        frequency=sum(x["frequency"] for x in members),
                        variants=" | ".join(dict.fromkeys(x["condition_text"] for x in members))[:200])
         for m in members:
             text = m["condition_text"] + " " + m["suggestion_text"]
-        pois_in_text = [resolve(scenic, e["canonical"]) for e in matcher.find(text)
-                        if e["type"] == "景点POI"
-                        and scenic in canonical_areas.get(e["canonical"], set())
-                        and node_id("POI", scenic, resolve(scenic, e["canonical"])) in G]
-        if pois_in_text:
-            for poi in dict.fromkeys(pois_in_text):
-                u = node_id("POI", scenic, poi)
-                if G.has_edge(u, cn, key="条件建议"):
-                    G[u][cn]["条件建议"]["weight"] += m["frequency"]
-                else:
-                    G.add_edge(u, cn, key="条件建议", relation="条件建议", weight=m["frequency"])
-                cond_edges += 1
-        else:
-            u = node_id("景区", scenic, scenic)
-            G.add_edge(u, cn, key="条件建议", relation="条件建议", weight=m["frequency"])
-            cond_to_scenic += 1
+            pois_in_text = [resolve(scenic, e["canonical"]) for e in matcher.find(text)
+                            if e["type"] == "景点POI"
+                            and scenic in canonical_areas.get(e["canonical"], set())
+                            and node_id("POI", scenic, resolve(scenic, e["canonical"])) in G]
+            if pois_in_text:
+                for poi in dict.fromkeys(pois_in_text):
+                    u = node_id("POI", scenic, poi)
+                    if G.has_edge(u, cn, key="条件建议"):
+                        G[u][cn]["条件建议"]["weight"] += m["frequency"]
+                    else:
+                        G.add_edge(u, cn, key="条件建议", relation="条件建议", weight=m["frequency"])
+                    cond_edges += 1
+            else:
+                u = node_id("景区", scenic, scenic)
+                G.add_edge(u, cn, key="条件建议", relation="条件建议", weight=m["frequency"])
+                cond_to_scenic += 1
 
     print(json.dumps({"cond_raw_pairs": _stats.get("cond_raw"), "cond_cluster_nodes": _stats.get("cond_clusters")}, ensure_ascii=False))
     # ── 导出与统计 ──────────────────────────────────────────────
