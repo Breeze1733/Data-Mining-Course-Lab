@@ -10,7 +10,7 @@ LLM 仅用于意图解析与最终文案润色，行程编排始终基于图谱�
 src/
   graph_tools.py    图谱查询工具层（4 个工具，带参数 Schema 与调用 trace）
   agent_cli.py      LLMClient + IntentParser + ReActAgent + 交互命令行
-  run_tests.py      6 场景批量测试（证据落盘）
+  run_tests.py      10 场景批量测试（离线 rules / 在线 LLM 产物分离落盘）
 output/
   traces/trace_*.json   每个场景的完整 ReAct 轨迹（thought/action/observation）
   itineraries.json      结构化行程
@@ -32,5 +32,5 @@ cd task1
 | query_conditions | 景区、游客类型 | 条件性建议（人群/装备/天气…） |
 | query_order | 景区、POI | 官方先后邻接（前驱/后继+权重） |
 ## 关键结论
-- 6/6 场景通过：含无匹配景区回退（S5）与“半日+看日出”冲突提示（S6）。
-- 每次规划真实调用 4 个图谱工具，官方路线模板按已选 POI 覆盖率选用（<60% 时改用图谱先后边拓扑排序）。
+- 10/10 场景通过（离线与在线双模式）：含回退（S5）、冲突提示（S6）、可行性提示（S7）、多跳动线（S8）、冬季时段（S9）、三日编排（S10）。
+- 每次规划真实调用 6 个图谱工具，官方路线模板按已选 POI 覆盖率选用（<60% 时改用图谱先后边拓扑排序），警告与特殊需求说明进入最终回答。

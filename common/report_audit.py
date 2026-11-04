@@ -35,6 +35,22 @@ def count_lines(path: Path) -> int | None:
         return None
 
 
+def _bounded_match(text: str, variant: str) -> bool:
+    """P22：数字类变体带前后边界匹配（数字/千分位/小数点不相连才算命中）。"""
+    if not variant:
+        return False
+    esc = re.escape(variant)
+    if re.fullmatch(r"[\d,]+", variant):
+        pat = r"(?<![\d,])" + esc + r"(?![\d,])"
+    elif re.fullmatch(r"[\d.]+", variant):
+        pat = r"(?<![\d.])" + esc + r"(?![\d.])"
+    elif variant.endswith("%"):
+        pat = r"(?<![\d.])" + re.escape(variant[:-1]) + r"%(?!\d)"
+    else:
+        return variant in text
+    return re.search(pat, text) is not None
+
+
 def v_int(x) -> list[str]:
     if x is None:
         return []
@@ -206,7 +222,8 @@ def main() -> int:
                     warns.append(f"{c['name']}(数据源缺失)")
                     n_missing_src += 1
                     continue
-                hit = any(v in text for v in variants)
+                # P22：数字带边界匹配——防止 79 命中 179、0.5 命中 30.5 这类短数字误配
+                hit = any(_bounded_match(text, v) for v in variants)
                 expected = " 或 ".join(variants[:3]) + ("…" if len(variants) > 3 else "")
             if hit:
                 n_pass += 1
