@@ -22,7 +22,8 @@ SCENARIOS = [
     {"id": "S2_亲子九寨沟一日", "query": "带孩子九寨沟一日游，怎么安排？",
      "expect": {"scenic": "九寨沟", "visitor_type": "孩子", "days": 1}},
     {"id": "S3_情侣黄山两日", "query": "情侣黄山两日游，想看日出",
-     "expect": {"scenic": "黄山", "visitor_type": "情侣", "days": 2}},
+     "expect": {"scenic": "黄山", "visitor_type": "情侣", "days": 2,
+                "sunrise_last_day_first": "光明顶"}},
     {"id": "S4_时间紧颐和园", "query": "只有3小时，颐和园快速逛一遍精华",
      "expect": {"scenic": "颐和园", "visitor_type": None, "days": 0.5}},
     {"id": "S5_无匹配景区", "query": "帮我规划故宫一日游",
@@ -39,6 +40,15 @@ SCENARIOS = [
     {"id": "S10_三日多天编排", "query": "九寨沟三天深度游，慢慢逛",
      "expect": {"scenic": "九寨沟", "days": 3, "multi_day": True}},
 ]
+def check_sunrise(result, expect_poi):
+    """P07 验收：看日出需求 → 日出观景点排最后一日首位，说明进入回答。"""
+    plan = result.get("plan") or {}
+    it = plan.get("itinerary", [])
+    last_day = max((x["day"] for x in it), default=1)
+    last_first = next((x["poi"] for x in it if x["day"] == last_day), None)
+    return last_first == expect_poi and "说明：看日出" in result["answer"]
+
+
 def check_multi_day(result):
     plan = result.get("plan") or {}
     days = {it["day"] for it in plan.get("itinerary", [])}
@@ -83,6 +93,8 @@ def main() -> int:
             elif k == "feasibility_keyword":
                 warnings = (result["plan"] or {}).get("feasibility_warnings", [])
                 checks["feasibility_keyword"] = bool(warnings) and any(v in w for w in warnings)
+            elif k == "sunrise_last_day_first":
+                checks["sunrise_last_day_first"] = check_sunrise(result, v)
             elif k == "multi_day":
                 checks["multi_day"] = check_multi_day(result)
             elif k == "seasonal_note":

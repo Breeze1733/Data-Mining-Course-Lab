@@ -189,9 +189,11 @@ class ReActAgent:
     def _plan_rule(self, intent: dict, trace: list) -> dict:
         scenic, days, visitor = intent["scenic"], intent["days"], intent["visitor_type"]
         limit = {0.5: 5, 1: 8, 1.5: 9, 2: 11, 3: 12, 3.5: 13, 4: 14, 5: 15}.get(days, 11)
-        pois_res = self.tools.call("query_pois", {"scenic": scenic, "visitor_type": visitor, "limit": limit}, trace)
+        # P07：特殊需求参与选点——“省力”映射到体力有限的人群证据（负向建议已降权）
+        visitor_eff = "体力有限" if ("省力" in (intent.get("special") or []) and not visitor) else visitor
+        pois_res = self.tools.call("query_pois", {"scenic": scenic, "visitor_type": visitor_eff, "limit": limit}, trace)
         route_res = self.tools.call("query_route", {"scenic": scenic, "days": days if days <= 2 else 2}, trace)
-        cond_res = self.tools.call("query_conditions", {"scenic": scenic, "visitor_type": visitor}, trace)
+        cond_res = self.tools.call("query_conditions", {"scenic": scenic, "visitor_type": visitor_eff}, trace)
         trace.append({"step": "thought", "thought": f"约束={intent}；先查核心 POI（limit={limit}），"
                      "再取官方路线做编排骨架，最后按游客类型取条件贴士"})
 
@@ -212,6 +214,18 @@ class ReActAgent:
         template_pos = best_pos if not template_cov_low else {}
         template = best_route["route_title"] if best_route else ""
         ordered = self._order_pois(scenic, selected, template_pos)
+        special_notes: list[str] = []
+        if "看日出" in (intent.get("special") or []) and days and days >= 2:
+            sp = self._find_sunrise_poi(scenic, ordered)
+            if sp:
+                ordered.remove(sp)
+                n_days0 = max(1, int(days) if days and days >= 1 else 1)
+                insert_at = min((n_days0 - 1) * ((len(ordered) + 1 + n_days0 - 1) // n_days0), len(ordered))
+                ordered.insert(insert_at, sp)
+                special_notes.append(f"看日出：{sp} 已安排在最后一日首位（清晨前往），需前晚住宿山上或山顶酒店")
+            else:
+                special_notes.append("看日出：已选景点中无日出观景点（如光明顶），如需看日出请将其加入需求")
+            trace.append({"step": "thought", "thought": f"特殊需求「看日出」编排：{special_notes[-1]}"})
         qr_selected = bool(best_route) and best_route.get("route_id") == route_res.get("route_id")
         trace.append({"step": "thought", "thought": f"编排骨架：模板“{template}”覆盖已选 POI 的 {best_cov:.0%}"
                      + ("；query_route 返回的路线入选" if qr_selected else
@@ -333,9 +347,24 @@ class ReActAgent:
                 if not any(k in c["condition"] + c["suggestion"] for k in other_area_kw)
                 and (c["cond_type"] == "人群" or any(k in c["suggestion"] for k in suggest_cue))][:6]
         return {"scenic": scenic, "days": days, "visitor_type": visitor, "special": intent["special"],
-                "trip_month": intent.get("month"),
+                "special_notes": special_notes, "trip_month": intent.get("month"),
                 "itinerary": itinerary, "tips": tips, "feasibility_warnings": feasibility_warnings,
                 "template_route": f'{route_res.get("route_id", "")} {route_res.get("route_title", "")}'}
+
+    def _find_sunrise_poi(self, scenic: str, ordered: list[str]) -> str | None:
+        """P07：在已选 POI 中找日出观景点——名称或挂接条件含“日出”。"""
+        for poi in ordered:
+            n = next((x for x in self.tools.poi_nodes(scenic) if self.tools.poi_label(x) == poi), None)
+            if not n:
+                continue
+            texts = [self.tools.G.nodes[n].get("name", ""), self.tools.G.nodes[n].get("label", "")]
+            for _, v, e in self.tools.G.out_edges(n, data=True):
+                if e.get("relation") == "条件建议":
+                    texts.append(self.tools.G.nodes[v].get("name", ""))
+                    texts.append(self.tools.G.nodes[v].get("suggestion", ""))
+            if any("日出" in t for t in texts):
+                return poi
+        return None
 
     def _order_pois(self, scenic: str, selected: list[str], template_pos: dict) -> list[str]:
         """模板全覆盖时按模板排；否则官方先后边拓扑排序（不可达时按入度+度数贪心），剩余按热度补。"""
@@ -422,9 +451,10 @@ class ReActAgent:
         warn_text = "".join(f'\n⚠ {w[:70]}' for w in warnings[:4])
         day_label = {0.5: "半日", 1: "一日", 1.5: "一日半", 2: "两日", 3: "三日", 3.5: "三日半", 4: "四日", 5: "五日"}
         month_tag = f'，出行时段{plan["trip_month"]}月' if plan.get("trip_month") else ""
+        sp_notes = "".join(f'{chr(10)}说明：{n}' for n in (plan.get("special_notes") or []))
         return (f'为您规划{plan["scenic"]}{day_label.get(plan["days"], plan["days"])}游{month_tag}'
                 f'（参考官方路线 {plan["template_route"]}）：\n' + "\n".join(lines) +
-                (f'\n贴士：{tips}' if tips else "") + warn_text)
+                (f'\n贴士：{tips}' if tips else "") + warn_text + sp_notes)
 
     # ── ReAct 主循环 ────────────────────────────────────────────
     def run(self, query: str) -> dict:

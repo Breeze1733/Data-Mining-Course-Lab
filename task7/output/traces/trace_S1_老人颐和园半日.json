@@ -176,6 +176,7 @@
   "special": [
    "省力"
   ],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
@@ -248,5 +249,5 @@
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }

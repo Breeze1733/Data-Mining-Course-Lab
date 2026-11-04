@@ -7,6 +7,7 @@
   "special": [
    "省力"
   ],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
@@ -85,6 +86,7 @@
   "days": 1,
   "visitor_type": "孩子",
   "special": [],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
@@ -185,6 +187,9 @@
   "special": [
    "看日出"
   ],
+  "special_notes": [
+   "看日出：光明顶 已安排在最后一日首位（清晨前往），需前晚住宿山上或山顶酒店"
+  ],
   "trip_month": null,
   "itinerary": [
    {
@@ -239,17 +244,17 @@
     "order": 7,
     "day": 2,
     "period": "上午",
-    "poi": "北海",
+    "poi": "光明顶",
     "transport_from_prev": "步行",
-    "note": ""
+    "note": "⚠ 去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下"
    },
    {
     "order": 8,
     "day": 2,
     "period": "上午",
-    "poi": "光明顶",
+    "poi": "北海",
     "transport_from_prev": "步行",
-    "note": "⚠ 去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下"
+    "note": ""
    },
    {
     "order": 9,
@@ -323,6 +328,7 @@
   "days": 0.5,
   "visitor_type": null,
   "special": [],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
@@ -415,6 +421,7 @@
   "special": [
    "看日出"
   ],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
@@ -515,6 +522,7 @@
   "days": 1,
   "visitor_type": null,
   "special": [],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
@@ -631,6 +639,7 @@
   "days": 1,
   "visitor_type": null,
   "special": [],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
@@ -747,6 +756,7 @@
   "days": 2,
   "visitor_type": null,
   "special": [],
+  "special_notes": [],
   "trip_month": 12,
   "itinerary": [
    {
@@ -898,6 +908,7 @@
   "days": 3,
   "visitor_type": null,
   "special": [],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
