@@ -364,7 +364,10 @@ def score(cases: list[dict]) -> None:
             name_match = pred == truth or (case["resolution_kind"] == "景区名" and truth == case["scenic_area"])
         else:
             name_match = True
-        rows.append({**g, "correct": bool(kind_match and name_match)})
+        rows.append({**g, "correct": bool(kind_match and name_match),
+                     "kind_match": bool(kind_match), "name_match": bool(name_match),
+                     "cur_pred": pred, "cur_kind": case["resolution_kind"],
+                     "cur_evidence": case.get("evidence", "")})
     acc_overall = sum(r["correct"] for r in rows) / len(rows)
     by_class = defaultdict(lambda: [0, 0])
     for r in rows:
@@ -385,11 +388,20 @@ def score(cases: list[dict]) -> None:
         "accuracy_by_class": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_class.items())},
         "accuracy_by_split": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_split.items())},
         "errors_by_split": {k: v[1] - v[0] for k, v in sorted(by_split.items())},
+        # P17：错误清单引用当前预测（历史 rule_resolution 快照仅存于 gold 文件备查）
         "errors": [
             {"pronoun": r["pronoun"], "class": r["pronoun_class"], "scenic": r["scenic_area"],
-             "rule": r["rule_resolution"], "rule_kind": r["rule_kind"],
+             "pred": r["cur_pred"], "pred_kind": r["cur_kind"], "evidence": r["cur_evidence"],
              "gold": r["gold_antecedent"], "gold_kind": r["gold_kind"], "note": r["note"]}
             for r in rows if not r["correct"]],
+        # P17：类别指标与先行词身份指标分开报告——非实体类只判类别，不冒充指代正确
+        "kind_only_accuracy": round(sum(r["kind_match"] for r in rows) / len(rows), 3) if rows else None,
+        "identity_scope": {
+            "n_identity_checked": sum(1 for r in rows if r["gold_kind"] in ("POI", "景区")),
+            "identity_accuracy": round(
+                sum(1 for r in rows if r["gold_kind"] in ("POI", "景区") and r["correct"])
+                / max(1, sum(1 for r in rows if r["gold_kind"] in ("POI", "景区"))), 3),
+        },
     }
     (OUT / "evaluation.json").write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
 
