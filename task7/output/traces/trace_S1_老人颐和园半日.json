@@ -87,7 +87,7 @@
   },
   {
    "step": "thought",
-   "thought": "用 query_order 校验首站的官方后继（昆明湖）以决定第二站是否符合主流动线"
+   "thought": "query_order 后继校验：无已选后继，维持现有顺序"
   },
   {
    "step": "action",

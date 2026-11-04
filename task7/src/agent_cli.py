@@ -35,9 +35,9 @@ VISITOR_PATTERNS = [
 ]
 DURATION_PATTERNS = [
     (3.5, r"三天半|3\.5\s*天"),
-    (3, r"三天|3\s*天"),
-    (4, r"四天|4\s*天"),
-    (5, r"五天|5\s*天"),
+    (3, r"三天|3\s*天|三日"),
+    (4, r"四天|4\s*天|四日"),
+    (5, r"五天|5\s*天|五日"),
     (2, r"两日|两天|2\s*天|二日|周末游"),
     (1.5, r"一天半|1\.5\s*天"),
     (1, r"一日|一天|1\s*天|当日"),
@@ -250,11 +250,22 @@ class ReActAgent:
                     x["poi"] == poi and x["visitor_fit"] > 0 for x in pois_res["pois"]) else "")
                 + ("，建议宿此" if is_lodging else ""),
             })
-        # 额外邻接参考（工具4，证明图谱查询参与编排）
-        if ordered:
+        # 工具4：官方后继校验（P12）——结果真实作用于决策：官方后继在已选集合且
+        # 不在第二位时，将后继调至第二位；无后继信息则如实记录，不夸大
+        if len(ordered) >= 2:
             order_res = self.tools.call("query_order", {"scenic": scenic, "poi": ordered[0]}, trace)
-            trace.append({"step": "thought", "thought": f"用 query_order 校验首站的官方后继（{order_res.get('poi')}）"
-                         "以决定第二站是否符合主流动线"})
+            succ = (order_res.get("successors") or [])
+            succ_labels = [x.get("name") if isinstance(x, dict) else str(x) for x in succ]
+            official_next = next((x for x in succ_labels if x in ordered[1:]), None)
+            if official_next and ordered[1] != official_next:
+                j = ordered.index(official_next)
+                ordered[1], ordered[j] = ordered[j], ordered[1]
+                trace.append({"step": "thought",
+                              "thought": f"query_order 后继校验：官方后继 {official_next} 原在 第{j + 1} 位，"
+                                         f"已调整至第 2 位以符合主流动线"})
+            else:
+                trace.append({"step": "thought",
+                              "thought": f"query_order 后继校验：{'无已选后继，维持现有顺序' if not official_next else '第二站已是官方后继，无需调整'}"})
         # P6 行程可行性校验（U24 时段化）：封禁/不建议类按 U11 提示；条件文本含月份窗口时按出行月份判定——
         # 封禁类月份命中 → 升级为时段冲突；正类窗口（开放/适合/精华）且出行月不在窗口 → 出行时段提示
         feasibility_warnings = []
@@ -371,15 +382,15 @@ class ReActAgent:
         return ordered_known + rest
 
     def _transport_between(self, a: str, b: str, scenic: str) -> str:
+        """P13：仅当两个 POI 挂接同一交通操作时才声称该交通方式，否则如实回退步行。"""
         na = next((n for n in self.tools.poi_nodes(scenic) if self.tools.poi_label(n) == a), None)
         nb = next((n for n in self.tools.poi_nodes(scenic) if self.tools.poi_label(n) == b), None)
         if na and nb:
-            for _, v, e in self.tools.G.out_edges(na, data=True):
-                if v == nb and e.get("relation") == "交通方式":
-                    return self.tools.G.nodes[v].get("name", "步行")
-            for _, v, e in self.tools.G.out_edges(nb, data=True):
-                if e.get("relation") == "交通方式":
-                    return self.tools.G.nodes[v].get("name", "步行")
+            trans = lambda n: {self.tools.G.nodes[v].get("name", "") for _, v, e in self.tools.G.out_edges(n, data=True)
+                               if e.get("relation") == "交通方式"}
+            shared = trans(na) & trans(nb) - {"步行"}
+            if shared:
+                return f'乘坐{sorted(shared)[0]}'
         return "步行"
 
     # ── 最终回答生成 ────────────────────────────────────────────

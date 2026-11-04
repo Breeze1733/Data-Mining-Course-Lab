@@ -100,7 +100,7 @@
     "day": 1,
     "period": "上午",
     "poi": "五花海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -108,7 +108,7 @@
     "day": 1,
     "period": "中午",
     "poi": "镜海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "乘坐徒步",
     "note": ""
    },
    {
@@ -124,7 +124,7 @@
     "day": 1,
     "period": "下午",
     "poi": "长海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -148,7 +148,7 @@
     "day": 1,
     "period": "晚上",
     "poi": "犀牛海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "乘坐徒步",
     "note": ""
    }
   ],
@@ -208,7 +208,7 @@
     "day": 1,
     "period": "中午",
     "poi": "云谷寺",
-    "transport_from_prev": "云谷索道",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -216,7 +216,7 @@
     "day": 1,
     "period": "下午",
     "poi": "西海大峡谷",
-    "transport_from_prev": "索道",
+    "transport_from_prev": "乘坐索道",
     "note": ""
    },
    {
@@ -256,7 +256,7 @@
     "day": 2,
     "period": "中午",
     "poi": "白鹅岭",
-    "transport_from_prev": "索道",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -272,7 +272,7 @@
     "day": 2,
     "period": "下午",
     "poi": "猴子观海",
-    "transport_from_prev": "索道",
+    "transport_from_prev": "步行",
     "note": ""
    }
   ],
@@ -446,7 +446,7 @@
     "day": 1,
     "period": "中午",
     "poi": "西海大峡谷",
-    "transport_from_prev": "索道",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -530,7 +530,7 @@
     "day": 1,
     "period": "上午",
     "poi": "五花海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -538,7 +538,7 @@
     "day": 1,
     "period": "中午",
     "poi": "镜海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "乘坐徒步",
     "note": ""
    },
    {
@@ -554,7 +554,7 @@
     "day": 1,
     "period": "下午",
     "poi": "长海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -578,7 +578,7 @@
     "day": 1,
     "period": "晚上",
     "poi": "犀牛海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "乘坐徒步",
     "note": ""
    }
   ],
@@ -646,7 +646,7 @@
     "day": 1,
     "period": "上午",
     "poi": "五花海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -654,7 +654,7 @@
     "day": 1,
     "period": "中午",
     "poi": "镜海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "乘坐徒步",
     "note": ""
    },
    {
@@ -670,7 +670,7 @@
     "day": 1,
     "period": "下午",
     "poi": "长海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -694,7 +694,7 @@
     "day": 1,
     "period": "晚上",
     "poi": "犀牛海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "乘坐徒步",
     "note": ""
    }
   ],
@@ -770,7 +770,7 @@
     "day": 1,
     "period": "中午",
     "poi": "云谷寺",
-    "transport_from_prev": "云谷索道",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -778,7 +778,7 @@
     "day": 1,
     "period": "下午",
     "poi": "西海大峡谷",
-    "transport_from_prev": "索道",
+    "transport_from_prev": "乘坐索道",
     "note": ""
    },
    {
@@ -818,7 +818,7 @@
     "day": 2,
     "period": "中午",
     "poi": "白鹅岭",
-    "transport_from_prev": "索道",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -834,7 +834,7 @@
     "day": 2,
     "period": "下午",
     "poi": "猴子观海",
-    "transport_from_prev": "索道",
+    "transport_from_prev": "步行",
     "note": ""
    }
   ],
@@ -929,7 +929,7 @@
     "day": 1,
     "period": "下午",
     "poi": "长海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -945,7 +945,7 @@
     "day": 2,
     "period": "上午",
     "poi": "镜海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -993,7 +993,7 @@
     "day": 3,
     "period": "下午",
     "poi": "箭竹海",
-    "transport_from_prev": "观光车",
+    "transport_from_prev": "步行",
     "note": ""
    }
   ],
