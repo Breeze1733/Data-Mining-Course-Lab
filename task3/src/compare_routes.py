@@ -72,6 +72,9 @@ def extract_tourist_routes() -> list[dict]:
                 "source_platform": rec["source_platform"],
                 "poi_sequence": pois, "distinct_pois": distinct,
                 "n_distinct": len(distinct),
+                # P20：po_sequence 保留折返与重复到访（连续重复已合并）；图边取完整序列；
+                # distinct_pois 仅用于覆盖率/tau 的集合口径
+                "evidence_note": "POI 阅读顺序序列（弱证据：含介绍/推荐提及，非全部为实际移动）",
             })
     return routes
 
@@ -203,6 +206,10 @@ def main() -> int:
             "order_tau_mean": round(sum(taus) / len(taus), 3) if taus else None,
             "n_order_pairs": len(taus),
             "official_has_time_info": has_official_time,
+            # P21：两种测量量纲不同——官方为路线标注时长（分钟）分布，游客为文本时段词提及频次，
+            # 只能作代理指标对照，不可直接相除比较
+            "official_time_basis": "路线标注时长（分钟）",
+            "tourist_time_basis": "文本时段词提及频次",
             "official_time_allocation_pct": pct(off_alloc),
             "tourist_time_allocation_pct": pct(tour_alloc),
             "tourist_time_counts": dict(tour_alloc),

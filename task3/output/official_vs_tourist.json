@@ -58,6 +58,8 @@
    "order_tau_mean": 0.68,
    "n_order_pairs": 84,
    "official_has_time_info": true,
+   "official_time_basis": "路线标注时长（分钟）",
+   "tourist_time_basis": "文本时段词提及频次",
    "official_time_allocation_pct": {
     "上午": 0.424,
     "中午": 0.168,
@@ -128,6 +130,8 @@
    "order_tau_mean": 0.29,
    "n_order_pairs": 53,
    "official_has_time_info": false,
+   "official_time_basis": "路线标注时长（分钟）",
+   "tourist_time_basis": "文本时段词提及频次",
    "official_time_allocation_pct": {
     "上午": null,
     "中午": null,
@@ -181,6 +185,8 @@
    "order_tau_mean": 0.52,
    "n_order_pairs": 81,
    "official_has_time_info": false,
+   "official_time_basis": "路线标注时长（分钟）",
+   "tourist_time_basis": "文本时段词提及频次",
    "official_time_allocation_pct": {
     "上午": null,
     "中午": null,

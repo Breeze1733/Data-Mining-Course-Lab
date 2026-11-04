@@ -16,17 +16,17 @@
      "from": "长廊",
      "to": "佛香阁",
      "relation": "先后顺序",
-     "weight": 7.0,
+     "weight": 14.5,
      "official_routes": "",
-     "tourist_support": 14
+     "tourist_support": 29
     },
     {
      "from": "佛香阁",
      "to": "长廊",
      "relation": "先后顺序",
-     "weight": 2.0,
+     "weight": 6.0,
      "official_routes": "",
-     "tourist_support": 4
+     "tourist_support": 12
     }
    ]
   },
@@ -38,17 +38,17 @@
      "from": "昆明湖",
      "to": "十七孔桥",
      "relation": "先后顺序",
-     "weight": 4.0,
+     "weight": 10.5,
      "official_routes": "",
-     "tourist_support": 8
+     "tourist_support": 21
     },
     {
      "from": "十七孔桥",
      "to": "昆明湖",
      "relation": "先后顺序",
-     "weight": 0.5,
+     "weight": 4.5,
      "official_routes": "",
-     "tourist_support": 1
+     "tourist_support": 9
     }
    ]
   },
@@ -60,17 +60,17 @@
      "from": "迎客松",
      "to": "光明顶",
      "relation": "先后顺序",
-     "weight": 2.5,
+     "weight": 8.0,
      "official_routes": "",
-     "tourist_support": 5
+     "tourist_support": 16
     },
     {
      "from": "光明顶",
      "to": "迎客松",
      "relation": "先后顺序",
-     "weight": 3.5,
+     "weight": 9.0,
      "official_routes": "",
-     "tourist_support": 7
+     "tourist_support": 18
     }
    ]
   },
@@ -82,17 +82,17 @@
      "from": "光明顶",
      "to": "飞来石",
      "relation": "先后顺序",
-     "weight": 7.0,
+     "weight": 23.0,
      "official_routes": "HS-O1-R3；HS-EXTRA1-R1；HS-EXTRA2-R1",
-     "tourist_support": 8
+     "tourist_support": 40
     },
     {
      "from": "飞来石",
      "to": "光明顶",
      "relation": "先后顺序",
-     "weight": 6.5,
+     "weight": 21.5,
      "official_routes": "HS-O1-R7；HS-EXTRA1-R2；HS-EXTRA1-R3",
-     "tourist_support": 7
+     "tourist_support": 37
     }
    ]
   },
@@ -104,17 +104,17 @@
      "from": "诺日朗",
      "to": "长海",
      "relation": "先后顺序",
-     "weight": 10.5,
+     "weight": 18.0,
      "official_routes": "JZG-EXP02-R1；JZG-EXP03-R1",
-     "tourist_support": 17
+     "tourist_support": 32
     },
     {
      "from": "长海",
      "to": "诺日朗",
      "relation": "先后顺序",
-     "weight": 0.5,
+     "weight": 3.5,
      "official_routes": "",
-     "tourist_support": 1
+     "tourist_support": 7
     }
    ]
   },
@@ -126,17 +126,17 @@
      "from": "长海",
      "to": "五彩池",
      "relation": "先后顺序",
-     "weight": 26.5,
+     "weight": 65.0,
      "official_routes": "JZG-EXP01-R1；JZG-EXP01-R2；JZG-EXP01-R3；JZG-EXP02-R1；JZG-EXP03-R1；JZG-EXP04-R1",
-     "tourist_support": 41
+     "tourist_support": 118
     },
     {
      "from": "五彩池",
      "to": "长海",
      "relation": "先后顺序",
-     "weight": 1.5,
+     "weight": 18.0,
      "official_routes": "",
-     "tourist_support": 3
+     "tourist_support": 36
     }
    ]
   }
@@ -145,103 +145,103 @@
   "黄山": [
    [
     "光明顶",
-    50
+    62
    ],
    [
     "迎客松",
-    42
+    54
    ],
    [
     "西海大峡谷",
-    37
+    52
    ],
    [
     "始信峰",
-    35
+    48
    ],
    [
-    "天都峰",
-    35
-   ],
-   [
-    "猴子观海",
-    34
+    "玉屏楼",
+    45
    ],
    [
     "北海",
-    33
+    44
    ],
    [
-    "飞来石",
-    31
+    "西海",
+    44
+   ],
+   [
+    "云谷寺",
+    41
    ]
   ],
   "九寨沟": [
    [
     "五花海",
-    45
+    57
    ],
    [
     "诺日朗",
-    45
-   ],
-   [
-    "五彩池",
-    44
-   ],
-   [
-    "原始森林",
-    41
-   ],
-   [
-    "诺日朗瀑布",
-    39
+    55
    ],
    [
     "长海",
-    38
+    52
    ],
    [
-    "树正寨",
-    34
+    "诺日朗瀑布",
+    51
+   ],
+   [
+    "沟口",
+    45
+   ],
+   [
+    "树正沟",
+    45
+   ],
+   [
+    "原始森林",
+    43
    ],
    [
     "镜海",
-    34
+    42
    ]
   ],
   "颐和园": [
    [
+    "昆明湖",
+    61
+   ],
+   [
     "佛香阁",
-    41
+    60
+   ],
+   [
+    "万寿山",
+    50
    ],
    [
     "西堤",
-    39
-   ],
-   [
-    "昆明湖",
-    35
-   ],
-   [
-    "谐趣园",
-    33
-   ],
-   [
-    "十七孔桥",
-    32
+    50
    ],
    [
     "长廊",
-    31
+    46
    ],
    [
-    "石舫",
-    29
+    "谐趣园",
+    43
    ],
    [
-    "东宫门",
-    29
+    "十七孔桥",
+    41
+   ],
+   [
+    "北宫门",
+    37
    ]
   ]
  },
@@ -261,7 +261,7 @@
  "edge_relation_distribution": {
   "包含": 158,
   "条件建议": 579,
-  "先后顺序": 1478,
+  "先后顺序": 1797,
   "时段归属": 141,
   "交通方式": 58
  },
@@ -274,8 +274,8 @@
  "provenance": {
   "cond_nodes_checked": 386,
   "cond_nodes_with_evidence": 386,
-  "order_edges_checked": 1242,
-  "order_edges_with_records": 1242,
+  "order_edges_checked": 1561,
+  "order_edges_with_records": 1561,
   "parse_failures": 0
  },
  "provenance_ok": true

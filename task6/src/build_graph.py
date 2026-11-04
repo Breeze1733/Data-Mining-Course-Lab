@@ -102,7 +102,8 @@ def main() -> int:
     for t in tourists:
         scenic = t["scenic_area"]
         rid = t.get("record_id")
-        for a, b in zip(t["distinct_pois"], t["distinct_pois"][1:]):
+        # P20：图边取完整 poi_sequence（保留折返与重复到访），权重累加承载访问强度
+        for a, b in zip(t["poi_sequence"], t["poi_sequence"][1:]):
             u, v = node_id("POI", scenic, resolve(scenic, a)), node_id("POI", scenic, resolve(scenic, b))
             if not (G.has_node(u) and G.has_node(v)):
                 continue

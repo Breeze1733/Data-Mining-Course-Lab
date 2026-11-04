@@ -1,9 +1,9 @@
 {
  "meta": {
-  "time": "2026-10-31 15:11",
-  "git": "ae84d02",
+  "time": "2026-11-05 02:13",
+  "git": "cdedf58",
   "label": "未命名时点",
-  "dirty_files": 19
+  "dirty_files": 11
  },
  "metrics": {
   "dataset.count": 271,
@@ -28,17 +28,17 @@
   "coref.n": 180,
   "coref.accuracy": 0.606,
   "cond.pairs": 832,
-  "cond.review_n": 49,
-  "cond.correct": 20,
-  "cond.boundary": 16,
-  "cond.wrong": 13,
-  "graph.nodes": 558,
-  "graph.edges": 2310,
+  "cond.review_n": 79,
+  "cond.correct": 39,
+  "cond.boundary": 19,
+  "cond.wrong": 21,
+  "graph.nodes": 563,
+  "graph.edges": 2733,
   "graph.fact_checks_passed": 6,
   "graph.fact_checks_total": 6,
   "graph.name_alignment_passed": true,
-  "agent.passed": 9,
-  "agent.total": 9,
-  "agent.mode": "llm"
+  "agent.passed": 10,
+  "agent.total": 10,
+  "agent.mode": "rules（--rules 强制离线）"
  }
 }
