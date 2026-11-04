@@ -1,29 +1,34 @@
 {
- "n": 49,
+ "n": 79,
  "verdicts": {
-  "boundary": 16,
-  "wrong": 13,
-  "correct": 20
+  "boundary": 19,
+  "wrong": 21,
+  "correct": 39
+ },
+ "alignment_with_current_extraction": {
+  "retained_identical": 58,
+  "missing": 18,
+  "changed_same_sentence": 3
  },
  "by_pattern": {
   "P1": {
-   "boundary": 4,
-   "wrong": 5,
-   "correct": 6
+   "boundary": 5,
+   "wrong": 7,
+   "correct": 12
   },
   "P4": {
-   "correct": 6,
+   "correct": 12,
    "boundary": 6,
-   "wrong": 3
+   "wrong": 7
   },
   "P5": {
-   "correct": 3,
+   "correct": 5,
    "boundary": 1
   },
   "P6": {
-   "boundary": 5,
-   "wrong": 5,
-   "correct": 5
+   "boundary": 7,
+   "wrong": 7,
+   "correct": 10
   }
  }
 }

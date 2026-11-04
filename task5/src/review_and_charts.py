@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import random
+import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -130,13 +131,34 @@ def fill(pairs: list[dict]) -> None:
     print(f"review written: {len(rows)}")
 
 
+def _norm5(t: str) -> str:
+    return re.sub(r"[\s，,。；;、！？!?\[\]（）()【】的了吗呢啊呀的]", "", t or "")
+
+
 def score() -> None:
     data = json.loads((OUT / "review_dev.json").read_text(encoding="utf-8"))["reviews"]
+    # P16：与当前抽取对齐——复核行是否仍被当前规则抽出（identical/changed/missing），
+    # 抽取器退化（误抽漏抽）不再对指标不可见
+    mapping = json.loads((OUT / "mapping_table.json").read_text(encoding="utf-8"))
+    mrows = mapping["rows"] if isinstance(mapping, dict) else mapping
+    pair_index = {(r["scenic_area"], _norm5(r["condition_text"]), _norm5(r["suggestion_text"]))
+                  for r in mrows}
+    sentence_index = {_norm5(r["sentence"]) for r in mrows}
+    align = Counter()
+    for r in data:
+        key = (r["scenic_area"], _norm5(r["condition"]), _norm5(r["suggestion"]))
+        if key in pair_index:
+            align["retained_identical"] += 1
+        elif _norm5(r["sentence"]) in sentence_index:
+            align["changed_same_sentence"] += 1
+        else:
+            align["missing"] += 1
     c = Counter(r["verdict"] for r in data)
     by_pattern = defaultdict(lambda: Counter())
     for r in data:
         by_pattern[r["pattern"].split("_")[0]][r["verdict"]] += 1
     result = {"n": len(data), "verdicts": dict(c),
+              "alignment_with_current_extraction": dict(align),
               "by_pattern": {k: dict(v) for k, v in by_pattern.items()}}
     (OUT / "review_summary.json").write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False, indent=1))
