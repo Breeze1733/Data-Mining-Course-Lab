@@ -44,6 +44,8 @@ def build_steps(task7_mode: str) -> list:
         ("task5/src/review_and_charts.py", ["--score"]),
         ("task5/src/review_and_charts.py", ["--charts"]),
         ("task5/src/export_mapping_xlsx.py", []),
+        # E01 原句级覆盖评测（漏抽/过抽首次可测）
+        ("task5/src/extraction_coverage_eval.py", []),
         ("task6/src/build_graph.py", []),
         ("task6/src/verify_graph.py", []),
         ("task6/src/visualize_graph.py", []),

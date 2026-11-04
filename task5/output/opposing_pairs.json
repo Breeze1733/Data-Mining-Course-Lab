@@ -8,7 +8,7 @@
    "suggestion": "不要买联票,去哪个小景点单独买票",
    "opposing_with": [
     {
-     "row_id": 831,
+     "row_id": 845,
      "suggestion": "买联票更省心",
      "sources": [
       "XHS_69bbb2340000000021011a19"
@@ -25,7 +25,7 @@
    "suggestion": "不建议买联票,只买门票即可",
    "opposing_with": [
     {
-     "row_id": 831,
+     "row_id": 845,
      "suggestion": "买联票更省心",
      "sources": [
       "XHS_69bbb2340000000021011a19"
@@ -42,7 +42,7 @@
    "suggestion": "不要买联票60",
    "opposing_with": [
     {
-     "row_id": 831,
+     "row_id": 845,
      "suggestion": "买联票更省心",
      "sources": [
       "XHS_69bbb2340000000021011a19"
@@ -59,21 +59,21 @@
    "suggestion": "买联票更省心",
    "opposing_with": [
     {
-     "row_id": 782,
+     "row_id": 796,
      "suggestion": "不要买联票,去哪个小景点单独买票",
      "sources": [
       "XHS_649263b10000000027001123"
      ]
     },
     {
-     "row_id": 806,
+     "row_id": 820,
      "suggestion": "不建议买联票,只买门票即可",
      "sources": [
       "XHS_6a9434700000000026000841"
      ]
     },
     {
-     "row_id": 825,
+     "row_id": 839,
      "suggestion": "不要买联票60",
      "sources": [
       "XHS_68ad991d000000001d02b330"

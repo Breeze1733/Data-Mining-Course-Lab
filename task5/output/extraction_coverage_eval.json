@@ -1,0 +1,262 @@
+{
+ "n_sentences": 40,
+ "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注）",
+ "scope_note": "in_scope=句内含条件性建议或带触发词的建议（实验5 任务口径）；无触发词的泛建议/路线罗列为任务外",
+ "n_advice_sentences": 6,
+ "advice_recall": 0.667,
+ "unmatched_advice": [
+  {
+   "sid": 23,
+   "gist": "玩黄龙的话住松潘古城（海拔低、配套全）",
+   "sentence": "其他参考:其实也看到很多游记里推荐玩黄龙的话,住在 松潘 古城,那里海拔相对比较低,而且商业配套更丰富,那里还是一处人文"
+  },
+  {
+   "sid": 24,
+   "gist": "14天内有相关旅居史的游客暂缓接待（防疫条件规定）",
+   "sentence": "5、按照当前防疫要求,对14天内有中高风险地区所在地级市和直辖市、省会城市所在区旅居史的游客,暂缓接待"
+  }
+ ],
+ "over_extraction_pairs_in_non_advice": 2,
+ "detail": [
+  {
+   "sid": 0,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 2,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 3,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 4,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": "中午12点上山、下午4点前下山（攻略式时间安排，无触发词）"
+  },
+  {
+   "sid": 5,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": "手机购票免现场排队（无触发词）"
+  },
+  {
+   "sid": 6,
+   "in_scope": true,
+   "n_pairs": 2,
+   "gist": "建议后山上前山下、早点下山、坐索道避开人流"
+  },
+  {
+   "sid": 7,
+   "in_scope": true,
+   "n_pairs": 1,
+   "gist": "如果背包有空间，可带面包香蕉香肠逗猴"
+  },
+  {
+   "sid": 8,
+   "in_scope": true,
+   "n_pairs": 1,
+   "gist": "视野不佳时建议多等5-10分钟"
+  },
+  {
+   "sid": 9,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 10,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 11,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 12,
+   "in_scope": true,
+   "n_pairs": 1,
+   "gist": "推荐坐火车下谷底再从一环二环爬上来"
+  },
+  {
+   "sid": 13,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 14,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 15,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 16,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 17,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 18,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 19,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 20,
+   "in_scope": false,
+   "n_pairs": 1,
+   "gist": ""
+  },
+  {
+   "sid": 21,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": "光线好则人多，自己取舍（无触发词）"
+  },
+  {
+   "sid": 22,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 23,
+   "in_scope": true,
+   "n_pairs": 0,
+   "gist": "玩黄龙的话住松潘古城（海拔低、配套全）"
+  },
+  {
+   "sid": 24,
+   "in_scope": true,
+   "n_pairs": 0,
+   "gist": "14天内有相关旅居史的游客暂缓接待（防疫条件规定）"
+  },
+  {
+   "sid": 25,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 26,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 27,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 28,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 29,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 30,
+   "in_scope": false,
+   "n_pairs": 1,
+   "gist": ""
+  },
+  {
+   "sid": 31,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": "昆明湖边坐一会儿（松弛感，无触发词）"
+  },
+  {
+   "sid": 32,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 33,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": "北如意门-画中游-…-新宫门（路线罗列）"
+  },
+  {
+   "sid": 34,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 35,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 36,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 37,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": "北宫门进➡…➡东宫门出（路线罗列）"
+  },
+  {
+   "sid": 38,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 39,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  }
+ ]
+}
