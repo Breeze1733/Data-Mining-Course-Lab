@@ -1797,6 +1797,216 @@
    "note": "北京地标广场，语料40次"
   },
   {
+   "name": "庐山",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "庐山",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "三清山",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "三清山",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "徽州",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "徽州",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "歙县",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "歙县",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "黄山南大门",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "黄山"
+   ],
+   "canonical": "黄山南大门",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "白云宾馆",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "黄山"
+   ],
+   "canonical": "白云宾馆",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "后湖",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "颐和园"
+   ],
+   "canonical": "后湖",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "慈福牌楼",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "颐和园"
+   ],
+   "canonical": "慈福牌楼",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "新宫门",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "颐和园"
+   ],
+   "canonical": "新宫门",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "敦煌",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "敦煌",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "麦积山",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "麦积山",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "莫高窟",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "莫高窟",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "鸣沙山",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "鸣沙山",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "嘉峪关关城",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "嘉峪关关城",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "横断山",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "横断山",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "归云山房",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "归云山房",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "国子监街",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "国子监街",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "五道营胡同",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "五道营胡同",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "北锣鼓巷",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "北锣鼓巷",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "恭王府博物馆",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "恭王府博物馆",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "九黄机场",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "九黄机场",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "成都东",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "成都东",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "成都东站",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "成都东站",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "天府机场",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "天府机场",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "虹桥火车站",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "虹桥火车站",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
    "name": "玉屏峰",
    "entity_type": "景点POI",
    "subtype": "景点",
@@ -2552,6 +2762,26 @@
    ],
    "canonical": "骑行",
    "source": "manual_vocabulary"
+  },
+  {
+   "name": "坐车",
+   "entity_type": "交通方式",
+   "subtype": "其他",
+   "scenic_areas": [
+    "通用"
+   ],
+   "canonical": "坐车",
+   "source": "b03_recall_eval_2026-11-05"
+  },
+  {
+   "name": "顺风车",
+   "entity_type": "交通方式",
+   "subtype": "其他",
+   "scenic_areas": [
+    "通用"
+   ],
+   "canonical": "顺风车",
+   "source": "b03_recall_eval_2026-11-05"
   },
   {
    "name": "西海大峡谷观光缆车",

@@ -27,7 +27,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 12 个 POI：五花海、五彩池、诺日朗、原始森林、诺日朗瀑布、长海"
+   "summary": "返回 12 个 POI：五花海、诺日朗、长海、诺日朗瀑布、原始森林、沟口"
   },
   {
    "step": "action",
@@ -63,7 +63,7 @@
   },
   {
    "step": "thought",
-   "thought": "编排骨架：模板“2016版二日游”覆盖已选 POI 的 83%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
+   "thought": "编排骨架：模板“2016版二日游”覆盖已选 POI 的 75%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
   },
   {
    "step": "action",
@@ -77,7 +77,7 @@
   {
    "step": "observation",
    "tool": "query_order",
-   "summary": "后继：长海、日则沟、原始森林、树正沟"
+   "summary": "后继：黄龙、长海、日则沟、川主寺"
   },
   {
    "step": "thought",
@@ -110,20 +110,6 @@
    "step": "observation",
    "tool": "query_poi_conditions",
    "summary": "返回 9 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗瀑布'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "诺日朗瀑布"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
   },
   {
    "step": "action",
@@ -183,6 +169,20 @@
   },
   {
    "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗瀑布'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "诺日朗瀑布"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 4 条条件建议"
+  },
+  {
+   "step": "action",
    "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '五花海'}",
    "tool": "query_poi_conditions",
    "args": {
@@ -232,7 +232,7 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "为您规划九寨沟三日游（参考官方路线 JZG-EXP01-R2 二日舒适游）：\n第一天·上午：沟口\n第一天·上午：原始森林（步行前往）\n第一天·中午：诺日朗瀑布（步行前往）\n第一天·下午：长海（步行前往）\n第二天·上午：五彩池（步行前往）\n第二天·上午：镜海（步行前往）\n第二天·中午：诺日朗（步行前往）\n第二天·下午：五花海（徒步前往）\n第三天·上午：树正寨（步行前往）\n第三天·上午：犀牛海（步行前往）\n第三天·中午：黄龙（步行前往）\n第三天·下午：箭竹海（步行前往）\n贴士：[人群] 一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了；[人群] 不要在芦苇海停留；[人群] 买好晕车贴或者晕车药；[人群] 不妨选择吃一顿丰盛的中餐\n⚠ 原始森林：不去原始森林——其实大半天足矣",
+ "answer": "为您规划九寨沟三日游（参考官方路线 JZG-EXP01-R2 二日舒适游）：\n第一天·上午：沟口\n第一天·上午：原始森林（步行前往）\n第一天·中午：长海（步行前往）\n第一天·下午：五彩池（步行前往）\n第二天·上午：镜海（步行前往）\n第二天·上午：诺日朗（步行前往）\n第二天·中午：诺日朗瀑布（步行前往）\n第二天·下午：五花海（徒步前往）\n第三天·上午：树正寨（步行前往）\n第三天·上午：犀牛海（步行前往）\n第三天·中午：黄龙（步行前往）\n第三天·下午：树正沟（步行前往）\n贴士：[人群] 一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了；[人群] 不要在芦苇海停留；[人群] 买好晕车贴或者晕车药；[人群] 不妨选择吃一顿丰盛的中餐\n⚠ 原始森林：不去原始森林——其实大半天足矣",
  "plan": {
   "scenic": "九寨沟",
   "days": 3,
@@ -261,7 +261,7 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "诺日朗瀑布",
+    "poi": "长海",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -269,7 +269,7 @@
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "长海",
+    "poi": "五彩池",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -277,7 +277,7 @@
     "order": 5,
     "day": 2,
     "period": "上午",
-    "poi": "五彩池",
+    "poi": "镜海",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -285,7 +285,7 @@
     "order": 6,
     "day": 2,
     "period": "上午",
-    "poi": "镜海",
+    "poi": "诺日朗",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -293,7 +293,7 @@
     "order": 7,
     "day": 2,
     "period": "中午",
-    "poi": "诺日朗",
+    "poi": "诺日朗瀑布",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -333,7 +333,7 @@
     "order": 12,
     "day": 3,
     "period": "下午",
-    "poi": "箭竹海",
+    "poi": "树正沟",
     "transport_from_prev": "步行",
     "note": ""
    }

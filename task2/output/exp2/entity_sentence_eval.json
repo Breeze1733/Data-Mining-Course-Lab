@@ -1,0 +1,192 @@
+{
+ "n_sentences": 40,
+ "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注；POI/交通严格跨度含包含式变体，时间重叠口径）",
+ "match_policy": "根景区名（黄山/九寨沟/颐和园）与城市名（北京/成都）按设计不作为 POI 实体抽取，评测双口径记录",
+ "per_type": {
+  "POI": {
+   "tp": 50,
+   "fp": 0,
+   "fn": 16,
+   "precision": 1.0,
+   "recall": 0.758,
+   "f1": 0.862
+  },
+  "交通": {
+   "tp": 14,
+   "fp": 0,
+   "fn": 1,
+   "precision": 1.0,
+   "recall": 0.933,
+   "f1": 0.966
+  },
+  "时间": {
+   "tp": 23,
+   "fp": 3,
+   "fn": 0,
+   "precision": 0.885,
+   "recall": 1.0,
+   "f1": 0.939
+  }
+ },
+ "missed": [
+  {
+   "sid": 0,
+   "text": "黄山",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "这一程我8天连战三山:庐山、三清山,黄山"
+  },
+  {
+   "sid": 1,
+   "text": "黄山",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "对于黄山的向往由来已久,读书时期在课本上就领略过它的美,再加上世人“五岳归来不看山,黄山归来不看岳”的至高评价也让我对此"
+  },
+  {
+   "sid": 1,
+   "text": "黄山",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "对于黄山的向往由来已久,读书时期在课本上就领略过它的美,再加上世人“五岳归来不看山,黄山归来不看岳”的至高评价也让我对此"
+  },
+  {
+   "sid": 14,
+   "text": "飞机",
+   "type": "交通",
+   "out_of_scope_design": false,
+   "sentence": "由于黄金周期间上海飞成都的机票较贵,且折扣机票的班次时间不够理想,所以我选择了坐动车D2206次,06:39开车,路程1"
+  },
+  {
+   "sid": 15,
+   "text": "成都",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "由于高原气候多变,在经历了早班飞机返回成都的插曲后,中午时段终于成功降落了九黄机场,开始了时隔十多年后的再次九寨黄龙之旅"
+  },
+  {
+   "sid": 16,
+   "text": "九寨沟",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "说起九寨沟美景,几年前就开始惦记了,去年差点就定了机票"
+  },
+  {
+   "sid": 17,
+   "text": "九寨沟",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "女儿的小学毕业之旅Part 2~2021暑假自驾游记【九寨沟、黄龙篇】"
+  },
+  {
+   "sid": 23,
+   "text": "松潘古城",
+   "type": "POI",
+   "out_of_scope_design": false,
+   "sentence": "其他参考:其实也看到很多游记里推荐玩黄龙的话,住在 松潘 古城,那里海拔相对比较低,而且商业配套更丰富,那里还是一处人文"
+  },
+  {
+   "sid": 28,
+   "text": "颐和园",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "第一次去颐和园看了半天攻略,最后决定走这条亲测好走的路线:"
+  },
+  {
+   "sid": 29,
+   "text": "北京",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "我刚从北京回,在出发前购买了一些书籍还上网向网友讨教,研究出一套实用的游览路线,现将它供朋友自助游参考一下"
+  },
+  {
+   "sid": 30,
+   "text": "颐和园",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "颐和园作为中国古代园林建筑史上的瑰宝,不但具有极高的历史文化价值,同时也是园林史是的艺术典范,是十分适合游览的园林风光景"
+  },
+  {
+   "sid": 31,
+   "text": "颐和园",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "颐和园皇家园林版“松弛感”:昆明湖边坐一会儿,风比滤镜好用"
+  },
+  {
+   "sid": 32,
+   "text": "北京",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "说起北京的颐和园这座著名的皇家园林可谓是名声显赫"
+  },
+  {
+   "sid": 32,
+   "text": "颐和园",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "说起北京的颐和园这座著名的皇家园林可谓是名声显赫"
+  },
+  {
+   "sid": 34,
+   "text": "清晏舫",
+   "type": "POI",
+   "out_of_scope_design": false,
+   "sentence": "清晏肪俗称石舫,是颐和园唯一带有西洋风格的建筑"
+  },
+  {
+   "sid": 34,
+   "text": "颐和园",
+   "type": "POI",
+   "out_of_scope_design": true,
+   "sentence": "清晏肪俗称石舫,是颐和园唯一带有西洋风格的建筑"
+  },
+  {
+   "sid": 37,
+   "text": "东宫门",
+   "type": "POI",
+   "out_of_scope_design": false,
+   "sentence": "北宫门进➡四大部洲➡佛香阁➡画中游➡后湖➡豳风桥➡界湖桥➡坐船➡南湖岛➡十七孔桥➡铜牛➡东 宫门出"
+  }
+ ],
+ "false_positives": [
+  {
+   "sid": 4,
+   "text": "每天",
+   "type": "时间节点",
+   "sentence": "按这个攻略每天中午12点上山 下午4点前下山不超过4小时,懒人友好"
+  },
+  {
+   "sid": 14,
+   "text": "D22",
+   "type": "时间节点",
+   "sentence": "由于黄金周期间上海飞成都的机票较贵,且折扣机票的班次时间不够理想,所以我选择了坐动车D2206次,06:39开车,路程1"
+  },
+  {
+   "sid": 18,
+   "text": "一天",
+   "type": "时间节点",
+   "sentence": "其实是为了方便日后回顾相册时,能记起每张照片大概是哪个海子[微笑R],能看的海子都看了,非常充实的一天"
+  }
+ ],
+ "scope_note": {
+  "excluded_by_design": [
+   "九寨沟",
+   "北京",
+   "成都",
+   "颐和园",
+   "黄山"
+  ],
+  "oos_misses": 13,
+  "recall_in_scope_only": 0.956,
+  "note": "根景区名与城市名按设计不作为 POI 抽取；in_scope_only 口径将其从分母移除"
+ },
+ "overall": {
+  "tp": 87,
+  "fp": 3,
+  "fn": 17,
+  "precision": 0.967,
+  "recall": 0.837,
+  "f1": 0.897
+ }
+}

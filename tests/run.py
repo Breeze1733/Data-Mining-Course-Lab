@@ -21,12 +21,16 @@ def build_steps(task7_mode: str) -> list:
     steps = [
         # 单元测试先行：链路重建前先保证基础语义未被破坏（P15）
         ("__unittest__", []),
+        # B03 漏检驱动的词典/时间规则扩充（幂等，须先于 build_dictionary）
+        ("task2/src/expand_dictionary_b03.py", []),
         ("task2/src/build_dictionary.py", []),
         ("task2/src/extract_entities.py", ["--iteration", "baseline"]),
         ("task2/src/extract_entities.py", ["--iteration", "refined"]),
         ("task2/src/visualize.py", ["--iteration", "baseline"]),
         ("task2/src/visualize.py", ["--iteration", "refined"]),
         ("task2/src/spot_check.py", ["--reconcile"]),
+        # B01 句级实体评测（查全率首次可测，产物 entity_sentence_eval.json）
+        ("task2/src/entity_sentence_eval.py", []),
         ("task2/src/iter_compare.py", []),
         ("task3/src/parse_routes.py", []),
         ("task3/src/compare_routes.py", []),
