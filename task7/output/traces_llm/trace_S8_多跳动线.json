@@ -15,8 +15,29 @@
   },
   {
    "step": "intent",
-   "thought": "LLM 解析失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），回退规则解析",
-   "via": "fallback"
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   },
+   "llm": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   },
+   "result": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   }
   },
   {
    "step": "action",
@@ -31,7 +52,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 8 个 POI：五彩池、五花海、诺日朗、原始森林、诺日朗瀑布、长海"
+   "summary": "返回 8 个 POI：五花海、五彩池、诺日朗、原始森林、诺日朗瀑布、长海"
   },
   {
    "step": "action",
@@ -99,7 +120,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 9 条条件建议"
   },
   {
    "step": "action",
@@ -113,7 +134,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 3 条条件建议"
+   "summary": "返回 6 条条件建议"
   },
   {
    "step": "action",
@@ -127,7 +148,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 5 条条件建议"
+   "summary": "返回 6 条条件建议"
   },
   {
    "step": "action",
@@ -141,7 +162,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 3 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -155,7 +176,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
+   "summary": "返回 4 条条件建议"
   },
   {
    "step": "action",
@@ -169,7 +190,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 5 条条件建议"
+   "summary": "返回 6 条条件建议"
   },
   {
    "step": "action",
@@ -183,7 +204,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
+   "summary": "返回 4 条条件建议"
   },
   {
    "step": "action",
@@ -197,7 +218,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 8 条条件建议"
   },
   {
    "step": "thought",
@@ -232,7 +253,7 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "游客朋友们好！今天带大家玩转九寨沟：上午入园，提示大家大半天足矣、建议不去原始森林，咱们直奔五花海、镜海，步行至诺日朗；下午乘车游长海，步行赏五彩池，徒步观诺日朗瀑布，最后坐车打卡犀牛海。贴心提醒：晕车请备好药，体力有限芦苇海别停留，恐高坐索道记得闭眼哟！\n动线参考（图谱先后顺序边，2 跳）：长海 → 五彩池 → 诺日朗中心",
+ "answer": "大家早上好！今天行程走起：上午先去五花海，提醒大家不去原始森林大半天也足矣；中午赏镜海；下午游诺日朗与长海；晚间打卡五彩池、诺日朗瀑布和犀牛海。\n\n贴士：晕车备好药，体力有限别在芦苇海停留，恐高坐索道闭眼；家庭出游推荐丰盛中餐与下午茶，情侣别错过微辣美食哦！\n动线参考（图谱先后顺序边，2 跳）：长海 → 五彩池 → 诺日朗中心",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -259,7 +280,7 @@
    {
     "order": 3,
     "day": 1,
-    "period": "上午",
+    "period": "中午",
     "poi": "镜海",
     "transport_from_prev": "观光车",
     "note": ""
@@ -267,7 +288,7 @@
    {
     "order": 4,
     "day": 1,
-    "period": "上午",
+    "period": "下午",
     "poi": "诺日朗",
     "transport_from_prev": "步行",
     "note": ""
@@ -283,7 +304,7 @@
    {
     "order": 6,
     "day": 1,
-    "period": "下午",
+    "period": "晚上",
     "poi": "五彩池",
     "transport_from_prev": "步行",
     "note": ""
@@ -291,7 +312,7 @@
    {
     "order": 7,
     "day": 1,
-    "period": "下午",
+    "period": "晚上",
     "poi": "诺日朗瀑布",
     "transport_from_prev": "徒步",
     "note": ""
@@ -299,7 +320,7 @@
    {
     "order": 8,
     "day": 1,
-    "period": "下午",
+    "period": "晚上",
     "poi": "犀牛海",
     "transport_from_prev": "观光车",
     "note": ""
@@ -348,5 +369,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 46.68
+ "elapsed": 20.41
 }

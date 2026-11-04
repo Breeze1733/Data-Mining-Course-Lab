@@ -171,7 +171,7 @@ class ReActAgent:
     # ── 规则模式规划 ────────────────────────────────────────────
     def _plan_rule(self, intent: dict, trace: list) -> dict:
         scenic, days, visitor = intent["scenic"], intent["days"], intent["visitor_type"]
-        limit = {0.5: 5, 1: 8, 1.5: 9, 2: 11}.get(days, 8)
+        limit = {0.5: 5, 1: 8, 1.5: 9, 2: 11, 3: 12, 3.5: 13, 4: 14, 5: 15}.get(days, 11)
         pois_res = self.tools.call("query_pois", {"scenic": scenic, "visitor_type": visitor, "limit": limit}, trace)
         route_res = self.tools.call("query_route", {"scenic": scenic, "days": days if days <= 2 else 2}, trace)
         cond_res = self.tools.call("query_conditions", {"scenic": scenic, "visitor_type": visitor}, trace)
@@ -196,30 +196,35 @@ class ReActAgent:
         ordered = self._order_pois(scenic, selected, template_pos)
         trace.append({"step": "thought", "thought": f"编排骨架：模板“{template}”覆盖已选 POI 的 {best_cov:.0%}"
                      + ("；覆盖率不足 60%，改用图谱先后边拓扑排序" if template_cov_low else "")})
-        # 天数/时段分配：模板 POI 沿用模板；未覆盖的均匀切分天，时段按当日序数映射；住宿节点固定晚上
+        # 天数/时段分配（P05/P06）：n_days 对 0.5/1/1.5/2/3/3.5/4/5 全部成立；
+        # 2 日且模板全覆盖时沿用模板的天与时段，否则按切分块分配；半日时段封顶于上午/中午（P06）；
+        # 住宿节点固定晚上。天号一律写入行程，不再出现“1.5/3 天全部落第 1 天”。
         period_cycle = ["上午", "上午", "中午", "下午", "下午", "晚上"]
-        n_days = max(1, int(days) if days else 1)
+        n_days = max(1, int(days) if days and days >= 1 else 1)
         split = (len(ordered) + n_days - 1) // n_days
-        per_day = ([ordered[:split], ordered[split:]] if n_days == 2 else [ordered])             if (template_cov_low and days >= 1) else None
+        per_day = [ordered[i * split:(i + 1) * split] for i in range(n_days)
+                   if ordered[i * split:(i + 1) * split]]
+        template_ok = not template_cov_low and days == 2
         itinerary = []
-        day_counter: dict[int, int] = {}
         for i, poi in enumerate(ordered):
             day, step, period, transport = template_pos.get(poi, (None, None, "", []))
-            if day is None or not period:
-                if per_day:
-                    day = next(d + 1 for d, chunk in enumerate(per_day) if poi in chunk)
-                    idx = per_day[day - 1].index(poi)
-                    period = period_cycle[min(idx, len(period_cycle) - 1)]
+            if not (template_ok and day is not None and period):
+                for d, chunk in enumerate(per_day):
+                    if poi in chunk:
+                        day = d + 1
+                        idx = chunk.index(poi)
+                        period = period_cycle[min(idx, len(period_cycle) - 1)]
+                        break
                 else:
                     day = day or 1
-                    idx = day_counter.get(day, 0)
-                    day_counter[day] = idx + 1
-                    period = period_cycle[min(idx, len(period_cycle) - 1)]
             is_lodging = any(k in poi for k in ("宾馆", "饭店", "酒店", "民宿"))
             if is_lodging:
                 period = "晚上"
+            if days == 0.5:
+                # P06：半日时段封顶于上午/中午，不出现下午/晚上
+                period = {"下午": "中午", "晚上": "中午"}.get(period, period)
             itinerary.append({
-                "order": len(itinerary) + 1, "day": day if days == 2 else 1,
+                "order": len(itinerary) + 1, "day": min(day or 1, n_days),
                 "period": period,
                 "poi": poi,
                 "transport_from_prev": (transport[0] if transport else
@@ -372,17 +377,22 @@ class ReActAgent:
                 return text
             except Exception as exc:
                 trace.append({"step": "render", "thought": f"LLM 润色失败（{exc}），使用模板文案", "via": "fallback"})
+        cn_day = {1: "一", 2: "二", 3: "三", 4: "四", 5: "五"}
+        multi = bool(plan["days"] and plan["days"] > 1)
         lines = []
-        day_label = {1: "第一天", 2: "第二天"}
         for it in plan["itinerary"]:
-            head = f'D{it["day"]}·{it["period"]}' if plan["days"] == 2 else it["period"]
+            head = f'第{cn_day.get(it["day"], it["day"])}天·{it["period"]}' if multi else it["period"]
             trans = f'（{it["transport_from_prev"]}前往）' if it["order"] > 1 else ""
             lines.append(f'{head}：{it["poi"]}{trans}')
         tips = "；".join(f'[{t["cond_type"]}] {t["suggestion"][:30]}' for t in plan["tips"][:4])
-        day_label = {0.5: "半日", 1: "一日", 1.5: "一日半", 2: "两日"}
-        return (f'为您规划{plan["scenic"]}{day_label.get(plan["days"], plan["days"])}游'
+        # P08：可行性警告进入最终回答（此前仅存在于内部字段）
+        warnings = plan.get("feasibility_warnings") or []
+        warn_text = "".join(f'\n⚠ {w[:70]}' for w in warnings[:4])
+        day_label = {0.5: "半日", 1: "一日", 1.5: "一日半", 2: "两日", 3: "三日", 3.5: "三日半", 4: "四日", 5: "五日"}
+        month_tag = f'，出行时段{plan["trip_month"]}月' if plan.get("trip_month") else ""
+        return (f'为您规划{plan["scenic"]}{day_label.get(plan["days"], plan["days"])}游{month_tag}'
                 f'（参考官方路线 {plan["template_route"]}）：\n' + "\n".join(lines) +
-                (f'\n贴士：{tips}' if tips else ""))
+                (f'\n贴士：{tips}' if tips else "") + warn_text)
 
     # ── ReAct 主循环 ────────────────────────────────────────────
     def run(self, query: str) -> dict:

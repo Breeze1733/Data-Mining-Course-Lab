@@ -32,7 +32,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 5 个 POI：佛香阁、西堤、昆明湖、十七孔桥、谐趣园"
+   "summary": "返回 5 个 POI：佛香阁、西堤、昆明湖、十七孔桥、长廊"
   },
   {
    "step": "action",
@@ -68,39 +68,25 @@
   },
   {
    "step": "thought",
-   "thought": "编排骨架：模板“APEC世界文化遗产经典线”覆盖已选 POI 的 40%；覆盖率不足 60%，改用图谱先后边拓扑排序"
+   "thought": "编排骨架：模板“APEC世界文化遗产经典线”覆盖已选 POI 的 60%"
   },
   {
    "step": "action",
-   "thought": "调用工具 query_order，参数 {'scenic': '颐和园', 'poi': '谐趣园'}",
+   "thought": "调用工具 query_order，参数 {'scenic': '颐和园', 'poi': '昆明湖'}",
    "tool": "query_order",
    "args": {
     "scenic": "颐和园",
-    "poi": "谐趣园"
+    "poi": "昆明湖"
    }
   },
   {
    "step": "observation",
    "tool": "query_order",
-   "summary": "后继：霁清轩、耕织图、仁寿殿、苏州街"
+   "summary": "后继：万寿山、十七孔桥、知春亭、新建宫门"
   },
   {
    "step": "thought",
-   "thought": "用 query_order 校验首站的官方后继（谐趣园）以决定第二站是否符合主流动线"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '谐趣园'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "颐和园",
-    "poi": "谐趣园"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 0 条条件建议"
+   "thought": "用 query_order 校验首站的官方后继（昆明湖）以决定第二站是否符合主流动线"
   },
   {
    "step": "action",
@@ -114,7 +100,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 1 条条件建议"
+   "summary": "返回 2 条条件建议"
   },
   {
    "step": "action",
@@ -128,7 +114,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 0 条条件建议"
+   "summary": "返回 2 条条件建议"
   },
   {
    "step": "action",
@@ -142,7 +128,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 3 条条件建议"
+   "summary": "返回 4 条条件建议"
   },
   {
    "step": "action",
@@ -151,6 +137,20 @@
    "args": {
     "scenic": "颐和园",
     "poi": "十七孔桥"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 3 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '长廊'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "颐和园",
+    "poi": "长廊"
    }
   },
   {
@@ -167,7 +167,7 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 2026清明反向遛弯路线）：\n上午：谐趣园\n上午：昆明湖（步行前往）\n中午：西堤（步行前往）\n下午：佛香阁（步行前往）\n下午：十七孔桥（步行前往）\n贴士：[人群] 别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果；[装备] 慎重考虑；[体力安全] 建议上去看看非常的漂亮；[天气] 不建议雨雪天走这一线--这天降温大风,特别是下行过了大半时,",
+ "answer": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 2026清明反向遛弯路线）：\n上午：昆明湖\n上午：西堤（步行前往）\n中午：佛香阁（步行前往）\n中午：十七孔桥（步行前往）\n中午：长廊（步行前往）\n贴士：[人群] 别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果；[装备] 慎重考虑；[体力安全] 建议上去看看非常的漂亮；[天气] 不建议雨雪天走这一线--这天降温大风,特别是下行过了大半时,",
  "plan": {
   "scenic": "颐和园",
   "days": 0.5,
@@ -181,7 +181,7 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "谐趣园",
+    "poi": "昆明湖",
     "transport_from_prev": "入园",
     "note": ""
    },
@@ -189,7 +189,7 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "昆明湖",
+    "poi": "西堤",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -197,23 +197,23 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "西堤",
+    "poi": "佛香阁",
     "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 4,
     "day": 1,
-    "period": "下午",
-    "poi": "佛香阁",
+    "period": "中午",
+    "poi": "十七孔桥",
     "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 5,
     "day": 1,
-    "period": "下午",
-    "poi": "十七孔桥",
+    "period": "中午",
+    "poi": "长廊",
     "transport_from_prev": "步行",
     "note": ""
    }
@@ -242,16 +242,10 @@
     "condition": "天气条件（句内）",
     "suggestion": "不建议雨雪天走这一线--这天降温大风,特别是下行过了大半时,终于明白什么是寒风凛冽,庆幸已经快到山下了,风",
     "frequency": 1
-   },
-   {
-    "cond_type": "时间",
-    "condition": "时间条件（句内）",
-    "suggestion": "不建议冬季游玩颐和园,没有夏天花开柳绿好看",
-    "frequency": 2
    }
   ],
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 0.01
+ "elapsed": 0.0
 }

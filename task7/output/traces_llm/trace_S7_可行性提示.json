@@ -52,7 +52,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 8 个 POI：五彩池、五花海、诺日朗、原始森林、诺日朗瀑布、长海"
+   "summary": "返回 8 个 POI：五花海、五彩池、诺日朗、原始森林、诺日朗瀑布、长海"
   },
   {
    "step": "action",
@@ -120,7 +120,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 9 条条件建议"
   },
   {
    "step": "action",
@@ -134,7 +134,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 3 条条件建议"
+   "summary": "返回 6 条条件建议"
   },
   {
    "step": "action",
@@ -148,7 +148,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 5 条条件建议"
+   "summary": "返回 6 条条件建议"
   },
   {
    "step": "action",
@@ -162,7 +162,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 3 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -176,7 +176,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
+   "summary": "返回 4 条条件建议"
   },
   {
    "step": "action",
@@ -190,7 +190,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 5 条条件建议"
+   "summary": "返回 6 条条件建议"
   },
   {
    "step": "action",
@@ -204,7 +204,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
+   "summary": "返回 4 条条件建议"
   },
   {
    "step": "action",
@@ -218,7 +218,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 8 条条件建议"
   },
   {
    "step": "thought",
@@ -226,7 +226,7 @@
   },
   {
    "step": "render",
-   "thought": "LLM 润色失败（The read operation timed out），使用模板文案",
+   "thought": "LLM 润色失败（<urlopen error _ssl.c:1011: The handshake operation timed out>），使用模板文案",
    "via": "fallback"
   },
   {
@@ -234,7 +234,7 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 一日精华游）：\n上午：原始森林\n上午：五花海（观光车前往）\n上午：镜海（观光车前往）\n上午：诺日朗（步行前往）\n下午：长海（观光车前往）\n下午：五彩池（步行前往）\n下午：诺日朗瀑布（徒步前往）\n下午：犀牛海（观光车前往）\n贴士：[人群] 一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了；[人群] 不要在芦苇海停留；[人群] 买好晕车贴或者晕车药；[人群] 不妨选择吃一顿丰盛的中餐",
+ "answer": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 一日精华游）：\n上午：原始森林\n上午：五花海（观光车前往）\n中午：镜海（观光车前往）\n下午：诺日朗（步行前往）\n下午：长海（观光车前往）\n晚上：五彩池（步行前往）\n晚上：诺日朗瀑布（徒步前往）\n晚上：犀牛海（观光车前往）\n贴士：[人群] 一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了；[人群] 不要在芦苇海停留；[人群] 买好晕车贴或者晕车药；[人群] 不妨选择吃一顿丰盛的中餐\n⚠ 原始森林：不去原始森林——其实大半天足矣",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -261,7 +261,7 @@
    {
     "order": 3,
     "day": 1,
-    "period": "上午",
+    "period": "中午",
     "poi": "镜海",
     "transport_from_prev": "观光车",
     "note": ""
@@ -269,7 +269,7 @@
    {
     "order": 4,
     "day": 1,
-    "period": "上午",
+    "period": "下午",
     "poi": "诺日朗",
     "transport_from_prev": "步行",
     "note": ""
@@ -285,7 +285,7 @@
    {
     "order": 6,
     "day": 1,
-    "period": "下午",
+    "period": "晚上",
     "poi": "五彩池",
     "transport_from_prev": "步行",
     "note": ""
@@ -293,7 +293,7 @@
    {
     "order": 7,
     "day": 1,
-    "period": "下午",
+    "period": "晚上",
     "poi": "诺日朗瀑布",
     "transport_from_prev": "徒步",
     "note": ""
@@ -301,7 +301,7 @@
    {
     "order": 8,
     "day": 1,
-    "period": "下午",
+    "period": "晚上",
     "poi": "犀牛海",
     "transport_from_prev": "观光车",
     "note": ""
@@ -350,5 +350,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 67.3
+ "elapsed": 66.24
 }

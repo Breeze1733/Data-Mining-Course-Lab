@@ -30,13 +30,19 @@ SCENARIOS = [
     {"id": "S6_冲突约束", "query": "半天时间在黄山看日出再下西海大峡谷",
      "expect": {"scenic": "黄山", "days": 0.5, "special": ["看日出"], "conflict_note": True}},
     {"id": "S7_可行性提示", "query": "九寨沟一日游，想去原始森林看看",
-     "expect": {"scenic": "九寨沟", "days": 1, "feasibility": True}},
+     "expect": {"scenic": "九寨沟", "days": 1, "feasibility": True, "feasibility_in_answer": "原始森林"}},
     {"id": "S8_多跳动线", "query": "九寨沟从长海出来怎么走回诺日朗中心？",
      "expect": {"scenic": "九寨沟", "path_query": ("长海", "诺日朗中心")}},
     {"id": "S9_冬季时段提示", "query": "12月去黄山两天，想上莲花峰，冬季去要注意什么？",
      "expect": {"scenic": "黄山", "days": 2, "month": 12,
                 "feasibility_keyword": "莲花峰", "seasonal_note": True}},
+    {"id": "S10_三日多天编排", "query": "九寨沟三天深度游，慢慢逛",
+     "expect": {"scenic": "九寨沟", "days": 3, "multi_day": True}},
 ]
+def check_multi_day(result):
+    plan = result.get("plan") or {}
+    days = {it["day"] for it in plan.get("itinerary", [])}
+    return plan.get("days") == 3 and days == {1, 2, 3}
 
 
 def main() -> int:
@@ -77,9 +83,14 @@ def main() -> int:
             elif k == "feasibility_keyword":
                 warnings = (result["plan"] or {}).get("feasibility_warnings", [])
                 checks["feasibility_keyword"] = bool(warnings) and any(v in w for w in warnings)
+            elif k == "multi_day":
+                checks["multi_day"] = check_multi_day(result)
             elif k == "seasonal_note":
                 warnings = (result["plan"] or {}).get("feasibility_warnings", [])
                 checks["seasonal_note"] = any("时段提示" in w for w in warnings)
+            elif k == "feasibility_in_answer":
+                # P08 验收：警告文本出现在最终回答中
+                checks["feasibility_in_answer"] = v in result["answer"]
             else:
                 checks[k] = intent.get(k) == v
         tool_calls = [t for t in result["trace"] if t.get("step") == "action"]
@@ -100,7 +111,8 @@ def main() -> int:
         checks["tools_used_in_answer"] = answer_covers_plan(result)
         if result["plan"]:
             n_pois = len(result["plan"]["itinerary"])
-            expected_n = {0.5: (3, 6), 1: (5, 9), 2: (8, 12)}[sc["expect"].get("days", 1)]
+            expected_n = {0.5: (3, 6), 1: (5, 9), 1.5: (6, 11), 2: (8, 13),
+                          3: (9, 14), 3.5: (10, 15), 4: (11, 16), 5: (12, 17)}[sc["expect"].get("days", 1)]
             checks["itinerary_size"] = expected_n[0] <= n_pois <= expected_n[1] + 2
             checks["tips_attached"] = len(result["plan"]["tips"]) > 0
         passed = all(checks.values())
