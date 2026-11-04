@@ -22,17 +22,18 @@
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.725
+   "accuracy": 0.625
   },
   "test": {
    "n": 60,
-   "accuracy": 0.367
+   "accuracy": 0.567
   }
  },
  "errors_by_split": {
-  "dev": 33,
-  "test": 38
+  "dev": 45,
+  "test": 26
  },
+ "split_method": "P18 文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
  "errors": [
   {
    "pronoun": "他们",

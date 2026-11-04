@@ -346,6 +346,27 @@ def fill_expand(cases: list[dict]) -> None:
     print(f"gold expanded: +{len(new_rows)} -> {len(merged)}")
 
 
+def doc_grouped_split(gold_rows: list[dict], target_test: int = 60) -> dict:
+    """P18：按文档分组划分 dev/test——句级随机划分存在同文档泄漏（原两轮样本有 25 篇共同文档）。
+
+    确定性：文档列表排序后 rng(42) 洗牌，整文档依次划入 test 直至样本数达标，其余归 dev。
+    返回 {record_id: "dev"|"test"}。
+    """
+    import random
+    doc_ids = sorted({g["record_id"] for g in gold_rows})
+    rng = random.Random(42)
+    rng.shuffle(doc_ids)
+    sizes = {d: sum(1 for g in gold_rows if g["record_id"] == d) for d in doc_ids}
+    split, n_test = {}, 0
+    for d in doc_ids:
+        if n_test < target_test:
+            split[d] = "test"
+            n_test += sizes[d]
+        else:
+            split[d] = "dev"
+    return split
+
+
 def score(cases: list[dict]) -> None:
     gold = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
     FIGS.mkdir(parents=True, exist_ok=True)
@@ -373,21 +394,20 @@ def score(cases: list[dict]) -> None:
     for r in rows:
         by_class[r["pronoun_class"]][1] += 1
         by_class[r["pronoun_class"]][0] += r["correct"]
-    # split 口径（学术界通行的 dev/test 划分）：dev = 120 例（迭代开发集），test = 60 例（held-out 测试集）
-    def split_of(r):
-        if "split" in r:
-            return r["split"]
-        return "test" if r.get("round") == 2 else "dev"
+    # split 口径（P18 文档分组）：整文档划入 dev/test，消除同文档泄漏
+    doc_split = doc_grouped_split(gold)
     by_split = defaultdict(lambda: [0, 0])
     for r in rows:
-        by_split[split_of(r)][1] += 1
-        by_split[split_of(r)][0] += r["correct"]
+        sp = doc_split[r["record_id"]]
+        by_split[sp][1] += 1
+        by_split[sp][0] += r["correct"]
     result = {
         "n": len(rows),
         "accuracy_overall": round(acc_overall, 3),
         "accuracy_by_class": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_class.items())},
         "accuracy_by_split": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_split.items())},
         "errors_by_split": {k: v[1] - v[0] for k, v in sorted(by_split.items())},
+        "split_method": "P18 文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
         # P17：错误清单引用当前预测（历史 rule_resolution 快照仅存于 gold 文件备查）
         "errors": [
             {"pronoun": r["pronoun"], "class": r["pronoun_class"], "scenic": r["scenic_area"],

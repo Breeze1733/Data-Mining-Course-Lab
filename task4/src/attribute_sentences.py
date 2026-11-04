@@ -300,14 +300,20 @@ def run_all(output_path: Path | None) -> dict[tuple[str, int], str]:
 
 
 def tune_holdout_split() -> tuple[set[str], set[str]]:
-    """495 句按 seed=42 对半分：前半 tune（特征迭代），后半 holdout（只做终评，U5 纪律）。"""
+    """P18：按文档（记录）分组对半分——句级随机划分有 81 篇文档横跨 tune/holdout，存在同文档泄漏。
+
+    确定性：记录列表排序后 rng(42) 洗牌，整记录划入 tune / holdout；句子归属跟随其记录。
+    """
     gold_rows = [json.loads(l) for l in (ATTR / "sentence_attribution.jsonl").open(encoding="utf-8")]
-    sids = sorted(g["sid"] for g in gold_rows)
     import random
+    records = sorted({g["record_id"] for g in gold_rows})
     rng = random.Random(42)
-    rng.shuffle(sids)
-    half = len(sids) // 2
-    return set(sids[:half]), set(sids[half:])
+    rng.shuffle(records)
+    half = len(records) // 2
+    tune_recs = set(records[:half])
+    tune = {g["sid"] for g in gold_rows if g["record_id"] in tune_recs}
+    hold = {g["sid"] for g in gold_rows if g["record_id"] not in tune_recs}
+    return tune, hold
 
 
 def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None,
@@ -343,7 +349,7 @@ def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None
         "method_note": ("方案B v3（特征规则）：词典POI+根名别名+补充地标(权重3/次)，景区外信号(2)，"
                         "文博词汇景区外信号(2，同句只计一次，v3)，大交通覆盖(v3 增国道/省道/县道/乡道)，酒店三态，"
                         "弱景观词(0.6)，转移词继承，基础设施+官方文本回退记录级标签；"
-                        "tune/holdout=seed42 对半分，v3 仅在 tune 半区迭代，holdout 只做终评。"),
+                        "tune/holdout=按文档分组对半分（P18，rng42 确定性），v3 仅在 tune 半区迭代，holdout 只做终评。"),
     }
     if splits:
         res["tune"] = {"A": score("A", "tune"), "B": score("B", "tune")}
