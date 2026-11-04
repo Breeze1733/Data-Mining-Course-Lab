@@ -98,8 +98,10 @@ def main() -> int:
                 G.add_edge(u, v, key="先后顺序", relation="先后顺序", weight=1.0, source="官方路线")
             official_support[(u, v)].append(p["route_id"])
     tourist_support: dict[tuple, int] = Counter()
+    tourist_records: dict[tuple, list] = defaultdict(list)
     for t in tourists:
         scenic = t["scenic_area"]
+        rid = t.get("record_id")
         for a, b in zip(t["distinct_pois"], t["distinct_pois"][1:]):
             u, v = node_id("POI", scenic, resolve(scenic, a)), node_id("POI", scenic, resolve(scenic, b))
             if not (G.has_node(u) and G.has_node(v)):
@@ -109,9 +111,16 @@ def main() -> int:
             else:
                 G.add_edge(u, v, key="先后顺序", relation="先后顺序", weight=0.5, source="游客序列")
             tourist_support[(u, v)] += 1
+            if rid and rid not in tourist_records[(u, v)]:
+                tourist_records[(u, v)].append(rid)
     for (u, v), route_ids in official_support.items():
         if G.has_edge(u, v, key="先后顺序"):
-            G[u][v]["先后顺序"]["official_routes"] = "；".join(dict.fromkeys(route_ids))[:200]
+            # P04：来源清单不截断（官方路线ID + 游客逐记录证据）
+            G[u][v]["先后顺序"]["official_routes"] = "；".join(dict.fromkeys(route_ids))
+    # P04：游客证据对官方/纯游客两类先后边统一回写（纯游客边此前拿不到记录清单）
+    for (u, v), recs in tourist_records.items():
+        if G.has_edge(u, v, key="先后顺序") and recs:
+            G[u][v]["先后顺序"]["tourist_records"] = json.dumps(recs, ensure_ascii=False)
             G[u][v]["先后顺序"]["tourist_support"] = tourist_support.get((u, v), 0)
 
     # ── 时段与交通（来自官方路线步骤）────────────────────────────
@@ -195,11 +204,28 @@ def main() -> int:
         cn = node_id("条件", scenic,
                      f'{rep["pattern"]}:{rep["condition_type"]}:{_norm_cond(rep["condition_text"])}')
         if not G.has_node(cn):
+            # P03/P04：全量证据落图——不截断 variants/suggestions，逐条来源与抽取方法可追溯
+            seen_cond, seen_sugg, seen_src = [], [], []
+            evidence = []
+            for x in members:
+                ct, sg = x["condition_text"], x["suggestion_text"]
+                if ct not in seen_cond:
+                    seen_cond.append(ct)
+                if sg not in seen_sugg:
+                    seen_sugg.append(sg)
+                if x.get("record_id") and x["record_id"] not in seen_src:
+                    seen_src.append(x["record_id"])
+                evidence.append({"row_id": x.get("row_id"), "record_id": x.get("record_id"),
+                                 "pattern": x.get("pattern"), "frequency": x.get("frequency", 1),
+                                 "condition": ct[:60], "suggestion": sg[:60]})
             G.add_node(cn, kind="条件", name=rep["condition_text"][:30],
                        label=f'[{rep["condition_type"]}|{rep["pattern"].split("_")[0]}] {rep["condition_text"][:24]}',
                        cond_type=rep["condition_type"], suggestion=rep["suggestion_text"][:100],
                        frequency=sum(x["frequency"] for x in members),
-                       variants=" | ".join(dict.fromkeys(x["condition_text"] for x in members))[:200])
+                       variants=json.dumps(seen_cond, ensure_ascii=False),
+                       suggestions=json.dumps(seen_sugg, ensure_ascii=False),
+                       sources=json.dumps(seen_src, ensure_ascii=False),
+                       evidence=json.dumps(evidence, ensure_ascii=False))
         for m in members:
             text = m["condition_text"] + " " + m["suggestion_text"]
             pois_in_text = [resolve(scenic, e["canonical"]) for e in matcher.find(text)
@@ -225,17 +251,20 @@ def main() -> int:
     import csv
     with (OUT / "graph_nodes.csv").open("w", encoding="utf-8-sig", newline="") as fh:
         w = csv.writer(fh)
-        w.writerow(["node_id", "kind", "name", "label", "mention_freq", "cond_type", "suggestion", "frequency"])
+        w.writerow(["node_id", "kind", "name", "label", "mention_freq", "cond_type", "suggestion", "frequency",
+                    "variants", "suggestions", "sources", "evidence"])
         for n, d in G.nodes(data=True):
             w.writerow([n, d.get("kind", ""), d.get("name", ""), d.get("label", ""),
                         d.get("mention_freq", ""), d.get("cond_type", ""), d.get("suggestion", ""),
-                        d.get("frequency", "")])
+                        d.get("frequency", ""), d.get("variants", ""), d.get("suggestions", ""),
+                        d.get("sources", ""), d.get("evidence", "")])
     with (OUT / "graph_edges.csv").open("w", encoding="utf-8-sig", newline="") as fh:
         w = csv.writer(fh)
-        w.writerow(["src", "dst", "relation", "weight", "source", "official_routes", "tourist_support"])
+        w.writerow(["src", "dst", "relation", "weight", "source", "official_routes", "tourist_support", "tourist_records"])
         for u, v, d in G.edges(data=True):
             w.writerow([u, v, d.get("relation", ""), round(d.get("weight", 1), 2),
-                        d.get("source", ""), d.get("official_routes", ""), d.get("tourist_support", "")])
+                        d.get("source", ""), d.get("official_routes", ""), d.get("tourist_support", ""),
+                        d.get("tourist_records", "")])
     nx.write_graphml(G, OUT / "knowledge_graph.graphml")
 
     per_scenic = {}

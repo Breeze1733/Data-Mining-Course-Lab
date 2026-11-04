@@ -103,6 +103,33 @@ def main() -> int:
             "各景区子图均为单一连通分量（条件节点挂靠在 POI/景区上），无孤立节点；",
         ],
     }
+    # P04 溯源抽检：条件节点与游客先后边的逐条证据必须完整可解析
+    import json as _json
+    prov = {"cond_nodes_checked": 0, "cond_nodes_with_evidence": 0,
+            "order_edges_checked": 0, "order_edges_with_records": 0, "parse_failures": 0}
+    for _, d in G.nodes(data=True):
+        if d.get("kind") == "条件":
+            prov["cond_nodes_checked"] += 1
+            try:
+                ev = _json.loads(d.get("evidence") or "[]")
+                src = _json.loads(d.get("sources") or "[]")
+                if ev and src:
+                    prov["cond_nodes_with_evidence"] += 1
+            except Exception:
+                prov["parse_failures"] += 1
+    for u, v, d in G.edges(data=True):
+        if d.get("relation") == "先后顺序" and d.get("source") == "游客序列":
+            prov["order_edges_checked"] += 1
+            try:
+                recs = _json.loads(d.get("tourist_records") or "[]")
+                if recs:
+                    prov["order_edges_with_records"] += 1
+            except Exception:
+                prov["parse_failures"] += 1
+    validation["provenance"] = prov
+    validation["provenance_ok"] = (prov["parse_failures"] == 0
+                                   and prov["cond_nodes_with_evidence"] == prov["cond_nodes_checked"]
+                                   and prov["order_edges_with_records"] == prov["order_edges_checked"])
     (OUT / "graph_validation.json").write_text(json.dumps(validation, ensure_ascii=False, indent=1), encoding="utf-8")
     ok = sum(1 for f in fact_checks if f["found"])
     print(json.dumps({"fact_checks_passed": f"{ok}/{len(fact_checks)}",

@@ -18,7 +18,7 @@
      "relation": "先后顺序",
      "weight": 7.0,
      "official_routes": "",
-     "tourist_support": ""
+     "tourist_support": 14
     },
     {
      "from": "佛香阁",
@@ -26,7 +26,7 @@
      "relation": "先后顺序",
      "weight": 2.0,
      "official_routes": "",
-     "tourist_support": ""
+     "tourist_support": 4
     }
    ]
   },
@@ -40,7 +40,7 @@
      "relation": "先后顺序",
      "weight": 4.0,
      "official_routes": "",
-     "tourist_support": ""
+     "tourist_support": 8
     },
     {
      "from": "十七孔桥",
@@ -48,7 +48,7 @@
      "relation": "先后顺序",
      "weight": 0.5,
      "official_routes": "",
-     "tourist_support": ""
+     "tourist_support": 1
     }
    ]
   },
@@ -62,7 +62,7 @@
      "relation": "先后顺序",
      "weight": 2.5,
      "official_routes": "",
-     "tourist_support": ""
+     "tourist_support": 5
     },
     {
      "from": "光明顶",
@@ -70,7 +70,7 @@
      "relation": "先后顺序",
      "weight": 3.5,
      "official_routes": "",
-     "tourist_support": ""
+     "tourist_support": 7
     }
    ]
   },
@@ -114,7 +114,7 @@
      "relation": "先后顺序",
      "weight": 0.5,
      "official_routes": "",
-     "tourist_support": ""
+     "tourist_support": 1
     }
    ]
   },
@@ -136,7 +136,7 @@
      "relation": "先后顺序",
      "weight": 1.5,
      "official_routes": "",
-     "tourist_support": ""
+     "tourist_support": 3
     }
    ]
   }
@@ -178,11 +178,11 @@
   ],
   "九寨沟": [
    [
-    "诺日朗",
+    "五花海",
     45
    ],
    [
-    "五花海",
+    "诺日朗",
     45
    ],
    [
@@ -270,5 +270,13 @@
   "经典先后对（长廊→佛香阁、迎客松→光明顶等）均有先后顺序边支撑，且带官方路线 ID 与游客支持计数；",
   "五彩池/北海等同名异点按景区命名空间隔离，未跨景区合并；",
   "各景区子图均为单一连通分量（条件节点挂靠在 POI/景区上），无孤立节点；"
- ]
+ ],
+ "provenance": {
+  "cond_nodes_checked": 386,
+  "cond_nodes_with_evidence": 386,
+  "order_edges_checked": 1242,
+  "order_edges_with_records": 1242,
+  "parse_failures": 0
+ },
+ "provenance_ok": true
 }
