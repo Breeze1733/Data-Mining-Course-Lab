@@ -21,6 +21,12 @@
 `task7/src/run_tests.py`（场景测试入口）、`task7/src/llm_intent_eval.py`（意图解析对比实验）。
 task1 的 `build_official_expansion.py` 命中 "urlopen" 为网页抓取（采集爬虫），不是 LLM API。
 
+任务7 验收双模式（`tests/run.py --task7 rules|llm|both`，默认 rules）：
+`rules` 为静态复现口径（显式 `--rules`，不因本机 config.json 意外联网）；
+`llm` 为在线动态验收（LLM 出行程与回答，产物单独写入 `*_llm.json` 与 `traces_llm/`，
+不覆盖离线验收证据）；`both` 先离线再在线。在线运行的真实模式与结果记录在
+`test_report_llm.json` 的 mode 字段。
+
 ## 术语与命名约定
 
 - **人工标注评测集**（gold standard）：由作者逐例判定的标准答案集，用于对规则系统做无偏评估——
