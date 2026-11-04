@@ -4,6 +4,7 @@
   "scenic": "未知",
   "visitor_type": null,
   "days": 1,
+  "days_explicit": true,
   "month": null,
   "special": []
  },

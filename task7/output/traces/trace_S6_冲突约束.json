@@ -4,6 +4,7 @@
   "scenic": "黄山",
   "visitor_type": null,
   "days": 0.5,
+  "days_explicit": true,
   "month": null,
   "special": [
    "看日出"
@@ -64,7 +65,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '黄山', 'visitor_type': None, 'days': 0.5, 'month': None, 'special': ['看日出']}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '黄山', 'visitor_type': None, 'days': 0.5, 'days_explicit': True, 'month': None, 'special': ['看日出']}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",

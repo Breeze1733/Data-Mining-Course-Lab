@@ -132,8 +132,10 @@ class IntentParser:
                 merged["scenic"] = llm_intent["scenic"]
             if not merged.get("visitor_type") and llm_intent.get("visitor_type"):
                 merged["visitor_type"] = llm_intent["visitor_type"]
-            if merged.get("days") == 1 and llm_intent.get("days") not in (None, 1):
-                merged["days"] = llm_intent["days"]
+            merged_days = self._merge_days(merged.get("days"), merged.get("days_explicit", False),
+                                            llm_intent.get("days"))
+            if merged_days is not None:
+                merged["days"] = merged_days
             if not merged.get("special") and llm_intent.get("special"):
                 merged["special"] = llm_intent["special"]
             if merged.get("month") is None and llm_intent.get("month"):
@@ -146,17 +148,32 @@ class IntentParser:
             return merged
         return self._parse_rules(query)
 
+    @staticmethod
+    def _merge_days(rule_days, rule_explicit: bool, llm_days):
+        """P10：规则显式给定的时长不被 LLM 覆盖；LLM 值须为 0.5–5 的数值，否则忽略。"""
+        if isinstance(llm_days, bool) or not isinstance(llm_days, (int, float)):
+            return rule_days
+        v = float(llm_days)
+        if not (0 < v <= 5):
+            return rule_days
+        if rule_explicit:
+            return rule_days
+        return v if v != rule_days else rule_days
+
     def _parse_rules(self, query: str) -> dict:
         scenic = next((a for a in AREAS if a in query), None)
         visitor = next((v for v, pat in VISITOR_PATTERNS if re.search(pat, query)), None)
         days = 1
+        days_explicit = False
         for d, pat in DURATION_PATTERNS:
             if re.search(pat, query):
                 days = d
+                days_explicit = True
                 break
         special = [s for s, pat in SPECIAL_PATTERNS if re.search(pat, query)]
         month = next((m for m, pat in TRIP_MONTH_PATTERNS if re.search(pat, query)), None)
         return {"scenic": scenic or "未知", "visitor_type": visitor, "days": days,
+                "days_explicit": days_explicit,
                 "month": month, "special": special}
 
 

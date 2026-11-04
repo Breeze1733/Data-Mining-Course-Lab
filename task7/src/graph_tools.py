@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 import networkx as nx
@@ -41,6 +42,9 @@ TOOL_SCHEMAS = [
 ]
 
 
+NEG_ADVICE_RE = re.compile(r"不要|别去|千万别|不宜|不适合|避免|慎|忌|禁止|不建议|别走|别爬")
+
+
 class GraphTools:
     def __init__(self):
         self.G = nx.read_graphml(OUT6 / "knowledge_graph.graphml")
@@ -73,14 +77,24 @@ class GraphTools:
             transports = sorted({self.G.nodes[v].get("name", "") for _, v, e in self.G.out_edges(n, data=True)
                                  if e.get("relation") == "交通方式"})
             fit = 0
+            caveats = []
             if visitor_type:
                 for _, v, e in self.G.out_edges(n, data=True):
                     if e.get("relation") == "条件建议" and self.G.nodes[v].get("cond_type") == "人群":
-                        if self._match_visitor(self.G.nodes[v].get("name", "") + self.G.nodes[v].get("suggestion", ""), visitor_type):
+                        text = self.G.nodes[v].get("name", "") + self.G.nodes[v].get("suggestion", "")
+                        if not self._match_visitor(text, visitor_type):
+                            continue
+                        if NEG_ADVICE_RE.search(text):
+                            # P09：负向人群建议（如“老人千万别走中轴线爬山”）不是正向适配——
+                            # 降权并记入站点提示，而不是当加分项
+                            fit -= float(e.get("weight", 1))
+                            caveats.append(self.G.nodes[v].get("suggestion", "")[:40])
+                        else:
                             fit += float(e.get("weight", 1))
             cand.append({"poi": d.get("label", n), "degree": self.G.degree(n),
                          "mention_freq": int(float(d.get("mention_freq", 0) or 0)),
-                         "periods": periods, "transports": transports, "visitor_fit": fit})
+                         "periods": periods, "transports": transports, "visitor_fit": fit,
+                         "visitor_caveats": caveats[:2]})
         # 有游客类型适配的优先（适配度高者在前），其次图谱度数、提及词频
         cand.sort(key=lambda x: (x["visitor_fit"] > 0, x["visitor_fit"], x["degree"], x["mention_freq"]),
                   reverse=True)

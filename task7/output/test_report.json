@@ -20,6 +20,7 @@
     "scenic": "颐和园",
     "visitor_type": "老人",
     "days": 0.5,
+    "days_explicit": true,
     "month": null,
     "special": [
      "省力"
@@ -46,6 +47,7 @@
     "scenic": "九寨沟",
     "visitor_type": "孩子",
     "days": 1,
+    "days_explicit": true,
     "month": null,
     "special": []
    },
@@ -70,6 +72,7 @@
     "scenic": "黄山",
     "visitor_type": "情侣",
     "days": 2,
+    "days_explicit": true,
     "month": null,
     "special": [
      "看日出"
@@ -77,7 +80,7 @@
    },
    "n_tool_calls": 14,
    "answer_head": "为您规划黄山两日游（参考官方路线 HS-EXTRA1-R2 冬季南门二日游）：\n第一天·上午：迎客松\n第一天·上午：莲花峰（步行前往）\n第一天·中午：云谷寺（云谷索道前往）\n第一天·下午：西海大峡谷（索道前往）\n第一天·下午：飞来石（步行前",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S4_时间紧颐和园",
@@ -96,12 +99,13 @@
     "scenic": "颐和园",
     "visitor_type": null,
     "days": 0.5,
+    "days_explicit": true,
     "month": null,
     "special": []
    },
    "n_tool_calls": 9,
    "answer_head": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 2026清明反向遛弯路线）：\n上午：昆明湖\n上午：西堤（步行前往）\n中午：佛香阁（步行前往）\n中午：十七孔桥（步行前往）\n中午：长廊（步行前往）\n贴士：[人群] 儿童:西线游相对",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S5_无匹配景区",
@@ -117,6 +121,7 @@
     "scenic": "未知",
     "visitor_type": null,
     "days": 1,
+    "days_explicit": true,
     "month": null,
     "special": []
    },
@@ -142,6 +147,7 @@
     "scenic": "黄山",
     "visitor_type": null,
     "days": 0.5,
+    "days_explicit": true,
     "month": null,
     "special": [
      "看日出"
@@ -169,6 +175,7 @@
     "scenic": "九寨沟",
     "visitor_type": null,
     "days": 1,
+    "days_explicit": true,
     "month": null,
     "special": []
    },
@@ -193,6 +200,7 @@
     "scenic": "九寨沟",
     "visitor_type": null,
     "days": 1,
+    "days_explicit": false,
     "month": null,
     "special": []
    },
@@ -219,12 +227,13 @@
     "scenic": "黄山",
     "visitor_type": null,
     "days": 2,
+    "days_explicit": true,
     "month": 12,
     "special": []
    },
    "n_tool_calls": 14,
    "answer_head": "为您规划黄山两日游，出行时段12月（参考官方路线 HS-EXTRA1-R2 冬季南门二日游）：\n第一天·上午：迎客松\n第一天·上午：莲花峰（步行前往）\n第一天·中午：云谷寺（云谷索道前往）\n第一天·下午：西海大峡谷（索道前往）\n第一天·下午",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S10_三日多天编排",
@@ -243,6 +252,7 @@
     "scenic": "九寨沟",
     "visitor_type": null,
     "days": 3,
+    "days_explicit": true,
     "month": null,
     "special": []
    },

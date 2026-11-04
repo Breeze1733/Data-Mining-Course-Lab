@@ -4,6 +4,7 @@
   "scenic": "颐和园",
   "visitor_type": null,
   "days": 0.5,
+  "days_explicit": true,
   "month": null,
   "special": []
  },
@@ -58,7 +59,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '颐和园', 'visitor_type': None, 'days': 0.5, 'month': None, 'special': []}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '颐和园', 'visitor_type': None, 'days': 0.5, 'days_explicit': True, 'month': None, 'special': []}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -251,5 +252,5 @@
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }
