@@ -799,3 +799,13 @@ E01（实验5 原句级有无建议评测）→ H07 置信区间 → D02 段落�
 - 规划器：avoid 地点从已选剔除并在回答说明（special_notes）；must 优先保留；
 - 新增 S12_不去地点 场景（不要去原始森林 → 行程无原始森林 + 回答说明避开），**12 场景双模式 12/12**；
 - 过程记录：两处交互 bug（special_notes 被后续初始化覆盖、残留自引用）由场景失败当场暴露并修复。
+
+---
+
+## 第5轮 U36：H04 原子写出 —— 完成
+
+- 新增 `common/atomic.py`（临时文件 + os.replace，杜绝半写文件污染正式产物）；
+- 改造核心写出：task5（mapping_table/extraction_stats/opposing_pairs）、task6（graph_nodes/edges/
+  graph_stats/graphml）——重建产物与改造前**字节级一致**（两处行尾语义按调用方区分：
+  JSON 平台翻译、CSV 原样 CRLF，防止 \r\r\n 与全库行尾翻转）；
+- 全链 exit 0、审计 70/70、守护零退化。
