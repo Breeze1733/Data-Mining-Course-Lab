@@ -9,6 +9,11 @@
   "lo": 0.386,
   "hi": 0.602
  },
+ "data_fingerprints": {
+  "dataset_clean": "6fae55942575",
+  "entity_dictionary": "430304c1f73a",
+  "entities_refined": "88f282d37466"
+ },
  "alignment_with_current_extraction": {
   "retained_identical": 58,
   "missing": 18,

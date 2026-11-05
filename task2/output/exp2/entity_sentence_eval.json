@@ -247,5 +247,10 @@
    "lo": 0.578,
    "hi": 0.794
   }
+ },
+ "data_fingerprints": {
+  "dataset_clean": "6fae55942575",
+  "entity_dictionary": "430304c1f73a",
+  "entities_refined": "88f282d37466"
  }
 }

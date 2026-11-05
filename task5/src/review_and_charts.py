@@ -148,6 +148,10 @@ def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
     return {"lo": round(max(0.0, center - spread), 3), "hi": round(min(1.0, center + spread), 3)}
 
 
+sys.path.insert(0, str(ROOT.parent))
+from common.fingerprints import data_fingerprints as _data_fingerprints
+
+
 def score() -> None:
     data = json.loads((OUT / "review_dev.json").read_text(encoding="utf-8"))["reviews"]
     # P16：与当前抽取对齐——复核行是否仍被当前规则抽出（identical/changed/missing），
@@ -172,6 +176,7 @@ def score() -> None:
         by_pattern[r["pattern"].split("_")[0]][r["verdict"]] += 1
     result = {"n": len(data), "verdicts": dict(c),
               "correct_ci95": wilson_ci(c.get("correct", 0), len(data)),
+              "data_fingerprints": _data_fingerprints(),
               "alignment_with_current_extraction": dict(align),
               "by_pattern": {k: dict(v) for k, v in by_pattern.items()}}
     (OUT / "review_summary.json").write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")

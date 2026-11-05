@@ -892,3 +892,12 @@ E01（实验5 原句级有无建议评测）→ H07 置信区间 → D02 段落�
   短序列顺序高一致掩盖了长序列分歧）、九寨沟 0.754→0.68→0.633（观光车单线强约束长序列依然成立）、
   颐和园 0.656→0.29→0.241。主口径取阈值 5 的保守值是合理选择；
 - 报告3 增补敏感性解读段，审计 70/70。
+
+---
+
+## 第5轮 U45：H05 数据版本指纹 —— 完成
+
+- `common/fingerprints.py`：dataset_clean/entity_dictionary/entities_refined 三个输入的 SHA256 前 12 位；
+- 四个评估产出器（task4 evaluation / task5 review_summary / task2 entity_sentence_eval / task6 graph_stats）
+  在写出时自动盖上 `data_fingerprints`——旧结果未重算时不再被当作新版本证据；
+- 审计 70/70、守护零退化（指纹随产出器自动刷新，无需手动 --update-state）。

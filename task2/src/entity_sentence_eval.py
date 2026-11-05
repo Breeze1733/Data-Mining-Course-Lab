@@ -17,6 +17,7 @@ from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT.parent))
 EXP2 = ROOT / "output/exp2"
 TASK1 = ROOT.parent / "task1"
 
@@ -106,11 +107,14 @@ def main() -> int:
             if gtype == "POI" and gtext in OUT_OF_SCOPE and gpos_found(sent, gtext):
                 stats_oos["POI"][2] += 1
 
-    def prf(tp, fp, fn):
-        return {"tp": tp, "fp": fp, "fn": fn,
-                "precision": round(tp / max(1, tp + fp), 3),
-                "recall": round(tp / max(1, tp + fn), 3),
-                "f1": round(2 * tp / max(1, 2 * tp + fp + fn), 3)}
+from common.fingerprints import data_fingerprints as _data_fingerprints
+
+
+def prf(tp, fp, fn):
+    return {"tp": tp, "fp": fp, "fn": fn,
+            "precision": round(tp / max(1, tp + fp), 3),
+            "recall": round(tp / max(1, tp + fn), 3),
+            "f1": round(2 * tp / max(1, 2 * tp + fp + fn), 3)}
 
     result = {
         "n_sentences": len(sample),
@@ -124,6 +128,7 @@ def main() -> int:
     tot = lambda i: sum(v[i] for v in stats.values())
     result["overall"] = prf(tot(0), tot(1), tot(2))
     result["overall"]["precision_ci95"] = wilson_ci(tot(0), tot(0) + tot(1))
+    result["data_fingerprints"] = _data_fingerprints()
     result["overall"]["recall_ci95"] = wilson_ci(tot(0), tot(0) + tot(2))
     # 双口径：把设计排除项（根景区名/城市）从 FN 分母移除后的查全率
     oos_fn = sum(1 for m in missed if m.get("out_of_scope_design"))

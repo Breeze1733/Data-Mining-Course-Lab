@@ -822,6 +822,11 @@
   "lo": 0.533,
   "hi": 0.674
  },
+ "data_fingerprints": {
+  "dataset_clean": "6fae55942575",
+  "entity_dictionary": "430304c1f73a",
+  "entities_refined": "88f282d37466"
+ },
  "identity_ci95": {
   "lo": 0.503,
   "hi": 0.724
