@@ -36,7 +36,7 @@ ADVICE = {4: (False, "中午12点上山、下午4点前下山（攻略式时间�
 
 
 def main() -> int:
-    sample = json.loads((TASK2 / "output/exp2/entity_sentence_sample.json").read_text(encoding="utf-8"))["sentences"]
+    sample = json.loads((TASK2 / "output/exp2/entity_sentence_sample_dev.json").read_text(encoding="utf-8"))["sentences"]
     mapping = json.loads((OUT / "mapping_table.json").read_text(encoding="utf-8"))
     mrows = mapping["rows"] if isinstance(mapping, dict) else mapping
     by_sentence = {}
@@ -66,6 +66,7 @@ def main() -> int:
     result = {
         "n_sentences": len(sample),
         "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注）",
+        "sample_note": "使用第一轮抽样（entity_sentence_sample_dev.json，开发历史）；B01 第二轮冻结样本仅用于实体评测",
         "scope_note": "in_scope=句内含条件性建议或带触发词的建议（实验5 任务口径）；无触发词的泛建议/路线罗列为任务外",
         "n_advice_sentences": advice_n,
         "advice_recall": round(matched_n / max(1, advice_n), 3),

@@ -1,19 +1,15 @@
 {
  "n_sentences": 40,
  "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注）",
+ "sample_note": "使用第一轮抽样（entity_sentence_sample_dev.json，开发历史）；B01 第二轮冻结样本仅用于实体评测",
  "scope_note": "in_scope=句内含条件性建议或带触发词的建议（实验5 任务口径）；无触发词的泛建议/路线罗列为任务外",
  "n_advice_sentences": 6,
- "advice_recall": 0.667,
+ "advice_recall": 0.833,
  "unmatched_advice": [
   {
    "sid": 23,
    "gist": "玩黄龙的话住松潘古城（海拔低、配套全）",
    "sentence": "其他参考:其实也看到很多游记里推荐玩黄龙的话,住在 松潘 古城,那里海拔相对比较低,而且商业配套更丰富,那里还是一处人文"
-  },
-  {
-   "sid": 24,
-   "gist": "14天内有相关旅居史的游客暂缓接待（防疫条件规定）",
-   "sentence": "5、按照当前防疫要求,对14天内有中高风险地区所在地级市和直辖市、省会城市所在区旅居史的游客,暂缓接待"
   }
  ],
  "over_extraction_pairs_in_non_advice": 2,
@@ -165,7 +161,7 @@
   {
    "sid": 24,
    "in_scope": true,
-   "n_pairs": 0,
+   "n_pairs": 1,
    "gist": "14天内有相关旅居史的游客暂缓接待（防疫条件规定）"
   },
   {

@@ -128,6 +128,23 @@ def extract_from_sentence(sent: str) -> list[dict]:
                           "suggestions": [sugg], "sentence": sent})
         seen_spans.add(m.start())
 
+    # P7 依据规定（E03）：按照/根据+要求/规定/政策/须知 的条件性规则信息（无显式条件连词）
+    for m in re.finditer(r"((?:按照|根据|依据)[^。！？；]{0,16}?(?:要求|规定|政策|须知|提示))[^。！？；]{0,12}?[，,]\s*([^。！？；]{1,60})", sent):
+        cond = m.group(1).strip()
+        rest = m.group(2).strip()
+        if not rest:
+            continue
+        emitted = False
+        for sugg in split_multi_suggestions(rest):
+            if re.match(r"^[第其][一二三四五六七八九十]", sugg.strip()):
+                continue
+            pairs.append({"pattern": "P7_依据规定", "trigger": m.group(1),
+                          "condition_text": cond, "suggestions": [sugg], "sentence": sent,
+                          "condition_type": "一般"})
+            emitted = True
+        if emitted:
+            seen_spans.add(m.start())
+
     # P3 当/遇到…时
     for m in re.finditer(r"(?:当(?!时|初|年|地|下|然)|遇到|遇上|碰到)([^。！？；，]{1,24}?)(的时候|时)[，,]?", sent):
         if m.start() in seen_spans:
