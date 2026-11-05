@@ -157,7 +157,8 @@ class GraphTools:
             conds.append({"cond_type": d.get("cond_type"), "condition": d.get("name"),
                           "suggestion": d.get("suggestion"), "frequency": int(float(d.get("frequency", 1) or 1))})
         # 人群类匹配游客类型的优先；其余按类型相关性排序
-        type_rank = {"人群": 0, "装备": 1, "体力安全": 2, "天气": 3, "时间": 4, "预约票务": 5, "交通": 6, "一般": 7, "其他": 8}
+        type_rank = {"人群": 0, "装备": 1, "体力安全": 2, "住宿": 3, "天气": 4, "时间": 5,
+                     "预约票务": 6, "交通": 7, "美食": 8, "拍照": 9, "一般": 10, "其他": 11}
         conds.sort(key=lambda c: (type_rank.get(c["cond_type"], 9), -c["frequency"]))
         return {"scenic": scenic, "visitor_type": visitor_type, "conditions": conds[:limit]}
 
