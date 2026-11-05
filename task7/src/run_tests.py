@@ -41,7 +41,17 @@ SCENARIOS = [
      "expect": {"scenic": "九寨沟", "days": 3, "multi_day": True}},
     {"id": "S11_多人群贴士", "query": "带老人和孩子去九寨沟一日游，走路要少",
      "expect": {"scenic": "九寨沟", "days": 1, "multi_visitor": ["老人", "孩子"], "tips_attached": True}},
+    {"id": "S12_不去地点", "query": "九寨沟一日游，不要去原始森林，人多",
+     "expect": {"scenic": "九寨沟", "days": 1, "avoid_respected": "原始森林"}},
 ]
+def check_avoid(result, expect_poi):
+    """G02b 验收：不去地点不出现在行程，且回答说明避开。"""
+    plan = result.get("plan") or {}
+    pois = [it["poi"] for it in plan.get("itinerary", [])]
+    not_in = all(expect_poi not in p for p in pois)
+    noted = any(expect_poi in (plan.get("special_notes") or [])[0:1][0] if plan.get("special_notes") else False
+                for _ in [0]) or any(expect_poi in n for n in (plan.get("special_notes") or []))
+    return not_in and noted
 def check_sunrise(result, expect_poi):
     """P07 验收：看日出需求 → 日出观景点排最后一日首位，说明进入回答。"""
     plan = result.get("plan") or {}
@@ -97,6 +107,8 @@ def main() -> int:
                 checks["feasibility_keyword"] = bool(warnings) and any(v in w for w in warnings)
             elif k == "sunrise_last_day_first":
                 checks["sunrise_last_day_first"] = check_sunrise(result, v)
+            elif k == "avoid_respected":
+                checks["avoid_respected"] = check_avoid(result, v)
             elif k == "multi_visitor":
                 vt = intent.get("visitor_types") or []
                 checks["multi_visitor"] = all(v in vt for v in v)

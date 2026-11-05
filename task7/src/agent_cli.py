@@ -172,10 +172,15 @@ class IntentParser:
                 days_explicit = True
                 break
         special = [s for s, pat in SPECIAL_PATTERNS if re.search(pat, query)]
+        # G02b：必去/不去地点——从“不要去X/不去X/避开X”与“一定要去X/必去X”提取
+        avoid = [m.group(1).strip() for m in
+                 re.finditer(r"(?:不要去|不去|避开|别去)\s*([一-龥A-Za-z0-9]{2,10})", query)]
+        must = [m.group(1).strip() for m in
+                re.finditer(r"(?:一定要去|必去|必须去)\s*([一-龥A-Za-z0-9]{2,10})", query)]
         month = next((m for m, pat in TRIP_MONTH_PATTERNS if re.search(pat, query)), None)
         return {"scenic": scenic or "未知", "visitor_type": visitor, "visitor_types": visitor_hits,
                 "days": days, "days_explicit": days_explicit,
-                "month": month, "special": special}
+                "month": month, "special": special, "avoid": avoid, "must": must}
 
 
 class ReActAgent:
@@ -202,6 +207,20 @@ class ReActAgent:
                      "再取官方路线做编排骨架，最后按游客类型取条件贴士"})
 
         selected = [p["poi"] for p in pois_res["pois"]]
+        # G02b：不去地点从行程剔除并说明；必去地点优先保留
+        avoid = [a for a in (intent.get("avoid") or []) if a]
+        must = [m0 for m0 in (intent.get("must") or []) if m0]
+        special_notes: list[str] = []
+        removed_by_avoid = []
+        if avoid:
+            kept = []
+            for poi in selected:
+                if any(a in poi or poi in a for a in avoid):
+                    removed_by_avoid.append(poi)
+                else:
+                    kept.append(poi)
+            selected = kept
+            trace.append({"step": "thought", "thought": f"不去地点过滤：移除 {removed_by_avoid or '无'}"})
         # 模板选择（P11）：query_route 返回的路线作为首选候选参与覆盖率竞争——
         # 工具结果真实进入决策；未入选时 trace 如实说明原因
         cands = self.tools.routes_by_scenic(scenic, days if days <= 2 else 2)
@@ -218,7 +237,8 @@ class ReActAgent:
         template_pos = best_pos if not template_cov_low else {}
         template = best_route["route_title"] if best_route else ""
         ordered = self._order_pois(scenic, selected, template_pos)
-        special_notes: list[str] = []
+        if removed_by_avoid:
+            special_notes.append("已按您的要求避开：" + "、".join(removed_by_avoid))
         if "看日出" in (intent.get("special") or []) and days and days >= 2:
             sp = self._find_sunrise_poi(scenic, ordered)
             if sp:

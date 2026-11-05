@@ -7,13 +7,14 @@
   "special": [
    "省力"
   ],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "昆明湖",
+    "poi": "万寿山",
     "transport_from_prev": "入园",
     "note": ""
    },
@@ -21,9 +22,9 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "西堤",
+    "poi": "画中游",
     "transport_from_prev": "步行",
-    "note": ""
+    "note": "与游客类型适配"
    },
    {
     "order": 3,
@@ -37,15 +38,15 @@
     "order": 4,
     "day": 1,
     "period": "中午",
-    "poi": "十七孔桥",
+    "poi": "昆明湖",
     "transport_from_prev": "步行",
-    "note": ""
+    "note": "与游客类型适配"
    },
    {
     "order": 5,
     "day": 1,
     "period": "中午",
-    "poi": "长廊",
+    "poi": "西堤",
     "transport_from_prev": "步行",
     "note": ""
    }
@@ -55,6 +56,18 @@
     "cond_type": "人群",
     "condition": "游客为老人",
     "suggestion": "别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为体力差的朋友",
+    "suggestion": "不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "体力一般或者不想走太多",
+    "suggestion": "中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较完整的湖景视角",
     "frequency": 1
    },
    {
@@ -68,12 +81,6 @@
     "condition": "体力可以",
     "suggestion": "建议上去看看非常的漂亮",
     "frequency": 1
-   },
-   {
-    "cond_type": "天气",
-    "condition": "天气条件（句内）",
-    "suggestion": "不建议雨雪天走这一线--这天降温大风,特别是下行过了大半时,终于明白什么是寒风凛冽,庆幸已经快到山下了,风",
-    "frequency": 1
    }
   ],
   "feasibility_warnings": [],
@@ -85,37 +92,38 @@
   "days": 1,
   "visitor_type": "孩子",
   "special": [],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "原始森林",
+    "poi": "沟口",
     "transport_from_prev": "入园",
-    "note": "⚠ 不去原始森林——其实大半天足矣"
+    "note": ""
    },
    {
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "五花海",
-    "transport_from_prev": "观光车",
-    "note": ""
+    "poi": "原始森林",
+    "transport_from_prev": "步行",
+    "note": "⚠ 不去原始森林——其实大半天足矣"
    },
    {
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "镜海",
-    "transport_from_prev": "观光车",
+    "poi": "长海",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "诺日朗",
+    "poi": "五彩池",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -123,15 +131,15 @@
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "长海",
-    "transport_from_prev": "观光车",
+    "poi": "镜海",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 6,
     "day": 1,
     "period": "晚上",
-    "poi": "五彩池",
+    "poi": "诺日朗",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -139,16 +147,16 @@
     "order": 7,
     "day": 1,
     "period": "晚上",
-    "poi": "诺日朗瀑布",
-    "transport_from_prev": "徒步",
+    "poi": "五花海",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 8,
     "day": 1,
     "period": "晚上",
-    "poi": "犀牛海",
-    "transport_from_prev": "观光车",
+    "poi": "诺日朗瀑布",
+    "transport_from_prev": "徒步",
     "note": ""
    }
   ],
@@ -185,6 +193,9 @@
   "special": [
    "看日出"
   ],
+  "special_notes": [
+   "看日出：光明顶 已安排在最后一日首位（清晨前往），需前晚住宿山上或山顶酒店"
+  ],
   "trip_month": null,
   "itinerary": [
    {
@@ -199,52 +210,44 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "莲花峰",
+    "poi": "始信峰",
     "transport_from_prev": "步行",
-    "note": "⚠ 莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘"
+    "note": "⚠ 只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步"
    },
    {
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "云谷寺",
-    "transport_from_prev": "云谷索道",
-    "note": ""
+    "poi": "莲花峰",
+    "transport_from_prev": "步行",
+    "note": "⚠ 莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘"
    },
    {
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "西海大峡谷",
-    "transport_from_prev": "索道",
+    "poi": "排云亭",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "飞来石",
+    "poi": "西海",
     "transport_from_prev": "步行",
-    "note": "⚠ 不去看飞来石——超近路就是可以直接到达这里"
+    "note": ""
    },
    {
     "order": 6,
     "day": 1,
     "period": "晚上",
-    "poi": "始信峰",
-    "transport_from_prev": "步行",
-    "note": "⚠ 只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步"
-   },
-   {
-    "order": 7,
-    "day": 2,
-    "period": "上午",
-    "poi": "北海",
+    "poi": "西海大峡谷",
     "transport_from_prev": "步行",
     "note": ""
    },
    {
-    "order": 8,
+    "order": 7,
     "day": 2,
     "period": "上午",
     "poi": "光明顶",
@@ -252,27 +255,35 @@
     "note": "⚠ 去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下"
    },
    {
-    "order": 9,
+    "order": 8,
     "day": 2,
-    "period": "中午",
-    "poi": "白鹅岭",
-    "transport_from_prev": "索道",
+    "period": "上午",
+    "poi": "北海",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
-    "order": 10,
+    "order": 9,
     "day": 2,
-    "period": "下午",
+    "period": "中午",
     "poi": "天都峰",
     "transport_from_prev": "步行",
     "note": "⚠ 去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下"
    },
    {
+    "order": 10,
+    "day": 2,
+    "period": "下午",
+    "poi": "玉屏楼",
+    "transport_from_prev": "步行",
+    "note": "⚠ 莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘"
+   },
+   {
     "order": 11,
     "day": 2,
     "period": "下午",
-    "poi": "猴子观海",
-    "transport_from_prev": "索道",
+    "poi": "云谷寺",
+    "transport_from_prev": "步行",
     "note": ""
    }
   ],
@@ -306,14 +317,14 @@
    "迎客松：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
    "迎客松：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
    "迎客松：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
+   "始信峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
    "莲花峰：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
    "莲花峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
-   "飞来石：不去看飞来石——超近路就是可以直接到达这里",
-   "始信峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
    "光明顶：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
    "光明顶：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
    "天都峰：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
-   "天都峰：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山"
+   "天都峰：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
+   "玉屏楼：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山"
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
  },
@@ -323,13 +334,14 @@
   "days": 0.5,
   "visitor_type": null,
   "special": [],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "昆明湖",
+    "poi": "万寿山",
     "transport_from_prev": "入园",
     "note": ""
    },
@@ -337,7 +349,7 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "西堤",
+    "poi": "佛香阁",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -345,7 +357,7 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "佛香阁",
+    "poi": "昆明湖",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -353,7 +365,7 @@
     "order": 4,
     "day": 1,
     "period": "中午",
-    "poi": "十七孔桥",
+    "poi": "西堤",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -415,6 +427,7 @@
   "special": [
    "看日出"
   ],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
@@ -446,14 +459,14 @@
     "day": 1,
     "period": "中午",
     "poi": "西海大峡谷",
-    "transport_from_prev": "索道",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 5,
     "day": 1,
     "period": "中午",
-    "poi": "莲花峰",
+    "poi": "玉屏楼",
     "transport_from_prev": "步行",
     "note": "⚠ 莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘"
    }
@@ -504,8 +517,7 @@
    "迎客松：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
    "天都峰：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
    "天都峰：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
-   "莲花峰：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
-   "莲花峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲"
+   "玉屏楼：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山"
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
  },
@@ -515,37 +527,38 @@
   "days": 1,
   "visitor_type": null,
   "special": [],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "原始森林",
+    "poi": "沟口",
     "transport_from_prev": "入园",
-    "note": "⚠ 不去原始森林——其实大半天足矣"
+    "note": ""
    },
    {
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "五花海",
-    "transport_from_prev": "观光车",
-    "note": ""
+    "poi": "原始森林",
+    "transport_from_prev": "步行",
+    "note": "⚠ 不去原始森林——其实大半天足矣"
    },
    {
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "镜海",
-    "transport_from_prev": "观光车",
+    "poi": "长海",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "诺日朗",
+    "poi": "五彩池",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -553,15 +566,15 @@
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "长海",
-    "transport_from_prev": "观光车",
+    "poi": "镜海",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 6,
     "day": 1,
     "period": "晚上",
-    "poi": "五彩池",
+    "poi": "诺日朗",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -569,16 +582,16 @@
     "order": 7,
     "day": 1,
     "period": "晚上",
-    "poi": "诺日朗瀑布",
-    "transport_from_prev": "徒步",
+    "poi": "五花海",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 8,
     "day": 1,
     "period": "晚上",
-    "poi": "犀牛海",
-    "transport_from_prev": "观光车",
+    "poi": "诺日朗瀑布",
+    "transport_from_prev": "徒步",
     "note": ""
    }
   ],
@@ -631,37 +644,38 @@
   "days": 1,
   "visitor_type": null,
   "special": [],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "原始森林",
+    "poi": "沟口",
     "transport_from_prev": "入园",
-    "note": "⚠ 不去原始森林——其实大半天足矣"
+    "note": ""
    },
    {
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "五花海",
-    "transport_from_prev": "观光车",
-    "note": ""
+    "poi": "原始森林",
+    "transport_from_prev": "步行",
+    "note": "⚠ 不去原始森林——其实大半天足矣"
    },
    {
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "镜海",
-    "transport_from_prev": "观光车",
+    "poi": "长海",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "诺日朗",
+    "poi": "五彩池",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -669,15 +683,15 @@
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "长海",
-    "transport_from_prev": "观光车",
+    "poi": "镜海",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 6,
     "day": 1,
     "period": "晚上",
-    "poi": "五彩池",
+    "poi": "诺日朗",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -685,16 +699,16 @@
     "order": 7,
     "day": 1,
     "period": "晚上",
-    "poi": "诺日朗瀑布",
-    "transport_from_prev": "徒步",
+    "poi": "五花海",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 8,
     "day": 1,
     "period": "晚上",
-    "poi": "犀牛海",
-    "transport_from_prev": "观光车",
+    "poi": "诺日朗瀑布",
+    "transport_from_prev": "徒步",
     "note": ""
    }
   ],
@@ -747,6 +761,7 @@
   "days": 2,
   "visitor_type": null,
   "special": [],
+  "special_notes": [],
   "trip_month": 12,
   "itinerary": [
    {
@@ -761,41 +776,41 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "莲花峰",
+    "poi": "始信峰",
     "transport_from_prev": "步行",
-    "note": "⚠ 莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘"
+    "note": "⚠ 只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步"
    },
    {
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "云谷寺",
-    "transport_from_prev": "云谷索道",
-    "note": ""
+    "poi": "莲花峰",
+    "transport_from_prev": "步行",
+    "note": "⚠ 莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘"
    },
    {
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "西海大峡谷",
-    "transport_from_prev": "索道",
+    "poi": "排云亭",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "飞来石",
+    "poi": "西海",
     "transport_from_prev": "步行",
-    "note": "⚠ 不去看飞来石——超近路就是可以直接到达这里"
+    "note": ""
    },
    {
     "order": 6,
     "day": 1,
     "period": "晚上",
-    "poi": "始信峰",
+    "poi": "西海大峡谷",
     "transport_from_prev": "步行",
-    "note": "⚠ 只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步"
+    "note": ""
    },
    {
     "order": 7,
@@ -817,24 +832,24 @@
     "order": 9,
     "day": 2,
     "period": "中午",
-    "poi": "白鹅岭",
-    "transport_from_prev": "索道",
-    "note": ""
-   },
-   {
-    "order": 10,
-    "day": 2,
-    "period": "下午",
     "poi": "天都峰",
     "transport_from_prev": "步行",
     "note": "⚠ 去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下"
    },
    {
+    "order": 10,
+    "day": 2,
+    "period": "下午",
+    "poi": "玉屏楼",
+    "transport_from_prev": "步行",
+    "note": "⚠ 莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘"
+   },
+   {
     "order": 11,
     "day": 2,
     "period": "下午",
-    "poi": "猴子观海",
-    "transport_from_prev": "索道",
+    "poi": "云谷寺",
+    "transport_from_prev": "步行",
     "note": ""
    }
   ],
@@ -880,14 +895,14 @@
    "迎客松：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
    "迎客松：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
    "迎客松：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
+   "始信峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
    "莲花峰：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
    "莲花峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
-   "飞来石：不去看飞来石——超近路就是可以直接到达这里",
-   "始信峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
    "光明顶：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
    "光明顶：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
    "天都峰：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
    "天都峰：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
+   "玉屏楼：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
    "黄山（时段提示）：条件建议集中于4/5/6/7/8/9/10/11月，您计划的12月不在其中——是按照整体景致的话最适合游玩的是是4-11月份，请确认当期景点开放情况"
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
@@ -900,6 +915,7 @@
   "special": [
    "省力"
   ],
+  "special_notes": [],
   "trip_month": null,
   "itinerary": [
    {
@@ -922,7 +938,7 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "诺日朗瀑布",
+    "poi": "长海",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -930,15 +946,15 @@
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "长海",
-    "transport_from_prev": "观光车",
+    "poi": "五彩池",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 5,
     "day": 2,
     "period": "上午",
-    "poi": "五彩池",
+    "poi": "镜海",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -946,15 +962,15 @@
     "order": 6,
     "day": 2,
     "period": "上午",
-    "poi": "镜海",
-    "transport_from_prev": "观光车",
+    "poi": "诺日朗",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 7,
     "day": 2,
     "period": "中午",
-    "poi": "诺日朗",
+    "poi": "诺日朗瀑布",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -994,8 +1010,208 @@
     "order": 12,
     "day": 3,
     "period": "下午",
-    "poi": "箭竹海",
-    "transport_from_prev": "观光车",
+    "poi": "树正沟",
+    "transport_from_prev": "步行",
+    "note": ""
+   }
+  ],
+  "tips": [
+   {
+    "cond_type": "人群",
+    "condition": "游客为体力有限",
+    "suggestion": "不要在芦苇海停留",
+    "frequency": 3
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为体力不足",
+    "suggestion": "观光车➕缆车下)",
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "装备条件（句内）",
+    "suggestion": "避免污染环境,还是文明入厕的好",
+    "frequency": 7
+   },
+   {
+    "cond_type": "装备",
+    "condition": "真的没有准备",
+    "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
+    "frequency": 3
+   }
+  ],
+  "feasibility_warnings": [
+   "原始森林：不去原始森林——其实大半天足矣"
+  ],
+  "template_route": "JZG-EXP01-R2 二日舒适游"
+ },
+ {
+  "scenario": "S11_多人群贴士",
+  "scenic": "九寨沟",
+  "days": 1,
+  "visitor_type": "老人",
+  "special": [],
+  "special_notes": [],
+  "trip_month": null,
+  "itinerary": [
+   {
+    "order": 1,
+    "day": 1,
+    "period": "上午",
+    "poi": "沟口",
+    "transport_from_prev": "入园",
+    "note": ""
+   },
+   {
+    "order": 2,
+    "day": 1,
+    "period": "上午",
+    "poi": "原始森林",
+    "transport_from_prev": "步行",
+    "note": "⚠ 不去原始森林——其实大半天足矣"
+   },
+   {
+    "order": 3,
+    "day": 1,
+    "period": "中午",
+    "poi": "长海",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 4,
+    "day": 1,
+    "period": "下午",
+    "poi": "五彩池",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 5,
+    "day": 1,
+    "period": "下午",
+    "poi": "镜海",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 6,
+    "day": 1,
+    "period": "晚上",
+    "poi": "诺日朗",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 7,
+    "day": 1,
+    "period": "晚上",
+    "poi": "五花海",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 8,
+    "day": 1,
+    "period": "晚上",
+    "poi": "诺日朗瀑布",
+    "transport_from_prev": "徒步",
+    "note": ""
+   }
+  ],
+  "tips": [
+   {
+    "cond_type": "装备",
+    "condition": "装备条件（句内）",
+    "suggestion": "避免污染环境,还是文明入厕的好",
+    "frequency": 7
+   },
+   {
+    "cond_type": "装备",
+    "condition": "真的没有准备",
+    "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
+    "frequency": 3
+   },
+   {
+    "cond_type": "装备",
+    "condition": "为了加水和休息",
+    "suggestion": "就算再老练的司机,走这条路,都需格外小心",
+    "frequency": 1
+   }
+  ],
+  "feasibility_warnings": [
+   "原始森林：不去原始森林——其实大半天足矣"
+  ],
+  "template_route": "JZG-EXP01-R1 一日精华游"
+ },
+ {
+  "scenario": "S12_不去地点",
+  "scenic": "九寨沟",
+  "days": 1,
+  "visitor_type": null,
+  "special": [
+   "避开人流"
+  ],
+  "special_notes": [
+   "已按您的要求避开：原始森林"
+  ],
+  "trip_month": null,
+  "itinerary": [
+   {
+    "order": 1,
+    "day": 1,
+    "period": "上午",
+    "poi": "沟口",
+    "transport_from_prev": "入园",
+    "note": ""
+   },
+   {
+    "order": 2,
+    "day": 1,
+    "period": "上午",
+    "poi": "长海",
+    "transport_from_prev": "乘坐观光车",
+    "note": ""
+   },
+   {
+    "order": 3,
+    "day": 1,
+    "period": "中午",
+    "poi": "五彩池",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 4,
+    "day": 1,
+    "period": "下午",
+    "poi": "镜海",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 5,
+    "day": 1,
+    "period": "下午",
+    "poi": "诺日朗",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 6,
+    "day": 1,
+    "period": "晚上",
+    "poi": "五花海",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 7,
+    "day": 1,
+    "period": "晚上",
+    "poi": "诺日朗瀑布",
+    "transport_from_prev": "徒步",
     "note": ""
    }
   ],
@@ -1037,9 +1253,7 @@
     "frequency": 1
    }
   ],
-  "feasibility_warnings": [
-   "原始森林：不去原始森林——其实大半天足矣"
-  ],
-  "template_route": "JZG-EXP01-R2 二日舒适游"
+  "feasibility_warnings": [],
+  "template_route": "JZG-EXP01-R1 一日精华游"
  }
 ]

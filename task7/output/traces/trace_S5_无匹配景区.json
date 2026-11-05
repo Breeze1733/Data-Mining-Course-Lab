@@ -7,7 +7,9 @@
   "days": 1,
   "days_explicit": true,
   "month": null,
-  "special": []
+  "special": [],
+  "avoid": [],
+  "must": []
  },
  "trace": [
   {
