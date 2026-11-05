@@ -901,3 +901,13 @@ E01（实验5 原句级有无建议评测）→ H07 置信区间 → D02 段落�
 - 四个评估产出器（task4 evaluation / task5 review_summary / task2 entity_sentence_eval / task6 graph_stats）
   在写出时自动盖上 `data_fingerprints`——旧结果未重算时不再被当作新版本证据；
 - 审计 70/70、守护零退化（指纹随产出器自动刷新，无需手动 --update-state）。
+
+---
+
+## 第5轮 U46：B10 时间规则消融 —— 完成
+
+- 3 条 b03 时间规则逐条消融（冻结测试 18 个时间 gold 实体）：
+  TIME_HOLIDAY_WEEK（黄金周|周末）贡献 1 个 hit；TIME_DYNASTY_NIANJIAN（乾隆年间）与
+  TIME_YEAR_BARE（裸年份）在冻结测试上 0 命中（其例子均在第一轮开发集，不在冻结集）。
+- 结论：三条规则保留成本极低（高度特化正则），但实际贡献集中在黄金周/周末时段词。
+  数据落在 entity_ablation_b10.json 同目录（消融过程记录在账本，不另出 JSON——样本太小）。
