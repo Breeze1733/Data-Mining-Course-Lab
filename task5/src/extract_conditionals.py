@@ -20,6 +20,9 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from common.atomic import atomic_write_text
+
 ROOT = Path(__file__).resolve().parents[1]
 TASK1 = ROOT.parent / "task1"
 OUT = ROOT / "output"
@@ -338,7 +341,7 @@ def main(argv=None) -> int:
     mapping = list(merged.values())
     mapping = mark_opposing(mapping)
     _opp = [r for r in mapping if r.get("opposing")]
-    (OUT / "opposing_pairs.json").write_text(json.dumps({
+    atomic_write_text(OUT / "opposing_pairs.json", json.dumps({
         "note": "P4 对立建议自动标记：同景区内否定式与肯定式同核建议共存（互带 row_id 与来源）",
         "n_marked_rows": len(_opp),
         "pairs": [{"scenic_area": r["scenic_area"], "term": r["opposing"]["term"],
@@ -353,8 +356,8 @@ def main(argv=None) -> int:
     with (OUT / "conditional_pairs.jsonl").open("w", encoding="utf-8") as fh:
         for p in all_pairs:
             fh.write(json.dumps(p, ensure_ascii=False) + "\n")
-    (OUT / "mapping_table.json").write_text(
-        json.dumps(mapping, ensure_ascii=False, indent=1), encoding="utf-8")
+    atomic_write_text(OUT / "mapping_table.json",
+        json.dumps(mapping, ensure_ascii=False, indent=1))
 
     stats = {
         "raw_pairs": len(all_pairs),
@@ -368,7 +371,7 @@ def main(argv=None) -> int:
             crowd_subtype(p["condition_text"]) or "未细分"
             for p in all_pairs if p["condition_type"] == "人群")),
     }
-    (OUT / "extraction_stats.json").write_text(json.dumps(stats, ensure_ascii=False, indent=1), encoding="utf-8")
+    atomic_write_text(OUT / "extraction_stats.json", json.dumps(stats, ensure_ascii=False, indent=1))
     print(json.dumps(stats, ensure_ascii=False, indent=1))
     return 0
 

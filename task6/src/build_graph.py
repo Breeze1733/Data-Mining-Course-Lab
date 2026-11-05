@@ -21,6 +21,9 @@ from collections import Counter, defaultdict
 import re
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from common.atomic import atomic_write_text
+
 import networkx as nx
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -256,23 +259,29 @@ def main() -> int:
     # ── 导出与统计 ──────────────────────────────────────────────
     OUT.mkdir(parents=True, exist_ok=True)
     import csv
-    with (OUT / "graph_nodes.csv").open("w", encoding="utf-8-sig", newline="") as fh:
-        w = csv.writer(fh)
-        w.writerow(["node_id", "kind", "name", "label", "mention_freq", "cond_type", "suggestion", "frequency",
-                    "variants", "suggestions", "sources", "evidence"])
-        for n, d in G.nodes(data=True):
-            w.writerow([n, d.get("kind", ""), d.get("name", ""), d.get("label", ""),
-                        d.get("mention_freq", ""), d.get("cond_type", ""), d.get("suggestion", ""),
-                        d.get("frequency", ""), d.get("variants", ""), d.get("suggestions", ""),
-                        d.get("sources", ""), d.get("evidence", "")])
-    with (OUT / "graph_edges.csv").open("w", encoding="utf-8-sig", newline="") as fh:
-        w = csv.writer(fh)
-        w.writerow(["src", "dst", "relation", "weight", "source", "official_routes", "tourist_support", "tourist_records"])
-        for u, v, d in G.edges(data=True):
-            w.writerow([u, v, d.get("relation", ""), round(d.get("weight", 1), 2),
-                        d.get("source", ""), d.get("official_routes", ""), d.get("tourist_support", ""),
-                        d.get("tourist_records", "")])
-    nx.write_graphml(G, OUT / "knowledge_graph.graphml")
+    _buf = io.StringIO()
+    w = csv.writer(_buf, lineterminator=chr(13) + chr(10))
+    w.writerow(["node_id", "kind", "name", "label", "mention_freq", "cond_type", "suggestion", "frequency",
+                "variants", "suggestions", "sources", "evidence"])
+    for n, d in G.nodes(data=True):
+        w.writerow([n, d.get("kind", ""), d.get("name", ""), d.get("label", ""),
+                    d.get("mention_freq", ""), d.get("cond_type", ""), d.get("suggestion", ""),
+                    d.get("frequency", ""), d.get("variants", ""), d.get("suggestions", ""),
+                    d.get("sources", ""), d.get("evidence", "")])
+    atomic_write_text(OUT / "graph_nodes.csv", _buf.getvalue(), encoding="utf-8-sig", newline="")
+
+    _buf2 = io.StringIO()
+    w2 = csv.writer(_buf2, lineterminator=chr(13) + chr(10))
+    w2.writerow(["src", "dst", "relation", "weight", "source", "official_routes", "tourist_support", "tourist_records"])
+    for u, v, d in G.edges(data=True):
+        w2.writerow([u, v, d.get("relation", ""), round(d.get("weight", 1), 2),
+                     d.get("source", ""), d.get("official_routes", ""), d.get("tourist_support", ""),
+                     d.get("tourist_records", "")])
+    atomic_write_text(OUT / "graph_edges.csv", _buf2.getvalue(), encoding="utf-8-sig", newline="")
+
+    _tmp_gml = OUT / "knowledge_graph.graphml.tmp"
+    nx.write_graphml(G, _tmp_gml)
+    _tmp_gml.replace(OUT / "knowledge_graph.graphml")
 
     per_scenic = {}
     for scenic in AREAS:
@@ -298,7 +307,7 @@ def main() -> int:
             "noise_filter": "仅词典内POI；游客序列需两端节点已存在；周边景点单列子类",
         },
     }
-    (OUT / "graph_stats.json").write_text(json.dumps(graph_stats, ensure_ascii=False, indent=1), encoding="utf-8")
+    atomic_write_text(OUT / "graph_stats.json", json.dumps(graph_stats, ensure_ascii=False, indent=1))
     print(json.dumps({k: graph_stats[k] for k in ("total_nodes", "total_edges", "by_kind", "by_relation")},
                      ensure_ascii=False, indent=1))
     for a in AREAS:
