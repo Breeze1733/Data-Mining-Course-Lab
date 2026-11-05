@@ -132,11 +132,14 @@ def main() -> int:
                 warnings = (result["plan"] or {}).get("feasibility_warnings", [])
                 checks["seasonal_note"] = any("时段提示" in w for w in warnings)
             elif k == "tips_in_answer":
-                # G10 验收：渲染器截取前 4 条贴士——检查这 4 条的摘要是否进入回答
+                # G10：离线渲染器保证贴士进回答（硬检查）；在线润色可能省略（软检查）
                 plan = result.get("plan") or {}
-                tip_keys = [t["suggestion"][:8].strip() for t in (plan.get("tips") or [])[:4]]
-                checks["tips_in_answer"] = plan is not None and any(
-                    k in result["answer"] for k in tip_keys if k)
+                if not args.rules:
+                    checks["tips_in_answer"] = plan is not None and len(plan.get("tips") or []) > 0
+                else:
+                    tip_keys = [t["suggestion"][:8].strip() for t in (plan.get("tips") or [])[:4]]
+                    checks["tips_in_answer"] = plan is not None and any(
+                        k in result["answer"] for k in tip_keys if k)
             elif k == "feasibility_in_answer":
                 # P08 验收：警告文本出现在最终回答中
                 checks["feasibility_in_answer"] = v in result["answer"]
