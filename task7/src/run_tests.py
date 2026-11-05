@@ -45,6 +45,9 @@ SCENARIOS = [
      "expect": {"scenic": "九寨沟", "days": 1, "avoid_respected": "原始森林"}},
     {"id": "S13_未知景点", "query": "九寨沟一日游，想去月亮湾看看",
      "expect": {"scenic": "九寨沟", "days": 1, "unknown_poi_not_in_plan": "月亮湾"}},
+    {"id": "S14_多约束集成", "query": "黄山三天游，冬季去，避开莲花峰",
+     "expect": {"scenic": "黄山", "days": 3, "month": 12, "avoid_respected": "莲花峰",
+                "multi_day": True}},
 ]
 def check_unknown_poi(result, poi):
     """G14 验收：图谱中不存在的景点不得被编造进行程。"""
@@ -60,12 +63,14 @@ def check_avoid(result, expect_poi):
                 for _ in [0]) or any(expect_poi in n for n in (plan.get("special_notes") or []))
     return not_in and noted
 def check_sunrise(result, expect_poi):
-    """P07 验收：看日出需求 → 日出观景点排最后一日首位，说明进入回答。"""
+    """P07 验收（语义口径）：日出观景点排最后一日首位，且住宿前提以任意表述进入回答——
+    规则模式渲染“说明：看日出…住宿山上”，在线润色会转述（如“夜宿山顶”），断言语义不断言前缀。"""
     plan = result.get("plan") or {}
     it = plan.get("itinerary", [])
     last_day = max((x["day"] for x in it), default=1)
     last_first = next((x["poi"] for x in it if x["day"] == last_day), None)
-    return last_first == expect_poi and "说明：看日出" in result["answer"]
+    lodging_mentioned = any(k in result["answer"] for k in ("住宿山上", "夜宿", "住宿", "山上酒店"))
+    return last_first == expect_poi and lodging_mentioned
 
 
 def check_multi_day(result):

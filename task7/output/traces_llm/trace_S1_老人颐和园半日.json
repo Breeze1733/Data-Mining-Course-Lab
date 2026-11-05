@@ -24,8 +24,49 @@
   },
   {
    "step": "intent",
-   "thought": "LLM 解析失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），回退规则解析",
-   "via": "fallback"
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "颐和园",
+    "visitor_type": "老人",
+    "visitor_types": [
+     "老人",
+     "体力有限"
+    ],
+    "days": 0.5,
+    "days_explicit": true,
+    "month": null,
+    "special": [
+     "省力"
+    ],
+    "avoid": [],
+    "must": []
+   },
+   "llm": {
+    "scenic": "颐和园",
+    "visitor_type": "老人",
+    "days": 1,
+    "month": null,
+    "special": [
+     "省力"
+    ]
+   },
+   "result": {
+    "scenic": "颐和园",
+    "visitor_type": "老人",
+    "visitor_types": [
+     "老人",
+     "体力有限"
+    ],
+    "days": 0.5,
+    "days_explicit": true,
+    "month": null,
+    "special": [
+     "省力"
+    ],
+    "avoid": [],
+    "must": []
+   }
   },
   {
    "step": "thought",
@@ -182,7 +223,7 @@
   },
   {
    "step": "render",
-   "thought": "LLM 润色失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），使用模板文案",
+   "thought": "LLM 润色失败（The read operation timed out），使用模板文案",
    "via": "fallback"
   },
   {
@@ -277,5 +318,5 @@
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 91.83
+ "elapsed": 77.44
 }
