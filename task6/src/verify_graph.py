@@ -18,7 +18,8 @@ import networkx as nx
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+if not isinstance(sys.stdout, io.TextIOWrapper):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 
 def verify_names(graph):
@@ -44,23 +45,28 @@ def verify_names(graph):
             "route_references_missing_from_graph": absent, "passed": not (unresolved or missing or absent)}
 
 
-def main() -> int:
-    G = nx.read_graphml(OUT / "knowledge_graph.graphml")
+def main(out_dir: Path | None = None) -> int:
+    """H06：out_dir 可指向产物副本——故障注入测试对损坏副本运行真实检查。"""
+    out_dir = Path(out_dir) if out_dir else OUT
+    G = nx.read_graphml(out_dir / "knowledge_graph.graphml")
 
     def edges_between(u_name: str, v_name: str, scenic: str):
+        """F09：事实核验只认正向有向边——路线先后是方向性知识，反向边（折返游记
+        产生的 v→u）不能顶替正向事实；反向存在单独记录供透明查看。"""
         u, v = f"POI:{scenic}:{u_name}", f"POI:{scenic}:{v_name}"
-        result = []
-        for a, b in ((u, v), (v, u)):
-            if G.has_edge(a, b):
-                data = G.get_edge_data(a, b)
-                items = (data.values() if data and all(isinstance(x, dict) for x in data.values())
-                         else [data])
-                for d in items:
-                    result.append({"from": a.split(":")[-1], "to": b.split(":")[-1],
-                                   "relation": d.get("relation"), "weight": float(d.get("weight", 0)),
-                                   "official_routes": d.get("official_routes", ""),
-                                   "tourist_support": d.get("tourist_support", "")})
-        return result
+
+        def edge_items(a, b):
+            if not G.has_edge(a, b):
+                return []
+            data = G.get_edge_data(a, b)
+            items = (data.values() if data and all(isinstance(x, dict) for x in data.values())
+                     else [data])
+            return [{"from": a.split(":")[-1], "to": b.split(":")[-1],
+                     "relation": d.get("relation"), "weight": float(d.get("weight", 0)),
+                     "official_routes": d.get("official_routes", ""),
+                     "tourist_support": d.get("tourist_support", "")} for d in items]
+
+        return edge_items(u, v), edge_items(v, u)
 
     known_pairs = [
         ("长廊", "佛香阁", "颐和园"), ("昆明湖", "十七孔桥", "颐和园"),
@@ -69,8 +75,9 @@ def main() -> int:
     ]
     fact_checks = []
     for a, b, scenic in known_pairs:
-        found = edges_between(a, b, scenic)
-        fact_checks.append({"pair": f"{scenic}:{a}→{b}", "found": bool(found), "edges": found[:2]})
+        forward, reverse = edges_between(a, b, scenic)
+        fact_checks.append({"pair": f"{scenic}:{a}→{b}", "found": bool(forward),
+                            "edges": forward[:2], "reverse_found": bool(reverse)})
 
     key_nodes = {}
     for scenic in ("黄山", "九寨沟", "颐和园"):
@@ -148,7 +155,7 @@ def main() -> int:
     validation["provenance_ok"] = (prov["parse_failures"] == 0
                                    and prov["cond_nodes_with_evidence"] == prov["cond_nodes_checked"]
                                    and prov["order_edges_with_records"] == prov["order_edges_checked"])
-    (OUT / "graph_validation.json").write_text(json.dumps(validation, ensure_ascii=False, indent=1), encoding="utf-8")
+    (out_dir / "graph_validation.json").write_text(json.dumps(validation, ensure_ascii=False, indent=1), encoding="utf-8")
     ok = sum(1 for f in fact_checks if f["found"])
     print(json.dumps({"fact_checks_passed": f"{ok}/{len(fact_checks)}",
                       "components": components,
@@ -161,4 +168,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    import argparse
+    _ap = argparse.ArgumentParser()
+    _ap.add_argument("--out-dir", default=None, help="验证目标产物目录（默认正式 output/；故障注入测试指向副本）")
+    _args = _ap.parse_args()
+    raise SystemExit(main(out_dir=Path(_args.out_dir) if _args.out_dir else None))

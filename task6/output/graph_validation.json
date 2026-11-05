@@ -19,16 +19,9 @@
      "weight": 14.5,
      "official_routes": "",
      "tourist_support": 29
-    },
-    {
-     "from": "佛香阁",
-     "to": "长廊",
-     "relation": "先后顺序",
-     "weight": 6.0,
-     "official_routes": "",
-     "tourist_support": 12
     }
-   ]
+   ],
+   "reverse_found": true
   },
   {
    "pair": "颐和园:昆明湖→十七孔桥",
@@ -41,16 +34,9 @@
      "weight": 10.0,
      "official_routes": "",
      "tourist_support": 20
-    },
-    {
-     "from": "十七孔桥",
-     "to": "昆明湖",
-     "relation": "先后顺序",
-     "weight": 4.5,
-     "official_routes": "",
-     "tourist_support": 9
     }
-   ]
+   ],
+   "reverse_found": true
   },
   {
    "pair": "黄山:迎客松→光明顶",
@@ -63,16 +49,9 @@
      "weight": 7.5,
      "official_routes": "",
      "tourist_support": 15
-    },
-    {
-     "from": "光明顶",
-     "to": "迎客松",
-     "relation": "先后顺序",
-     "weight": 8.5,
-     "official_routes": "",
-     "tourist_support": 17
     }
-   ]
+   ],
+   "reverse_found": true
   },
   {
    "pair": "黄山:光明顶→飞来石",
@@ -85,16 +64,9 @@
      "weight": 22.5,
      "official_routes": "HS-O1-R3；HS-EXTRA1-R1；HS-EXTRA2-R1",
      "tourist_support": 39
-    },
-    {
-     "from": "飞来石",
-     "to": "光明顶",
-     "relation": "先后顺序",
-     "weight": 21.0,
-     "official_routes": "HS-O1-R7；HS-EXTRA1-R2；HS-EXTRA1-R3",
-     "tourist_support": 36
     }
-   ]
+   ],
+   "reverse_found": true
   },
   {
    "pair": "九寨沟:诺日朗→长海",
@@ -107,16 +79,9 @@
      "weight": 18.0,
      "official_routes": "JZG-EXP02-R1；JZG-EXP03-R1",
      "tourist_support": 32
-    },
-    {
-     "from": "长海",
-     "to": "诺日朗",
-     "relation": "先后顺序",
-     "weight": 3.5,
-     "official_routes": "",
-     "tourist_support": 7
     }
-   ]
+   ],
+   "reverse_found": true
   },
   {
    "pair": "九寨沟:长海→五彩池",
@@ -129,16 +94,9 @@
      "weight": 65.0,
      "official_routes": "JZG-EXP01-R1；JZG-EXP01-R2；JZG-EXP01-R3；JZG-EXP02-R1；JZG-EXP03-R1；JZG-EXP04-R1",
      "tourist_support": 118
-    },
-    {
-     "from": "五彩池",
-     "to": "长海",
-     "relation": "先后顺序",
-     "weight": 18.0,
-     "official_routes": "",
-     "tourist_support": 36
     }
-   ]
+   ],
+   "reverse_found": true
   }
  ],
  "key_poi_nodes_by_degree": {
@@ -194,11 +152,11 @@
     51
    ],
    [
-    "树正沟",
+    "沟口",
     45
    ],
    [
-    "沟口",
+    "树正沟",
     45
    ],
    [
@@ -206,7 +164,7 @@
     43
    ],
    [
-    "镜海",
+    "黄龙",
     42
    ]
   ],
@@ -240,7 +198,7 @@
     43
    ],
    [
-    "东宫门",
+    "北宫门",
     39
    ]
   ]
