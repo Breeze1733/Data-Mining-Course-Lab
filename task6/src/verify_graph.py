@@ -103,6 +103,24 @@ def main() -> int:
             "各景区子图均为单一连通分量（条件节点挂靠在 POI/景区上），无孤立节点；",
         ],
     }
+    # F11：三方一致性——graphml / nodes.csv / edges.csv / stats 行列数互相印证
+    import csv as _csv
+    import json as _json
+    try:
+        with (ROOT / "output/graph_nodes.csv").open(encoding="utf-8-sig") as _fh:
+            _n_nodes = sum(1 for _ in _csv.DictReader(_fh))
+        with (ROOT / "output/graph_edges.csv").open(encoding="utf-8-sig") as _fh:
+            _n_edges = sum(1 for _ in _csv.DictReader(_fh))
+        _stats = _json.loads((ROOT / "output/graph_stats.json").read_text(encoding="utf-8"))
+        _rt_ok = (_n_nodes == _stats.get("total_nodes") == G.number_of_nodes()
+                  and _n_edges == _stats.get("total_edges") == G.number_of_edges())
+        validation["roundtrip"] = {"csv_nodes": _n_nodes, "csv_edges": _n_edges,
+                                   "graphml_nodes": G.number_of_nodes(),
+                                   "graphml_edges": G.number_of_edges(),
+                                   "ok": _rt_ok}
+    except Exception as _exc:
+        validation["roundtrip"] = {"ok": False, "error": str(_exc)}
+
     # P04 溯源抽检：条件节点与游客先后边的逐条证据必须完整可解析
     import json as _json
     prov = {"cond_nodes_checked": 0, "cond_nodes_with_evidence": 0,

@@ -72,6 +72,14 @@ class GraphTools:
     def query_pois(self, scenic: str, visitor_type: str | None = None, limit: int = 8) -> dict:
         if scenic not in AREAS:
             return {"error": f"不支持的景区：{scenic}（仅支持 {'/'.join(AREAS)}）"}
+        # G09：limit 类型/范围校验（负数切片曾把结果尾部砍掉而非报错）
+        try:
+            limit = int(limit)
+        except (TypeError, ValueError):
+            return {"error": f"limit 须为整数，收到：{limit!r}"}
+        if limit <= 0:
+            return {"error": f"limit 须为正整数，收到：{limit}"}
+        limit = min(limit, 50)
         cand = []
         for n in self.poi_nodes(scenic):
             d = self.G.nodes[n]
@@ -132,6 +140,13 @@ class GraphTools:
     def query_conditions(self, scenic: str, visitor_type: str | None = None, limit: int = 6) -> dict:
         if scenic not in AREAS:
             return {"error": f"不支持的景区：{scenic}"}
+        try:
+            limit = int(limit)
+        except (TypeError, ValueError):
+            return {"error": f"limit 须为整数，收到：{limit!r}"}
+        if limit <= 0:
+            return {"error": f"limit 须为正整数，收到：{limit}"}
+        limit = min(limit, 60)
         conds = []
         for n, d in self.G.nodes(data=True):
             if d.get("kind") != "条件" or f":{scenic}:" not in n:

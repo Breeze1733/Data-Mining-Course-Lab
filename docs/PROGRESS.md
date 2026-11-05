@@ -817,3 +817,14 @@ E01（实验5 原句级有无建议评测）→ H07 置信区间 → D02 段落�
 - `local/autonomy/check_acceptance.py`：任务书七个实验 + 总结反思的 26 个评分项逐项核对
   "实现脚本 → 证据产物 → 报告文件"三链存在性，输出验收矩阵（acceptance_matrix.json，不入 Git）。
 - 结果：**26/26 PASS，零缺项**；矩阵即 H14 最终验收的可机读底稿（每次结构变更后可重跑）。
+
+---
+
+## 第5轮 U38：G09 工具健壮性 + F11 三方一致性 —— 完成
+
+- **G09**：`query_pois/query_conditions` 的 limit 校验（负数切片曾把结果尾部砍掉而非报错——
+  limit=-5 返回 43 个 POI 的真 bug 修复）；错误参数结构化返回补齐离线单测
+  （tests/task7/test_tool_errors.py，4 用例：坏景区/未知POI/limit校验/跨景区路径）。
+- **F11**：`verify_graph` 新增三方一致性检查——graphml / nodes.csv / edges.csv / stats 行列数互相印证
+  （roundtrip: 579/2837 全对齐，ok: true）。
+- 单测 69→73；守护零退化。
