@@ -41,5 +41,10 @@
  "marginal_recall": {
   "b03批次": 0.061,
   "p2批次": 0.03
+ },
+ "data_fingerprints": {
+  "dataset_clean": "6fae55942575",
+  "entity_dictionary": "430304c1f73a",
+  "entities_refined": "88f282d37466"
  }
 }
