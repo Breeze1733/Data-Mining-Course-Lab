@@ -208,6 +208,28 @@ def skip_sentence(sent: str) -> bool:
 
 
 
+_PHOTO_HINT = re.compile(r"拍照|出片|机位|镜头|拍摄|摄影|合影|角度|光线|构图")
+_TICKET_HINT = re.compile(r"门票|联票|买票|票价|预约|免费|半价|优惠|一卡通|票")
+_LODGING_HINT = re.compile(r"住|酒店|民宿|宾馆|客栈|床位|帐篷|标间|多人间|入住|过夜|夜宿")
+_FOOD_HINT = re.compile(r"吃|餐|食|饭|菜|小吃|美食|特产|零食|面包|泡面|自热")
+
+
+def refine_condition_type(cond_text: str, sugg_text: str, current: str) -> str:
+    """E11：对"其他/一般"类型做关键词细化分类。不改既有特定类型。"""
+    if current not in ("其他", "一般"):
+        return current
+    text = cond_text + " " + sugg_text
+    if _PHOTO_HINT.search(text):
+        return "拍照"
+    if _LODGING_HINT.search(text):
+        return "住宿"
+    if _TICKET_HINT.search(text):
+        return "预约票务"
+    if _FOOD_HINT.search(text):
+        return "美食"
+    return current
+
+
 def extract_from_sentence(sent: str) -> list[dict]:
 
     pairs = []
@@ -711,6 +733,12 @@ def main(argv=None) -> int:
                     })
 
 
+
+    # E11：条件类型细化（批量）
+    for p in all_pairs:
+        p["condition_type"] = refine_condition_type(
+            p.get("condition_text", ""), p.get("suggestion_text", ""),
+            p.get("condition_type", "其他"))
 
     # 去重：同景区 + 条件/建议归一文本相同 → 合并来源；另产出全局跨景区重复合并视图
 
