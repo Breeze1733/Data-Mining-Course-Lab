@@ -818,6 +818,14 @@
   }
  ],
  "kind_only_accuracy": 0.672,
+ "accuracy_ci95": {
+  "lo": 0.533,
+  "hi": 0.674
+ },
+ "identity_ci95": {
+  "lo": 0.503,
+  "hi": 0.724
+ },
  "identity_scope": {
   "n_identity_checked": 71,
   "identity_accuracy": 0.62

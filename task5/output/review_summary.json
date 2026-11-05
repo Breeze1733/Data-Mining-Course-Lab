@@ -5,6 +5,10 @@
   "wrong": 21,
   "correct": 39
  },
+ "correct_ci95": {
+  "lo": 0.386,
+  "hi": 0.602
+ },
  "alignment_with_current_extraction": {
   "retained_identical": 58,
   "missing": 18,

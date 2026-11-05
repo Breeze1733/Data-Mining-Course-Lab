@@ -29,6 +29,19 @@ def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+
+def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
+    """H07：Wilson 95% 置信区间（小样本比例的稳健区间）。"""
+    if n == 0:
+        return {"lo": None, "hi": None}
+    p = k / n
+    z2 = z * z
+    denom = 1 + z2 / n
+    center = (p + z2 / (2 * n)) / denom
+    spread = (z / denom) * (p * (1 - p) / n + z2 / (4 * n * n)) ** 0.5
+    return {"lo": round(max(0.0, center - spread), 3), "hi": round(min(1.0, center + spread), 3)}
+
+
 def main() -> int:
     sample = load_json(EXP2 / "entity_sentence_sample.json")["sentences"]
     gold_doc = load_json(EXP2 / "entity_sentence_gold.json")
@@ -110,6 +123,8 @@ def main() -> int:
     }
     tot = lambda i: sum(v[i] for v in stats.values())
     result["overall"] = prf(tot(0), tot(1), tot(2))
+    result["overall"]["precision_ci95"] = wilson_ci(tot(0), tot(0) + tot(1))
+    result["overall"]["recall_ci95"] = wilson_ci(tot(0), tot(0) + tot(2))
     # 双口径：把设计排除项（根景区名/城市）从 FN 分母移除后的查全率
     oos_fn = sum(1 for m in missed if m.get("out_of_scope_design"))
     in_scope_fn = result["overall"]["fn"] - oos_fn

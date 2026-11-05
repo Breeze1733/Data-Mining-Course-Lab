@@ -367,6 +367,19 @@ def doc_grouped_split(gold_rows: list[dict], target_test: int = 60) -> dict:
     return split
 
 
+
+def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
+    """H07：Wilson 95% 置信区间（小样本比例的稳健区间）。"""
+    if n == 0:
+        return {"lo": None, "hi": None}
+    p = k / n
+    z2 = z * z
+    denom = 1 + z2 / n
+    center = (p + z2 / (2 * n)) / denom
+    spread = (z / denom) * (p * (1 - p) / n + z2 / (4 * n * n)) ** 0.5
+    return {"lo": round(max(0.0, center - spread), 3), "hi": round(min(1.0, center + spread), 3)}
+
+
 def score(cases: list[dict]) -> None:
     gold = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
     FIGS.mkdir(parents=True, exist_ok=True)
@@ -416,6 +429,10 @@ def score(cases: list[dict]) -> None:
             for r in rows if not r["correct"]],
         # P17：类别指标与先行词身份指标分开报告——非实体类只判类别，不冒充指代正确
         "kind_only_accuracy": round(sum(r["kind_match"] for r in rows) / len(rows), 3) if rows else None,
+        "accuracy_ci95": wilson_ci(round(acc_overall * len(rows)), len(rows)),
+        "identity_ci95": wilson_ci(
+            sum(1 for r in rows if r["gold_kind"] in ("POI", "景区") and r["correct"]),
+            sum(1 for r in rows if r["gold_kind"] in ("POI", "景区"))),
         "identity_scope": {
             "n_identity_checked": sum(1 for r in rows if r["gold_kind"] in ("POI", "景区")),
             "identity_accuracy": round(
