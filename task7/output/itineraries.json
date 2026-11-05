@@ -22,15 +22,15 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "佛香阁",
+    "poi": "画中游",
     "transport_from_prev": "步行",
-    "note": ""
+    "note": "与游客类型适配"
    },
    {
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "昆明湖",
+    "poi": "佛香阁",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -38,15 +38,15 @@
     "order": 4,
     "day": 1,
     "period": "中午",
-    "poi": "西堤",
+    "poi": "昆明湖",
     "transport_from_prev": "步行",
-    "note": ""
+    "note": "与游客类型适配"
    },
    {
     "order": 5,
     "day": 1,
     "period": "中午",
-    "poi": "长廊",
+    "poi": "西堤",
     "transport_from_prev": "步行",
     "note": ""
    }
@@ -59,6 +59,18 @@
     "frequency": 1
    },
    {
+    "cond_type": "人群",
+    "condition": "游客为体力差的朋友",
+    "suggestion": "不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)",
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "体力一般或者不想走太多",
+    "suggestion": "中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较完整的湖景视角",
+    "frequency": 1
+   },
+   {
     "cond_type": "装备",
     "condition": "装备条件（句内）",
     "suggestion": "慎重考虑",
@@ -68,12 +80,6 @@
     "cond_type": "体力安全",
     "condition": "体力可以",
     "suggestion": "建议上去看看非常的漂亮",
-    "frequency": 1
-   },
-   {
-    "cond_type": "天气",
-    "condition": "天气条件（句内）",
-    "suggestion": "不建议雨雪天走这一线--这天降温大风,特别是下行过了大半时,终于明白什么是寒风凛冽,庆幸已经快到山下了,风",
     "frequency": 1
    }
   ],
@@ -1049,5 +1055,104 @@
    "原始森林：不去原始森林——其实大半天足矣"
   ],
   "template_route": "JZG-EXP01-R2 二日舒适游"
+ },
+ {
+  "scenario": "S11_多人群贴士",
+  "scenic": "九寨沟",
+  "days": 1,
+  "visitor_type": "老人",
+  "special": [],
+  "special_notes": [],
+  "trip_month": null,
+  "itinerary": [
+   {
+    "order": 1,
+    "day": 1,
+    "period": "上午",
+    "poi": "沟口",
+    "transport_from_prev": "入园",
+    "note": ""
+   },
+   {
+    "order": 2,
+    "day": 1,
+    "period": "上午",
+    "poi": "原始森林",
+    "transport_from_prev": "步行",
+    "note": "⚠ 不去原始森林——其实大半天足矣"
+   },
+   {
+    "order": 3,
+    "day": 1,
+    "period": "中午",
+    "poi": "长海",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 4,
+    "day": 1,
+    "period": "下午",
+    "poi": "五彩池",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 5,
+    "day": 1,
+    "period": "下午",
+    "poi": "镜海",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 6,
+    "day": 1,
+    "period": "晚上",
+    "poi": "诺日朗",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 7,
+    "day": 1,
+    "period": "晚上",
+    "poi": "五花海",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 8,
+    "day": 1,
+    "period": "晚上",
+    "poi": "诺日朗瀑布",
+    "transport_from_prev": "徒步",
+    "note": ""
+   }
+  ],
+  "tips": [
+   {
+    "cond_type": "装备",
+    "condition": "装备条件（句内）",
+    "suggestion": "避免污染环境,还是文明入厕的好",
+    "frequency": 7
+   },
+   {
+    "cond_type": "装备",
+    "condition": "真的没有准备",
+    "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
+    "frequency": 3
+   },
+   {
+    "cond_type": "装备",
+    "condition": "为了加水和休息",
+    "suggestion": "就算再老练的司机,走这条路,都需格外小心",
+    "frequency": 1
+   }
+  ],
+  "feasibility_warnings": [
+   "原始森林：不去原始森林——其实大半天足矣"
+  ],
+  "template_route": "JZG-EXP01-R1 一日精华游"
  }
 ]

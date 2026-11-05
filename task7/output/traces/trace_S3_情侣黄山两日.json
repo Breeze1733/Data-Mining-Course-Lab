@@ -3,6 +3,9 @@
  "intent": {
   "scenic": "黄山",
   "visitor_type": "情侣",
+  "visitor_types": [
+   "情侣"
+  ],
   "days": 2,
   "days_explicit": true,
   "month": null,
@@ -18,11 +21,13 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_pois，参数 {'scenic': '黄山', 'visitor_type': '情侣', 'limit': 11}",
+   "thought": "调用工具 query_pois，参数 {'scenic': '黄山', 'visitor_type': ['情侣'], 'limit': 11}",
    "tool": "query_pois",
    "args": {
     "scenic": "黄山",
-    "visitor_type": "情侣",
+    "visitor_type": [
+     "情侣"
+    ],
     "limit": 11
    }
   },
@@ -47,11 +52,13 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_conditions，参数 {'scenic': '黄山', 'visitor_type': '情侣'}",
+   "thought": "调用工具 query_conditions，参数 {'scenic': '黄山', 'visitor_type': ['情侣']}",
    "tool": "query_conditions",
    "args": {
     "scenic": "黄山",
-    "visitor_type": "情侣"
+    "visitor_type": [
+     "情侣"
+    ]
    }
   },
   {
@@ -61,7 +68,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '黄山', 'visitor_type': '情侣', 'days': 2, 'days_explicit': True, 'month': None, 'special': ['看日出']}；先查核心 POI（limit=11），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '黄山', 'visitor_type': '情侣', 'visitor_types': ['情侣'], 'days': 2, 'days_explicit': True, 'month': None, 'special': ['看日出']}；先查核心 POI（limit=11），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -199,7 +206,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 1 条条件建议"
+   "summary": "返回 2 条条件建议"
   },
   {
    "step": "action",
@@ -381,5 +388,5 @@
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
  },
- "elapsed": 0.01
+ "elapsed": 0.0
 }

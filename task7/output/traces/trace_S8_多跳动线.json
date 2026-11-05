@@ -3,6 +3,7 @@
  "intent": {
   "scenic": "九寨沟",
   "visitor_type": null,
+  "visitor_types": [],
   "days": 1,
   "days_explicit": false,
   "month": null,
@@ -59,7 +60,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'days': 1, 'days_explicit': False, 'month': None, 'special': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 1, 'days_explicit': False, 'month': None, 'special': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -137,7 +138,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 7 条条件建议"
   },
   {
    "step": "action",
@@ -340,5 +341,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 0.01
+ "elapsed": 0.0
 }

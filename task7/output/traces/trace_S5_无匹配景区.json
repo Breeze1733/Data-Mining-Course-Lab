@@ -3,6 +3,7 @@
  "intent": {
   "scenic": "未知",
   "visitor_type": null,
+  "visitor_types": [],
   "days": 1,
   "days_explicit": true,
   "month": null,

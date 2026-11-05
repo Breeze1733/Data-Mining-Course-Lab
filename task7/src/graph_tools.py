@@ -62,8 +62,11 @@ class GraphTools:
     def _match_visitor(self, text: str, visitor_type: str | None) -> bool:
         if not visitor_type:
             return True
-        kws = VISITOR_KEYWORDS.get(visitor_type, [visitor_type])
-        return any(k in text for k in kws)
+        for v in (visitor_type if isinstance(visitor_type, (list, tuple)) else [visitor_type]):
+            kws = VISITOR_KEYWORDS.get(v, [v])
+            if any(k in text for k in kws):
+                return True
+        return False
 
     # ── 工具1：query_pois ───────────────────────────────────────
     def query_pois(self, scenic: str, visitor_type: str | None = None, limit: int = 8) -> dict:

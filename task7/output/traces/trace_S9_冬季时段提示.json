@@ -3,6 +3,7 @@
  "intent": {
   "scenic": "黄山",
   "visitor_type": null,
+  "visitor_types": [],
   "days": 2,
   "days_explicit": true,
   "month": 12,
@@ -59,7 +60,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '黄山', 'visitor_type': None, 'days': 2, 'days_explicit': True, 'month': 12, 'special': []}；先查核心 POI（limit=11），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '黄山', 'visitor_type': None, 'visitor_types': [], 'days': 2, 'days_explicit': True, 'month': 12, 'special': []}；先查核心 POI（limit=11），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -179,7 +180,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 1 条条件建议"
+   "summary": "返回 2 条条件建议"
   },
   {
    "step": "action",
@@ -388,5 +389,5 @@
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }

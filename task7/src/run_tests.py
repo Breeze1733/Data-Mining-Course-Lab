@@ -39,6 +39,8 @@ SCENARIOS = [
                 "feasibility_keyword": "莲花峰", "seasonal_note": True}},
     {"id": "S10_三日多天编排", "query": "九寨沟三天深度游，慢慢逛",
      "expect": {"scenic": "九寨沟", "days": 3, "multi_day": True}},
+    {"id": "S11_多人群贴士", "query": "带老人和孩子去九寨沟一日游，走路要少",
+     "expect": {"scenic": "九寨沟", "days": 1, "multi_visitor": ["老人", "孩子"], "tips_attached": True}},
 ]
 def check_sunrise(result, expect_poi):
     """P07 验收：看日出需求 → 日出观景点排最后一日首位，说明进入回答。"""
@@ -95,6 +97,9 @@ def main() -> int:
                 checks["feasibility_keyword"] = bool(warnings) and any(v in w for w in warnings)
             elif k == "sunrise_last_day_first":
                 checks["sunrise_last_day_first"] = check_sunrise(result, v)
+            elif k == "multi_visitor":
+                vt = intent.get("visitor_types") or []
+                checks["multi_visitor"] = all(v in vt for v in v)
             elif k == "multi_day":
                 checks["multi_day"] = check_multi_day(result)
             elif k == "seasonal_note":

@@ -162,7 +162,8 @@ class IntentParser:
 
     def _parse_rules(self, query: str) -> dict:
         scenic = next((a for a in AREAS if a in query), None)
-        visitor = next((v for v, pat in VISITOR_PATTERNS if re.search(pat, query)), None)
+        visitor_hits = [v for v, pat in VISITOR_PATTERNS if re.search(pat, query)]
+        visitor = visitor_hits[0] if visitor_hits else None
         days = 1
         days_explicit = False
         for d, pat in DURATION_PATTERNS:
@@ -172,8 +173,8 @@ class IntentParser:
                 break
         special = [s for s, pat in SPECIAL_PATTERNS if re.search(pat, query)]
         month = next((m for m, pat in TRIP_MONTH_PATTERNS if re.search(pat, query)), None)
-        return {"scenic": scenic or "未知", "visitor_type": visitor, "days": days,
-                "days_explicit": days_explicit,
+        return {"scenic": scenic or "未知", "visitor_type": visitor, "visitor_types": visitor_hits,
+                "days": days, "days_explicit": days_explicit,
                 "month": month, "special": special}
 
 
@@ -190,7 +191,10 @@ class ReActAgent:
         scenic, days, visitor = intent["scenic"], intent["days"], intent["visitor_type"]
         limit = {0.5: 5, 1: 8, 1.5: 9, 2: 11, 3: 12, 3.5: 13, 4: 14, 5: 15}.get(days, 11)
         # P07：特殊需求参与选点——“省力”映射到体力有限的人群证据（负向建议已降权）
-        visitor_eff = "体力有限" if ("省力" in (intent.get("special") or []) and not visitor) else visitor
+        # G02：多人群（如“带老人和孩子”）→ 条件查询与贴士按人群列表匹配
+        visitor_types = intent.get("visitor_types") or ([visitor] if visitor else [])
+        visitor_eff = ("体力有限" if ("省力" in (intent.get("special") or []) and not visitor)
+                       else (visitor_types if visitor_types else visitor))
         pois_res = self.tools.call("query_pois", {"scenic": scenic, "visitor_type": visitor_eff, "limit": limit}, trace)
         route_res = self.tools.call("query_route", {"scenic": scenic, "days": days if days <= 2 else 2}, trace)
         cond_res = self.tools.call("query_conditions", {"scenic": scenic, "visitor_type": visitor_eff}, trace)
@@ -352,19 +356,28 @@ class ReActAgent:
                 "template_route": f'{route_res.get("route_id", "")} {route_res.get("route_title", "")}'}
 
     def _find_sunrise_poi(self, scenic: str, ordered: list[str]) -> str | None:
-        """P07：在已选 POI 中找日出观景点——名称或挂接条件含“日出”。"""
+        """P07：在已选 POI 中找日出观景点。
+
+        评分制：名称/标签直含“日出”记 2 分（如曙光亭类），挂接条件含“日出”记 1 分；
+        同分取图谱度数最高者——避免把挂接条件碰巧含“日出”的次要景点排在经典观测点之前。
+        """
+        best, best_key = None, None
         for poi in ordered:
             n = next((x for x in self.tools.poi_nodes(scenic) if self.tools.poi_label(x) == poi), None)
             if not n:
                 continue
-            texts = [self.tools.G.nodes[n].get("name", ""), self.tools.G.nodes[n].get("label", "")]
+            name_txt = self.tools.G.nodes[n].get("name", "") + self.tools.G.nodes[n].get("label", "")
+            cond_txts = []
             for _, v, e in self.tools.G.out_edges(n, data=True):
                 if e.get("relation") == "条件建议":
-                    texts.append(self.tools.G.nodes[v].get("name", ""))
-                    texts.append(self.tools.G.nodes[v].get("suggestion", ""))
-            if any("日出" in t for t in texts):
-                return poi
-        return None
+                    cond_txts.append(self.tools.G.nodes[v].get("name", ""))
+                    cond_txts.append(self.tools.G.nodes[v].get("suggestion", ""))
+            score = 2 if "日出" in name_txt else (1 if any("日出" in t for t in cond_txts) else 0)
+            if score:
+                key = (score, self.tools.G.degree(n))
+                if best_key is None or key > best_key:
+                    best, best_key = poi, key
+        return best
 
     def _order_pois(self, scenic: str, selected: list[str], template_pos: dict) -> list[str]:
         """模板全覆盖时按模板排；否则官方先后边拓扑排序（不可达时按入度+度数贪心），剩余按热度补。"""
