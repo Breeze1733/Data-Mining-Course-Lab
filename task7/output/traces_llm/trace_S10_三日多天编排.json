@@ -7,9 +7,7 @@
   "days": 3,
   "days_explicit": true,
   "month": null,
-  "special": [
-   "省力"
-  ],
+  "special": [],
   "avoid": [],
   "must": []
  },
@@ -39,9 +37,7 @@
     "visitor_type": null,
     "days": 3,
     "month": null,
-    "special": [
-     "省力"
-    ]
+    "special": []
    },
    "result": {
     "scenic": "九寨沟",
@@ -50,20 +46,18 @@
     "days": 3,
     "days_explicit": true,
     "month": null,
-    "special": [
-     "省力"
-    ],
+    "special": [],
     "avoid": [],
     "must": []
    }
   },
   {
    "step": "action",
-   "thought": "调用工具 query_pois，参数 {'scenic': '九寨沟', 'visitor_type': '体力有限', 'limit': 12}",
+   "thought": "调用工具 query_pois，参数 {'scenic': '九寨沟', 'visitor_type': None, 'limit': 12}",
    "tool": "query_pois",
    "args": {
     "scenic": "九寨沟",
-    "visitor_type": "体力有限",
+    "visitor_type": null,
     "limit": 12
    }
   },
@@ -88,11 +82,11 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_conditions，参数 {'scenic': '九寨沟', 'visitor_type': '体力有限'}",
+   "thought": "调用工具 query_conditions，参数 {'scenic': '九寨沟', 'visitor_type': None}",
    "tool": "query_conditions",
    "args": {
     "scenic": "九寨沟",
-    "visitor_type": "体力有限"
+    "visitor_type": null
    }
   },
   {
@@ -102,7 +96,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 3, 'days_explicit': True, 'month': None, 'special': ['省力'], 'avoid': [], 'must': []}；先查核心 POI（limit=12），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 3, 'days_explicit': True, 'month': None, 'special': [], 'avoid': [], 'must': []}；先查核心 POI（limit=12），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -280,14 +274,12 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家跟我走！D1沟口入园，建议不去原始森林（其实大半天足矣），直奔长海、五彩池；D2赏镜海、诺日朗与诺日朗瀑布，下午游五花海；D3走树正寨、犀牛海，中午往黄龙，下午逛树正沟。\n\n贴心提醒：体力弱建议观光车加缆车下，芦苇海不停留；按时吃饭别省钱、身体是根本，文明入厕保护环境！",
+ "answer": "大家跟我走！三天行程来啦：\n\nD1从**沟口**入园，提示不去**原始森林**（其实大半天足矣），直奔**长海**和**五彩池**；\nD2游览**镜海**、**诺日朗**、**诺日朗瀑布**与**五花海**；\nD3逛**树正寨**、**犀牛海**，中午去**黄龙**，下午游**树正沟**。\n\n提示：晕车备好药，恐高乘索道闭眼，体力有限别在芦苇海停留哦！",
  "plan": {
   "scenic": "九寨沟",
   "days": 3,
   "visitor_type": null,
-  "special": [
-   "省力"
-  ],
+  "special": [],
   "special_notes": [],
   "trip_month": null,
   "itinerary": [
@@ -391,27 +383,39 @@
   "tips": [
    {
     "cond_type": "人群",
+    "condition": "游客为恐高",
+    "suggestion": "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满",
+    "frequency": 3
+   },
+   {
+    "cond_type": "人群",
     "condition": "游客为体力有限",
     "suggestion": "不要在芦苇海停留",
     "frequency": 3
    },
    {
     "cond_type": "人群",
-    "condition": "游客为体力不足",
-    "suggestion": "观光车➕缆车下)",
+    "condition": "游客为晕车",
+    "suggestion": "买好晕车贴或者晕车药",
+    "frequency": 2
+   },
+   {
+    "cond_type": "人群",
+    "condition": "是家庭出游",
+    "suggestion": "不妨选择吃一顿丰盛的中餐",
     "frequency": 1
    },
    {
-    "cond_type": "装备",
-    "condition": "装备条件（句内）",
-    "suggestion": "避免污染环境,还是文明入厕的好",
-    "frequency": 7
+    "cond_type": "人群",
+    "condition": "游客为情侣",
+    "suggestion": "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!",
+    "frequency": 1
    },
    {
-    "cond_type": "装备",
-    "condition": "真的没有准备",
-    "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
-    "frequency": 3
+    "cond_type": "人群",
+    "condition": "游客为家庭",
+    "suggestion": "三二家庭聚会,里面所使用的水果都是应季水果,吃起来新鲜可口,在如此童话森林中来一场英式下午茶会,应该是旅行中最难忘的回忆",
+    "frequency": 1
    }
   ],
   "feasibility_warnings": [
@@ -419,5 +423,5 @@
   ],
   "template_route": "JZG-EXP01-R2 二日舒适游"
  },
- "elapsed": 18.54
+ "elapsed": 33.68
 }

@@ -212,6 +212,13 @@ class ReActAgent:
         must = [m0 for m0 in (intent.get("must") or []) if m0]
         special_notes: list[str] = []
         removed_by_avoid = []
+        # G03/G05：多日行程自动注入住宿 POI
+        if days and days >= 2:
+            has_lodging = any(any(k in p for k in ("宾馆", "酒店", "民宿", "饭店")) for p in selected)
+            if not has_lodging:
+                lodging = self._find_lodging_poi(scenic)
+                if lodging and lodging not in selected:
+                    selected.append(lodging)
         if avoid:
             kept = []
             for poi in selected:
@@ -239,6 +246,9 @@ class ReActAgent:
         ordered = self._order_pois(scenic, selected, template_pos)
         if removed_by_avoid:
             special_notes.append("已按您的要求避开：" + "、".join(removed_by_avoid))
+        lodging_in_plan = [p for p in selected if any(k in p for k in ("宾馆", "酒店", "民宿"))]
+        if lodging_in_plan and days and days >= 2:
+            special_notes.append(f"住宿：{lodging_in_plan[0]} 已纳入行程（多日游建议山上住宿）")
         if "看日出" in (intent.get("special") or []) and days and days >= 2:
             sp = self._find_sunrise_poi(scenic, ordered)
             if sp:
@@ -374,6 +384,17 @@ class ReActAgent:
                 "special_notes": special_notes, "trip_month": intent.get("month"),
                 "itinerary": itinerary, "tips": tips, "feasibility_warnings": feasibility_warnings,
                 "template_route": f'{route_res.get("route_id", "")} {route_res.get("route_title", "")}'}
+
+    def _find_lodging_poi(self, scenic: str) -> str | None:
+        """G03/G05：找景区内住宿 POI（名称含宾馆/酒店/民宿/饭店，度数最高者）。"""
+        best, best_deg = None, 0
+        for n in self.tools.poi_nodes(scenic):
+            label = self.tools.G.nodes[n].get("label", "")
+            if any(k in label for k in ("宾馆", "酒店", "民宿", "饭店")):
+                deg = self.tools.G.degree(n)
+                if deg > best_deg:
+                    best, best_deg = label, deg
+        return best
 
     def _find_sunrise_poi(self, scenic: str, ordered: list[str]) -> str | None:
         """P07：在已选 POI 中找日出观景点。
