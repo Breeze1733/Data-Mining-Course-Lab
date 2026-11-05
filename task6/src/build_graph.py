@@ -35,7 +35,8 @@ TASK3 = ROOT.parent / "task3"
 TASK5 = ROOT.parent / "task5"
 OUT = ROOT / "output"
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout, io.TextIOWrapper):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 AREAS = ("黄山", "九寨沟", "颐和园")
 PERIODS = ("上午", "中午", "下午", "晚上")

@@ -23,7 +23,8 @@ TASK1 = ROOT.parent / "task1"
 TASK2 = ROOT.parent / "task2"
 OUT = ROOT / "output"
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout, io.TextIOWrapper):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 PRONOUN_RE = re.compile(r"它们?|他们|她们|这里|那里|那边|此处|其中|该景点|这座|这条")
 SENT_SPLIT = re.compile(r"[。！？；!?\n]+")

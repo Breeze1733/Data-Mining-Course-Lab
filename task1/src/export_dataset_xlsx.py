@@ -59,7 +59,9 @@ def clip(value, limit=EXCEL_LIMIT):
 
 
 def main() -> int:
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+    if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout, io.TextIOWrapper):
+    if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout, io.TextIOWrapper):
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
     rows = [json.loads(line) for line in (PROCESSED / "dataset_clean.jsonl").open(encoding="utf-8")]
     rejected = [json.loads(line) for line in (PROCESSED / "rejected_records.jsonl").open(encoding="utf-8")]
     examples = json.loads((PROCESSED / "cleaning_examples.json").read_text(encoding="utf-8"))

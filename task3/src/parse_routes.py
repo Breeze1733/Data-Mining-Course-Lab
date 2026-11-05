@@ -24,7 +24,8 @@ OUT = ROOT / "output"
 sys.path.insert(0, str(TASK2 / "src"))
 from extract_entities import DictMatcher, load_dictionary  # noqa: E402
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout, io.TextIOWrapper):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 # ── 名称归一化 ────────────────────────────────────────────────
 # 规则1：词典 canonical（清晏舫→石舫、诺日朗游客中心→诺日朗中心等，见 entity_dictionary.json）

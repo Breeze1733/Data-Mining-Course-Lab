@@ -27,7 +27,8 @@ ROOT = Path(__file__).resolve().parents[1]
 TASK1 = ROOT.parent / "task1"
 OUT = ROOT / "output"
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout, io.TextIOWrapper):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 SENT_SPLIT = re.compile(r"[。！？\n]+")
 
