@@ -116,7 +116,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 11 条条件建议"
+   "summary": "返回 12 条条件建议"
   },
   {
    "step": "action",
@@ -158,7 +158,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 8 条条件建议"
+   "summary": "返回 9 条条件建议"
   },
   {
    "step": "thought",

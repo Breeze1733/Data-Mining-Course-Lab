@@ -108,7 +108,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 11 条条件建议"
+   "summary": "返回 12 条条件建议"
   },
   {
    "step": "action",
@@ -234,7 +234,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 8 条条件建议"
+   "summary": "返回 9 条条件建议"
   },
   {
    "step": "thought",
@@ -388,5 +388,5 @@
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }

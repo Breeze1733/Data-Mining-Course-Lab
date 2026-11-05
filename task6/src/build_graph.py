@@ -59,8 +59,14 @@ def main() -> int:
     parsed = [json.loads(l) for l in (TASK3 / "output/parsed_routes.jsonl").open(encoding="utf-8")]
     tourists = [json.loads(l) for l in (TASK3 / "output/tourist_routes.jsonl").open(encoding="utf-8")]
     mapping = json.loads((TASK5 / "output/mapping_table.json").read_text(encoding="utf-8"))
-    stats2 = json.loads((TASK2 / "output/exp2/entity_stats_refined.json").read_text(encoding="utf-8"))
-    mention_freq = stats2["top_canonical"]
+    # B11：提及频次直接从实体全量统计（此前依赖 top_canonical 截断表——仅 3 条，127 个 POI 节点频次为 0）
+    mention_counter: Counter = Counter()
+    with (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8") as _fh:
+        for _line in _fh:
+            _rec = json.loads(_line)
+            for _e in _rec["entities"]:
+                if _e["type"] == "景点POI":
+                    mention_counter[_e["canonical"]] += 1
 
     G = nx.MultiDiGraph()
 
@@ -74,7 +80,7 @@ def main() -> int:
         for scenic in e["scenic_areas"]:
             if scenic == "通用":
                 continue
-            freq = mention_freq.get("景点POI", {}).get(e["canonical"], 0)
+            freq = mention_counter.get(e["canonical"], 0)
             G.add_node(node_id("POI", scenic, e["canonical"]), kind=e["subtype"], name=e["canonical"],
                        label=e["canonical"], mention_freq=freq, aliases=e["name"])
             rel = "周边关联" if e["subtype"] == "周边景点" else "包含"
