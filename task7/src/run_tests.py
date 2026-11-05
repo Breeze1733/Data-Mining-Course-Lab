@@ -18,7 +18,7 @@ OUT = ROOT / "output"
 
 SCENARIOS = [
     {"id": "S1_老人颐和园半日", "query": "带老人去颐和园玩半天，腿脚不方便，走省力的路线",
-     "expect": {"scenic": "颐和园", "visitor_type": "老人", "days": 0.5}},
+     "expect": {"scenic": "颐和园", "visitor_type": "老人", "days": 0.5, "tips_in_answer": True}},
     {"id": "S2_亲子九寨沟一日", "query": "带孩子九寨沟一日游，怎么安排？",
      "expect": {"scenic": "九寨沟", "visitor_type": "孩子", "days": 1}},
     {"id": "S3_情侣黄山两日", "query": "情侣黄山两日游，想看日出",
@@ -131,6 +131,12 @@ def main() -> int:
             elif k == "seasonal_note":
                 warnings = (result["plan"] or {}).get("feasibility_warnings", [])
                 checks["seasonal_note"] = any("时段提示" in w for w in warnings)
+            elif k == "tips_in_answer":
+                # G10 验收：渲染器截取前 4 条贴士——检查这 4 条的摘要是否进入回答
+                plan = result.get("plan") or {}
+                tip_keys = [t["suggestion"][:8].strip() for t in (plan.get("tips") or [])[:4]]
+                checks["tips_in_answer"] = plan is not None and any(
+                    k in result["answer"] for k in tip_keys if k)
             elif k == "feasibility_in_answer":
                 # P08 验收：警告文本出现在最终回答中
                 checks["feasibility_in_answer"] = v in result["answer"]

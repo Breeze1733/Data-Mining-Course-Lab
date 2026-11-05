@@ -21,8 +21,41 @@
   },
   {
    "step": "intent",
-   "thought": "LLM 解析失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），回退规则解析",
-   "via": "fallback"
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "九寨沟",
+    "visitor_type": "孩子",
+    "visitor_types": [
+     "孩子"
+    ],
+    "days": 1,
+    "days_explicit": true,
+    "month": null,
+    "special": [],
+    "avoid": [],
+    "must": []
+   },
+   "llm": {
+    "scenic": "九寨沟",
+    "visitor_type": "亲子",
+    "days": 1,
+    "month": null,
+    "special": []
+   },
+   "result": {
+    "scenic": "九寨沟",
+    "visitor_type": "孩子",
+    "visitor_types": [
+     "孩子"
+    ],
+    "days": 1,
+    "days_explicit": true,
+    "month": null,
+    "special": [],
+    "avoid": [],
+    "must": []
+   }
   },
   {
    "step": "action",
@@ -215,15 +248,15 @@
   },
   {
    "step": "render",
-   "thought": "LLM 润色失败（The read operation timed out），使用模板文案",
-   "via": "fallback"
+   "thought": "调用 LLM 润色行程文案",
+   "via": "llm"
   },
   {
    "step": "final",
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 一日精华游）：\n上午：沟口\n上午：原始森林（步行前往）\n中午：长海（步行前往）\n下午：五彩池（步行前往）\n下午：镜海（步行前往）\n晚上：诺日朗（步行前往）\n晚上：五花海（步行前往）\n晚上：诺日朗瀑布（徒步前往）\n贴士：[装备] 避免污染环境,还是文明入厕的好；[装备] 也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本；[装备] 就算再老练的司机,走这条路,都需格外小心\n⚠ 原始森林：不去原始森林——其实大半天足矣",
+ "answer": "大家带好孩子，咱们出发啦！上午从沟口入园，建议不去原始森林，其实大半天足矣；中午游长海；下午看五彩池和镜海；晚上逛诺日朗、五花海与诺日朗瀑布。\n\n提示大家：路上请文明入厕避免污染；没准备干粮别为省钱冒险不吃，身体是根本；司机师傅行车、加水和休息时都需格外小心！",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -322,5 +355,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 104.56
+ "elapsed": 26.27
 }
