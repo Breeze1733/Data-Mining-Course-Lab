@@ -164,6 +164,7 @@ def main() -> int:
     t_period = tourist_period_allocation()
 
     comparison = {}
+    tau_sens = {scenic: {3: [], 5: [], 7: []} for scenic in official}
     for scenic, officials in official.items():
         official_pois = list(dict.fromkeys(poi for o in officials for poi in o["norm_sequence"]))
         tourists_here = [t for t in tourists if t["scenic_area"] == scenic]
@@ -185,6 +186,19 @@ def main() -> int:
                         best_tau = tau
             if best_tau is not None:
                 taus.append(best_tau)
+            # C08：阈值敏感性——不同公共 POI 下限下的最佳 tau（供稳健性查看）
+            for thr in (3, 5, 7):
+                best_thr = None
+                for o in officials:
+                    o_set = set(o["norm_sequence"])
+                    common = [q for q in o["norm_sequence"] if q in tset]
+                    t_common = [q for q in t["distinct_pois"] if q in o_set]
+                    if len(common) >= thr:
+                        tau = kendall_tau(t_common, common)
+                        if tau == tau and (best_thr is None or tau > best_thr):
+                            best_thr = tau
+                if best_thr is not None:
+                    tau_sens[scenic][thr].append(best_thr)
 
         off_alloc = official_period_allocation(officials)
         tour_alloc = t_period.get(scenic, Counter())
@@ -210,6 +224,9 @@ def main() -> int:
             # 只能作代理指标对照，不可直接相除比较
             "official_time_basis": "路线标注时长（分钟）",
             "tourist_time_basis": "文本时段词提及频次",
+            "tau_sensitivity": {str(thr): {
+                "n": len(v), "mean": round(sum(v) / len(v), 3) if v else None}
+                for thr, v in sorted(tau_sens[scenic].items())},
             "official_time_allocation_pct": pct(off_alloc),
             "tourist_time_allocation_pct": pct(tour_alloc),
             "tourist_time_counts": dict(tour_alloc),
