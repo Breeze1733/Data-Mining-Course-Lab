@@ -18,7 +18,7 @@
      "relation": "先后顺序",
      "weight": 14.5,
      "official_routes": "",
-     "tourist_support": 29
+     "tourist_support": 21
     }
    ],
    "reverse_found": true
@@ -33,7 +33,7 @@
      "relation": "先后顺序",
      "weight": 10.0,
      "official_routes": "",
-     "tourist_support": 20
+     "tourist_support": 14
     }
    ],
    "reverse_found": true
@@ -48,7 +48,7 @@
      "relation": "先后顺序",
      "weight": 7.5,
      "official_routes": "",
-     "tourist_support": 15
+     "tourist_support": 14
     }
    ],
    "reverse_found": true
@@ -63,7 +63,7 @@
      "relation": "先后顺序",
      "weight": 22.5,
      "official_routes": "HS-O1-R3；HS-EXTRA1-R1；HS-EXTRA2-R1",
-     "tourist_support": 39
+     "tourist_support": 21
     }
    ],
    "reverse_found": true
@@ -78,7 +78,7 @@
      "relation": "先后顺序",
      "weight": 18.0,
      "official_routes": "JZG-EXP02-R1；JZG-EXP03-R1",
-     "tourist_support": 32
+     "tourist_support": 29
     }
    ],
    "reverse_found": true
@@ -93,7 +93,7 @@
      "relation": "先后顺序",
      "weight": 65.0,
      "official_routes": "JZG-EXP01-R1；JZG-EXP01-R2；JZG-EXP01-R3；JZG-EXP02-R1；JZG-EXP03-R1；JZG-EXP04-R1",
-     "tourist_support": 118
+     "tourist_support": 67
     }
    ],
    "reverse_found": true
@@ -218,7 +218,7 @@
  },
  "edge_relation_distribution": {
   "包含": 163,
-  "条件建议": 598,
+  "条件建议": 645,
   "先后顺序": 1874,
   "时段归属": 144,
   "交通方式": 58
@@ -230,15 +230,15 @@
   "各景区子图均为单一连通分量（条件节点挂靠在 POI/景区上），无孤立节点；"
  ],
  "roundtrip": {
-  "csv_nodes": 579,
-  "csv_edges": 2837,
-  "graphml_nodes": 579,
-  "graphml_edges": 2837,
+  "csv_nodes": 608,
+  "csv_edges": 2884,
+  "graphml_nodes": 608,
+  "graphml_edges": 2884,
   "ok": true
  },
  "provenance": {
-  "cond_nodes_checked": 397,
-  "cond_nodes_with_evidence": 397,
+  "cond_nodes_checked": 426,
+  "cond_nodes_with_evidence": 426,
   "order_edges_checked": 1631,
   "order_edges_with_records": 1631,
   "parse_failures": 0

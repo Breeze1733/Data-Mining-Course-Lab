@@ -30,6 +30,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from normalize_name import normalize  # noqa: E402  与实验3相同的归一化
 
 ROOT = Path(__file__).resolve().parents[1]
+TASK1 = ROOT.parent / "task1"
 TASK2 = ROOT.parent / "task2"
 TASK3 = ROOT.parent / "task3"
 TASK5 = ROOT.parent / "task5"
@@ -107,8 +108,25 @@ def main() -> int:
             else:
                 G.add_edge(u, v, key="先后顺序", relation="先后顺序", weight=1.0, source="官方路线")
             official_support[(u, v)].append(p["route_id"])
+    # F05：近重复游记去重——同组记录对同一条边只计 1 次支持
+    _dup_groups: list[list[str]] = []
+    _quality = json.loads((TASK1 / "data/processed/quality_report.json").read_text(encoding="utf-8"))
+    for _d in _quality.get("near_duplicates", []):
+        _a, _b = _d["record_id_a"], _d["record_id_b"]
+        for _grp in _dup_groups:
+            if _a in _grp or _b in _grp:
+                _grp.add(_b); _grp.add(_a)
+                break
+        else:
+            _dup_groups.append({_a, _b})
+    _rec2grp: dict[str, int] = {}
+    for _gi, _grp in enumerate(_dup_groups):
+        for _r in _grp:
+            _rec2grp[_r] = _gi
+
     tourist_support: dict[tuple, int] = Counter()
     tourist_records: dict[tuple, list] = defaultdict(list)
+    tourist_group_seen: dict[tuple, set] = defaultdict(set)
     for t in tourists:
         scenic = t["scenic_area"]
         rid = t.get("record_id")
@@ -121,6 +139,11 @@ def main() -> int:
                 G[u][v]["先后顺序"]["weight"] += 0.5
             else:
                 G.add_edge(u, v, key="先后顺序", relation="先后顺序", weight=0.5, source="游客序列")
+            # F05：同近重复组对同一条边只计 1 次支持
+            grp_id = _rec2grp.get(rid, rid)
+            if grp_id in tourist_group_seen[(u, v)]:
+                continue
+            tourist_group_seen[(u, v)].add(grp_id)
             tourist_support[(u, v)] += 1
             if rid and rid not in tourist_records[(u, v)]:
                 tourist_records[(u, v)].append(rid)
