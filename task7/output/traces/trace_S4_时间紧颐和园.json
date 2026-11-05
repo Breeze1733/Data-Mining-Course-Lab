@@ -112,7 +112,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -126,7 +126,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -154,7 +154,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "thought",
@@ -256,5 +256,5 @@
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }
