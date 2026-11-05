@@ -43,7 +43,14 @@ SCENARIOS = [
      "expect": {"scenic": "九寨沟", "days": 1, "multi_visitor": ["老人", "孩子"], "tips_attached": True}},
     {"id": "S12_不去地点", "query": "九寨沟一日游，不要去原始森林，人多",
      "expect": {"scenic": "九寨沟", "days": 1, "avoid_respected": "原始森林"}},
+    {"id": "S13_未知景点", "query": "九寨沟一日游，想去月亮湾看看",
+     "expect": {"scenic": "九寨沟", "days": 1, "unknown_poi_not_in_plan": "月亮湾"}},
 ]
+def check_unknown_poi(result, poi):
+    """G14 验收：图谱中不存在的景点不得被编造进行程。"""
+    plan = result.get("plan") or {}
+    pois = [it["poi"] for it in plan.get("itinerary", [])]
+    return plan is not None and all(poi not in p for p in pois)
 def check_avoid(result, expect_poi):
     """G02b 验收：不去地点不出现在行程，且回答说明避开。"""
     plan = result.get("plan") or {}
@@ -107,6 +114,8 @@ def main() -> int:
                 checks["feasibility_keyword"] = bool(warnings) and any(v in w for w in warnings)
             elif k == "sunrise_last_day_first":
                 checks["sunrise_last_day_first"] = check_sunrise(result, v)
+            elif k == "unknown_poi_not_in_plan":
+                checks["unknown_poi_not_in_plan"] = check_unknown_poi(result, v)
             elif k == "avoid_respected":
                 checks["avoid_respected"] = check_avoid(result, v)
             elif k == "multi_visitor":
