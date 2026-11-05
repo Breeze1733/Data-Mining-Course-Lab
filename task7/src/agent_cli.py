@@ -162,6 +162,12 @@ class IntentParser:
 
     def _parse_rules(self, query: str) -> dict:
         scenic = next((a for a in AREAS if a in query), None)
+        if scenic is None:
+            # 景区别名映射（“九寨”→“九寨沟”等常见简称）
+            for _alias, _target in (("九寨", "九寨沟"), ("黄山市", "黄山"), ("黄龙九寨", "九寨沟")):
+                if _alias in query:
+                    scenic = _target
+                    break
         visitor_hits = [v for v, pat in VISITOR_PATTERNS if re.search(pat, query)]
         visitor = visitor_hits[0] if visitor_hits else None
         days = 1
