@@ -102,7 +102,7 @@ def main() -> int:
     result = {
         "n_sentences": len(sample),
         "annotated_by": gold_doc["annotated_by"],
-        "match_policy": gold_doc["out_of_scope_note"],
+        "match_policy": gold_doc.get("out_of_scope_note", "根景区名与城市名按设计不作为 POI 实体抽取"),
         "per_type": {t: prf(*v) for t, v in stats.items()},
         "missed": missed,
         "false_positives": false_pos,

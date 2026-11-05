@@ -1,172 +1,223 @@
 {
  "n_sentences": 40,
  "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注；POI/交通严格跨度含包含式变体，时间重叠口径）",
- "match_policy": "根景区名（黄山/九寨沟/颐和园）与城市名（北京/成都）按设计不作为 POI 实体抽取，评测双口径记录",
+ "match_policy": "根景区名与城市名按设计不作为 POI 实体抽取",
  "per_type": {
   "POI": {
-   "tp": 50,
-   "fp": 0,
-   "fn": 16,
-   "precision": 1.0,
-   "recall": 0.758,
-   "f1": 0.862
+   "tp": 22,
+   "fp": 1,
+   "fn": 9,
+   "precision": 0.957,
+   "recall": 0.71,
+   "f1": 0.815
   },
   "交通": {
-   "tp": 14,
-   "fp": 0,
-   "fn": 1,
-   "precision": 1.0,
-   "recall": 0.933,
-   "f1": 0.966
+   "tp": 11,
+   "fp": 1,
+   "fn": 6,
+   "precision": 0.917,
+   "recall": 0.647,
+   "f1": 0.759
   },
   "时间": {
-   "tp": 23,
-   "fp": 3,
-   "fn": 0,
-   "precision": 0.885,
-   "recall": 1.0,
-   "f1": 0.939
+   "tp": 13,
+   "fp": 6,
+   "fn": 5,
+   "precision": 0.684,
+   "recall": 0.722,
+   "f1": 0.703
   }
  },
  "missed": [
   {
-   "sid": 0,
-   "text": "黄山",
-   "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "这一程我8天连战三山:庐山、三清山,黄山"
+   "sid": 1,
+   "text": "换乘车",
+   "type": "交通",
+   "out_of_scope_design": false,
+   "sentence": "完全特种兵行程,山上花费45,门票190,两头换乘车19+46,燃尽了"
   },
   {
-   "sid": 1,
-   "text": "黄山",
-   "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "对于黄山的向往由来已久,读书时期在课本上就领略过它的美,再加上世人“五岳归来不看山,黄山归来不看岳”的至高评价也让我对此"
+   "sid": 4,
+   "text": "爬山",
+   "type": "交通",
+   "out_of_scope_design": false,
+   "sentence": "沿途导游给我们介绍了徽州地方沿革和特产特色,敲定了爬山的行程"
   },
   {
-   "sid": 1,
-   "text": "黄山",
+   "sid": 5,
+   "text": "黄山旅游换乘中心",
    "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "对于黄山的向往由来已久,读书时期在课本上就领略过它的美,再加上世人“五岳归来不看山,黄山归来不看岳”的至高评价也让我对此"
+   "out_of_scope_design": false,
+   "sentence": "酒店一定要选在黄山旅游换乘中心附近300米以内,不然就要走很多路"
+  },
+  {
+   "sid": 6,
+   "text": "智选假日酒店",
+   "type": "POI",
+   "out_of_scope_design": false,
+   "sentence": "住宿:智选假日酒店,这个酒店很新,也很干净,推荐"
   },
   {
    "sid": 14,
+   "text": "高铁",
+   "type": "交通",
+   "out_of_scope_design": false,
+   "sentence": "我看很多人从成都去九寨沟,是坐早上最早6点多的车到黄龙九寨站,到了这个高铁站,还得坐一两小时大巴才能到九寨沟,这样的话留"
+  },
+  {
+   "sid": 17,
+   "text": "春节",
+   "type": "时间",
+   "out_of_scope_design": false,
+   "sentence": "春节因假期比较长很多人都会和家人来一场春节之旅,当然对于国内著名的景区九寨沟来说春节前往的游客是非常多的,那么春节去九寨"
+  },
+  {
+   "sid": 18,
    "text": "飞机",
    "type": "交通",
    "out_of_scope_design": false,
    "sentence": "由于黄金周期间上海飞成都的机票较贵,且折扣机票的班次时间不够理想,所以我选择了坐动车D2206次,06:39开车,路程1"
   },
   {
-   "sid": 15,
-   "text": "成都",
-   "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "由于高原气候多变,在经历了早班飞机返回成都的插曲后,中午时段终于成功降落了九黄机场,开始了时隔十多年后的再次九寨黄龙之旅"
+   "sid": 21,
+   "text": "搭车",
+   "type": "交通",
+   "out_of_scope_design": false,
+   "sentence": "景区大门上车后,观光车带我们直接到了Y字形左侧最上面的长海、五彩池,然后再回头往下,这条路线叫「则查洼沟」,基本用走的,"
   },
   {
-   "sid": 16,
-   "text": "九寨沟",
-   "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "说起九寨沟美景,几年前就开始惦记了,去年差点就定了机票"
-  },
-  {
-   "sid": 17,
-   "text": "九寨沟",
-   "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "女儿的小学毕业之旅Part 2~2021暑假自驾游记【九寨沟、黄龙篇】"
-  },
-  {
-   "sid": 23,
-   "text": "松潘古城",
+   "sid": 25,
+   "text": "拉卜楞寺",
    "type": "POI",
    "out_of_scope_design": false,
-   "sentence": "其他参考:其实也看到很多游记里推荐玩黄龙的话,住在 松潘 古城,那里海拔相对比较低,而且商业配套更丰富,那里还是一处人文"
+   "sentence": "第六天一早出发去拉卜楞寺,路边起伏的高原草甸在蓝天白云的映衬下分外美丽"
   },
   {
-   "sid": 28,
-   "text": "颐和园",
+   "sid": 25,
+   "text": "一早",
+   "type": "时间",
+   "out_of_scope_design": false,
+   "sentence": "第六天一早出发去拉卜楞寺,路边起伏的高原草甸在蓝天白云的映衬下分外美丽"
+  },
+  {
+   "sid": 26,
+   "text": "三苏祠",
    "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "第一次去颐和园看了半天攻略,最后决定走这条亲测好走的路线:"
+   "out_of_scope_design": false,
+   "sentence": "然后经过我的偶像--苏东波的故乡,三苏祠去看了一下,最喜欢:人有悲欢离合,月有阴晴圆缺,此事古难全"
   },
   {
    "sid": 29,
-   "text": "北京",
-   "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "我刚从北京回,在出发前购买了一些书籍还上网向网友讨教,研究出一套实用的游览路线,现将它供朋友自助游参考一下"
+   "text": "上世纪六十年代",
+   "type": "时间",
+   "out_of_scope_design": false,
+   "sentence": "生于上世纪六十年代的我,上小学、中学时,一年中最快乐的事就是春游或者秋游"
   },
   {
    "sid": 30,
-   "text": "颐和园",
-   "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "颐和园作为中国古代园林建筑史上的瑰宝,不但具有极高的历史文化价值,同时也是园林史是的艺术典范,是十分适合游览的园林风光景"
-  },
-  {
-   "sid": 31,
-   "text": "颐和园",
-   "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "颐和园皇家园林版“松弛感”:昆明湖边坐一会儿,风比滤镜好用"
+   "text": "2019",
+   "type": "时间",
+   "out_of_scope_design": false,
+   "sentence": "2019北京印象-双火8天广东-北京漫游"
   },
   {
    "sid": 32,
-   "text": "北京",
-   "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "说起北京的颐和园这座著名的皇家园林可谓是名声显赫"
-  },
-  {
-   "sid": 32,
-   "text": "颐和园",
-   "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "说起北京的颐和园这座著名的皇家园林可谓是名声显赫"
-  },
-  {
-   "sid": 34,
-   "text": "清晏舫",
+   "text": "天安门",
    "type": "POI",
    "out_of_scope_design": false,
-   "sentence": "清晏肪俗称石舫,是颐和园唯一带有西洋风格的建筑"
+   "sentence": "这里已经不仅仅是景点,毫无疑问对于中华儿女天安门内含了太多的象征意义--这里是中华民族精神家园的根脉,国家政治、文化的中"
   },
   {
-   "sid": 34,
-   "text": "颐和园",
-   "type": "POI",
-   "out_of_scope_design": true,
-   "sentence": "清晏肪俗称石舫,是颐和园唯一带有西洋风格的建筑"
+   "sid": 32,
+   "text": "明朝永乐年间",
+   "type": "时间",
+   "out_of_scope_design": false,
+   "sentence": "这里已经不仅仅是景点,毫无疑问对于中华儿女天安门内含了太多的象征意义--这里是中华民族精神家园的根脉,国家政治、文化的中"
+  },
+  {
+   "sid": 33,
+   "text": "有轨电车",
+   "type": "交通",
+   "out_of_scope_design": false,
+   "sentence": "多路地面公交车在颐和园经停,地铁4号线北宫门有站,有轨电车西郊线有颐和园西门站"
   },
   {
    "sid": 37,
-   "text": "东宫门",
+   "text": "南长城",
    "type": "POI",
    "out_of_scope_design": false,
-   "sentence": "北宫门进➡四大部洲➡佛香阁➡画中游➡后湖➡豳风桥➡界湖桥➡坐船➡南湖岛➡十七孔桥➡铜牛➡东 宫门出"
+   "sentence": "尽管人很多,比起南长城简直就是游人如织,但好汉坡、好汉石、好汉碑都在北长城"
+  },
+  {
+   "sid": 37,
+   "text": "北长城",
+   "type": "POI",
+   "out_of_scope_design": false,
+   "sentence": "尽管人很多,比起南长城简直就是游人如织,但好汉坡、好汉石、好汉碑都在北长城"
+  },
+  {
+   "sid": 38,
+   "text": "琉璃塔",
+   "type": "POI",
+   "out_of_scope_design": false,
+   "sentence": "这个路线除了到苏州街和四大部洲的时候很晒很热外,开始往琉璃塔、谐趣园走的路上绿树成荫,后半程基本还是凉快的"
+  },
+  {
+   "sid": 39,
+   "text": "西苑站",
+   "type": "POI",
+   "out_of_scope_design": false,
+   "sentence": "新建宫门出,可以打车,也可以对面坐公交车437路两站,到西苑站下车"
   }
  ],
  "false_positives": [
   {
-   "sid": 4,
-   "text": "每天",
-   "type": "时间节点",
-   "sentence": "按这个攻略每天中午12点上山 下午4点前下山不超过4小时,懒人友好"
+   "sid": 10,
+   "text": "登山",
+   "type": "交通方式",
+   "sentence": "因为第一次去黄山,经验不足,我们选择了一个太阳热着水洼的天气登山,错过了许多景色,例如最为出名的猴子观海,没有了云层,一"
   },
   {
    "sid": 14,
+   "text": "一天",
+   "type": "时间节点",
+   "sentence": "我看很多人从成都去九寨沟,是坐早上最早6点多的车到黄龙九寨站,到了这个高铁站,还得坐一两小时大巴才能到九寨沟,这样的话留"
+  },
+  {
+   "sid": 17,
+   "text": "春节",
+   "type": "时间节点",
+   "sentence": "春节因假期比较长很多人都会和家人来一场春节之旅,当然对于国内著名的景区九寨沟来说春节前往的游客是非常多的,那么春节去九寨"
+  },
+  {
+   "sid": 17,
+   "text": "春节",
+   "type": "时间节点",
+   "sentence": "春节因假期比较长很多人都会和家人来一场春节之旅,当然对于国内著名的景区九寨沟来说春节前往的游客是非常多的,那么春节去九寨"
+  },
+  {
+   "sid": 17,
+   "text": "春节",
+   "type": "时间节点",
+   "sentence": "春节因假期比较长很多人都会和家人来一场春节之旅,当然对于国内著名的景区九寨沟来说春节前往的游客是非常多的,那么春节去九寨"
+  },
+  {
+   "sid": 18,
    "text": "D22",
    "type": "时间节点",
    "sentence": "由于黄金周期间上海飞成都的机票较贵,且折扣机票的班次时间不够理想,所以我选择了坐动车D2206次,06:39开车,路程1"
   },
   {
-   "sid": 18,
+   "sid": 19,
    "text": "一天",
    "type": "时间节点",
-   "sentence": "其实是为了方便日后回顾相册时,能记起每张照片大概是哪个海子[微笑R],能看的海子都看了,非常充实的一天"
+   "sentence": "虽然是最后一天,但是上午还是去了三个名为解少数民族文化,实为购物的景点,一个银饰售卖点,一个特产超市,另一个是蚕丝产品"
+  },
+  {
+   "sid": 33,
+   "text": "颐和园西门",
+   "type": "景点POI",
+   "sentence": "多路地面公交车在颐和园经停,地铁4号线北宫门有站,有轨电车西郊线有颐和园西门站"
   }
  ],
  "scope_note": {
@@ -177,16 +228,16 @@
    "颐和园",
    "黄山"
   ],
-  "oos_misses": 13,
-  "recall_in_scope_only": 0.956,
+  "oos_misses": 0,
+  "recall_in_scope_only": 0.697,
   "note": "根景区名与城市名按设计不作为 POI 抽取；in_scope_only 口径将其从分母移除"
  },
  "overall": {
-  "tp": 87,
-  "fp": 3,
-  "fn": 17,
-  "precision": 0.967,
-  "recall": 0.837,
-  "f1": 0.897
+  "tp": 46,
+  "fp": 8,
+  "fn": 20,
+  "precision": 0.852,
+  "recall": 0.697,
+  "f1": 0.767
  }
 }
