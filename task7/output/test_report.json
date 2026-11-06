@@ -1,7 +1,7 @@
 {
  "mode": "rules（--rules 强制离线）",
- "n_scenarios": 14,
- "n_passed": 14,
+ "n_scenarios": 15,
+ "n_passed": 15,
  "results": [
   {
    "scenario": "S1_老人颐和园半日",
@@ -35,7 +35,7 @@
    },
    "n_tool_calls": 7,
    "answer_head": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 2026清明反向遛弯路线）：\n上午：万寿山\n上午：画中游（步行前往）\n中午：佛香阁（步行前往）\n贴士：[人群] 别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果；[人",
-   "elapsed": 0.01
+   "elapsed": 0.02
   },
   {
    "scenario": "S2_亲子九寨沟一日",
@@ -65,7 +65,7 @@
    },
    "n_tool_calls": 9,
    "answer_head": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 一日精华游）：\n上午：沟口\n上午：原始森林（步行前往）\n中午：长海（步行前往）\n下午：五彩池（步行前往）\n下午：镜海（步行前往）\n贴士：[装备] 不建议去原始森林,它和九寨沟看水",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S3_情侣黄山两日",
@@ -182,7 +182,7 @@
    },
    "n_tool_calls": 7,
    "answer_head": "提示：半日游难以兼顾看日出——日出需要清晨身处山顶，通常要求前晚住宿山上。建议改为两日行程（首日上山宿山顶，次日看日出后下山），或舍弃看日出安排。\n\n为您规划黄山半日游（参考官方路线 HS-EXTRA1-R2 冬季南门二日游）：\n上午：光明",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S7_可行性提示",
@@ -211,7 +211,7 @@
    },
    "n_tool_calls": 9,
    "answer_head": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 一日精华游）：\n上午：沟口\n上午：原始森林（步行前往）\n中午：长海（步行前往）\n下午：五彩池（步行前往）\n下午：镜海（步行前往）\n贴士：[人群] 那边由于道路狭窄,所以并没有设立",
-   "elapsed": 0.01
+   "elapsed": 0.0
   },
   {
    "scenario": "S8_多跳动线",
@@ -422,6 +422,36 @@
    },
    "n_tool_calls": 14,
    "answer_head": "为您规划黄山三日游，出行时段12月（参考官方路线 HS-EXTRA1-R2 冬季南门二日游）：\n第一天·上午：迎客松\n第一天·上午：始信峰（步行前往）\n第一天·中午：排云亭（步行前往）\n第一天·下午：西海（步行前往）\n第二天·上午：西海大峡",
+   "elapsed": 0.01
+  },
+  {
+   "scenario": "S15_必去地点",
+   "query": "黄山两日游，一定要去天都峰",
+   "passed": true,
+   "checks": {
+    "scenic": true,
+    "days": true,
+    "must_respected": true,
+    "tools_called": true,
+    "tools_used_in_answer": true,
+    "itinerary_size": true,
+    "tips_attached": true
+   },
+   "intent": {
+    "scenic": "黄山",
+    "visitor_type": null,
+    "visitor_types": [],
+    "days": 2,
+    "days_explicit": true,
+    "month": null,
+    "special": [],
+    "avoid": [],
+    "must": [
+     "天都峰"
+    ]
+   },
+   "n_tool_calls": 14,
+   "answer_head": "为您规划黄山两日游（参考官方路线 HS-EXTRA1-R2 冬季南门二日游）：\n第一天·上午：迎客松\n第一天·上午：始信峰（步行前往）\n第一天·中午：莲花峰（步行前往）\n第一天·下午：排云亭（步行前往）\n第一天·下午：西海（步行前往）\n第一",
    "elapsed": 0.01
   }
  ],
