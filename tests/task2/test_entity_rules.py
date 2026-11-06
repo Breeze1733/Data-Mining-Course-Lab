@@ -58,6 +58,23 @@ class EntityRuleTests(unittest.TestCase):
         self.assertEqual(selected, [poi])
         self.assertIn(duration, suppressed)
 
+    def test_b09_overlap_counterexamples(self):
+        """B09 反例组：长词优先、跨类型共存、设施复合词守卫、根景区设计排除、时长不吞交通。"""
+        # 长词优先：观光缆车并入设施长名，"站"后缀不阻断
+        self.assertEqual(self.surfaces("西海大峡谷观光缆车站"), ["西海大峡谷观光缆车"])
+        # 跨类型共存：POI 与交通相邻不互吞
+        self.assertEqual(self.surfaces("从云谷寺坐索道到白鹅岭"),
+                         ["云谷寺", "索道", "白鹅岭"])
+        # 设施复合词守卫：北海宾馆的"北海"前缀不出实体，独立"北海"正常出
+        self.assertEqual(self.surfaces("北海宾馆旁边的北海好看"), ["北海"])
+        # 根景区/行政名设计排除：嵌套景区名整体不出 POI 实体
+        self.assertEqual(self.surfaces("黄山市黄山区的黄山风景区"), [])
+        # 时长不吞交通实体
+        self.assertEqual(self.surfaces("缆车5分钟一班"), ["缆车"])
+        self.assertEqual([e["text"] for e in time_entities("缆车5分钟一班")], ["5分钟"])
+        # 命名索道 vs 通用索道：专名优先且不吞后续 POI
+        self.assertEqual(self.surfaces("乘玉屏索道，再爬天都峰"), ["玉屏索道", "天都峰"])
+
 
 if __name__ == "__main__":
     unittest.main()
