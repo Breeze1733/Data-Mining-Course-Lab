@@ -151,11 +151,20 @@ class GraphTools:
         for n, d in self.G.nodes(data=True):
             if d.get("kind") != "条件" or f":{scenic}:" not in n:
                 continue
-            text = d.get("name", "") + " " + d.get("suggestion", "")
+            all_sugg = []
+            try:
+                all_sugg = json.loads(d.get("suggestions", "[]"))
+            except (json.JSONDecodeError, TypeError):
+                pass
+            if not all_sugg:
+                all_sugg = [d.get("suggestion", "")]
+            text = d.get("name", "") + " " + " ".join(all_sugg)
             if visitor_type and d.get("cond_type") == "人群" and not self._match_visitor(text, visitor_type):
                 continue
             conds.append({"cond_type": d.get("cond_type"), "condition": d.get("name"),
-                          "suggestion": d.get("suggestion"), "frequency": int(float(d.get("frequency", 1) or 1))})
+                          "suggestion": d.get("suggestion"),
+                          "all_suggestions": all_sugg[:5],
+                          "frequency": int(float(d.get("frequency", 1) or 1))})
         # 人群类匹配游客类型的优先；其余按类型相关性排序
         type_rank = {"人群": 0, "装备": 1, "体力安全": 2, "住宿": 3, "天气": 4, "时间": 5,
                      "预约票务": 6, "交通": 7, "美食": 8, "拍照": 9, "一般": 10, "其他": 11}

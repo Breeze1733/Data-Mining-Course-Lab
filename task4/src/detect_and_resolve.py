@@ -229,12 +229,21 @@ def main(argv=None) -> int:
                             case.update({"resolution": scenic_area, "resolution_kind": "景区名",
                                          "evidence": "窗口内无实体，回退到景区名"})
                     else:
+                        # D05：候选排序——POI 优先于交通、近距优先，且
+                        # locative（这里/那里）偏好景观类 POI（排除住宿/设施）
+                        def compat_bonus(c):
+                            if cls == "locative" and c["kind"] == "POI":
+                                if any(k in c["name"] for k in ("宾馆", "酒店", "民宿", "饭店", "站", "中心")):
+                                    return -2  # 处所代词偏好景观而非住宿/设施
+                            return 0
                         cands.sort(key=lambda c: (0 if c["kind"] == "POI" else 1,
                                                   {"同句": 0, "前句": 1, "前两句": 2}[c["scope"]],
+                                                  compat_bonus(c),
                                                   c["distance"]))
                         best = cands[0]
                         case.update({"resolution": best["name"], "resolution_kind": best["kind"],
-                                     "evidence": f'{best["scope"]}最近{best["kind"]}，距离{best["distance"]}字符'})
+                                     "evidence": f'{best["scope"]}最近{best["kind"]}，距离{best["distance"]}字符'
+                                                 + (f'（语义兼容加成）' if compat_bonus(best) else '')})
                     case["candidates"] = cands[:6]
                 elif cls == "person":
                     window = case["sentence"] + case["prev_sentence"]
