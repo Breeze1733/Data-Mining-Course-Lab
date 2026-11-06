@@ -331,9 +331,14 @@ def main(argv=None) -> int:
                     # hint-cur 分支只看当前句的同行者信号（前句"我们"不应否决当前句的服务角色指代）
                     party_cur = PARTY_RE.search(case["sentence"])
                     # “他们(家|自家|后院|店里)”指店家设施而非人（U22，人工标注评测集4例）
+                    # U62 回归修复：守卫必须终止（write+continue）——曾因改成 if/else 后
+                    # 落入下方独立 if 链被 travel_party 覆盖（2 例设施类回归）
                     if re.search(r"(他们|她们)(家|自家|后院|店里)", case["sentence"]):
                         case.update({"resolution": "facility", "resolution_kind": "设施",
                                      "evidence": "“他们家/后院/店里”指店家设施"})
+                        fh.write(json.dumps(case, ensure_ascii=False) + "\n")
+                        n_cases += 1
+                        continue
                     else:
                         # U62：他人指代跟随信号——代词紧邻人物词（间隔≤16 字且间隔无我/我们/你），
                         # 或代词先于本句任何我/我们/你 且前句含人物词（“…站了一队人,他们在等…”）。
