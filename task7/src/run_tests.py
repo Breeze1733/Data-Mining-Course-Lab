@@ -79,6 +79,86 @@ def check_multi_day(result):
     return plan.get("days") == 3 and days == {1, 2, 3}
 
 
+def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
+    """单场景验收检查（run_tests 与 H08 消融共用同一口径，避免两处断言漂移）。
+
+    rules=True 时 tips_in_answer 为硬检查（离线渲染器必须保证贴士进回答）；
+    在线润色可能转述/省略，为软检查（计划里有贴士即可）。
+    """
+    checks = {}
+    intent = result["intent"]
+    for k, v in sc["expect"].items():
+        if k == "fallback":
+            checks["fallback_answer"] = result["plan"] is None and "仅支持" in result["answer"]
+        elif k == "conflict_note":
+            checks["conflict_note"] = any("冲突" in t.get("thought", "") for t in result["trace"])
+        elif k == "path_query":
+            fp, tp = v
+            calls = [t for t in result["trace"] if t.get("step") == "action"
+                     and t.get("tool") == "query_path"]
+            checks["path_tool_called"] = bool(calls)
+            checks["path_valid"] = ("动线参考" in result["answer"]
+                                    and fp in result["answer"] and tp in result["answer"])
+        elif k == "feasibility":
+            warnings = (result["plan"] or {}).get("feasibility_warnings", [])
+            checks["feasibility_warning"] = bool(warnings) and any(
+                "原始森林" in w for w in warnings)
+        elif k == "feasibility_keyword":
+            warnings = (result["plan"] or {}).get("feasibility_warnings", [])
+            checks["feasibility_keyword"] = bool(warnings) and any(v in w for w in warnings)
+        elif k == "sunrise_last_day_first":
+            checks["sunrise_last_day_first"] = check_sunrise(result, v)
+        elif k == "unknown_poi_not_in_plan":
+            checks["unknown_poi_not_in_plan"] = check_unknown_poi(result, v)
+        elif k == "avoid_respected":
+            checks["avoid_respected"] = check_avoid(result, v)
+        elif k == "multi_visitor":
+            vt = intent.get("visitor_types") or []
+            checks["multi_visitor"] = all(v in vt for v in v)
+        elif k == "multi_day":
+            checks["multi_day"] = check_multi_day(result)
+        elif k == "seasonal_note":
+            warnings = (result["plan"] or {}).get("feasibility_warnings", [])
+            checks["seasonal_note"] = any("时段提示" in w for w in warnings)
+        elif k == "tips_in_answer":
+            # G10：离线渲染器保证贴士进回答（硬检查）；在线润色可能省略（软检查）
+            plan = result.get("plan") or {}
+            if not rules:
+                checks["tips_in_answer"] = plan is not None and len(plan.get("tips") or []) > 0
+            else:
+                tip_keys = [t["suggestion"][:8].strip() for t in (plan.get("tips") or [])[:4]]
+                checks["tips_in_answer"] = plan is not None and any(
+                    k in result["answer"] for k in tip_keys if k)
+        elif k == "feasibility_in_answer":
+            # P08 验收：警告文本出现在最终回答中
+            checks["feasibility_in_answer"] = v in result["answer"]
+        else:
+            checks[k] = intent.get(k) == v
+    tool_calls = [t for t in result["trace"] if t.get("step") == "action"]
+    checks["tools_called"] = len(tool_calls) >= (0 if sc["expect"].get("fallback") else 3)
+
+    def answer_covers_plan(res):
+        """P14：最终回答必须覆盖计划内容（真实检查，非恒真）——
+        有计划时回答需提及至少 60% 行程站点名；回退场景需列出全部支持景区。"""
+        plan = res.get("plan")
+        if plan is None:
+            return all(a in res["answer"] for a in ("黄山", "九寨沟", "颐和园"))
+        pois = [it["poi"] for it in plan["itinerary"]]
+        if not pois:
+            return False
+        hit = sum(1 for poi in pois if poi in res["answer"])
+        return hit >= max(1, int(0.6 * len(pois)))
+
+    checks["tools_used_in_answer"] = answer_covers_plan(result)
+    if result["plan"]:
+        n_pois = len(result["plan"]["itinerary"])
+        expected_n = {0.5: (3, 6), 1: (5, 9), 1.5: (6, 11), 2: (8, 13),
+                      3: (9, 14), 3.5: (10, 15), 4: (11, 16), 5: (12, 17)}[sc["expect"].get("days", 1)]
+        checks["itinerary_size"] = expected_n[0] <= n_pois <= expected_n[1] + 2
+        checks["tips_attached"] = len(result["plan"]["tips"]) > 0
+    return checks
+
+
 def main() -> int:
     sys.stdout.reconfigure(encoding="utf-8")
     OUT.mkdir(parents=True, exist_ok=True)
@@ -96,80 +176,11 @@ def main() -> int:
     for sc in SCENARIOS:
         agent = ReActAgent(llm)
         result = agent.run(sc["query"])
-        checks = {}
-        intent = result["intent"]
-        for k, v in sc["expect"].items():
-            if k == "fallback":
-                checks["fallback_answer"] = result["plan"] is None and "仅支持" in result["answer"]
-            elif k == "conflict_note":
-                checks["conflict_note"] = any("冲突" in t.get("thought", "") for t in result["trace"])
-            elif k == "path_query":
-                fp, tp = v
-                calls = [t for t in result["trace"] if t.get("step") == "action"
-                         and t.get("tool") == "query_path"]
-                checks["path_tool_called"] = bool(calls)
-                checks["path_valid"] = ("动线参考" in result["answer"]
-                                        and fp in result["answer"] and tp in result["answer"])
-            elif k == "feasibility":
-                warnings = (result["plan"] or {}).get("feasibility_warnings", [])
-                checks["feasibility_warning"] = bool(warnings) and any(
-                    "原始森林" in w for w in warnings)
-            elif k == "feasibility_keyword":
-                warnings = (result["plan"] or {}).get("feasibility_warnings", [])
-                checks["feasibility_keyword"] = bool(warnings) and any(v in w for w in warnings)
-            elif k == "sunrise_last_day_first":
-                checks["sunrise_last_day_first"] = check_sunrise(result, v)
-            elif k == "unknown_poi_not_in_plan":
-                checks["unknown_poi_not_in_plan"] = check_unknown_poi(result, v)
-            elif k == "avoid_respected":
-                checks["avoid_respected"] = check_avoid(result, v)
-            elif k == "multi_visitor":
-                vt = intent.get("visitor_types") or []
-                checks["multi_visitor"] = all(v in vt for v in v)
-            elif k == "multi_day":
-                checks["multi_day"] = check_multi_day(result)
-            elif k == "seasonal_note":
-                warnings = (result["plan"] or {}).get("feasibility_warnings", [])
-                checks["seasonal_note"] = any("时段提示" in w for w in warnings)
-            elif k == "tips_in_answer":
-                # G10：离线渲染器保证贴士进回答（硬检查）；在线润色可能省略（软检查）
-                plan = result.get("plan") or {}
-                if not args.rules:
-                    checks["tips_in_answer"] = plan is not None and len(plan.get("tips") or []) > 0
-                else:
-                    tip_keys = [t["suggestion"][:8].strip() for t in (plan.get("tips") or [])[:4]]
-                    checks["tips_in_answer"] = plan is not None and any(
-                        k in result["answer"] for k in tip_keys if k)
-            elif k == "feasibility_in_answer":
-                # P08 验收：警告文本出现在最终回答中
-                checks["feasibility_in_answer"] = v in result["answer"]
-            else:
-                checks[k] = intent.get(k) == v
+        checks = evaluate_scenario(sc, result, rules=args.rules)
         tool_calls = [t for t in result["trace"] if t.get("step") == "action"]
-        checks["tools_called"] = len(tool_calls) >= (0 if sc["expect"].get("fallback") else 3)
-
-        def answer_covers_plan(res):
-            """P14：最终回答必须覆盖计划内容（真实检查，非恒真）——
-            有计划时回答需提及至少 60% 行程站点名；回退场景需列出全部支持景区。"""
-            plan = res.get("plan")
-            if plan is None:
-                return all(a in res["answer"] for a in ("黄山", "九寨沟", "颐和园"))
-            pois = [it["poi"] for it in plan["itinerary"]]
-            if not pois:
-                return False
-            hit = sum(1 for poi in pois if poi in res["answer"])
-            return hit >= max(1, int(0.6 * len(pois)))
-
-        checks["tools_used_in_answer"] = answer_covers_plan(result)
-        if result["plan"]:
-            n_pois = len(result["plan"]["itinerary"])
-            expected_n = {0.5: (3, 6), 1: (5, 9), 1.5: (6, 11), 2: (8, 13),
-                          3: (9, 14), 3.5: (10, 15), 4: (11, 16), 5: (12, 17)}[sc["expect"].get("days", 1)]
-            checks["itinerary_size"] = expected_n[0] <= n_pois <= expected_n[1] + 2
-            checks["tips_attached"] = len(result["plan"]["tips"]) > 0
         passed = all(checks.values())
         results.append({"scenario": sc["id"], "query": sc["query"], "passed": passed,
-                        "checks": checks, "intent": intent,
+                        "checks": checks, "intent": result["intent"],
                         "n_tool_calls": len(tool_calls), "answer_head": result["answer"][:120],
                         "elapsed": result["elapsed"]})
         (trace_dir / f'trace_{sc["id"]}.json').write_text(

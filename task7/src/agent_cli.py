@@ -286,20 +286,7 @@ class ReActAgent:
                               "thought": f"query_order 后继校验：{'无已选后继，维持现有顺序' if not official_next else '第二站已是官方后继，无需调整'}"})
         # G03：时段预算——限制每日 POI 数量（半日≤3、一日≤5、多日≤每日4）
         n_days = max(1, int(days) if days and days >= 1 else 1)
-        daily_budget = {0.5: 3, 1: 5, 1.5: 4, 2: 4, 3: 4, 3.5: 4, 4: 4, 5: 4}.get(days, 4)
-        # 日出/住宿 POI 不受时段预算裁剪（它们是多日行程的结构性锚点）
-        _anchored = set()
-        if _sunrise_poi:
-            _anchored.add(_sunrise_poi)
-        _anchored.update(p for p in ordered if any(k in p for k in ("宾馆", "酒店", "民宿")))
-        max_pois = daily_budget * n_days + len(_anchored)
-        if len(ordered) > max_pois:
-            dropped = [p for p in ordered[max_pois:] if p not in _anchored]
-            kept_tail = [p for p in ordered[max_pois:] if p in _anchored]
-            ordered = ordered[:max_pois] + kept_tail
-            special_notes.append(f"时间预算限制：已裁剪 {len(dropped)} 个景点（{', '.join(dropped[:3])}等），建议根据体力取舍")
-            trace.append({"step": "thought",
-                          "thought": f"时段预算：每日上限 {daily_budget}，总 {n_days} 天，裁剪 {len(dropped)} 个 POI"})
+        ordered = self._apply_time_budget(ordered, days, n_days, _sunrise_poi, special_notes, trace)
 
         # 天数/时段分配（P05/P06）：n_days 对 0.5/1/1.5/2/3/3.5/4/5 全部成立；
         # 2 日且模板全覆盖时沿用模板的天与时段，否则按切分块分配；半日时段封顶于上午/中午（P06）；
@@ -425,6 +412,28 @@ class ReActAgent:
                 "special_notes": special_notes, "trip_month": intent.get("month"),
                 "itinerary": itinerary, "tips": tips, "feasibility_warnings": feasibility_warnings,
                 "template_route": f'{route_res.get("route_id", "")} {route_res.get("route_title", "")}'}
+
+    def _apply_time_budget(self, ordered: list[str], days, n_days: int, _sunrise_poi,
+                           special_notes: list, trace: list) -> list[str]:
+        """G03：时段预算——限制每日 POI 数量（半日≤3、一日≤5、多日≤每日4）。
+
+        日出/住宿 POI 不受裁剪（它们是多日行程的结构性锚点）。
+        独立成方法以便 H08 消融整体禁用。
+        """
+        daily_budget = {0.5: 3, 1: 5, 1.5: 4, 2: 4, 3: 4, 3.5: 4, 4: 4, 5: 4}.get(days, 4)
+        _anchored = set()
+        if _sunrise_poi:
+            _anchored.add(_sunrise_poi)
+        _anchored.update(p for p in ordered if any(k in p for k in ("宾馆", "酒店", "民宿")))
+        max_pois = daily_budget * n_days + len(_anchored)
+        if len(ordered) > max_pois:
+            dropped = [p for p in ordered[max_pois:] if p not in _anchored]
+            kept_tail = [p for p in ordered[max_pois:] if p in _anchored]
+            ordered = ordered[:max_pois] + kept_tail
+            special_notes.append(f"时间预算限制：已裁剪 {len(dropped)} 个景点（{', '.join(dropped[:3])}等），建议根据体力取舍")
+            trace.append({"step": "thought",
+                          "thought": f"时段预算：每日上限 {daily_budget}，总 {n_days} 天，裁剪 {len(dropped)} 个 POI"})
+        return ordered
 
     def _find_lodging_poi(self, scenic: str) -> str | None:
         """G03/G05：找景区内住宿 POI（名称含宾馆/酒店/民宿/饭店，度数最高者）。"""
