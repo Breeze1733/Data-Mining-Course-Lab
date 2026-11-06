@@ -1219,3 +1219,14 @@ E01（实验5 原句级有无建议评测）→ H07 置信区间 → D02 段落�
 - **修复**：TIME_DURATION 加周上下文守卫与"晚上"负断言（住宿"三晚/两晚"时长不受影响）；
   半夜 加入 6 条时段交替模式；entity_period 时段前缀回退（groups 提为模块级，顺带消除分支内引用隐患）；
 - **回归**：冻结句级评测 P/R/F1 逐字节不变；22+3 单测全绿；report1/2/3 数字随实体统计重建，audit 70/70。
+
+---
+
+## 第5轮 U71：G06 不变量固化 + 链路暂态红根因修复 —— 完成
+
+- **G06**：行程不变量（天号连续、日内时段单调、半日封顶上午/中午、住宿固定晚上）探针 15 场景
+  零违例——固化为 evaluate_scenario 通用检查 itinerary_invariants，未来任何规划回归都会红；
+- **U71 根因**：此前 3 次"暂态 chain 失败"同源——test_collection 内 save 用裸 Path.replace，
+  Windows 下对刚关闭的临时文件偶发 WinError 5（杀毒/索引器短暂持锁）；
+  common/atomic.py 加 _replace_with_retry（5×50ms），task1 save 内联同款重试；
+  chain 连跑 3 次全绿，随机红消除。
