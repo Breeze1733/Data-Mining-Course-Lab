@@ -222,6 +222,22 @@ def main(argv=None) -> int:
                             })
 
                     cur_sent_start, cur_sent_end = sentences[si][0], sentences[si][1]
+                    # U60：处所代词紧跟同句 POI 枚举（“…慈光阁和云谷寺及北大门、西大门那里出售”）——
+                    # 此时“那里”承接整个枚举集合而非最后一个 POI（dev 证据 +1、零破坏后实施）
+                    if cls == "locative":
+                        cur_pois = sorted((e for e in pois if cur_sent_start <= e["start"] < cur_sent_end
+                                           and e["end"] <= doc_start), key=lambda e: e["start"])
+                        _gap = text[cur_pois[-1]["end"]:doc_start] if cur_pois else ""
+                        if (len(cur_pois) >= 2 and len(_gap) <= 12
+                                and not re.search(r"[，。；！？,;!?]", _gap)
+                                and any(re.fullmatch(r"[、和与及/,,\s]{1,3}", text[a["end"]:b["start"]])
+                                        for a, b in zip(cur_pois, cur_pois[1:]))):
+                            case.update({"resolution": "preceding_set", "resolution_kind": "前文POI集合",
+                                         "evidence": "处所代词紧跟同句 POI 枚举（A、B和C那里；"
+                                                     "枚举后缀可含未入池的入口/大门名）"})
+                            fh.write(json.dumps(case, ensure_ascii=False) + "\n")
+                            n_cases += 1
+                            continue
                     add_pool([e for e in pois + transports
                               if cur_sent_start <= e["start"] < cur_sent_end], "同句", False)
                     if si >= 1:
