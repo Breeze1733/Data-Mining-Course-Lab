@@ -1,0 +1,14 @@
+{
+ "title": "H01 跨任务数据契约校验",
+ "checked": [
+  "entities_refined",
+  "parsed_routes",
+  "tourist_routes",
+  "pronoun_cases",
+  "conditional_pairs",
+  "task7 itineraries",
+  "graph_nodes"
+ ],
+ "n_violations": 0,
+ "violations": []
+}

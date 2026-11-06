@@ -49,6 +49,8 @@ def build_steps(task7_mode: str) -> list:
         ("task6/src/build_graph.py", []),
         ("task6/src/verify_graph.py", []),
         ("task6/src/visualize_graph.py", []),
+        # H01 跨任务数据契约校验（边界字段一致性，只读；违例即链失败）
+        ("common/contract_check.py", []),
     ]
     if task7_mode in ("rules", "both"):
         # 静态复现：显式选择离线规则模式（提示词 §2.3），不因本机 config.json 意外联网
