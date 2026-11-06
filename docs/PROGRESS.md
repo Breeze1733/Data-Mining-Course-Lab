@@ -1018,3 +1018,13 @@ E01（实验5 原句级有无建议评测）→ H07 置信区间 → D02 段落�
 - **确认 bug**：query_order 的后继调序发生在 itinerary 构建之后——`ordered[1]` 和 `ordered[j]` 交换
   不影响已构建的行程。修复：移到天数/时段分配之前，调序结果真实影响行程内容。
 - 双模式 14/14 通过、审计 70/70。
+
+---
+
+## 第5轮 U53 续：§4.1-4 时间指标分母修正 —— 完成
+
+- `official_period_allocation` 分离两种量纲：已知分钟（`minutes`）与无时长步骤（`steps`）各自统计，
+  不再混加在同一 Counter 中（此前 60 分钟 + 2 个无步骤 = 62，量纲不一致）；
+- 输出新增 `official_time_minutes` / `official_time_steps` / `official_time_allocation_pct`（仅已知分钟占比）；
+- 黄山/颐和园验证：`minutes={}` + `steps={'未标注':111}` ——确认节点链形态的官方路线无时长信息；
+  九寨沟（日程表形态）应有非零分钟。数据与 report3 的定性分析一致。
