@@ -1,10 +1,10 @@
 {
  "n": 180,
- "accuracy_overall": 0.622,
+ "accuracy_overall": 0.628,
  "accuracy_by_class": {
   "locative": {
    "n": 45,
-   "accuracy": 0.556
+   "accuracy": 0.578
   },
   "object": {
    "n": 45,
@@ -22,7 +22,7 @@
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.667
+   "accuracy": 0.675
   },
   "test": {
    "n": 60,
@@ -30,7 +30,7 @@
   }
  },
  "errors_by_split": {
-  "dev": 40,
+  "dev": 39,
   "test": 28
  },
  "split_method": "P18 文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
@@ -298,17 +298,6 @@
    "gold": "泰安",
    "gold_kind": "景区",
    "note": "多景区游记（泰安/泰山段），“这里”指泰安当地"
-  },
-  {
-   "pronoun": "那里",
-   "class": "locative",
-   "scenic": "黄山",
-   "pred": "云谷寺",
-   "pred_kind": "POI",
-   "evidence": "同句最近POI，距离8字符",
-   "gold": "慈光阁/云谷寺/北大门/西大门",
-   "gold_kind": "集合-POI",
-   "note": "入口并列结构，“那里”指多个地点"
   },
   {
    "pronoun": "这里",
@@ -784,10 +773,10 @@
    "note": "先行词为“廊上斑驳的画”，归至长廊实体"
   }
  ],
- "kind_only_accuracy": 0.689,
+ "kind_only_accuracy": 0.694,
  "accuracy_ci95": {
-  "lo": 0.55,
-  "hi": 0.69
+  "lo": 0.555,
+  "hi": 0.695
  },
  "data_fingerprints": {
   "dataset_clean": "6fae55942575",
