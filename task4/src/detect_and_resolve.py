@@ -41,6 +41,45 @@ PRONOUN_CLASS = {
     "其中": "set",
 }
 
+# U59：名词回退的集合信号（kind 名词集合 vs 其他 的判据，dev 证据 +5）
+_PLURAL_PREFIX_RE = re.compile(r"(?:这些|那些|各[类种样]?|诸|众多|许多|很多|大片|成片|遍地的?)[一-龥]{0,4}$")
+_ENUM_GAP_RE = re.compile(r"[、和与及/,,\s]{1,3}")
+
+
+def _pseg_cut(text: str) -> list[tuple[str, str]]:
+    import jieba.posseg as pseg
+    return [(w.word, w.flag) for w in pseg.cut(text)]
+
+
+def _noun_enum_signal(text: str) -> bool:
+    """窗口内顿号/和连接的 ≥2 个普通名词 → 真集合。"""
+    if not text:
+        return False
+    pos, words = 0, []
+    for word, flag in _pseg_cut(text):
+        if flag.startswith("n") and len(word) >= 2:
+            words.append((word, pos))
+        pos += len(word)
+    return any(_ENUM_GAP_RE.fullmatch(text[pa + len(wa): pb] or "")
+               for (wa, pa), (_, pb) in zip(words, words[1:]))
+
+
+def _plural_prefix_signal(text: str, offset: int) -> bool:
+    """最近名词前紧邻复数指示词（这些松树/各种会议）→ 真集合。"""
+    return bool(text and offset > 0 and _PLURAL_PREFIX_RE.search(text[:offset]))
+
+
+def _span_set_signals(text: str) -> tuple[bool, bool]:
+    """（枚举信号, 复数指示信号）：按该 span 的最后一个普通名词位置判复数前缀。"""
+    if not text:
+        return False, False
+    pos, last = 0, None
+    for word, flag in _pseg_cut(text):
+        if flag.startswith("n") and len(word) >= 2:
+            last = (word, pos)
+        pos += len(word)
+    return _noun_enum_signal(text), (last is not None and _plural_prefix_signal(text, last[1]))
+
 
 def split_sentences(text: str) -> list[tuple[int, int, str]]:
     sents = []
@@ -318,13 +357,22 @@ def main(argv=None) -> int:
                                             case["prev_sentence"]):
                             if not text_before:
                                 continue
-                            words = [w for w, f in pseg.cut(text_before) if f.startswith("n") and len(w) >= 2]
+                            words = [w for w, f in _pseg_cut(text_before) if f.startswith("n") and len(w) >= 2]
                             if words:
                                 noun = words[-1]
                                 break
                         if noun:
-                            case.update({"resolution": f"noun:{noun}", "resolution_kind": "名词集合",
-                                         "evidence": f"最近的普通名词“{noun}”（jieba 词性）"})
+                            # U59 谱系对齐（dev 证据 +5）：jieba 回退取的是单个最近名词，
+                            # 单名词先行词按"其他"（非实体概念）判定；仅当窗口存在真集合信号
+                            # （顿号/和连接的≥2普通名词、数量词短语守卫、复数指示前缀）时才判"名词集合"——
+                            # 避免把"恭王府占地面积…其中"这类单概念先行词误标为集合。
+                            sent_prefix = case["sentence"][: doc_start - cur_sent_start]
+                            e1, p1 = _span_set_signals(sent_prefix)
+                            e2, p2 = _span_set_signals(case.get("prev_sentence") or "")
+                            kind = "名词集合" if (qty_guard or e1 or e2 or p1 or p2) else "其他"
+                            case.update({"resolution": f"noun:{noun}", "resolution_kind": kind,
+                                         "evidence": f"最近的普通名词“{noun}”（jieba 词性；"
+                                                     f"{'集合信号：数量词/枚举/复数指示' if kind == '名词集合' else '单名词无集合信号'}）"})
                         else:
                             case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
                                          "evidence": "窗口内无 POI 也无普通名词"})
