@@ -278,8 +278,21 @@ def main(argv=None) -> int:
                                          "evidence": "窗口无实体但提及住宿/餐饮设施"})
                         elif focus == "景区外":
                             # 焦点在景区外时回退主景区名方向性错误（U22）：如实记无明确先行词
-                            case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
-                                         "evidence": "句子焦点在景区外，不回退主景区名"})
+                            # U61：景区外句的概念先行词回退——同句代词前最近普通名词
+                            # （"祠堂又是一部史书,它记载了…"，dev 证据 +2/0 坏后实施）
+                            _nb = None
+                            _idx = case["sentence"].find(pron)
+                            if _idx > 0:
+                                for w, f in _pseg_cut(case["sentence"][:_idx]):
+                                    if f.startswith("n") and len(w) >= 2:
+                                        _nb = w
+                            if _nb:
+                                case.update({"resolution": f"noun:{_nb}", "resolution_kind": "其他",
+                                             "evidence": "窗口无实体且焦点在景区外，"
+                                                         "回退同句代词前最近普通名词（概念先行词）"})
+                            else:
+                                case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
+                                             "evidence": "句子焦点在景区外，不回退主景区名"})
                         else:
                             case.update({"resolution": scenic_area, "resolution_kind": "景区名",
                                          "evidence": "窗口内无实体，回退到景区名"})
