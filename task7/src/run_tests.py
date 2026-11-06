@@ -81,6 +81,30 @@ def check_multi_day(result):
     return plan.get("days") == 3 and days == {1, 2, 3}
 
 
+def check_invariants(result):
+    """G06：行程不变量（凡有计划的场景通用）——天号连续、日内时段单调、
+    半日封顶上午/中午、住宿节点固定晚上。任何一条被破坏即规划回归。"""
+    plan = result.get("plan") or {}
+    it = plan.get("itinerary", [])
+    if not it:
+        return True
+    period_order = {"上午": 0, "中午": 1, "下午": 2, "晚上": 3, "未标注时段": 4}
+    days = sorted({x["day"] for x in it})
+    if days != list(range(1, len(days) + 1)):
+        return False
+    for d in days:
+        seq = [period_order.get(x["period"], 9) for x in it if x["day"] == d]
+        if seq != sorted(seq):
+            return False
+    if plan.get("days") == 0.5:
+        if any(x["period"] not in ("上午", "中午") for x in it):
+            return False
+    for x in it:
+        if any(k in x["poi"] for k in ("宾馆", "酒店", "民宿", "饭店")) and x["period"] != "晚上":
+            return False
+    return True
+
+
 def check_must(result, expect_poi):
     """U66 验收：必去地点必须在行程中，且回答/贴士说明必去落实（识别 must 死代码退化）。"""
     plan = result.get("plan") or {}
@@ -164,6 +188,7 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
         return hit >= max(1, int(0.6 * len(pois)))
 
     checks["tools_used_in_answer"] = answer_covers_plan(result)
+    checks["itinerary_invariants"] = check_invariants(result)
     if result["plan"]:
         n_pois = len(result["plan"]["itinerary"])
         expected_n = {0.5: (3, 6), 1: (5, 9), 1.5: (6, 11), 2: (8, 13),
