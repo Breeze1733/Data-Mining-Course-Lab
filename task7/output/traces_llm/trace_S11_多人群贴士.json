@@ -22,7 +22,7 @@
   },
   {
    "step": "intent",
-   "thought": "LLM 解析失败（Remote end closed connection without response），回退规则解析",
+   "thought": "LLM 解析失败（<urlopen error _ssl.c:1011: The handshake operation timed out>），回退规则解析",
    "via": "fallback"
   },
   {
@@ -218,7 +218,7 @@
   },
   {
    "step": "render",
-   "thought": "LLM 润色失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），使用模板文案",
+   "thought": "LLM 润色失败（<urlopen error _ssl.c:1011: The handshake operation timed out>），使用模板文案",
    "via": "fallback"
   },
   {
@@ -319,5 +319,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 73.25
+ "elapsed": 120.06
 }

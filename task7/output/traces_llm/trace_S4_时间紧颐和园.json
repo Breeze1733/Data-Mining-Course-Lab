@@ -19,8 +19,37 @@
   },
   {
    "step": "intent",
-   "thought": "LLM 解析失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），回退规则解析",
-   "via": "fallback"
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "颐和园",
+    "visitor_type": null,
+    "visitor_types": [],
+    "days": 0.5,
+    "days_explicit": true,
+    "month": null,
+    "special": [],
+    "avoid": [],
+    "must": []
+   },
+   "llm": {
+    "scenic": "颐和园",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   },
+   "result": {
+    "scenic": "颐和园",
+    "visitor_type": null,
+    "visitor_types": [],
+    "days": 0.5,
+    "days_explicit": true,
+    "month": null,
+    "special": [],
+    "avoid": [],
+    "must": []
+   }
   },
   {
    "step": "action",
@@ -167,7 +196,7 @@
   },
   {
    "step": "render",
-   "thought": "LLM 润色失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），使用模板文案",
+   "thought": "LLM 润色失败（IncompleteRead(115 bytes read, 657 more expected)），使用模板文案",
    "via": "fallback"
   },
   {
@@ -266,5 +295,5 @@
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 92.33
+ "elapsed": 45.51
 }

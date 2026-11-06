@@ -21,43 +21,8 @@
   },
   {
    "step": "intent",
-   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
-   "via": "hybrid",
-   "rule": {
-    "scenic": "黄山",
-    "visitor_type": null,
-    "visitor_types": [],
-    "days": 0.5,
-    "days_explicit": true,
-    "month": null,
-    "special": [
-     "看日出"
-    ],
-    "avoid": [],
-    "must": []
-   },
-   "llm": {
-    "scenic": "黄山",
-    "visitor_type": null,
-    "days": 1,
-    "month": null,
-    "special": [
-     "看日出"
-    ]
-   },
-   "result": {
-    "scenic": "黄山",
-    "visitor_type": null,
-    "visitor_types": [],
-    "days": 0.5,
-    "days_explicit": true,
-    "month": null,
-    "special": [
-     "看日出"
-    ],
-    "avoid": [],
-    "must": []
-   }
+   "thought": "LLM 解析失败（The read operation timed out），回退规则解析",
+   "via": "fallback"
   },
   {
    "step": "thought",
@@ -208,7 +173,7 @@
   },
   {
    "step": "render",
-   "thought": "LLM 润色失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），使用模板文案",
+   "thought": "LLM 润色失败（<urlopen error _ssl.c:1011: The handshake operation timed out>），使用模板文案",
    "via": "fallback"
   },
   {
@@ -317,5 +282,5 @@
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
  },
- "elapsed": 42.63
+ "elapsed": 121.58
 }

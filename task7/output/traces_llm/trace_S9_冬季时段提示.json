@@ -19,37 +19,8 @@
   },
   {
    "step": "intent",
-   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
-   "via": "hybrid",
-   "rule": {
-    "scenic": "黄山",
-    "visitor_type": null,
-    "visitor_types": [],
-    "days": 2,
-    "days_explicit": true,
-    "month": 12,
-    "special": [],
-    "avoid": [],
-    "must": []
-   },
-   "llm": {
-    "scenic": "黄山",
-    "visitor_type": null,
-    "days": 2,
-    "month": 12,
-    "special": []
-   },
-   "result": {
-    "scenic": "黄山",
-    "visitor_type": null,
-    "visitor_types": [],
-    "days": 2,
-    "days_explicit": true,
-    "month": 12,
-    "special": [],
-    "avoid": [],
-    "must": []
-   }
+   "thought": "LLM 解析失败（The read operation timed out），回退规则解析",
+   "via": "fallback"
   },
   {
    "step": "action",
@@ -270,15 +241,15 @@
   },
   {
    "step": "render",
-   "thought": "LLM 润色失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），使用模板文案",
-   "via": "fallback"
+   "thought": "调用 LLM 润色行程文案",
+   "via": "llm"
   },
   {
    "step": "final",
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "为您规划黄山两日游，出行时段12月（参考官方路线 HS-EXTRA1-R2 冬季南门二日游）：\n第一天·上午：迎客松\n第一天·上午：始信峰（步行前往）\n第一天·中午：莲花峰（步行前往）\n第一天·下午：排云亭（步行前往）\n第一天·下午：西海（步行前往）\n第一天·晚上：西海大峡谷（步行前往）\n第一天·晚上：白云宾馆（步行前往）\n第二天·上午：北海（步行前往）\n第二天·中午：光明顶（步行前往）\n第二天·下午：天都峰（步行前往）\n第二天·下午：玉屏楼（步行前往）\n第二天·晚上：云谷寺（步行前往）\n贴士：[人群] 请个人带是必须的；[人群] 过这儿时最好挑有雾的天气,看不到谷底和深壑；[人群] 不想分开睡,经济条件也不错；[人群] 还是前山上,后山下吧\n⚠ 迎客松：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松\n⚠ 迎客松：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下\n⚠ 迎客松：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲\n⚠ 始信峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲\n说明：住宿：白云宾馆 已纳入行程（多日游建议山上住宿）",
+ "answer": "大家跟我走！\n**D1**：赏迎客松、始信峰，登莲花峰（若封山可选天都峰），经排云亭、西海到西海大峡谷，夜宿白云宾馆。\n**D2**：游北海，登光明顶，探天都峰、玉屏楼，下至云谷寺。\n\n**提示**：12月出行请确认景点开放并防寒；首访建议请导游；恐高建议前山上后山下；腿脚不便可绕行一线天。",
  "plan": {
   "scenic": "黄山",
   "days": 2,
@@ -438,5 +409,5 @@
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
  },
- "elapsed": 41.06
+ "elapsed": 78.78
 }

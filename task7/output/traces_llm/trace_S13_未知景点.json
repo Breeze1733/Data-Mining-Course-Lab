@@ -19,8 +19,37 @@
   },
   {
    "step": "intent",
-   "thought": "LLM 解析失败（The read operation timed out），回退规则解析",
-   "via": "fallback"
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "visitor_types": [],
+    "days": 1,
+    "days_explicit": true,
+    "month": null,
+    "special": [],
+    "avoid": [],
+    "must": []
+   },
+   "llm": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": []
+   },
+   "result": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "visitor_types": [],
+    "days": 1,
+    "days_explicit": true,
+    "month": null,
+    "special": [],
+    "avoid": [],
+    "must": []
+   }
   },
   {
    "step": "action",
@@ -217,7 +246,7 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家早上好！咱们今日行程：上午从沟口入园，提示不去原始森林，大半天足矣；中午游长海，下午赏五彩池、镜海；晚上打卡诺日朗、五花海，最后徒步看诺日朗瀑布。\n\n出行提示：易晕车请备好晕车药；体力有限别在芦苇海停留；恐高坐索道别睁眼；家庭出游不妨选顿丰盛中餐！",
+ "answer": "大家早！今天带大家玩九寨沟：上午咱们从沟口入园前往原始森林（提示：不去原始森林其实大半天足矣）；中午游长海；下午漫步五彩池与镜海；晚上去诺日朗、五花海，最后徒步看诺日朗瀑布。\n\n贴心提醒：晕车备好药，恐高坐索道闭眼，体力有限别停芦苇海，家庭出游建议选中餐，情侣推荐尝尝当地香辣美食！",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -334,5 +363,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 85.11
+ "elapsed": 40.13
 }

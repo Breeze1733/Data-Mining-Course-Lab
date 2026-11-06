@@ -273,6 +273,22 @@ class ReActAgent:
                      + ("；query_route 返回的路线入选" if qr_selected else
                         "；query_route 返回的路线覆盖率不足，另选覆盖最高者")
                      + ("；覆盖率不足 60%，改用图谱先后边拓扑排序" if template_cov_low else "")})
+        # 工具4：官方后继校验（P12/§4.1-3）——结果真实作用于决策：
+        # 在 itinerary 构建前调用，后继调序直接影响行程内容
+        if len(ordered) >= 2:
+            order_res = self.tools.call("query_order", {"scenic": scenic, "poi": ordered[0]}, trace)
+            succ = (order_res.get("successors") or [])
+            succ_labels = [x.get("name") if isinstance(x, dict) else str(x) for x in succ]
+            official_next = next((x for x in succ_labels if x in ordered[1:]), None)
+            if official_next and ordered[1] != official_next:
+                j = ordered.index(official_next)
+                ordered[1], ordered[j] = ordered[j], ordered[1]
+                trace.append({"step": "thought",
+                              "thought": f"query_order 后继校验：官方后继 {official_next} 原在 第{j + 1} 位，"
+                                         f"已调整至第 2 位以符合主流动线"})
+            else:
+                trace.append({"step": "thought",
+                              "thought": f"query_order 后继校验：{'无已选后继，维持现有顺序' if not official_next else '第二站已是官方后继，无需调整'}"})
         # 天数/时段分配（P05/P06）：n_days 对 0.5/1/1.5/2/3/3.5/4/5 全部成立；
         # 2 日且模板全覆盖时沿用模板的天与时段，否则按切分块分配；半日时段封顶于上午/中午（P06）；
         # 住宿节点固定晚上。天号一律写入行程，不再出现“1.5/3 天全部落第 1 天”。
@@ -329,22 +345,6 @@ class ReActAgent:
             for i, it in enumerate(itinerary):
                 it["order"] = i + 1
 
-        # 工具4：官方后继校验（P12）——结果真实作用于决策：官方后继在已选集合且
-        # 不在第二位时，将后继调至第二位；无后继信息则如实记录，不夸大
-        if len(ordered) >= 2:
-            order_res = self.tools.call("query_order", {"scenic": scenic, "poi": ordered[0]}, trace)
-            succ = (order_res.get("successors") or [])
-            succ_labels = [x.get("name") if isinstance(x, dict) else str(x) for x in succ]
-            official_next = next((x for x in succ_labels if x in ordered[1:]), None)
-            if official_next and ordered[1] != official_next:
-                j = ordered.index(official_next)
-                ordered[1], ordered[j] = ordered[j], ordered[1]
-                trace.append({"step": "thought",
-                              "thought": f"query_order 后继校验：官方后继 {official_next} 原在 第{j + 1} 位，"
-                                         f"已调整至第 2 位以符合主流动线"})
-            else:
-                trace.append({"step": "thought",
-                              "thought": f"query_order 后继校验：{'无已选后继，维持现有顺序' if not official_next else '第二站已是官方后继，无需调整'}"})
         # P6 行程可行性校验（U24 时段化）：封禁/不建议类按 U11 提示；条件文本含月份窗口时按出行月份判定——
         # 封禁类月份命中 → 升级为时段冲突；正类窗口（开放/适合/精华）且出行月不在窗口 → 出行时段提示
         feasibility_warnings = []

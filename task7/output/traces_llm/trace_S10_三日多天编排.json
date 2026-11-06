@@ -7,7 +7,9 @@
   "days": 3,
   "days_explicit": true,
   "month": null,
-  "special": [],
+  "special": [
+   "省力"
+  ],
   "avoid": [],
   "must": []
  },
@@ -19,16 +21,49 @@
   },
   {
    "step": "intent",
-   "thought": "LLM 解析失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），回退规则解析",
-   "via": "fallback"
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "visitor_types": [],
+    "days": 3,
+    "days_explicit": true,
+    "month": null,
+    "special": [],
+    "avoid": [],
+    "must": []
+   },
+   "llm": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 3,
+    "month": null,
+    "special": [
+     "省力"
+    ]
+   },
+   "result": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "visitor_types": [],
+    "days": 3,
+    "days_explicit": true,
+    "month": null,
+    "special": [
+     "省力"
+    ],
+    "avoid": [],
+    "must": []
+   }
   },
   {
    "step": "action",
-   "thought": "调用工具 query_pois，参数 {'scenic': '九寨沟', 'visitor_type': None, 'limit': 12}",
+   "thought": "调用工具 query_pois，参数 {'scenic': '九寨沟', 'visitor_type': '体力有限', 'limit': 12}",
    "tool": "query_pois",
    "args": {
     "scenic": "九寨沟",
-    "visitor_type": null,
+    "visitor_type": "体力有限",
     "limit": 12
    }
   },
@@ -53,11 +88,11 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_conditions，参数 {'scenic': '九寨沟', 'visitor_type': None}",
+   "thought": "调用工具 query_conditions，参数 {'scenic': '九寨沟', 'visitor_type': '体力有限'}",
    "tool": "query_conditions",
    "args": {
     "scenic": "九寨沟",
-    "visitor_type": null
+    "visitor_type": "体力有限"
    }
   },
   {
@@ -67,7 +102,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 3, 'days_explicit': True, 'month': None, 'special': [], 'avoid': [], 'must': []}；先查核心 POI（limit=12），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 3, 'days_explicit': True, 'month': None, 'special': ['省力'], 'avoid': [], 'must': []}；先查核心 POI（limit=12），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -237,20 +272,22 @@
   },
   {
    "step": "render",
-   "thought": "调用 LLM 润色行程文案",
-   "via": "llm"
+   "thought": "LLM 润色失败（The read operation timed out），使用模板文案",
+   "via": "fallback"
   },
   {
    "step": "final",
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "第一天从沟口入园，建议不去原始森林（其实大半天足矣），直奔长海与五彩池；第二天打卡镜海、诺日朗与诺日朗瀑布，下午漫步五花海；第三天游览树正寨、犀牛海，随后去黄龙和树正沟。提示大家：备好晕车药，体力有限别在芦苇海停留，恐高坐索道闭紧眼哦！",
+ "answer": "为您规划九寨沟三日游（参考官方路线 JZG-EXP01-R2 二日舒适游）：\n第一天·上午：沟口\n第一天·上午：原始森林（步行前往）\n第一天·中午：长海（步行前往）\n第一天·下午：五彩池（步行前往）\n第二天·上午：镜海（步行前往）\n第二天·上午：诺日朗（步行前往）\n第二天·中午：诺日朗瀑布（步行前往）\n第二天·下午：五花海（徒步前往）\n第三天·上午：树正寨（步行前往）\n第三天·上午：犀牛海（步行前往）\n第三天·中午：黄龙（步行前往）\n第三天·下午：树正沟（步行前往）\n贴士：[人群] 不要在芦苇海停留；[人群] 观光车➕缆车下)；[装备] 避免污染环境,还是文明入厕的好；[装备] 也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本\n⚠ 原始森林：不去原始森林——其实大半天足矣",
  "plan": {
   "scenic": "九寨沟",
   "days": 3,
   "visitor_type": null,
-  "special": [],
+  "special": [
+   "省力"
+  ],
   "special_notes": [],
   "trip_month": null,
   "itinerary": [
@@ -360,33 +397,21 @@
    },
    {
     "cond_type": "人群",
-    "condition": "游客为恐高",
-    "suggestion": "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满",
+    "condition": "游客为体力不足",
+    "suggestion": "观光车➕缆车下)",
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "装备条件（句内）",
+    "suggestion": "避免污染环境,还是文明入厕的好",
+    "frequency": 7
+   },
+   {
+    "cond_type": "装备",
+    "condition": "真的没有准备",
+    "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
     "frequency": 3
-   },
-   {
-    "cond_type": "人群",
-    "condition": "游客为家庭",
-    "suggestion": "三二家庭聚会,里面所使用的水果都是应季水果",
-    "frequency": 2
-   },
-   {
-    "cond_type": "人群",
-    "condition": "游客为晕车",
-    "suggestion": "买好晕车贴或者晕车药",
-    "frequency": 2
-   },
-   {
-    "cond_type": "人群",
-    "condition": "是家庭出游",
-    "suggestion": "不妨选择吃一顿丰盛的中餐",
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "游客为情侣",
-    "suggestion": "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!",
-    "frequency": 1
    }
   ],
   "feasibility_warnings": [
@@ -394,5 +419,5 @@
   ],
   "template_route": "JZG-EXP01-R2 二日舒适游"
  },
- "elapsed": 59.03
+ "elapsed": 69.69
 }
