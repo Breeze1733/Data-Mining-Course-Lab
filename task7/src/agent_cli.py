@@ -45,7 +45,7 @@ DURATION_PATTERNS = [
 ]
 SPECIAL_PATTERNS = [
     ("看日出", r"日出|朝霞"), ("避开人流", r"人少|避开|错峰|不挤"),
-    ("省力", r"省力|轻松|不累|少走|不想太累|不要太累|不想走太多"), ("红叶", r"红叶|秋色|赏秋"),
+    ("省力", r"省力|轻松|不累|少走|不想太累|不要太累|不想走太多|走路要少|少走路"), ("红叶", r"红叶|秋色|赏秋"),
     ("拍照片", r"拍照|出片|机位"), ("滑雪", r"滑雪|温泉"),
 ]
 # 出行月份（规则口径）：月份短语/季节词/节假日 → 代表月份（U24 时段可行性）
@@ -185,6 +185,14 @@ class IntentParser:
                  re.finditer(r"(?:不要去|不想去|不去|避开|别安排|别去|不想逛)\s*([一-龥A-Za-z0-9]{2,10})", query)]
         avoid += [m.group(1).strip() for m in
                   re.finditer(r"([一-龥A-Za-z0-9]{2,10})\s*就不去了?", query)]
+        # G15 否定表达变体：POI前置否定（“原始森林不要去”）、“除了X都行”、
+        # “X就别安排了”（千万/切记等副词不入捕获）
+        avoid += [m.group(1).strip() for m in
+                  re.finditer(r"([一-龥A-Za-z0-9]{2,10})(?<!千万)(?<!切记)\s*(?:不要去|别去)", query)]
+        avoid += [m.group(1).strip() for m in
+                  re.finditer(r"除了\s*([一-龥A-Za-z0-9]{2,10})\s*(?:都|以外|之外)", query)]
+        avoid += [m.group(1).strip() for m in
+                  re.finditer(r"([一-龥A-Za-z0-9]{2,10})\s*就别(?:安排|去|考虑)", query)]
         must = [m.group(1).strip() for m in
                 re.finditer(r"(?:一定要去|一定要逛|必须去|必去)\s*([一-龥A-Za-z0-9]{2,10})", query)]
         must += [m.group(1).strip() for m in
