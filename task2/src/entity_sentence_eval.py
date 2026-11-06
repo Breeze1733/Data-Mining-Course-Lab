@@ -76,7 +76,9 @@ def main() -> int:
     stats = {"POI": [0, 0, 0], "交通": [0, 0, 0], "时间": [0, 0, 0]}
     stats_oos = {"POI": [0, 0, 0]}  # 设计排除口径（根景区名/城市名）：tp/fn 单独计数
     missed, false_pos = [], []
+    sentence_stats = []  # B02：每句局部 (tp,fp,fn)，供分层报告
     for o in sample:
+        sent_stats = {"POI": [0, 0, 0], "交通": [0, 0, 0], "时间": [0, 0, 0]}
         sid, sent = o["sid"], o["sentence"]
         rid, start = o["record_id"], o["start"]
         preds = []
@@ -107,20 +109,25 @@ def main() -> int:
                             break
             if hit:
                 stats[gtype][0] += 1
+                sent_stats[gtype][0] += 1
             else:
                 stats[gtype][2] += 1
+                sent_stats[gtype][2] += 1
                 missed.append({"sid": sid, "text": gtext, "type": gtype,
                                "out_of_scope_design": gtext in OUT_OF_SCOPE,
                                "sentence": sent[:60]})
         for i, pp in enumerate(preds):
             if not used[i]:
-                stats[{"景点POI": "POI", "交通方式": "交通", "时间节点": "时间"}[pp["type"]]][1] += 1
+                _t = {"景点POI": "POI", "交通方式": "交通", "时间节点": "时间"}[pp["type"]]
+                stats[_t][1] += 1
+                sent_stats[_t][1] += 1
                 false_pos.append({"sid": sid, "text": pp["text"], "type": pp["type"],
                                   "sentence": sent[:60]})
         # 设计排除口径：根景区名/城市名的提及单独计数（判 missed 即计入该口径 FN）
         for gtext, gtype in gold.get(sid, []):
             if gtype == "POI" and gtext in OUT_OF_SCOPE and gpos_found(sent, gtext):
                 stats_oos["POI"][2] += 1
+        sentence_stats.append((o, sent_stats))
 
     result = {
         "n_sentences": len(sample),
@@ -131,6 +138,25 @@ def main() -> int:
         "false_positives": false_pos,
         "scope_note": {},
     }
+    # B02/U78：分层报告（冻结样本仅测量，不改规则）——按平台/景区/来源跨度长度
+    def _strata(keyfn, name):
+        agg = {}
+        for o, sent_stats in sentence_stats:
+            k = keyfn(o, sent_stats)
+            slot = agg.setdefault(k, {"POI": [0, 0, 0], "交通": [0, 0, 0], "时间": [0, 0, 0]})
+            for typ, tri in sent_stats.items():
+                for i in range(3):
+                    slot[typ][i] += tri[i]
+        return {"layer": name,
+                "buckets": {str(k): {"overall": prf(sum(v[0] for v in s.values()),
+                                                     sum(v[1] for v in s.values()),
+                                                     sum(v[2] for v in s.values()))}
+                            for k, s in sorted(agg.items(), key=lambda kv: str(kv[0]))}}
+    result["stratified"] = [
+        _strata(lambda o, ss: o.get("platform", "?"), "平台"),
+        _strata(lambda o, ss: o.get("scenic", o.get("scenic_area", "?")), "景区"),
+        _strata(lambda o, ss: "长句≥30" if len(o["sentence"]) >= 30 else "短句<30", "句长"),
+    ]
     tot = lambda i: sum(v[i] for v in stats.values())
     result["overall"] = prf(tot(0), tot(1), tot(2))
     result["overall"]["precision_ci95"] = wilson_ci(tot(0), tot(0) + tot(1))
