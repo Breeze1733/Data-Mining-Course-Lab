@@ -1,0 +1,112 @@
+{
+ "title": "C01 六类官方路线格式构造性反例探针（parse_routes 鲁棒性）",
+ "method": "6 类格式各构造易错变体直接喂 RouteParser.parse，断言格式识别/POI 序列/时间范围完整性",
+ "n_probes": 8,
+ "n_fail": 0,
+ "results": [
+  {
+   "id": "A1_箭头链_时段标记",
+   "format": "arrow_chain",
+   "pois": [
+    "箭竹海",
+    "熊猫海",
+    "诺日朗",
+    "五花海",
+    "珍珠滩"
+   ],
+   "n_steps": 5,
+   "passed": true,
+   "problems": []
+  },
+  {
+   "id": "A2_破折号链_时间范围",
+   "format": "arrow_chain",
+   "pois": [
+    "云谷寺",
+    "白鹅岭",
+    "光明顶",
+    "西海大峡谷"
+   ],
+   "n_steps": 4,
+   "passed": true,
+   "problems": []
+  },
+  {
+   "id": "S1_汉字编号站点",
+   "format": "numbered_stops",
+   "pois": [
+    "东宫门",
+    "仁寿殿",
+    "昆明湖",
+    "十七孔桥"
+   ],
+   "n_steps": 4,
+   "passed": true,
+   "problems": []
+  },
+  {
+   "id": "N1_数字编号列表",
+   "format": "numbered_list",
+   "pois": [
+    "树正群海",
+    "犀牛海",
+    "镜海",
+    "长海"
+   ],
+   "n_steps": 4,
+   "passed": true,
+   "problems": []
+  },
+  {
+   "id": "K1_键值路线行",
+   "format": "kv_route_line",
+   "pois": [
+    "沟口",
+    "原始森林",
+    "芳草海"
+   ],
+   "n_steps": 3,
+   "passed": true,
+   "problems": []
+  },
+  {
+   "id": "P1_散文由至句",
+   "format": "prose",
+   "pois": [
+    "慈光阁",
+    "玉屏楼",
+    "迎客松",
+    "鳌鱼峰",
+    "光明顶"
+   ],
+   "n_steps": 1,
+   "passed": true,
+   "problems": []
+  },
+  {
+   "id": "T1_主题无序段",
+   "format": "theme_prose",
+   "pois": [
+    "原始森林",
+    "天鹅海",
+    "五花海"
+   ],
+   "n_steps": 2,
+   "passed": true,
+   "problems": []
+  },
+  {
+   "id": "C4_时间范围冒号变体",
+   "format": "arrow_chain",
+   "pois": [
+    "玉屏楼",
+    "鳌鱼峰",
+    "天海",
+    "光明顶"
+   ],
+   "n_steps": 4,
+   "passed": true,
+   "problems": []
+  }
+ ]
+}
