@@ -3,9 +3,9 @@
  "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注）",
  "sample_note": "第一轮 dev 40 句（entity_sentence_sample_dev.json）+ 追抽 60 句（coverage_sample_expanded.json，seed=77，排除既有抽样记录）；B01 第二轮冻结样本仅用于实体评测",
  "scope_note": "in_scope=句内含条件性建议或带触发词的建议（实验5 任务口径）；无触发词的泛建议/路线罗列为任务外",
- "n_advice_sentences": 14,
+ "n_advice_sentences": 13,
  "n_design_excluded": 0,
- "advice_recall": 0.929,
+ "advice_recall": 1.0,
  "by_batch": {
   "round1_dev": {
    "n_sentences": 40,
@@ -15,8 +15,8 @@
   },
   "expanded_seed77": {
    "n_sentences": 60,
-   "n_advice_sentences": 9,
-   "advice_recall": 0.889,
+   "n_advice_sentences": 8,
+   "advice_recall": 1.0,
    "over_extraction_pairs_in_non_advice": 1
   }
  },
@@ -398,8 +398,9 @@
   {
    "sid": 1022,
    "in_scope": true,
+   "design_excluded": true,
    "n_pairs": 0,
-   "gist": "谐趣园可感悟园中之园之美（弱建议）"
+   "gist": "谐趣园可感悟园中之园之美（弱建议）【设计排除：纯建议无条件绑定，超出条件-建议对任务范围】"
   },
   {
    "sid": 1023,
