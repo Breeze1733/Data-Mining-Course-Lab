@@ -203,6 +203,18 @@ def main() -> int:
         t = _norm_cond(m["condition_text"])[:4]
         return "NEG" if re.search(r"^(不要|不去|别|切勿|避免|慎|忌|没带|没有带|没有|不宜|不建议)", t) else "POS"
 
+    # 代表建议选优：代表成员的建议不一定最可操作（如“避暑旅游”弱于“携带保暖衣物”）。
+    # 动作信号 > 成员频次 > 长度，从全组建议中选代表落图。
+    _SUGG_ACT = re.compile(
+        r"(?:不要|别去|别走|千万|建议|记得|最好|需要|可以尝试|避开|注意|慎|宜|忌|"
+        r"带[上着]?|穿|涂|订|预约|乘|坐|尝|早点|提前|步行|前往|游览|下山|上山|错峰|托运)")
+
+    def _best_suggestion(members) -> str:
+        cands = [(x.get("frequency", 1), x["suggestion_text"]) for x in members if x.get("suggestion_text")]
+        if not cands:
+            return ""
+        return max(cands, key=lambda fc: (bool(_SUGG_ACT.search(fc[1])), fc[0], len(fc[1])))[1]
+
     clusters: list[dict] = []
     reps: list[tuple[str, str, str, str, set]] = []
     for m in mapping:
@@ -254,7 +266,7 @@ def main() -> int:
                                  "condition": ct[:60], "suggestion": sg[:60]})
             G.add_node(cn, kind="条件", name=rep["condition_text"][:30],
                        label=f'[{rep["condition_type"]}|{rep["pattern"].split("_")[0]}] {rep["condition_text"][:24]}',
-                       cond_type=rep["condition_type"], suggestion=rep["suggestion_text"][:100],
+                       cond_type=rep["condition_type"], suggestion=_best_suggestion(members)[:100],
                        frequency=sum(x["frequency"] for x in members),
                        variants=json.dumps(seen_cond, ensure_ascii=False),
                        suggestions=json.dumps(seen_sugg, ensure_ascii=False),
