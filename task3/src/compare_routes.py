@@ -346,6 +346,11 @@ def main() -> int:
 
     tau_sens = {scenic: {3: [], 5: [], 7: []} for scenic in official}
 
+    # C08 扩展：聚合规则敏感性——同一批 (游客, 官方路线) tau 对，按三种聚合规则汇总：
+    # best（择优匹配，主口径）／mean（全部有效对均值）／first（仅第一条官方路线）。
+    # 择优匹配天然乐观，须与另两种口径并列呈现，避免乐观解释。
+    tau_agg = {scenic: {r: [] for r in ("best", "mean", "first")} for scenic in official}
+
     for scenic, officials in official.items():
 
         official_pois = list(dict.fromkeys(poi for o in officials for poi in o["norm_sequence"]))
@@ -387,6 +392,29 @@ def main() -> int:
             if best_tau is not None:
 
                 taus.append(best_tau)
+
+            # C08 扩展：聚合规则敏感性（本轮游客路线的全部有效 tau 对）
+            all_taus = []
+            for o in officials:
+                o_set = set(o["norm_sequence"])
+                common = [q for q in o["norm_sequence"] if q in tset]
+                t_common = [q for q in t["distinct_pois"] if q in o_set]
+                if len(common) >= 5:
+                    tau = kendall_tau(t_common, common)
+                    if tau == tau:
+                        all_taus.append(tau)
+            if all_taus:
+                tau_agg[scenic]["best"].append(max(all_taus))
+                tau_agg[scenic]["mean"].append(sum(all_taus) / len(all_taus))
+            # first：仅对第一条官方路线（固定参考，不择优；每条游客独立计算）
+            o = officials[0]
+            o_set = set(o["norm_sequence"])
+            common = [q for q in o["norm_sequence"] if q in tset]
+            t_common = [q for q in t["distinct_pois"] if q in o_set]
+            if len(common) >= 5:
+                tau_first = kendall_tau(t_common, common)
+                if tau_first == tau_first:
+                    tau_agg[scenic]["first"].append(tau_first)
 
             # C08：阈值敏感性——不同公共 POI 下限下的最佳 tau（供稳健性查看）
 
@@ -469,6 +497,13 @@ def main() -> int:
             "official_time_basis": "路线标注时长（分钟，已知）+ 无时长步骤数（分别统计）",
 
             "tourist_time_basis": "文本时段词提及频次",
+
+            # C08 扩展：聚合规则敏感性（择优匹配天然乐观，与 mean/first 并列呈现）
+            "tau_aggregation_sensitivity": {
+                r: {"n": len(tau_agg[scenic][r]),
+                    "mean": round(sum(tau_agg[scenic][r]) / len(tau_agg[scenic][r]), 3)
+                    if tau_agg[scenic][r] else None}
+                for r in ("best", "mean", "first")},
 
             "tau_sensitivity": {str(thr): {
 

@@ -60,6 +60,20 @@
    "official_has_time_info": true,
    "official_time_basis": "路线标注时长（分钟，已知）+ 无时长步骤数（分别统计）",
    "tourist_time_basis": "文本时段词提及频次",
+   "tau_aggregation_sensitivity": {
+    "best": {
+     "n": 84,
+     "mean": 0.68
+    },
+    "mean": {
+     "n": 84,
+     "mean": 0.326
+    },
+    "first": {
+     "n": 75,
+     "mean": 0.464
+    }
+   },
    "tau_sensitivity": {
     "3": {
      "n": 84,
@@ -158,6 +172,20 @@
    "official_has_time_info": false,
    "official_time_basis": "路线标注时长（分钟，已知）+ 无时长步骤数（分别统计）",
    "tourist_time_basis": "文本时段词提及频次",
+   "tau_aggregation_sensitivity": {
+    "best": {
+     "n": 53,
+     "mean": 0.29
+    },
+    "mean": {
+     "n": 53,
+     "mean": -0.054
+    },
+    "first": {
+     "n": 6,
+     "mean": -0.141
+    }
+   },
    "tau_sensitivity": {
     "3": {
      "n": 60,
@@ -235,6 +263,20 @@
    "official_has_time_info": false,
    "official_time_basis": "路线标注时长（分钟，已知）+ 无时长步骤数（分别统计）",
    "tourist_time_basis": "文本时段词提及频次",
+   "tau_aggregation_sensitivity": {
+    "best": {
+     "n": 82,
+     "mean": 0.525
+    },
+    "mean": {
+     "n": 82,
+     "mean": 0.074
+    },
+    "first": {
+     "n": 0,
+     "mean": null
+    }
+   },
    "tau_sensitivity": {
     "3": {
      "n": 82,
