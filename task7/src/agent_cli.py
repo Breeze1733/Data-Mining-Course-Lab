@@ -249,6 +249,10 @@ class ReActAgent:
                     kept.append(poi)
             selected = kept
             trace.append({"step": "thought", "thought": f"不去地点过滤：移除 {removed_by_avoid or '无'}"})
+            # G07 最小放宽建议：避开较多导致行程明显精简时，给出可放宽方向（不替用户放宽）
+            if len(removed_by_avoid) >= 2 and len(selected) <= 3:
+                special_notes.append("您避开的景点较多，行程较精简；"
+                                     "如需更丰富的安排，可放宽部分\"不去\"地点后再试")
         # U66：必去地点落实（G02b 后半——此前 must 仅抽取、从未作用于规划）。
         # 已选/解析到的必去项一律进入豁免名单（must_keep），豁免时段预算裁剪（硬约束优先，G04）；
         # 解析失败如实说明。
