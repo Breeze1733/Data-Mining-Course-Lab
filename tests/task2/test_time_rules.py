@@ -122,6 +122,24 @@ class TimeRuleTests(unittest.TestCase):
         items = self.candidates("下午一点到达")
         self.assertEqual(items[0].normalized, "13:00")
 
+    def test_b07_weekday_not_duration(self) -> None:
+        """U70 反例：周X晚上不抽"五晚"时长（只出时段词）；住宿"三晚"仍是时长。"""
+        for text in ("周五晚上", "周二早上", "周日晚上"):
+            items = self.candidates(text)
+            self.assertFalse([i for i in items if i.subtype == "时长"],
+                             f"{text} 不应抽出时长实体")
+        items = self.candidates("周五晚上")
+        self.assertEqual([i.normalized for i in items], ["晚上"])
+        items = self.candidates("住宿三晚")
+        durations = [item for item in items if item.subtype == "时长"]
+        self.assertEqual(durations[0].normalized, "3晚")
+
+    def test_b07_midnight_is_extracted(self) -> None:
+        """U70 反例：半夜X点可抽出（此前 半夜 不在时段词表，12点误归中午）。"""
+        items = self.candidates("半夜12点")
+        self.assertTrue(items, "半夜12点应抽出时刻实体")
+        self.assertEqual(items[0].subtype, "时刻")
+
 
 if __name__ == "__main__":
     unittest.main()
