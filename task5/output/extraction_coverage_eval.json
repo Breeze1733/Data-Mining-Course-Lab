@@ -1,18 +1,26 @@
 {
- "n_sentences": 40,
+ "n_sentences": 100,
  "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注）",
- "sample_note": "使用第一轮抽样（entity_sentence_sample_dev.json，开发历史）；B01 第二轮冻结样本仅用于实体评测",
+ "sample_note": "第一轮 dev 40 句（entity_sentence_sample_dev.json）+ 追抽 60 句（coverage_sample_expanded.json，seed=77，排除既有抽样记录）；B01 第二轮冻结样本仅用于实体评测",
  "scope_note": "in_scope=句内含条件性建议或带触发词的建议（实验5 任务口径）；无触发词的泛建议/路线罗列为任务外",
- "n_advice_sentences": 6,
- "advice_recall": 0.833,
- "unmatched_advice": [
-  {
-   "sid": 23,
-   "gist": "玩黄龙的话住松潘古城（海拔低、配套全）",
-   "sentence": "其他参考:其实也看到很多游记里推荐玩黄龙的话,住在 松潘 古城,那里海拔相对比较低,而且商业配套更丰富,那里还是一处人文"
+ "n_advice_sentences": 14,
+ "n_design_excluded": 0,
+ "advice_recall": 0.929,
+ "by_batch": {
+  "round1_dev": {
+   "n_sentences": 40,
+   "n_advice_sentences": 5,
+   "advice_recall": 1.0,
+   "over_extraction_pairs_in_non_advice": 2
+  },
+  "expanded_seed77": {
+   "n_sentences": 60,
+   "n_advice_sentences": 9,
+   "advice_recall": 0.889,
+   "over_extraction_pairs_in_non_advice": 1
   }
- ],
- "over_extraction_pairs_in_non_advice": 2,
+ },
+ "over_extraction_pairs_in_non_advice": 3,
  "detail": [
   {
    "sid": 0,
@@ -155,8 +163,9 @@
   {
    "sid": 23,
    "in_scope": true,
+   "design_excluded": true,
    "n_pairs": 0,
-   "gist": "玩黄龙的话住松潘古城（海拔低、配套全）"
+   "gist": "玩黄龙的话住松潘古城（海拔低、配套全）【设计排除：他景区建议，归属过滤不产出】"
   },
   {
    "sid": 24,
@@ -250,6 +259,366 @@
   },
   {
    "sid": 39,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1000,
+   "in_scope": true,
+   "n_pairs": 1,
+   "gist": "体力最充沛时看中线最好、错峰人少"
+  },
+  {
+   "sid": 1001,
+   "in_scope": true,
+   "n_pairs": 1,
+   "gist": "没体力的可以不下车、座车右侧可以在车上看"
+  },
+  {
+   "sid": 1002,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1003,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1004,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1005,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1006,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1007,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1008,
+   "in_scope": true,
+   "n_pairs": 1,
+   "gist": "高反出现时路上随时休息补氧"
+  },
+  {
+   "sid": 1009,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1010,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1011,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1012,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1013,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1014,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1015,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1016,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1017,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1018,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1019,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1020,
+   "in_scope": true,
+   "n_pairs": 1,
+   "gist": "只要走一条涵盖3块区域的路线即可领略全貌"
+  },
+  {
+   "sid": 1021,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1022,
+   "in_scope": true,
+   "n_pairs": 0,
+   "gist": "谐趣园可感悟园中之园之美（弱建议）"
+  },
+  {
+   "sid": 1023,
+   "in_scope": true,
+   "n_pairs": 1,
+   "gist": "后湖步道偏窄，带老人小孩慎选"
+  },
+  {
+   "sid": 1024,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1025,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1026,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1027,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1028,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1029,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1030,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1031,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1032,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1033,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": "泛化陈述（必须优先做的两件事，非条件建议）——初判误触发，如实修正"
+  },
+  {
+   "sid": 1034,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1035,
+   "in_scope": true,
+   "n_pairs": 1,
+   "gist": "注意北京很多景点周一不开放（条件规定）"
+  },
+  {
+   "sid": 1036,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1037,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1038,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1039,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1040,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1041,
+   "in_scope": true,
+   "n_pairs": 1,
+   "gist": "如果没有打卡天都峰的执念、想轻松徒步，推荐这条路线"
+  },
+  {
+   "sid": 1042,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1043,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1044,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1045,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1046,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1047,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1048,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1049,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1050,
+   "in_scope": true,
+   "n_pairs": 2,
+   "gist": "需乘坐新国线登山车，私家车不允许进入（条件规定）"
+  },
+  {
+   "sid": 1051,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1052,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1053,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1054,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1055,
+   "in_scope": false,
+   "n_pairs": 1,
+   "gist": ""
+  },
+  {
+   "sid": 1056,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1057,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1058,
+   "in_scope": false,
+   "n_pairs": 0,
+   "gist": ""
+  },
+  {
+   "sid": 1059,
    "in_scope": false,
    "n_pairs": 0,
    "gist": ""
