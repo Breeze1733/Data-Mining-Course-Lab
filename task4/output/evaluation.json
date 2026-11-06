@@ -1,6 +1,6 @@
 {
  "n": 180,
- "accuracy_overall": 0.639,
+ "accuracy_overall": 0.65,
  "accuracy_by_class": {
   "locative": {
    "n": 45,
@@ -12,7 +12,7 @@
   },
   "person": {
    "n": 45,
-   "accuracy": 0.644
+   "accuracy": 0.689
   },
   "set": {
    "n": 45,
@@ -22,16 +22,16 @@
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.692
+   "accuracy": 0.7
   },
   "test": {
    "n": 60,
-   "accuracy": 0.533
+   "accuracy": 0.55
   }
  },
  "errors_by_split": {
-  "dev": 37,
-  "test": 28
+  "dev": 36,
+  "test": 27
  },
  "split_method": "P18 文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
  "errors": [
@@ -218,17 +218,6 @@
    "pred": "travel_party",
    "pred_kind": "同行者",
    "evidence": "一手游记默认指作者及同行者",
-   "gold": "挑山工",
-   "gold_kind": "他人",
-   "note": "承前句挑山工重担语境，“对比他们”指挑山工"
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "黄山",
-   "pred": "facility",
-   "pred_kind": "设施",
-   "evidence": "“他们家/后院/店里”指店家设施",
    "gold": "馄饨店主一家",
    "gold_kind": "他人",
    "note": ""
@@ -300,17 +289,6 @@
    "note": "同句“西海岸景区”，多景区游记（三清山段）"
   },
   {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "黄山",
-   "pred": "travel_party",
-   "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
-   "gold": "上山的游客",
-   "gold_kind": "他人",
-   "note": ""
-  },
-  {
    "pronoun": "它",
    "class": "object",
    "scenic": "黄山",
@@ -338,7 +316,7 @@
    "scenic": "黄山",
    "pred": "other_person",
    "pred_kind": "他人",
-   "evidence": "句中含他人角色词且无同行者信号",
+   "evidence": "他人指代跟随信号：代词紧邻人物词“游客”",
    "gold": "光明顶/迎客松等景点",
    "gold_kind": "集合-POI",
    "note": "人称代词指景点集合，类别跨越 person→POI 集合"
@@ -404,7 +382,7 @@
    "scenic": "九寨沟",
    "pred": "other_person",
    "pred_kind": "他人",
-   "evidence": "前句含他人角色词且本窗口无同行者信号",
+   "evidence": "他人指代跟随信号：代词紧邻人物词“阿姨”",
    "gold": "同行者",
    "gold_kind": "同行者",
    "note": "前句“他们”即同行队伍"
@@ -441,6 +419,28 @@
    "gold": "白石海",
    "gold_kind": "POI",
    "note": "“倒映其中”指白石海湖面（前句明名），参照第114例口径"
+  },
+  {
+   "pronoun": "他们",
+   "class": "person",
+   "scenic": "九寨沟",
+   "pred": "travel_party",
+   "pred_kind": "同行者",
+   "evidence": "一手游记默认指作者及同行者",
+   "gold": "图旅影像馆",
+   "gold_kind": "设施",
+   "note": "“他们家”指租赁商铺店家"
+  },
+  {
+   "pronoun": "他们",
+   "class": "person",
+   "scenic": "九寨沟",
+   "pred": "travel_party",
+   "pred_kind": "同行者",
+   "evidence": "一手游记默认指作者及同行者",
+   "gold": "硬石餐厅",
+   "gold_kind": "设施",
+   "note": "“他们家招牌”指餐厅店家"
   },
   {
    "pronoun": "这里",
@@ -597,17 +597,6 @@
    "note": "“这里的消费”指等位就餐的餐厅"
   },
   {
-   "pronoun": "她们",
-   "class": "person",
-   "scenic": "九寨沟",
-   "pred": "travel_party",
-   "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
-   "gold": "同路几个小姑娘",
-   "gold_kind": "他人",
-   "note": "前句“遇见…几个小姑娘”，非作者队伍"
-  },
-  {
    "pronoun": "那边",
    "class": "locative",
    "scenic": "九寨沟",
@@ -628,17 +617,6 @@
    "gold": "718联合厂拆分后的各厂",
    "gold_kind": "集合-其他",
    "note": ""
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "颐和园",
-   "pred": "travel_party",
-   "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
-   "gold": "等879路的一队人",
-   "gold_kind": "他人",
-   "note": "同句“站了一队人”"
   },
   {
    "pronoun": "它",
@@ -751,10 +729,10 @@
    "note": "先行词为“廊上斑驳的画”，归至长廊实体"
   }
  ],
- "kind_only_accuracy": 0.706,
+ "kind_only_accuracy": 0.717,
  "accuracy_ci95": {
-  "lo": 0.566,
-  "hi": 0.705
+  "lo": 0.578,
+  "hi": 0.716
  },
  "data_fingerprints": {
   "dataset_clean": "6fae55942575",
