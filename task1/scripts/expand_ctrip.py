@@ -67,7 +67,16 @@ def stamp():
 def save(path,data):
  temp=path.with_suffix(path.suffix+'.tmp')
  temp.write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8')
- temp.replace(path)
+ # U71：Windows 下 Path.replace 对刚关闭的临时文件偶发 WinError 5（杀毒/索引器短暂持锁），
+ # 曾致 unittest 随机红——小退避重试后放弃
+ for _i in range(5):
+  try:
+   temp.replace(path)
+   break
+  except PermissionError:
+   if _i==4:
+    raise
+   time.sleep(0.05)
 
 def get(url):
  global NEXT_REQUEST
