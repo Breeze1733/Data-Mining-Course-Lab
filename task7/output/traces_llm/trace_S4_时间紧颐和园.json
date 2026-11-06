@@ -19,37 +19,8 @@
   },
   {
    "step": "intent",
-   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
-   "via": "hybrid",
-   "rule": {
-    "scenic": "颐和园",
-    "visitor_type": null,
-    "visitor_types": [],
-    "days": 0.5,
-    "days_explicit": true,
-    "month": null,
-    "special": [],
-    "avoid": [],
-    "must": []
-   },
-   "llm": {
-    "scenic": "颐和园",
-    "visitor_type": null,
-    "days": 1,
-    "month": null,
-    "special": []
-   },
-   "result": {
-    "scenic": "颐和园",
-    "visitor_type": null,
-    "visitor_types": [],
-    "days": 0.5,
-    "days_explicit": true,
-    "month": null,
-    "special": [],
-    "avoid": [],
-    "must": []
-   }
+   "thought": "LLM 解析失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），回退规则解析",
+   "via": "fallback"
   },
   {
    "step": "action",
@@ -146,7 +117,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -160,7 +131,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -188,7 +159,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "thought",
@@ -196,15 +167,15 @@
   },
   {
    "step": "render",
-   "thought": "调用 LLM 润色行程文案",
-   "via": "llm"
+   "thought": "LLM 润色失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），使用模板文案",
+   "via": "fallback"
   },
   {
    "step": "final",
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家上午好！咱们上午先登万寿山、访佛香阁，学生朋友记得拜拜“逢考必过”；老人和体力差的别爬中轴，去画中游或乘船过湖更省力。中午漫步昆明湖与西堤，带娃走平坦西线更轻松，最后游览长廊。提醒大家，出行装备请慎重考虑，穿双舒服的鞋，咱们出发！",
+ "answer": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 2026清明反向遛弯路线）：\n上午：万寿山\n上午：佛香阁（步行前往）\n中午：昆明湖（步行前往）\n中午：西堤（步行前往）\n中午：长廊（步行前往）\n贴士：[人群] 儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途；[人群] 别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果；[人群] 拜一下:来都来了,逢考必过；[人群] 不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明",
  "plan": {
   "scenic": "颐和园",
   "days": 0.5,
@@ -295,5 +266,5 @@
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 23.19
+ "elapsed": 92.33
 }

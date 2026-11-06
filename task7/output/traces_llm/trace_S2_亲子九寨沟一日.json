@@ -72,7 +72,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 8 个 POI：五花海、诺日朗、长海、诺日朗瀑布、原始森林、沟口"
+   "summary": "返回 8 个 POI：五花海、长海、诺日朗、诺日朗瀑布、五彩池、原始森林"
   },
   {
    "step": "action",
@@ -170,7 +170,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -184,7 +184,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 7 条条件建议"
+   "summary": "返回 8 条条件建议"
   },
   {
    "step": "action",
@@ -198,7 +198,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 7 条条件建议"
   },
   {
    "step": "action",
@@ -226,7 +226,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 7 条条件建议"
   },
   {
    "step": "action",
@@ -256,7 +256,7 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "小朋友们，咱们上午从沟口入园，提示不去原始森林——其实大半天足矣！中午赏长海，下午看五彩池和镜海，晚上逛诺日朗、五花海，徒步看诺日朗瀑布。\n出游提示：记得文明入厕避免污染环境；没带吃的也别为省钱冒险不吃，身体是根本；就算老练司机加水休息走这条路也格外小心哦！",
+ "answer": "大家早上好！咱们带娃玩九寨沟：上午从**沟口**入园，提醒大家**不去原始森林**——其实大半天足矣；中午游览**长海**；下午看绚丽的**五彩池**与**镜海**；晚上经**诺日朗**，漫步**五花海**并打卡壮观的**诺日朗瀑布**。\n\n贴心提示：请文明入厕避免污染；也别为省几块钱冒险不吃，好的身体才是一切的根本！",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -342,12 +342,6 @@
     "condition": "真的没有准备",
     "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
     "frequency": 3
-   },
-   {
-    "cond_type": "装备",
-    "condition": "为了加水和休息",
-    "suggestion": "就算再老练的司机,走这条路,都需格外小心",
-    "frequency": 1
    }
   ],
   "feasibility_warnings": [
@@ -355,5 +349,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 17.32
+ "elapsed": 24.1
 }

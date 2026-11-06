@@ -19,37 +19,8 @@
   },
   {
    "step": "intent",
-   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
-   "via": "hybrid",
-   "rule": {
-    "scenic": "未知",
-    "visitor_type": null,
-    "visitor_types": [],
-    "days": 1,
-    "days_explicit": true,
-    "month": null,
-    "special": [],
-    "avoid": [],
-    "must": []
-   },
-   "llm": {
-    "scenic": "未知",
-    "visitor_type": null,
-    "days": 1,
-    "month": null,
-    "special": []
-   },
-   "result": {
-    "scenic": "未知",
-    "visitor_type": null,
-    "visitor_types": [],
-    "days": 1,
-    "days_explicit": true,
-    "month": null,
-    "special": [],
-    "avoid": [],
-    "must": []
-   }
+   "thought": "LLM 解析失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），回退规则解析",
+   "via": "fallback"
   },
   {
    "step": "thought",
@@ -62,5 +33,5 @@
  ],
  "answer": "抱歉，当前仅支持 黄山/九寨沟/颐和园 三个景区的规划。您可以试试：“带老人颐和园半日游”“九寨沟亲子一日游”“黄山两日看日出”。",
  "plan": null,
- "elapsed": 4.13
+ "elapsed": 33.56
 }

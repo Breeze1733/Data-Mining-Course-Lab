@@ -249,6 +249,7 @@ class ReActAgent:
         template_cov_low = best_cov < 0.6
         template_pos = best_pos if not template_cov_low else {}
         template = best_route["route_title"] if best_route else ""
+        _sunrise_poi = None
         ordered = self._order_pois(scenic, selected, template_pos)
         if removed_by_avoid:
             special_notes.append("已按您的要求避开：" + "、".join(removed_by_avoid))
@@ -258,6 +259,7 @@ class ReActAgent:
         if "看日出" in (intent.get("special") or []) and days and days >= 2:
             sp = self._find_sunrise_poi(scenic, ordered)
             if sp:
+                _sunrise_poi = sp
                 ordered.remove(sp)
                 n_days0 = max(1, int(days) if days and days >= 1 else 1)
                 insert_at = min((n_days0 - 1) * ((len(ordered) + 1 + n_days0 - 1) // n_days0), len(ordered))
@@ -308,6 +310,25 @@ class ReActAgent:
                     x["poi"] == poi and x["visitor_fit"] > 0 for x in pois_res["pois"]) else "")
                 + ("，建议宿此" if is_lodging else ""),
             })
+        # §4.1-2：住宿/日出 天号与时段覆盖——保证"前晚住宿→次日清晨观景"的时间先后
+        if days and days >= 2:
+            PERIOD_ORD = {"上午": 0, "中午": 1, "下午": 2, "晚上": 3}
+            # 住宿 → 第 n_days-1 天晚上（前晚住宿）
+            for it in itinerary:
+                if any(k in it["poi"] for k in ("宾馆", "酒店", "民宿")):
+                    it["day"] = max(1, n_days - 1)
+                    it["period"] = "晚上"
+            # 日出 → 第 n_days 天上午
+            if _sunrise_poi:
+                for it in itinerary:
+                    if it["poi"] == _sunrise_poi:
+                        it["day"] = n_days
+                        it["period"] = "上午"
+            # 日内按时段排序（保证单调性）
+            itinerary.sort(key=lambda x: (x["day"], PERIOD_ORD.get(x["period"], 9)))
+            for i, it in enumerate(itinerary):
+                it["order"] = i + 1
+
         # 工具4：官方后继校验（P12）——结果真实作用于决策：官方后继在已选集合且
         # 不在第二位时，将后继调至第二位；无后继信息则如实记录，不夸大
         if len(ordered) >= 2:

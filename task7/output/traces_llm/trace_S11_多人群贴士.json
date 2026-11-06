@@ -10,9 +10,7 @@
   "days": 1,
   "days_explicit": true,
   "month": null,
-  "special": [
-   "省力"
-  ],
+  "special": [],
   "avoid": [],
   "must": []
  },
@@ -24,47 +22,8 @@
   },
   {
    "step": "intent",
-   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
-   "via": "hybrid",
-   "rule": {
-    "scenic": "九寨沟",
-    "visitor_type": "老人",
-    "visitor_types": [
-     "老人",
-     "孩子"
-    ],
-    "days": 1,
-    "days_explicit": true,
-    "month": null,
-    "special": [],
-    "avoid": [],
-    "must": []
-   },
-   "llm": {
-    "scenic": "九寨沟",
-    "visitor_type": "亲子",
-    "days": 1,
-    "month": null,
-    "special": [
-     "省力"
-    ]
-   },
-   "result": {
-    "scenic": "九寨沟",
-    "visitor_type": "老人",
-    "visitor_types": [
-     "老人",
-     "孩子"
-    ],
-    "days": 1,
-    "days_explicit": true,
-    "month": null,
-    "special": [
-     "省力"
-    ],
-    "avoid": [],
-    "must": []
-   }
+   "thought": "LLM 解析失败（Remote end closed connection without response），回退规则解析",
+   "via": "fallback"
   },
   {
    "step": "action",
@@ -82,7 +41,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 8 个 POI：五花海、诺日朗、长海、诺日朗瀑布、原始森林、沟口"
+   "summary": "返回 8 个 POI：五花海、长海、诺日朗、诺日朗瀑布、五彩池、原始森林"
   },
   {
    "step": "action",
@@ -117,7 +76,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': '老人', 'visitor_types': ['老人', '孩子'], 'days': 1, 'days_explicit': True, 'month': None, 'special': ['省力'], 'avoid': [], 'must': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': '老人', 'visitor_types': ['老人', '孩子'], 'days': 1, 'days_explicit': True, 'month': None, 'special': [], 'avoid': [], 'must': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -181,7 +140,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -195,7 +154,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 7 条条件建议"
+   "summary": "返回 8 条条件建议"
   },
   {
    "step": "action",
@@ -209,7 +168,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 7 条条件建议"
   },
   {
    "step": "action",
@@ -237,7 +196,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 7 条条件建议"
   },
   {
    "step": "action",
@@ -259,22 +218,20 @@
   },
   {
    "step": "render",
-   "thought": "调用 LLM 润色行程文案",
-   "via": "llm"
+   "thought": "LLM 润色失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），使用模板文案",
+   "via": "fallback"
   },
   {
    "step": "final",
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "叔叔阿姨好！咱们九寨沟省力游：上午从沟口入园，提示不去原始森林，大半天足矣；中午游长海；下午看五彩池、镜海；晚上去诺日朗、五花海与诺日朗瀑布。提示司机行车格外小心；请大家文明入厕防污染，路上千万别为了省钱不吃饭，身体才是根本！",
+ "answer": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 一日精华游）：\n上午：沟口\n上午：原始森林（步行前往）\n中午：长海（步行前往）\n下午：五彩池（步行前往）\n下午：镜海（步行前往）\n晚上：诺日朗（步行前往）\n晚上：五花海（步行前往）\n晚上：诺日朗瀑布（徒步前往）\n贴士：[装备] 避免污染环境,还是文明入厕的好；[装备] 也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本\n⚠ 原始森林：不去原始森林——其实大半天足矣",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
   "visitor_type": "老人",
-  "special": [
-   "省力"
-  ],
+  "special": [],
   "special_notes": [],
   "trip_month": null,
   "itinerary": [
@@ -355,12 +312,6 @@
     "condition": "真的没有准备",
     "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
     "frequency": 3
-   },
-   {
-    "cond_type": "装备",
-    "condition": "为了加水和休息",
-    "suggestion": "就算再老练的司机,走这条路,都需格外小心",
-    "frequency": 1
    }
   ],
   "feasibility_warnings": [
@@ -368,5 +319,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 21.11
+ "elapsed": 73.25
 }

@@ -24,49 +24,8 @@
   },
   {
    "step": "intent",
-   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
-   "via": "hybrid",
-   "rule": {
-    "scenic": "颐和园",
-    "visitor_type": "老人",
-    "visitor_types": [
-     "老人",
-     "体力有限"
-    ],
-    "days": 0.5,
-    "days_explicit": true,
-    "month": null,
-    "special": [
-     "省力"
-    ],
-    "avoid": [],
-    "must": []
-   },
-   "llm": {
-    "scenic": "颐和园",
-    "visitor_type": "老人",
-    "days": 1,
-    "month": null,
-    "special": [
-     "省力"
-    ]
-   },
-   "result": {
-    "scenic": "颐和园",
-    "visitor_type": "老人",
-    "visitor_types": [
-     "老人",
-     "体力有限"
-    ],
-    "days": 0.5,
-    "days_explicit": true,
-    "month": null,
-    "special": [
-     "省力"
-    ],
-    "avoid": [],
-    "must": []
-   }
+   "thought": "LLM 解析失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），回退规则解析",
+   "via": "fallback"
   },
   {
    "step": "thought",
@@ -187,7 +146,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -201,7 +160,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -231,7 +190,7 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "叔叔阿姨好！咱们上午入园先游万寿山，别走中轴线爬山太累，直接去半山腰的画中游俯瞰湖景、远眺西山。中午前往佛香阁，体力好可登，累了咱就不登；接着乘船过昆明湖，省体力还能看全景，最后漫步西堤，边走边吹风，一路平缓又省心！",
+ "answer": "叔叔阿姨上午好！咱们先到万寿山，别走中轴线爬山太累，直接去半山腰的画中游，俯瞰湖景远眺西山；中午到佛香阁，体力允许建议上去看看，累了咱就不登。接着游览昆明湖，推荐乘船过湖，既省力又能看全景，最后漫步西堤赏景。咱们走平缓路线，保准轻松尽兴！",
  "plan": {
   "scenic": "颐和园",
   "days": 0.5,
@@ -318,5 +277,5 @@
   "feasibility_warnings": [],
   "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
  },
- "elapsed": 19.49
+ "elapsed": 62.86
 }

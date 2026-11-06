@@ -243,6 +243,14 @@
    },
    {
     "order": 7,
+    "day": 1,
+    "period": "晚上",
+    "poi": "白云宾馆",
+    "transport_from_prev": "步行",
+    "note": "，建议宿此"
+   },
+   {
+    "order": 8,
     "day": 2,
     "period": "上午",
     "poi": "光明顶",
@@ -250,20 +258,12 @@
     "note": "⚠ 只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步"
    },
    {
-    "order": 8,
+    "order": 9,
     "day": 2,
     "period": "上午",
     "poi": "北海",
     "transport_from_prev": "步行",
     "note": ""
-   },
-   {
-    "order": 9,
-    "day": 2,
-    "period": "晚上",
-    "poi": "白云宾馆",
-    "transport_from_prev": "步行",
-    "note": "，建议宿此"
    },
    {
     "order": 10,
@@ -816,19 +816,19 @@
    },
    {
     "order": 7,
+    "day": 1,
+    "period": "晚上",
+    "poi": "白云宾馆",
+    "transport_from_prev": "步行",
+    "note": "，建议宿此"
+   },
+   {
+    "order": 8,
     "day": 2,
     "period": "上午",
     "poi": "北海",
     "transport_from_prev": "步行",
     "note": ""
-   },
-   {
-    "order": 8,
-    "day": 2,
-    "period": "晚上",
-    "poi": "白云宾馆",
-    "transport_from_prev": "步行",
-    "note": "，建议宿此"
    },
    {
     "order": 9,
