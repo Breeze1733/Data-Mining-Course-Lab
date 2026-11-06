@@ -32,6 +32,10 @@ PERSON_HINT_RE = re.compile(
     r"挑夫|挑山工|工作人员|司机|导游|老板|店员|大叔|阿姨|小哥|师傅|保安|检票员|服务员|主人|大爷|大妈|"
     r"游客|前台|讲解员|店主|姑娘|小伙子|教练|医生|护士|当地人|本地人|管理者|管理员|村民|东家|掌柜|小朋友|孩子们")
 
+# U62：他人指代跟随信号的人物词扩展（登山者/路人/行人/“一队人”式群体名词；dev 证据 +3/0 坏）
+PERSON_HINT_EXT = re.compile(
+    PERSON_HINT_RE.pattern + r"|登山者|路人|行人|[一两二三四五六七八几]?\s*[队批群帮].{0,3}人")
+
 # 代词语义类别 → 消解策略
 PRONOUN_CLASS = {
     "这里": "locative", "那里": "locative", "那边": "locative", "此处": "locative",
@@ -326,7 +330,30 @@ def main(argv=None) -> int:
                     if re.search(r"(他们|她们)(家|自家|后院|店里)", case["sentence"]):
                         case.update({"resolution": "facility", "resolution_kind": "设施",
                                      "evidence": "“他们家/后院/店里”指店家设施"})
-                    elif PERSON_HINT_RE.search(case["sentence"]) and not party_cur:
+                    else:
+                        # U62：他人指代跟随信号——代词紧邻人物词（间隔≤16 字且间隔无我/我们/你），
+                        # 或代词先于本句任何我/我们/你 且前句含人物词（“…站了一队人,他们在等…”）。
+                        # 此时“他们”承接近旁第三者名词，即使窗口出现“我们”（叙述者）也判他人
+                        #（dev 证据 +3/0 坏后实施）
+                        _hidx = case["sentence"].find(pron)
+                        _hint_hit = None
+                        if _hidx >= 0:
+                            _prefix = case["sentence"][:_hidx]
+                            for _mm in PERSON_HINT_EXT.finditer(_prefix):
+                                _gap = _prefix[_mm.end():]
+                                if len(_gap) <= 16 and not re.search(r"我们|我|你", _gap):
+                                    _hint_hit = _mm
+                                    break
+                            if _hint_hit is None and not re.search(r"我们|我|你", _prefix) \
+                                    and PERSON_HINT_EXT.search(case["prev_sentence"]):
+                                _hint_hit = PERSON_HINT_EXT.search(case["prev_sentence"])
+                        if _hint_hit:
+                            case.update({"resolution": "other_person", "resolution_kind": "他人",
+                                         "evidence": f'他人指代跟随信号：代词紧邻人物词“{_hint_hit.group(0)}”'})
+                            fh.write(json.dumps(case, ensure_ascii=False) + "\n")
+                            n_cases += 1
+                            continue
+                    if PERSON_HINT_RE.search(case["sentence"]) and not party_cur:
                         case.update({"resolution": "other_person", "resolution_kind": "他人",
                                      "evidence": "句中含他人角色词且无同行者信号"})
                     elif not party_signal and PERSON_HINT_RE.search(case["prev_sentence"]):
