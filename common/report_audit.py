@@ -35,6 +35,23 @@ def count_lines(path: Path) -> int | None:
         return None
 
 
+def _bounded_match_span(text: str, variant: str) -> re.Match | None:
+    """P22/H10：带边界的数字匹配，返回 Match（供上下文共现检查定位）。"""
+    if not variant:
+        return None
+    esc = re.escape(variant)
+    if re.fullmatch(r"[\d,]+", variant):
+        pat = r"(?<![\d,])" + esc + r"(?![\d,])"
+    elif re.fullmatch(r"[\d.]+", variant):
+        pat = r"(?<![\d.])" + esc + r"(?![\d.])"
+    elif variant.endswith("%"):
+        pat = r"(?<![\d.])" + re.escape(variant[:-1]) + r"%(?!\d)"
+    else:
+        m = re.search(re.escape(variant), text)
+        return m
+    return re.search(pat, text)
+
+
 def _bounded_match(text: str, variant: str) -> bool:
     """P22：数字类变体带前后边界匹配（数字/千分位/小数点不相连才算命中）。"""
     if not variant:
@@ -142,7 +159,8 @@ def build_claims() -> dict[str, list[dict]]:
         "task4/report.docx": [
             {"name": "代词案例数", "variants": v_int(count_lines(ROOT / "task4/output/pronoun_cases.jsonl")), "required": True},
             {"name": "人工标注样本数", "variants": v_int(EVAL.get("n")), "required": True},
-            {"name": "总体准确率", "variants": v_pct(EVAL.get("accuracy_overall")), "required": True},
+            {"name": "总体准确率", "variants": v_pct(EVAL.get("accuracy_overall")), "required": True,
+             "near": {"patterns": [r"人工标注|消解"], "window": 160}},
             {"name": "错误数", "variants": v_int(n_eval - correct_eval), "required": False},
             {"name": "locative准确率", "variants": v_pct((acc.get("locative") or {}).get("accuracy")), "required": True},
             {"name": "object准确率", "variants": v_pct((acc.get("object") or {}).get("accuracy")), "required": True},
@@ -153,11 +171,14 @@ def build_claims() -> dict[str, list[dict]]:
             {"name": "原始条件对", "variants": v_int(STAT5.get("raw_pairs")), "required": True},
             {"name": "去重后条件对", "variants": v_int(STAT5.get("after_dedup")), "required": True},
             {"name": "合并重复", "variants": v_int(STAT5.get("duplicates_merged")), "required": True},
-            {"name": "P1显式条件", "variants": v_int((STAT5.get("by_pattern") or {}).get("P1_显式条件")), "required": True},
+            {"name": "P1显式条件", "variants": v_int((STAT5.get("by_pattern") or {}).get("P1_显式条件")), "required": True,
+             "near": {"patterns": [r"P1|显式条件"], "window": 120}},
             {"name": "P4建议推断", "variants": v_int((STAT5.get("by_pattern") or {}).get("P4_建议推断")), "required": True},
-            {"name": "P6否定建议", "variants": v_int((STAT5.get("by_pattern") or {}).get("P6_否定建议")), "required": True},
+            {"name": "P6否定建议", "variants": v_int((STAT5.get("by_pattern") or {}).get("P6_否定建议")), "required": True,
+             "near": {"patterns": [r"P6|否定|避雷"], "window": 120}},
             {"name": "复核样本数", "variants": v_int(n_rev), "required": True},
-            {"name": "复核-正确", "variants": v_int(rv.get("correct")) + v_pct((rv.get("correct") or 0) / n_rev), "required": True},
+            {"name": "复核-正确", "variants": v_int(rv.get("correct")) + v_pct((rv.get("correct") or 0) / n_rev), "required": True,
+             "near": {"patterns": [r"复核|人工|AI|正确"], "window": 120}},
             {"name": "复核-边界", "variants": v_int(rv.get("boundary")) + v_pct((rv.get("boundary") or 0) / n_rev), "required": True},
             {"name": "复核-错误", "variants": v_int(rv.get("wrong")) + v_pct((rv.get("wrong") or 0) / n_rev), "required": True},
         ],
@@ -182,7 +203,8 @@ def build_claims() -> dict[str, list[dict]]:
         "实验总结反思.docx": [
             {"name": "数据集规模", "variants": v_int((Q1.get("profile") or {}).get("text_types", {}).get("travelogue"))
                 + v_int(Q1.get("accepted_records")), "required": True},
-            {"name": "消解准确率", "variants": v_pct(EVAL.get("accuracy_overall")), "required": True},
+            {"name": "消解准确率", "variants": v_pct(EVAL.get("accuracy_overall")), "required": True,
+             "near": {"patterns": [r"消解"], "window": 160}},
             {"name": "消解人工标注样本", "variants": v_int(EVAL.get("n")), "required": True},
             {"name": "实体抽检正确", "variants": v_int((SPOT.get("review_summary") or {}).get("correct")), "required": True},
             {"name": "条件复核样本", "variants": v_int(n_rev), "required": True},
@@ -223,7 +245,24 @@ def main() -> int:
                     n_missing_src += 1
                     continue
                 # P22：数字带边界匹配——防止 79 命中 179、0.5 命中 30.5 这类短数字误配
-                hit = any(_bounded_match(text, v) for v in variants)
+                # H10：near 语义绑定——数值须与指定上下文（分母/样本范围/方法名）在
+                # ±window 字符内共现，防"数字对但挂错指标名/分母"的漂移
+                near = c.get("near")
+                hit = False
+                for v in variants:
+                    m = _bounded_match_span(text, v)
+                    if not m:
+                        continue
+                    if near:
+                        window = near.get("window", 120)
+                        lo, hi = max(0, m.start() - window), min(len(text), m.end() + window)
+                        ctx = text[lo:hi]
+                        if all(re.search(rx, ctx) for rx in near["patterns"]):
+                            hit = True
+                            break
+                    else:
+                        hit = True
+                        break
                 expected = " 或 ".join(variants[:3]) + ("…" if len(variants) > 3 else "")
             if hit:
                 n_pass += 1
