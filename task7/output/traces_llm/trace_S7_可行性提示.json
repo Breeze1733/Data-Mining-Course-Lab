@@ -121,6 +121,10 @@
    "thought": "query_order 后继校验：无已选后继，维持现有顺序"
   },
   {
+   "step": "thought",
+   "thought": "时段预算：每日上限 5，总 1 天，裁剪 3 个 POI"
+  },
+  {
    "step": "action",
    "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '沟口'}",
    "tool": "query_poi_conditions",
@@ -191,48 +195,6 @@
    "summary": "返回 7 条条件建议"
   },
   {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "诺日朗"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 5 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '五花海'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "五花海"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 7 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗瀑布'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "诺日朗瀑布"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
-  },
-  {
    "step": "thought",
    "thought": "可行性校验：1 条封禁/不建议提示；已附加到对应站点"
   },
@@ -246,13 +208,15 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家跟我走！今天九寨沟一日游：上午从沟口入园，提示大家不去原始森林——其实大半天足矣；中午咱们前往长海；下午漫步五彩池和镜海；晚上依次游览诺日朗与五花海，最后徒步观赏诺日朗瀑布。跟着我走，轻松看遍绝美精华！",
+ "answer": "大家注意啦！今天九寨一日游按时间规划：上午由沟口入园，建议放弃原始森林以省体力；中午直奔长海，下午游览五彩池和镜海。因时间限制，诺日朗、五花海、诺日朗瀑布已作裁剪，大家依体力取舍。小贴士：晕车朋友备好晕车药，体力有限者芦苇海千万别停留。咱们开心出发！",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
   "visitor_type": null,
   "special": [],
-  "special_notes": [],
+  "special_notes": [
+   "时间预算限制：已裁剪 3 个景点（诺日朗, 五花海, 诺日朗瀑布等），建议根据体力取舍"
+  ],
   "trip_month": null,
   "itinerary": [
    {
@@ -294,30 +258,6 @@
     "poi": "镜海",
     "transport_from_prev": "步行",
     "note": ""
-   },
-   {
-    "order": 6,
-    "day": 1,
-    "period": "晚上",
-    "poi": "诺日朗",
-    "transport_from_prev": "步行",
-    "note": ""
-   },
-   {
-    "order": 7,
-    "day": 1,
-    "period": "晚上",
-    "poi": "五花海",
-    "transport_from_prev": "步行",
-    "note": ""
-   },
-   {
-    "order": 8,
-    "day": 1,
-    "period": "晚上",
-    "poi": "诺日朗瀑布",
-    "transport_from_prev": "徒步",
-    "note": ""
    }
   ],
   "tips": [
@@ -325,36 +265,59 @@
     "cond_type": "人群",
     "condition": "游客为体力有限",
     "suggestion": "不要在芦苇海停留",
+    "all_suggestions": [
+     "不要在芦苇海停留",
+     "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车",
+     "索道上山(80元/人)",
+     "然后步行下山观景"
+    ],
     "frequency": 4
    },
    {
     "cond_type": "人群",
     "condition": "游客为恐高",
     "suggestion": "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满",
+    "all_suggestions": [
+     "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满"
+    ],
     "frequency": 3
    },
    {
     "cond_type": "人群",
     "condition": "游客为家庭",
     "suggestion": "三二家庭聚会,里面所使用的水果都是应季水果",
+    "all_suggestions": [
+     "三二家庭聚会,里面所使用的水果都是应季水果",
+     "吃起来新鲜可口,在如此童话森林中来一场英式下午茶会,应该是旅行中最难忘的回忆"
+    ],
     "frequency": 2
    },
    {
     "cond_type": "人群",
     "condition": "游客为晕车",
     "suggestion": "买好晕车贴或者晕车药",
+    "all_suggestions": [
+     "买好晕车贴或者晕车药",
+     "的晕车药(p8)吃了坐一路山路一点问题没有"
+    ],
     "frequency": 2
    },
    {
     "cond_type": "人群",
     "condition": "是家庭出游",
     "suggestion": "不妨选择吃一顿丰盛的中餐",
+    "all_suggestions": [
+     "不妨选择吃一顿丰盛的中餐"
+    ],
     "frequency": 1
    },
    {
     "cond_type": "人群",
     "condition": "游客为情侣",
     "suggestion": "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!",
+    "all_suggestions": [
+     "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!"
+    ],
     "frequency": 1
    }
   ],
@@ -363,5 +326,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 19.18
+ "elapsed": 20.35
 }

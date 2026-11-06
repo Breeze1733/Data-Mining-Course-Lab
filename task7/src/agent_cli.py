@@ -257,14 +257,9 @@ class ReActAgent:
         if lodging_in_plan and days and days >= 2:
             special_notes.append(f"住宿：{lodging_in_plan[0]} 已纳入行程（多日游建议山上住宿）")
         if "看日出" in (intent.get("special") or []) and days and days >= 2:
-            sp = self._find_sunrise_poi(scenic, ordered)
-            if sp:
-                _sunrise_poi = sp
-                ordered.remove(sp)
-                n_days0 = max(1, int(days) if days and days >= 1 else 1)
-                insert_at = min((n_days0 - 1) * ((len(ordered) + 1 + n_days0 - 1) // n_days0), len(ordered))
-                ordered.insert(insert_at, sp)
-                special_notes.append(f"看日出：{sp} 已安排在最后一日首位（清晨前往），需前晚住宿山上或山顶酒店")
+            _sunrise_poi = self._find_sunrise_poi(scenic, ordered)
+            if _sunrise_poi:
+                special_notes.append(f"看日出：{_sunrise_poi} 已安排在最后一日首位（清晨前往），需前晚住宿山上或山顶酒店")
             else:
                 special_notes.append("看日出：已选景点中无日出观景点（如光明顶），如需看日出请将其加入需求")
             trace.append({"step": "thought", "thought": f"特殊需求「看日出」编排：{special_notes[-1]}"})
@@ -289,6 +284,23 @@ class ReActAgent:
             else:
                 trace.append({"step": "thought",
                               "thought": f"query_order 后继校验：{'无已选后继，维持现有顺序' if not official_next else '第二站已是官方后继，无需调整'}"})
+        # G03：时段预算——限制每日 POI 数量（半日≤3、一日≤5、多日≤每日4）
+        n_days = max(1, int(days) if days and days >= 1 else 1)
+        daily_budget = {0.5: 3, 1: 5, 1.5: 4, 2: 4, 3: 4, 3.5: 4, 4: 4, 5: 4}.get(days, 4)
+        # 日出/住宿 POI 不受时段预算裁剪（它们是多日行程的结构性锚点）
+        _anchored = set()
+        if _sunrise_poi:
+            _anchored.add(_sunrise_poi)
+        _anchored.update(p for p in ordered if any(k in p for k in ("宾馆", "酒店", "民宿")))
+        max_pois = daily_budget * n_days + len(_anchored)
+        if len(ordered) > max_pois:
+            dropped = [p for p in ordered[max_pois:] if p not in _anchored]
+            kept_tail = [p for p in ordered[max_pois:] if p in _anchored]
+            ordered = ordered[:max_pois] + kept_tail
+            special_notes.append(f"时间预算限制：已裁剪 {len(dropped)} 个景点（{', '.join(dropped[:3])}等），建议根据体力取舍")
+            trace.append({"step": "thought",
+                          "thought": f"时段预算：每日上限 {daily_budget}，总 {n_days} 天，裁剪 {len(dropped)} 个 POI"})
+
         # 天数/时段分配（P05/P06）：n_days 对 0.5/1/1.5/2/3/3.5/4/5 全部成立；
         # 2 日且模板全覆盖时沿用模板的天与时段，否则按切分块分配；半日时段封顶于上午/中午（P06）；
         # 住宿节点固定晚上。天号一律写入行程，不再出现“1.5/3 天全部落第 1 天”。
@@ -334,14 +346,16 @@ class ReActAgent:
                 if any(k in it["poi"] for k in ("宾馆", "酒店", "民宿")):
                     it["day"] = max(1, n_days - 1)
                     it["period"] = "晚上"
-            # 日出 → 第 n_days 天上午
+            # 日出 → 第 n_days 天上午，且排在该日首位
             if _sunrise_poi:
                 for it in itinerary:
                     if it["poi"] == _sunrise_poi:
                         it["day"] = n_days
                         it["period"] = "上午"
-            # 日内按时段排序（保证单调性）
-            itinerary.sort(key=lambda x: (x["day"], PERIOD_ORD.get(x["period"], 9)))
+            # 日内按时段排序（保证单调性），日出 POI 排该日首位
+            itinerary.sort(key=lambda x: (x["day"],
+                                          PERIOD_ORD.get(x["period"], 9),
+                                          0 if x["poi"] == _sunrise_poi else 1))
             for i, it in enumerate(itinerary):
                 it["order"] = i + 1
 

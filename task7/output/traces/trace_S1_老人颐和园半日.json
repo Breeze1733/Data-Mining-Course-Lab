@@ -102,6 +102,10 @@
    "thought": "query_order 后继校验：无已选后继，维持现有顺序"
   },
   {
+   "step": "thought",
+   "thought": "时段预算：每日上限 3，总 1 天，裁剪 2 个 POI"
+  },
+  {
    "step": "action",
    "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '万寿山'}",
    "tool": "query_poi_conditions",
@@ -144,34 +148,6 @@
    "summary": "返回 5 条条件建议"
   },
   {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '昆明湖'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "颐和园",
-    "poi": "昆明湖"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 3 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '西堤'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "颐和园",
-    "poi": "西堤"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
-  },
-  {
    "step": "thought",
    "thought": "可行性校验：0 条封禁/不建议提示"
   },
@@ -180,7 +156,7 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 2026清明反向遛弯路线）：\n上午：万寿山\n上午：画中游（步行前往）\n中午：佛香阁（步行前往）\n中午：昆明湖（步行前往）\n中午：西堤（步行前往）\n贴士：[人群] 别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果；[人群] 不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明；[人群] 中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较；[装备] 慎重考虑",
+ "answer": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 2026清明反向遛弯路线）：\n上午：万寿山\n上午：画中游（步行前往）\n中午：佛香阁（步行前往）\n贴士：[人群] 别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果；[人群] 不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明；[人群] 中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较；[装备] 慎重考虑\n说明：时间预算限制：已裁剪 2 个景点（昆明湖, 西堤等），建议根据体力取舍",
  "plan": {
   "scenic": "颐和园",
   "days": 0.5,
@@ -188,7 +164,9 @@
   "special": [
    "省力"
   ],
-  "special_notes": [],
+  "special_notes": [
+   "时间预算限制：已裁剪 2 个景点（昆明湖, 西堤等），建议根据体力取舍"
+  ],
   "trip_month": null,
   "itinerary": [
    {
@@ -214,22 +192,6 @@
     "poi": "佛香阁",
     "transport_from_prev": "步行",
     "note": ""
-   },
-   {
-    "order": 4,
-    "day": 1,
-    "period": "中午",
-    "poi": "昆明湖",
-    "transport_from_prev": "步行",
-    "note": "与游客类型适配"
-   },
-   {
-    "order": 5,
-    "day": 1,
-    "period": "中午",
-    "poi": "西堤",
-    "transport_from_prev": "步行",
-    "note": ""
    }
   ],
   "tips": [
@@ -237,30 +199,45 @@
     "cond_type": "人群",
     "condition": "游客为老人",
     "suggestion": "别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景",
+    "all_suggestions": [
+     "别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景"
+    ],
     "frequency": 1
    },
    {
     "cond_type": "人群",
     "condition": "游客为体力差的朋友",
     "suggestion": "不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)",
+    "all_suggestions": [
+     "不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)"
+    ],
     "frequency": 1
    },
    {
     "cond_type": "人群",
     "condition": "体力一般或者不想走太多",
     "suggestion": "中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较完整的湖景视角",
+    "all_suggestions": [
+     "中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较完整的湖景视角"
+    ],
     "frequency": 1
    },
    {
     "cond_type": "装备",
     "condition": "装备条件（句内）",
     "suggestion": "慎重考虑",
+    "all_suggestions": [
+     "慎重考虑"
+    ],
     "frequency": 1
    },
    {
     "cond_type": "体力安全",
     "condition": "体力可以",
     "suggestion": "建议上去看看非常的漂亮",
+    "all_suggestions": [
+     "建议上去看看非常的漂亮"
+    ],
     "frequency": 1
    }
   ],

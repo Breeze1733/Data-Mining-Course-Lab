@@ -7,7 +7,9 @@
   "days": 1,
   "days_explicit": true,
   "month": null,
-  "special": [],
+  "special": [
+   "避开人流"
+  ],
   "avoid": [
    "原始森林"
   ],
@@ -21,8 +23,45 @@
   },
   {
    "step": "intent",
-   "thought": "LLM 解析失败（<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>），回退规则解析",
-   "via": "fallback"
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "visitor_types": [],
+    "days": 1,
+    "days_explicit": true,
+    "month": null,
+    "special": [],
+    "avoid": [
+     "原始森林"
+    ],
+    "must": []
+   },
+   "llm": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "days": 1,
+    "month": null,
+    "special": [
+     "避开人流"
+    ]
+   },
+   "result": {
+    "scenic": "九寨沟",
+    "visitor_type": null,
+    "visitor_types": [],
+    "days": 1,
+    "days_explicit": true,
+    "month": null,
+    "special": [
+     "避开人流"
+    ],
+    "avoid": [
+     "原始森林"
+    ],
+    "must": []
+   }
   },
   {
    "step": "action",
@@ -69,7 +108,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 1, 'days_explicit': True, 'month': None, 'special': [], 'avoid': ['原始森林'], 'must': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 1, 'days_explicit': True, 'month': None, 'special': ['避开人流'], 'avoid': ['原始森林'], 'must': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -96,6 +135,10 @@
   {
    "step": "thought",
    "thought": "query_order 后继校验：无已选后继，维持现有顺序"
+  },
+  {
+   "step": "thought",
+   "thought": "时段预算：每日上限 5，总 1 天，裁剪 2 个 POI"
   },
   {
    "step": "action",
@@ -168,34 +211,6 @@
    "summary": "返回 5 条条件建议"
   },
   {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '五花海'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "五花海"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 7 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗瀑布'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "诺日朗瀑布"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
-  },
-  {
    "step": "thought",
    "thought": "可行性校验：0 条封禁/不建议提示"
   },
@@ -209,14 +224,17 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "游客朋友们好！今天行程已为您避开原始森林。咱们上午从沟口入园乘车直奔长海；中午漫步五彩池；下午游览镜海与诺日朗；晚上徒步赏五花海及诺日朗瀑布。\n\n出行提醒：晕车请备好药，恐高坐索道闭眼；体力弱勿停芦苇海；家庭出游推荐享用应季水果与丰盛中餐；当地特色微辣喷香，不耐辣也能放心尝！",
+ "answer": "大家早上好！今天九寨游为避开人流，已舍去原始森林、五花海和诺日朗瀑布。\n\n上午我们从沟口乘车直达长海；中午漫步五彩池；下午步行游览镜海，最后抵达诺日朗。\n\n温馨提示：晕车请备药；体力弱别在芦苇海停留；恐高坐索道可闭眼；家庭出游推荐尝尝应季水果茶或中餐。请大家根据体力适度取舍哦！",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
   "visitor_type": null,
-  "special": [],
+  "special": [
+   "避开人流"
+  ],
   "special_notes": [
-   "已按您的要求避开：原始森林"
+   "已按您的要求避开：原始森林",
+   "时间预算限制：已裁剪 2 个景点（五花海, 诺日朗瀑布等），建议根据体力取舍"
   ],
   "trip_month": null,
   "itinerary": [
@@ -259,22 +277,6 @@
     "poi": "诺日朗",
     "transport_from_prev": "步行",
     "note": ""
-   },
-   {
-    "order": 6,
-    "day": 1,
-    "period": "晚上",
-    "poi": "五花海",
-    "transport_from_prev": "步行",
-    "note": ""
-   },
-   {
-    "order": 7,
-    "day": 1,
-    "period": "晚上",
-    "poi": "诺日朗瀑布",
-    "transport_from_prev": "徒步",
-    "note": ""
    }
   ],
   "tips": [
@@ -282,41 +284,64 @@
     "cond_type": "人群",
     "condition": "游客为体力有限",
     "suggestion": "不要在芦苇海停留",
+    "all_suggestions": [
+     "不要在芦苇海停留",
+     "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车",
+     "索道上山(80元/人)",
+     "然后步行下山观景"
+    ],
     "frequency": 4
    },
    {
     "cond_type": "人群",
     "condition": "游客为恐高",
     "suggestion": "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满",
+    "all_suggestions": [
+     "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满"
+    ],
     "frequency": 3
    },
    {
     "cond_type": "人群",
     "condition": "游客为家庭",
     "suggestion": "三二家庭聚会,里面所使用的水果都是应季水果",
+    "all_suggestions": [
+     "三二家庭聚会,里面所使用的水果都是应季水果",
+     "吃起来新鲜可口,在如此童话森林中来一场英式下午茶会,应该是旅行中最难忘的回忆"
+    ],
     "frequency": 2
    },
    {
     "cond_type": "人群",
     "condition": "游客为晕车",
     "suggestion": "买好晕车贴或者晕车药",
+    "all_suggestions": [
+     "买好晕车贴或者晕车药",
+     "的晕车药(p8)吃了坐一路山路一点问题没有"
+    ],
     "frequency": 2
    },
    {
     "cond_type": "人群",
     "condition": "是家庭出游",
     "suggestion": "不妨选择吃一顿丰盛的中餐",
+    "all_suggestions": [
+     "不妨选择吃一顿丰盛的中餐"
+    ],
     "frequency": 1
    },
    {
     "cond_type": "人群",
     "condition": "游客为情侣",
     "suggestion": "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!",
+    "all_suggestions": [
+     "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!"
+    ],
     "frequency": 1
    }
   ],
   "feasibility_warnings": [],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 55.02
+ "elapsed": 16.46
 }

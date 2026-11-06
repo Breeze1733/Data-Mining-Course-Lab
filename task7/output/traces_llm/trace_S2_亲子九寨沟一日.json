@@ -131,6 +131,10 @@
    "thought": "query_order 后继校验：无已选后继，维持现有顺序"
   },
   {
+   "step": "thought",
+   "thought": "时段预算：每日上限 5，总 1 天，裁剪 3 个 POI"
+  },
+  {
    "step": "action",
    "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '沟口'}",
    "tool": "query_poi_conditions",
@@ -201,48 +205,6 @@
    "summary": "返回 7 条条件建议"
   },
   {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "诺日朗"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 5 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '五花海'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "五花海"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 7 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗瀑布'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "诺日朗瀑布"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
-  },
-  {
    "step": "thought",
    "thought": "可行性校验：1 条封禁/不建议提示；已附加到对应站点"
   },
@@ -256,13 +218,15 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "带小朋友看过来！咱们上午沟口入园，注意不去原始森林——其实大半天足矣；中午漫步长海；下午打卡五彩池和镜海；晚上游览诺日朗、五花海与诺日朗瀑布。\n\n贴心提醒：要文明入厕避免污染环境；没备干粮千万别为了省钱冒险不吃，毕竟好的身体才是一切根本哦！",
+ "answer": "大家早！今天咱们九寨一日游：上午从沟口入园，时间紧就不去原始森林了；诺日朗、五花海、诺日朗瀑布已裁减，大家按体力取舍。中午游长海，下午看五彩池和镜海。带娃出游请文明入厕勿污染，备好常备药；千万别为省钱不吃饭，保护好身体才玩得开心！",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
   "visitor_type": "孩子",
   "special": [],
-  "special_notes": [],
+  "special_notes": [
+   "时间预算限制：已裁剪 3 个景点（诺日朗, 五花海, 诺日朗瀑布等），建议根据体力取舍"
+  ],
   "trip_month": null,
   "itinerary": [
    {
@@ -304,30 +268,6 @@
     "poi": "镜海",
     "transport_from_prev": "步行",
     "note": ""
-   },
-   {
-    "order": 6,
-    "day": 1,
-    "period": "晚上",
-    "poi": "诺日朗",
-    "transport_from_prev": "步行",
-    "note": ""
-   },
-   {
-    "order": 7,
-    "day": 1,
-    "period": "晚上",
-    "poi": "五花海",
-    "transport_from_prev": "步行",
-    "note": ""
-   },
-   {
-    "order": 8,
-    "day": 1,
-    "period": "晚上",
-    "poi": "诺日朗瀑布",
-    "transport_from_prev": "徒步",
-    "note": ""
    }
   ],
   "tips": [
@@ -335,12 +275,22 @@
     "cond_type": "装备",
     "condition": "装备条件（句内）",
     "suggestion": "避免污染环境,还是文明入厕的好",
+    "all_suggestions": [
+     "避免污染环境,还是文明入厕的好",
+     "慎驾驶,安全第一",
+     "不宜剧烈运动,不宜过量饮酒",
+     "可以提前备好常用药品以便不时之需",
+     "避免河道淤积"
+    ],
     "frequency": 7
    },
    {
     "cond_type": "装备",
     "condition": "真的没有准备",
     "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
+    "all_suggestions": [
+     "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本"
+    ],
     "frequency": 3
    }
   ],
@@ -349,5 +299,5 @@
   ],
   "template_route": "JZG-EXP01-R1 一日精华游"
  },
- "elapsed": 29.04
+ "elapsed": 20.92
 }

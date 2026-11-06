@@ -19,8 +19,37 @@
   },
   {
    "step": "intent",
-   "thought": "LLM 解析失败（The read operation timed out），回退规则解析",
-   "via": "fallback"
+   "thought": "混合解析：规则精确字段优先，LLM 补缺省",
+   "via": "hybrid",
+   "rule": {
+    "scenic": "黄山",
+    "visitor_type": null,
+    "visitor_types": [],
+    "days": 2,
+    "days_explicit": true,
+    "month": 12,
+    "special": [],
+    "avoid": [],
+    "must": []
+   },
+   "llm": {
+    "scenic": "黄山",
+    "visitor_type": null,
+    "days": 2,
+    "month": 12,
+    "special": []
+   },
+   "result": {
+    "scenic": "黄山",
+    "visitor_type": null,
+    "visitor_types": [],
+    "days": 2,
+    "days_explicit": true,
+    "month": 12,
+    "special": [],
+    "avoid": [],
+    "must": []
+   }
   },
   {
    "step": "action",
@@ -90,6 +119,10 @@
   {
    "step": "thought",
    "thought": "query_order 后继校验：无已选后继，维持现有顺序"
+  },
+  {
+   "step": "thought",
+   "thought": "时段预算：每日上限 4，总 2 天，裁剪 3 个 POI"
   },
   {
    "step": "action",
@@ -218,26 +251,12 @@
    "summary": "返回 13 条条件建议"
   },
   {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '天都峰'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "黄山",
-    "poi": "天都峰"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 16 条条件建议"
-  },
-  {
    "step": "thought",
    "thought": "时段窗口扫描：1 条条件节点含月份窗口且与出行月 12 不符，已生成时段提示"
   },
   {
    "step": "thought",
-   "thought": "可行性校验：10 条封禁/不建议提示；已附加到对应站点"
+   "thought": "可行性校验：8 条封禁/不建议提示；已附加到对应站点"
   },
   {
    "step": "render",
@@ -249,14 +268,15 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家跟我走！\n**D1**：赏迎客松、始信峰，登莲花峰（若封山可选天都峰），经排云亭、西海到西海大峡谷，夜宿白云宾馆。\n**D2**：游北海，登光明顶，探天都峰、玉屏楼，下至云谷寺。\n\n**提示**：12月出行请确认景点开放并防寒；首访建议请导游；恐高建议前山上后山下；腿脚不便可绕行一线天。",
+ "answer": "游客朋友们好！黄山两日游行程来啦：\n\n第一天上午看迎客松、始信峰，中午登莲花峰（若遇封山可选天都峰），下午逛排云亭、西海，夜宿白云宾馆。\n第二天上午探秘西海大峡谷与北海，下午登光明顶。\n\n提示：12月出游请留意冬季开放情况；首游建议请向导，恐高朋友可挑雾天走，大家依体力灵活取舍哦！",
  "plan": {
   "scenic": "黄山",
   "days": 2,
   "visitor_type": null,
   "special": [],
   "special_notes": [
-   "住宿：白云宾馆 已纳入行程（多日游建议山上住宿）"
+   "住宿：白云宾馆 已纳入行程（多日游建议山上住宿）",
+   "时间预算限制：已裁剪 3 个景点（天都峰, 玉屏楼, 云谷寺等），建议根据体力取舍"
   ],
   "trip_month": 12,
   "itinerary": [
@@ -304,17 +324,17 @@
     "order": 6,
     "day": 1,
     "period": "晚上",
-    "poi": "西海大峡谷",
-    "transport_from_prev": "步行",
-    "note": ""
-   },
-   {
-    "order": 7,
-    "day": 1,
-    "period": "晚上",
     "poi": "白云宾馆",
     "transport_from_prev": "步行",
     "note": "，建议宿此"
+   },
+   {
+    "order": 7,
+    "day": 2,
+    "period": "上午",
+    "poi": "西海大峡谷",
+    "transport_from_prev": "步行",
+    "note": ""
    },
    {
     "order": 8,
@@ -327,34 +347,10 @@
    {
     "order": 9,
     "day": 2,
-    "period": "中午",
+    "period": "下午",
     "poi": "光明顶",
     "transport_from_prev": "步行",
     "note": "⚠ 只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步"
-   },
-   {
-    "order": 10,
-    "day": 2,
-    "period": "下午",
-    "poi": "天都峰",
-    "transport_from_prev": "步行",
-    "note": "⚠ 莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松"
-   },
-   {
-    "order": 11,
-    "day": 2,
-    "period": "下午",
-    "poi": "玉屏楼",
-    "transport_from_prev": "步行",
-    "note": ""
-   },
-   {
-    "order": 12,
-    "day": 2,
-    "period": "晚上",
-    "poi": "云谷寺",
-    "transport_from_prev": "步行",
-    "note": ""
    }
   ],
   "tips": [
@@ -362,36 +358,57 @@
     "cond_type": "人群",
     "condition": "你是第一次去黄山",
     "suggestion": "请个人带是必须的",
+    "all_suggestions": [
+     "请个人带是必须的",
+     "最好要熟悉的当地人带,我们这次通过我的朋友,带我们游玩黄山(没带我们走弯路,全程没有购物也没有隐形消费,非常热情,有问必答,专业的事交给专业的人做,相对于自己瞎逛要省心很多,也划算很多~~)"
+    ],
     "frequency": 2
    },
    {
     "cond_type": "人群",
     "condition": "有恐高症的朋友",
     "suggestion": "过这儿时最好挑有雾的天气,看不到谷底和深壑",
+    "all_suggestions": [
+     "过这儿时最好挑有雾的天气,看不到谷底和深壑",
+     "就不会太害怕了"
+    ],
     "frequency": 2
    },
    {
     "cond_type": "人群",
     "condition": "一般情侣或家庭出来",
     "suggestion": "不想分开睡,经济条件也不错",
+    "all_suggestions": [
+     "不想分开睡,经济条件也不错",
+     "可以考虑睡标间"
+    ],
     "frequency": 2
    },
    {
     "cond_type": "人群",
     "condition": "恐高",
     "suggestion": "还是前山上,后山下吧",
+    "all_suggestions": [
+     "还是前山上,后山下吧"
+    ],
     "frequency": 1
    },
    {
     "cond_type": "人群",
     "condition": "游客为体力好的话",
     "suggestion": "从云谷寺索道走后山—前山的经典线路",
+    "all_suggestions": [
+     "从云谷寺索道走后山—前山的经典线路"
+    ],
     "frequency": 1
    },
    {
     "cond_type": "人群",
     "condition": "腿脚不方便",
     "suggestion": "可以从旁边的山路绕开爬一线天,一样可以到前面",
+    "all_suggestions": [
+     "可以从旁边的山路绕开爬一线天,一样可以到前面"
+    ],
     "frequency": 1
    }
   ],
@@ -403,11 +420,9 @@
    "莲花峰：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松",
    "莲花峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
    "光明顶：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
-   "天都峰：莲花峰封山可选择登天都峰——即鳌鱼峰后前往玉屏楼迎客松",
-   "天都峰：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
    "黄山（时段提示）：条件建议集中于4/5/6/7/8/9/10/11月，您计划的12月不在其中——是按照整体景致的话最适合游玩的是是4-11月份，请确认当期景点开放情况"
   ],
   "template_route": "HS-EXTRA1-R2 冬季南门二日游"
  },
- "elapsed": 78.78
+ "elapsed": 21.21
 }

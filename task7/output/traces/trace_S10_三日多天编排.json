@@ -346,36 +346,59 @@
     "cond_type": "人群",
     "condition": "游客为体力有限",
     "suggestion": "不要在芦苇海停留",
+    "all_suggestions": [
+     "不要在芦苇海停留",
+     "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车",
+     "索道上山(80元/人)",
+     "然后步行下山观景"
+    ],
     "frequency": 4
    },
    {
     "cond_type": "人群",
     "condition": "游客为恐高",
     "suggestion": "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满",
+    "all_suggestions": [
+     "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满"
+    ],
     "frequency": 3
    },
    {
     "cond_type": "人群",
     "condition": "游客为家庭",
     "suggestion": "三二家庭聚会,里面所使用的水果都是应季水果",
+    "all_suggestions": [
+     "三二家庭聚会,里面所使用的水果都是应季水果",
+     "吃起来新鲜可口,在如此童话森林中来一场英式下午茶会,应该是旅行中最难忘的回忆"
+    ],
     "frequency": 2
    },
    {
     "cond_type": "人群",
     "condition": "游客为晕车",
     "suggestion": "买好晕车贴或者晕车药",
+    "all_suggestions": [
+     "买好晕车贴或者晕车药",
+     "的晕车药(p8)吃了坐一路山路一点问题没有"
+    ],
     "frequency": 2
    },
    {
     "cond_type": "人群",
     "condition": "是家庭出游",
     "suggestion": "不妨选择吃一顿丰盛的中餐",
+    "all_suggestions": [
+     "不妨选择吃一顿丰盛的中餐"
+    ],
     "frequency": 1
    },
    {
     "cond_type": "人群",
     "condition": "游客为情侣",
     "suggestion": "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!",
+    "all_suggestions": [
+     "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!"
+    ],
     "frequency": 1
    }
   ],
@@ -384,5 +407,5 @@
   ],
   "template_route": "JZG-EXP01-R2 二日舒适游"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }
