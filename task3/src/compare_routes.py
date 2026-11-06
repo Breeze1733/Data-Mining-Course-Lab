@@ -424,9 +424,9 @@ def main() -> int:
 
         tour_alloc = t_period.get(scenic, Counter())
 
-        has_official_time = (sum(off_min[k] for k in PERIODS) > 0
+        has_official_time = (sum(off_min.get(k, 0) for k in PERIODS) > 0
 
-                             or sum(off_steps[k] for k in PERIODS) > 0)
+                             or sum(off_steps.get(k, 0) for k in PERIODS) > 0)
 
 
 

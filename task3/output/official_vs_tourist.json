@@ -58,7 +58,7 @@
    "order_tau_mean": 0.68,
    "n_order_pairs": 84,
    "official_has_time_info": true,
-   "official_time_basis": "路线标注时长（分钟）",
+   "official_time_basis": "路线标注时长（分钟，已知）+ 无时长步骤数（分别统计）",
    "tourist_time_basis": "文本时段词提及频次",
    "tau_sensitivity": {
     "3": {
@@ -75,10 +75,21 @@
     }
    },
    "official_time_allocation_pct": {
-    "上午": 0.424,
-    "中午": 0.168,
+    "上午": 0.408,
+    "中午": 0.185,
     "下午": 0.408,
     "晚上": 0.0
+   },
+   "official_time_steps": {
+    "上午": 38,
+    "下午": 27,
+    "未标注": 60
+   },
+   "official_time_minutes": {
+    "上午": 265,
+    "中午": 120,
+    "下午": 265,
+    "未标注": 150
    },
    "tourist_time_allocation_pct": {
     "上午": 0.461,
@@ -145,7 +156,7 @@
    "order_tau_mean": 0.29,
    "n_order_pairs": 53,
    "official_has_time_info": false,
-   "official_time_basis": "路线标注时长（分钟）",
+   "official_time_basis": "路线标注时长（分钟，已知）+ 无时长步骤数（分别统计）",
    "tourist_time_basis": "文本时段词提及频次",
    "tau_sensitivity": {
     "3": {
@@ -166,6 +177,12 @@
     "中午": null,
     "下午": null,
     "晚上": null
+   },
+   "official_time_steps": {
+    "未标注": 124
+   },
+   "official_time_minutes": {
+    "未标注": 120
    },
    "tourist_time_allocation_pct": {
     "上午": 0.462,
@@ -216,7 +233,7 @@
    "order_tau_mean": 0.525,
    "n_order_pairs": 82,
    "official_has_time_info": false,
-   "official_time_basis": "路线标注时长（分钟）",
+   "official_time_basis": "路线标注时长（分钟，已知）+ 无时长步骤数（分别统计）",
    "tourist_time_basis": "文本时段词提及频次",
    "tau_sensitivity": {
     "3": {
@@ -238,6 +255,10 @@
     "下午": null,
     "晚上": null
    },
+   "official_time_steps": {
+    "未标注": 111
+   },
+   "official_time_minutes": {},
    "tourist_time_allocation_pct": {
     "上午": 0.485,
     "中午": 0.114,
