@@ -7,17 +7,22 @@
 口径说明：根景区名（黄山/九寨沟/颐和园）与城市名（北京/成都）按设计不作为 POI 抽取，
 分母中单列（entity_sentence_eval.json 的 scope_note）。
 
+H06 发现与修复：本文件曾在 main 中段插入模块级 import，将结果构建/落盘全部截断为
+prf() 内 return 之后的死代码——脚本静默零产出（exit 0 且不写产物）。现已复原 main
+完整闭环：评测 → 结果构建 → 落盘 → 打印。
+
 用法：python src/entity_sentence_eval.py
 """
 from __future__ import annotations
 
 import json
 import sys
-from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT.parent))
+from common.fingerprints import data_fingerprints as _data_fingerprints  # noqa: E402
+
 EXP2 = ROOT / "output/exp2"
 TASK1 = ROOT.parent / "task1"
 
@@ -30,7 +35,6 @@ def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-
 def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
     """H07：Wilson 95% 置信区间（小样本比例的稳健区间）。"""
     if n == 0:
@@ -41,6 +45,17 @@ def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
     center = (p + z2 / (2 * n)) / denom
     spread = (z / denom) * (p * (1 - p) / n + z2 / (4 * n * n)) ** 0.5
     return {"lo": round(max(0.0, center - spread), 3), "hi": round(min(1.0, center + spread), 3)}
+
+
+def prf(tp: int, fp: int, fn: int) -> dict:
+    return {"tp": tp, "fp": fp, "fn": fn,
+            "precision": round(tp / max(1, tp + fp), 3),
+            "recall": round(tp / max(1, tp + fn), 3),
+            "f1": round(2 * tp / max(1, 2 * tp + fp + fn), 3)}
+
+
+def gpos_found(sent: str, gtext: str) -> bool:
+    return sent.find(gtext) >= 0
 
 
 def main() -> int:
@@ -107,15 +122,6 @@ def main() -> int:
             if gtype == "POI" and gtext in OUT_OF_SCOPE and gpos_found(sent, gtext):
                 stats_oos["POI"][2] += 1
 
-from common.fingerprints import data_fingerprints as _data_fingerprints
-
-
-def prf(tp, fp, fn):
-    return {"tp": tp, "fp": fp, "fn": fn,
-            "precision": round(tp / max(1, tp + fp), 3),
-            "recall": round(tp / max(1, tp + fn), 3),
-            "f1": round(2 * tp / max(1, 2 * tp + fp + fn), 3)}
-
     result = {
         "n_sentences": len(sample),
         "annotated_by": gold_doc["annotated_by"],
@@ -146,10 +152,6 @@ def prf(tp, fp, fn):
                       "per_type": {k: {kk: v[kk] for kk in ("precision", "recall", "f1")}
                                    for k, v in result["per_type"].items()}}, ensure_ascii=False))
     return 0
-
-
-def gpos_found(sent: str, gtext: str) -> bool:
-    return sent.find(gtext) >= 0
 
 
 if __name__ == "__main__":
