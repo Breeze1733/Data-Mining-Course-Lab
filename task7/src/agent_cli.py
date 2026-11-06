@@ -456,10 +456,17 @@ class ReActAgent:
         tips = [c for c in cond_res.get("conditions", [])
                 if not any(k in c["condition"] + c["suggestion"] for k in other_area_kw)
                 and (c["cond_type"] == "人群" or any(k in c["suggestion"] for k in suggest_cue))][:6]
+        # G13：编排来源如实标注——模板覆盖不足 60% 时未采用官方路线，不得冒充官方来源
+        if template and not template_cov_low:
+            template_src = f'（参考官方路线 {route_res.get("route_id", "")} {template}）'
+        else:
+            template_src = "（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）"
         return {"scenic": scenic, "days": days, "visitor_type": visitor, "special": intent["special"],
                 "special_notes": special_notes, "trip_month": intent.get("month"),
                 "itinerary": itinerary, "tips": tips, "feasibility_warnings": feasibility_warnings,
-                "template_route": f'{route_res.get("route_id", "")} {route_res.get("route_title", "")}'}
+                "template_used": bool(template and not template_cov_low),
+                "template_route": f'{route_res.get("route_id", "")} {route_res.get("route_title", "")}',
+                "template_src": template_src}
 
     def _apply_time_budget(self, ordered: list[str], days, n_days: int, _sunrise_poi,
                            special_notes: list, trace: list) -> list[str]:
@@ -604,9 +611,10 @@ class ReActAgent:
         day_label = {0.5: "半日", 1: "一日", 1.5: "一日半", 2: "两日", 3: "三日", 3.5: "三日半", 4: "四日", 5: "五日"}
         month_tag = f'，出行时段{plan["trip_month"]}月' if plan.get("trip_month") else ""
         sp_notes = "".join(f'{chr(10)}说明：{n}' for n in (plan.get("special_notes") or []))
+        # G13：来源区分——编排依据（官方/图谱动线）如实标注；贴士注明游记经验来源
         return (f'为您规划{plan["scenic"]}{day_label.get(plan["days"], plan["days"])}游{month_tag}'
-                f'（参考官方路线 {plan["template_route"]}）：\n' + "\n".join(lines) +
-                (f'\n贴士：{tips}' if tips else "") + warn_text + sp_notes)
+                f'{plan.get("template_src", "")}：\n' + "\n".join(lines) +
+                (f'\n贴士（来自游记经验）：{tips}' if tips else "") + warn_text + sp_notes)
 
     # ── ReAct 主循环 ────────────────────────────────────────────
     def run(self, query: str) -> dict:
