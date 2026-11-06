@@ -721,9 +721,9 @@
    "pronoun": "它",
    "class": "object",
    "scenic": "颐和园",
-   "pred": "昆明湖",
+   "pred": "乐寿堂",
    "pred_kind": "POI",
-   "evidence": "前两句最近POI，距离35字符",
+   "evidence": "前两句最近POI，距离98字符",
    "gold": "长廊",
    "gold_kind": "POI",
    "note": "先行词为“廊上斑驳的画”，归至长廊实体"
