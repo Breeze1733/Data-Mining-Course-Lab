@@ -48,6 +48,8 @@ SCENARIOS = [
     {"id": "S14_多约束集成", "query": "黄山三天游，冬季去，避开莲花峰",
      "expect": {"scenic": "黄山", "days": 3, "month": 12, "avoid_respected": "莲花峰",
                 "multi_day": True}},
+    {"id": "S15_必去地点", "query": "黄山两日游，一定要去天都峰",
+     "expect": {"scenic": "黄山", "days": 2, "must_respected": "天都峰"}},
 ]
 def check_unknown_poi(result, poi):
     """G14 验收：图谱中不存在的景点不得被编造进行程。"""
@@ -77,6 +79,16 @@ def check_multi_day(result):
     plan = result.get("plan") or {}
     days = {it["day"] for it in plan.get("itinerary", [])}
     return plan.get("days") == 3 and days == {1, 2, 3}
+
+
+def check_must(result, expect_poi):
+    """U66 验收：必去地点必须在行程中，且回答/贴士说明必去落实（识别 must 死代码退化）。"""
+    plan = result.get("plan") or {}
+    pois = [it["poi"] for it in plan.get("itinerary", [])]
+    in_plan = any(expect_poi in p for p in pois)
+    noted = any(expect_poi in n for n in (plan.get("special_notes") or [])) \
+        or expect_poi in result["answer"]
+    return in_plan and noted
 
 
 def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
@@ -112,6 +124,8 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
             checks["unknown_poi_not_in_plan"] = check_unknown_poi(result, v)
         elif k == "avoid_respected":
             checks["avoid_respected"] = check_avoid(result, v)
+        elif k == "must_respected":
+            checks["must_respected"] = check_must(result, v)
         elif k == "multi_visitor":
             vt = intent.get("visitor_types") or []
             checks["multi_visitor"] = all(v in vt for v in v)

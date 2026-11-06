@@ -249,6 +249,32 @@ class ReActAgent:
                     kept.append(poi)
             selected = kept
             trace.append({"step": "thought", "thought": f"不去地点过滤：移除 {removed_by_avoid or '无'}"})
+        # U66：必去地点落实（G02b 后半——此前 must 仅抽取、从未作用于规划）。
+        # 已选/解析到的必去项一律进入豁免名单（must_keep），豁免时段预算裁剪（硬约束优先，G04）；
+        # 解析失败如实说明。
+        must_keep: list[str] = []
+        for m0 in must:
+            hit = next((p for p in selected if m0 in p or p in m0), None)
+            if hit:
+                must_keep.append(hit)
+                special_notes.append(f"必去：{hit} 已在行程中")
+                continue
+            node = self.tools._resolve_poi(scenic, m0)
+            if node is not None:
+                label = self.tools.poi_label(node)
+                if label not in selected:
+                    selected.append(label)
+                    must_keep.append(label)
+                    special_notes.append(f"必去：{label} 已加入行程")
+                else:
+                    must_keep.append(label)
+                    special_notes.append(f"必去：{label} 已在行程中")
+            else:
+                special_notes.append(f"必去：{m0} 未在{scenic}景点库中找到，请确认名称或咨询景区")
+        if must:
+            trace.append({"step": "thought",
+                          "thought": f"必去地点处理：{len(must_keep)} 个进入豁免名单"
+                                     f"（含新加入），未找到项见贴士"})
         # 模板选择（P11）：query_route 返回的路线作为首选候选参与覆盖率竞争——
         # 工具结果真实进入决策；未入选时 trace 如实说明原因
         cands = self.tools.routes_by_scenic(scenic, days if days <= 2 else 2)
@@ -302,6 +328,13 @@ class ReActAgent:
         # G03：时段预算——限制每日 POI 数量（半日≤3、一日≤5、多日≤每日4）
         n_days = max(1, int(days) if days and days >= 1 else 1)
         ordered = self._apply_time_budget(ordered, days, n_days, _sunrise_poi, special_notes, trace)
+        # U66：必去地点豁免时段预算裁剪（硬约束优先，G04）——被裁剪则回填
+        if must_keep:
+            missing = [p for p in dict.fromkeys(must_keep) if p not in ordered]
+            if missing:
+                ordered.extend(missing)
+                trace.append({"step": "thought",
+                              "thought": f"必去地点豁免预算裁剪：{missing} 已回填行程"})
 
         # 天数/时段分配（P05/P06）：n_days 对 0.5/1/1.5/2/3/3.5/4/5 全部成立；
         # 2 日且模板全覆盖时沿用模板的天与时段，否则按切分块分配；半日时段封顶于上午/中午（P06）；

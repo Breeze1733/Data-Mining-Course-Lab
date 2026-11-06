@@ -1,17 +1,17 @@
 {
- "updated_at": "2026-11-06 04:39",
+ "updated_at": "2026-11-07 04:35",
  "guards": {
   "dataset.count": 271,
   "graph.fact_checks": "6/6",
   "graph.name_alignment_passed": true,
-  "agent.passed": "14/14",
+  "agent.passed": "15/15",
   "task2.spot_n": 53,
   "task2.spot_self_consistent": true,
   "task5.review_n": 79,
   "task5.review_self_consistent": true,
   "task5.verdicts": "39/19/21",
   "task4.score_rerun_ok": true,
-  "task4.coref_accuracy": 0.606,
+  "task4.coref_accuracy": 0.65,
   "task4.coref_n": 180,
   "task5.score_rerun_ok": true
  },
