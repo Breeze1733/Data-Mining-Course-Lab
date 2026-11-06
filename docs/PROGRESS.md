@@ -1230,3 +1230,16 @@ E01（实验5 原句级有无建议评测）→ H07 置信区间 → D02 段落�
   Windows 下对刚关闭的临时文件偶发 WinError 5（杀毒/索引器短暂持锁）；
   common/atomic.py 加 _replace_with_retry（5×50ms），task1 save 内联同款重试；
   chain 连跑 3 次全绿，随机红消除。
+
+---
+
+## 第5轮 U72：F06 权重方案敏感性 —— 完成
+
+- **设计**：先后顺序边三种权重方案（mixed=现行官方+游客、official_only、tourist_only，
+  边级 official_routes/tourist_support 列驱动），运行期替换 GraphTools.G 重跑 15 场景；
+- **结果**：三方案场景断言均 15/15（验收对权重选择稳健）；行程序列 tau vs mixed——
+  tourist_only 0.942（当前边权实际由游客证据主导）、official_only 0.487（S12 低至 −0.333，
+  官方边稀疏）——官方路线的编排影响主要来自 P11 模板选择机制而非边权；
+- **顺带验证**：graphml 往返把 MultiDiGraph 压成 DiGraph，但同对多关系 0 条（build_graph
+  按键合并），无保真损失；
+- **产物**：metrics/f06_weight_sensitivity.json（分析只读，不改生产图谱）。
