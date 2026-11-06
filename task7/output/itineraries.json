@@ -85,7 +85,9 @@
    }
   ],
   "feasibility_warnings": [],
-  "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
+  "template_used": true,
+  "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线",
+  "template_src": "（参考官方路线 YHY-EXP05-R1 2026西堤省力赏花线）"
  },
  {
   "scenario": "S2_亲子九寨沟一日",
@@ -177,7 +179,9 @@
    "原始森林：装备条件（句内）——不建议去原始森林,它和九寨沟看水的核心特色不符,还存在耗时、景色普通等问题,具体",
    "原始森林：不去原始森林——其实大半天足矣"
   ],
-  "template_route": "JZG-EXP01-R1 一日精华游"
+  "template_used": true,
+  "template_route": "JZG-EXP01-R1 一日精华游",
+  "template_src": "（参考官方路线 JZG-EXP01-R1 2016版一日游）"
  },
  {
   "scenario": "S3_情侣黄山两日",
@@ -317,7 +321,9 @@
    "天都峰：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
    "天都峰：想云谷上玉屏下——那我感觉大概率是没啥力气的,而且时间也来不及,老道口下午3点关闭,新道口下午1点"
   ],
-  "template_route": "HS-EXTRA1-R2 冬季南门二日游"
+  "template_used": false,
+  "template_route": "HS-EXTRA1-R2 冬季南门二日游",
+  "template_src": "（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）"
  },
  {
   "scenario": "S4_时间紧颐和园",
@@ -413,7 +419,9 @@
    }
   ],
   "feasibility_warnings": [],
-  "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
+  "template_used": true,
+  "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线",
+  "template_src": "（参考官方路线 YHY-EXP05-R1 APEC世界文化遗产经典线）"
  },
  {
   "scenario": "S6_冲突约束",
@@ -521,7 +529,9 @@
    "天都峰：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
    "天都峰：想云谷上玉屏下——那我感觉大概率是没啥力气的,而且时间也来不及,老道口下午3点关闭,新道口下午1点"
   ],
-  "template_route": "HS-EXTRA1-R2 冬季南门二日游"
+  "template_used": true,
+  "template_route": "HS-EXTRA1-R2 冬季南门二日游",
+  "template_src": "（参考官方路线 HS-EXTRA1-R2 黄山主体山岳游 第1至3天）"
  },
  {
   "scenario": "S7_可行性提示",
@@ -640,7 +650,9 @@
    "原始森林：装备条件（句内）——不建议去原始森林,它和九寨沟看水的核心特色不符,还存在耗时、景色普通等问题,具体",
    "原始森林：不去原始森林——其实大半天足矣"
   ],
-  "template_route": "JZG-EXP01-R1 一日精华游"
+  "template_used": true,
+  "template_route": "JZG-EXP01-R1 一日精华游",
+  "template_src": "（参考官方路线 JZG-EXP01-R1 2016版一日游）"
  },
  {
   "scenario": "S8_多跳动线",
@@ -759,7 +771,9 @@
    "原始森林：装备条件（句内）——不建议去原始森林,它和九寨沟看水的核心特色不符,还存在耗时、景色普通等问题,具体",
    "原始森林：不去原始森林——其实大半天足矣"
   ],
-  "template_route": "JZG-EXP01-R1 一日精华游"
+  "template_used": true,
+  "template_route": "JZG-EXP01-R1 一日精华游",
+  "template_src": "（参考官方路线 JZG-EXP01-R1 2016版一日游）"
  },
  {
   "scenario": "S9_冬季时段提示",
@@ -915,7 +929,9 @@
    "光明顶：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
    "黄山（时段提示）：条件建议集中于4/5/6/7/8/9/10/11月，您计划的12月不在其中——是按照整体景致的话最适合游玩的是是4-11月份，请确认当期景点开放情况"
   ],
-  "template_route": "HS-EXTRA1-R2 冬季南门二日游"
+  "template_used": false,
+  "template_route": "HS-EXTRA1-R2 冬季南门二日游",
+  "template_src": "（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）"
  },
  {
   "scenario": "S10_三日多天编排",
@@ -1088,7 +1104,9 @@
    "原始森林：装备条件（句内）——不建议去原始森林,它和九寨沟看水的核心特色不符,还存在耗时、景色普通等问题,具体",
    "原始森林：不去原始森林——其实大半天足矣"
   ],
-  "template_route": "JZG-EXP01-R2 二日舒适游"
+  "template_used": true,
+  "template_route": "JZG-EXP01-R2 二日舒适游",
+  "template_src": "（参考官方路线 JZG-EXP01-R2 2016版二日游）"
  },
  {
   "scenario": "S11_多人群贴士",
@@ -1182,7 +1200,9 @@
    "原始森林：装备条件（句内）——不建议去原始森林,它和九寨沟看水的核心特色不符,还存在耗时、景色普通等问题,具体",
    "原始森林：不去原始森林——其实大半天足矣"
   ],
-  "template_route": "JZG-EXP01-R1 一日精华游"
+  "template_used": true,
+  "template_route": "JZG-EXP01-R1 一日精华游",
+  "template_src": "（参考官方路线 JZG-EXP01-R1 2016版一日游）"
  },
  {
   "scenario": "S12_不去地点",
@@ -1299,7 +1319,9 @@
    }
   ],
   "feasibility_warnings": [],
-  "template_route": "JZG-EXP01-R1 一日精华游"
+  "template_used": true,
+  "template_route": "JZG-EXP01-R1 一日精华游",
+  "template_src": "（参考官方路线 JZG-EXP01-R1 2016版一日游）"
  },
  {
   "scenario": "S13_未知景点",
@@ -1418,7 +1440,9 @@
    "原始森林：装备条件（句内）——不建议去原始森林,它和九寨沟看水的核心特色不符,还存在耗时、景色普通等问题,具体",
    "原始森林：不去原始森林——其实大半天足矣"
   ],
-  "template_route": "JZG-EXP01-R1 一日精华游"
+  "template_used": true,
+  "template_route": "JZG-EXP01-R1 一日精华游",
+  "template_src": "（参考官方路线 JZG-EXP01-R1 2016版一日游）"
  },
  {
   "scenario": "S14_多约束集成",
@@ -1594,7 +1618,9 @@
    "玉屏楼：莲花峰封山可选择登天都峰——然后登天都,然后步行下山,登天都就无法乘索道下山",
    "黄山（时段提示）：条件建议集中于4/5/6/7/8/9/10/11月，您计划的12月不在其中——是按照整体景致的话最适合游玩的是是4-11月份，请确认当期景点开放情况"
   ],
-  "template_route": "HS-EXTRA1-R2 冬季南门二日游"
+  "template_used": true,
+  "template_route": "HS-EXTRA1-R2 冬季南门二日游",
+  "template_src": "（参考官方路线 HS-EXTRA1-R2 南门二日游）"
  },
  {
   "scenario": "S15_必去地点",
@@ -1761,6 +1787,8 @@
    "天都峰：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下",
    "天都峰：想云谷上玉屏下——那我感觉大概率是没啥力气的,而且时间也来不及,老道口下午3点关闭,新道口下午1点"
   ],
-  "template_route": "HS-EXTRA1-R2 冬季南门二日游"
+  "template_used": false,
+  "template_route": "HS-EXTRA1-R2 冬季南门二日游",
+  "template_src": "（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）"
  }
 ]
