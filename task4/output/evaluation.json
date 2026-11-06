@@ -1,6 +1,6 @@
 {
  "n": 180,
- "accuracy_overall": 0.628,
+ "accuracy_overall": 0.639,
  "accuracy_by_class": {
   "locative": {
    "n": 45,
@@ -8,7 +8,7 @@
   },
   "object": {
    "n": 45,
-   "accuracy": 0.667
+   "accuracy": 0.711
   },
   "person": {
    "n": 45,
@@ -22,7 +22,7 @@
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.675
+   "accuracy": 0.692
   },
   "test": {
    "n": 60,
@@ -30,7 +30,7 @@
   }
  },
  "errors_by_split": {
-  "dev": 39,
+  "dev": 37,
   "test": 28
  },
  "split_method": "P18 文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
@@ -94,9 +94,9 @@
    "pronoun": "这座",
    "class": "object",
    "scenic": "颐和园",
-   "pred": "NONE",
-   "pred_kind": "无明确先行词",
-   "evidence": "句子焦点在景区外，不回退主景区名",
+   "pred": "noun:城门",
+   "pred_kind": "其他",
+   "evidence": "窗口无实体且焦点在景区外，回退同句代词前最近普通名词（概念先行词）",
    "gold": "紫禁城",
    "gold_kind": "景区",
    "note": "“这座皇城”指紫禁城，多景点游记（故宫段）"
@@ -188,28 +188,6 @@
    "gold": "迎面来的登山者",
    "gold_kind": "他人",
    "note": "同句“从下面上来的人”"
-  },
-  {
-   "pronoun": "它",
-   "class": "object",
-   "scenic": "黄山",
-   "pred": "NONE",
-   "pred_kind": "无明确先行词",
-   "evidence": "句子焦点在景区外，不回退主景区名",
-   "gold": "祠堂",
-   "gold_kind": "其他",
-   "note": "“它”承前指祠堂（普通名词）"
-  },
-  {
-   "pronoun": "它",
-   "class": "object",
-   "scenic": "黄山",
-   "pred": "NONE",
-   "pred_kind": "无明确先行词",
-   "evidence": "句子焦点在景区外，不回退主景区名",
-   "gold": "祠堂",
-   "gold_kind": "其他",
-   "note": "普通名词“祠堂”，非POI"
   },
   {
    "pronoun": "其中",
@@ -391,9 +369,9 @@
    "pronoun": "它",
    "class": "object",
    "scenic": "九寨沟",
-   "pred": "NONE",
-   "pred_kind": "无明确先行词",
-   "evidence": "句子焦点在景区外，不回退主景区名",
+   "pred": "noun:花海",
+   "pred_kind": "其他",
+   "evidence": "窗口无实体且焦点在景区外，回退同句代词前最近普通名词（概念先行词）",
    "gold": "红原",
    "gold_kind": "景区",
    "note": "“它的缠绵悱恻”指红原四季；红原未收录"
@@ -688,9 +666,9 @@
    "pronoun": "这里",
    "class": "locative",
    "scenic": "颐和园",
-   "pred": "NONE",
-   "pred_kind": "无明确先行词",
-   "evidence": "句子焦点在景区外，不回退主景区名",
+   "pred": "noun:词汇",
+   "pred_kind": "其他",
+   "evidence": "窗口无实体且焦点在景区外，回退同句代词前最近普通名词（概念先行词）",
    "gold": "紫禁城",
    "gold_kind": "景区",
    "note": "多景点游记（故宫/紫禁城段）"
@@ -732,9 +710,9 @@
    "pronoun": "这里",
    "class": "locative",
    "scenic": "颐和园",
-   "pred": "NONE",
-   "pred_kind": "无明确先行词",
-   "evidence": "句子焦点在景区外，不回退主景区名",
+   "pred": "noun:大事",
+   "pred_kind": "其他",
+   "evidence": "窗口无实体且焦点在景区外，回退同句代词前最近普通名词（概念先行词）",
    "gold": "避暑山庄",
    "gold_kind": "景区",
    "note": "多景点游记（承德避暑山庄段）"
@@ -773,10 +751,10 @@
    "note": "先行词为“廊上斑驳的画”，归至长廊实体"
   }
  ],
- "kind_only_accuracy": 0.694,
+ "kind_only_accuracy": 0.706,
  "accuracy_ci95": {
-  "lo": 0.555,
-  "hi": 0.695
+  "lo": 0.566,
+  "hi": 0.705
  },
  "data_fingerprints": {
   "dataset_clean": "6fae55942575",
