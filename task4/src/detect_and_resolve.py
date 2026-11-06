@@ -205,6 +205,10 @@ def main(argv=None) -> int:
                         before = [e for e in pool if e["end"] <= doc_start]
                         if is_prev:
                             before = pool  # 前句实体全部视为“在前”
+                        # D06/U67：pois+transports 拼接池并非全局按位置有序（实测 246/271 记录乱序），
+                        # 直接 reversed 截断是顺序依赖的——先按 end 降序排为“就近优先”，
+                        # 再截断保留距代词最近的 7 个，截断不再偏向实体类型/列表顺序
+                        before = sorted(before, key=lambda e: e["end"], reverse=True)
                         kept = 0
                         for e in reversed(before):
                             if attr_filter_on:
