@@ -316,6 +316,51 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
 
 
+    # U74(a)：裸"X的话，Y"（无如果/要是 前置）——"玩黄龙的话住松潘古城"（E01 扩充样本实证漏抽）
+    for m in re.finditer(r"([一-龥A-Za-z0-9]{2,12})的话[，,]?\s*", sent):
+        if m.start() in seen_spans:
+            continue
+        cond = m.group(1).strip()
+        if cond.startswith(("如果", "要是", "若", "假如", "既然", "就是说")):
+            continue  # 连词型由 P1 处理
+        rest = sent[m.end():].strip()
+        if not rest or not (SUGG_VERB.match(rest)
+                            or re.match(r"(?:建议|最好|推荐|记得|不妨|务必|要|选|住|坐|乘|带|穿|备|订|避)", rest)):
+            continue
+        for sugg in split_multi_suggestions(rest[:40]):
+            pairs.append({"pattern": "P1_显式条件", "trigger": "…的话(裸)",
+                          "condition_text": cond, "suggestions": [sugg], "sentence": sent})
+        seen_spans.add(m.start())
+
+    # U74(b)：空格分隔的"条件 出现 + 祈使"——"高反情况出现 路上随时休息补氧"
+    for m in re.finditer(r"([一-龥A-Za-z0-9]{2,14}(?:出现|的时候?))[ 　]+([一-龥][^。！？；]{1,28})", sent):
+        cond, rest = m.group(1), m.group(2).strip()
+        if not re.search(r"(?:休息|补氧|带上?|备|穿|涂|错峰|排队|慢行|提前)", rest[:10]):
+            continue
+        pairs.append({"pattern": "P4_句内条件", "trigger": "空格条件",
+                      "condition_text": cond, "suggestions": [rest], "sentence": sent,
+                      "condition_type": "体力安全" if ("高反" in cond or "体力" in cond) else "一般"})
+
+    # U74(e)：须做/禁入规定（"你需要乘坐新国线登山车"/"私家车不允许进入"）
+    for m in re.finditer(r"(需要?|须)(乘坐?|购买|预订|预约)[^。！？；，]{1,26}", sent):
+        pairs.append({"pattern": "P7_依据规定", "trigger": m.group(1) + m.group(2),
+                      "condition_text": "入园/通行规定（句内）", "suggestions": [m.group(0)],
+                      "sentence": sent,
+                      "condition_type": "预约票务" if ("订" in m.group(2) or "预约" in m.group(2)) else "交通"})
+    for m in re.finditer(r"(不允许|禁止|不得)[^。！？；，]{1,26}", sent):
+        back = sent[max(0, m.start() - 12):m.start()]
+        if re.search(r"(估计|可能|将|恐怕|也许|说不定)", back):
+            continue  # U74：预测性语境（"估计不久将禁止"）非现行规定
+        pairs.append({"pattern": "P6_否定建议", "trigger": m.group(1),
+                      "condition_text": "入园/通行规定（句内）", "suggestions": [m.group(0)],
+                      "sentence": sent, "condition_type": "一般"})
+    # U74(f)：注意+闭馆/不开放类规定（"需要注意的是北京很多景点周一都不开放"）
+    for m in re.finditer(r"(需要注意的是?|注意)[^。！？；]{0,18}(不开放|闭馆|关闭|停运|暂停开放)[^。！？；]{0,20}", sent):
+        pairs.append({"pattern": "P7_依据规定", "trigger": m.group(1),
+                      "condition_text": "开放时间规定（句内）",
+                      "suggestions": [m.group(0)[:40]], "sentence": sent,
+                      "condition_type": "时间"})
+
     # P7 依据规定（E03）：按照/根据+要求/规定/政策/须知 的条件性规则信息（无显式条件连词）
 
     for m in re.finditer(r"((?:按照|根据|依据)[^。！？；]{0,16}?(?:要求|规定|政策|须知|提示))[^。！？；]{0,12}?[，,]\s*([^。！？；]{1,60})", sent):
@@ -466,7 +511,17 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         crowd = m.group(1).strip()
 
-        for sugg in split_multi_suggestions(m.group(2)):
+        segs = split_multi_suggestions(m.group(2))
+
+        # U74(c)：首段并回"可以"动词线索——建议从动词起（此前"可以不下了"被截成"不下了"，
+
+        # 3 字建议被最短长度过滤淘汰，E01 扩充样本实证）
+
+        if segs:
+
+            segs[0] = "可以" + segs[0]
+
+        for sugg in segs:
 
             pairs.append({"pattern": "P5_人群可以", "trigger": "可以",
 
@@ -508,6 +563,13 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             cond_text, cond_type = "一般建议（避雷）", "一般"
 
+        # U74(d)：回扩动词短语——否定词前的"带/穿/买/选…"短语属于同一建议
+        # （"带老人、小孩慎选"此前仅存"慎选)"，3 字被最短长度过滤淘汰）
+        back = sent[max(0, m.start(1) - 8):m.start(1)]
+        back_m = re.search(r"(带|穿|买|选|点|准备|记得)([^，。！？；；]{0,6})$", back)
+        if back_m:
+            clause = back_m.group(0) + clause
+        clause = clause.rstrip(")）]】")
         for sugg in split_multi_suggestions(clause):
 
             pairs.append({"pattern": "P6_否定建议", "trigger": m.group(1),

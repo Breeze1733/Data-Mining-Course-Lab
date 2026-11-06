@@ -28,15 +28,66 @@ ADVICE = {4: (False, "中午12点上山、下午4点前下山（攻略式时间�
           8: (True, "视野不佳时建议多等5-10分钟"),
           12: (True, "推荐坐火车下谷底再从一环二环爬上来"),
           21: (False, "光线好则人多，自己取舍（无触发词）"),
-          23: (True, "玩黄龙的话住松潘古城（海拔低、配套全）"),
+          23: (True, "玩黄龙的话住松潘古城（海拔低、配套全）【设计排除：他景区建议，归属过滤不产出】"),
           24: (True, "14天内有相关旅居史的游客暂缓接待（防疫条件规定）"),
           31: (False, "昆明湖边坐一会儿（松弛感，无触发词）"),
           33: (False, "北如意门-画中游-…-新宫门（路线罗列）"),
           37: (False, "北宫门进➡…➡东宫门出（路线罗列）")}
 
 
+def _load_batches() -> list[dict]:
+    """E01 扩充：第一轮 dev 40 句（ADVICE 字典判读）+ 追抽 60 句（coverage_sample_expanded.json，
+    ai_advice 字段随样本存储）。两批口径一致，分批与合并同时报告。"""
+    batches = []
+    dev = json.loads((TASK2 / "output/exp2/entity_sentence_sample_dev.json").read_text(encoding="utf-8"))["sentences"]
+    batches.append({"batch": "round1_dev", "sentences": [
+        {**o, "ai_advice": ADVICE.get(o["sid"], (False, ""))[0],
+         "gist": ADVICE.get(o["sid"], (False, ""))[1]} for o in dev]})
+    expanded_path = TASK2 / "output/exp2/coverage_sample_expanded.json"
+    if expanded_path.exists():
+        exp = json.loads(expanded_path.read_text(encoding="utf-8"))["sentences"]
+        batches.append({"batch": "expanded_seed77", "sentences": exp})
+    return batches
+
+
 def main() -> int:
-    sample = json.loads((TASK2 / "output/exp2/entity_sentence_sample_dev.json").read_text(encoding="utf-8"))["sentences"]
+    batches = _load_batches()
+    all_rows = []
+    batch_stats = {}
+    for b in batches:
+        b_rows = _eval_batch(b["batch"], b["sentences"])
+        batch_stats[b["batch"]] = {k: b_rows[k] for k in
+                                   ("n_sentences", "n_advice_sentences", "advice_recall",
+                                    "over_extraction_pairs_in_non_advice")}
+        all_rows.extend(b_rows["detail"])
+    advice_n = sum(s["n_advice_sentences"] for s in batch_stats.values())
+    design_excluded_n = sum(s.get("n_design_excluded", 0) for s in batch_stats.values())
+    matched_total = sum(1 for r in all_rows if r["in_scope"] and r["n_pairs"] > 0)
+    over_pairs = sum(r["n_pairs"] for r in all_rows if not r["in_scope"])
+    result = {
+        "n_sentences": len(all_rows),
+        "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注）",
+        "sample_note": "第一轮 dev 40 句（entity_sentence_sample_dev.json）+ 追抽 60 句"
+                       "（coverage_sample_expanded.json，seed=77，排除既有抽样记录）；"
+                       "B01 第二轮冻结样本仅用于实体评测",
+        "scope_note": "in_scope=句内含条件性建议或带触发词的建议（实验5 任务口径）；无触发词的泛建议/路线罗列为任务外",
+        "n_advice_sentences": advice_n,
+        "n_design_excluded": design_excluded_n,
+        "advice_recall": round(matched_total / max(1, advice_n), 3),
+        "by_batch": batch_stats,
+        "over_extraction_pairs_in_non_advice": over_pairs,
+        "detail": all_rows,
+    }
+    (OUT / "extraction_coverage_eval.json").write_text(
+        json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(json.dumps({"n_advice": advice_n, "advice_recall": result["advice_recall"],
+                      "by_batch": {k: v["advice_recall"] for k, v in batch_stats.items()},
+                      "over_pairs": over_pairs}, ensure_ascii=False))
+    return 0
+
+
+def _eval_batch(batch: str, sample: list[dict]) -> dict:
+    """单批评测：句级判读 × 当前映射表匹配（record+包含匹配口径）。"""
     mapping = json.loads((OUT / "mapping_table.json").read_text(encoding="utf-8"))
     mrows = mapping["rows"] if isinstance(mapping, dict) else mapping
     by_sentence = {}
@@ -47,9 +98,19 @@ def main() -> int:
     unmatched_advice = []
     over_pairs = 0
     detail = []
+    design_excluded = 0
     for o in sample:
         sid, rid, sent = o["sid"], o["record_id"], o["sentence"]
-        in_scope, gist = ADVICE.get(sid, (False, ""))
+        in_scope = o.get("ai_advice")
+        if in_scope is None:
+            in_scope, gist = ADVICE.get(sid, (False, ""))
+        else:
+            gist = o.get("gist", "")
+        if in_scope and "设计排除" in gist:
+            design_excluded += 1
+            detail.append({"sid": sid, "in_scope": True, "design_excluded": True,
+                           "n_pairs": 0, "gist": gist})
+            continue
         # P16 精神：按 record + 句子包含匹配（task5 分句与抽样分句的规则不同，精确等值会漏配）
         pairs = [r for (rr, ss), rs in by_sentence.items() if rr == rid and (ss in sent or sent in ss)
                  for r in rs]
@@ -63,23 +124,19 @@ def main() -> int:
             over_pairs += len(pairs)
         detail.append({"sid": sid, "in_scope": in_scope, "n_pairs": len(pairs), "gist": gist})
 
-    result = {
+    return {
         "n_sentences": len(sample),
-        "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注）",
-        "sample_note": "使用第一轮抽样（entity_sentence_sample_dev.json，开发历史）；B01 第二轮冻结样本仅用于实体评测",
-        "scope_note": "in_scope=句内含条件性建议或带触发词的建议（实验5 任务口径）；无触发词的泛建议/路线罗列为任务外",
+        "n_design_excluded": design_excluded,
         "n_advice_sentences": advice_n,
         "advice_recall": round(matched_n / max(1, advice_n), 3),
         "unmatched_advice": unmatched_advice,
         "over_extraction_pairs_in_non_advice": over_pairs,
         "detail": detail,
     }
-    (OUT / "extraction_coverage_eval.json").write_text(
-        json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(json.dumps({"n_advice": advice_n, "advice_recall": result["advice_recall"],
-                      "unmatched": [u["sid"] for u in unmatched_advice],
-                      "over_pairs": over_pairs}, ensure_ascii=False))
-    return 0
+
+
+
+
 
 
 if __name__ == "__main__":

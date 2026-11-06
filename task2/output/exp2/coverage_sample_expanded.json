@@ -1,0 +1,616 @@
+{
+ "draw_seed": 77,
+ "sampling": "travelogue 正文句，排除既有抽样记录；scenic×platform 分层，每记录≤2句",
+ "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注）——判读后回填 ai_advice/gist",
+ "n": 60,
+ "sentences": [
+  {
+   "record_id": "XHS_6abbe5ce000000001400072d",
+   "scenic": "九寨沟",
+   "platform": "小红书",
+   "start": 17,
+   "sentence": "在体力最充沛时候看中线最好看几个海子并且错峰人不多",
+   "sid": 1000,
+   "ai_advice": true,
+   "gist": "体力最充沛时看中线最好、错峰人少"
+  },
+  {
+   "record_id": "XHS_6a7af58b000000000e03f400",
+   "scenic": "九寨沟",
+   "platform": "小红书",
+   "start": 761,
+   "sentence": "走完双龙海又累了,我们就直接坐车出去了,芦苇海没有停车站,要在盆景海下车往回走,但这部分可以在车上看,座车右侧就可以,没体力的可以不下了",
+   "sid": 1001,
+   "ai_advice": true,
+   "gist": "没体力的可以不下车、座车右侧可以在车上看"
+  },
+  {
+   "record_id": "XHS_68fee7fd0000000007021c37",
+   "scenic": "九寨沟",
+   "platform": "小红书",
+   "start": 532,
+   "sentence": "00:10分到家,结束行程",
+   "sid": 1002,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6adc9757000000002403ffca",
+   "scenic": "九寨沟",
+   "platform": "小红书",
+   "start": 109,
+   "sentence": "7:50到达箭竹海p2p3,箭竹海非常不吃天气,天刚微微亮,美得跟油画一样,沿着栈道一路走一路拍",
+   "sid": 1003,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_69079d88000000000701514e",
+   "scenic": "九寨沟",
+   "platform": "小红书",
+   "start": 0,
+   "sentence": "周五:21:05-23:45 搭乘海航HU7375从深圳前往成都天府机场(269)",
+   "sid": 1004,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6abbe5ce000000001400072d",
+   "scenic": "九寨沟",
+   "platform": "小红书",
+   "start": 0,
+   "sentence": "首先先说,我认为分配到中线也很好",
+   "sid": 1005,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6aa5670b0000000026009cf5",
+   "scenic": "九寨沟",
+   "platform": "小红书",
+   "start": 718,
+   "sentence": "16:20 登上景区直通车",
+   "sid": 1006,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_69cd2898000000002800aace",
+   "scenic": "九寨沟",
+   "platform": "小红书",
+   "start": 205,
+   "sentence": "108:30-12:30 松潘古城深度游(免费但近期在修路,灰尘很大)",
+   "sid": 1007,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_689b5f99000000001c00a124",
+   "scenic": "九寨沟",
+   "platform": "小红书",
+   "start": 136,
+   "sentence": "3:00徒步上山顶看五彩池(高反情况出现 路上随时休息补氧)(海拔3569米)",
+   "sid": 1008,
+   "ai_advice": true,
+   "gist": "高反出现时路上随时休息补氧"
+  },
+  {
+   "record_id": "XHS_6ab74f85000000001402eb46",
+   "scenic": "九寨沟",
+   "platform": "小红书",
+   "start": 43,
+   "sentence": "转大巴10:30抵达九寨沟景区",
+   "sid": 1009,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_2117447",
+   "scenic": "九寨沟",
+   "platform": "携程游记",
+   "start": 638,
+   "sentence": "第2天 2014-10-09",
+   "sid": 1010,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_3969978",
+   "scenic": "九寨沟",
+   "platform": "携程游记",
+   "start": 1864,
+   "sentence": "在设计上大厅与包厢隔成不同区间,欢腾与宁静仅一墙之隔",
+   "sid": 1011,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_1098121",
+   "scenic": "九寨沟",
+   "platform": "携程游记",
+   "start": 9591,
+   "sentence": "在下行就到了老虎海、树正瀑布和树正群海",
+   "sid": 1012,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4037691",
+   "scenic": "九寨沟",
+   "platform": "携程游记",
+   "start": 2839,
+   "sentence": "\"芦苇海\"海拔2140米,全长2.2公里,是一个半沼泽湖泊",
+   "sid": 1013,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_1098121",
+   "scenic": "九寨沟",
+   "platform": "携程游记",
+   "start": 8625,
+   "sentence": "他们大部分都是跟团玩的,大家也顾上看了,都挤在一起拍照片,那个乱啊,无可言说,完全可以想象得出来",
+   "sid": 1014,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_3950329",
+   "scenic": "九寨沟",
+   "platform": "携程游记",
+   "start": 5024,
+   "sentence": "食物:半打红牛、咖啡(开车提神),紫皮糖、手撕牛肉干、小面包、火腿肠、两包泡面",
+   "sid": 1015,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4008520",
+   "scenic": "九寨沟",
+   "platform": "携程游记",
+   "start": 2299,
+   "sentence": "最近的一家标准化酒店是假日酒店,楼下还有一些快餐店",
+   "sid": 1016,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_3975508",
+   "scenic": "九寨沟",
+   "platform": "携程游记",
+   "start": 4928,
+   "sentence": "老虎海长310米,宽171-194米,深25米,库容约110万立方米,因此,即使在冬季水量也十分充沛",
+   "sid": 1017,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_3977904",
+   "scenic": "九寨沟",
+   "platform": "携程游记",
+   "start": 2848,
+   "sentence": "酒店是藏式风格的,也是奔着这一点预定的",
+   "sid": 1018,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4027753",
+   "scenic": "九寨沟",
+   "platform": "携程游记",
+   "start": 1683,
+   "sentence": "由于发车时间是凌晨五点半,第二天凌晨四点我们就起床了,迷迷糊糊收拾完就到酒店大堂等着来接车的人,这也是跟团的一个好处之一,不用自己去张罗车",
+   "sid": 1019,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6ab3a3c9000000000a027646",
+   "scenic": "颐和园",
+   "platform": "小红书",
+   "start": 184,
+   "sentence": "✅所以只要走一条途径了3块区域的路线,就已经大致领略了颐和园的全貌,值回票价了",
+   "sid": 1020,
+   "ai_advice": true,
+   "gist": "只要走一条涵盖3块区域的路线即可领略全貌"
+  },
+  {
+   "record_id": "XHS_69db48da000000002003ac81",
+   "scenic": "颐和园",
+   "platform": "小红书",
+   "start": 177,
+   "sentence": "→ 长廊(百米彩绘长廊,一步一画超惊艳)",
+   "sid": 1021,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6a3bc73700000000070286b8",
+   "scenic": "颐和园",
+   "platform": "小红书",
+   "start": 245,
+   "sentence": "同时谐趣园还有园中之园霁清轩,是嘉庆皇帝审美艺术的集中体现,可感悟沈从文笔下藤萝绿柱之美",
+   "sid": 1022,
+   "ai_advice": true,
+   "gist": "谐趣园可感悟园中之园之美（弱建议）"
+  },
+  {
+   "record_id": "XHS_69fed78f000000002301df8b",
+   "scenic": "颐和园",
+   "platform": "小红书",
+   "start": 461,
+   "sentence": "游玩时长:约5小时(注意⚠:沿路后湖步道偏窄,带老人、小孩慎选)",
+   "sid": 1023,
+   "ai_advice": true,
+   "gist": "后湖步道偏窄，带老人小孩慎选"
+  },
+  {
+   "record_id": "XHS_69f06f9a000000003502c259",
+   "scenic": "颐和园",
+   "platform": "小红书",
+   "start": 136,
+   "sentence": "2小时完美~#拂堤杨柳醉春烟 #历史人文景点 #历史人文旅游",
+   "sid": 1024,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6a2fc7380000000008033fa0",
+   "scenic": "颐和园",
+   "platform": "小红书",
+   "start": 15,
+   "sentence": "不是走错景点,是走错了方向、错开了时间",
+   "sid": 1025,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_698ac043000000000a03312b",
+   "scenic": "颐和园",
+   "platform": "小红书",
+   "start": 470,
+   "sentence": "3光线:下午3-4点的光线最柔和,也最容易拍出日落氛围",
+   "sid": 1026,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_649263b10000000027001123",
+   "scenic": "颐和园",
+   "platform": "小红书",
+   "start": 402,
+   "sentence": "[吧唧R]然后面对仁寿殿沿着左侧走,穿过幽深小路,开阔的昆明湖尽收眼底",
+   "sid": 1027,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_69312f7a000000001e014de8",
+   "scenic": "颐和园",
+   "platform": "小红书",
+   "start": 472,
+   "sentence": "是慈禧和光绪住园期间临朝例证、接受恭贺和接待外国使节的地方",
+   "sid": 1028,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6adf124a000000001601ae2c",
+   "scenic": "颐和园",
+   "platform": "小红书",
+   "start": 309,
+   "sentence": "远离主路的这片区域林木繁盛,少喧闹",
+   "sid": 1029,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4114227",
+   "scenic": "颐和园",
+   "platform": "携程游记",
+   "start": 3790,
+   "sentence": "晚上去位于前门的便宜坊,吃了顿大餐------北京烤鸭",
+   "sid": 1030,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4024149",
+   "scenic": "颐和园",
+   "platform": "携程游记",
+   "start": 389,
+   "sentence": "D6:游:天安门广场升旗、故宫博物院、王府井",
+   "sid": 1031,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_3941430",
+   "scenic": "颐和园",
+   "platform": "携程游记",
+   "start": 1140,
+   "sentence": "上车后直奔自然博物馆,它位于天坛公园的西门,这个地方有好多的餐厅,找一家看着不错的,自己喜欢的就行,先把肚子填饱",
+   "sid": 1032,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_3965800",
+   "scenic": "颐和园",
+   "platform": "携程游记",
+   "start": 1932,
+   "sentence": "这两项恐怕是每一个中国人到北京都必须优先要做的事罢",
+   "sid": 1033,
+   "ai_advice": false,
+   "gist": "泛化陈述（必须优先做的两件事，非条件建议）——初判误触发，如实修正"
+  },
+  {
+   "record_id": "CTRIP_4076286",
+   "scenic": "颐和园",
+   "platform": "携程游记",
+   "start": 6025,
+   "sentence": "可以看到桥上的石阶已经被踩得凹凸不平,估计可能不久将禁止游客通行",
+   "sid": 1034,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4112830",
+   "scenic": "颐和园",
+   "platform": "携程游记",
+   "start": 109,
+   "sentence": "此外,需要注意的是北京很多景点周一都不开放",
+   "sid": 1035,
+   "ai_advice": true,
+   "gist": "注意北京很多景点周一不开放（条件规定）"
+  },
+  {
+   "record_id": "CTRIP_3965800",
+   "scenic": "颐和园",
+   "platform": "携程游记",
+   "start": 5739,
+   "sentence": "从国家领导人孙中山、毛泽东、朱德、周恩来、邓小平、江泽民、胡锦涛;从他国元首普金、奥巴马、克林顿;从自然科学家杨振宁、袁隆平、屠呦呦;从娱乐体育明星姚明、郎平、成龙等挨个欣赏并合影了一遍,最叹服是在出口的地方写着这样一段结束语:我们不是世界上最大的蜡像馆,也不是最豪华的蜡像馆,但它是世界上艺术水平最高的蜡像馆",
+   "sid": 1036,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4035354",
+   "scenic": "颐和园",
+   "platform": "携程游记",
+   "start": 667,
+   "sentence": "因为大早上的安排看升旗基本没怎么睡,所以第一天的行程安排比较轻松,看过升旗,与天安门合影打卡,拍一张人民币上的人民大会堂",
+   "sid": 1037,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4030611",
+   "scenic": "颐和园",
+   "platform": "携程游记",
+   "start": 19114,
+   "sentence": "清帝每到盛夏就来此避暑、听政,故圆明园又称“夏宫”",
+   "sid": 1038,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4076742",
+   "scenic": "颐和园",
+   "platform": "携程游记",
+   "start": 6204,
+   "sentence": "后记:经过一段时间的查阅资料、回忆,2019年的北京游行程已记录完成",
+   "sid": 1039,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6ad74173000000003003f1d8",
+   "scenic": "黄山",
+   "platform": "小红书",
+   "start": 887,
+   "sentence": "⏰ 17:45 抵达南大门换乘中心 吃饭",
+   "sid": 1040,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6ac5e2f8000000001501419b",
+   "scenic": "黄山",
+   "platform": "小红书",
+   "start": 157,
+   "sentence": "如果没有非要打卡天都峰的执念,只想轻松徒步看风景,真心推荐这条路线",
+   "sid": 1041,
+   "ai_advice": true,
+   "gist": "如果没有打卡天都峰的执念、想轻松徒步，推荐这条路线"
+  },
+  {
+   "record_id": "XHS_6ad74173000000003003f1d8",
+   "scenic": "黄山",
+   "platform": "小红书",
+   "start": 48,
+   "sentence": "⏰17:30 坐上酒店的接站车",
+   "sid": 1042,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_69f4206d000000003502deac",
+   "scenic": "黄山",
+   "platform": "小红书",
+   "start": 274,
+   "sentence": "酒店走廊有开水、吹风机、烘干机",
+   "sid": 1043,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6aaa7265000000002b0267de",
+   "scenic": "黄山",
+   "platform": "小红书",
+   "start": 682,
+   "sentence": "#周末出走计划 #宁波周边游 #小小黄山轻松拿下 #女生徒步 #周末去哪儿",
+   "sid": 1044,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_69c7e183000000002102f498",
+   "scenic": "黄山",
+   "platform": "小红书",
+   "start": 18,
+   "sentence": "当天空气能见度拉满,眼睛太幸福啦[赞R]",
+   "sid": 1045,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6999519700000000150386e2",
+   "scenic": "黄山",
+   "platform": "小红书",
+   "start": 614,
+   "sentence": "山上净走:6.5–7.5h",
+   "sid": 1046,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_69f4206d000000003502deac",
+   "scenic": "黄山",
+   "platform": "小红书",
+   "start": 55,
+   "sentence": "4月29日:游黄山(住山顶酒店)",
+   "sid": 1047,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_69c7e183000000002102f498",
+   "scenic": "黄山",
+   "platform": "小红书",
+   "start": 305,
+   "sentence": "2. 9:30进园刚好赶上云海黄金期,17:00下山索道人少不用挤",
+   "sid": 1048,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "XHS_6a6b54ba000000002402e987",
+   "scenic": "黄山",
+   "platform": "小红书",
+   "start": 170,
+   "sentence": "路线始信峰→黑虎松→梦笔生花→猴子观海→ (遥观飞来石)→光明顶→鳌鱼峰→百步云梯→迎客松,打卡精华",
+   "sid": 1049,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_1333628",
+   "scenic": "黄山",
+   "platform": "携程游记",
+   "start": 4305,
+   "sentence": "从南大门到前山慈光阁或后山的云谷寺有大约15分钟的爬山公路,这里你需要乘坐景区的“新国线”专用登山车,私家车是不允许进入的",
+   "sid": 1050,
+   "ai_advice": true,
+   "gist": "需乘坐新国线登山车，私家车不允许进入（条件规定）"
+  },
+  {
+   "record_id": "CTRIP_4038290",
+   "scenic": "黄山",
+   "platform": "携程游记",
+   "start": 30,
+   "sentence": "在X音刷到了黄山的日出与日落",
+   "sid": 1051,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4109335",
+   "scenic": "黄山",
+   "platform": "携程游记",
+   "start": 4200,
+   "sentence": "不过黄山大部分时间都是云山雾罩的",
+   "sid": 1052,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_3995811",
+   "scenic": "黄山",
+   "platform": "携程游记",
+   "start": 3066,
+   "sentence": "祠堂前的大樟树已经有千年树龄,是安徽省名木",
+   "sid": 1053,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4034449",
+   "scenic": "黄山",
+   "platform": "携程游记",
+   "start": 1224,
+   "sentence": "一路下山,膝盖已经开始疼起来了",
+   "sid": 1054,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4031821",
+   "scenic": "黄山",
+   "platform": "携程游记",
+   "start": 944,
+   "sentence": "宾至如家很温馨,回廊小院设计的考究客房舒服,保留了不少老物件很亲切,琴棋书画茶道室样样入扣,如果闲住几日养性又悦目,精致的百年庭院给你带来穿越时空的对话,十分享受",
+   "sid": 1055,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_1333628",
+   "scenic": "黄山",
+   "platform": "携程游记",
+   "start": 1956,
+   "sentence": "汤口目前一共有【3个换乘中心】:",
+   "sid": 1056,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_3999208",
+   "scenic": "黄山",
+   "platform": "携程游记",
+   "start": 7149,
+   "sentence": "1、汤口镇南大门,90%的游客会从南大门进黄山,此条线路有两条索道,后山云谷索道,前山玉屏索道,南大门进入的游客也是90%会选择后山云谷索道上,看完迎客松,前山玉屏索道下,这是一条最成熟、最省体力,各方面来说也是最方便的游览线路,缺点是人多,人非常多,旺季排队索道就要3个小时以上",
+   "sid": 1057,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4019387",
+   "scenic": "黄山",
+   "platform": "携程游记",
+   "start": 18984,
+   "sentence": "沿芦林湖畔行走,欣赏着湖光山色,不知不觉来到了庐山博物馆",
+   "sid": 1058,
+   "ai_advice": false,
+   "gist": ""
+  },
+  {
+   "record_id": "CTRIP_4019387",
+   "scenic": "黄山",
+   "platform": "携程游记",
+   "start": 20074,
+   "sentence": "市区面临鄱阳湖,水上运输四通八达,自古有“南国咽喉、西江锁钥”之称",
+   "sid": 1059,
+   "ai_advice": false,
+   "gist": ""
+  }
+ ],
+ "n_advice": 9,
+ "annotation_note": "AI 逐句判读（口径同第一轮：条件性建议或带触发词的建议计入；攻略式时间安排/路线罗列/无触发词泛建议任务外）",
+ "design_excluded_sids": [
+  {
+   "sid": 23,
+   "reason": "他景区建议（黄龙/松潘）按 P1 归属过滤设计不产出，双口径单列"
+  }
+ ]
+}
