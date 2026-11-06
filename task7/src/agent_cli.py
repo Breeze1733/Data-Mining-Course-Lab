@@ -26,10 +26,10 @@ from graph_tools import AREAS, GraphTools  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 
 VISITOR_PATTERNS = [
-    ("老人", r"老人|爸妈|父母|银发|奶奶|爷爷|长辈"),
-    ("孩子", r"孩子|小孩|儿童|带娃|娃|儿子|女儿|幼儿园"),
+    ("老人", r"老人|爸妈|父母|银发|奶奶|爷爷|长辈|岳父|岳母|外婆|外公"),
+    ("孩子", r"孩子|小孩|儿童|带娃|娃|儿子|女儿|幼儿园|闺女|小朋友|宝贝"),
     ("亲子", r"亲子|家庭|一家"),
-    ("情侣", r"情侣|夫妻|蜜月|约会|女朋友|男朋友"),
+    ("情侣", r"情侣|夫妻|蜜月|约会|女朋友|男朋友|对象|另一半|爱人"),
     ("体力有限", r"体力(不好|差|有限|不足)|腿脚|孕妇|高反"),
     ("初次游览", r"第一次|首次|没去过"),
 ]
@@ -45,13 +45,13 @@ DURATION_PATTERNS = [
 ]
 SPECIAL_PATTERNS = [
     ("看日出", r"日出|朝霞"), ("避开人流", r"人少|避开|错峰|不挤"),
-    ("省力", r"省力|轻松|不累|少走"), ("红叶", r"红叶|秋色|赏秋"),
+    ("省力", r"省力|轻松|不累|少走|不想太累|不要太累|不想走太多"), ("红叶", r"红叶|秋色|赏秋"),
     ("拍照片", r"拍照|出片|机位"), ("滑雪", r"滑雪|温泉"),
 ]
 # 出行月份（规则口径）：月份短语/季节词/节假日 → 代表月份（U24 时段可行性）
 TRIP_MONTH_PATTERNS = [
     (10, r"(?<!\d)10月|十月|秋季|秋天|国庆"), (11, r"(?<!\d)11月|十一月"), (12, r"(?<!\d)12月|十二月|冬季|冬天"),
-    (1, r"(?<!\d)1月|一月|寒假|元旦"), (2, r"(?<!\d)2月|二月|春节"), (3, r"(?<!\d)3月|三月"),
+    (1, r"(?<!\d)1月|一月|寒假|元旦"), (2, r"(?<!\d)2月|二月|春节|过年"), (3, r"(?<!\d)3月|三月"),
     (4, r"(?<!\d)4月|四月|春季|春天"), (5, r"(?<!\d)5月|五月|五一"), (6, r"(?<!\d)6月|六月"),
     (7, r"(?<!\d)7月|七月|暑假|夏季|夏天"), (8, r"(?<!\d)8月|八月"), (9, r"(?<!\d)9月|九月"),
 ]
@@ -178,11 +178,18 @@ class IntentParser:
                 days_explicit = True
                 break
         special = [s for s, pat in SPECIAL_PATTERNS if re.search(pat, query)]
-        # G02b：必去/不去地点——从“不要去X/不去X/避开X”与“一定要去X/必去X”提取
+        # G02b/G14：不去地点——前缀否定（不要去/不想去/不去/避开/别安排/别去/不想逛）
+        # 与后置否定（“X就不去了”）；必去地点——前缀（一定要去/一定要逛/必去/必须去）
+        # 与后置（“X是必去的”）。后置模式收紧锚点（就不去/是必去），避免误捕。
         avoid = [m.group(1).strip() for m in
-                 re.finditer(r"(?:不要去|不去|避开|别去)\s*([一-龥A-Za-z0-9]{2,10})", query)]
+                 re.finditer(r"(?:不要去|不想去|不去|避开|别安排|别去|不想逛)\s*([一-龥A-Za-z0-9]{2,10})", query)]
+        avoid += [m.group(1).strip() for m in
+                  re.finditer(r"([一-龥A-Za-z0-9]{2,10})\s*就不去了?", query)]
         must = [m.group(1).strip() for m in
-                re.finditer(r"(?:一定要去|必去|必须去)\s*([一-龥A-Za-z0-9]{2,10})", query)]
+                re.finditer(r"(?:一定要去|一定要逛|必须去|必去)\s*([一-龥A-Za-z0-9]{2,10})", query)]
+        must += [m.group(1).strip() for m in
+                 re.finditer(r"([一-龥A-Za-z0-9]{2,10})是必去", query)]
+        avoid, must = list(dict.fromkeys(avoid)), list(dict.fromkeys(must))
         month = next((m for m, pat in TRIP_MONTH_PATTERNS if re.search(pat, query)), None)
         return {"scenic": scenic or "未知", "visitor_type": visitor, "visitor_types": visitor_hits,
                 "days": days, "days_explicit": days_explicit,

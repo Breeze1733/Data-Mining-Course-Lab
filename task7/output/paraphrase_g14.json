@@ -1,0 +1,288 @@
+{
+ "title": "G14 扩展：意图解析同义改写鲁棒性（实验7，规则模式）",
+ "method": "对验收场景查询做同义改写后解析，对比期望意图；期望值为 AI 标注（非人工判定，提示词 §7 口径声明）",
+ "n_cases": 17,
+ "n_check": 16,
+ "n_design_excluded": 1,
+ "n_fail": 0,
+ "cases": [
+  {
+   "id": "V1",
+   "query": "陪岳父岳母去黄山玩两天，行程别太赶",
+   "kind": "check",
+   "note": "岳父岳母=老人，原场景用“带老人”",
+   "expect": {
+    "visitor_type": "老人",
+    "days": 2
+   },
+   "parsed": {
+    "visitor_type": "老人",
+    "days": 2
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "V2",
+   "query": "和外婆一起游九寨沟，一日游怎么走",
+   "kind": "check",
+   "note": "外婆=老人",
+   "expect": {
+    "visitor_type": "老人",
+    "days": 1
+   },
+   "parsed": {
+    "visitor_type": "老人",
+    "days": 1
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "V3",
+   "query": "带闺女去颐和园半天",
+   "kind": "check",
+   "note": "闺女=孩子",
+   "expect": {
+    "visitor_type": "孩子",
+    "days": 0.5
+   },
+   "parsed": {
+    "visitor_type": "孩子",
+    "days": 0.5
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "V4",
+   "query": "跟对象去黄山两日游",
+   "kind": "check",
+   "note": "对象=情侣",
+   "expect": {
+    "visitor_type": "情侣",
+    "days": 2
+   },
+   "parsed": {
+    "visitor_type": "情侣",
+    "days": 2
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "V5",
+   "query": "一家三口去九寨沟玩一天",
+   "kind": "check",
+   "note": "一家=亲子（家庭出游）",
+   "expect": {
+    "visitor_type": "亲子",
+    "days": 1
+   },
+   "parsed": {
+    "visitor_type": "亲子",
+    "days": 1
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "D1",
+   "query": "大半天时间逛颐和园，精华就好",
+   "kind": "check",
+   "note": "大半天按半天档",
+   "expect": {
+    "days": 0.5
+   },
+   "parsed": {
+    "days": 0.5
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "D2",
+   "query": "九寨沟玩两三天",
+   "kind": "design",
+   "note": "模糊区间“两三天”：现行取先命中的三天档；区间推算超出规则解析范围",
+   "expect": {
+    "days": 3
+   },
+   "parsed": {
+    "days": 3
+   },
+   "passed": null,
+   "mismatches": {}
+  },
+  {
+   "id": "D3",
+   "query": "只有三小时，颐和园快速逛一遍",
+   "kind": "check",
+   "note": "三小时=半天档（数字+小时已覆盖，改汉字数词）",
+   "expect": {
+    "days": 0.5
+   },
+   "parsed": {
+    "days": 0.5
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "A1",
+   "query": "九寨沟一日游，不想去原始森林",
+   "kind": "check",
+   "note": "不想去=不要去",
+   "expect": {
+    "avoid": [
+     "原始森林"
+    ]
+   },
+   "parsed": {
+    "avoid": [
+     "原始森林"
+    ]
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "A2",
+   "query": "黄山三天游，别安排莲花峰",
+   "kind": "check",
+   "note": "别安排=别去",
+   "expect": {
+    "avoid": [
+     "莲花峰"
+    ],
+    "days": 3
+   },
+   "parsed": {
+    "avoid": [
+     "莲花峰"
+    ],
+    "days": 3
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "A3",
+   "query": "九寨沟一日游，原始森林就不去了，人太多",
+   "kind": "check",
+   "note": "POI后置否定“X就不去了”",
+   "expect": {
+    "avoid": [
+     "原始森林"
+    ]
+   },
+   "parsed": {
+    "avoid": [
+     "原始森林"
+    ]
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "M1",
+   "query": "黄山两日游，光明顶是必去的",
+   "kind": "check",
+   "note": "POI后置“X是必去的”",
+   "expect": {
+    "must": [
+     "光明顶"
+    ],
+    "days": 2
+   },
+   "parsed": {
+    "must": [
+     "光明顶"
+    ],
+    "days": 2
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "M2",
+   "query": "颐和园一日游，一定要逛佛香阁",
+   "kind": "check",
+   "note": "一定要逛=一定要去",
+   "expect": {
+    "must": [
+     "佛香阁"
+    ]
+   },
+   "parsed": {
+    "must": [
+     "佛香阁"
+    ]
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "S1",
+   "query": "陪爸妈游九寨沟，不想太累",
+   "kind": "check",
+   "note": "不想太累=省力",
+   "expect": {
+    "visitor_type": "老人",
+    "special_has": "省力"
+   },
+   "parsed": {
+    "visitor_type": "老人",
+    "special_has": null
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "S2",
+   "query": "情侣黄山两日，想观日出",
+   "kind": "check",
+   "note": "观日出=看日出（日出词元已覆盖）",
+   "expect": {
+    "visitor_type": "情侣",
+    "special_has": "看日出"
+   },
+   "parsed": {
+    "visitor_type": "情侣",
+    "special_has": null
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "T1",
+   "query": "过年的时候去黄山两天，要注意什么",
+   "kind": "check",
+   "note": "过年=春节=2月档",
+   "expect": {
+    "month": 2
+   },
+   "parsed": {
+    "month": 2
+   },
+   "passed": true,
+   "mismatches": {}
+  },
+  {
+   "id": "T2",
+   "query": "十二月底去九寨沟三天",
+   "kind": "check",
+   "note": "十二月底=12月",
+   "expect": {
+    "month": 12,
+    "days": 3
+   },
+   "parsed": {
+    "month": 12,
+    "days": 3
+   },
+   "passed": true,
+   "mismatches": {}
+  }
+ ]
+}
