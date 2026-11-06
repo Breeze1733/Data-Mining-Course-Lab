@@ -1,6 +1,6 @@
 {
  "n": 180,
- "accuracy_overall": 0.65,
+ "accuracy_overall": 0.661,
  "accuracy_by_class": {
   "locative": {
    "n": 45,
@@ -12,7 +12,7 @@
   },
   "person": {
    "n": 45,
-   "accuracy": 0.689
+   "accuracy": 0.733
   },
   "set": {
    "n": 45,
@@ -22,7 +22,7 @@
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.7
+   "accuracy": 0.717
   },
   "test": {
    "n": 60,
@@ -30,7 +30,7 @@
   }
  },
  "errors_by_split": {
-  "dev": 36,
+  "dev": 34,
   "test": 27
  },
  "split_method": "P18 文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
@@ -215,9 +215,9 @@
    "pronoun": "他们",
    "class": "person",
    "scenic": "黄山",
-   "pred": "travel_party",
-   "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
+   "pred": "facility",
+   "pred_kind": "设施",
+   "evidence": "“他们家/后院/店里”指店家设施",
    "gold": "馄饨店主一家",
    "gold_kind": "他人",
    "note": ""
@@ -419,28 +419,6 @@
    "gold": "白石海",
    "gold_kind": "POI",
    "note": "“倒映其中”指白石海湖面（前句明名），参照第114例口径"
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "九寨沟",
-   "pred": "travel_party",
-   "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
-   "gold": "图旅影像馆",
-   "gold_kind": "设施",
-   "note": "“他们家”指租赁商铺店家"
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "九寨沟",
-   "pred": "travel_party",
-   "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
-   "gold": "硬石餐厅",
-   "gold_kind": "设施",
-   "note": "“他们家招牌”指餐厅店家"
   },
   {
    "pronoun": "这里",
@@ -729,10 +707,10 @@
    "note": "先行词为“廊上斑驳的画”，归至长廊实体"
   }
  ],
- "kind_only_accuracy": 0.717,
+ "kind_only_accuracy": 0.728,
  "accuracy_ci95": {
-  "lo": 0.578,
-  "hi": 0.716
+  "lo": 0.589,
+  "hi": 0.726
  },
  "data_fingerprints": {
   "dataset_clean": "6fae55942575",
