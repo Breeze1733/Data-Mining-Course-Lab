@@ -597,6 +597,9 @@ class ReActAgent:
         if self.llm and self.llm.available:
             try:
                 text = self.llm.complete(self.POLISH_PROMPT, json.dumps(plan, ensure_ascii=False))
+                # G12：空/纯空白响应与异常同视为润色失败——直接透传会产生空回答
+                if not text or not text.strip():
+                    raise ValueError("LLM 返回空响应")
                 trace.append({"step": "render", "thought": "调用 LLM 润色行程文案", "via": "llm"})
                 return text
             except Exception as exc:
