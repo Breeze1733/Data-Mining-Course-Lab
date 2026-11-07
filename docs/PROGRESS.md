@@ -1413,3 +1413,18 @@ E01（实验5 原句级有无建议评测）→ H07 置信区间 → D02 段落�
 - **验证**：基线[万寿山,佛香阁,昆明湖,东宫门,谐趣园]→拍照[佛香阁,昆明湖,长廊,十七孔桥,万寿山]
   ——选点与排序都响应软偏好；15/15、guard、audit 70/70；
 - **过程插曲**：photo_pois 未初始化致非拍照场景 NameError，chain 抓到后立即修复。
+
+---
+
+## 第5轮 收尾：抽取模式名去编号 + 文件合并 —— 完成（应用户要求）
+
+- **P1-P7 模式名迁移**：显式条件/句内条件/时点条件/建议推断/人群可以/否定建议/依据规定
+  （映射表 977 行、复核 79+30+49 行、图谱节点 ID、审计声明键同步迁移；冻结复核文件的
+  case/verdict 未动，仅标签字段一致性迁移）；review_and_charts 的复核引导键同步；
+- **文件合并 57→44 个源文件**（-13）：
+  - task2：expand_dictionary（三批次+导出）、ablation_dictionary（消融+迭代对比 --iter-compare）
+  - task3：normalize_name/time_periods 内联进使用方
+  - task4：annotate_sample --propagation（传播分析并入评分器）
+  - task5：coverage_eval（抽样+评测）、review_and_charts --xlsx
+  - task7：intent_robustness（同义改写+输入扰动）、evaluations（消融+权重敏感性）
+- 链入口同步更新；guard 指纹变化（review_dev 标签迁移）按 --update-state 机制留痕。
