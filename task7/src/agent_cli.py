@@ -429,6 +429,8 @@ class ReActAgent:
                 months = extract_condition_months(text)
                 if CLOSURE_RE.search(text):
                     w = f'{poi}：{c["condition"][:26]}——{c["suggestion"][:40]}'
+                    years = "/".join(sorted(json.loads(c.get("source_years") or "[]"))[-2:])
+                    w = w + (f"（证据年份 {years}）" if years else "")
                     if months and trip_month and trip_month in months:
                         w = f'{poi}（时段冲突，您出行的{trip_month}月适逢条件所述月份）：{c["condition"][:26]}——{c["suggestion"][:40]}'
                     if w not in seen_warn:

@@ -235,6 +235,11 @@ def main() -> int:
             return ""
         return max(cands, key=lambda fc: (bool(_SUGG_ACT.search(fc[1])), fc[0], len(fc[1])))[1]
 
+    rec_year = {}
+    for line in (TASK1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8"):
+        _r = json.loads(line)
+        rec_year[_r["record_id"]] = str(_r.get("published_at") or "")
+
     clusters: list[dict] = []
     # 对比词守卫见模块级 _contrast_blocked（真实图谱 0 对受影响，潜在风险加固）
     reps: list[tuple[str, str, str, str, set]] = []
@@ -288,6 +293,9 @@ def main() -> int:
                 evidence.append({"row_id": x.get("row_id"), "record_id": x.get("record_id"),
                                  "pattern": x.get("pattern"), "frequency": x.get("frequency", 1),
                                  "condition": ct[:60], "suggestion": sg[:60]})
+            src_years = sorted({m[:4] for rid in seen_src
+                                for m in [str(rec_year.get(rid, ""))]
+                                if re.match(r"^(?:19|20)\d{2}", m)})
             G.add_node(cn, kind="条件", name=rep["condition_text"][:30],
                        label=f'[{rep["condition_type"]}|{rep["pattern"].split("_")[0]}] {rep["condition_text"][:24]}',
                        cond_type=rep["condition_type"], suggestion=_best_suggestion(members)[:100],
@@ -295,6 +303,7 @@ def main() -> int:
                        variants=json.dumps(seen_cond, ensure_ascii=False),
                        suggestions=json.dumps(seen_sugg, ensure_ascii=False),
                        sources=json.dumps(seen_src, ensure_ascii=False),
+                       source_years=json.dumps(src_years, ensure_ascii=False),
                        evidence=json.dumps(evidence, ensure_ascii=False))
         for m in members:
             text = m["condition_text"] + " " + m["suggestion_text"]

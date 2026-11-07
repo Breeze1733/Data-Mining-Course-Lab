@@ -1,0 +1,21 @@
+{
+ "title": "A01 逐记录溯源字段覆盖审计",
+ "numbers": {
+  "total": 271,
+  "collected_at": 271,
+  "source_url": 271,
+  "content_snapshot_sha": 22,
+  "published_at": 266,
+  "provenance_note_fields": [
+   "author",
+   "provenance_note",
+   "extraction_selector",
+   "raw_file",
+   "canonical_source_url",
+   "cleaning_counts"
+  ],
+  "snapshot_sha256_only": 22,
+  "content_sha256_only": 271
+ },
+ "verdict": "collected_at/source_url/content_sha256 100%（271/271）；published_at 98.2%；snapshot_sha256 22/271——历史采集时点早于快照哈希机制引入，属溯源增强欠账（已列交付前可选补算项）；A01 主体机制已实现"
+}

@@ -198,7 +198,8 @@ class GraphTools:
                 continue
             d = self.G.nodes[v]
             conds.append({"condition": d.get("name", ""), "suggestion": d.get("suggestion", ""),
-                          "cond_type": d.get("cond_type"), "frequency": int(float(e.get("weight", 1) or 1))})
+                          "cond_type": d.get("cond_type"), "frequency": int(float(e.get("weight", 1) or 1)),
+                          "source_years": d.get("source_years", "[]")})
         conds.sort(key=lambda c: -c["frequency"])
         return {"poi": poi, "scenic": scenic, "conditions": conds}
 
