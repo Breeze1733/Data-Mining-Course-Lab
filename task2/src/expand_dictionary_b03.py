@@ -26,6 +26,13 @@ SEED = ROOT / "resources/domain_seed.json"
 TIMERULES = ROOT / "resources/time_rules.json"
 
 SOURCE = "b03_recall_eval_2026-11-05"
+# U85 第二批：消解 dev gold 先行词证据（dev 120 例，冻结留出集不参与）；
+# B03 纪律：语料频次 ≥2 才录入（墨海/白石海 各 1 次为样本特例，排除并记录）
+SOURCE2 = "b03_coref_gold_dev_2026-11-07"
+POI_ADDITIONS2 = [
+    ("送客松", "送客松", ["黄山"], "黄山名松，语料13次；消解 dev gold 先行词（它→送客松）"),
+    ("金山岭长城", "金山岭长城", [], "北京周边长城段，语料2次；消解 dev gold 先行词"),
+]
 
 # (name, canonical, scenic_areas, rationale) —— scenic_areas=[] 表示周边地标
 POI_ADDITIONS = [
@@ -82,6 +89,13 @@ def main() -> int:
             continue
         seed["poi"].append({"name": name, "entity_type": "景点POI", "subtype": "景点",
                             "scenic_areas": areas, "canonical": canonical, "source": SOURCE})
+        poi_names.add(name)
+        added_poi += 1
+    for name, canonical, areas, rationale in POI_ADDITIONS2:
+        if name in poi_names:
+            continue
+        seed["poi"].append({"name": name, "entity_type": "景点POI", "subtype": "景点",
+                            "scenic_areas": areas, "canonical": canonical, "source": SOURCE2})
         poi_names.add(name)
         added_poi += 1
     for name, canonical, subtype, rationale in TRANSPORT_ADDITIONS:
