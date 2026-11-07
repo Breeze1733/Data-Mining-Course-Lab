@@ -880,6 +880,7 @@ def main(argv=None) -> int:
         "duplicates_merged": near_dup,
 
         "by_pattern": dict(Counter(p["pattern"] for p in all_pairs)),
+        "by_polarity": dict(Counter(p.get("polarity", "POS") for p in all_pairs)),
 
         "by_condition_type": dict(Counter(p["condition_type"] for p in all_pairs)),
 

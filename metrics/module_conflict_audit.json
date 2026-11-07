@@ -1,0 +1,4 @@
+{
+ "duplicates": {},
+ "verdict": "无同名模块（entity_rules/time_rules 等唯一）——sys.path 次序无冲突风险"
+}

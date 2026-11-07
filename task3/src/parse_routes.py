@@ -234,9 +234,15 @@ class RouteParser:
                      if s["pois"] or s["time_range"] or s.get("station_tag") or s["transport"]]
             for i, s in enumerate(steps, 1):
                 s["step_no"] = i
-        # 住宿点标记（宾馆/饭店/酒店/民宿）
+        # 住宿点标记（宾馆/饭店/酒店/民宿）与步骤类型（C02：停留 vs 移动事件）
         for s in steps:
             s["lodging"] = bool(re.search(r"宾馆|饭店|酒店|民宿", s["text"]))
+            if not s["pois"] and s["transport"]:
+                s["step_kind"] = "移动事件"
+            elif s["lodging"]:
+                s["step_kind"] = "住宿停留"
+            else:
+                s["step_kind"] = "景点停留"
         # 时段前向填充：带时段标记的行只设置后续步骤的 period
         self._fill_periods(steps)
         return {

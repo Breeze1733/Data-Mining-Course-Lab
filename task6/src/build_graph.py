@@ -63,6 +63,25 @@ def _contrast_blocked(ta: str, tb: str) -> bool:
     return any({ta[i], tb[i]} == {x, y} for x, y in _CONTRAST)
 
 
+def dedup_groups_from_quality(quality: dict) -> tuple[list[set], dict[str, int]]:
+    """F05：近重复对 → 传递闭包分组与 record→组号映射（键名与 preprocess 输出一致）。"""
+    groups: list[set] = []
+    for _d in quality.get("near_duplicate_pairs", []):
+        _a, _b = _d["record_id_a"], _d["record_id_b"]
+        for _grp in groups:
+            if _a in _grp or _b in _grp:
+                _grp.add(_b)
+                _grp.add(_a)
+                break
+        else:
+            groups.append({_a, _b})
+    rec2grp: dict[str, int] = {}
+    for _gi, _grp in enumerate(groups):
+        for _r in _grp:
+            rec2grp[_r] = _gi
+    return groups, rec2grp
+
+
 def main() -> int:
     sys.path.insert(0, str(TASK2 / "src"))
     from extract_entities import DictMatcher, load_dictionary
@@ -129,20 +148,8 @@ def main() -> int:
                 G.add_edge(u, v, key="先后顺序", relation="先后顺序", weight=1.0, source="官方路线")
             official_support[(u, v)].append(p["route_id"])
     # 近重复游记去重——同组记录对同一条边只计 1 次支持
-    _dup_groups: list[list[str]] = []
     _quality = json.loads((TASK1 / "data/processed/quality_report.json").read_text(encoding="utf-8"))
-    for _d in _quality.get("near_duplicates", []):
-        _a, _b = _d["record_id_a"], _d["record_id_b"]
-        for _grp in _dup_groups:
-            if _a in _grp or _b in _grp:
-                _grp.add(_b); _grp.add(_a)
-                break
-        else:
-            _dup_groups.append({_a, _b})
-    _rec2grp: dict[str, int] = {}
-    for _gi, _grp in enumerate(_dup_groups):
-        for _r in _grp:
-            _rec2grp[_r] = _gi
+    _dup_groups, _rec2grp = dedup_groups_from_quality(_quality)
 
     tourist_support: dict[tuple, int] = Counter()
     tourist_records: dict[tuple, list] = defaultdict(list)
