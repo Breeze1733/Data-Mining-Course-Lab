@@ -1797,5 +1797,148 @@
   "template_used": false,
   "template_route": "HS-EXTRA1-R2 冬季南门二日游",
   "template_src": "（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）"
+ },
+ {
+  "scenario": "S16_无日出景点诚实回退",
+  "scenic": "颐和园",
+  "days": 2,
+  "visitor_type": null,
+  "special": [
+   "看日出"
+  ],
+  "special_notes": [
+   "看日出：已选景点中无日出观景点（如光明顶），如需看日出请将其加入需求",
+   "时间预算限制：已裁剪 3 个景点（西堤, 十七孔桥, 北宫门等），建议根据体力取舍"
+  ],
+  "trip_month": null,
+  "itinerary": [
+   {
+    "order": 1,
+    "day": 1,
+    "period": "上午",
+    "poi": "万寿山",
+    "transport_from_prev": "入园",
+    "note": ""
+   },
+   {
+    "order": 2,
+    "day": 1,
+    "period": "上午",
+    "poi": "石舫",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 3,
+    "day": 1,
+    "period": "中午",
+    "poi": "长廊",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 4,
+    "day": 1,
+    "period": "下午",
+    "poi": "画中游",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 5,
+    "day": 2,
+    "period": "上午",
+    "poi": "佛香阁",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 6,
+    "day": 2,
+    "period": "上午",
+    "poi": "谐趣园",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 7,
+    "day": 2,
+    "period": "中午",
+    "poi": "东宫门",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 8,
+    "day": 2,
+    "period": "下午",
+    "poi": "昆明湖",
+    "transport_from_prev": "步行",
+    "note": ""
+   }
+  ],
+  "tips": [
+   {
+    "cond_type": "人群",
+    "condition": "游客为孩子",
+    "suggestion": "儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途中经过的14号至19号敌楼路段较为平坦,便于行走",
+    "all_suggestions": [
+     "儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途中经过的14号至19号敌楼路段较为平坦,便于行走",
+     "儿童的科学乐园,小朋友们可以通过互动游戏来学习科学知识"
+    ],
+    "frequency": 2
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为体力好的",
+    "suggestion": "可以不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)",
+    "all_suggestions": [
+     "可以爬一爬",
+     "可以不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)"
+    ],
+    "frequency": 2
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为老人",
+    "suggestion": "别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景",
+    "all_suggestions": [
+     "别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景"
+    ],
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "游客为学生",
+    "suggestion": "拜一下:来都来了,逢考必过",
+    "all_suggestions": [
+     "拜一下:来都来了,逢考必过"
+    ],
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "体力一般或者不想走太多",
+    "suggestion": "中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较完整的湖景视角",
+    "all_suggestions": [
+     "中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较完整的湖景视角"
+    ],
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "装备条件（句内）",
+    "suggestion": "带老人、小孩慎选",
+    "all_suggestions": [
+     "慎重考虑",
+     "带老人、小孩慎选"
+    ],
+    "frequency": 2
+   }
+  ],
+  "feasibility_warnings": [],
+  "template_used": false,
+  "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线",
+  "template_src": "（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）"
  }
 ]

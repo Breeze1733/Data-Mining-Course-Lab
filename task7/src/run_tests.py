@@ -50,7 +50,18 @@ SCENARIOS = [
                 "multi_day": True}},
     {"id": "S15_必去地点", "query": "黄山两日游，一定要去天都峰",
      "expect": {"scenic": "黄山", "days": 2, "must_respected": "天都峰"}},
+    {"id": "S16_无日出景点诚实回退", "query": "颐和园两日游，想看日出",
+     "expect": {"scenic": "颐和园", "days": 2, "sunrise_honest": True}},
 ]
+
+
+def check_sunrise_honest(result):
+    """验收：景区无日出观景点时不得伪造日出安排——须如实说明并照常给出行程。"""
+    plan = result.get("plan") or {}
+    notes = plan.get("special_notes") or []
+    noted = any("无日出观景点" in n for n in notes)
+    no_fake = all("日出" not in it["period"] and "日出" not in it["poi"] for it in plan.get("itinerary", []))
+    return bool(plan.get("itinerary")) and noted and no_fake
 def check_unknown_poi(result, poi):
     """ 验收：图谱中不存在的景点不得被编造进行程。"""
     plan = result.get("plan") or {}
@@ -150,6 +161,8 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
             checks["avoid_respected"] = check_avoid(result, v)
         elif k == "must_respected":
             checks["must_respected"] = check_must(result, v)
+        elif k == "sunrise_honest":
+            checks["sunrise_honest"] = check_sunrise_honest(result)
         elif k == "multi_visitor":
             vt = intent.get("visitor_types") or []
             checks["multi_visitor"] = all(v in vt for v in v)
