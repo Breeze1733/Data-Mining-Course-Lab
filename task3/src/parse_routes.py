@@ -45,6 +45,13 @@ DAY_MARK = re.compile(r"[【\[]\s*(第[一二三四五六七八九十\d]+[日天
 PERIOD_MARK = re.compile(r"[【\[]\s*(上午|中午|下午|晚上|清晨|傍晚|全天)\s*[】\]]|(上午|中午|下午|晚上|清晨|傍晚)[:：]")
 # 复合天+时段标记（"【第一天·晚上】"）——此前 DAY/PERIOD 各自都不命中复合形，
 # 天与时段双双丢失
+# C05/U? 无：非路经语境子句守卫——未去/放弃、他人行程、背景罗列的 POI 不是步骤
+NON_ROUTE_CLAUSE_RE = re.compile(
+    r"未(?:去|能前往|能成行|开放)|没有?去|没能(?:前往|到达|成行)|放弃|取消了?|原计划"
+    r"|本来(?:想|打算|计划)|计划去"
+    r"|(?:很多人|大家|游客们?|不少人|其他游客)都?(?:去|前往|选择)"
+    r"|有[^，。；]{1,18}等")
+
 DAY_PERIOD_MARK = re.compile(
     r"[【\[]\s*(第[一二三四五六七八九十\d]+[日天])\s*[·.、]\s*(上午|中午|下午|晚上|清晨|傍晚)\s*[】\]]")
 STATION_MARK = re.compile(r"第([一二三四五六七八九十\d]+)站[:：]")
@@ -143,6 +150,15 @@ class RouteParser:
                 if m := PERIOD_MARK.search(seg):
                     period = (m.group(1) or m.group(2))
                 seg_content = DAY_MARK.sub("", PERIOD_MARK.sub("", seg)).strip()
+                # C05：子句级语境守卫——剔除"未去/放弃/他人行程/背景罗列"子句后再解析，
+                # 避免把没去成的景点、介绍性罗列当成真实路经（构造探针实证三类误吞）
+                if NON_ROUTE_CLAUSE_RE.search(seg_content):
+                    clauses = re.split(r"([，,])", seg_content)
+                    kept = [c for i, c in enumerate(clauses)
+                            if i % 2 == 0 and not NON_ROUTE_CLAUSE_RE.search(c)]
+                    seg_content = "，".join(c for c in kept if c.strip())
+                    if not seg_content.strip():
+                        continue
                 if not seg_content:
                     continue
                 # 站点列表行（第一站：…）

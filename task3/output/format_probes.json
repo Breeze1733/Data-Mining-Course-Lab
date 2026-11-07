@@ -1,7 +1,7 @@
 {
  "title": "六类官方路线格式构造性反例探针（parse_routes 鲁棒性）",
  "method": "6 类格式各构造易错变体直接喂 RouteParser.parse，断言格式识别/POI 序列/时间范围完整性",
- "n_probes": 10,
+ "n_probes": 13,
  "n_fail": 0,
  "results": [
   {
@@ -92,6 +92,40 @@
     "五花海"
    ],
    "n_steps": 2,
+   "passed": true,
+   "problems": []
+  },
+  {
+   "id": "G1_放弃语境剔除",
+   "format": "prose",
+   "pois": [
+    "光明顶",
+    "飞来石"
+   ],
+   "n_steps": 1,
+   "passed": true,
+   "problems": []
+  },
+  {
+   "id": "G2_背景罗列剔除",
+   "format": "prose",
+   "pois": [
+    "慈光阁",
+    "玉屏楼",
+    "光明顶"
+   ],
+   "n_steps": 3,
+   "passed": true,
+   "problems": []
+  },
+  {
+   "id": "G3_他人行程剔除",
+   "format": "prose",
+   "pois": [
+    "原始森林",
+    "诺日朗"
+   ],
+   "n_steps": 1,
    "passed": true,
    "problems": []
   },
