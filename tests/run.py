@@ -22,8 +22,7 @@ def build_steps(task7_mode: str) -> list:
         # 单元测试先行：链路重建前先保证基础语义未被破坏
         ("__unittest__", []),
         # 漏检驱动的词典/时间规则扩充（幂等，须先于 build_dictionary）
-        ("task2/src/expand_dictionary_recall.py", []),
-        ("task2/src/build_dictionary.py", []),
+        ("task2/src/expand_dictionary.py", []),
         ("task2/src/extract_entities.py", ["--iteration", "baseline"]),
         ("task2/src/extract_entities.py", ["--iteration", "refined"]),
         ("task2/src/visualize.py", ["--iteration", "baseline"]),
@@ -31,7 +30,7 @@ def build_steps(task7_mode: str) -> list:
         ("task2/src/spot_check.py", ["--reconcile"]),
         # 句级实体评测（查全率首次可测，产物 entity_sentence_eval.json）
         ("task2/src/entity_sentence_eval.py", []),
-        ("task2/src/iter_compare.py", []),
+        ("task2/src/ablation_dictionary.py", ["--iter-compare"]),
         ("task3/src/parse_routes.py", []),
         ("task3/src/compare_routes.py", []),
         ("task3/src/build_hierarchy_view.py", []),
@@ -43,9 +42,9 @@ def build_steps(task7_mode: str) -> list:
         ("task5/src/extract_conditionals.py", []),
         ("task5/src/review_and_charts.py", ["--score"]),
         ("task5/src/review_and_charts.py", ["--charts"]),
-        ("task5/src/export_mapping_xlsx.py", []),
+        ("task5/src/review_and_charts.py", ["--xlsx"]),
         # 原句级覆盖评测（漏抽/过抽首次可测）
-        ("task5/src/extraction_coverage_eval.py", []),
+        ("task5/src/coverage_eval.py", []),
         ("task6/src/build_graph.py", []),
         ("task6/src/verify_graph.py", []),
         ("task6/src/visualize_graph.py", []),

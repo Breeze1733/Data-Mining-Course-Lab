@@ -4,7 +4,7 @@
  "samples": [
   {
    "case_index": 494,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "九寨沟",
    "condition": "你不是特殊人群",
    "suggestion": "比如 儿童、老年人、残疾人等其他特殊职业",
@@ -12,7 +12,7 @@
   },
   {
    "case_index": 414,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "九寨沟",
    "condition": "生活有开关",
    "suggestion": "家人们和睦相聚就是以键快乐",
@@ -20,7 +20,7 @@
   },
   {
    "case_index": 642,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "九寨沟",
    "condition": "细细品味",
    "suggestion": "最好是两天,阳光下的九寨会更美!",
@@ -28,7 +28,7 @@
   },
   {
    "case_index": 614,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "九寨沟",
    "condition": "你的旅途里有佳人作伴",
    "suggestion": "那就权当再议",
@@ -36,7 +36,7 @@
   },
   {
    "case_index": 596,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "九寨沟",
    "condition": "包车的话会直接送到索道检票口)",
    "suggestion": "一定要提前几天订)",
@@ -44,7 +44,7 @@
   },
   {
    "case_index": 79,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "颐和园",
    "condition": "刷身份证就能入园",
    "suggestion": "比较方便",
@@ -52,7 +52,7 @@
   },
   {
    "case_index": 68,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "颐和园",
    "condition": "是晚上",
    "suggestion": "景色会更美",
@@ -60,7 +60,7 @@
   },
   {
    "case_index": 1282,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "颐和园",
    "condition": "体力一般或者不想走太多",
    "suggestion": "中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较完整的湖景视角",
@@ -68,7 +68,7 @@
   },
   {
    "case_index": 1038,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "颐和园",
    "condition": "因为这边比八达岭人少",
    "suggestion": "10月中旬—11月初盛红期",
@@ -76,7 +76,7 @@
   },
   {
    "case_index": 54,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "颐和园",
    "condition": "说颐和园与恭亲王府是文化古迹与古典园林的展现",
    "suggestion": "天坛公园给我最大的感触对天地的敬畏,对自然的敬畏,即便是科技发达的现在",
@@ -84,7 +84,7 @@
   },
   {
    "case_index": 331,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "黄山",
    "condition": "出售商品的地方",
    "suggestion": "展品主要在二楼",
@@ -92,7 +92,7 @@
   },
   {
    "case_index": 272,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "黄山",
    "condition": "一日游就必须放弃了北海景区、天海景区",
    "suggestion": "就是莲花峰、天都峰、迎客松都来不及去",
@@ -100,7 +100,7 @@
   },
   {
    "case_index": 94,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "黄山",
    "condition": "全程全靠自己爬上爬下",
    "suggestion": "把大部分景点都玩一遍,至少需要2-3天时间",
@@ -108,7 +108,7 @@
   },
   {
    "case_index": 92,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "黄山",
    "condition": "不上莲花峰",
    "suggestion": "建议早点下山,因为旅行团还没杀到,途中美景可任你拍,坐索道下山不用人挤人,省去和大部队一起排队的时间",
@@ -116,7 +116,7 @@
   },
   {
    "case_index": 121,
-   "pattern": "P1_显式条件",
+   "pattern": "显式条件",
    "scenic_area": "黄山",
    "condition": "在油菜花开的季节",
    "suggestion": "这里是欣赏梯田花海的绝佳之地",
@@ -124,7 +124,7 @@
   },
   {
    "case_index": 693,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "九寨沟",
    "condition": "一般建议",
    "suggestion": "可以根据当年代表村庄的献祭日期来安排行程时间,要注意的是尽管各个村庄的六月会日程网上可以查询的到,但大部分具体的开始时间",
@@ -132,7 +132,7 @@
   },
   {
    "case_index": 713,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "九寨沟",
    "condition": "时间条件（句内）",
    "suggestion": "尽量早点进景区,所以我们就约了7点出发",
@@ -140,7 +140,7 @@
   },
   {
    "case_index": 1184,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "九寨沟",
    "condition": "一般建议",
    "suggestion": "走左边,不绕五花海一圈九寨沟约等于白来",
@@ -148,7 +148,7 @@
   },
   {
    "case_index": 428,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "九寨沟",
    "condition": "时间条件（句内）",
    "suggestion": "像我一样放慢生活的节奏,择一假期,带着心爱的人,一起置身于山水草木之间,过几天向往已久的宁静生活,走进童话里的九寨天堂",
@@ -156,7 +156,7 @@
   },
   {
    "case_index": 1230,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "九寨沟",
    "condition": "一般建议",
    "suggestion": "在环形栈道走一圈,这个点太阳已经出来了,照得每个角度的海子颜色都不一样,五眼六色的特别漂亮,这段路游客较多",
@@ -164,7 +164,7 @@
   },
   {
    "case_index": 948,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "颐和园",
    "condition": "一般建议",
    "suggestion": "上去看看非常的漂亮",
@@ -172,7 +172,7 @@
   },
   {
    "case_index": 1289,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "颐和园",
    "condition": "一般建议",
    "suggestion": "买联票更省心",
@@ -180,7 +180,7 @@
   },
   {
    "case_index": 1242,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "颐和园",
    "condition": "一般建议",
    "suggestion": "经常出行了",
@@ -188,7 +188,7 @@
   },
   {
    "case_index": 957,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "颐和园",
    "condition": "一般建议",
    "suggestion": "帮忙点赞和收藏!",
@@ -196,7 +196,7 @@
   },
   {
    "case_index": 1251,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "颐和园",
    "condition": "一般建议",
    "suggestion": "预留一整天",
@@ -204,7 +204,7 @@
   },
   {
    "case_index": 1121,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "黄山",
    "condition": "一般建议",
    "suggestion": "是离汤口镇南门游客中心(白色椭圆天桥)近一点的地方,爬完回去休息非常方便",
@@ -212,7 +212,7 @@
   },
   {
    "case_index": 271,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "黄山",
    "condition": "一般建议",
    "suggestion": "自由行,没有旅行团走这条线,北大门到西大门只能包车",
@@ -220,7 +220,7 @@
   },
   {
    "case_index": 18,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "黄山",
    "condition": "一般建议",
    "suggestion": "天数:三至七天左右(不计往返时间)",
@@ -228,7 +228,7 @@
   },
   {
    "case_index": 180,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "黄山",
    "condition": "一般建议",
    "suggestion": "查了下淘宝有很多黄山的店铺卖当季新茶的",
@@ -236,7 +236,7 @@
   },
   {
    "case_index": 380,
-   "pattern": "P4_建议推断",
+   "pattern": "建议推断",
    "scenic_area": "黄山",
    "condition": "一般建议",
    "suggestion": "大家尽量以独卫床为主(性价比最高),标间价格过贵,公卫条件过差",
@@ -244,7 +244,7 @@
   },
   {
    "case_index": 1155,
-   "pattern": "P5_人群可以",
+   "pattern": "人群可以",
    "scenic_area": "九寨沟",
    "condition": "游客为体力不足",
    "suggestion": "观光车➕缆车下)",
@@ -252,7 +252,7 @@
   },
   {
    "case_index": 1261,
-   "pattern": "P5_人群可以",
+   "pattern": "人群可以",
    "scenic_area": "颐和园",
    "condition": "游客为体力差的朋友",
    "suggestion": "不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)",
@@ -260,7 +260,7 @@
   },
   {
    "case_index": 1238,
-   "pattern": "P5_人群可以",
+   "pattern": "人群可以",
    "scenic_area": "颐和园",
    "condition": "游客为体力好的还",
    "suggestion": "继续沿湖往南走~",
@@ -268,7 +268,7 @@
   },
   {
    "case_index": 298,
-   "pattern": "P5_人群可以",
+   "pattern": "人群可以",
    "scenic_area": "黄山",
    "condition": "游客为体力好的话",
    "suggestion": "从云谷寺索道走后山—前山的经典线路",
@@ -276,7 +276,7 @@
   },
   {
    "case_index": 1203,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "九寨沟",
    "condition": "一般建议（避雷）",
    "suggestion": "那样要走两公里多哦)",
@@ -284,7 +284,7 @@
   },
   {
    "case_index": 618,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "九寨沟",
    "condition": "一般建议（避雷）",
    "suggestion": "不要期望和她们商量让你插下队,素质很一般",
@@ -292,7 +292,7 @@
   },
   {
    "case_index": 458,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "九寨沟",
    "condition": "一般建议（避雷）",
    "suggestion": "不要成为第二个峨眉山猴群,被游客宠得嚣张跋扈",
@@ -300,7 +300,7 @@
   },
   {
    "case_index": 457,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "九寨沟",
    "condition": "装备条件（句内）",
    "suggestion": "避免污染环境,还是文明入厕的好",
@@ -308,7 +308,7 @@
   },
   {
    "case_index": 740,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "九寨沟",
    "condition": "一般建议（避雷）",
    "suggestion": "不要慌忙赶路,要稳、要适应高海拔",
@@ -316,7 +316,7 @@
   },
   {
    "case_index": 76,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "颐和园",
    "condition": "一般建议（避雷）",
    "suggestion": "不要排了,当天的票没了,啊~~~~~,旁边有人说在携程还能买到票",
@@ -324,7 +324,7 @@
   },
   {
    "case_index": 976,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "颐和园",
    "condition": "装备条件（句内）",
    "suggestion": "慎重考虑",
@@ -332,7 +332,7 @@
   },
   {
    "case_index": 1279,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "颐和园",
    "condition": "一般建议（避雷）",
    "suggestion": "不要硬打卡全部点位,挑重点慢走细逛",
@@ -340,7 +340,7 @@
   },
   {
    "case_index": 950,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "颐和园",
    "condition": "一般建议（避雷）",
    "suggestion": "不要相信兜售东西的小商贩,每个景点附近都有正规的商店或者打车的地方",
@@ -348,7 +348,7 @@
   },
   {
    "case_index": 40,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "颐和园",
    "condition": "一般建议（避雷）",
    "suggestion": "不要买联票",
@@ -356,7 +356,7 @@
   },
   {
    "case_index": 401,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "黄山",
    "condition": "一般建议（避雷）",
    "suggestion": "不要在任何建筑物、古迹、岩石、竹木上题字刻画",
@@ -364,7 +364,7 @@
   },
   {
    "case_index": 301,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "黄山",
    "condition": "装备条件（句内）",
    "suggestion": "避免低血糖",
@@ -372,7 +372,7 @@
   },
   {
    "case_index": 345,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "黄山",
    "condition": "一般建议（避雷）",
    "suggestion": "不要太多",
@@ -380,7 +380,7 @@
   },
   {
    "case_index": 143,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "黄山",
    "condition": "一般建议（避雷）",
    "suggestion": "不要把祖宗留下来的宝贵东西毁在我们手上",
@@ -388,7 +388,7 @@
   },
   {
    "case_index": 1114,
-   "pattern": "P6_否定建议",
+   "pattern": "否定建议",
    "scenic_area": "黄山",
    "condition": "装备条件（句内）",
    "suggestion": "就算外面很热地板也很凉,我冷到有点灵魂出窍了,默默把我的薄羽绒穿上了… 我其实带了一个气垫的",

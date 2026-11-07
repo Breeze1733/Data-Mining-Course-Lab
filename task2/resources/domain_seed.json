@@ -15,9 +15,7 @@
   },
   "recall_expansion": {
    "date": "2026-11-05",
-   "added_poi": 0,
-   "added_transport": 0,
-   "basis": "句级实体评测漏检清单 + 全语料频次≥2 证据"
+   "basis": "句级实体评测漏检清单 + 消解 gold 先行词 + 全语料频次≥2 证据"
   }
  },
  "poi": [

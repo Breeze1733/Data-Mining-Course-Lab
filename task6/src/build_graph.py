@@ -27,7 +27,8 @@ from common.atomic import atomic_write_text
 import networkx as nx
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from normalize_name import normalize  # noqa: E402  与实验3相同的归一化
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
+from entity_identity import normalize  # noqa: E402  与实验3相同的归一化
 
 ROOT = Path(__file__).resolve().parents[1]
 TASK1 = ROOT.parent / "task1"

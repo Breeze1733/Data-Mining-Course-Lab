@@ -31,7 +31,8 @@ if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout,
 # 规则1：词典 canonical（清晏舫→石舫、诺日朗游客中心→诺日朗中心等，见 entity_dictionary.json）
 # 规则2：地理限定语剥离（黄山南大门/黄山风景区→南大门；“XX景区”后缀剥离）
 # 规则3：等同名异点（五彩池）保留景区限定，不强行合并
-from normalize_name import normalize  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
+from entity_identity import normalize  # noqa: E402
 
 # ── 分隔符与括号 ──────────────────────────────────────────────
 CHAIN_SEP = re.compile(r"→|➝|➞|⇒|➤|─+|—+|–+")

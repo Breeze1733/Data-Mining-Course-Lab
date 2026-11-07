@@ -248,11 +248,11 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         branch_b_sugg = m.group(4).strip()
 
-        pairs.append({"pattern": "P1_显式条件", "trigger": m.group(1),
+        pairs.append({"pattern": "显式条件", "trigger": m.group(1),
 
                       "condition_text": branch_a_cond, "suggestions": [branch_a_sugg], "sentence": sent})
 
-        pairs.append({"pattern": "P1_显式条件", "trigger": m.group(1) + "(否则)",
+        pairs.append({"pattern": "显式条件", "trigger": m.group(1) + "(否则)",
 
                       "condition_text": "非" + branch_a_cond, "suggestions": [branch_b_sugg], "sentence": sent})
 
@@ -284,7 +284,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         for sugg in split_multi_suggestions(rest):
 
-            pairs.append({"pattern": "P1_显式条件", "trigger": trigger,
+            pairs.append({"pattern": "显式条件", "trigger": trigger,
 
                           "condition_text": cond, "suggestions": [sugg], "sentence": sent})
 
@@ -306,7 +306,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         for sugg in split_multi_suggestions(rest):
 
-            pairs.append({"pattern": "P1_显式条件", "trigger": trigger,
+            pairs.append({"pattern": "显式条件", "trigger": trigger,
 
                           "condition_text": m.group(2).rstrip("的话").strip(),
 
@@ -328,7 +328,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
                             or re.match(r"(?:建议|最好|推荐|记得|不妨|务必|要|选|住|坐|乘|带|穿|备|订|避)", rest)):
             continue
         for sugg in split_multi_suggestions(rest[:40]):
-            pairs.append({"pattern": "P1_显式条件", "trigger": "…的话(裸)",
+            pairs.append({"pattern": "显式条件", "trigger": "…的话(裸)",
                           "condition_text": cond, "suggestions": [sugg], "sentence": sent})
         seen_spans.add(m.start())
 
@@ -337,13 +337,13 @@ def extract_from_sentence(sent: str) -> list[dict]:
         cond, rest = m.group(1), m.group(2).strip()
         if not re.search(r"(?:休息|补氧|带上?|备|穿|涂|错峰|排队|慢行|提前)", rest[:10]):
             continue
-        pairs.append({"pattern": "P4_句内条件", "trigger": "空格条件",
+        pairs.append({"pattern": "句内条件", "trigger": "空格条件",
                       "condition_text": cond, "suggestions": [rest], "sentence": sent,
                       "condition_type": "体力安全" if ("高反" in cond or "体力" in cond) else "一般"})
 
     # 扩展C：须做/禁入规定（"你需要乘坐新国线登山车"/"私家车不允许进入"）
     for m in re.finditer(r"(需要?|须)(乘坐?|购买|预订|预约)[^。！？；，]{1,26}", sent):
-        pairs.append({"pattern": "P7_依据规定", "trigger": m.group(1) + m.group(2),
+        pairs.append({"pattern": "依据规定", "trigger": m.group(1) + m.group(2),
                       "condition_text": "入园/通行规定（句内）", "suggestions": [m.group(0)],
                       "sentence": sent,
                       "condition_type": "预约票务" if ("订" in m.group(2) or "预约" in m.group(2)) else "交通"})
@@ -351,12 +351,12 @@ def extract_from_sentence(sent: str) -> list[dict]:
         back = sent[max(0, m.start() - 12):m.start()]
         if re.search(r"(估计|可能|将|恐怕|也许|说不定)", back):
             continue  # 预测性语境（"估计不久将禁止"）非现行规定
-        pairs.append({"pattern": "P6_否定建议", "trigger": m.group(1),
+        pairs.append({"pattern": "否定建议", "trigger": m.group(1),
                       "condition_text": "入园/通行规定（句内）", "suggestions": [m.group(0)],
                       "sentence": sent, "condition_type": "一般"})
     # 扩展D：注意+闭馆/不开放类规定（"需要注意的是北京很多景点周一都不开放"）
     for m in re.finditer(r"(需要注意的是?|注意)[^。！？；]{0,18}(不开放|闭馆|关闭|停运|暂停开放)[^。！？；]{0,20}", sent):
-        pairs.append({"pattern": "P7_依据规定", "trigger": m.group(1),
+        pairs.append({"pattern": "依据规定", "trigger": m.group(1),
                       "condition_text": "开放时间规定（句内）",
                       "suggestions": [m.group(0)[:40]], "sentence": sent,
                       "condition_type": "时间"})
@@ -381,7 +381,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
                 continue
 
-            pairs.append({"pattern": "P7_依据规定", "trigger": m.group(1),
+            pairs.append({"pattern": "依据规定", "trigger": m.group(1),
 
                           "condition_text": cond, "suggestions": [sugg], "sentence": sent,
 
@@ -407,11 +407,11 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         branch_b_sugg = m.group(4).strip()
 
-        pairs.append({"pattern": "P1_显式条件", "trigger": m.group(1),
+        pairs.append({"pattern": "显式条件", "trigger": m.group(1),
 
                       "condition_text": branch_a_cond, "suggestions": [branch_a_sugg], "sentence": sent})
 
-        pairs.append({"pattern": "P1_显式条件", "trigger": m.group(1) + "(否则)",
+        pairs.append({"pattern": "显式条件", "trigger": m.group(1) + "(否则)",
 
                       "condition_text": "非" + branch_a_cond, "suggestions": [branch_b_sugg], "sentence": sent})
 
@@ -437,7 +437,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         for sugg in split_multi_suggestions(rest):
 
-            pairs.append({"pattern": "P3_时点条件", "trigger": "当…时/遇到…时",
+            pairs.append({"pattern": "时点条件", "trigger": "当…时/遇到…时",
 
                           "condition_text": cond, "suggestions": [sugg], "sentence": sent})
 
@@ -487,7 +487,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
                 continue  # 列举项（"第二,房卡"）非建议
 
-            pairs.append({"pattern": "P4_建议推断", "trigger": m.group(1),
+            pairs.append({"pattern": "建议推断", "trigger": m.group(1),
 
                           "condition_text": cond_text, "suggestions": [sugg], "sentence": sent,
 
@@ -523,7 +523,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         for sugg in segs:
 
-            pairs.append({"pattern": "P5_人群可以", "trigger": "可以",
+            pairs.append({"pattern": "人群可以", "trigger": "可以",
 
                           "condition_text": f"游客为{crowd}", "suggestions": [sugg], "sentence": sent,
 
@@ -572,7 +572,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
         clause = clause.rstrip(")）]】")
         for sugg in split_multi_suggestions(clause):
 
-            pairs.append({"pattern": "P6_否定建议", "trigger": m.group(1),
+            pairs.append({"pattern": "否定建议", "trigger": m.group(1),
 
                           "condition_text": cond_text, "suggestions": [sugg], "sentence": sent,
 

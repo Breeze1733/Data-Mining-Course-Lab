@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-07 04:35",
+ "updated_at": "2026-11-08 00:14",
  "guards": {
   "dataset.count": 271,
   "graph.fact_checks": "6/6",
@@ -11,14 +11,14 @@
   "task5.review_self_consistent": true,
   "task5.verdicts": "39/19/21",
   "task4.score_rerun_ok": true,
-  "task4.coref_accuracy": 0.65,
+  "task4.coref_accuracy": 0.678,
   "task4.coref_n": 180,
   "task5.score_rerun_ok": true
  },
  "gold.sha256": {
   "task2_spot_checks": "d7ee3d95b6a4caeec4161807b0bfbd35b4279409644431c5ca9cbe9849eef7d7",
   "task4_annotation_gold": "7b0ea6cdedc1e4910bf3d991004efc191e7fa2ad5a3027c0df5192d7e927156f",
-  "task5_review_dev": "f42bcfceaa84ae40eacf9bdd9357d60bece59e64a6e45be9eedfccc550a9df3f"
+  "task5_review_dev": "a7e8d859f8e549295f843e7ab4085b9b6cef711e44f7c414fdc8a0ece09bfeed"
  },
  "notes": "人工标注判定历史只允许追加复核；指纹变化必须在优化记录中说明。"
 }

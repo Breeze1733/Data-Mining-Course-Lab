@@ -83,7 +83,26 @@ def draw_tree(hierarchy: dict, title: str, path: Path):
     plt.close(fig)
 
 
-from time_periods import entity_period
+
+def entity_period(entity: dict) -> str | None:
+    """归一化时钟/时段词 → 四大报告时段（与 compare_routes 内联版同源）。"""
+    import re as _re
+    groups = {"上午": ("清晨", "早晨", "早上", "上午"), "中午": ("正午", "中午"),
+              "下午": ("下午", "傍晚"), "晚上": ("晚上", "夜间", "夜里", "深夜", "凌晨", "半夜")}
+    if entity.get("subtype") == "时段":
+        word = entity.get("normalized") or entity["text"]
+        return next((k for k, vs in groups.items() if word in vs), None)
+    if entity.get("subtype") not in {"时刻", "时刻区间"}:
+        return None
+    value = entity.get("normalized") or entity["text"]
+    for k, vs in groups.items():
+        if value.startswith(vs):
+            return k
+    m = _re.match(r"(\d{1,2}):", value)
+    if not m:
+        return None
+    hour = int(m.group(1))
+    return "上午" if 5 <= hour < 12 else "中午" if 12 <= hour < 14 else "下午" if 14 <= hour < 19 else "晚上"
 
 
 def tourist_time_hierarchy() -> dict:
