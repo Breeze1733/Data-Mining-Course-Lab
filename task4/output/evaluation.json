@@ -1,6 +1,6 @@
 {
  "n": 180,
- "accuracy_overall": 0.661,
+ "accuracy_overall": 0.672,
  "accuracy_by_class": {
   "locative": {
    "n": 45,
@@ -12,7 +12,7 @@
   },
   "person": {
    "n": 45,
-   "accuracy": 0.733
+   "accuracy": 0.778
   },
   "set": {
    "n": 45,
@@ -22,7 +22,7 @@
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.717
+   "accuracy": 0.733
   },
   "test": {
    "n": 60,
@@ -30,22 +30,11 @@
   }
  },
  "errors_by_split": {
-  "dev": 34,
+  "dev": 32,
   "test": 27
  },
  "split_method": "P18 文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
  "errors": [
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "颐和园",
-   "pred": "travel_party",
-   "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
-   "gold": "两个胜利者（英法联军）",
-   "gold_kind": "他人",
-   "note": "历史叙述，前句“两个胜利者”"
-  },
   {
    "pronoun": "它们",
    "class": "object",
@@ -177,17 +166,6 @@
    "gold": "庐山老别墅",
    "gold_kind": "其他",
    "note": "多景区游记（庐山段）"
-  },
-  {
-   "pronoun": "他们",
-   "class": "person",
-   "scenic": "黄山",
-   "pred": "travel_party",
-   "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
-   "gold": "迎面来的登山者",
-   "gold_kind": "他人",
-   "note": "同句“从下面上来的人”"
   },
   {
    "pronoun": "其中",
@@ -707,10 +685,10 @@
    "note": "先行词为“廊上斑驳的画”，归至长廊实体"
   }
  ],
- "kind_only_accuracy": 0.728,
+ "kind_only_accuracy": 0.739,
  "accuracy_ci95": {
-  "lo": 0.589,
-  "hi": 0.726
+  "lo": 0.601,
+  "hi": 0.737
  },
  "data_fingerprints": {
   "dataset_clean": "6fae55942575",
