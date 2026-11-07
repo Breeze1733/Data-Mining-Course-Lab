@@ -1,0 +1,9 @@
+{
+ "title": "F05 修复效应复测",
+ "numbers": {
+  "edges_weight_changed": 2,
+  "seq_edges_total": 1883,
+  "single_source_ratio": 0.476
+ },
+ "verdict": "键名修复后仅 2 条先后边权重修正（近重复对同边双计的记录组合少），影响小但去重机制恢复且可测试；权重分布单源占比 0.476 与语料自然分布一致"
+}

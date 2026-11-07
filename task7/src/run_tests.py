@@ -54,7 +54,20 @@ SCENARIOS = [
      "expect": {"scenic": "颐和园", "days": 2, "sunrise_honest": True}},
     {"id": "S17_出入口编排", "query": "颐和园一日游，北宫门进东宫门出",
      "expect": {"scenic": "颐和园", "days": 1, "entrance_first": "北宫门", "exit_last": "东宫门"}},
+    {"id": "S18_避开住宿日出取舍", "query": "黄山两日游想看日出，不要住白云宾馆",
+     "expect": {"scenic": "黄山", "days": 2, "avoid_respected": "白云宾馆",
+                "sunrise_tradeoff": True}},
 ]
+
+
+def check_sunrise_tradeoff(result):
+    """验收：唯一山上住宿被避开时，日出安排必须给出取舍说明而非照常声称住宿山上。"""
+    plan = result.get("plan") or {}
+    pois = [it["poi"] for it in plan.get("itinerary", [])]
+    no_lodging = not any(any(k in p for k in ("宾馆", "酒店", "民宿")) for p in pois)
+    noted = any("避开山上住宿" in n and "取舍" in n or "恢复住宿" in n
+                for n in (plan.get("special_notes") or []))
+    return no_lodging and noted
 
 
 def check_entrance_exit(result, en, ex):
@@ -178,6 +191,8 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
             checks["entrance_first"] = check_entrance_exit(result, v, sc["expect"]["exit_last"])
         elif k == "exit_last":
             pass  # 已并入 entrance_first 的端点检查
+        elif k == "sunrise_tradeoff":
+            checks["sunrise_tradeoff"] = check_sunrise_tradeoff(result)
         elif k == "multi_visitor":
             vt = intent.get("visitor_types") or []
             checks["multi_visitor"] = all(v in vt for v in v)

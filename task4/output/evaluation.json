@@ -85,6 +85,24 @@
    }
   }
  },
+ "accuracy_by_platform": {
+  "CTRIP": {
+   "n": 171,
+   "accuracy": 0.667,
+   "ci95": {
+    "lo": 0.593,
+    "hi": 0.733
+   }
+  },
+  "XHS": {
+   "n": 9,
+   "accuracy": 0.889,
+   "ci95": {
+    "lo": 0.565,
+    "hi": 0.98
+   }
+  }
+ },
  "errors_by_split": {
   "dev": 31,
   "test": 27

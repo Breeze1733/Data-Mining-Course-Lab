@@ -182,7 +182,7 @@ class IntentParser:
         # 与后置否定（“X就不去了”）；必去地点——前缀（一定要去/一定要逛/必去/必须去）
         # 与后置（“X是必去的”）。后置模式收紧锚点（就不去/是必去），避免误捕。
         avoid = [m.group(1).strip() for m in
-                 re.finditer(r"(?:不要去|不想去|不去|避开|别安排|别去|不想逛)\s*([一-龥A-Za-z0-9]{2,10})", query)]
+                 re.finditer(r"(?:不要去|不想去|不去|避开|别安排|别去|不想逛|不要住|不住|别住)\s*([一-龥A-Za-z0-9]{2,10})", query)]
         avoid += [m.group(1).strip() for m in
                   re.finditer(r"([一-龥A-Za-z0-9]{2,10})\s*就不去了?", query)]
         # 否定表达变体：POI前置否定（“原始森林不要去”）、“除了X都行”、
@@ -200,7 +200,7 @@ class IntentParser:
         avoid, must = list(dict.fromkeys(avoid)), list(dict.fromkeys(must))
         # G02：出入口——"北宫门进东宫门出"/"从北宫门进入"
         m_en = re.search(r"(?:从|在)?([一-龥]{2,8}?)(?:进园|入园|进入|进)", query)
-        m_ex = re.search(r"([一-龥]{2,8}?)(?:出园|出|离开)", query)
+        m_ex = re.search(r"([一-龥]{2,8}?)(?:出园|(?<!日)出|离开)", query)
         entrance = m_en.group(1).strip() if m_en else None
         exit_gate = m_ex.group(1).strip() if m_ex else None
         if entrance and entrance.endswith(("景区", "园区")):
@@ -382,7 +382,14 @@ class ReActAgent:
         if "看日出" in (intent.get("special") or []) and days and days >= 2:
             _sunrise_poi = self._find_sunrise_poi(scenic, ordered)
             if _sunrise_poi:
-                special_notes.append(f"看日出：{_sunrise_poi} 已安排在最后一日首位（清晨前往），需前晚住宿山上或山顶酒店")
+                _lodging_now = [q for q in selected if any(k in q for k in ("宾馆", "酒店", "民宿"))]
+                if _lodging_now:
+                    special_notes.append(f"看日出：{_sunrise_poi} 已安排在最后一日首位（清晨前往），需前晚住宿山上或山顶酒店")
+                else:
+                    # G05：无住宿证据时的方案取舍——如实说明，不虚构住宿安排
+                    special_notes.append(f"看日出：{_sunrise_poi} 已安排在最后一日首位（清晨前往）；"
+                                         "注意：您已避开山上住宿且无替代住宿点，需凌晨自山下出发（班车/夜爬，注意安全），"
+                                         "或恢复住宿安排后再看日出")
             else:
                 special_notes.append("看日出：已选景点中无日出观景点（如光明顶），如需看日出请将其加入需求")
             trace.append({"step": "thought", "thought": f"特殊需求「看日出」编排：{special_notes[-1]}"})

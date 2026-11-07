@@ -422,9 +422,12 @@ def score(cases: list[dict]) -> None:
         by_split[sp][0] += r["correct"]
     # D04：弃权口径——"无明确先行词"为可解释弃权；覆盖率与准确率分开报告
     by_scenic_acc = defaultdict(lambda: [0, 0])
+    by_platform_acc = defaultdict(lambda: [0, 0])
     for r in rows:
         by_scenic_acc[r["scenic_area"]][1] += 1
         by_scenic_acc[r["scenic_area"]][0] += r["correct"]
+        by_platform_acc[r.get("source_platform") or r["record_id"].split("_")[0]][1] += 1
+        by_platform_acc[r.get("source_platform") or r["record_id"].split("_")[0]][0] += r["correct"]
     abstain_by_class = defaultdict(lambda: [0, 0])
     for r in rows:
         abstain_by_class[r["pronoun_class"]][1] += 1
@@ -447,6 +450,10 @@ def score(cases: list[dict]) -> None:
         "accuracy_by_scenic": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3),
                                    "ci95": wilson_ci(v[0], v[1])}
                                for k, v in sorted(by_scenic_acc.items())},
+        # H07：按平台分层（XHS vs 携程），附 CI
+        "accuracy_by_platform": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3),
+                                     "ci95": wilson_ci(v[0], v[1])}
+                                 for k, v in sorted(by_platform_acc.items())},
         "errors_by_split": {k: v[1] - v[0] for k, v in sorted(by_split.items())},
         "split_method": "文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
         # 错误清单引用当前预测（历史 rule_resolution 快照仅存于 gold 文件备查）
