@@ -2007,6 +2007,24 @@
    "source": "b03_recall_eval_2026-11-05"
   },
   {
+   "name": "送客松",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [
+    "黄山"
+   ],
+   "canonical": "送客松",
+   "source": "b03_coref_gold_dev_2026-11-07"
+  },
+  {
+   "name": "金山岭长城",
+   "entity_type": "景点POI",
+   "subtype": "景点",
+   "scenic_areas": [],
+   "canonical": "金山岭长城",
+   "source": "b03_coref_gold_dev_2026-11-07"
+  },
+  {
    "name": "玉屏峰",
    "entity_type": "景点POI",
    "subtype": "景点",

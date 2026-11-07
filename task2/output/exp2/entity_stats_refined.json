@@ -1,14 +1,14 @@
 {
  "iteration": "refined",
  "dictionary_size": {
-  "poi": 244,
+  "poi": 246,
   "transport": 52,
   "stopwords": 15
  },
  "records": 271,
- "total_entities": 23933,
- "entities_per_record_mean": 88.31,
- "segmentation_tokens_total": 472910,
+ "total_entities": 23960,
+ "entities_per_record_mean": 88.41,
+ "segmentation_tokens_total": 472885,
  "by_scenic_area": {
   "九寨沟": {
    "时间节点": 3523,
@@ -16,14 +16,14 @@
    "景点POI": 5091
   },
   "颐和园": {
-   "景点POI": 3924,
+   "景点POI": 3931,
    "时间节点": 1246,
    "交通方式": 585
   },
   "黄山": {
    "时间节点": 2698,
    "交通方式": 1415,
-   "景点POI": 3936
+   "景点POI": 3956
   }
  },
  "by_subtype": {
@@ -31,7 +31,7 @@
   "时间节点/时段": 1089,
   "交通方式/景区车辆": 586,
   "交通方式/步行": 667,
-  "景点POI/景点": 12951,
+  "景点POI/景点": 12978,
   "时间节点/时刻区间": 237,
   "时间节点/相对日": 1035,
   "时间节点/季节": 278,

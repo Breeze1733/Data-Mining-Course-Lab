@@ -107,7 +107,7 @@
    ],
    [
     "迎客松",
-    58
+    59
    ],
    [
     "西海大峡谷",
@@ -119,7 +119,7 @@
    ],
    [
     "玉屏楼",
-    46
+    48
    ],
    [
     "北海",
@@ -164,7 +164,7 @@
     43
    ],
    [
-    "黄龙",
+    "五彩池",
     42
    ]
   ],
@@ -198,7 +198,7 @@
     43
    ],
    [
-    "北宫门",
+    "东宫门",
     39
    ]
   ]
@@ -217,9 +217,9 @@
   "颐和园": 1
  },
  "edge_relation_distribution": {
-  "包含": 163,
+  "包含": 164,
   "条件建议": 700,
-  "先后顺序": 1874,
+  "先后顺序": 1884,
   "时段归属": 144,
   "交通方式": 58
  },
@@ -230,17 +230,17 @@
   "各景区子图均为单一连通分量（条件节点挂靠在 POI/景区上），无孤立节点；"
  ],
  "roundtrip": {
-  "csv_nodes": 643,
-  "csv_edges": 2939,
-  "graphml_nodes": 643,
-  "graphml_edges": 2939,
+  "csv_nodes": 644,
+  "csv_edges": 2950,
+  "graphml_nodes": 644,
+  "graphml_edges": 2950,
   "ok": true
  },
  "provenance": {
   "cond_nodes_checked": 461,
   "cond_nodes_with_evidence": 461,
-  "order_edges_checked": 1631,
-  "order_edges_with_records": 1631,
+  "order_edges_checked": 1641,
+  "order_edges_with_records": 1641,
   "parse_failures": 0
  },
  "provenance_ok": true

@@ -1,6 +1,6 @@
 {
  "n": 180,
- "accuracy_overall": 0.672,
+ "accuracy_overall": 0.678,
  "accuracy_by_class": {
   "locative": {
    "n": 45,
@@ -8,7 +8,7 @@
   },
   "object": {
    "n": 45,
-   "accuracy": 0.711
+   "accuracy": 0.733
   },
   "person": {
    "n": 45,
@@ -22,7 +22,7 @@
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.733
+   "accuracy": 0.742
   },
   "test": {
    "n": 60,
@@ -30,7 +30,7 @@
   }
  },
  "errors_by_split": {
-  "dev": 32,
+  "dev": 31,
   "test": 27
  },
  "split_method": "P18 文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
@@ -177,17 +177,6 @@
    "gold": "宅内陈列",
    "gold_kind": "其他",
    "note": ""
-  },
-  {
-   "pronoun": "它",
-   "class": "object",
-   "scenic": "黄山",
-   "pred": "迎客松",
-   "pred_kind": "POI",
-   "evidence": "同句最近POI，距离34字符",
-   "gold": "送客松",
-   "gold_kind": "POI",
-   "note": "“记住它”指后置命名的送客松"
   },
   {
    "pronoun": "他们",
@@ -687,20 +676,20 @@
  ],
  "kind_only_accuracy": 0.739,
  "accuracy_ci95": {
-  "lo": 0.601,
-  "hi": 0.737
+  "lo": 0.606,
+  "hi": 0.742
  },
  "data_fingerprints": {
   "dataset_clean": "6fae55942575",
-  "entity_dictionary": "430304c1f73a",
-  "entities_refined": "c3c2f82aa24e"
+  "entity_dictionary": "b62d50b061d7",
+  "entities_refined": "f999bf7cd6ab"
  },
  "identity_ci95": {
-  "lo": 0.503,
-  "hi": 0.724
+  "lo": 0.518,
+  "hi": 0.736
  },
  "identity_scope": {
   "n_identity_checked": 71,
-  "identity_accuracy": 0.62
+  "identity_accuracy": 0.634
  }
 }

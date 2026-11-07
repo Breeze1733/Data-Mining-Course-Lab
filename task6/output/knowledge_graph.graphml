@@ -971,6 +971,13 @@
   <data key="d3">2</data>
   <data key="d4">新宫门</data>
 </node>
+<node id="POI:黄山:送客松">
+  <data key="d0">景点</data>
+  <data key="d1">送客松</data>
+  <data key="d2">送客松</data>
+  <data key="d3">20</data>
+  <data key="d4">送客松</data>
+</node>
 <node id="POI:黄山:玉屏峰">
   <data key="d0">景点</data>
   <data key="d1">玉屏峰</data>
@@ -6951,6 +6958,10 @@
   <data key="d13">1</data>
 </edge>
 <edge source="景区:黄山:黄山" target="POI:黄山:白云宾馆" id="包含">
+  <data key="d12">包含</data>
+  <data key="d13">1</data>
+</edge>
+<edge source="景区:黄山:黄山" target="POI:黄山:送客松" id="包含">
   <data key="d12">包含</data>
   <data key="d13">1</data>
 </edge>
@@ -16939,7 +16950,7 @@
 </edge>
 <edge source="POI:黄山:玉屏楼" target="POI:黄山:迎客松" id="先后顺序">
   <data key="d12">先后顺序</data>
-  <data key="d14">15.0</data>
+  <data key="d14">14.5</data>
   <data key="d15">游客序列</data>
   <data key="d16">["CTRIP_4019387", "CTRIP_3993157", "CTRIP_4004475", "CTRIP_4123390", "CTRIP_3961636", "CTRIP_4021373", "CTRIP_4034449", "CTRIP_4032520", "CTRIP_4011981", "CTRIP_3999208", "CTRIP_3995811", "CTRIP_4006823", "CTRIP_3976836", "CTRIP_1016507", "CTRIP_811927", "CTRIP_898653", "CTRIP_1333628", "XHS_6a5357f9000000001c025a3a", "XHS_69c7e183000000002102f498", "XHS_688a0687000000002302e41d", "XHS_6ab76638000000001c01fb3a"]</data>
   <data key="d17">21</data>
@@ -17047,6 +17058,13 @@
   <data key="d14">1.5</data>
   <data key="d15">游客序列</data>
   <data key="d16">["CTRIP_3976836", "CTRIP_1333628"]</data>
+  <data key="d17">2</data>
+</edge>
+<edge source="POI:黄山:玉屏楼" target="POI:黄山:送客松" id="先后顺序">
+  <data key="d12">先后顺序</data>
+  <data key="d14">1.0</data>
+  <data key="d15">游客序列</data>
+  <data key="d16">["CTRIP_1016507", "CTRIP_1333628"]</data>
   <data key="d17">2</data>
 </edge>
 <edge source="POI:黄山:玉屏楼" target="POI:黄山:黑虎松" id="先后顺序">
@@ -19295,17 +19313,17 @@
 </edge>
 <edge source="POI:黄山:莲花峰" target="POI:黄山:玉屏楼" id="先后顺序">
   <data key="d12">先后顺序</data>
-  <data key="d14">7.5</data>
+  <data key="d14">7.0</data>
   <data key="d15">游客序列</data>
-  <data key="d16">["CTRIP_4019387", "CTRIP_4004475", "CTRIP_4123390", "CTRIP_4032520", "CTRIP_3986022", "CTRIP_3995811", "CTRIP_4006823", "CTRIP_3976836", "CTRIP_1333628"]</data>
-  <data key="d17">9</data>
+  <data key="d16">["CTRIP_4019387", "CTRIP_4004475", "CTRIP_4123390", "CTRIP_4032520", "CTRIP_3986022", "CTRIP_4006823", "CTRIP_3976836", "CTRIP_1333628"]</data>
+  <data key="d17">8</data>
 </edge>
 <edge source="POI:黄山:莲花峰" target="POI:黄山:迎客松" id="先后顺序">
   <data key="d12">先后顺序</data>
-  <data key="d14">13.0</data>
+  <data key="d14">12.5</data>
   <data key="d15">游客序列</data>
-  <data key="d16">["CTRIP_3989929", "CTRIP_4031821", "CTRIP_4023752", "CTRIP_3951546", "CTRIP_3993157", "CTRIP_2953624", "CTRIP_3944634", "CTRIP_4034449", "CTRIP_3999208", "CTRIP_3953404", "CTRIP_3965378", "CTRIP_3976836", "CTRIP_940945", "CTRIP_811927", "CTRIP_731743", "XHS_6825b63c000000000c039c16", "XHS_699db4740000000022039268"]</data>
-  <data key="d17">17</data>
+  <data key="d16">["CTRIP_3989929", "CTRIP_4031821", "CTRIP_4023752", "CTRIP_3951546", "CTRIP_3993157", "CTRIP_2953624", "CTRIP_3944634", "CTRIP_4034449", "CTRIP_3999208", "CTRIP_3953404", "CTRIP_3965378", "CTRIP_3976836", "CTRIP_811927", "CTRIP_731743", "XHS_6825b63c000000000c039c16", "XHS_699db4740000000022039268"]</data>
+  <data key="d17">16</data>
 </edge>
 <edge source="POI:黄山:莲花峰" target="POI:黄山:百步云梯" id="先后顺序">
   <data key="d12">先后顺序</data>
@@ -19354,6 +19372,13 @@
   <data key="d14">1.0</data>
   <data key="d15">游客序列</data>
   <data key="d16">["CTRIP_3986022", "CTRIP_1333628"]</data>
+  <data key="d17">2</data>
+</edge>
+<edge source="POI:黄山:莲花峰" target="POI:黄山:送客松" id="先后顺序">
+  <data key="d12">先后顺序</data>
+  <data key="d14">1.0</data>
+  <data key="d15">游客序列</data>
+  <data key="d16">["CTRIP_3995811", "CTRIP_940945"]</data>
   <data key="d17">2</data>
 </edge>
 <edge source="POI:黄山:莲花峰" target="POI:黄山:玉屏景区" id="先后顺序">
@@ -20904,19 +20929,17 @@
 </edge>
 <edge source="POI:黄山:迎客松" target="POI:黄山:黄山南大门" id="先后顺序">
   <data key="d12">先后顺序</data>
-  <data key="d14">2.5</data>
+  <data key="d14">2.0</data>
   <data key="d15">官方路线</data>
   <data key="d18">HS-EXTRA1-R2；HS-EXTRA1-R4</data>
-  <data key="d16">["XHS_6a10349e00000000060233b0"]</data>
-  <data key="d17">1</data>
 </edge>
 <edge source="POI:黄山:迎客松" target="POI:黄山:莲花峰" id="先后顺序">
   <data key="d12">先后顺序</data>
-  <data key="d14">9.0</data>
+  <data key="d14">8.0</data>
   <data key="d15">官方路线</data>
   <data key="d18">HS-EXTRA2-R1</data>
-  <data key="d16">["CTRIP_4031821", "CTRIP_3991429", "CTRIP_3993157", "CTRIP_4021373", "CTRIP_4004430", "CTRIP_3982660", "CTRIP_3995811", "CTRIP_3963679", "CTRIP_4006823", "CTRIP_4035540", "CTRIP_3953404", "CTRIP_4052444", "CTRIP_1016507", "CTRIP_811927"]</data>
-  <data key="d17">14</data>
+  <data key="d16">["CTRIP_4031821", "CTRIP_3991429", "CTRIP_3993157", "CTRIP_4021373", "CTRIP_4004430", "CTRIP_3982660", "CTRIP_3995811", "CTRIP_3963679", "CTRIP_4006823", "CTRIP_4035540", "CTRIP_3953404", "CTRIP_4052444", "CTRIP_811927"]</data>
+  <data key="d17">13</data>
 </edge>
 <edge source="POI:黄山:迎客松" target="POI:黄山:天都峰" id="先后顺序">
   <data key="d12">先后顺序</data>
@@ -20928,10 +20951,10 @@
 </edge>
 <edge source="POI:黄山:迎客松" target="POI:黄山:宏村" id="先后顺序">
   <data key="d12">先后顺序</data>
-  <data key="d14">3.5</data>
+  <data key="d14">2.5</data>
   <data key="d15">游客序列</data>
-  <data key="d16">["CTRIP_4010240", "CTRIP_3989929", "CTRIP_3958849", "CTRIP_3951546", "CTRIP_2953624", "CTRIP_4017265", "CTRIP_3735942"]</data>
-  <data key="d17">7</data>
+  <data key="d16">["CTRIP_4010240", "CTRIP_3958849", "CTRIP_3951546", "CTRIP_4017265", "CTRIP_3735942"]</data>
+  <data key="d17">5</data>
 </edge>
 <edge source="POI:黄山:迎客松" target="POI:黄山:西海大峡谷" id="先后顺序">
   <data key="d12">先后顺序</data>
@@ -20968,6 +20991,13 @@
   <data key="d16">["CTRIP_4019387", "CTRIP_1016507", "CTRIP_940945"]</data>
   <data key="d17">3</data>
 </edge>
+<edge source="POI:黄山:迎客松" target="POI:黄山:送客松" id="先后顺序">
+  <data key="d12">先后顺序</data>
+  <data key="d14">5.0</data>
+  <data key="d15">游客序列</data>
+  <data key="d16">["CTRIP_3989929", "CTRIP_4031821", "CTRIP_2953624", "CTRIP_4034449", "CTRIP_3999208", "CTRIP_1016507", "CTRIP_811927", "XHS_6a10349e00000000060233b0"]</data>
+  <data key="d17">8</data>
+</edge>
 <edge source="POI:黄山:迎客松" target="POI:黄山:白云宾馆" id="先后顺序">
   <data key="d12">先后顺序</data>
   <data key="d14">3.0</data>
@@ -20991,10 +21021,10 @@
 </edge>
 <edge source="POI:黄山:迎客松" target="POI:黄山:慈光阁" id="先后顺序">
   <data key="d12">先后顺序</data>
-  <data key="d14">9.5</data>
+  <data key="d14">9.0</data>
   <data key="d15">游客序列</data>
-  <data key="d16">["CTRIP_3951546", "CTRIP_3991429", "CTRIP_3993157", "CTRIP_4123390", "CTRIP_4034449", "CTRIP_4032520", "CTRIP_3999208", "CTRIP_4006823", "CTRIP_811927", "CTRIP_731743", "XHS_6a5357f9000000001c025a3a", "XHS_67f6eff7000000001202c2d0", "XHS_69db10e5000000001a0350f1", "XHS_688a0687000000002302e41d", "XHS_6999519700000000150386e2"]</data>
-  <data key="d17">15</data>
+  <data key="d16">["CTRIP_3951546", "CTRIP_3991429", "CTRIP_3993157", "CTRIP_4123390", "CTRIP_4034449", "CTRIP_4032520", "CTRIP_4006823", "CTRIP_811927", "CTRIP_731743", "XHS_6a5357f9000000001c025a3a", "XHS_67f6eff7000000001202c2d0", "XHS_69db10e5000000001a0350f1", "XHS_688a0687000000002302e41d", "XHS_6999519700000000150386e2"]</data>
+  <data key="d17">14</data>
 </edge>
 <edge source="POI:黄山:迎客松" target="POI:黄山:北海" id="先后顺序">
   <data key="d12">先后顺序</data>
@@ -21061,7 +21091,7 @@
 </edge>
 <edge source="POI:黄山:迎客松" target="POI:黄山:黑虎松" id="先后顺序">
   <data key="d12">先后顺序</data>
-  <data key="d14">1.0</data>
+  <data key="d14">0.5</data>
   <data key="d15">游客序列</data>
   <data key="d16">["CTRIP_1016507"]</data>
   <data key="d17">1</data>
@@ -22783,7 +22813,7 @@
   <data key="d16">["CTRIP_898653"]</data>
   <data key="d17">1</data>
 </edge>
-<edge source="POI:黄山:西递" target="POI:黄山:迎客松" id="先后顺序">
+<edge source="POI:黄山:西递" target="POI:黄山:送客松" id="先后顺序">
   <data key="d12">先后顺序</data>
   <data key="d14">0.5</data>
   <data key="d15">游客序列</data>
@@ -23186,6 +23216,55 @@
   <data key="d14">0.5</data>
   <data key="d15">游客序列</data>
   <data key="d16">["XHS_6aad1606000000000d027c7e"]</data>
+  <data key="d17">1</data>
+</edge>
+<edge source="POI:黄山:送客松" target="POI:黄山:宏村" id="先后顺序">
+  <data key="d12">先后顺序</data>
+  <data key="d14">1.0</data>
+  <data key="d15">游客序列</data>
+  <data key="d16">["CTRIP_3989929", "CTRIP_2953624"]</data>
+  <data key="d17">2</data>
+</edge>
+<edge source="POI:黄山:送客松" target="POI:黄山:莲花峰" id="先后顺序">
+  <data key="d12">先后顺序</data>
+  <data key="d14">1.0</data>
+  <data key="d15">游客序列</data>
+  <data key="d16">["CTRIP_4031821", "CTRIP_1016507"]</data>
+  <data key="d17">2</data>
+</edge>
+<edge source="POI:黄山:送客松" target="POI:黄山:迎客松" id="先后顺序">
+  <data key="d12">先后顺序</data>
+  <data key="d14">3.0</data>
+  <data key="d15">游客序列</data>
+  <data key="d16">["CTRIP_4034449", "CTRIP_1016507", "CTRIP_940945", "CTRIP_811927", "XHS_6a33a8bc000000002100bb7e"]</data>
+  <data key="d17">5</data>
+</edge>
+<edge source="POI:黄山:送客松" target="POI:黄山:慈光阁" id="先后顺序">
+  <data key="d12">先后顺序</data>
+  <data key="d14">0.5</data>
+  <data key="d15">游客序列</data>
+  <data key="d16">["CTRIP_3999208"]</data>
+  <data key="d17">1</data>
+</edge>
+<edge source="POI:黄山:送客松" target="POI:黄山:玉屏楼" id="先后顺序">
+  <data key="d12">先后顺序</data>
+  <data key="d14">1.0</data>
+  <data key="d15">游客序列</data>
+  <data key="d16">["CTRIP_3995811", "CTRIP_1333628"]</data>
+  <data key="d17">2</data>
+</edge>
+<edge source="POI:黄山:送客松" target="POI:黄山:黑虎松" id="先后顺序">
+  <data key="d12">先后顺序</data>
+  <data key="d14">0.5</data>
+  <data key="d15">游客序列</data>
+  <data key="d16">["CTRIP_1016507"]</data>
+  <data key="d17">1</data>
+</edge>
+<edge source="POI:黄山:送客松" target="POI:黄山:黄山南大门" id="先后顺序">
+  <data key="d12">先后顺序</data>
+  <data key="d14">0.5</data>
+  <data key="d15">游客序列</data>
+  <data key="d16">["XHS_6a10349e00000000060233b0"]</data>
   <data key="d17">1</data>
 </edge>
 <edge source="POI:黄山:玉屏峰" target="POI:黄山:西海" id="先后顺序">

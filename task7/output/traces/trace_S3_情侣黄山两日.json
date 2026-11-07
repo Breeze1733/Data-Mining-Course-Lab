@@ -36,7 +36,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 11 个 POI：光明顶、迎客松、天都峰、西海大峡谷、玉屏楼、始信峰"
+   "summary": "返回 11 个 POI：光明顶、迎客松、天都峰、西海大峡谷、玉屏楼、莲花峰"
   },
   {
    "step": "action",
@@ -394,5 +394,5 @@
   "template_route": "HS-EXTRA1-R2 冬季南门二日游",
   "template_src": "（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }

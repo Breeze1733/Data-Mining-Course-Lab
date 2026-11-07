@@ -257,7 +257,7 @@
     "曙光亭"
    ],
    "coverage_mean": 0.417,
-   "jaccard_mean": 0.355,
+   "jaccard_mean": 0.353,
    "order_tau_mean": 0.525,
    "n_order_pairs": 82,
    "official_has_time_info": false,

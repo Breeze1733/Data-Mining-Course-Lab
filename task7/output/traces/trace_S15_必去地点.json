@@ -32,7 +32,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 11 个 POI：光明顶、迎客松、天都峰、西海大峡谷、玉屏楼、始信峰"
+   "summary": "返回 11 个 POI：光明顶、迎客松、天都峰、西海大峡谷、玉屏楼、莲花峰"
   },
   {
    "step": "action",
