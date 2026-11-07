@@ -43,6 +43,25 @@ AREAS = ("黄山", "九寨沟", "颐和园")
 PERIODS = ("上午", "中午", "下午", "晚上")
 
 
+# E09/U83（模块级供单测复用）：对比词守卫——等长文本恰一处差异且互为对比词→语义相斥
+_CONTRAST = [("多", "少"), ("雨", "雪"), ("早", "晚"), ("上", "下"), ("有", "无"),
+             ("大", "小"), ("开", "关"), ("高", "低"), ("冷", "热"), ("快", "慢"), ("贵", "廉")]
+
+
+def _norm_cond_m(t: str) -> str:
+    return re.sub(r"[\s，,。；;、！？!?\[\]（）()【】的了吗呢啊呀]", "", t)
+
+
+def _contrast_blocked(ta: str, tb: str) -> bool:
+    if len(ta) != len(tb):
+        return False
+    diffs = [i for i, (x, y) in enumerate(zip(ta, tb)) if x != y]
+    if len(diffs) != 1:
+        return False
+    i = diffs[0]
+    return any({ta[i], tb[i]} == {x, y} for x, y in _CONTRAST)
+
+
 def main() -> int:
     sys.path.insert(0, str(TASK2 / "src"))
     from extract_entities import DictMatcher, load_dictionary
@@ -216,6 +235,7 @@ def main() -> int:
         return max(cands, key=lambda fc: (bool(_SUGG_ACT.search(fc[1])), fc[0], len(fc[1])))[1]
 
     clusters: list[dict] = []
+    # E09/U83：对比词守卫见模块级 _contrast_blocked（真实图谱 0 对受影响，潜在风险加固）
     reps: list[tuple[str, str, str, str, set]] = []
     for m in mapping:
         key_text = _norm_cond(m["condition_text"])
@@ -227,6 +247,9 @@ def main() -> int:
                     and pat0 == m["pattern"] and pol0 == _polarity(m)):
                 inter, union = len(bg0 & bg), len(bg0 | bg)
                 if union and inter / union >= 0.4:
+                    if _contrast_blocked(_norm_cond(m["condition_text"]),
+                                         _norm_cond(cluster0["members"][0]["condition_text"])):
+                        continue
                     hit = cluster0
                     break
         if hit is not None:
