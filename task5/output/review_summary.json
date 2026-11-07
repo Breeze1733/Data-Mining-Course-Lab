@@ -15,8 +15,8 @@
   "entities_refined": "f999bf7cd6ab"
  },
  "alignment_with_current_extraction": {
-  "retained_identical": 51,
-  "missing": 17,
+  "retained_identical": 50,
+  "missing": 18,
   "changed_same_sentence": 11
  },
  "by_pattern": {

@@ -52,7 +52,16 @@ SCENARIOS = [
      "expect": {"scenic": "黄山", "days": 2, "must_respected": "天都峰"}},
     {"id": "S16_无日出景点诚实回退", "query": "颐和园两日游，想看日出",
      "expect": {"scenic": "颐和园", "days": 2, "sunrise_honest": True}},
+    {"id": "S17_出入口编排", "query": "颐和园一日游，北宫门进东宫门出",
+     "expect": {"scenic": "颐和园", "days": 1, "entrance_first": "北宫门", "exit_last": "东宫门"}},
 ]
+
+
+def check_entrance_exit(result, en, ex):
+    """验收：入口 POI 为行程首站、出口 POI 为末站（识别出入口被忽略的退化）。"""
+    plan = result.get("plan") or {}
+    pois = [it["poi"] for it in plan.get("itinerary", [])]
+    return bool(pois) and pois[0] == en and pois[-1] == ex
 
 
 def check_sunrise_honest(result):
@@ -163,6 +172,12 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
             checks["must_respected"] = check_must(result, v)
         elif k == "sunrise_honest":
             checks["sunrise_honest"] = check_sunrise_honest(result)
+        elif k == "entrance_first":
+            plan = result.get("plan") or {}
+            pois = [it["poi"] for it in plan.get("itinerary", [])]
+            checks["entrance_first"] = check_entrance_exit(result, v, sc["expect"]["exit_last"])
+        elif k == "exit_last":
+            pass  # 已并入 entrance_first 的端点检查
         elif k == "multi_visitor":
             vt = intent.get("visitor_types") or []
             checks["multi_visitor"] = all(v in vt for v in v)

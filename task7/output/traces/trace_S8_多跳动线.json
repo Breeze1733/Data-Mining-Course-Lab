@@ -9,7 +9,9 @@
   "month": null,
   "special": [],
   "avoid": [],
-  "must": []
+  "must": [],
+  "entrance": null,
+  "exit_gate": "九寨沟从长海"
  },
  "trace": [
   {
@@ -62,7 +64,15 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 1, 'days_explicit': False, 'month': None, 'special': [], 'avoid': [], 'must': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 1, 'days_explicit': False, 'month': None, 'special': [], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': '九寨沟从长海'}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+  },
+  {
+   "step": "thought",
+   "thought": "出入口处理：出口 长海 纳入行程并豁免预算"
+  },
+  {
+   "step": "thought",
+   "thought": "出入口编排：出口 长海 后置于行程末站"
   },
   {
    "step": "thought",
@@ -89,6 +99,10 @@
   {
    "step": "thought",
    "thought": "时段预算：每日上限 5，总 1 天，裁剪 3 个 POI"
+  },
+  {
+   "step": "thought",
+   "thought": "必去地点豁免预算裁剪：['长海'] 已回填行程"
   },
   {
    "step": "action",
@@ -120,20 +134,6 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '长海'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "长海"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 5 条条件建议"
-  },
-  {
-   "step": "action",
    "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '五彩池'}",
    "tool": "query_poi_conditions",
    "args": {
@@ -159,6 +159,34 @@
    "step": "observation",
    "tool": "query_poi_conditions",
    "summary": "返回 8 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "诺日朗"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 4 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '长海'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "长海"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "thought",
@@ -188,14 +216,15 @@
    "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 2016版一日游）：\n上午：沟口\n上午：原始森林（步行前往）\n中午：长海（步行前往）\n下午：五彩池（步行前往）\n下午：镜海（步行前往）\n贴士（来自游记经验）：[人群] 那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离；[人群] 一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了；[人群] 可以观光车➕缆车下)；[人群] 吃起来新鲜可口,在如此童话森林中来一场英式下午茶会,应该是旅\n⚠ 原始森林：装备条件（句内）——不建议去原始森林,它和九寨沟看水的核心特色不符,还存在耗时、景色普通等问题,具体（证据年份 2022/2025（语料经验，出行前请核实）\n⚠ 原始森林：不去原始森林——其实大半天足矣（证据年份 2022）（语料经验，出行前请核实）\n说明：时间预算限制：已裁剪 3 个景点（诺日朗, 五花海, 诺日朗瀑布等），建议根据体力取舍\n动线参考（图谱先后顺序边，1 跳）：长海 → 诺日朗中心",
+ "answer": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 2016版一日游）：\n上午：沟口\n上午：原始森林（步行前往）\n中午：五彩池（步行前往）\n下午：镜海（步行前往）\n下午：诺日朗（步行前往）\n晚上：长海（步行前往）\n贴士（来自游记经验）：[人群] 那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离；[人群] 一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了；[人群] 可以观光车➕缆车下)；[人群] 吃起来新鲜可口,在如此童话森林中来一场英式下午茶会,应该是旅\n⚠ 原始森林：装备条件（句内）——不建议去原始森林,它和九寨沟看水的核心特色不符,还存在耗时、景色普通等问题,具体（证据年份 2022/2025（语料经验，出行前请核实）\n⚠ 原始森林：不去原始森林——其实大半天足矣（证据年份 2022）（语料经验，出行前请核实）\n说明：出口：长海 已在行程中\n说明：时间预算限制：已裁剪 3 个景点（五花海, 诺日朗瀑布, 长海等），建议根据体力取舍\n动线参考（图谱先后顺序边，1 跳）：长海 → 诺日朗中心",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
   "visitor_type": null,
   "special": [],
   "special_notes": [
-   "时间预算限制：已裁剪 3 个景点（诺日朗, 五花海, 诺日朗瀑布等），建议根据体力取舍"
+   "出口：长海 已在行程中",
+   "时间预算限制：已裁剪 3 个景点（五花海, 诺日朗瀑布, 长海等），建议根据体力取舍"
   ],
   "trip_month": null,
   "itinerary": [
@@ -219,7 +248,7 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "长海",
+    "poi": "五彩池",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -227,7 +256,7 @@
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "五彩池",
+    "poi": "镜海",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -235,7 +264,15 @@
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "镜海",
+    "poi": "诺日朗",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
+    "order": 6,
+    "day": 1,
+    "period": "晚上",
+    "poi": "长海",
     "transport_from_prev": "步行",
     "note": ""
    }

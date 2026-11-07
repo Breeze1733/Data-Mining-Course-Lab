@@ -266,6 +266,10 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
     # P1/P2/P3：显式条件（含”…的话就/可以/建议Y”无逗号紧邻变体，+4 例真实建议）
 
+    # E06：转述话语守卫——"导游说/司机说…如果…"的建议对象是叙述者，非游客
+    if re.search(r"(?:导游|司机|师傅|工作人员|店员|讲解员)说[^。！？；]{0,8}(?:如果|要是|若)", sent):
+        return pairs
+
     for m in re.finditer(r"(如果|假如|假若|若是|(?<![宛仿相如自普兰沉聊日的])若|要是|万一|一旦|只要|除非)([^。！？；]{1,40}?)(的话)?[，,]", sent):
 
         cond = (m.group(2) or "").strip()
@@ -278,7 +282,9 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         trigger = m.group(1) + ("…的话" if m.group(3) else "")
 
-        if RHETORIC_P1_RE.match(trigger) and rest.startswith(("那么", "那 ")):
+        # E06：修辞守卫两口径——"如果说"落在条件文本（连词组只捕 2 字）；转述话语
+        # （导游说/司机说…+如果）的建议对象是叙述者，非游客建议
+        if (RHETORIC_P1_RE.match(trigger) or cond.startswith("说")) and rest.startswith(("那么", "那 ")):
 
             continue  # "如果说X,那么Y"为对仗修辞，非条件建议
 

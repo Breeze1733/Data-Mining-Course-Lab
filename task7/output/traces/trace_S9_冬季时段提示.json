@@ -9,7 +9,9 @@
   "month": 12,
   "special": [],
   "avoid": [],
-  "must": []
+  "must": [],
+  "entrance": null,
+  "exit_gate": null
  },
  "trace": [
   {
@@ -62,7 +64,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '黄山', 'visitor_type': None, 'visitor_types': [], 'days': 2, 'days_explicit': True, 'month': 12, 'special': [], 'avoid': [], 'must': []}；先查核心 POI（limit=11），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '黄山', 'visitor_type': None, 'visitor_types': [], 'days': 2, 'days_explicit': True, 'month': 12, 'special': [], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': None}；先查核心 POI（limit=11），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",

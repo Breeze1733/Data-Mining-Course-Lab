@@ -360,6 +360,9 @@ def main() -> int:
     nx.write_graphml(G, _tmp_gml)
     _tmp_gml.replace(OUT / "knowledge_graph.graphml")
 
+    from fingerprints import data_fingerprints as _fp
+    _graph_fingerprints = _fp
+
     per_scenic = {}
     for scenic in AREAS:
         sub = G.subgraph([n for n in G.nodes if f":{scenic}:" in n])
@@ -378,6 +381,8 @@ def main() -> int:
         "by_relation": dict(Counter(d.get("relation", "?") for _, _, d in G.edges(data=True))),
         "cond_edges_to_poi": cond_edges, "cond_edges_to_scenic": cond_to_scenic,
         "per_scenic": per_scenic,
+        # F13：图谱与输入的版本绑定（词典/语料指纹，防旧图配新词典）
+        "input_fingerprints": _graph_fingerprints(),
         "fusion_policy": {
             "entity_alignment": "实验2词典 canonical 为唯一键，景区命名空间隔离（五彩池/北海不跨景区合并）",
             "source_merge": "先后边=官方1.0/条+游客0.5/条；条件边挂句中POI，无POI挂景区并计数",

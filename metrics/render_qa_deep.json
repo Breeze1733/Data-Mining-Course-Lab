@@ -1,0 +1,112 @@
+{
+ "title": "H11 深度 QA：东亚字体与表格列数",
+ "results": [
+  {
+   "file": "task1/report.docx",
+   "east_asian_fonts": [
+    "Times New Roman",
+    "宋体",
+    "黑体"
+   ],
+   "table_cols": [
+    4,
+    5,
+    3,
+    3
+   ],
+   "ok": true
+  },
+  {
+   "file": "task2/report.docx",
+   "east_asian_fonts": [
+    "Times New Roman",
+    "宋体",
+    "黑体"
+   ],
+   "table_cols": [
+    3,
+    3,
+    2
+   ],
+   "ok": true
+  },
+  {
+   "file": "task3/report.docx",
+   "east_asian_fonts": [
+    "Times New Roman",
+    "宋体",
+    "黑体"
+   ],
+   "table_cols": [
+    4,
+    8
+   ],
+   "ok": true
+  },
+  {
+   "file": "task4/report.docx",
+   "east_asian_fonts": [
+    "Times New Roman",
+    "宋体",
+    "黑体"
+   ],
+   "table_cols": [
+    4,
+    3,
+    3
+   ],
+   "ok": true
+  },
+  {
+   "file": "task5/report.docx",
+   "east_asian_fonts": [
+    "Times New Roman",
+    "宋体",
+    "黑体"
+   ],
+   "table_cols": [
+    5,
+    4
+   ],
+   "ok": true
+  },
+  {
+   "file": "task6/report.docx",
+   "east_asian_fonts": [
+    "Times New Roman",
+    "宋体",
+    "黑体"
+   ],
+   "table_cols": [
+    4,
+    4,
+    3
+   ],
+   "ok": true
+  },
+  {
+   "file": "task7/report.docx",
+   "east_asian_fonts": [
+    "Times New Roman",
+    "宋体",
+    "黑体"
+   ],
+   "table_cols": [
+    3,
+    7,
+    5
+   ],
+   "ok": true
+  },
+  {
+   "file": "实验总结反思.docx",
+   "east_asian_fonts": [
+    "Times New Roman",
+    "宋体",
+    "黑体"
+   ],
+   "table_cols": [],
+   "ok": true
+  }
+ ]
+}

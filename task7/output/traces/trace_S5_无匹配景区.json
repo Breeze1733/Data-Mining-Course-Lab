@@ -9,7 +9,9 @@
   "month": null,
   "special": [],
   "avoid": [],
-  "must": []
+  "must": [],
+  "entrance": null,
+  "exit_gate": null
  },
  "trace": [
   {

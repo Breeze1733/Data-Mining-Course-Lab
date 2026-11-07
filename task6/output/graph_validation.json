@@ -218,7 +218,7 @@
  },
  "edge_relation_distribution": {
   "包含": 164,
-  "条件建议": 700,
+  "条件建议": 692,
   "先后顺序": 1883,
   "时段归属": 144,
   "交通方式": 58
@@ -230,15 +230,15 @@
   "各景区子图均为单一连通分量（条件节点挂靠在 POI/景区上），无孤立节点；"
  ],
  "roundtrip": {
-  "csv_nodes": 644,
-  "csv_edges": 2949,
-  "graphml_nodes": 644,
-  "graphml_edges": 2949,
+  "csv_nodes": 638,
+  "csv_edges": 2941,
+  "graphml_nodes": 638,
+  "graphml_edges": 2941,
   "ok": true
  },
  "provenance": {
-  "cond_nodes_checked": 461,
-  "cond_nodes_with_evidence": 461,
+  "cond_nodes_checked": 455,
+  "cond_nodes_with_evidence": 455,
   "order_edges_checked": 1639,
   "order_edges_with_records": 1639,
   "parse_failures": 0

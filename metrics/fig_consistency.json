@@ -1,0 +1,34 @@
+{
+ "title": "F12 报告图与 figs 目录一致性",
+ "results": {
+  "task1": {
+   "embedded": 0,
+   "figs_dir_pngs": 0
+  },
+  "task2": {
+   "embedded": 1,
+   "figs_dir_pngs": 0
+  },
+  "task3": {
+   "embedded": 4,
+   "figs_dir_pngs": 5
+  },
+  "task4": {
+   "embedded": 1,
+   "figs_dir_pngs": 1
+  },
+  "task5": {
+   "embedded": 2,
+   "figs_dir_pngs": 2
+  },
+  "task6": {
+   "embedded": 3,
+   "figs_dir_pngs": 3
+  },
+  "task7": {
+   "embedded": 0,
+   "figs_dir_pngs": 0
+  }
+ },
+ "note": "报告只内嵌代表图（余图留目录供查阅），数量差异为设计取舍"
+}

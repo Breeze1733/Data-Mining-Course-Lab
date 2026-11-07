@@ -1,19 +1,19 @@
 {
- "raw_pairs": 1042,
- "after_dedup": 977,
- "duplicates_merged": 65,
+ "raw_pairs": 1025,
+ "after_dedup": 966,
+ "duplicates_merged": 59,
  "by_pattern": {
   "建议推断": 373,
-  "显式条件": 488,
+  "显式条件": 471,
   "否定建议": 156,
   "依据规定": 17,
   "人群可以": 7,
   "句内条件": 1
  },
  "by_condition_type": {
-  "时间": 116,
+  "时间": 113,
   "一般": 312,
-  "其他": 316,
+  "其他": 302,
   "天气": 30,
   "拍照": 37,
   "预约票务": 41,
@@ -25,13 +25,13 @@
   "体力安全": 14
  },
  "by_scenic": {
-  "九寨沟": 522,
+  "九寨沟": 507,
   "颐和园": 159,
-  "黄山": 361
+  "黄山": 359
  },
  "by_text_type": {
-  "official_route": 17,
-  "travelogue": 1025
+  "official_route": 16,
+  "travelogue": 1009
  },
  "crowd_breakdown": {
   "孩子": 3,

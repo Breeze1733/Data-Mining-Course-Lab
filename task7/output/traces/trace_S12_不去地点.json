@@ -11,7 +11,9 @@
   "avoid": [
    "原始森林"
   ],
-  "must": []
+  "must": [],
+  "entrance": null,
+  "exit_gate": null
  },
  "trace": [
   {
@@ -64,7 +66,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 1, 'days_explicit': True, 'month': None, 'special': [], 'avoid': ['原始森林'], 'must': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 1, 'days_explicit': True, 'month': None, 'special': [], 'avoid': ['原始森林'], 'must': [], 'entrance': None, 'exit_gate': None}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -164,7 +166,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 5 条条件建议"
+   "summary": "返回 4 条条件建议"
   },
   {
    "step": "thought",

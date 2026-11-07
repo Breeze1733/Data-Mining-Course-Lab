@@ -59,6 +59,20 @@
    "accuracy": 0.55
   }
  },
+ "accuracy_by_scenic": {
+  "九寨沟": {
+   "n": 60,
+   "accuracy": 0.6
+  },
+  "颐和园": {
+   "n": 60,
+   "accuracy": 0.65
+  },
+  "黄山": {
+   "n": 60,
+   "accuracy": 0.783
+  }
+ },
  "errors_by_split": {
   "dev": 31,
   "test": 27

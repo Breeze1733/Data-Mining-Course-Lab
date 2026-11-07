@@ -14,7 +14,9 @@
    "省力"
   ],
   "avoid": [],
-  "must": []
+  "must": [],
+  "entrance": null,
+  "exit_gate": null
  },
  "trace": [
   {
@@ -73,7 +75,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': '老人', 'visitor_types': ['老人', '孩子'], 'days': 1, 'days_explicit': True, 'month': None, 'special': ['省力'], 'avoid': [], 'must': []}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': '老人', 'visitor_types': ['老人', '孩子'], 'days': 1, 'days_explicit': True, 'month': None, 'special': ['省力'], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': None}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",

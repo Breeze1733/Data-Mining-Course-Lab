@@ -198,10 +198,27 @@ class IntentParser:
         must += [m.group(1).strip() for m in
                  re.finditer(r"([一-龥A-Za-z0-9]{2,10})是必去", query)]
         avoid, must = list(dict.fromkeys(avoid)), list(dict.fromkeys(must))
+        # G02：出入口——"北宫门进东宫门出"/"从北宫门进入"
+        m_en = re.search(r"(?:从|在)?([一-龥]{2,8}?)(?:进园|入园|进入|进)", query)
+        m_ex = re.search(r"([一-龥]{2,8}?)(?:出园|出|离开)", query)
+        entrance = m_en.group(1).strip() if m_en else None
+        exit_gate = m_ex.group(1).strip() if m_ex else None
+        if entrance and entrance.endswith(("景区", "园区")):
+            entrance = entrance[:-2]
+        if entrance in ("进入", "进口"):
+            entrance = None
+        if exit_gate in ("出发", "发"):
+            exit_gate = None
+        # 校验：捕获串不得含进/出动词本身（懒惰量词仍可能带上边界字）
+        if entrance and ("进" in entrance or "出" in entrance):
+            entrance = None
+        if exit_gate and ("进" in exit_gate or "出" in exit_gate):
+            exit_gate = None
         month = next((m for m, pat in TRIP_MONTH_PATTERNS if re.search(pat, query)), None)
         return {"scenic": scenic or "未知", "visitor_type": visitor, "visitor_types": visitor_hits,
                 "days": days, "days_explicit": days_explicit,
-                "month": month, "special": special, "avoid": avoid, "must": must}
+                "month": month, "special": special, "avoid": avoid, "must": must,
+                "entrance": entrance, "exit_gate": exit_gate}
 
 
 class ReActAgent:
@@ -290,6 +307,32 @@ class ReActAgent:
             trace.append({"step": "thought",
                           "thought": f"必去地点处理：{len(must_keep)} 个进入豁免名单"
                                      f"（含新加入），未找到项见贴士"})
+        # G02 出入口：入口/出口 POI 加入行程并豁免预算（硬性动线端点）
+        entrance_label = exit_label = None
+        for role, raw, kind in (("入口", intent.get("entrance"), "en"),
+                                ("出口", intent.get("exit_gate"), "ex")):
+            if not raw:
+                continue
+            hit = next((q for q in selected if raw in q or q in raw), None)
+            node = self.tools._resolve_poi(scenic, raw)
+            label = self.tools.poi_label(node) if node is not None else None
+            if label is None and hit:
+                label = hit
+            if label is None:
+                special_notes.append(f"{role}：{raw} 未在{scenic}景点库中找到，请确认名称")
+                continue
+            if label not in selected:
+                selected.append(label)
+                special_notes.append(f"{role}：{label} 已加入行程")
+            else:
+                special_notes.append(f"{role}：{label} 已在行程中")
+            if kind == "en":
+                entrance_label = label
+            else:
+                exit_label = label
+            must_keep.append(label)
+            trace.append({"step": "thought",
+                          "thought": f"出入口处理：{role} {label} 纳入行程并豁免预算"})
         # 模板选择：query_route 返回的路线作为首选候选参与覆盖率竞争——
         # 工具结果真实进入决策；未入选时 trace 如实说明原因
         cands = self.tools.routes_by_scenic(scenic, days if days <= 2 else 2)
@@ -307,6 +350,17 @@ class ReActAgent:
         template = best_route["route_title"] if best_route else ""
         _sunrise_poi = None
         ordered = self._order_pois(scenic, selected, template_pos)
+        # G02 出入口就近编排：入口前置、出口后置（动线端点优先于软偏好）
+        if entrance_label and entrance_label in ordered:
+            ordered.remove(entrance_label)
+            ordered.insert(0, entrance_label)
+            trace.append({"step": "thought",
+                          "thought": f"出入口编排：入口 {entrance_label} 前置于行程首站"})
+        if exit_label and exit_label in ordered:
+            ordered.remove(exit_label)
+            ordered.append(exit_label)
+            trace.append({"step": "thought",
+                          "thought": f"出入口编排：出口 {exit_label} 后置于行程末站"})
         # 软偏好提升在编排序之后生效（此前置于 selected 上会被 _order_pois 覆盖）
         if photo_pois:
             ordered.sort(key=lambda x: x not in photo_pois)
