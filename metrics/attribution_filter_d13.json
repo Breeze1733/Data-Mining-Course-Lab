@@ -1,0 +1,17 @@
+{
+ "title": "归属过滤的双向计量：精度收益与召回损失（dev 120 例）",
+ "method": "对 locative/object 类逐例重算句级归属标签；统计 focus=景区外 的例数、其中 gold 先行词实体落在同句窗口（过滤召回暴露面）的例数；再对暴露例做反事实推演（放宽同句过滤能否转对）",
+ "numbers": {
+  "dev_locative_object_focus_oos": 7,
+  "recall_exposure_surface": 1,
+  "exposed_case": {
+   "case_index": 34,
+   "pronoun": "这里",
+   "entity": "景山公园",
+   "gold": "景山公园",
+   "gold_kind": "景区"
+  },
+  "counterfactual_gain": 0
+ },
+ "verdict": "维持现状：放宽同句过滤反事实增益为 0（暴露例 gold 为景区级，规则即便命中实体也因 kind 谱系判错）；归属过滤的精度收益占优，召回损失在 dev 上可忽略。不再放宽；若未来 gold 谱系引入景区级实体 kind 映射可重开。"
+}
