@@ -42,6 +42,10 @@ DUR_RE = re.compile(r"(?:约|大概|将近|近)?\d+(?:\.\d+)?\s*(?:个)?(?:小�
 PERIOD_WORDS = ("清晨", "早上", "上午", "中午", "下午", "傍晚", "晚上", "夜里", "深夜", "凌晨", "全天")
 DAY_MARK = re.compile(r"[【\[]\s*(第[一二三四五六七八九十\d]+[日天]|Day\s*\d+)\s*[】\]]|第([一二三四五六七八九十\d]+)天|Day\s*(\d+)")
 PERIOD_MARK = re.compile(r"[【\[]\s*(上午|中午|下午|晚上|清晨|傍晚|全天)\s*[】\]]|(上午|中午|下午|晚上|清晨|傍晚)[:：]")
+# C03/U86：复合天+时段标记（"【第一天·晚上】"）——此前 DAY/PERIOD 各自都不命中复合形，
+# 天与时段双双丢失
+DAY_PERIOD_MARK = re.compile(
+    r"[【\[]\s*(第[一二三四五六七八九十\d]+[日天])\s*[·.、]\s*(上午|中午|下午|晚上|清晨|傍晚)\s*[】\]]")
 STATION_MARK = re.compile(r"第([一二三四五六七八九十\d]+)站[:：]")
 STOP_TOKEN = re.compile(r"^(?:反之也可|以此类推|等等|依此类推)$")
 CJK_RE = re.compile(r"[\u4e00-\u9fff]")
@@ -126,7 +130,13 @@ class RouteParser:
                 seg = seg.strip()
                 if not seg:
                     continue
-                if m := DAY_MARK.search(seg):
+                mdp = DAY_PERIOD_MARK.search(seg)
+                if mdp:
+                    # C03/U86：复合标记同时设定天与时段；天变更仍重置时段（次日第一站
+                    # 不继承前一日晚上——C03 要求，跨日重置在复合标记同样成立）
+                    day = self._cn_day(mdp.group(1))
+                    period = mdp.group(2)
+                elif m := DAY_MARK.search(seg):
                     day = self._day_num(m)
                     period = None
                 if m := PERIOD_MARK.search(seg):
@@ -196,6 +206,17 @@ class RouteParser:
         }
 
     @staticmethod
+    def _cn_day(text: str) -> int:
+        cn = "一二三四五六七八九十"
+        body = text[1:-1] if text.endswith(("天", "日")) else text
+        if body.isdigit():
+            return int(body)
+        for i, c in enumerate(cn, 1):
+            if c in body:
+                return 10 if c == "十" and len(body) == 1 else i
+        return 1
+
+    @staticmethod
     def _day_num(m: re.Match) -> int:
         text = m.group(1) or m.group(2) or m.group(3)
         if text and text.isdigit():
@@ -211,9 +232,14 @@ class RouteParser:
     @staticmethod
     def _fill_periods(steps: list[dict]) -> None:
         """时段标记行本身不含 POI（如“【上午】”），标记只对后续步骤生效；
-        首个标记前若已有步骤，沿用 step 里的 period_hint。"""
+        首个标记前若已有步骤，沿用 step 里的 period_hint。
+        C03/U86：跨日重置——次日第一站不得继承前一日时段（如前一晚"晚上"）。"""
         current = None
+        prev_day = None
         for s in steps:
+            if prev_day is not None and s["day"] != prev_day:
+                current = None
+            prev_day = s["day"]
             if s["period"]:
                 current = s["period"]
             elif s["period_hint"]:

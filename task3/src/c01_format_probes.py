@@ -61,6 +61,13 @@ PROBES = [
     {"id": "T1_主题无序段", "scenic_area": "九寨沟", "ordered_route": False,
      "raw_content": "生态主题：原始森林与天鹅海适合观察鸟类。季节主题：秋季五花海色彩最盛。",
      "expect": {"format": "theme_prose"}},
+    {"id": "M1_链内天标记", "route_id": "PROBE-M1", "scenic_area": "九寨沟", "ordered_route": True,
+     "raw_content": "【第一天】沟口→诺日朗→【第二天】长海→五彩池",
+     "expect": {"pois_days": [("沟口", 1), ("诺日朗", 1), ("长海", 2), ("五彩池", 2)]}},
+    {"id": "M3_跨日时段重置", "route_id": "PROBE-M3", "scenic_area": "黄山", "ordered_route": True,
+     "raw_content": "【第一天·晚上】住宿白云宾馆→【第二天】光明顶看日出",
+     "expect": {"pois_days_periods": [("白云宾馆", 1, "晚上"), ("光明顶", 2, None)],
+                "note": "C03：复合标记解析 + 次日第一站不继承前一日晚上"}},
     {"id": "C4_时间范围冒号变体", "scenic_area": "黄山", "ordered_route": True,
      "raw_content": "玉屏楼（6:30～9:30 看日出人流）—鳌鱼峰—天海—光明顶",
      "expect": {"format": "arrow_chain",
@@ -85,11 +92,23 @@ def main() -> int:
             got_pois.extend(x["normalized"] for x in st["pois"])
         problems = []
         exp = probe["expect"]
-        if p.get("format") != exp["format"]:
+        if "format" in exp and p.get("format") != exp["format"]:
             problems.append(f"format={p.get('format')} 期望 {exp['format']}")
         if "pois_in_order" in exp:
             if got_pois != exp["pois_in_order"]:
                 problems.append(f"pois={got_pois} 期望 {exp['pois_in_order']}")
+        if "pois_days" in exp:
+            got_days = []
+            for st in steps:
+                got_days.extend((x["normalized"], st["day"]) for x in st["pois"])
+            if got_days != exp["pois_days"]:
+                problems.append(f"days={got_days} 期望 {exp['pois_days']}")
+        if "pois_days_periods" in exp:
+            got_dp = []
+            for st in steps:
+                got_dp.extend((x["normalized"], st["day"], st["period"]) for x in st["pois"])
+            if got_dp != exp["pois_days_periods"]:
+                problems.append(f"day/period={got_dp} 期望 {exp['pois_days_periods']}")
         if "time_range_intact" in exp:
             raw = probe["raw_content"]
             kept = any(exp["time_range_intact"] in (json.dumps(st, ensure_ascii=False)) for st in steps)
