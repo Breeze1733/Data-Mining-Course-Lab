@@ -1,7 +1,7 @@
 {
  "name_alignment": {
   "alias_rows": 7,
-  "route_poi_references_checked": 504,
+  "route_poi_references_checked": 506,
   "unresolved_alias_targets": [],
   "graph_nodes_without_identity": [],
   "route_references_missing_from_graph": [],
@@ -110,11 +110,11 @@
     59
    ],
    [
-    "西海大峡谷",
-    51
+    "始信峰",
+    50
    ],
    [
-    "始信峰",
+    "西海大峡谷",
     50
    ],
    [
@@ -164,7 +164,7 @@
     43
    ],
    [
-    "黄龙",
+    "五彩池",
     42
    ]
   ],
@@ -198,7 +198,7 @@
     43
    ],
    [
-    "北宫门",
+    "东宫门",
     39
    ]
   ]
@@ -219,7 +219,7 @@
  "edge_relation_distribution": {
   "包含": 164,
   "条件建议": 700,
-  "先后顺序": 1884,
+  "先后顺序": 1883,
   "时段归属": 144,
   "交通方式": 58
  },
@@ -231,16 +231,16 @@
  ],
  "roundtrip": {
   "csv_nodes": 644,
-  "csv_edges": 2950,
+  "csv_edges": 2949,
   "graphml_nodes": 644,
-  "graphml_edges": 2950,
+  "graphml_edges": 2949,
   "ok": true
  },
  "provenance": {
   "cond_nodes_checked": 461,
   "cond_nodes_with_evidence": 461,
-  "order_edges_checked": 1641,
-  "order_edges_with_records": 1641,
+  "order_edges_checked": 1639,
+  "order_edges_with_records": 1639,
   "parse_failures": 0
  },
  "provenance_ok": true

@@ -19848,11 +19848,13 @@
   <data key="d16">["CTRIP_4005841", "CTRIP_4019387", "CTRIP_4036408", "CTRIP_3999208", "XHS_69f832f500000000230056c5", "XHS_67f6eff7000000001202c2d0", "XHS_6825b63c000000000c039c16", "XHS_6ab76638000000001c01fb3a"]</data>
   <data key="d17">8</data>
 </edge>
-<edge source="POI:黄山:西海大峡谷" target="POI:黄山:屯溪老街" id="先后顺序">
+<edge source="POI:黄山:西海大峡谷" target="POI:黄山:迎客松" id="先后顺序">
   <data key="d12">先后顺序</data>
-  <data key="d14">1.0</data>
+  <data key="d14">2.5</data>
   <data key="d15">官方路线</data>
   <data key="d18">HS-EXTRA2-R1</data>
+  <data key="d16">["CTRIP_3958849", "CTRIP_3991429", "XHS_69f832f500000000230056c5"]</data>
+  <data key="d17">3</data>
 </edge>
 <edge source="POI:黄山:西海大峡谷" target="POI:黄山:曙光亭" id="先后顺序">
   <data key="d12">先后顺序</data>
@@ -19921,13 +19923,6 @@
   <data key="d14">1.5</data>
   <data key="d15">游客序列</data>
   <data key="d16">["CTRIP_4036408", "CTRIP_3944634", "XHS_6ab76638000000001c01fb3a"]</data>
-  <data key="d17">3</data>
-</edge>
-<edge source="POI:黄山:西海大峡谷" target="POI:黄山:迎客松" id="先后顺序">
-  <data key="d12">先后顺序</data>
-  <data key="d14">1.5</data>
-  <data key="d15">游客序列</data>
-  <data key="d16">["CTRIP_3958849", "CTRIP_3991429", "XHS_69f832f500000000230056c5"]</data>
   <data key="d17">3</data>
 </edge>
 <edge source="POI:黄山:西海大峡谷" target="POI:黄山:天海" id="先后顺序">
@@ -20941,6 +20936,14 @@
   <data key="d16">["CTRIP_4031821", "CTRIP_3991429", "CTRIP_3993157", "CTRIP_4021373", "CTRIP_4004430", "CTRIP_3982660", "CTRIP_3995811", "CTRIP_3963679", "CTRIP_4006823", "CTRIP_4035540", "CTRIP_3953404", "CTRIP_4052444", "CTRIP_811927"]</data>
   <data key="d17">13</data>
 </edge>
+<edge source="POI:黄山:迎客松" target="POI:黄山:屯溪老街" id="先后顺序">
+  <data key="d12">先后顺序</data>
+  <data key="d14">1.5</data>
+  <data key="d15">官方路线</data>
+  <data key="d18">HS-EXTRA2-R1</data>
+  <data key="d16">["XHS_699db4740000000022039268"]</data>
+  <data key="d17">1</data>
+</edge>
 <edge source="POI:黄山:迎客松" target="POI:黄山:天都峰" id="先后顺序">
   <data key="d12">先后顺序</data>
   <data key="d14">14.0</data>
@@ -21117,16 +21120,9 @@
   <data key="d16">["XHS_699db4740000000022039268"]</data>
   <data key="d17">1</data>
 </edge>
-<edge source="POI:黄山:迎客松" target="POI:黄山:屯溪老街" id="先后顺序">
-  <data key="d12">先后顺序</data>
-  <data key="d14">0.5</data>
-  <data key="d15">游客序列</data>
-  <data key="d16">["XHS_699db4740000000022039268"]</data>
-  <data key="d17">1</data>
-</edge>
 <edge source="POI:黄山:迎客松" target="时段:黄山:未标注时段" id="时段归属">
   <data key="d12">时段归属</data>
-  <data key="d13">11</data>
+  <data key="d13">12</data>
 </edge>
 <edge source="POI:黄山:迎客松" target="条件:黄山:建议推断:一般:一般建议" id="条件建议">
   <data key="d12">条件建议</data>
