@@ -59,6 +59,7 @@ class GraphTools:
         self.G = _GRAPH_CACHE["G"]
         self.routes = [json.loads(l) for l in (TASK3 / "parsed_routes.jsonl").open(encoding="utf-8")]
         self.trace: list[dict] = []
+        self._qcache: dict = {}
 
     # ── 基础查询 ────────────────────────────────────────────────
     def poi_nodes(self, scenic: str) -> list[str]:
@@ -246,7 +247,11 @@ class GraphTools:
         if tool not in {t["name"] for t in TOOL_SCHEMAS}:
             result = {"error": f"未知工具：{tool}"}
         else:
-            result = getattr(self, tool)(**args)
+            # G16：同实例内同参确定性查询缓存（trace 仍逐步记录）
+            key = (tool, json.dumps(args, ensure_ascii=False, sort_keys=True, default=str))
+            if key not in self._qcache:
+                self._qcache[key] = getattr(self, tool)(**args)
+            result = self._qcache[key]
         summary = self._summarize(result)
         self.trace.append({"tool": tool, "args": args, "summary": summary})
         if trace is not None:

@@ -1,0 +1,9 @@
+{
+ "title": "A04 内容分层探针（标题并入与广告标记残留）",
+ "numbers": {
+  "total": 271,
+  "title_included_in_clean_head": 39,
+  "docs_with_ad_markers": 12
+ },
+ "verdict": "标题并入正文头部为采集设计（provenance_note 可查）；广告标记残留低（清洗层已有平台话术/呼吁守卫），分层审计通过"
+}

@@ -444,7 +444,9 @@ def score(cases: list[dict]) -> None:
         },
         "accuracy_by_class": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_class.items())},
         "accuracy_by_split": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_split.items())},
-        "accuracy_by_scenic": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_scenic_acc.items())},
+        "accuracy_by_scenic": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3),
+                                   "ci95": wilson_ci(v[0], v[1])}
+                               for k, v in sorted(by_scenic_acc.items())},
         "errors_by_split": {k: v[1] - v[0] for k, v in sorted(by_split.items())},
         "split_method": "文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
         # 错误清单引用当前预测（历史 rule_resolution 快照仅存于 gold 文件备查）

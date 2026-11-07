@@ -125,14 +125,31 @@ class RouteParser:
         steps: list[dict] = []
         day, period = 1, None
         step_no = 0
-        lines = [ln.strip() for ln in text.split("\n") if ln.strip()]
+        # C11：保留行/段在 raw_content 中的字符跨度（步骤原句可溯源）
+        lines = []
+        pos = 0
+        for ln in text.split("\n"):
+            stripped = ln.strip()
+            if stripped:
+                start = text.find(stripped, pos)
+                lines.append((stripped, start, start + len(stripped)))
+            pos += len(ln) + 1
         # 散文式路线整段无换行，先分句再逐句解析
         if fmt in ("prose", "theme_prose"):
-            sentences: list[str] = []
-            for ln in lines:
-                sentences.extend(s.strip() for s in re.split(r"(?<=[。！？；])", ln) if s.strip())
-            lines = sentences
-        for line in lines:
+            sents_with_span: list[tuple[str, int, int]] = []
+            for ln, ln_start, ln_end in lines:
+                offset = ln_start
+                for s in re.split(r"(?<=[。！？；])", ln):
+                    s = s.strip()
+                    if not s:
+                        continue
+                    _i = ln.find(s, offset - ln_start)
+                    if _i < 0:
+                        _i = offset - ln_start
+                    sents_with_span.append((s, ln_start + _i, ln_start + _i + len(s)))
+                    offset = _i + len(s)
+            lines = sents_with_span
+        for line, line_start, line_end in lines:
             # 段级处理：一天/时段标记可能出现在行首或链中间（如“…—【第二日】丹霞峰…”）
             for seg in CHAIN_SEP.split(line):
                 seg = seg.strip()
@@ -150,6 +167,11 @@ class RouteParser:
                 if m := PERIOD_MARK.search(seg):
                     period = (m.group(1) or m.group(2))
                 seg_content = DAY_MARK.sub("", PERIOD_MARK.sub("", seg)).strip()
+                seg_span = None
+                if seg_content:
+                    _i = line.find(seg_content)
+                    if _i >= 0:
+                        seg_span = [line_start + _i, line_start + _i + len(seg_content)]
                 # C05：子句级语境守卫——剔除"未去/放弃/他人行程/背景罗列"子句后再解析，
                 # 避免把没去成的景点、介绍性罗列当成真实路经（构造探针实证三类误吞）
                 if NON_ROUTE_CLAUSE_RE.search(seg_content):
@@ -166,7 +188,7 @@ class RouteParser:
                     step_no += 1
                     ann = self.annotate(seg_content)
                     ann.update({"step_no": step_no, "day": day, "period": period,
-                                "station_tag": f"第{m.group(1)}站"})
+                                "station_tag": f"第{m.group(1)}站", "span": seg_span})
                     steps.append(ann)
                     continue
                 # KV 字段行（活动路线：… / 活动时长：约2小时）
@@ -176,7 +198,8 @@ class RouteParser:
                     if label == "活动路线":
                         for sub in self.parse_line(val, scenic):
                             step_no += 1
-                            sub.update({"step_no": step_no, "day": day, "period": period})
+                            sub.update({"step_no": step_no, "day": day, "period": period,
+                                        "span": seg_span})
                             steps.append(sub)
                     elif label == "活动时长" and steps and not steps[-1]["duration"]:
                         dur = DUR_RE.search(seg_content)
@@ -201,7 +224,8 @@ class RouteParser:
                             and sub["pois"][0]["normalized"] == steps[-1]["pois"][-1]["normalized"]):
                         continue
                     step_no += 1
-                    sub.update({"step_no": step_no, "day": day, "period": period})
+                    sub.update({"step_no": step_no, "day": day, "period": period,
+                                "span": seg_span})
                     steps.append(sub)
         # 纯前置句过滤：arrow_chain 格式下无 POI 且无时间的开场白不算步骤
         if fmt == "arrow_chain":
