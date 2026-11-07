@@ -75,6 +75,7 @@ def main() -> int:
 
     stats = {"POI": [0, 0, 0], "交通": [0, 0, 0], "时间": [0, 0, 0]}
     strict_hit = {"POI": 0, "交通": 0, "时间": 0}  # B01：严格口径（命中即精确等文本）
+    strict_by_span = {}  # B02：跨度长度分层 {长度桶: [严格命中, 总命中]}
     stats_oos = {"POI": [0, 0, 0]}  # 设计排除口径（根景区名/城市名）：tp/fn 单独计数
     missed, false_pos = [], []
     sentence_stats = []  # 每句局部 (tp,fp,fn)，供分层报告
@@ -109,6 +110,11 @@ def main() -> int:
                             hit = True
                             if pp["text"] == gtext:
                                 strict_hit[gtype] += 1
+                            _bucket = "2字" if len(gtext) <= 2 else "3-4字" if len(gtext) <= 4 else "5字+"
+                            _sb = strict_by_span.setdefault(_bucket, [0, 0])
+                            _sb[1] += 1
+                            if pp["text"] == gtext:
+                                _sb[0] += 1
                             break
             if hit:
                 stats[gtype][0] += 1
@@ -140,6 +146,8 @@ def main() -> int:
         # B01 双口径：宽松（包含式变体命中，主口径）与严格（命中文本精确相等）
         "strict_ratio": {t: round(strict_hit[t] / max(1, v[0]), 3)
                          for t, v in stats.items() if v[0]},
+        # B02：命中实体的跨度长度分层（2字/3-4字/5字+）的严格占比
+        "strict_by_span_len": strict_by_span,
         "missed": missed,
         "false_positives": false_pos,
         "scope_note": {},

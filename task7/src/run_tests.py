@@ -57,7 +57,23 @@ SCENARIOS = [
     {"id": "S18_避开住宿日出取舍", "query": "黄山两日游想看日出，不要住白云宾馆",
      "expect": {"scenic": "黄山", "days": 2, "avoid_respected": "白云宾馆",
                 "sunrise_tradeoff": True}},
+    {"id": "S19_一天半游不坍缩", "query": "黄山一天半游",
+     "expect": {"scenic": "黄山", "days": 1.5, "half_tail_multi_day": True}},
 ]
+
+
+def check_half_tail_multi_day(result):
+    """验收：小数天数不坍缩——1.5 天须跨 2 天且尾日为半日（时段封顶上午/中午）。
+
+    此前 int(1.5)=1 把一天半游坍缩成单日 4 站（低于 sizing 下限 6）。
+    """
+    plan = result.get("plan") or {}
+    it = plan.get("itinerary", [])
+    days = sorted({x["day"] for x in it})
+    if days != [1, 2]:
+        return False
+    tail_periods = [x["period"] for x in it if x["day"] == 2]
+    return all(p in ("上午", "中午") for p in tail_periods) and bool(tail_periods)
 
 
 def check_sunrise_tradeoff(result):
@@ -193,6 +209,8 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
             pass  # 已并入 entrance_first 的端点检查
         elif k == "sunrise_tradeoff":
             checks["sunrise_tradeoff"] = check_sunrise_tradeoff(result)
+        elif k == "half_tail_multi_day":
+            checks["half_tail_multi_day"] = check_half_tail_multi_day(result)
         elif k == "multi_visitor":
             vt = intent.get("visitor_types") or []
             checks["multi_visitor"] = all(v in vt for v in v)

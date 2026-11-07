@@ -54,9 +54,18 @@ class GraphTools:
         # 不再重复解析同一图谱（语义不变，进程内共享只读对象）
         mtime = (OUT6 / "knowledge_graph.graphml").stat().st_mtime
         if _GRAPH_CACHE.get("mtime") != mtime:
+            try:
+                _GRAPH_CACHE["G"] = nx.read_graphml(OUT6 / "knowledge_graph.graphml")
+            except Exception as exc:
+                # G09：图文件损坏 → 结构化错误而非构造崩溃（Agent 可给出稳定回退）
+                _GRAPH_CACHE["G"] = None
+                _GRAPH_CACHE["load_error"] = f"图谱文件解析失败：{exc}"
             _GRAPH_CACHE["mtime"] = mtime
-            _GRAPH_CACHE["G"] = nx.read_graphml(OUT6 / "knowledge_graph.graphml")
         self.G = _GRAPH_CACHE["G"]
+        if self.G is None:
+            self.load_error = _GRAPH_CACHE.get("load_error", "图谱加载失败")
+        else:
+            self.load_error = None
         self.routes = [json.loads(l) for l in (TASK3 / "parsed_routes.jsonl").open(encoding="utf-8")]
         self.trace: list[dict] = []
         self._qcache: dict = {}
@@ -244,6 +253,8 @@ class GraphTools:
 
     # ── 统一调用入口（记录 trace；trace 传入时同步 action/observation 两步）──
     def call(self, tool: str, args: dict, trace: list | None = None) -> dict:
+        if self.G is None:
+            return {"error": f"图谱不可用：{getattr(self, 'load_error', '加载失败')}"}
         if tool not in {t["name"] for t in TOOL_SCHEMAS}:
             result = {"error": f"未知工具：{tool}"}
         else:

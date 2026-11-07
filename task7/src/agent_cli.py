@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 import sys
 import time
@@ -415,7 +416,7 @@ class ReActAgent:
                 trace.append({"step": "thought",
                               "thought": f"query_order 后继校验：{'无已选后继，维持现有顺序' if not official_next else '第二站已是官方后继，无需调整'}"})
         # 时段预算——限制每日 POI 数量（半日≤3、一日≤5、多日≤每日4）
-        n_days = max(1, int(days) if days and days >= 1 else 1)
+        n_days = max(1, int(math.ceil(days)) if days and days >= 1 else 1)
         ordered = self._apply_time_budget(ordered, days, n_days, _sunrise_poi, special_notes, trace)
         # 必去地点豁免时段预算裁剪（硬约束优先，）——被裁剪则回填
         if must_keep:
@@ -429,7 +430,8 @@ class ReActAgent:
         # 2 日且模板全覆盖时沿用模板的天与时段，否则按切分块分配；半日时段封顶于上午/中午；
         # 住宿节点固定晚上。天号一律写入行程，不再出现“1.5/3 天全部落第 1 天”。
         period_cycle = ["上午", "上午", "中午", "下午", "下午", "晚上"]
-        n_days = max(1, int(days) if days and days >= 1 else 1)
+        # 小数天数：分天用向上取整（1.5 → 2 天，尾日半日由下方时段封顶实现）
+        n_days = max(1, int(math.ceil(days)) if days and days >= 1 else 1)
         split = (len(ordered) + n_days - 1) // n_days
         per_day = [ordered[i * split:(i + 1) * split] for i in range(n_days)
                    if ordered[i * split:(i + 1) * split]]
@@ -449,6 +451,9 @@ class ReActAgent:
             is_lodging = any(k in poi for k in ("宾馆", "饭店", "酒店", "民宿"))
             if is_lodging:
                 period = "晚上"
+            # 小数天数尾日为半日：时段封顶于上午/中午（不出现下午/晚上）
+            if days and days % 1 != 0 and day == n_days and period in ("下午", "晚上"):
+                period = "中午"
             if days == 0.5:
                 # 半日时段封顶于上午/中午，不出现下午/晚上
                 period = {"下午": "中午", "晚上": "中午"}.get(period, period)
@@ -571,7 +576,8 @@ class ReActAgent:
         if _sunrise_poi:
             _anchored.add(_sunrise_poi)
         _anchored.update(p for p in ordered if any(k in p for k in ("宾馆", "酒店", "民宿")))
-        max_pois = daily_budget * n_days + len(_anchored)
+        effective = days if (days and days >= 1) else 1
+        max_pois = (daily_budget if days == 0.5 else round(daily_budget * effective)) + len(_anchored)
         if len(ordered) > max_pois:
             dropped = [p for p in ordered[max_pois:] if p not in _anchored]
             kept_tail = [p for p in ordered[max_pois:] if p in _anchored]

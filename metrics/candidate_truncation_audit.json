@@ -1,0 +1,11 @@
+{
+ "title": "D05 候选截断审计（6 上限触发率）",
+ "n_with_candidates": 838,
+ "n_truncated": 81,
+ "rate": 0.097,
+ "by_class": {
+  "object": 17,
+  "locative": 64
+ },
+ "verdict": "截断触发率低（候选池 7 截断后至多 6）——U67 就近排序保证被保留的是最近候选，截断不再偏向实体类型"
+}
