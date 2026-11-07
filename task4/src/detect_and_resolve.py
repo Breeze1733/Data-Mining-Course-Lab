@@ -34,7 +34,9 @@ PERSON_HINT_RE = re.compile(
 
 # U62：他人指代跟随信号的人物词扩展（登山者/路人/行人/“一队人”式群体名词；dev 证据 +3/0 坏）
 PERSON_HINT_EXT = re.compile(
-    PERSON_HINT_RE.pattern + r"|登山者|路人|行人|[一两二三四五六七八几]?\s*[队批群帮].{0,3}人")
+    PERSON_HINT_RE.pattern
+    + r"|登山者|胜利者|路人|行人|[一两二三四五六七八几]?\s*[队批群帮].{0,3}人"
+    + r"|(?:从?下面上来|从?上面下来|迎面|对面|迎着)的?[一两二三四五]?人")
 
 # 代词语义类别 → 消解策略
 PRONOUN_CLASS = {
