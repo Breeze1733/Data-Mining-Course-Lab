@@ -347,7 +347,7 @@ def fill_expand(cases: list[dict]) -> None:
 
 
 def doc_grouped_split(gold_rows: list[dict], target_test: int = 60) -> dict:
-    """P18：按文档分组划分 dev/test——句级随机划分存在同文档泄漏（原两轮样本有 25 篇共同文档）。
+    """按文档分组划分 dev/test——句级随机划分存在同文档泄漏（原两轮样本有 25 篇共同文档）。
 
     确定性：文档列表排序后 rng(42) 洗牌，整文档依次划入 test 直至样本数达标，其余归 dev。
     返回 {record_id: "dev"|"test"}。
@@ -373,7 +373,7 @@ from common.fingerprints import data_fingerprints as _data_fingerprints
 
 
 def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
-    """H07：Wilson 95% 置信区间（小样本比例的稳健区间）。"""
+    """Wilson 95% 置信区间（小样本比例的稳健区间）。"""
     if n == 0:
         return {"lo": None, "hi": None}
     p = k / n
@@ -412,7 +412,7 @@ def score(cases: list[dict]) -> None:
     for r in rows:
         by_class[r["pronoun_class"]][1] += 1
         by_class[r["pronoun_class"]][0] += r["correct"]
-    # split 口径（P18 文档分组）：整文档划入 dev/test，消除同文档泄漏
+    # split 口径（ 文档分组）：整文档划入 dev/test，消除同文档泄漏
     doc_split = doc_grouped_split(gold)
     by_split = defaultdict(lambda: [0, 0])
     for r in rows:
@@ -425,14 +425,14 @@ def score(cases: list[dict]) -> None:
         "accuracy_by_class": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_class.items())},
         "accuracy_by_split": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_split.items())},
         "errors_by_split": {k: v[1] - v[0] for k, v in sorted(by_split.items())},
-        "split_method": "P18 文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
-        # P17：错误清单引用当前预测（历史 rule_resolution 快照仅存于 gold 文件备查）
+        "split_method": "文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
+        # 错误清单引用当前预测（历史 rule_resolution 快照仅存于 gold 文件备查）
         "errors": [
             {"pronoun": r["pronoun"], "class": r["pronoun_class"], "scenic": r["scenic_area"],
              "pred": r["cur_pred"], "pred_kind": r["cur_kind"], "evidence": r["cur_evidence"],
              "gold": r["gold_antecedent"], "gold_kind": r["gold_kind"], "note": r["note"]}
             for r in rows if not r["correct"]],
-        # P17：类别指标与先行词身份指标分开报告——非实体类只判类别，不冒充指代正确
+        # 类别指标与先行词身份指标分开报告——非实体类只判类别，不冒充指代正确
         "kind_only_accuracy": round(sum(r["kind_match"] for r in rows) / len(rows), 3) if rows else None,
         "accuracy_ci95": wilson_ci(round(acc_overall * len(rows)), len(rows)),
         "data_fingerprints": _data_fingerprints(),

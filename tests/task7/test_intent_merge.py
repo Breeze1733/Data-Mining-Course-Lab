@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""P10：意图合并的显式时长保护与类型/范围校验（离线单测）。"""
+"""意图合并的显式时长保护与类型/范围校验（离线单测）。"""
 import sys
 import unittest
 from pathlib import Path

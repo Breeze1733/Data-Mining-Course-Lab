@@ -150,7 +150,7 @@ class IntentParser:
 
     @staticmethod
     def _merge_days(rule_days, rule_explicit: bool, llm_days):
-        """P10：规则显式给定的时长不被 LLM 覆盖；LLM 值须为 0.5–5 的数值，否则忽略。"""
+        """规则显式给定的时长不被 LLM 覆盖；LLM 值须为 0.5–5 的数值，否则忽略。"""
         if isinstance(llm_days, bool) or not isinstance(llm_days, (int, float)):
             return rule_days
         v = float(llm_days)
@@ -178,14 +178,14 @@ class IntentParser:
                 days_explicit = True
                 break
         special = [s for s, pat in SPECIAL_PATTERNS if re.search(pat, query)]
-        # G02b/G14：不去地点——前缀否定（不要去/不想去/不去/避开/别安排/别去/不想逛）
+        # 不去地点——前缀否定（不要去/不想去/不去/避开/别安排/别去/不想逛）
         # 与后置否定（“X就不去了”）；必去地点——前缀（一定要去/一定要逛/必去/必须去）
         # 与后置（“X是必去的”）。后置模式收紧锚点（就不去/是必去），避免误捕。
         avoid = [m.group(1).strip() for m in
                  re.finditer(r"(?:不要去|不想去|不去|避开|别安排|别去|不想逛)\s*([一-龥A-Za-z0-9]{2,10})", query)]
         avoid += [m.group(1).strip() for m in
                   re.finditer(r"([一-龥A-Za-z0-9]{2,10})\s*就不去了?", query)]
-        # G15 否定表达变体：POI前置否定（“原始森林不要去”）、“除了X都行”、
+        # 否定表达变体：POI前置否定（“原始森林不要去”）、“除了X都行”、
         # “X就别安排了”（千万/切记等副词不入捕获）
         avoid += [m.group(1).strip() for m in
                   re.finditer(r"([一-龥A-Za-z0-9]{2,10})(?<!千万)(?<!切记)\s*(?:不要去|别去)", query)]
@@ -216,8 +216,8 @@ class ReActAgent:
     def _plan_rule(self, intent: dict, trace: list) -> dict:
         scenic, days, visitor = intent["scenic"], intent["days"], intent["visitor_type"]
         limit = {0.5: 5, 1: 8, 1.5: 9, 2: 11, 3: 12, 3.5: 13, 4: 14, 5: 15}.get(days, 11)
-        # P07：特殊需求参与选点——“省力”映射到体力有限的人群证据（负向建议已降权）
-        # G02：多人群（如“带老人和孩子”）→ 条件查询与贴士按人群列表匹配
+        # 特殊需求参与选点——“省力”映射到体力有限的人群证据（负向建议已降权）
+        # 多人群（如“带老人和孩子”）→ 条件查询与贴士按人群列表匹配
         visitor_types = intent.get("visitor_types") or ([visitor] if visitor else [])
         visitor_eff = ("体力有限" if ("省力" in (intent.get("special") or []) and not visitor)
                        else (visitor_types if visitor_types else visitor))
@@ -228,7 +228,7 @@ class ReActAgent:
                      "再取官方路线做编排骨架，最后按游客类型取条件贴士"})
 
         selected = [p["poi"] for p in pois_res["pois"]]
-        # G04：软偏好参与选点排序——"拍照片"把挂有拍照类条件的已选 POI 前置
+        # 软偏好参与选点排序——"拍照片"把挂有拍照类条件的已选 POI 前置
         # （稳定排序只提位不新增；此前该特殊需求仅被解析、从未作用于规划）
         photo_pois: set = set()
         if "拍照片" in (intent.get("special") or []):
@@ -239,12 +239,12 @@ class ReActAgent:
             if photo_pois:
                 trace.append({"step": "thought",
                               "thought": f"软偏好「拍照片」：{sorted(photo_pois)} 挂有拍照点位条件（编排后前置）"})
-        # G02b：不去地点从行程剔除并说明；必去地点优先保留
+        # 不去地点从行程剔除并说明；必去地点优先保留
         avoid = [a for a in (intent.get("avoid") or []) if a]
         must = [m0 for m0 in (intent.get("must") or []) if m0]
         special_notes: list[str] = []
         removed_by_avoid = []
-        # G03/G05：多日行程自动注入住宿 POI
+        # 多日行程自动注入住宿 POI
         if days and days >= 2:
             has_lodging = any(any(k in p for k in ("宾馆", "酒店", "民宿", "饭店")) for p in selected)
             if not has_lodging:
@@ -260,12 +260,12 @@ class ReActAgent:
                     kept.append(poi)
             selected = kept
             trace.append({"step": "thought", "thought": f"不去地点过滤：移除 {removed_by_avoid or '无'}"})
-            # G07 最小放宽建议：避开较多导致行程明显精简时，给出可放宽方向（不替用户放宽）
+            # 最小放宽建议：避开较多导致行程明显精简时，给出可放宽方向（不替用户放宽）
             if len(removed_by_avoid) >= 2 and len(selected) <= 3:
                 special_notes.append("您避开的景点较多，行程较精简；"
                                      "如需更丰富的安排，可放宽部分\"不去\"地点后再试")
-        # 必去地点落实（G02b 后半——此前 must 仅抽取、从未作用于规划）。
-        # 已选/解析到的必去项一律进入豁免名单（must_keep），豁免时段预算裁剪（硬约束优先，G04）；
+        # 必去地点落实（ 后半——此前 must 仅抽取、从未作用于规划）。
+        # 已选/解析到的必去项一律进入豁免名单（must_keep），豁免时段预算裁剪（硬约束优先，）；
         # 解析失败如实说明。
         must_keep: list[str] = []
         for m0 in must:
@@ -290,7 +290,7 @@ class ReActAgent:
             trace.append({"step": "thought",
                           "thought": f"必去地点处理：{len(must_keep)} 个进入豁免名单"
                                      f"（含新加入），未找到项见贴士"})
-        # 模板选择（P11）：query_route 返回的路线作为首选候选参与覆盖率竞争——
+        # 模板选择：query_route 返回的路线作为首选候选参与覆盖率竞争——
         # 工具结果真实进入决策；未入选时 trace 如实说明原因
         cands = self.tools.routes_by_scenic(scenic, days if days <= 2 else 2)
         best_route, best_pos, best_cov = None, {}, 0.0
@@ -307,7 +307,7 @@ class ReActAgent:
         template = best_route["route_title"] if best_route else ""
         _sunrise_poi = None
         ordered = self._order_pois(scenic, selected, template_pos)
-        # G04：软偏好提升在编排序之后生效（此前置于 selected 上会被 _order_pois 覆盖）
+        # 软偏好提升在编排序之后生效（此前置于 selected 上会被 _order_pois 覆盖）
         if photo_pois:
             ordered.sort(key=lambda x: x not in photo_pois)
             trace.append({"step": "thought",
@@ -329,7 +329,7 @@ class ReActAgent:
                      + ("；query_route 返回的路线入选" if qr_selected else
                         "；query_route 返回的路线覆盖率不足，另选覆盖最高者")
                      + ("；覆盖率不足 60%，改用图谱先后边拓扑排序" if template_cov_low else "")})
-        # 工具4：官方后继校验（P12/§4.1-3）——结果真实作用于决策：
+        # 工具4：官方后继校验（/§4.1-3）——结果真实作用于决策：
         # 在 itinerary 构建前调用，后继调序直接影响行程内容
         if len(ordered) >= 2:
             order_res = self.tools.call("query_order", {"scenic": scenic, "poi": ordered[0]}, trace)
@@ -345,10 +345,10 @@ class ReActAgent:
             else:
                 trace.append({"step": "thought",
                               "thought": f"query_order 后继校验：{'无已选后继，维持现有顺序' if not official_next else '第二站已是官方后继，无需调整'}"})
-        # G03：时段预算——限制每日 POI 数量（半日≤3、一日≤5、多日≤每日4）
+        # 时段预算——限制每日 POI 数量（半日≤3、一日≤5、多日≤每日4）
         n_days = max(1, int(days) if days and days >= 1 else 1)
         ordered = self._apply_time_budget(ordered, days, n_days, _sunrise_poi, special_notes, trace)
-        # 必去地点豁免时段预算裁剪（硬约束优先，G04）——被裁剪则回填
+        # 必去地点豁免时段预算裁剪（硬约束优先，）——被裁剪则回填
         if must_keep:
             missing = [p for p in dict.fromkeys(must_keep) if p not in ordered]
             if missing:
@@ -356,8 +356,8 @@ class ReActAgent:
                 trace.append({"step": "thought",
                               "thought": f"必去地点豁免预算裁剪：{missing} 已回填行程"})
 
-        # 天数/时段分配（P05/P06）：n_days 对 0.5/1/1.5/2/3/3.5/4/5 全部成立；
-        # 2 日且模板全覆盖时沿用模板的天与时段，否则按切分块分配；半日时段封顶于上午/中午（P06）；
+        # 天数/时段分配（/）：n_days 对 0.5/1/1.5/2/3/3.5/4/5 全部成立；
+        # 2 日且模板全覆盖时沿用模板的天与时段，否则按切分块分配；半日时段封顶于上午/中午；
         # 住宿节点固定晚上。天号一律写入行程，不再出现“1.5/3 天全部落第 1 天”。
         period_cycle = ["上午", "上午", "中午", "下午", "下午", "晚上"]
         n_days = max(1, int(days) if days and days >= 1 else 1)
@@ -381,7 +381,7 @@ class ReActAgent:
             if is_lodging:
                 period = "晚上"
             if days == 0.5:
-                # P06：半日时段封顶于上午/中午，不出现下午/晚上
+                # 半日时段封顶于上午/中午，不出现下午/晚上
                 period = {"下午": "中午", "晚上": "中午"}.get(period, period)
             itinerary.append({
                 "order": len(itinerary) + 1, "day": min(day or 1, n_days),
@@ -476,7 +476,7 @@ class ReActAgent:
         tips = [c for c in cond_res.get("conditions", [])
                 if not any(k in c["condition"] + c["suggestion"] for k in other_area_kw)
                 and (c["cond_type"] == "人群" or any(k in c["suggestion"] for k in suggest_cue))][:6]
-        # G13：编排来源如实标注——模板覆盖不足 60% 时未采用官方路线，不得冒充官方来源
+        # 编排来源如实标注——模板覆盖不足 60% 时未采用官方路线，不得冒充官方来源
         if template and not template_cov_low:
             template_src = f'（参考官方路线 {route_res.get("route_id", "")} {template}）'
         else:
@@ -490,10 +490,10 @@ class ReActAgent:
 
     def _apply_time_budget(self, ordered: list[str], days, n_days: int, _sunrise_poi,
                            special_notes: list, trace: list) -> list[str]:
-        """G03：时段预算——限制每日 POI 数量（半日≤3、一日≤5、多日≤每日4）。
+        """时段预算——限制每日 POI 数量（半日≤3、一日≤5、多日≤每日4）。
 
         日出/住宿 POI 不受裁剪（它们是多日行程的结构性锚点）。
-        独立成方法以便 H08 消融整体禁用。
+        独立成方法以便  消融整体禁用。
         """
         daily_budget = {0.5: 3, 1: 5, 1.5: 4, 2: 4, 3: 4, 3.5: 4, 4: 4, 5: 4}.get(days, 4)
         _anchored = set()
@@ -511,7 +511,7 @@ class ReActAgent:
         return ordered
 
     def _find_lodging_poi(self, scenic: str) -> str | None:
-        """G03/G05：找景区内住宿 POI（名称含宾馆/酒店/民宿/饭店，度数最高者）。"""
+        """找景区内住宿 POI（名称含宾馆/酒店/民宿/饭店，度数最高者）。"""
         best, best_deg = None, 0
         for n in self.tools.poi_nodes(scenic):
             label = self.tools.G.nodes[n].get("label", "")
@@ -522,7 +522,7 @@ class ReActAgent:
         return best
 
     def _find_sunrise_poi(self, scenic: str, ordered: list[str]) -> str | None:
-        """P07：在已选 POI 中找日出观景点。
+        """在已选 POI 中找日出观景点。
 
         评分制：名称/标签直含“日出”记 2 分（如曙光亭类），挂接条件含“日出”记 1 分；
         同分取图谱度数最高者——避免把挂接条件碰巧含“日出”的次要景点排在经典观测点之前。
@@ -594,7 +594,7 @@ class ReActAgent:
         return ordered_known + rest
 
     def _transport_between(self, a: str, b: str, scenic: str) -> str:
-        """P13：仅当两个 POI 挂接同一交通操作时才声称该交通方式，否则如实回退步行。"""
+        """仅当两个 POI 挂接同一交通操作时才声称该交通方式，否则如实回退步行。"""
         na = next((n for n in self.tools.poi_nodes(scenic) if self.tools.poi_label(n) == a), None)
         nb = next((n for n in self.tools.poi_nodes(scenic) if self.tools.poi_label(n) == b), None)
         if na and nb:
@@ -613,7 +613,7 @@ class ReActAgent:
         if self.llm and self.llm.available:
             try:
                 text = self.llm.complete(self.POLISH_PROMPT, json.dumps(plan, ensure_ascii=False))
-                # G12：空/纯空白响应与异常同视为润色失败——直接透传会产生空回答
+                # 空/纯空白响应与异常同视为润色失败——直接透传会产生空回答
                 if not text or not text.strip():
                     raise ValueError("LLM 返回空响应")
                 trace.append({"step": "render", "thought": "调用 LLM 润色行程文案", "via": "llm"})
@@ -628,13 +628,13 @@ class ReActAgent:
             trans = f'（{it["transport_from_prev"]}前往）' if it["order"] > 1 else ""
             lines.append(f'{head}：{it["poi"]}{trans}')
         tips = "；".join(f'[{t["cond_type"]}] {t["suggestion"][:30]}' for t in plan["tips"][:4])
-        # P08：可行性警告进入最终回答（此前仅存在于内部字段）
+        # 可行性警告进入最终回答（此前仅存在于内部字段）
         warnings = plan.get("feasibility_warnings") or []
         warn_text = "".join(f'\n⚠ {w[:70]}' for w in warnings[:4])
         day_label = {0.5: "半日", 1: "一日", 1.5: "一日半", 2: "两日", 3: "三日", 3.5: "三日半", 4: "四日", 5: "五日"}
         month_tag = f'，出行时段{plan["trip_month"]}月' if plan.get("trip_month") else ""
         sp_notes = "".join(f'{chr(10)}说明：{n}' for n in (plan.get("special_notes") or []))
-        # G13：来源区分——编排依据（官方/图谱动线）如实标注；贴士注明游记经验来源
+        # 来源区分——编排依据（官方/图谱动线）如实标注；贴士注明游记经验来源
         return (f'为您规划{plan["scenic"]}{day_label.get(plan["days"], plan["days"])}游{month_tag}'
                 f'{plan.get("template_src", "")}：\n' + "\n".join(lines) +
                 (f'\n贴士（来自游记经验）：{tips}' if tips else "") + warn_text + sp_notes)

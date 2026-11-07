@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""H06 回归：全仓扫描"return/raise 后同层不可达语句"死代码。
+""" 回归：全仓扫描"return/raise 后同层不可达语句"死代码。
 
 背景：task2/src/entity_sentence_eval.py 曾因在 main 中段插入模块级 import，
 结果构建/落盘代码全部落入 prf() 内 return 之后成为死代码——评测脚本静默零产出

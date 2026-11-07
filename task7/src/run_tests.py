@@ -52,12 +52,12 @@ SCENARIOS = [
      "expect": {"scenic": "黄山", "days": 2, "must_respected": "天都峰"}},
 ]
 def check_unknown_poi(result, poi):
-    """G14 验收：图谱中不存在的景点不得被编造进行程。"""
+    """ 验收：图谱中不存在的景点不得被编造进行程。"""
     plan = result.get("plan") or {}
     pois = [it["poi"] for it in plan.get("itinerary", [])]
     return plan is not None and all(poi not in p for p in pois)
 def check_avoid(result, expect_poi):
-    """G02b 验收：不去地点不出现在行程，且回答说明避开。"""
+    """ 验收：不去地点不出现在行程，且回答说明避开。"""
     plan = result.get("plan") or {}
     pois = [it["poi"] for it in plan.get("itinerary", [])]
     not_in = all(expect_poi not in p for p in pois)
@@ -65,7 +65,7 @@ def check_avoid(result, expect_poi):
                 for _ in [0]) or any(expect_poi in n for n in (plan.get("special_notes") or []))
     return not_in and noted
 def check_sunrise(result, expect_poi):
-    """P07 验收（语义口径）：日出观景点排最后一日首位，且住宿前提以任意表述进入回答——
+    """ 验收（语义口径）：日出观景点排最后一日首位，且住宿前提以任意表述进入回答——
     规则模式渲染“说明：看日出…住宿山上”，在线润色会转述（如“夜宿山顶”），断言语义不断言前缀。"""
     plan = result.get("plan") or {}
     it = plan.get("itinerary", [])
@@ -82,7 +82,7 @@ def check_multi_day(result):
 
 
 def check_invariants(result):
-    """G06：行程不变量（凡有计划的场景通用）——天号连续、日内时段单调、
+    """行程不变量（凡有计划的场景通用）——天号连续、日内时段单调、
     半日封顶上午/中午、住宿节点固定晚上。任何一条被破坏即规划回归。"""
     plan = result.get("plan") or {}
     it = plan.get("itinerary", [])
@@ -116,7 +116,7 @@ def check_must(result, expect_poi):
 
 
 def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
-    """单场景验收检查（run_tests 与 H08 消融共用同一口径，避免两处断言漂移）。
+    """单场景验收检查（run_tests 与  消融共用同一口径，避免两处断言漂移）。
 
     rules=True 时 tips_in_answer 为硬检查（离线渲染器必须保证贴士进回答）；
     在线润色可能转述/省略，为软检查（计划里有贴士即可）。
@@ -159,7 +159,7 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
             warnings = (result["plan"] or {}).get("feasibility_warnings", [])
             checks["seasonal_note"] = any("时段提示" in w for w in warnings)
         elif k == "tips_in_answer":
-            # G10：离线渲染器保证贴士进回答（硬检查）；在线润色可能省略（软检查）
+            # 离线渲染器保证贴士进回答（硬检查）；在线润色可能省略（软检查）
             plan = result.get("plan") or {}
             if not rules:
                 checks["tips_in_answer"] = plan is not None and len(plan.get("tips") or []) > 0
@@ -168,7 +168,7 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
                 checks["tips_in_answer"] = plan is not None and any(
                     k in result["answer"] for k in tip_keys if k)
         elif k == "feasibility_in_answer":
-            # P08 验收：警告文本出现在最终回答中
+            # 验收：警告文本出现在最终回答中
             checks["feasibility_in_answer"] = v in result["answer"]
         else:
             checks[k] = intent.get(k) == v
@@ -176,7 +176,7 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
     checks["tools_called"] = len(tool_calls) >= (0 if sc["expect"].get("fallback") else 3)
 
     def answer_covers_plan(res):
-        """P14：最终回答必须覆盖计划内容（真实检查，非恒真）——
+        """最终回答必须覆盖计划内容（真实检查，非恒真）——
         有计划时回答需提及至少 60% 行程站点名；回退场景需列出全部支持景区。"""
         plan = res.get("plan")
         if plan is None:

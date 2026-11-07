@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""G09：工具错误参数的稳定结构化返回（离线单测）。"""
+"""工具错误参数的稳定结构化返回（离线单测）。"""
 import sys
 import unittest
 from pathlib import Path

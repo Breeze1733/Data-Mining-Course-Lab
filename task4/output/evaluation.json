@@ -33,7 +33,7 @@
   "dev": 31,
   "test": 27
  },
- "split_method": "P18 文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
+ "split_method": "文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
  "errors": [
   {
    "pronoun": "它们",
@@ -681,7 +681,7 @@
  },
  "data_fingerprints": {
   "dataset_clean": "6fae55942575",
-  "entity_dictionary": "b62d50b061d7",
+  "entity_dictionary": "e275e19c11e5",
   "entities_refined": "f999bf7cd6ab"
  },
  "identity_ci95": {

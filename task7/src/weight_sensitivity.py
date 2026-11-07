@@ -1,4 +1,4 @@
-"""实验7 F06：官方/游客证据权重对下游编排的敏感性。
+"""实验7 ：官方/游客证据权重对下游编排的敏感性。
 
 先后顺序边为"官方路线 + 游客序列"双源加权（build_graph），边级来源已保留
 （official_routes / tourist_support 列）。本分析构造三种权重方案：
@@ -8,7 +8,7 @@
 
 对全部 15 个验收场景在每种方案下重跑（运行期替换 GraphTools.G 的先后顺序边），
 对比行程站点序列（Kendall tau）与场景通过数——量化证据权重选择对下游的传导。
-输出 metrics/f06_weight_sensitivity.json。
+输出 metrics/weight_sensitivity.json。
 """
 from __future__ import annotations
 
@@ -102,7 +102,7 @@ def main() -> int:
             row[scheme] = kendall_tau(seqs_by["mixed"][sid], seqs_by[scheme][sid])
         sens[sid] = row
     report = {
-        "title": "F06 权重方案敏感性：官方/游客证据分离对下游编排的传导（实验7）",
+        "title": "权重方案敏感性：官方/游客证据分离对下游编排的传导（实验7）",
         "method": "三种先后顺序边权重方案（mixed=现行官方+游客、official_only、tourist_only）下重跑 15 场景；"
                   "行程站点序列与 mixed 方案做 Kendall tau（公共站点<2 记 None）",
         "n_scenarios": len(SCENARIOS),
@@ -114,7 +114,7 @@ def main() -> int:
         ],
     }
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "f06_weight_sensitivity.json").write_text(
+    (OUT / "weight_sensitivity.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps(passes, ensure_ascii=False))
     return 0

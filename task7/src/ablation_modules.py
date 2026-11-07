@@ -1,4 +1,4 @@
-"""实验7 H08 消融：各模块对最终规划的贡献。
+"""实验7  消融：各模块对最终规划的贡献。
 
 对 14 个验收场景逐一禁用单个模块后重跑（规则模式），记录通过数与受影响场景，
 量化每个模块对最终规划质量的边际贡献。禁用方式为运行期补丁（类方法替换：
@@ -41,7 +41,7 @@ _ORIG = {}  # 原方法引用，_make_patches 时填充
 
 
 def _err(**_kw):
-    return {"error": "H08 消融：该工具已禁用"}
+    return {"error": "消融：该工具已禁用"}
 
 
 def _make_patches() -> dict[str, tuple[str, callable, callable]]:
@@ -155,7 +155,7 @@ def main() -> int:
         print(f'{name:16s} pass={rows[-1]["n_passed"]:2d}/{len(SCENARIOS)} '
               f'fail={len(fails)} avg_tools={rows[-1]["avg_tool_calls"]}')
     report = {
-        "title": "H08 模块消融：各模块对最终规划的贡献（实验7，规则模式）",
+        "title": "模块消融：各模块对最终规划的贡献（实验7，规则模式）",
         "method": "对 14 个验收场景逐一禁用单个模块后重跑；口径与 run_tests.evaluate_scenario 一致；"
                   "contribution = 基线通过数 − 消融后通过数（受该模块影响的场景数）",
         "n_scenarios": len(SCENARIOS),

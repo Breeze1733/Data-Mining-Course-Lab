@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""E01：条件建议抽取的原句级覆盖评测（查全/过抽首次可测）。
+"""条件建议抽取的原句级覆盖评测（查全/过抽首次可测）。
 
-此前评测只在"系统已抽出的对"上测准确率，无法度量漏抽。本评测复用 B01 的 40 句原始抽样
+此前评测只在"系统已抽出的对"上测准确率，无法度量漏抽。本评测复用  的 40 句原始抽样
 （task2/output/exp2/entity_sentence_sample.json），对每句判读"是否含给游客的建议"
 （AI 逐句判读，来源如实声明），再对照当前映射表（mapping_table.json）报告：
   - advice_recall：含建议句中被抽出≥1 对的比例；
@@ -36,7 +36,7 @@ ADVICE = {4: (False, "中午12点上山、下午4点前下山（攻略式时间�
 
 
 def _load_batches() -> list[dict]:
-    """E01 扩充：第一轮 dev 40 句（ADVICE 字典判读）+ 追抽 60 句（coverage_sample_expanded.json，
+    """ 扩充：第一轮 dev 40 句（ADVICE 字典判读）+ 追抽 60 句（coverage_sample_expanded.json，
     ai_advice 字段随样本存储）。两批口径一致，分批与合并同时报告。"""
     batches = []
     dev = json.loads((TASK2 / "output/exp2/entity_sentence_sample_dev.json").read_text(encoding="utf-8"))["sentences"]
@@ -69,7 +69,7 @@ def main() -> int:
         "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注）",
         "sample_note": "第一轮 dev 40 句（entity_sentence_sample_dev.json）+ 追抽 60 句"
                        "（coverage_sample_expanded.json，seed=77，排除既有抽样记录）；"
-                       "B01 第二轮冻结样本仅用于实体评测",
+                       " 第二轮冻结样本仅用于实体评测",
         "scope_note": "in_scope=句内含条件性建议或带触发词的建议（实验5 任务口径）；无触发词的泛建议/路线罗列为任务外",
         "n_advice_sentences": advice_n,
         "n_design_excluded": design_excluded_n,
@@ -111,7 +111,7 @@ def _eval_batch(batch: str, sample: list[dict]) -> dict:
             detail.append({"sid": sid, "in_scope": True, "design_excluded": True,
                            "n_pairs": 0, "gist": gist})
             continue
-        # P16 精神：按 record + 句子包含匹配（task5 分句与抽样分句的规则不同，精确等值会漏配）
+        # 精神：按 record + 句子包含匹配（task5 分句与抽样分句的规则不同，精确等值会漏配）
         pairs = [r for (rr, ss), rs in by_sentence.items() if rr == rid and (ss in sent or sent in ss)
                  for r in rs]
         if in_scope:

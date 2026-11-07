@@ -36,7 +36,7 @@ def count_lines(path: Path) -> int | None:
 
 
 def _bounded_match_span(text: str, variant: str) -> re.Match | None:
-    """P22/H10：带边界的数字匹配，返回 Match（供上下文共现检查定位）。"""
+    """带边界的数字匹配，返回 Match（供上下文共现检查定位）。"""
     if not variant:
         return None
     esc = re.escape(variant)
@@ -53,7 +53,7 @@ def _bounded_match_span(text: str, variant: str) -> re.Match | None:
 
 
 def _bounded_match(text: str, variant: str) -> bool:
-    """P22：数字类变体带前后边界匹配（数字/千分位/小数点不相连才算命中）。"""
+    """数字类变体带前后边界匹配（数字/千分位/小数点不相连才算命中）。"""
     if not variant:
         return False
     esc = re.escape(variant)
@@ -244,8 +244,8 @@ def main() -> int:
                     warns.append(f"{c['name']}(数据源缺失)")
                     n_missing_src += 1
                     continue
-                # P22：数字带边界匹配——防止 79 命中 179、0.5 命中 30.5 这类短数字误配
-                # H10：near 语义绑定——数值须与指定上下文（分母/样本范围/方法名）在
+                # 数字带边界匹配——防止 79 命中 179、0.5 命中 30.5 这类短数字误配
+                # near 语义绑定——数值须与指定上下文（分母/样本范围/方法名）在
                 # ±window 字符内共现，防"数字对但挂错指标名/分母"的漂移
                 near = c.get("near")
                 hit = False

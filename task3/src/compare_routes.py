@@ -148,7 +148,7 @@ def extract_tourist_routes() -> list[dict]:
 
                 "n_distinct": len(distinct),
 
-                # P20：po_sequence 保留折返与重复到访（连续重复已合并）；图边取完整序列；
+                # po_sequence 保留折返与重复到访（连续重复已合并）；图边取完整序列；
 
                 # distinct_pois 仅用于覆盖率/tau 的集合口径
 
@@ -346,7 +346,7 @@ def main() -> int:
 
     tau_sens = {scenic: {3: [], 5: [], 7: []} for scenic in official}
 
-    # C08 扩展：聚合规则敏感性——同一批 (游客, 官方路线) tau 对，按三种聚合规则汇总：
+    # 扩展：聚合规则敏感性——同一批 (游客, 官方路线) tau 对，按三种聚合规则汇总：
     # best（择优匹配，主口径）／mean（全部有效对均值）／first（仅第一条官方路线）。
     # 择优匹配天然乐观，须与另两种口径并列呈现，避免乐观解释。
     tau_agg = {scenic: {r: [] for r in ("best", "mean", "first")} for scenic in official}
@@ -393,7 +393,7 @@ def main() -> int:
 
                 taus.append(best_tau)
 
-            # C08 扩展：聚合规则敏感性（本轮游客路线的全部有效 tau 对）
+            # 扩展：聚合规则敏感性（本轮游客路线的全部有效 tau 对）
             all_taus = []
             for o in officials:
                 o_set = set(o["norm_sequence"])
@@ -416,7 +416,7 @@ def main() -> int:
                 if tau_first == tau_first:
                     tau_agg[scenic]["first"].append(tau_first)
 
-            # C08：阈值敏感性——不同公共 POI 下限下的最佳 tau（供稳健性查看）
+            # 阈值敏感性——不同公共 POI 下限下的最佳 tau（供稳健性查看）
 
             for thr in (3, 5, 7):
 
@@ -490,7 +490,7 @@ def main() -> int:
 
             "official_has_time_info": has_official_time,
 
-            # P21：两种测量量纲不同——官方为路线标注时长（分钟）分布，游客为文本时段词提及频次，
+            # 两种测量量纲不同——官方为路线标注时长（分钟）分布，游客为文本时段词提及频次，
 
             # 只能作代理指标对照，不可直接相除比较
 
@@ -498,7 +498,7 @@ def main() -> int:
 
             "tourist_time_basis": "文本时段词提及频次",
 
-            # C08 扩展：聚合规则敏感性（择优匹配天然乐观，与 mean/first 并列呈现）
+            # 扩展：聚合规则敏感性（择优匹配天然乐观，与 mean/first 并列呈现）
             "tau_aggregation_sensitivity": {
                 r: {"n": len(tau_agg[scenic][r]),
                     "mean": round(sum(tau_agg[scenic][r]) / len(tau_agg[scenic][r]), 3)

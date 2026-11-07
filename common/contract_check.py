@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""H01：跨任务数据契约校验——各任务边界产物的基础字段一致性。
+"""跨任务数据契约校验——各任务边界产物的基础字段一致性。
 
 校验（只读，不修数据）：
 - 所有出现 record_id 的产物，其 id 必须存在于 task1 数据集；
@@ -100,7 +100,7 @@ def main() -> int:
         violations.append(f"graph_nodes 行数 {n_nodes} != stats {gstats.get('total_nodes')}")
 
     report = {
-        "title": "H01 跨任务数据契约校验",
+        "title": "跨任务数据契约校验",
         "checked": ["entities_refined", "parsed_routes", "tourist_routes", "pronoun_cases",
                     "conditional_pairs", "task7 itineraries", "graph_nodes"],
         "n_violations": len(violations),

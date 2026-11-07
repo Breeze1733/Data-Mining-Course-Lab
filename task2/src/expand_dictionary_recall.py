@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""B03 词典扩充（2026-11-05）：实体句级评测（B01）漏检驱动的补录。
+""" 词典扩充（2026-11-05）：实体句级评测漏检驱动的补录。
 
-依据：B01 原始句子级实体评测（task2/output/exp2/entity_sentence_eval.json）的漏检清单，
+依据： 原始句子级实体评测（task2/output/exp2/entity_sentence_eval.json）的漏检清单，
 逐条核对其**全语料出现频次**（≥2 视为有证据的真实专名/交通/时段表达，非评测样本特例）。
 
 内容：
@@ -25,10 +25,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SEED = ROOT / "resources/domain_seed.json"
 TIMERULES = ROOT / "resources/time_rules.json"
 
-SOURCE = "b03_recall_eval_2026-11-05"
+SOURCE = "recall_eval_2026-11-05"
 # 第二批：消解 dev gold 先行词证据（dev 120 例，冻结留出集不参与）；
-# B03 纪律：语料频次 ≥2 才录入（墨海/白石海 各 1 次为样本特例，排除并记录）
-SOURCE2 = "b03_coref_gold_dev_2026-11-07"
+# 纪律：语料频次 ≥2 才录入（墨海/白石海 各 1 次为样本特例，排除并记录）
+SOURCE2 = "coref_gold_dev_2026-11-07"
 POI_ADDITIONS2 = [
     ("送客松", "送客松", ["黄山"], "黄山名松，语料13次；消解 dev gold 先行词（它→送客松）"),
     ("金山岭长城", "金山岭长城", [], "北京周边长城段，语料2次；消解 dev gold 先行词"),
@@ -105,9 +105,9 @@ def main() -> int:
                                   "scenic_areas": ["通用"], "canonical": canonical, "source": SOURCE})
         tr_names.add(name)
         added_tr += 1
-    seed["meta"]["b03_expansion"] = {"date": "2026-11-05", "added_poi": added_poi,
+    seed["meta"]["recall_expansion"] = {"date": "2026-11-05", "added_poi": added_poi,
                                      "added_transport": added_tr,
-                                     "basis": "B01 句级实体评测漏检清单 + 全语料频次≥2 证据"}
+                                     "basis": "句级实体评测漏检清单 + 全语料频次≥2 证据"}
     SEED.write_text(json.dumps(seed, ensure_ascii=False, indent=1), encoding="utf-8")
 
     trule = json.loads(TIMERULES.read_text(encoding="utf-8"))

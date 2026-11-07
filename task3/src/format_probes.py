@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-"""C01：六类官方路线格式的构造性反例探针（parse_routes 鲁棒性检验）。
+"""六类官方路线格式的构造性反例探针（parse_routes 鲁棒性检验）。
 
 对 classify_format 支持的 6 类格式各构造易错变体（真实语料同构、非冻结样本），
 直接喂 RouteParser.parse，断言关键解析行为：
-- arrow_chain：破折号链中的时间范围（"8:00-10:00"）不被路线分隔符拆开（§5 C04）
+- arrow_chain：破折号链中的时间范围（"8:00-10:00"）不被路线分隔符拆开（§5 ）
 - numbered_stops：第一站/第二站 汉字编号 + 冒号站点
 - numbered_list：阿拉伯数字编号 + 顿号
 - kv_route_line：活动路线：键值字段
 - prose：由…至… / 先…再… 叙述句
 - theme_prose：无序主题段（ordered_route=False）
-输出 task3/output/c01_format_probes.json；任一断言失败退出码 1（驱动修复）。
+输出 task3/output/format_probes.json；任一断言失败退出码 1（驱动修复）。
 """
 from __future__ import annotations
 
@@ -67,7 +67,7 @@ PROBES = [
     {"id": "M3_跨日时段重置", "route_id": "PROBE-M3", "scenic_area": "黄山", "ordered_route": True,
      "raw_content": "【第一天·晚上】住宿白云宾馆→【第二天】光明顶看日出",
      "expect": {"pois_days_periods": [("白云宾馆", 1, "晚上"), ("光明顶", 2, None)],
-                "note": "C03：复合标记解析 + 次日第一站不继承前一日晚上"}},
+                "note": "复合标记解析 + 次日第一站不继承前一日晚上"}},
     {"id": "C4_时间范围冒号变体", "scenic_area": "黄山", "ordered_route": True,
      "raw_content": "玉屏楼（6:30～9:30 看日出人流）—鳌鱼峰—天海—光明顶",
      "expect": {"format": "arrow_chain",
@@ -121,12 +121,12 @@ def main() -> int:
         print(f'{"PASS" if passed else "FAIL"} {probe["id"]} format={p.get("format")} pois={got_pois}'
               + (f" 问题={problems}" if problems else ""))
     report = {
-        "title": "C01 六类官方路线格式构造性反例探针（parse_routes 鲁棒性）",
+        "title": "六类官方路线格式构造性反例探针（parse_routes 鲁棒性）",
         "method": "6 类格式各构造易错变体直接喂 RouteParser.parse，断言格式识别/POI 序列/时间范围完整性",
         "n_probes": len(PROBES), "n_fail": n_fail, "results": rows,
     }
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "c01_format_probes.json").write_text(
+    (OUT / "format_probes.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({"n_probes": len(PROBES), "n_fail": n_fail}, ensure_ascii=False))
     return 1 if n_fail else 0

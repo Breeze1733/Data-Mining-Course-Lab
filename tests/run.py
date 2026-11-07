@@ -19,17 +19,17 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def build_steps(task7_mode: str) -> list:
     steps = [
-        # 单元测试先行：链路重建前先保证基础语义未被破坏（P15）
+        # 单元测试先行：链路重建前先保证基础语义未被破坏
         ("__unittest__", []),
-        # B03 漏检驱动的词典/时间规则扩充（幂等，须先于 build_dictionary）
-        ("task2/src/expand_dictionary_b03.py", []),
+        # 漏检驱动的词典/时间规则扩充（幂等，须先于 build_dictionary）
+        ("task2/src/expand_dictionary_recall.py", []),
         ("task2/src/build_dictionary.py", []),
         ("task2/src/extract_entities.py", ["--iteration", "baseline"]),
         ("task2/src/extract_entities.py", ["--iteration", "refined"]),
         ("task2/src/visualize.py", ["--iteration", "baseline"]),
         ("task2/src/visualize.py", ["--iteration", "refined"]),
         ("task2/src/spot_check.py", ["--reconcile"]),
-        # B01 句级实体评测（查全率首次可测，产物 entity_sentence_eval.json）
+        # 句级实体评测（查全率首次可测，产物 entity_sentence_eval.json）
         ("task2/src/entity_sentence_eval.py", []),
         ("task2/src/iter_compare.py", []),
         ("task3/src/parse_routes.py", []),
@@ -38,18 +38,18 @@ def build_steps(task7_mode: str) -> list:
         ("task4/src/attribute_sentences.py", ["--output", "task4/output/attribution/attributed_sentences.jsonl"]),
         ("task4/src/detect_and_resolve.py", []),
         ("task4/src/annotate_sample.py", ["--score"]),
-        # 消解示例依赖当前 pronoun_cases + gold，必须排在 detect_and_resolve 之后（P15）
+        # 消解示例依赖当前 pronoun_cases + gold，必须排在 detect_and_resolve 之后
         ("task4/src/build_resolved_examples.py", []),
         ("task5/src/extract_conditionals.py", []),
         ("task5/src/review_and_charts.py", ["--score"]),
         ("task5/src/review_and_charts.py", ["--charts"]),
         ("task5/src/export_mapping_xlsx.py", []),
-        # E01 原句级覆盖评测（漏抽/过抽首次可测）
+        # 原句级覆盖评测（漏抽/过抽首次可测）
         ("task5/src/extraction_coverage_eval.py", []),
         ("task6/src/build_graph.py", []),
         ("task6/src/verify_graph.py", []),
         ("task6/src/visualize_graph.py", []),
-        # H01 跨任务数据契约校验（边界字段一致性，只读；违例即链失败）
+        # 跨任务数据契约校验（边界字段一致性，只读；违例即链失败）
         ("common/contract_check.py", []),
     ]
     if task7_mode in ("rules", "both"):

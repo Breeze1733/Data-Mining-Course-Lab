@@ -25,7 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE_PATH = ROOT / "metrics" / "regression_state.json"
-# H03：优先用当前解释器（同一环境），不存在时回退到仓库 .venv（跨机器/非 venv 启动仍可用）
+# 优先用当前解释器（同一环境），不存在时回退到仓库 .venv（跨机器/非 venv 启动仍可用）
 PY = sys.executable if Path(sys.executable).name.lower().startswith("python") else ROOT / ".venv/Scripts/python.exe"
 if not Path(PY).exists():
     PY = ROOT / ".venv/Scripts/python.exe"

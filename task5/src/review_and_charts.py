@@ -137,7 +137,7 @@ def _norm5(t: str) -> str:
 
 
 def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
-    """H07：Wilson 95% 置信区间（小样本比例的稳健区间）。"""
+    """Wilson 95% 置信区间（小样本比例的稳健区间）。"""
     if n == 0:
         return {"lo": None, "hi": None}
     p = k / n
@@ -154,7 +154,7 @@ from common.fingerprints import data_fingerprints as _data_fingerprints
 
 def score() -> None:
     data = json.loads((OUT / "review_dev.json").read_text(encoding="utf-8"))["reviews"]
-    # P16：与当前抽取对齐——复核行是否仍被当前规则抽出（identical/changed/missing），
+    # 与当前抽取对齐——复核行是否仍被当前规则抽出（identical/changed/missing），
     # 抽取器退化（误抽漏抽）不再对指标不可见
     mapping = json.loads((OUT / "mapping_table.json").read_text(encoding="utf-8"))
     mrows = mapping["rows"] if isinstance(mapping, dict) else mapping

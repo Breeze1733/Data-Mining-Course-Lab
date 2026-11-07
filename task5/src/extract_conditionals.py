@@ -68,7 +68,7 @@ SENT_SPLIT = re.compile(r"[。！？\n]+")
 
 COND_MARKERS = ("如果", "假如", "假若", "若是", "若", "要是", "万一", "一旦", "只要", "除非")
 
-# E05：补全动作动词——逗号后接动作动词时切分为独立建议（穿/带/吃/住 等常见旅游建议动词）
+# 补全动作动词——逗号后接动作动词时切分为独立建议（穿/带/吃/住 等常见旅游建议动词）
 
 SUGG_VERB = re.compile(r"^(则|就|那|然后|最好|建议|推荐|记得|千万|尽量|务必|一定要|可以|不妨|选择|改|换|提前|避开|放弃|考虑|穿|带|买|吃|住|坐|乘|走|游览|参观|步行|前往|返回|入住|预定|预约|排队|自驾|徒步|登|第[一二三四五六七八九十]+天)")
 
@@ -215,7 +215,7 @@ _FOOD_HINT = re.compile(r"吃|餐|食|饭|菜|小吃|美食|特产|零食|面包
 
 
 def refine_condition_type(cond_text: str, sugg_text: str, current: str) -> str:
-    """E11：对"其他/一般"类型做关键词细化分类。不改既有特定类型。"""
+    """对"其他/一般"类型做关键词细化分类。不改既有特定类型。"""
     if current not in ("其他", "一般"):
         return current
     text = cond_text + " " + sugg_text
@@ -238,7 +238,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
 
 
-    # E04 优先：否则分支拆分（比 P1 更好的解析——分别保存互斥分支，不合并）
+    # 优先：否则分支拆分（比 P1 更好的解析——分别保存互斥分支，不合并）
 
     for m in re.finditer(r"(如果|要是|若)([^。！？；]{1,40}?)就([^，。！？；]{1,30})[，,]?否则([^。！？；]{1,40})", sent):
 
@@ -316,7 +316,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
 
 
-    # 扩展A：裸"X的话，Y"（无如果/要是 前置）——"玩黄龙的话住松潘古城"（E01 扩充样本实证漏抽）
+    # 扩展A：裸"X的话，Y"（无如果/要是 前置）——"玩黄龙的话住松潘古城"（ 扩充样本实证漏抽）
     for m in re.finditer(r"([一-龥A-Za-z0-9]{2,12})的话[，,]?\s*", sent):
         if m.start() in seen_spans:
             continue
@@ -361,7 +361,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
                       "suggestions": [m.group(0)[:40]], "sentence": sent,
                       "condition_type": "时间"})
 
-    # P7 依据规定（E03）：按照/根据+要求/规定/政策/须知 的条件性规则信息（无显式条件连词）
+    # P7 依据规定：按照/根据+要求/规定/政策/须知 的条件性规则信息（无显式条件连词）
 
     for m in re.finditer(r"((?:按照|根据|依据)[^。！？；]{0,16}?(?:要求|规定|政策|须知|提示))[^。！？；]{0,12}?[，,]\s*([^。！？；]{1,60})", sent):
 
@@ -393,7 +393,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             seen_spans.add(m.start())
 
-    # E04：否则分支拆分——"如果A就B，否则C"拆为 A→B 和 非A→C 两个条件对
+    # 否则分支拆分——"如果A就B，否则C"拆为 A→B 和 非A→C 两个条件对
 
     for m in re.finditer(r"(如果|要是|若)([^。！？；]{1,40}?)就([^，。！？；]{1,30})[，,]?否则([^。！？；]{1,40})", sent):
 
@@ -515,7 +515,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         # 扩展E：首段并回"可以"动词线索——建议从动词起（此前"可以不下了"被截成"不下了"，
 
-        # 3 字建议被最短长度过滤淘汰，E01 扩充样本实证）
+        # 3 字建议被最短长度过滤淘汰， 扩充样本实证）
 
         if segs:
 
@@ -796,7 +796,7 @@ def main(argv=None) -> int:
 
 
 
-    # E11：条件类型细化（批量）
+    # 条件类型细化（批量）
     for p in all_pairs:
         p["condition_type"] = refine_condition_type(
             p.get("condition_text", ""), p.get("suggestion_text", ""),

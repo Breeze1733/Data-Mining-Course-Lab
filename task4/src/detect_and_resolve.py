@@ -207,7 +207,7 @@ def main(argv=None) -> int:
                         before = [e for e in pool if e["end"] <= doc_start]
                         if is_prev:
                             before = pool  # 前句实体全部视为“在前”
-                        # D06：pois+transports 拼接池并非全局按位置有序（实测 246/271 记录乱序），
+                        # pois+transports 拼接池并非全局按位置有序（实测 246/271 记录乱序），
                         # 直接 reversed 截断是顺序依赖的——先按 end 降序排为“就近优先”，
                         # 再截断保留距代词最近的 7 个，截断不再偏向实体类型/列表顺序
                         before = sorted(before, key=lambda e: e["end"], reverse=True)
@@ -307,7 +307,7 @@ def main(argv=None) -> int:
                             case.update({"resolution": scenic_area, "resolution_kind": "景区名",
                                          "evidence": "窗口内无实体，回退到景区名"})
                     else:
-                        # D05：候选排序——POI 优先于交通、近距优先，且
+                        # 候选排序——POI 优先于交通、近距优先，且
                         # locative（这里/那里）偏好景观类 POI（排除住宿/设施）
                         def compat_bonus(c):
                             if cls == "locative" and c["kind"] == "POI":

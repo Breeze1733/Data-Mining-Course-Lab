@@ -72,7 +72,7 @@ class GraphTools:
     def query_pois(self, scenic: str, visitor_type: str | None = None, limit: int = 8) -> dict:
         if scenic not in AREAS:
             return {"error": f"不支持的景区：{scenic}（仅支持 {'/'.join(AREAS)}）"}
-        # G09：limit 类型/范围校验（负数切片曾把结果尾部砍掉而非报错）
+        # limit 类型/范围校验（负数切片曾把结果尾部砍掉而非报错）
         try:
             limit = int(limit)
         except (TypeError, ValueError):
@@ -96,7 +96,7 @@ class GraphTools:
                         if not self._match_visitor(text, visitor_type):
                             continue
                         if NEG_ADVICE_RE.search(text):
-                            # P09：负向人群建议（如“老人千万别走中轴线爬山”）不是正向适配——
+                            # 负向人群建议（如“老人千万别走中轴线爬山”）不是正向适配——
                             # 降权并记入站点提示，而不是当加分项
                             fit -= float(e.get("weight", 1))
                             caveats.append(self.G.nodes[v].get("suggestion", "")[:40])

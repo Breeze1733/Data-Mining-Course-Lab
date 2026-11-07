@@ -42,7 +42,7 @@ DUR_RE = re.compile(r"(?:约|大概|将近|近)?\d+(?:\.\d+)?\s*(?:个)?(?:小�
 PERIOD_WORDS = ("清晨", "早上", "上午", "中午", "下午", "傍晚", "晚上", "夜里", "深夜", "凌晨", "全天")
 DAY_MARK = re.compile(r"[【\[]\s*(第[一二三四五六七八九十\d]+[日天]|Day\s*\d+)\s*[】\]]|第([一二三四五六七八九十\d]+)天|Day\s*(\d+)")
 PERIOD_MARK = re.compile(r"[【\[]\s*(上午|中午|下午|晚上|清晨|傍晚|全天)\s*[】\]]|(上午|中午|下午|晚上|清晨|傍晚)[:：]")
-# C03：复合天+时段标记（"【第一天·晚上】"）——此前 DAY/PERIOD 各自都不命中复合形，
+# 复合天+时段标记（"【第一天·晚上】"）——此前 DAY/PERIOD 各自都不命中复合形，
 # 天与时段双双丢失
 DAY_PERIOD_MARK = re.compile(
     r"[【\[]\s*(第[一二三四五六七八九十\d]+[日天])\s*[·.、]\s*(上午|中午|下午|晚上|清晨|傍晚)\s*[】\]]")
@@ -132,8 +132,8 @@ class RouteParser:
                     continue
                 mdp = DAY_PERIOD_MARK.search(seg)
                 if mdp:
-                    # C03：复合标记同时设定天与时段；天变更仍重置时段（次日第一站
-                    # 不继承前一日晚上——C03 要求，跨日重置在复合标记同样成立）
+                    # 复合标记同时设定天与时段；天变更仍重置时段（次日第一站
+                    # 不继承前一日晚上—— 要求，跨日重置在复合标记同样成立）
                     day = self._cn_day(mdp.group(1))
                     period = mdp.group(2)
                 elif m := DAY_MARK.search(seg):
@@ -233,7 +233,7 @@ class RouteParser:
     def _fill_periods(steps: list[dict]) -> None:
         """时段标记行本身不含 POI（如“【上午】”），标记只对后续步骤生效；
         首个标记前若已有步骤，沿用 step 里的 period_hint。
-        C03：跨日重置——次日第一站不得继承前一日时段（如前一晚"晚上"）。"""
+        ：跨日重置——次日第一站不得继承前一日时段（如前一晚"晚上"）。"""
         current = None
         prev_day = None
         for s in steps:

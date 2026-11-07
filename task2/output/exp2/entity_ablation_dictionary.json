@@ -1,0 +1,45 @@
+{
+ "n_sentences": 40,
+ "configs": {
+  "full": {
+   "precision": 0.852,
+   "recall": 0.697,
+   "f1": 0.767,
+   "tp": 46,
+   "fp": 8,
+   "fn": 20,
+   "recall_ci95": {
+    "lo": 0.578,
+    "hi": 0.794
+   }
+  },
+  "minus_recall": {
+   "precision": 0.843,
+   "recall": 0.652,
+   "f1": 0.735,
+   "tp": 43,
+   "fp": 8,
+   "fn": 23,
+   "recall_ci95": {
+    "lo": 0.531,
+    "hi": 0.755
+   }
+  },
+  "minus_recall_p2": {
+   "precision": 0.837,
+   "recall": 0.621,
+   "f1": 0.713,
+   "tp": 41,
+   "fp": 8,
+   "fn": 25,
+   "recall_ci95": {
+    "lo": 0.501,
+    "hi": 0.729
+   }
+  }
+ },
+ "marginal_recall": {
+  "recall批次": 0.045,
+  "peripheral批次": 0.031
+ }
+}

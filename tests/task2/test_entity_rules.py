@@ -59,7 +59,7 @@ class EntityRuleTests(unittest.TestCase):
         self.assertIn(duration, suppressed)
 
     def test_b09_overlap_counterexamples(self):
-        """B09 反例组：长词优先、跨类型共存、设施复合词守卫、根景区设计排除、时长不吞交通。"""
+        """ 反例组：长词优先、跨类型共存、设施复合词守卫、根景区设计排除、时长不吞交通。"""
         # 长词优先：观光缆车并入设施长名，"站"后缀不阻断
         self.assertEqual(self.surfaces("西海大峡谷观光缆车站"), ["西海大峡谷观光缆车"])
         # 跨类型共存：POI 与交通相邻不互吞

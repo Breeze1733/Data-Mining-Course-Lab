@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""B10：词典扩充消融——把 B01 冻结测试的召回增益按扩充批次归因。
+"""词典扩充消融——把  冻结测试的召回增益按扩充批次归因。
 
 配置（在冻结测试 40 句上以 DictMatcher 直接打分，金标准与正式评测同源）：
   full            当前 refined 全量
-  minus_b03       去掉 b03_recall_eval 批次（POI 25 + 交通 2 + 时间规则 3）
-  minus_p2        再去掉 p2_peripheral_expansion 批次（56 条）
+  minus_recall    去掉 recall_eval 批次（POI 25 + 交通 2 + 时间规则 3）
+  minus_p2        再去掉 peripheral_expansion 批次（56 条）
   seed_only       仅保留 seed/manual/merged 主干
 输出：各配置的 P/R/F1 与每批次边际贡献（ΔR）。
 """
@@ -83,8 +83,8 @@ def main() -> int:
 
     entries, stopwords, _ = load_dictionary("refined")
     trule = json.loads((RES / "time_rules.json").read_text(encoding="utf-8"))
-    SRC_B03 = "b03_recall_eval_2026-11-05"
-    SRC_P2 = "p2_peripheral_expansion_2026-10-30"
+    SRC_RECALL = "recall_eval_2026-11-05"
+    SRC_P2 = "peripheral_expansion_2026-10-30"
 
     import entity_rules as ER
     orig_load = ER.TimeRules
@@ -126,10 +126,10 @@ def main() -> int:
 
     configs = {
         "full": ([e for e in entries], trule["patterns"]),
-        "minus_b03": ([e for e in entries if e.get("source") != SRC_B03],
-                      [p for p in trule["patterns"] if p.get("source") != SRC_B03]),
-        "minus_b03_p2": ([e for e in entries if e.get("source") not in (SRC_B03, SRC_P2)],
-                         [p for p in trule["patterns"] if p.get("source") != SRC_B03]),
+        "minus_recall": ([e for e in entries if e.get("source") != SRC_RECALL],
+                      [p for p in trule["patterns"] if p.get("source") != SRC_RECALL]),
+        "minus_recall_p2": ([e for e in entries if e.get("source") not in (SRC_RECALL, SRC_P2)],
+                         [p for p in trule["patterns"] if p.get("source") != SRC_RECALL]),
     }
     results = {}
     import contextlib
@@ -146,11 +146,11 @@ def main() -> int:
         print(f"{name:14s} P={r['precision']:.3f} R={r['recall']:.3f} F1={r['f1']:.3f} "
               f"(TP {r['tp']} FP {r['fp']} FN {r['fn']}) R_CI95={r['recall_ci95']}")
 
-    d_b03 = round(results["full"]["recall"] - results["minus_b03"]["recall"], 3)
-    d_p2 = round(results["minus_b03"]["recall"] - results["minus_b03_p2"]["recall"], 3)
+    d_recall = round(results["full"]["recall"] - results["minus_recall"]["recall"], 3)
+    d_p2 = round(results["minus_recall"]["recall"] - results["minus_recall_p2"]["recall"], 3)
     out = {"n_sentences": len(sample), "configs": results,
-           "marginal_recall": {"b03批次": d_b03, "p2批次": d_p2}}
-    (EXP2 / "entity_ablation_b10.json").write_text(
+           "marginal_recall": {"recall批次": d_recall, "peripheral批次": d_p2}}
+    (EXP2 / "entity_ablation_dictionary.json").write_text(
         json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     print("边际召回贡献:", json.dumps(out["marginal_recall"], ensure_ascii=False))
     return 0

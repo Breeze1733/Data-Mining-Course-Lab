@@ -43,7 +43,7 @@ AREAS = ("黄山", "九寨沟", "颐和园")
 PERIODS = ("上午", "中午", "下午", "晚上")
 
 
-# E09（模块级供单测复用）：对比词守卫——等长文本恰一处差异且互为对比词→语义相斥
+# （模块级供单测复用）：对比词守卫——等长文本恰一处差异且互为对比词→语义相斥
 _CONTRAST = [("多", "少"), ("雨", "雪"), ("早", "晚"), ("上", "下"), ("有", "无"),
              ("大", "小"), ("开", "关"), ("高", "低"), ("冷", "热"), ("快", "慢"), ("贵", "廉")]
 
@@ -83,7 +83,7 @@ def main() -> int:
     parsed = [json.loads(l) for l in (TASK3 / "output/parsed_routes.jsonl").open(encoding="utf-8")]
     tourists = [json.loads(l) for l in (TASK3 / "output/tourist_routes.jsonl").open(encoding="utf-8")]
     mapping = json.loads((TASK5 / "output/mapping_table.json").read_text(encoding="utf-8"))
-    # B11：提及频次直接从实体全量统计（此前依赖 top_canonical 截断表——仅 3 条，127 个 POI 节点频次为 0）
+    # 提及频次直接从实体全量统计（此前依赖 top_canonical 截断表——仅 3 条，127 个 POI 节点频次为 0）
     mention_counter: Counter = Counter()
     with (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8") as _fh:
         for _line in _fh:
@@ -127,7 +127,7 @@ def main() -> int:
             else:
                 G.add_edge(u, v, key="先后顺序", relation="先后顺序", weight=1.0, source="官方路线")
             official_support[(u, v)].append(p["route_id"])
-    # F05：近重复游记去重——同组记录对同一条边只计 1 次支持
+    # 近重复游记去重——同组记录对同一条边只计 1 次支持
     _dup_groups: list[list[str]] = []
     _quality = json.loads((TASK1 / "data/processed/quality_report.json").read_text(encoding="utf-8"))
     for _d in _quality.get("near_duplicates", []):
@@ -149,7 +149,7 @@ def main() -> int:
     for t in tourists:
         scenic = t["scenic_area"]
         rid = t.get("record_id")
-        # P20：图边取完整 poi_sequence（保留折返与重复到访），权重累加承载访问强度
+        # 图边取完整 poi_sequence（保留折返与重复到访），权重累加承载访问强度
         for a, b in zip(t["poi_sequence"], t["poi_sequence"][1:]):
             u, v = node_id("POI", scenic, resolve(scenic, a)), node_id("POI", scenic, resolve(scenic, b))
             if not (G.has_node(u) and G.has_node(v)):
@@ -158,7 +158,7 @@ def main() -> int:
                 G[u][v]["先后顺序"]["weight"] += 0.5
             else:
                 G.add_edge(u, v, key="先后顺序", relation="先后顺序", weight=0.5, source="游客序列")
-            # F05：同近重复组对同一条边只计 1 次支持
+            # 同近重复组对同一条边只计 1 次支持
             grp_id = _rec2grp.get(rid, rid)
             if grp_id in tourist_group_seen[(u, v)]:
                 continue
@@ -168,9 +168,9 @@ def main() -> int:
                 tourist_records[(u, v)].append(rid)
     for (u, v), route_ids in official_support.items():
         if G.has_edge(u, v, key="先后顺序"):
-            # P04：来源清单不截断（官方路线ID + 游客逐记录证据）
+            # 来源清单不截断（官方路线ID + 游客逐记录证据）
             G[u][v]["先后顺序"]["official_routes"] = "；".join(dict.fromkeys(route_ids))
-    # P04：游客证据对官方/纯游客两类先后边统一回写（纯游客边此前拿不到记录清单）
+    # 游客证据对官方/纯游客两类先后边统一回写（纯游客边此前拿不到记录清单）
     for (u, v), recs in tourist_records.items():
         if G.has_edge(u, v, key="先后顺序") and recs:
             G[u][v]["先后顺序"]["tourist_records"] = json.dumps(recs, ensure_ascii=False)
@@ -235,7 +235,7 @@ def main() -> int:
         return max(cands, key=lambda fc: (bool(_SUGG_ACT.search(fc[1])), fc[0], len(fc[1])))[1]
 
     clusters: list[dict] = []
-    # E09：对比词守卫见模块级 _contrast_blocked（真实图谱 0 对受影响，潜在风险加固）
+    # 对比词守卫见模块级 _contrast_blocked（真实图谱 0 对受影响，潜在风险加固）
     reps: list[tuple[str, str, str, str, set]] = []
     for m in mapping:
         key_text = _norm_cond(m["condition_text"])
@@ -268,12 +268,12 @@ def main() -> int:
         members = cluster["members"]
         rep = sorted(members, key=lambda x: (-x["frequency"], x["condition_text"]))[0]
         scenic = rep["scenic_area"]
-        # P02：ID 纳入抽取模式——推断型标签（“时间条件（句内）”）的 P4 建议与 P6 避雷是
+        # ID 纳入抽取模式——推断型标签（“时间条件（句内）”）的 P4 建议与 P6 避雷是
         # 不同语义节点，聚类已按 pattern 分离，节点身份必须同步携带，否则互相碰撞
         cn = node_id("条件", scenic,
                      f'{rep["pattern"]}:{rep["condition_type"]}:{_norm_cond(rep["condition_text"])}')
         if not G.has_node(cn):
-            # P03/P04：全量证据落图——不截断 variants/suggestions，逐条来源与抽取方法可追溯
+            # 全量证据落图——不截断 variants/suggestions，逐条来源与抽取方法可追溯
             seen_cond, seen_sugg, seen_src = [], [], []
             evidence = []
             for x in members:

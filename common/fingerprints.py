@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""H05：数据版本指纹——评估产物绑定其输入数据的 SHA256 前缀，
+"""数据版本指纹——评估产物绑定其输入数据的 SHA256 前缀，
 旧结果未重算时不再被当作新版本证据。"""
 import hashlib
 from pathlib import Path

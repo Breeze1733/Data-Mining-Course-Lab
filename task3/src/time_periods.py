@@ -15,7 +15,7 @@ def entity_period(entity: dict) -> str | None:
     if entity.get("subtype") not in {"时刻", "时刻区间"}:
         return None
     value = entity.get("normalized") or entity["text"]
-    # B07：约数/范围时刻（"下午四五点"）无具体钟点——按开头时段词归桶
+    # 约数/范围时刻（"下午四五点"）无具体钟点——按开头时段词归桶
     for key, values in _GROUPS.items():
         if value.startswith(tuple(values)):
             return key

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""B01：实体识别的句级完整评测（查全率首次可测）。
+"""实体识别的句级完整评测（查全率首次可测）。
 
 此前评测为"命中样本查准抽检"（spot_check 53/53+46/46），无法度量漏检。
 本评测在 40 句原始句子上以人工判读金标准（entity_sentence_gold.json，AI 逐句判读并声明来源）
@@ -7,7 +7,7 @@
 口径说明：根景区名（黄山/九寨沟/颐和园）与城市名（北京/成都）按设计不作为 POI 抽取，
 分母中单列（entity_sentence_eval.json 的 scope_note）。
 
-H06 发现与修复：本文件曾在 main 中段插入模块级 import，将结果构建/落盘全部截断为
+ 发现与修复：本文件曾在 main 中段插入模块级 import，将结果构建/落盘全部截断为
 prf() 内 return 之后的死代码——脚本静默零产出（exit 0 且不写产物）。现已复原 main
 完整闭环：评测 → 结果构建 → 落盘 → 打印。
 
@@ -36,7 +36,7 @@ def load_json(path: Path):
 
 
 def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
-    """H07：Wilson 95% 置信区间（小样本比例的稳健区间）。"""
+    """Wilson 95% 置信区间（小样本比例的稳健区间）。"""
     if n == 0:
         return {"lo": None, "hi": None}
     p = k / n
@@ -76,7 +76,7 @@ def main() -> int:
     stats = {"POI": [0, 0, 0], "交通": [0, 0, 0], "时间": [0, 0, 0]}
     stats_oos = {"POI": [0, 0, 0]}  # 设计排除口径（根景区名/城市名）：tp/fn 单独计数
     missed, false_pos = [], []
-    sentence_stats = []  # B02：每句局部 (tp,fp,fn)，供分层报告
+    sentence_stats = []  # 每句局部 (tp,fp,fn)，供分层报告
     for o in sample:
         sent_stats = {"POI": [0, 0, 0], "交通": [0, 0, 0], "时间": [0, 0, 0]}
         sid, sent = o["sid"], o["sentence"]
@@ -138,7 +138,7 @@ def main() -> int:
         "false_positives": false_pos,
         "scope_note": {},
     }
-    # B02：分层报告（冻结样本仅测量，不改规则）——按平台/景区/来源跨度长度
+    # 分层报告（冻结样本仅测量，不改规则）——按平台/景区/来源跨度长度
     def _strata(keyfn, name):
         agg = {}
         for o, sent_stats in sentence_stats:

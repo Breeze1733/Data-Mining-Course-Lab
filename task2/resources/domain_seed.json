@@ -11,7 +11,13 @@
    "date": "2026-11-05",
    "added_poi": 0,
    "added_transport": 0,
-   "basis": "B01 句级实体评测漏检清单 + 全语料频次≥2 证据"
+   "basis": "句级实体评测漏检清单 + 全语料频次≥2 证据"
+  },
+  "recall_expansion": {
+   "date": "2026-11-05",
+   "added_poi": 0,
+   "added_transport": 0,
+   "basis": "句级实体评测漏检清单 + 全语料频次≥2 证据"
   }
  },
  "poi": [
@@ -1303,7 +1309,7 @@
     "九寨沟"
    ],
    "canonical": "扎如寺",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "九寨沟景区内景点（扎如生态游线路终点），语料20次"
   },
   {
@@ -1314,7 +1320,7 @@
     "颐和园"
    ],
    "canonical": "颐和园博物馆",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "颐和园文昌院内展馆，官方路线出现"
   },
   {
@@ -1325,7 +1331,7 @@
     "黄山"
    ],
    "canonical": "西海大峡谷",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "游客对西海大峡谷的代称，task4黄金注释"
   },
   {
@@ -1334,7 +1340,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "松潘古城",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "task4黄金注释'真先行词松潘古城未收录'"
   },
   {
@@ -1343,7 +1349,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "磁器口",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "task4黄金：'这里'指重庆磁器口"
   },
   {
@@ -1352,7 +1358,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "乐山大佛景区",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "task4黄金：'这里有13路公交站'指乐山大佛附近"
   },
   {
@@ -1361,7 +1367,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "乐山大佛景区",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "同上，短写法归一到全称"
   },
   {
@@ -1370,7 +1376,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "景山公园",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "task4黄金：多景点游记景山段"
   },
   {
@@ -1379,7 +1385,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "景山公园",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "景山公园短写法"
   },
   {
@@ -1388,7 +1394,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "南锣鼓巷",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "task4黄金×2"
   },
   {
@@ -1397,7 +1403,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "荷花市场",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "task4黄金"
   },
   {
@@ -1406,7 +1412,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "北京大学",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "task4黄金：'这里'指北大"
   },
   {
@@ -1415,7 +1421,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "清华大学",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "task4黄金（注：gold原文'清华大学校园'仍不相等，边界如实保留）"
   },
   {
@@ -1424,7 +1430,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "清华大学",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "清华大学短写法"
   },
   {
@@ -1433,7 +1439,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "故宫",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料190次"
   },
   {
@@ -1442,7 +1448,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "天坛",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料81次"
   },
   {
@@ -1451,7 +1457,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "圆明园",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料160次"
   },
   {
@@ -1460,7 +1466,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "北海公园",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料28次；与黄山'北海'(北海景区)不同名冲突，长词优先"
   },
   {
@@ -1469,7 +1475,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "恭王府",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料45次"
   },
   {
@@ -1478,7 +1484,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "什刹海",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料28次"
   },
   {
@@ -1487,7 +1493,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "烟袋斜街",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料10次"
   },
   {
@@ -1496,7 +1502,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "后海",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料20次"
   },
   {
@@ -1505,7 +1511,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "大栅栏",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料39次"
   },
   {
@@ -1514,7 +1520,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "王府井",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料30次"
   },
   {
@@ -1523,7 +1529,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "雍和宫",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料20次"
   },
   {
@@ -1532,7 +1538,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "国子监",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料23次"
   },
   {
@@ -1541,7 +1547,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "香山公园",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料14次"
   },
   {
@@ -1550,7 +1556,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "香山公园",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "香山公园短写法"
   },
   {
@@ -1559,7 +1565,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "八达岭长城",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料23次"
   },
   {
@@ -1568,7 +1574,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "慕田峪长城",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料14次"
   },
   {
@@ -1577,7 +1583,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "鸟巢",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料53次"
   },
   {
@@ -1586,7 +1592,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "水立方",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料32次"
   },
   {
@@ -1595,7 +1601,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "国家博物馆",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料32次"
   },
   {
@@ -1604,7 +1610,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "三星堆博物馆",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料33次"
   },
   {
@@ -1613,7 +1619,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "三星堆博物馆",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "三星堆博物馆短写法"
   },
   {
@@ -1622,7 +1628,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "都江堰",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料82次"
   },
   {
@@ -1631,7 +1637,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "青城山",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料42次"
   },
   {
@@ -1640,7 +1646,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "峨眉山",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料38次"
   },
   {
@@ -1649,7 +1655,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "杜甫草堂",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料11次"
   },
   {
@@ -1658,7 +1664,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "宽窄巷子",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料48次"
   },
   {
@@ -1667,7 +1673,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "武侯祠",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料38次"
   },
   {
@@ -1676,7 +1682,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "锦里",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料41次"
   },
   {
@@ -1685,7 +1691,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "洪崖洞",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料9次"
   },
   {
@@ -1696,7 +1702,7 @@
     "黄山"
    ],
    "canonical": "西递",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料40次；与宏村同为黄山联游惯例（in_scenic 跟随宏村先例）"
   },
   {
@@ -1705,7 +1711,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "徽州古城",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料7次"
   },
   {
@@ -1714,7 +1720,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "千岛湖",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料21次"
   },
   {
@@ -1723,7 +1729,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "苏堤",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料14次（杭州西湖）"
   },
   {
@@ -1732,7 +1738,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "汤口镇",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料82次；黄山门户集散地，非景区内游览点"
   },
   {
@@ -1741,7 +1747,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "汤口镇",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "汤口镇短写法"
   },
   {
@@ -1750,7 +1756,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "黄龙五彩池",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "语料10次；与九寨沟五彩池同名异点，独立canonical消歧"
   },
   {
@@ -1761,7 +1767,7 @@
     "九寨沟"
    ],
    "canonical": "则查洼沟",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "则查洼沟常见异写，语料16次"
   },
   {
@@ -1772,7 +1778,7 @@
     "九寨沟"
    ],
    "canonical": "则查洼沟",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "则查洼沟口语省写，语料独立出现4次"
   },
   {
@@ -1781,7 +1787,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "月沼",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "宏村内景点（月沼/南湖），供消解候选；不进景区内序列"
   },
   {
@@ -1790,7 +1796,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "南湖",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "宏村内景点（月沼/南湖），供消解候选；不进景区内序列"
   },
   {
@@ -1799,7 +1805,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "雅克夏雪山",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "成都-九寨沟沿线雪山（G248），语料9次"
   },
   {
@@ -1808,7 +1814,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "天安门广场",
-   "source": "p2_peripheral_expansion_2026-10-30",
+   "source": "peripheral_expansion_2026-10-30",
    "note": "北京地标广场，语料40次"
   },
   {
@@ -1817,7 +1823,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "庐山",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "三清山",
@@ -1825,7 +1831,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "三清山",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "徽州",
@@ -1833,7 +1839,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "徽州",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "歙县",
@@ -1841,7 +1847,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "歙县",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "黄山南大门",
@@ -1851,7 +1857,7 @@
     "黄山"
    ],
    "canonical": "黄山南大门",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "白云宾馆",
@@ -1861,7 +1867,7 @@
     "黄山"
    ],
    "canonical": "白云宾馆",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "后湖",
@@ -1871,7 +1877,7 @@
     "颐和园"
    ],
    "canonical": "后湖",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "慈福牌楼",
@@ -1881,7 +1887,7 @@
     "颐和园"
    ],
    "canonical": "慈福牌楼",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "新宫门",
@@ -1891,7 +1897,7 @@
     "颐和园"
    ],
    "canonical": "新宫门",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "敦煌",
@@ -1899,7 +1905,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "敦煌",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "麦积山",
@@ -1907,7 +1913,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "麦积山",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "莫高窟",
@@ -1915,7 +1921,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "莫高窟",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "鸣沙山",
@@ -1923,7 +1929,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "鸣沙山",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "嘉峪关关城",
@@ -1931,7 +1937,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "嘉峪关关城",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "横断山",
@@ -1939,7 +1945,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "横断山",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "归云山房",
@@ -1947,7 +1953,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "归云山房",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "国子监街",
@@ -1955,7 +1961,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "国子监街",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "五道营胡同",
@@ -1963,7 +1969,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "五道营胡同",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "北锣鼓巷",
@@ -1971,7 +1977,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "北锣鼓巷",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "恭王府博物馆",
@@ -1979,7 +1985,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "恭王府博物馆",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "九黄机场",
@@ -1987,7 +1993,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "九黄机场",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "成都东",
@@ -1995,7 +2001,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "成都东",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "成都东站",
@@ -2003,7 +2009,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "成都东站",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "天府机场",
@@ -2011,7 +2017,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "天府机场",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "虹桥火车站",
@@ -2019,7 +2025,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "虹桥火车站",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "送客松",
@@ -2029,7 +2035,7 @@
     "黄山"
    ],
    "canonical": "送客松",
-   "source": "b03_coref_gold_dev_2026-11-07"
+   "source": "coref_gold_dev_2026-11-07"
   },
   {
    "name": "金山岭长城",
@@ -2037,7 +2043,7 @@
    "subtype": "景点",
    "scenic_areas": [],
    "canonical": "金山岭长城",
-   "source": "b03_coref_gold_dev_2026-11-07"
+   "source": "coref_gold_dev_2026-11-07"
   }
  ],
  "transport": [
@@ -2419,7 +2425,7 @@
     "通用"
    ],
    "canonical": "坐车",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   },
   {
    "name": "顺风车",
@@ -2429,7 +2435,7 @@
     "通用"
    ],
    "canonical": "顺风车",
-   "source": "b03_recall_eval_2026-11-05"
+   "source": "recall_eval_2026-11-05"
   }
  ],
  "domain_stopwords": [

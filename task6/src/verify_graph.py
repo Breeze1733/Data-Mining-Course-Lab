@@ -46,12 +46,12 @@ def verify_names(graph):
 
 
 def main(out_dir: Path | None = None) -> int:
-    """H06：out_dir 可指向产物副本——故障注入测试对损坏副本运行真实检查。"""
+    """out_dir 可指向产物副本——故障注入测试对损坏副本运行真实检查。"""
     out_dir = Path(out_dir) if out_dir else OUT
     G = nx.read_graphml(out_dir / "knowledge_graph.graphml")
 
     def edges_between(u_name: str, v_name: str, scenic: str):
-        """F09：事实核验只认正向有向边——路线先后是方向性知识，反向边（折返游记
+        """事实核验只认正向有向边——路线先后是方向性知识，反向边（折返游记
         产生的 v→u）不能顶替正向事实；反向存在单独记录供透明查看。"""
         u, v = f"POI:{scenic}:{u_name}", f"POI:{scenic}:{v_name}"
 
@@ -110,7 +110,7 @@ def main(out_dir: Path | None = None) -> int:
             "各景区子图均为单一连通分量（条件节点挂靠在 POI/景区上），无孤立节点；",
         ],
     }
-    # F11：三方一致性——graphml / nodes.csv / edges.csv / stats 行列数互相印证
+    # 三方一致性——graphml / nodes.csv / edges.csv / stats 行列数互相印证
     import csv as _csv
     import json as _json
     try:
@@ -128,7 +128,7 @@ def main(out_dir: Path | None = None) -> int:
     except Exception as _exc:
         validation["roundtrip"] = {"ok": False, "error": str(_exc)}
 
-    # P04 溯源抽检：条件节点与游客先后边的逐条证据必须完整可解析
+    # 溯源抽检：条件节点与游客先后边的逐条证据必须完整可解析
     import json as _json
     prov = {"cond_nodes_checked": 0, "cond_nodes_with_evidence": 0,
             "order_edges_checked": 0, "order_edges_with_records": 0, "parse_failures": 0}
