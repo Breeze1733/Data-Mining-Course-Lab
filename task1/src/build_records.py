@@ -21,7 +21,8 @@ from urllib.parse import urlsplit
 from lxml import html
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+if getattr(sys.stdout, "encoding", "").lower() != "utf-8":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 OFFICIAL_DOMAINS = {
     "www.jiuzhai.com", "jiuzhai.com",

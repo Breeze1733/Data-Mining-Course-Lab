@@ -1,0 +1,26 @@
+{
+ "title": "B12 链路各步耗时基线（G16 缓存后）",
+ "timings": {
+  "task2/src/extract_entities.py": 5.12,
+  "task4/src/detect_and_resolve.py": 2.28,
+  "task3/src/compare_routes.py": 1.56,
+  "task5/src/extract_conditionals.py": 1.5,
+  "task7/src/run_tests.py": 1.17,
+  "task6/src/build_graph.py": 1.15
+ },
+ "slowest": [
+  [
+   "task2/src/extract_entities.py",
+   5.12
+  ],
+  [
+   "task4/src/detect_and_resolve.py",
+   2.28
+  ],
+  [
+   "task3/src/compare_routes.py",
+   1.56
+  ]
+ ],
+ "verdict": "全链主要步骤均在秒级；实体抽取最大头（jieba 首次加载）"
+}

@@ -1,0 +1,8 @@
+{
+ "title": "H02 stdout 副作用复查",
+ "remaining": [
+  "task3/src/compare_routes.py 等模块保留 TextIOWrapper 重包（条件守卫式，仅编码非 utf-8 时生效）",
+  "tests 与链入口统一 reconfigure"
+ ],
+ "verdict": "重包均为条件守卫式（非 import 即执行的无条件副作用），H02 风险可控"
+}
