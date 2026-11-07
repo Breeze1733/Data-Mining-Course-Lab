@@ -1,0 +1,11 @@
+{
+ "title": "无逗号条件变体（如果X就Y）的过滤式设计预演",
+ "funnel": {
+  "raw": 107,
+  "after_sugg_verb_gate": 12,
+  "after_cond_noun_gate": 2,
+  "after_metaphor_gate": 2
+ },
+ "survivors_quality": "2 例幸存均为低质量（占卦门票混入/边界模糊），不足以支撑新增模式",
+ "verdict": "否定：无逗号形态在本语料被比喻、非建议用法主导，三道门后仅余 2 条低质候选——不新增模式；逗号/的话形态仍是可靠信号。若未来语料扩充可重开。"
+}
