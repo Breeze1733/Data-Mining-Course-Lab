@@ -138,7 +138,7 @@ def main() -> int:
         "false_positives": false_pos,
         "scope_note": {},
     }
-    # B02/U78：分层报告（冻结样本仅测量，不改规则）——按平台/景区/来源跨度长度
+    # B02：分层报告（冻结样本仅测量，不改规则）——按平台/景区/来源跨度长度
     def _strata(keyfn, name):
         agg = {}
         for o, sent_stats in sentence_stats:

@@ -16,7 +16,7 @@ from pathlib import Path
 
 from dictionary import Candidate, TYPE_TIME
 
-EDGE_TRIM = ' \t\r\n，,。；;、：:→➡➔⇒-—–~～()（）[]【】<>《》"\'“”‘’'
+EDGE_TRIM = ' \t\r\n，,。；;、：:→➡➔⇒-—–~～()[]【】<>《》"\'“”‘’'
 
 
 def trim_span(text: str, start: int, end: int) -> tuple[int, int]:

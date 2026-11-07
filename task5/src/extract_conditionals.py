@@ -182,7 +182,7 @@ def split_multi_suggestions(sugg: str) -> list[str]:
 
 PLATFORM_PHRASE_RE = re.compile(r"点赞|收藏|一键三连|评论区|私信|关注我们|转发|推荐阅读")
 
-# U20 守卫（依据 review_test 新鲜抽检 8 wrong 归因）：
+# 守卫（依据 review_test 新鲜抽检 8 wrong 归因）：
 
 LYRICAL_RE = re.compile(r"人生|岁月|初心|青春|梦想|心态|老得太快|明白得太迟|否定了自己|自己的想法")
 
@@ -264,7 +264,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
 
 
-    # P1/P2/P3：显式条件（含”…的话就/可以/建议Y”无逗号紧邻变体，U25：+4 例真实建议）
+    # P1/P2/P3：显式条件（含”…的话就/可以/建议Y”无逗号紧邻变体，+4 例真实建议）
 
     for m in re.finditer(r"(如果|假如|假若|若是|(?<![宛仿相如自普兰沉聊日的])若|要是|万一|一旦|只要|除非)([^。！？；]{1,40}?)(的话)?[，,]", sent):
 
@@ -316,7 +316,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
 
 
-    # U74(a)：裸"X的话，Y"（无如果/要是 前置）——"玩黄龙的话住松潘古城"（E01 扩充样本实证漏抽）
+    # 扩展A：裸"X的话，Y"（无如果/要是 前置）——"玩黄龙的话住松潘古城"（E01 扩充样本实证漏抽）
     for m in re.finditer(r"([一-龥A-Za-z0-9]{2,12})的话[，,]?\s*", sent):
         if m.start() in seen_spans:
             continue
@@ -332,7 +332,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
                           "condition_text": cond, "suggestions": [sugg], "sentence": sent})
         seen_spans.add(m.start())
 
-    # U74(b)：空格分隔的"条件 出现 + 祈使"——"高反情况出现 路上随时休息补氧"
+    # 扩展B：空格分隔的"条件 出现 + 祈使"——"高反情况出现 路上随时休息补氧"
     for m in re.finditer(r"([一-龥A-Za-z0-9]{2,14}(?:出现|的时候?))[ 　]+([一-龥][^。！？；]{1,28})", sent):
         cond, rest = m.group(1), m.group(2).strip()
         if not re.search(r"(?:休息|补氧|带上?|备|穿|涂|错峰|排队|慢行|提前)", rest[:10]):
@@ -341,7 +341,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
                       "condition_text": cond, "suggestions": [rest], "sentence": sent,
                       "condition_type": "体力安全" if ("高反" in cond or "体力" in cond) else "一般"})
 
-    # U74(e)：须做/禁入规定（"你需要乘坐新国线登山车"/"私家车不允许进入"）
+    # 扩展C：须做/禁入规定（"你需要乘坐新国线登山车"/"私家车不允许进入"）
     for m in re.finditer(r"(需要?|须)(乘坐?|购买|预订|预约)[^。！？；，]{1,26}", sent):
         pairs.append({"pattern": "P7_依据规定", "trigger": m.group(1) + m.group(2),
                       "condition_text": "入园/通行规定（句内）", "suggestions": [m.group(0)],
@@ -350,11 +350,11 @@ def extract_from_sentence(sent: str) -> list[dict]:
     for m in re.finditer(r"(不允许|禁止|不得)[^。！？；，]{1,26}", sent):
         back = sent[max(0, m.start() - 12):m.start()]
         if re.search(r"(估计|可能|将|恐怕|也许|说不定)", back):
-            continue  # U74：预测性语境（"估计不久将禁止"）非现行规定
+            continue  # 预测性语境（"估计不久将禁止"）非现行规定
         pairs.append({"pattern": "P6_否定建议", "trigger": m.group(1),
                       "condition_text": "入园/通行规定（句内）", "suggestions": [m.group(0)],
                       "sentence": sent, "condition_type": "一般"})
-    # U74(f)：注意+闭馆/不开放类规定（"需要注意的是北京很多景点周一都不开放"）
+    # 扩展D：注意+闭馆/不开放类规定（"需要注意的是北京很多景点周一都不开放"）
     for m in re.finditer(r"(需要注意的是?|注意)[^。！？；]{0,18}(不开放|闭馆|关闭|停运|暂停开放)[^。！？；]{0,20}", sent):
         pairs.append({"pattern": "P7_依据规定", "trigger": m.group(1),
                       "condition_text": "开放时间规定（句内）",
@@ -513,7 +513,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         segs = split_multi_suggestions(m.group(2))
 
-        # U74(c)：首段并回"可以"动词线索——建议从动词起（此前"可以不下了"被截成"不下了"，
+        # 扩展E：首段并回"可以"动词线索——建议从动词起（此前"可以不下了"被截成"不下了"，
 
         # 3 字建议被最短长度过滤淘汰，E01 扩充样本实证）
 
@@ -563,7 +563,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             cond_text, cond_type = "一般建议（避雷）", "一般"
 
-        # U74(d)：回扩动词短语——否定词前的"带/穿/买/选…"短语属于同一建议
+        # 扩展F：回扩动词短语——否定词前的"带/穿/买/选…"短语属于同一建议
         # （"带老人、小孩慎选"此前仅存"慎选)"，3 字被最短长度过滤淘汰）
         back = sent[max(0, m.start(1) - 8):m.start(1)]
         back_m = re.search(r"(带|穿|买|选|点|准备|记得)([^，。！？；；]{0,6})$", back)
@@ -588,7 +588,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
 
 
-# P4 对立建议自动标记（U15）：同景区内"否定式 vs 肯定式"同核建议共存并互带来源引用。
+# P4 对立建议自动标记：同景区内"否定式 vs 肯定式"同核建议共存并互带来源引用。
 
 NEG_PREFIX_RE = re.compile(r"^(不要|不宜|不建议|别|切勿|避免|慎|忌|最好不|无法|不能)")
 
@@ -704,7 +704,7 @@ def mark_opposing(mapping: list[dict]) -> list[dict]:
 
 def norm(s: str) -> str:
 
-    return re.sub(r"[\s，,。；;、！？!?\[\]（）()【】]+", "", s)
+    return re.sub(r"[\s，,。；;、！？!?\[\]()【】]+", "", s)
 
 
 

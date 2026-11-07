@@ -32,7 +32,7 @@ plt.rcParams["axes.unicode_minus"] = False
 # 人工判定：key=(pattern, scenic, 条件归一, 建议归一) → (verdict, note)
 def _norm(s: str) -> str:
     import re as _re
-    return _re.sub(r"[\s，,。；;、！？!?（）()【】\[\]]+", "", s)
+    return _re.sub(r"[\s，,。；;、！？!?()【】\[\]]+", "", s)
 
 
 VERDICTS: dict[tuple, tuple[str, str]] = {
@@ -132,7 +132,7 @@ def fill(pairs: list[dict]) -> None:
 
 
 def _norm5(t: str) -> str:
-    return re.sub(r"[\s，,。；;、！？!?\[\]（）()【】的了吗呢啊呀的]", "", t or "")
+    return re.sub(r"[\s，,。；;、！？!?\[\]()【】的了吗呢啊呀的]", "", t or "")
 
 
 

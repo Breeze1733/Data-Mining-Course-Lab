@@ -26,7 +26,7 @@ SEED = ROOT / "resources/domain_seed.json"
 TIMERULES = ROOT / "resources/time_rules.json"
 
 SOURCE = "b03_recall_eval_2026-11-05"
-# U85 第二批：消解 dev gold 先行词证据（dev 120 例，冻结留出集不参与）；
+# 第二批：消解 dev gold 先行词证据（dev 120 例，冻结留出集不参与）；
 # B03 纪律：语料频次 ≥2 才录入（墨海/白石海 各 1 次为样本特例，排除并记录）
 SOURCE2 = "b03_coref_gold_dev_2026-11-07"
 POI_ADDITIONS2 = [

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""E09/U83：条件聚类对比词守卫——语义相斥的近文本不得因 Jaccard 高而合并。"""
+"""E09：条件聚类对比词守卫——语义相斥的近文本不得因 Jaccard 高而合并。"""
 import unittest
 import sys
 from pathlib import Path

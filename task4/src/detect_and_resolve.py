@@ -32,7 +32,7 @@ PERSON_HINT_RE = re.compile(
     r"挑夫|挑山工|工作人员|司机|导游|老板|店员|大叔|阿姨|小哥|师傅|保安|检票员|服务员|主人|大爷|大妈|"
     r"游客|前台|讲解员|店主|姑娘|小伙子|教练|医生|护士|当地人|本地人|管理者|管理员|村民|东家|掌柜|小朋友|孩子们")
 
-# U62：他人指代跟随信号的人物词扩展（登山者/路人/行人/“一队人”式群体名词；dev 证据 +3/0 坏）
+# 他人指代跟随信号的人物词扩展（登山者/路人/行人/“一队人”式群体名词；dev 证据 +3/0 坏）
 PERSON_HINT_EXT = re.compile(
     PERSON_HINT_RE.pattern
     + r"|登山者|胜利者|路人|行人|[一两二三四五六七八几]?\s*[队批群帮].{0,3}人"
@@ -47,7 +47,7 @@ PRONOUN_CLASS = {
     "其中": "set",
 }
 
-# U59：名词回退的集合信号（kind 名词集合 vs 其他 的判据，dev 证据 +5）
+# 名词回退的集合信号（kind 名词集合 vs 其他 的判据，dev 证据 +5）
 _PLURAL_PREFIX_RE = re.compile(r"(?:这些|那些|各[类种样]?|诸|众多|许多|很多|大片|成片|遍地的?)[一-龥]{0,4}$")
 _ENUM_GAP_RE = re.compile(r"[、和与及/,,\s]{1,3}")
 
@@ -165,8 +165,8 @@ def main(argv=None) -> int:
                     "prev2_sentence": sentences[si - 2][2] if si >= 2 else "",
                 }
                 if cls in ("locative", "object"):
-                    # 路线指代："这条(路|线…)"指代道路/线路本身，不是沿途 POI（U13，7例人工标注集回归）；
-                    # "这条沟"指代窗口内带"沟"的水系/沟谷 POI（U22，则查洼沟例）
+                    # 路线指代："这条(路|线…)"指代道路/线路本身，不是沿途 POI（7例人工标注集回归）；
+                    # "这条沟"指代窗口内带"沟"的水系/沟谷 POI（则查洼沟例）
                     if pron == "这条" and re.search(r"这条路|这条线|该路线", case["sentence"]):
                         case.update({"resolution": "路线", "resolution_kind": "路线",
                                      "evidence": "这条+路/线 指代道路/线路本身"})
@@ -184,7 +184,7 @@ def main(argv=None) -> int:
                             fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                             n_cases += 1
                             continue
-                    # “其它”为限定词（其+它），非回指代词（U22，人工标注评测集留出2例）
+                    # “其它”为限定词（其+它），非回指代词（人工标注评测集留出2例）
                     if pron in ("它", "它们") and doc_start > 0 and text[doc_start - 1] == "其":
                         case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
                                      "evidence": "“其它”为限定词，非回指代词，检测保留但消解为无"})
@@ -207,7 +207,7 @@ def main(argv=None) -> int:
                         before = [e for e in pool if e["end"] <= doc_start]
                         if is_prev:
                             before = pool  # 前句实体全部视为“在前”
-                        # D06/U67：pois+transports 拼接池并非全局按位置有序（实测 246/271 记录乱序），
+                        # D06：pois+transports 拼接池并非全局按位置有序（实测 246/271 记录乱序），
                         # 直接 reversed 截断是顺序依赖的——先按 end 降序排为“就近优先”，
                         # 再截断保留距代词最近的 7 个，截断不再偏向实体类型/列表顺序
                         before = sorted(before, key=lambda e: e["end"], reverse=True)
@@ -217,7 +217,7 @@ def main(argv=None) -> int:
                                 eslab = sent_label(e["start"])
                                 if focus != "景区外" and eslab == "景区外":
                                     continue  # P1 归属过滤：焦点在景区内/未知时，景区外句实体不作候选
-                                # 焦点景区×实体归属一致性只约束跨句候选——同句明说的实体即当前叙述的一部分（U22）
+                                # 焦点景区×实体归属一致性只约束跨句候选——同句明说的实体即当前叙述的一部分
                                 if scope != "同句" and focus in SCENIC_NAMES and e["type"] == "景点POI":
                                     scenic_of = poi2scenic.get(e["canonical"])
                                     if scenic_of is not None and focus not in scenic_of:
@@ -232,7 +232,7 @@ def main(argv=None) -> int:
                             })
 
                     cur_sent_start, cur_sent_end = sentences[si][0], sentences[si][1]
-                    # U60：处所代词紧跟同句 POI 枚举（“…慈光阁和云谷寺及北大门、西大门那里出售”）——
+                    # 处所代词紧跟同句 POI 枚举（“…慈光阁和云谷寺及北大门、西大门那里出售”）——
                     # 此时“那里”承接整个枚举集合而非最后一个 POI（dev 证据 +1、零破坏后实施）
                     if cls == "locative":
                         cur_pois = sorted((e for e in pois if cur_sent_start <= e["start"] < cur_sent_end
@@ -256,7 +256,7 @@ def main(argv=None) -> int:
                     if si >= 2:
                         add_pool([e for e in pois
                                   if sentences[si - 2][0] <= e["start"] < sentences[si - 2][1]], "前两句", True)
-                    # 后置命名："…名为X"的 X 是代词先行词的同位专名（U22，人工标注评测集1例）
+                    # 后置命名："…名为X"的 X 是代词先行词的同位专名（人工标注评测集1例）
                     tail = case["sentence"][max(0, doc_end - cur_sent_start):]
                     if re.search(r"名为|称之为|称作|叫做|叫作", tail):
                         after = [e for e in pois if e["start"] >= doc_end and e["start"] < cur_sent_end]
@@ -269,7 +269,7 @@ def main(argv=None) -> int:
                             fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                             n_cases += 1
                             continue
-                    # 命名句："X在这里被叫做Y"指称的是范围而非窗口实体（U22，人工标注评测集1例）
+                    # 命名句："X在这里被叫做Y"指称的是范围而非窗口实体（人工标注评测集1例）
                     if re.search(r"被叫做|被称作|被叫作|被唤作", case["sentence"]):
                         if focus == "景区外":
                             case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
@@ -281,14 +281,14 @@ def main(argv=None) -> int:
                         n_cases += 1
                         continue
                     if not cands:
-                        # 设施回退：窗口内无实体但提及酒店/餐厅/民宿等 → "这里/那里"多指该设施（U16，2例人工标注集回归）
+                        # 设施回退：窗口内无实体但提及酒店/餐厅/民宿等 → "这里/那里"多指该设施（2例人工标注集回归）
                         if re.search(r"酒店|民宿|餐厅|饭馆|烤鸭店|客栈|宾馆|农家乐|店家|客房",
                                      case["sentence"] + case["prev_sentence"]):
                             case.update({"resolution": "facility", "resolution_kind": "设施",
                                          "evidence": "窗口无实体但提及住宿/餐饮设施"})
                         elif focus == "景区外":
-                            # 焦点在景区外时回退主景区名方向性错误（U22）：如实记无明确先行词
-                            # U61：景区外句的概念先行词回退——同句代词前最近普通名词
+                            # 焦点在景区外时回退主景区名方向性错误：如实记无明确先行词
+                            # 景区外句的概念先行词回退——同句代词前最近普通名词
                             # （"祠堂又是一部史书,它记载了…"，dev 证据 +2/0 坏后实施）
                             _nb = None
                             _idx = case["sentence"].find(pron)
@@ -326,14 +326,14 @@ def main(argv=None) -> int:
                 elif cls == "person":
                     window = case["sentence"] + case["prev_sentence"]
                     window3 = case["sentence"] + case["prev_sentence"] + case["prev2_sentence"]
-                    # “同行”在“同行拼车/同行拼”等语境指同车陌生人而非同行队伍（U22）
+                    # “同行”在“同行拼车/同行拼”等语境指同车陌生人而非同行队伍
                     PARTY_RE = re.compile(r"我们|我俩|咱们|我妈|我爸|媳妇|闺女|老婆|老公|女儿|儿子|同伴|闺蜜|一家人|同行(?!拼)")
                     party_signal = PARTY_RE.search(window)
                     party_signal3 = PARTY_RE.search(window3)
                     # hint-cur 分支只看当前句的同行者信号（前句"我们"不应否决当前句的服务角色指代）
                     party_cur = PARTY_RE.search(case["sentence"])
-                    # “他们(家|自家|后院|店里)”指店家设施而非人（U22，人工标注评测集4例）
-                    # U62 回归修复：守卫必须终止（write+continue）——曾因改成 if/else 后
+                    # “他们(家|自家|后院|店里)”指店家设施而非人（人工标注评测集4例）
+                    # 回归修复：守卫必须终止（write+continue）——曾因改成 if/else 后
                     # 落入下方独立 if 链被 travel_party 覆盖（2 例设施类回归）
                     if re.search(r"(他们|她们)(家|自家|后院|店里)", case["sentence"]):
                         case.update({"resolution": "facility", "resolution_kind": "设施",
@@ -342,7 +342,7 @@ def main(argv=None) -> int:
                         n_cases += 1
                         continue
                     else:
-                        # U62：他人指代跟随信号——代词紧邻人物词（间隔≤16 字且间隔无我/我们/你），
+                        # 他人指代跟随信号——代词紧邻人物词（间隔≤16 字且间隔无我/我们/你），
                         # 或代词先于本句任何我/我们/你 且前句含人物词（“…站了一队人,他们在等…”）。
                         # 此时“他们”承接近旁第三者名词，即使窗口出现“我们”（叙述者）也判他人
                         #（dev 证据 +3/0 坏后实施）
@@ -373,7 +373,7 @@ def main(argv=None) -> int:
                     elif (not party_signal3 and not re.search(r"我|你", case["prev_sentence"])
                           and PERSON_HINT_RE.search(case["prev2_sentence"])):
                         case.update({"resolution": "other_person", "resolution_kind": "他人",
-                                     "evidence": "前二句含他人角色词、前句非第一人称叙述且窗口无同行者信号（U22 扩窗）"})
+                                     "evidence": "前二句含他人角色词、前句非第一人称叙述且窗口无同行者信号（扩窗）"})
                     elif not party_cur and not PERSON_HINT_RE.search(case["sentence"]) and re.search(
                             r"酒店|宾馆|民宿|客栈|餐厅|饭馆|旅馆|客房|房间", case["sentence"]):
                         case.update({"resolution": "facility", "resolution_kind": "设施",
@@ -400,11 +400,11 @@ def main(argv=None) -> int:
                         re.fullmatch(r"[、和与及/,,\s]{1,3}", text[a["end"]:b["start"]])
                         for a, b in zip(win_pois, win_pois[1:]))
                     # 数量词短语守卫（"72个山峰/三副转轮藏/两种上山方式"）→ 优先名词集合；
-                    # 守卫窗口为整个先行词窗口（U22 扩展：三副转轮藏的数量词在前句中部）
+                    # 守卫窗口为整个先行词窗口（扩展：三副转轮藏的数量词在前句中部）
                     qty_guard = re.search(
                         r"[一二两三四五六七八九十几\d]+\s*[个座副条种栋项回轮处只名套批]",
                         window_text)
-                    # 可替代方式："可以X也可以Y"的"其中"承接方式集合而非 POI 枚举（U22，人工标注评测集1例）
+                    # 可替代方式："可以X也可以Y"的"其中"承接方式集合而非 POI 枚举（人工标注评测集1例）
                     alternatives = re.search(r"可以[^，。？！;；]{1,12}也可以", window_text)
                     if person_set:
                         case.update({"resolution": "person_set", "resolution_kind": "人称集合",
@@ -429,7 +429,7 @@ def main(argv=None) -> int:
                                 noun = words[-1]
                                 break
                         if noun:
-                            # U59 谱系对齐（dev 证据 +5）：jieba 回退取的是单个最近名词，
+                            # 谱系对齐（dev 证据 +5）：jieba 回退取的是单个最近名词，
                             # 单名词先行词按"其他"（非实体概念）判定；仅当窗口存在真集合信号
                             # （顿号/和连接的≥2普通名词、数量词短语守卫、复数指示前缀）时才判"名词集合"——
                             # 避免把"恭王府占地面积…其中"这类单概念先行词误标为集合。

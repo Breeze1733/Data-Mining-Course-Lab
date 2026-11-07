@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """H04：正式产物的原子写出——先写临时文件再 os.replace，杜绝半写文件污染正式结果。
 
-U71：Windows 下 os.replace 对刚关闭的临时文件偶发 PermissionError（WinError 5，
+Windows 下 os.replace 对刚关闭的临时文件偶发 PermissionError（WinError 5，
 杀毒/索引器短暂持锁，实测约数轮触发一次，曾致 unittest 随机红）。统一在此小退避重试。
 """
 import os

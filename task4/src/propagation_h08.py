@@ -70,7 +70,7 @@ def main() -> int:
         else:
             nm = True
         n_poi, n_tra = pools.get(c["record_id"], (0, 0))
-        # U65 分层改用有方差的机械维度：同句干扰实体数、代词-最近实体距离
+        # 分层改用有方差的机械维度：同句干扰实体数、代词-最近实体距离
         _ents = ents_by_rec.get(c["record_id"], [])
         _ds, _de = c["doc_start"], c["doc_end"]
         _sent_lo, _sent_hi = c["doc_start"] - len(c["prev_sentence"]), c["doc_end"] + 10 ** 9
@@ -104,7 +104,7 @@ def main() -> int:
                   "120 例记录级 POI 池全部 ≥8（无方差）。改按机械难度维度分层："
                   "代词前同句干扰实体数、代词-最近前文实体距离。真实信号：最近实体 ≤20 字符层 "
                   "acc 显著高于更远层——错误集中在实体池启发式支撑薄弱的位置（真实先行词多为非实体"
-                  "名词或跨句远距），与 U59/U61 的名词回退改进方向一致。仅 dev 侧，Wilson 95% CI。",
+                  "名词或跨句远距），与 的名词回退改进方向一致。仅 dev 侧，Wilson 95% CI。",
         "overall": {"n": len(rows),
                     "accuracy": round(sum(r["correct"] for r in rows) / len(rows), 3)},
         "layers": [

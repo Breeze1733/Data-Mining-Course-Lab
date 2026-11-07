@@ -43,13 +43,13 @@ AREAS = ("黄山", "九寨沟", "颐和园")
 PERIODS = ("上午", "中午", "下午", "晚上")
 
 
-# E09/U83（模块级供单测复用）：对比词守卫——等长文本恰一处差异且互为对比词→语义相斥
+# E09（模块级供单测复用）：对比词守卫——等长文本恰一处差异且互为对比词→语义相斥
 _CONTRAST = [("多", "少"), ("雨", "雪"), ("早", "晚"), ("上", "下"), ("有", "无"),
              ("大", "小"), ("开", "关"), ("高", "低"), ("冷", "热"), ("快", "慢"), ("贵", "廉")]
 
 
 def _norm_cond_m(t: str) -> str:
-    return re.sub(r"[\s，,。；;、！？!?\[\]（）()【】的了吗呢啊呀]", "", t)
+    return re.sub(r"[\s，,。；;、！？!?\[\]()【】的了吗呢啊呀]", "", t)
 
 
 def _contrast_blocked(ta: str, tb: str) -> bool:
@@ -213,7 +213,7 @@ def main() -> int:
     # P5 聚类归一：同景区+同类型+归一文本 char-bigram Jaccard>=0.4 的条件合并为一个节点，
     # 保留代表文本（频次最高）、全部变体与合计频次；边按成员逐条挂接、权重累加。
     def _norm_cond(t: str) -> str:
-        return re.sub(r"[\s，,。；;、！？!?\[\]（）()【】的了吗呢啊呀]", "", t)
+        return re.sub(r"[\s，,。；;、！？!?\[\]()【】的了吗呢啊呀]", "", t)
 
     def _bigrams(t: str) -> set:
         return {t[i:i + 2] for i in range(len(t) - 1)} if len(t) > 1 else {t}
@@ -235,7 +235,7 @@ def main() -> int:
         return max(cands, key=lambda fc: (bool(_SUGG_ACT.search(fc[1])), fc[0], len(fc[1])))[1]
 
     clusters: list[dict] = []
-    # E09/U83：对比词守卫见模块级 _contrast_blocked（真实图谱 0 对受影响，潜在风险加固）
+    # E09：对比词守卫见模块级 _contrast_blocked（真实图谱 0 对受影响，潜在风险加固）
     reps: list[tuple[str, str, str, str, set]] = []
     for m in mapping:
         key_text = _norm_cond(m["condition_text"])

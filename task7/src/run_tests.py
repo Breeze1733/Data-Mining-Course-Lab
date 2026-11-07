@@ -106,7 +106,7 @@ def check_invariants(result):
 
 
 def check_must(result, expect_poi):
-    """U66 验收：必去地点必须在行程中，且回答/贴士说明必去落实（识别 must 死代码退化）。"""
+    """验收：必去地点必须在行程中，且回答/贴士说明必去落实（识别 must 死代码退化）。"""
     plan = result.get("plan") or {}
     pois = [it["poi"] for it in plan.get("itinerary", [])]
     in_plan = any(expect_poi in p for p in pois)

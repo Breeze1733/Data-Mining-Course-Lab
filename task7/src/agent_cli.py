@@ -48,7 +48,7 @@ SPECIAL_PATTERNS = [
     ("省力", r"省力|轻松|不累|少走|不想太累|不要太累|不想走太多|走路要少|少走路"), ("红叶", r"红叶|秋色|赏秋"),
     ("拍照片", r"拍照|出片|机位"), ("滑雪", r"滑雪|温泉"),
 ]
-# 出行月份（规则口径）：月份短语/季节词/节假日 → 代表月份（U24 时段可行性）
+# 出行月份（规则口径）：月份短语/季节词/节假日 → 代表月份（时段可行性）
 TRIP_MONTH_PATTERNS = [
     (10, r"(?<!\d)10月|十月|秋季|秋天|国庆"), (11, r"(?<!\d)11月|十一月"), (12, r"(?<!\d)12月|十二月|冬季|冬天"),
     (1, r"(?<!\d)1月|一月|寒假|元旦"), (2, r"(?<!\d)2月|二月|春节|过年"), (3, r"(?<!\d)3月|三月"),
@@ -126,7 +126,7 @@ class IntentParser:
                 trace.append({"step": "intent", "thought": f"LLM 解析失败（{exc}），回退规则解析", "via": "fallback"})
         if llm_intent is not None:
             rule_intent = self._parse_rules(query)
-            # 混合：规则精确字段（时长正则/景区词表/人群词表）优先，规则缺省处用 LLM 补（U18）
+            # 混合：规则精确字段（时长正则/景区词表/人群词表）优先，规则缺省处用 LLM 补
             merged = dict(rule_intent)
             if merged.get("scenic") in (None, "未知") and llm_intent.get("scenic"):
                 merged["scenic"] = llm_intent["scenic"]
@@ -228,7 +228,7 @@ class ReActAgent:
                      "再取官方路线做编排骨架，最后按游客类型取条件贴士"})
 
         selected = [p["poi"] for p in pois_res["pois"]]
-        # G04/U88：软偏好参与选点排序——"拍照片"把挂有拍照类条件的已选 POI 前置
+        # G04：软偏好参与选点排序——"拍照片"把挂有拍照类条件的已选 POI 前置
         # （稳定排序只提位不新增；此前该特殊需求仅被解析、从未作用于规划）
         photo_pois: set = set()
         if "拍照片" in (intent.get("special") or []):
@@ -264,7 +264,7 @@ class ReActAgent:
             if len(removed_by_avoid) >= 2 and len(selected) <= 3:
                 special_notes.append("您避开的景点较多，行程较精简；"
                                      "如需更丰富的安排，可放宽部分\"不去\"地点后再试")
-        # U66：必去地点落实（G02b 后半——此前 must 仅抽取、从未作用于规划）。
+        # 必去地点落实（G02b 后半——此前 must 仅抽取、从未作用于规划）。
         # 已选/解析到的必去项一律进入豁免名单（must_keep），豁免时段预算裁剪（硬约束优先，G04）；
         # 解析失败如实说明。
         must_keep: list[str] = []
@@ -307,7 +307,7 @@ class ReActAgent:
         template = best_route["route_title"] if best_route else ""
         _sunrise_poi = None
         ordered = self._order_pois(scenic, selected, template_pos)
-        # G04/U88：软偏好提升在编排序之后生效（此前置于 selected 上会被 _order_pois 覆盖）
+        # G04：软偏好提升在编排序之后生效（此前置于 selected 上会被 _order_pois 覆盖）
         if photo_pois:
             ordered.sort(key=lambda x: x not in photo_pois)
             trace.append({"step": "thought",
@@ -348,7 +348,7 @@ class ReActAgent:
         # G03：时段预算——限制每日 POI 数量（半日≤3、一日≤5、多日≤每日4）
         n_days = max(1, int(days) if days and days >= 1 else 1)
         ordered = self._apply_time_budget(ordered, days, n_days, _sunrise_poi, special_notes, trace)
-        # U66：必去地点豁免时段预算裁剪（硬约束优先，G04）——被裁剪则回填
+        # 必去地点豁免时段预算裁剪（硬约束优先，G04）——被裁剪则回填
         if must_keep:
             missing = [p for p in dict.fromkeys(must_keep) if p not in ordered]
             if missing:
@@ -414,7 +414,7 @@ class ReActAgent:
             for i, it in enumerate(itinerary):
                 it["order"] = i + 1
 
-        # P6 行程可行性校验（U24 时段化）：封禁/不建议类按 U11 提示；条件文本含月份窗口时按出行月份判定——
+        # P6 行程可行性校验（时段化）：封禁/不建议类按 提示；条件文本含月份窗口时按出行月份判定——
         # 封禁类月份命中 → 升级为时段冲突；正类窗口（开放/适合/精华）且出行月不在窗口 → 出行时段提示
         feasibility_warnings = []
         seen_warn = set()

@@ -1261,7 +1261,7 @@
   <data key="d1">自驾</data>
   <data key="d2">自驾</data>
 </node>
-<node id="条件:九寨沟:P4_建议推断:时间:时间条件句内">
+<node id="条件:九寨沟:P4_建议推断:时间:时间条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">时间条件（句内）</data>
   <data key="d2">[时间|P4] 时间条件（句内）</data>
@@ -1309,7 +1309,7 @@
   <data key="d10">["JZG-SUP02"]</data>
   <data key="d11">[{"row_id": 3, "record_id": "JZG-SUP02", "pattern": "P1_显式条件", "frequency": 1, "condition": "镜的100多个湖泊散布其间", "suggestion": "泉、瀑、河、滩将无数碧蓝澄澈的湖泊连缀一体,千姿百态,如诗如画,是多少人心之向往的一处天堂"}]</data>
 </node>
-<node id="条件:九寨沟:P4_建议推断:天气:天气条件句内">
+<node id="条件:九寨沟:P4_建议推断:天气:天气条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">天气条件（句内）</data>
   <data key="d2">[天气|P4] 天气条件（句内）</data>
@@ -1333,7 +1333,7 @@
   <data key="d10">["YHY-EXP02", "XHS_689b3f7e000000001d007fae", "XHS_698ac043000000000a03312b", "XHS_6a4bc4050000000016027a65", "XHS_6ab51bbd000000001c02d84a", "XHS_6a9434700000000026000841", "XHS_6adf124a000000001601ae2c", "XHS_6ae22af4000000003402822f"]</data>
   <data key="d11">[{"row_id": 6, "record_id": "YHY-EXP02", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "拍照留念处:知春亭、排云殿金水桥前"}, {"row_id": 929, "record_id": "XHS_689b3f7e000000001d007fae", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "懒人走的路线,不仅可以拍到爆火的机位,还不费腿~"}, {"row_id": 930, "record_id": "XHS_698ac043000000000a03312b", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "一条懒人友好的宝藏路线,从北宫门进,基本都是下坡路,不费腿!而且能完美衔接几个超小众的出片机位"}, {"row_id": 933, "record_id": "XHS_6a4bc4050000000016027a65", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "想出片也走不动道的懒宝宝们~"}, {"row_id": 938, "record_id": "XHS_6ab51bbd000000001c02d84a", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "拍照,氛围感拉满"}, {"row_id": 951, "record_id": "XHS_6a9434700000000026000841", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "打卡拍照)-佛香阁(俯瞰昆明湖)-千米长廊(看彩绘)-清晏舫(大石船)-十七孔桥(日落金光的光影拍照)-新建宫(出)"}, {"row_id": 961, "record_id": "XHS_6adf124a000000001601ae2c", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "静看湖面,抬眼能看见玉峰塔藏在彩树之间,一路向前,远处佛香阁遥遥相望,适合拍摄大气舒展的远景"}, {"row_id": 964, "record_id": "XHS_6ae22af4000000003402822f", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "安静拍氛围感照片不用抢机位"}]</data>
 </node>
-<node id="条件:颐和园:P6_否定建议:一般:一般建议避雷">
+<node id="条件:颐和园:P6_否定建议:一般:一般建议（避雷）">
   <data key="d0">条件</data>
   <data key="d1">一般建议（避雷）</data>
   <data key="d2">[一般|P6] 一般建议（避雷）</data>
@@ -1357,7 +1357,7 @@
   <data key="d10">["YHY-EXP07", "YHY-EXP08", "YHY-EXP09", "CTRIP_3996366", "CTRIP_4178108", "CTRIP_4144300", "CTRIP_4156664", "CTRIP_1289220", "CTRIP_3941430", "CTRIP_4046620", "CTRIP_4114227", "CTRIP_4076734", "CTRIP_4050657", "CTRIP_4137972", "CTRIP_4112830", "CTRIP_3990573", "XHS_69312f7a000000001e014de8", "XHS_698ac043000000000a03312b", "XHS_6a2fc7380000000008033fa0", "XHS_69fed78f000000002301df8b", "XHS_6ab3a3c9000000000a027646", "XHS_69522c43000000001f00f5cf", "XHS_6ae191650000000035026c89", "XHS_6a336311000000000802419f", "XHS_6adf124a000000001601ae2c", "XHS_6ae0a23c000000002b0014a0", "XHS_6abf929500000000180130dd", "XHS_6aacd64e0000000011034a18", "XHS_69bbb2340000000021011a19"]</data>
   <data key="d11">[{"row_id": 8, "record_id": "YHY-EXP07", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "路线:东宫门→仁寿殿→乐寿堂→文昌阁→廓如亭→耕织图景区→颐和园博物馆"}, {"row_id": 9, "record_id": "YHY-EXP08", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "的“南如意门→昆明湖南岸→西堤→耕织图景区→北如意门”路线广受好评"}, {"row_id": 10, "record_id": "YHY-EXP09", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "!此条路线游览大约2小时,省时间不废腿!"}, {"row_id": 18, "record_id": "CTRIP_3996366", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "颐和园游玩4---5小时"}, {"row_id": 26, "record_id": "CTRIP_4178108", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "带润唇膏"}, {"row_id": 27, "record_id": "CTRIP_4144300", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "两个游览路线:"}, {"row_id": 28, "record_id": "CTRIP_4144300", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "理由包括:"}, {"row_id": 30, "record_id": "CTRIP_4144300", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "乘坐缆车抵达14号敌楼"}, {"row_id": 33, "record_id": "CTRIP_4156664", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "想互动的小伙伴提前想好段子,这位毒舌霸天虎可是专治社恐!"}, {"row_id": 34, "record_id": "CTRIP_4156664", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "胆小的朋友坐中间排,前排小哥的帽子真的被机械恐龙叼走了"}, {"row_id": 35, "record_id": "CTRIP_4156664", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "早/晚错峰玩"}, {"row_id": 36, "record_id": "CTRIP_1289220", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "来此一逛"}, {"row_id": 705, "record_id": "CTRIP_3941430", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "可以往东走100米,定位在景山公园的东门,这个地方可以停车"}, {"row_id": 711, "record_id": "CTRIP_3941430", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "1949全鸭季了"}, {"row_id": 712, "record_id": "CTRIP_4046620", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "大步走去,向着我自以为可以走去的路"}, {"row_id": 713, "record_id": "CTRIP_4046620", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "即使前面是深渊,荆棘,狭谷,火坑,都由我自己负责”"}, {"row_id": 721, "record_id": "CTRIP_4114227", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "租一个,无需押金,费用每个20元"}, {"row_id": 722, "record_id": "CTRIP_4114227", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "摸好后赶紧把手揣兜里把福气带回家哦!"}, {"row_id": 724, "record_id": "CTRIP_4076734", "pattern": "P4_建议推断", "frequency": 4, "condition": "一般建议", "suggestion": "搞明白,的确是一件很美妙的事情"}, {"row_id": 742, "record_id": "CTRIP_4050657", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "以这三个为中心"}, {"row_id": 747, "record_id": "CTRIP_4137972", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "07年去北京时坐的硬座36块钱"}, {"row_id": 757, "record_id": "CTRIP_4112830", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "稍作调整"}, {"row_id": 758, "record_id": "CTRIP_3990573", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "游览的园林风光景点"}, {"row_id": 759, "record_id": "CTRIP_3990573", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "游览时注意园区的游览路线指示牌,也可询问当地人选择最适合自己的游览路线"}, {"row_id": 926, "record_id": "XHS_69312f7a000000001e014de8", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "经常出行了"}, {"row_id": 931, "record_id": "XHS_698ac043000000000a03312b", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "穿浅色或颜色鲜艳的衣服,在蓝白调的冬景里会更突出"}, {"row_id": 932, "record_id": "XHS_6a2fc7380000000008033fa0", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "放空的一个停顿点"}, {"row_id": 935, "record_id": "XHS_69fed78f000000002301df8b", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "预留一整天"}, {"row_id": 942, "record_id": "XHS_6ab3a3c9000000000a027646", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "不同朋友的游园路线"}, {"row_id": 948, "record_id": "XHS_69522c43000000001f00f5cf", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "早去人少"}, {"row_id": 956, "record_id": "XHS_6ae191650000000035026c89", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "想全面体验的游客)"}, {"row_id": 957, "record_id": "XHS_6ae191650000000035026c89", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "穿一双舒适的运动鞋,暴走2万步是常态"}, {"row_id": 958, "record_id": "XHS_6a336311000000000802419f", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "驻足吹风、慢赏西堤湖景"}, {"row_id": 959, "record_id": "XHS_6adf124a000000001601ae2c", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "计划慢慢逛"}, {"row_id": 960, "record_id": "XHS_6adf124a000000001601ae2c", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "拍细节感满满的中式照片"}, {"row_id": 962, "record_id": "XHS_6ae0a23c000000002b0014a0", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "带薄外套"}, {"row_id": 963, "record_id": "XHS_6abf929500000000180130dd", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "分次游览,拒绝赶路式打卡"}, {"row_id": 971, "record_id": "XHS_6aacd64e0000000011034a18", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "游览顺序:佛香阁 → 昆明湖 → 十七孔桥 → 长廊 → 西堤"}, {"row_id": 975, "record_id": "XHS_69bbb2340000000021011a19", "pattern": "P4_建议推断", "frequency": 1, "condition": "一般建议", "suggestion": "带身份证入园"}]</data>
 </node>
-<node id="条件:黄山:P6_否定建议:一般:一般建议避雷">
+<node id="条件:黄山:P6_否定建议:一般:一般建议（避雷）">
   <data key="d0">条件</data>
   <data key="d1">一般建议（避雷）</data>
   <data key="d2">[一般|P6] 一般建议（避雷）</data>
@@ -1405,7 +1405,7 @@
   <data key="d10">["HS-EXTRA2"]</data>
   <data key="d11">[{"row_id": 15, "record_id": "HS-EXTRA2", "pattern": "P1_显式条件", "frequency": 1, "condition": "住汤口镇", "suggestion": "早上先到景区入口,再坐缆车上山,大概十几分钟"}]</data>
 </node>
-<node id="条件:颐和园:P6_否定建议:时间:时间条件句内">
+<node id="条件:颐和园:P6_否定建议:时间:时间条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">时间条件（句内）</data>
   <data key="d2">[时间|P6] 时间条件（句内）</data>
@@ -1429,7 +1429,7 @@
   <data key="d10">["CTRIP_4178417"]</data>
   <data key="d11">[{"row_id": 19, "record_id": "CTRIP_4178417", "pattern": "P1_显式条件", "frequency": 1, "condition": "没有2019年起持续几近三年的疫情", "suggestion": "应该说每年都会出去,每年都会有新的游记面世,好在第一个目标“三山五岳”实现了之后,百度旅游这一产品退出来历史舞台,于是把"}]</data>
 </node>
-<node id="条件:颐和园:P7_依据规定:交通:入园/通行规定句内">
+<node id="条件:颐和园:P7_依据规定:交通:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[交通|P7] 入园/通行规定（句内）</data>
@@ -1585,7 +1585,7 @@
   <data key="d10">["CTRIP_4132000"]</data>
   <data key="d11">[{"row_id": 42, "record_id": "CTRIP_4132000", "pattern": "P1_显式条件", "frequency": 1, "condition": "除去路边的汽车", "suggestion": "似乎就可以梦回数百年前生活时代"}]</data>
 </node>
-<node id="条件:颐和园:P6_否定建议:一般:入园/通行规定句内">
+<node id="条件:颐和园:P6_否定建议:一般:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[一般|P6] 入园/通行规定（句内）</data>
@@ -1645,7 +1645,7 @@
   <data key="d10">["CTRIP_4010240"]</data>
   <data key="d11">[{"row_id": 50, "record_id": "CTRIP_4010240", "pattern": "P1_显式条件", "frequency": 1, "condition": "不上莲花峰", "suggestion": "从光明顶到迎客松大概走两个小时,不算太辛苦"}, {"row_id": 51, "record_id": "CTRIP_4010240", "pattern": "P1_显式条件", "frequency": 1, "condition": "不上莲花峰", "suggestion": "建议早点下山,因为旅行团还没杀到,途中美景可任你拍,坐索道下山不用人挤人,省去和大部队一起排队的时间"}]</data>
 </node>
-<node id="条件:黄山:P6_否定建议:一般:入园/通行规定句内">
+<node id="条件:黄山:P6_否定建议:一般:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[一般|P6] 入园/通行规定（句内）</data>
@@ -1777,7 +1777,7 @@
   <data key="d10">["CTRIP_4050842"]</data>
   <data key="d11">[{"row_id": 65, "record_id": "CTRIP_4050842", "pattern": "P1_显式条件", "frequency": 1, "condition": "像我们这样事后诸葛亮", "suggestion": "其实留给山上游览的时间就被压缩不少了"}]</data>
 </node>
-<node id="条件:黄山:P4_建议推断:时间:时间条件句内">
+<node id="条件:黄山:P4_建议推断:时间:时间条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">时间条件（句内）</data>
   <data key="d2">[时间|P4] 时间条件（句内）</data>
@@ -1825,7 +1825,7 @@
   <data key="d10">["CTRIP_4050842", "XHS_69ca605e000000001d01c761"]</data>
   <data key="d11">[{"row_id": 71, "record_id": "CTRIP_4050842", "pattern": "P1_显式条件", "frequency": 1, "condition": "没有带身份证", "suggestion": "可以报身份证号检票,但亲身经历,会比较麻烦"}, {"row_id": 72, "record_id": "CTRIP_4050842", "pattern": "P1_显式条件", "frequency": 1, "condition": "没带身份证", "suggestion": "需要退掉网络票,重新线下购买"}, {"row_id": 778, "record_id": "XHS_69ca605e000000001d01c761", "pattern": "P1_显式条件", "frequency": 1, "condition": "没有带", "suggestion": "山底可买(5元一根)"}]</data>
 </node>
-<node id="条件:黄山:P4_建议推断:天气:天气条件句内">
+<node id="条件:黄山:P4_建议推断:天气:天气条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">天气条件（句内）</data>
   <data key="d2">[天气|P4] 天气条件（句内）</data>
@@ -2029,7 +2029,7 @@
   <data key="d10">["CTRIP_4031821"]</data>
   <data key="d11">[{"row_id": 101, "record_id": "CTRIP_4031821", "pattern": "P1_显式条件", "frequency": 1, "condition": "闲住几日养性又悦目", "suggestion": "精致的百年庭院给你带来穿越时空的对话,十分享受"}]</data>
 </node>
-<node id="条件:黄山:P7_依据规定:时间:开放时间规定句内">
+<node id="条件:黄山:P7_依据规定:时间:开放时间规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">开放时间规定（句内）</data>
   <data key="d2">[时间|P7] 开放时间规定（句内）</data>
@@ -2485,7 +2485,7 @@
   <data key="d10">["CTRIP_4032520"]</data>
   <data key="d11">[{"row_id": 172, "record_id": "CTRIP_4032520", "pattern": "P1_显式条件", "frequency": 1, "condition": "莲花峰封山可选择登天都峰", "suggestion": "即鳌鱼峰后前往玉屏楼迎客松"}, {"row_id": 173, "record_id": "CTRIP_4032520", "pattern": "P1_显式条件", "frequency": 1, "condition": "莲花峰封山可选择登天都峰", "suggestion": "然后登天都,然后步行下山,登天都就无法乘索道下山"}]</data>
 </node>
-<node id="条件:黄山:P6_否定建议:美食:一般建议避雷">
+<node id="条件:黄山:P6_否定建议:美食:一般建议（避雷）">
   <data key="d0">条件</data>
   <data key="d1">一般建议（避雷）</data>
   <data key="d2">[美食|P6] 一般建议（避雷）</data>
@@ -2557,7 +2557,7 @@
   <data key="d10">["CTRIP_4017265"]</data>
   <data key="d11">[{"row_id": 183, "record_id": "CTRIP_4017265", "pattern": "P1_显式条件", "frequency": 1, "condition": "如要用一句话来形容", "suggestion": "就是四望空无地,孤舟若在天"}]</data>
 </node>
-<node id="条件:黄山:P6_否定建议:住宿:入园/通行规定句内">
+<node id="条件:黄山:P6_否定建议:住宿:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[住宿|P6] 入园/通行规定（句内）</data>
@@ -2581,7 +2581,7 @@
   <data key="d10">["CTRIP_3735942"]</data>
   <data key="d11">[{"row_id": 188, "record_id": "CTRIP_3735942", "pattern": "P1_显式条件", "frequency": 1, "condition": "脚力不好就会苦了父母", "suggestion": "负重途步你们懂得"}]</data>
 </node>
-<node id="条件:黄山:P7_依据规定:交通:入园/通行规定句内">
+<node id="条件:黄山:P7_依据规定:交通:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[交通|P7] 入园/通行规定（句内）</data>
@@ -2785,7 +2785,7 @@
   <data key="d10">["CTRIP_3999208"]</data>
   <data key="d11">[{"row_id": 221, "record_id": "CTRIP_3999208", "pattern": "P1_显式条件", "frequency": 1, "condition": "天都峰开放的话)然后从天都峰步行下山到慈光阁", "suggestion": "就是基本腿废"}]</data>
 </node>
-<node id="条件:黄山:P7_依据规定:预约票务:入园/通行规定句内">
+<node id="条件:黄山:P7_依据规定:预约票务:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[预约票务|P7] 入园/通行规定（句内）</data>
@@ -2941,7 +2941,7 @@
   <data key="d10">["CTRIP_3953404"]</data>
   <data key="d11">[{"row_id": 241, "record_id": "CTRIP_3953404", "pattern": "P1_显式条件", "frequency": 1, "condition": "只用一个字来形容黄山", "suggestion": "那个字是 “仙”"}]</data>
 </node>
-<node id="条件:黄山:P6_否定建议:装备:装备条件句内">
+<node id="条件:黄山:P6_否定建议:装备:装备条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">装备条件（句内）</data>
   <data key="d2">[装备|P6] 装备条件（句内）</data>
@@ -2965,7 +2965,7 @@
   <data key="d10">["CTRIP_4109335"]</data>
   <data key="d11">[{"row_id": 244, "record_id": "CTRIP_4109335", "pattern": "P1_显式条件", "frequency": 1, "condition": "周末节假日来", "suggestion": "这一段经常好几公里大堵车"}, {"row_id": 247, "record_id": "CTRIP_4109335", "pattern": "P1_显式条件", "frequency": 1, "condition": "周末节假日车流量大", "suggestion": "只能把车停到几百米前的一个游客中心大平台那里"}]</data>
 </node>
-<node id="条件:黄山:P6_否定建议:时间:时间条件句内">
+<node id="条件:黄山:P6_否定建议:时间:时间条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">时间条件（句内）</data>
   <data key="d2">[时间|P6] 时间条件（句内）</data>
@@ -3025,7 +3025,7 @@
   <data key="d10">["CTRIP_4109335"]</data>
   <data key="d11">[{"row_id": 251, "record_id": "CTRIP_4109335", "pattern": "P1_显式条件", "frequency": 1, "condition": "腿脚不方便", "suggestion": "可以从旁边的山路绕开爬一线天,一样可以到前面"}]</data>
 </node>
-<node id="条件:黄山:P6_否定建议:天气:天气条件句内">
+<node id="条件:黄山:P6_否定建议:天气:天气条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">天气条件（句内）</data>
   <data key="d2">[天气|P6] 天气条件（句内）</data>
@@ -3121,7 +3121,7 @@
   <data key="d10">["CTRIP_3976836"]</data>
   <data key="d11">[{"row_id": 268, "record_id": "CTRIP_3976836", "pattern": "P1_显式条件", "frequency": 1, "condition": "一放暑假", "suggestion": "大人就要准备休年假"}, {"row_id": 269, "record_id": "CTRIP_3976836", "pattern": "P1_显式条件", "frequency": 1, "condition": "一放暑假", "suggestion": "带着孩子去哪里转一转"}]</data>
 </node>
-<node id="条件:黄山:P6_否定建议:拍照:入园/通行规定句内">
+<node id="条件:黄山:P6_否定建议:拍照:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[拍照|P6] 入园/通行规定（句内）</data>
@@ -3397,7 +3397,7 @@
   <data key="d10">["CTRIP_1333628"]</data>
   <data key="d11">[{"row_id": 329, "record_id": "CTRIP_1333628", "pattern": "P1_显式条件", "frequency": 1, "condition": "这两个地方不去", "suggestion": "肯定会是一种遗憾"}]</data>
 </node>
-<node id="条件:黄山:P6_否定建议:拍照:一般建议避雷">
+<node id="条件:黄山:P6_否定建议:拍照:一般建议（避雷）">
   <data key="d0">条件</data>
   <data key="d1">一般建议（避雷）</data>
   <data key="d2">[拍照|P6] 一般建议（避雷）</data>
@@ -3469,7 +3469,7 @@
   <data key="d10">["CTRIP_3970738"]</data>
   <data key="d11">[{"row_id": 342, "record_id": "CTRIP_3970738", "pattern": "P1_显式条件", "frequency": 1, "condition": "生活有开关", "suggestion": "家人们和睦相聚就是以键快乐"}]</data>
 </node>
-<node id="条件:九寨沟:P6_否定建议:一般:一般建议避雷">
+<node id="条件:九寨沟:P6_否定建议:一般:一般建议（避雷）">
   <data key="d0">条件</data>
   <data key="d1">一般建议（避雷）</data>
   <data key="d2">[一般|P6] 一般建议（避雷）</data>
@@ -3541,7 +3541,7 @@
   <data key="d10">["CTRIP_3970738"]</data>
   <data key="d11">[{"row_id": 348, "record_id": "CTRIP_3970738", "pattern": "P1_显式条件", "frequency": 1, "condition": "时间充裕", "suggestion": "体力尚好"}, {"row_id": 349, "record_id": "CTRIP_3970738", "pattern": "P1_显式条件", "frequency": 1, "condition": "时间充裕", "suggestion": "不妨徒步原始森林,到山顶享受“上帝视角”下静如处子的芳草海,别有一番风味,美不胜收"}]</data>
 </node>
-<node id="条件:九寨沟:P7_依据规定:交通:入园/通行规定句内">
+<node id="条件:九寨沟:P7_依据规定:交通:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[交通|P7] 入园/通行规定（句内）</data>
@@ -3577,7 +3577,7 @@
   <data key="d10">["CTRIP_3971596"]</data>
   <data key="d11">[{"row_id": 355, "record_id": "CTRIP_3971596", "pattern": "P1_显式条件", "frequency": 1, "condition": "用餐人少", "suggestion": "还可以试试石锅藏香鸡"}]</data>
 </node>
-<node id="条件:九寨沟:P6_否定建议:一般:入园/通行规定句内">
+<node id="条件:九寨沟:P6_否定建议:一般:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[一般|P6] 入园/通行规定（句内）</data>
@@ -3721,7 +3721,7 @@
   <data key="d10">["CTRIP_4002947"]</data>
   <data key="d11">[{"row_id": 381, "record_id": "CTRIP_4002947", "pattern": "P1_显式条件", "frequency": 1, "condition": "隐若现的雪山在风雪中看着你", "suggestion": "等着你,这样的冲击感让人又向往,又紧张"}]</data>
 </node>
-<node id="条件:九寨沟:P6_否定建议:装备:装备条件句内">
+<node id="条件:九寨沟:P6_否定建议:装备:装备条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">装备条件（句内）</data>
   <data key="d2">[装备|P6] 装备条件（句内）</data>
@@ -3937,7 +3937,7 @@
   <data key="d10">["CTRIP_3996473"]</data>
   <data key="d11">[{"row_id": 412, "record_id": "CTRIP_3996473", "pattern": "P1_显式条件", "frequency": 2, "condition": "你全程坐车", "suggestion": "又喜欢早起,安排得当一天时间玩遍九寨沟也是可以的"}]</data>
 </node>
-<node id="条件:九寨沟:P6_否定建议:美食:一般建议避雷">
+<node id="条件:九寨沟:P6_否定建议:美食:一般建议（避雷）">
   <data key="d0">条件</data>
   <data key="d1">一般建议（避雷）</data>
   <data key="d2">[美食|P6] 一般建议（避雷）</data>
@@ -4633,7 +4633,7 @@
   <data key="d10">["CTRIP_4032329"]</data>
   <data key="d11">[{"row_id": 516, "record_id": "CTRIP_4032329", "pattern": "P1_显式条件", "frequency": 1, "condition": "有兴趣", "suggestion": "建议要尽快去"}]</data>
 </node>
-<node id="条件:九寨沟:P6_否定建议:拍照:入园/通行规定句内">
+<node id="条件:九寨沟:P6_否定建议:拍照:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[拍照|P6] 入园/通行规定（句内）</data>
@@ -4693,7 +4693,7 @@
   <data key="d10">["CTRIP_4055037"]</data>
   <data key="d11">[{"row_id": 526, "record_id": "CTRIP_4055037", "pattern": "P1_显式条件", "frequency": 1, "condition": "吃完药也没有效果", "suggestion": "那就一定要及时吸氧,听闺蜜说她去 香格里拉 的经历,头痛高反一吸氧立马就好,过一阵子就适应了"}]</data>
 </node>
-<node id="条件:九寨沟:P6_否定建议:美食:入园/通行规定句内">
+<node id="条件:九寨沟:P6_否定建议:美食:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[美食|P6] 入园/通行规定（句内）</data>
@@ -5017,7 +5017,7 @@
   <data key="d10">["CTRIP_3950329"]</data>
   <data key="d11">[{"row_id": 598, "record_id": "CTRIP_3950329", "pattern": "P1_显式条件", "frequency": 1, "condition": "有可能先去则查洼沟", "suggestion": "错峰游览其实更好"}]</data>
 </node>
-<node id="条件:九寨沟:P6_否定建议:时间:时间条件句内">
+<node id="条件:九寨沟:P6_否定建议:时间:时间条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">时间条件（句内）</data>
   <data key="d2">[时间|P6] 时间条件（句内）</data>
@@ -5221,7 +5221,7 @@
   <data key="d10">["CTRIP_3984446", "CTRIP_4173182"]</data>
   <data key="d11">[{"row_id": 637, "record_id": "CTRIP_3984446", "pattern": "P4_建议推断", "frequency": 1, "condition": "游客为体力有限", "suggestion": "不要在芦苇海停留"}, {"row_id": 638, "record_id": "CTRIP_3984446", "pattern": "P4_建议推断", "frequency": 1, "condition": "游客为体力有限", "suggestion": "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车"}, {"row_id": 699, "record_id": "CTRIP_4173182", "pattern": "P4_建议推断", "frequency": 1, "condition": "游客为体力有限", "suggestion": "索道上山(80元/人)"}, {"row_id": 700, "record_id": "CTRIP_4173182", "pattern": "P4_建议推断", "frequency": 1, "condition": "游客为体力有限", "suggestion": "然后步行下山观景"}]</data>
 </node>
-<node id="条件:九寨沟:P6_否定建议:天气:天气条件句内">
+<node id="条件:九寨沟:P6_否定建议:天气:天气条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">天气条件（句内）</data>
   <data key="d2">[天气|P6] 天气条件（句内）</data>
@@ -5641,7 +5641,7 @@
   <data key="d10">["CTRIP_3941430"]</data>
   <data key="d11">[{"row_id": 707, "record_id": "CTRIP_3941430", "pattern": "P1_显式条件", "frequency": 1, "condition": "小朋友能办身份证", "suggestion": "最好还是办一张,办不了的把户口本页复印也"}]</data>
 </node>
-<node id="条件:颐和园:P7_依据规定:预约票务:入园/通行规定句内">
+<node id="条件:颐和园:P7_依据规定:预约票务:入园/通行规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">入园/通行规定（句内）</data>
   <data key="d2">[预约票务|P7] 入园/通行规定（句内）</data>
@@ -5677,7 +5677,7 @@
   <data key="d10">["CTRIP_4046620"]</data>
   <data key="d11">[{"row_id": 714, "record_id": "CTRIP_4046620", "pattern": "P1_显式条件", "frequency": 1, "condition": "能自行做到乐善、无求那就是佛呢", "suggestion": "此处你也可以不用再来了—大约是白话了的“即心即佛”或菩提只向心觅,何劳向外求玄?"}]</data>
 </node>
-<node id="条件:颐和园:P6_否定建议:天气:天气条件句内">
+<node id="条件:颐和园:P6_否定建议:天气:天气条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">天气条件（句内）</data>
   <data key="d2">[天气|P6] 天气条件（句内）</data>
@@ -5713,7 +5713,7 @@
   <data key="d10">["CTRIP_4114227"]</data>
   <data key="d11">[{"row_id": 717, "record_id": "CTRIP_4114227", "pattern": "P1_显式条件", "frequency": 1, "condition": "你实在不想爬", "suggestion": "可以坐滑车或缆车上去"}]</data>
 </node>
-<node id="条件:颐和园:P6_否定建议:拍照:一般建议避雷">
+<node id="条件:颐和园:P6_否定建议:拍照:一般建议（避雷）">
   <data key="d0">条件</data>
   <data key="d1">一般建议（避雷）</data>
   <data key="d2">[拍照|P6] 一般建议（避雷）</data>
@@ -5725,7 +5725,7 @@
   <data key="d10">["CTRIP_4114227"]</data>
   <data key="d11">[{"row_id": 718, "record_id": "CTRIP_4114227", "pattern": "P6_否定建议", "frequency": 1, "condition": "一般建议（避雷）", "suggestion": "别急着爬北城,你先往南城方向上几个台阶,很近,好汉碑在那儿等你去拍照呢,拍完照再折回来爬北城"}]</data>
 </node>
-<node id="条件:颐和园:P6_否定建议:装备:装备条件句内">
+<node id="条件:颐和园:P6_否定建议:装备:装备条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">装备条件（句内）</data>
   <data key="d2">[装备|P6] 装备条件（句内）</data>
@@ -5905,7 +5905,7 @@
   <data key="d10">["CTRIP_4076390"]</data>
   <data key="d11">[{"row_id": 743, "record_id": "CTRIP_4076390", "pattern": "P1_显式条件", "frequency": 1, "condition": "想省时间", "suggestion": "可从东宫门进"}]</data>
 </node>
-<node id="条件:颐和园:P4_建议推断:时间:时间条件句内">
+<node id="条件:颐和园:P4_建议推断:时间:时间条件（句内）">
   <data key="d0">条件</data>
   <data key="d1">时间条件（句内）</data>
   <data key="d2">[时间|P4] 时间条件（句内）</data>
@@ -5941,7 +5941,7 @@
   <data key="d10">["CTRIP_4035354"]</data>
   <data key="d11">[{"row_id": 752, "record_id": "CTRIP_4035354", "pattern": "P1_显式条件", "frequency": 1, "condition": "有阳光", "suggestion": "每天都能看到,当然必须是下午,夕阳西下的时候"}, {"row_id": 753, "record_id": "CTRIP_4035354", "pattern": "P1_显式条件", "frequency": 1, "condition": "有阳光", "suggestion": "后湖是赏秋的绝佳地方,过苏州街后沿着后湖岸边行走,湖两岸红黄交错,色彩缤纷"}]</data>
 </node>
-<node id="条件:颐和园:P7_依据规定:时间:开放时间规定句内">
+<node id="条件:颐和园:P7_依据规定:时间:开放时间规定（句内）">
   <data key="d0">条件</data>
   <data key="d1">开放时间规定（句内）</data>
   <data key="d2">[时间|P7] 开放时间规定（句内）</data>
@@ -6037,7 +6037,7 @@
   <data key="d10">["XHS_69f832f500000000230056c5"]</data>
   <data key="d11">[{"row_id": 770, "record_id": "XHS_69f832f500000000230056c5", "pattern": "P1_显式条件", "frequency": 1, "condition": "人不多", "suggestion": "赶紧去排队! 我们就因为耽搁了,排了整整两小时下山索道,还赶上下雨"}]</data>
 </node>
-<node id="条件:黄山:P6_否定建议:住宿:一般建议避雷">
+<node id="条件:黄山:P6_否定建议:住宿:一般建议（避雷）">
   <data key="d0">条件</data>
   <data key="d1">一般建议（避雷）</data>
   <data key="d2">[住宿|P6] 一般建议（避雷）</data>
@@ -6649,7 +6649,7 @@
   <data key="d10">["XHS_6a0b09b90000000007025455"]</data>
   <data key="d11">[{"row_id": 919, "record_id": "XHS_6a0b09b90000000007025455", "pattern": "P1_显式条件", "frequency": 1, "condition": "最后不想坐船", "suggestion": "可原路返回,东门进+东门出"}]</data>
 </node>
-<node id="条件:颐和园:P6_否定建议:预约票务:一般建议避雷">
+<node id="条件:颐和园:P6_否定建议:预约票务:一般建议（避雷）">
   <data key="d0">条件</data>
   <data key="d1">一般建议（避雷）</data>
   <data key="d2">[预约票务|P6] 一般建议（避雷）</data>
@@ -6989,7 +6989,7 @@
   <data key="d12">包含</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:一般:一般建议避雷" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:一般:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7009,7 +7009,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:一般:入园/通行规定句内" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:一般:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7045,7 +7045,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7061,7 +7061,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P4_建议推断:天气:天气条件句内" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P4_建议推断:天气:天气条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7125,7 +7125,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P7_依据规定:时间:开放时间规定句内" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P7_依据规定:时间:开放时间规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7245,7 +7245,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:美食:一般建议避雷" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:美食:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7265,7 +7265,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:住宿:入园/通行规定句内" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:住宿:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7273,7 +7273,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P7_依据规定:交通:入园/通行规定句内" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P7_依据规定:交通:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7313,7 +7313,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定句内" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7345,7 +7345,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:装备:装备条件句内" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:装备:装备条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7353,7 +7353,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:时间:时间条件句内" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7369,7 +7369,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:天气:天气条件句内" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:天气:天气条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7397,7 +7397,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:拍照:入园/通行规定句内" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:拍照:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7485,7 +7485,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:拍照:一般建议避雷" id="条件建议">
+<edge source="景区:黄山:黄山" target="条件:黄山:P6_否定建议:拍照:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7777,7 +7777,7 @@
   <data key="d12">包含</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7793,7 +7793,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P4_建议推断:天气:天气条件句内" id="条件建议">
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P4_建议推断:天气:天气条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7809,7 +7809,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:一般:一般建议避雷" id="条件建议">
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:一般:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7825,7 +7825,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P7_依据规定:交通:入园/通行规定句内" id="条件建议">
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P7_依据规定:交通:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7837,7 +7837,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定句内" id="条件建议">
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7877,7 +7877,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:装备:装备条件句内" id="条件建议">
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:装备:装备条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -7925,7 +7925,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">2</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:美食:一般建议避雷" id="条件建议">
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:美食:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">2</data>
 </edge>
@@ -8137,7 +8137,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:拍照:入园/通行规定句内" id="条件建议">
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:拍照:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8157,7 +8157,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:美食:入园/通行规定句内" id="条件建议">
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:美食:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8237,7 +8237,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:时间:时间条件句内" id="条件建议">
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8293,7 +8293,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:天气:天气条件句内" id="条件建议">
+<edge source="景区:九寨沟:九寨沟" target="条件:九寨沟:P6_否定建议:天气:天气条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8725,7 +8725,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:一般:一般建议避雷" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:一般:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8733,7 +8733,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:时间:时间条件句内" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8789,7 +8789,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:一般:入园/通行规定句内" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:一般:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8813,7 +8813,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:P7_依据规定:预约票务:入园/通行规定句内" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:P7_依据规定:预约票务:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8825,7 +8825,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:天气:天气条件句内" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:天气:天气条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8837,11 +8837,11 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:拍照:一般建议避雷" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:拍照:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:装备:装备条件句内" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:装备:装备条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8885,7 +8885,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8897,7 +8897,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:P7_依据规定:时间:开放时间规定句内" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:P7_依据规定:时间:开放时间规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -8905,7 +8905,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:预约票务:一般建议避雷" id="条件建议">
+<edge source="景区:颐和园:颐和园" target="条件:颐和园:P6_否定建议:预约票务:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -9213,7 +9213,7 @@
   <data key="d12">时段归属</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:颐和园:万寿山" target="条件:颐和园:P6_否定建议:一般:入园/通行规定句内" id="条件建议">
+<edge source="POI:颐和园:万寿山" target="条件:颐和园:P6_否定建议:一般:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -9467,7 +9467,7 @@
   <data key="d12">时段归属</data>
   <data key="d13">10</data>
 </edge>
-<edge source="POI:颐和园:东宫门" target="条件:颐和园:P6_否定建议:一般:一般建议避雷" id="条件建议">
+<edge source="POI:颐和园:东宫门" target="条件:颐和园:P6_否定建议:一般:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">2</data>
 </edge>
@@ -9873,7 +9873,7 @@
   <data key="d16">["CTRIP_940945", "CTRIP_731743"]</data>
   <data key="d17">2</data>
 </edge>
-<edge source="POI:黄山:九龙瀑" target="条件:黄山:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:黄山:九龙瀑" target="条件:黄山:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -10614,7 +10614,7 @@
   <data key="d12">时段归属</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:五花海" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:九寨沟:五花海" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -11005,7 +11005,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:颐和园:佛香阁" target="条件:颐和园:P7_依据规定:交通:入园/通行规定句内" id="条件建议">
+<edge source="POI:颐和园:佛香阁" target="条件:颐和园:P7_依据规定:交通:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -11285,7 +11285,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:光明顶" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定句内" id="条件建议">
+<edge source="POI:黄山:光明顶" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -11361,7 +11361,7 @@
   <data key="d16">["CTRIP_3950329", "XHS_690c4ddf000000000703a3c1"]</data>
   <data key="d17">2</data>
 </edge>
-<edge source="POI:九寨沟:则查洼沟" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:九寨沟:则查洼沟" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -11449,7 +11449,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:颐和园:北如意门" target="条件:颐和园:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:颐和园:北如意门" target="条件:颐和园:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -11757,7 +11757,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:北海" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定句内" id="条件建议">
+<edge source="POI:黄山:北海" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -12258,7 +12258,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:原始森林" target="条件:九寨沟:P6_否定建议:装备:装备条件句内" id="条件建议">
+<edge source="POI:九寨沟:原始森林" target="条件:九寨沟:P6_否定建议:装备:装备条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -12363,7 +12363,7 @@
   <data key="d12">时段归属</data>
   <data key="d13">5</data>
 </edge>
-<edge source="POI:九寨沟:双龙海" target="条件:九寨沟:P6_否定建议:一般:一般建议避雷" id="条件建议">
+<edge source="POI:九寨沟:双龙海" target="条件:九寨沟:P6_否定建议:一般:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -12449,7 +12449,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:颐和园:听鹂馆" target="条件:颐和园:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:颐和园:听鹂馆" target="条件:颐和园:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -12962,7 +12962,7 @@
   <data key="d12">交通方式</data>
   <data key="d13">3</data>
 </edge>
-<edge source="POI:九寨沟:天鹅海" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定句内" id="条件建议">
+<edge source="POI:九寨沟:天鹅海" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -13133,7 +13133,7 @@
   <data key="d12">时段归属</data>
   <data key="d13">6</data>
 </edge>
-<edge source="POI:黄山:始信峰" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定句内" id="条件建议">
+<edge source="POI:黄山:始信峰" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -14232,7 +14232,7 @@
   <data key="d16">["XHS_6ae0a23c000000002b0014a0"]</data>
   <data key="d17">1</data>
 </edge>
-<edge source="POI:颐和园:新建宫门" target="条件:颐和园:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:颐和园:新建宫门" target="条件:颐和园:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -14364,7 +14364,7 @@
   <data key="d12">时段归属</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:日则沟" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:九寨沟:日则沟" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">2</data>
 </edge>
@@ -15001,7 +15001,7 @@
   <data key="d12">交通方式</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:树正寨" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:九寨沟:树正寨" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -16542,7 +16542,7 @@
   <data key="d12">交通方式</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:犀牛海" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:九寨沟:犀牛海" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -16550,7 +16550,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:犀牛海" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定句内" id="条件建议">
+<edge source="POI:九寨沟:犀牛海" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -17106,7 +17106,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:玉屏楼" target="条件:黄山:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:黄山:玉屏楼" target="条件:黄山:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -17417,7 +17417,7 @@
   <data key="d12">时段归属</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:珍珠滩" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:九寨沟:珍珠滩" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -17705,7 +17705,7 @@
   <data key="d12">时段归属</data>
   <data key="d13">2</data>
 </edge>
-<edge source="POI:颐和园:画中游" target="条件:颐和园:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:颐和园:画中游" target="条件:颐和园:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -18019,7 +18019,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:百步云梯" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定句内" id="条件建议">
+<edge source="POI:黄山:百步云梯" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -19020,7 +19020,7 @@
   <data key="d12">交通方式</data>
   <data key="d13">2</data>
 </edge>
-<edge source="POI:九寨沟:芦苇海" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:九寨沟:芦苇海" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -19103,7 +19103,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:芳草海" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定句内" id="条件建议">
+<edge source="POI:九寨沟:芳草海" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -19429,7 +19429,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:莲花峰" target="条件:黄山:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:黄山:莲花峰" target="条件:黄山:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -19647,7 +19647,7 @@
   <data key="d12">交通方式</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:颐和园:西堤" target="条件:颐和园:P6_否定建议:一般:一般建议避雷" id="条件建议">
+<edge source="POI:颐和园:西堤" target="条件:颐和园:P6_否定建议:一般:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -19832,7 +19832,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:西海" target="条件:黄山:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:黄山:西海" target="条件:黄山:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -20030,7 +20030,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:西海大峡谷" target="条件:黄山:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:黄山:西海大峡谷" target="条件:黄山:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -20335,7 +20335,7 @@
   <data key="d12">时段归属</data>
   <data key="d13">7</data>
 </edge>
-<edge source="POI:九寨沟:诺日朗" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:九寨沟:诺日朗" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -20461,7 +20461,7 @@
   <data key="d12">时段归属</data>
   <data key="d13">4</data>
 </edge>
-<edge source="POI:九寨沟:诺日朗中心" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:九寨沟:诺日朗中心" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -20469,7 +20469,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:诺日朗中心" target="条件:九寨沟:P7_依据规定:交通:入园/通行规定句内" id="条件建议">
+<edge source="POI:九寨沟:诺日朗中心" target="条件:九寨沟:P7_依据规定:交通:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -20670,11 +20670,11 @@
   <data key="d12">时段归属</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:诺日朗瀑布" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:九寨沟:诺日朗瀑布" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:诺日朗瀑布" target="条件:九寨沟:P7_依据规定:交通:入园/通行规定句内" id="条件建议">
+<edge source="POI:九寨沟:诺日朗瀑布" target="条件:九寨沟:P7_依据规定:交通:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -21519,7 +21519,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">2</data>
 </edge>
-<edge source="POI:九寨沟:镜海" target="条件:九寨沟:P4_建议推断:天气:天气条件句内" id="条件建议">
+<edge source="POI:九寨沟:镜海" target="条件:九寨沟:P4_建议推断:天气:天气条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -21527,7 +21527,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:镜海" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定句内" id="条件建议">
+<edge source="POI:九寨沟:镜海" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -21910,7 +21910,7 @@
   <data key="d12">时段归属</data>
   <data key="d13">2</data>
 </edge>
-<edge source="POI:九寨沟:长海" target="条件:九寨沟:P4_建议推断:时间:时间条件句内" id="条件建议">
+<edge source="POI:九寨沟:长海" target="条件:九寨沟:P4_建议推断:时间:时间条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">2</data>
 </edge>
@@ -22364,7 +22364,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:鳌鱼峰" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定句内" id="条件建议">
+<edge source="POI:黄山:鳌鱼峰" target="条件:黄山:P7_依据规定:预约票务:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -22530,7 +22530,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:九寨沟:黄龙" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定句内" id="条件建议">
+<edge source="POI:九寨沟:黄龙" target="条件:九寨沟:P6_否定建议:一般:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -23055,7 +23055,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:白云宾馆" target="条件:黄山:P6_否定建议:住宿:入园/通行规定句内" id="条件建议">
+<edge source="POI:黄山:白云宾馆" target="条件:黄山:P6_否定建议:住宿:入园/通行规定（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -23067,7 +23067,7 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:白云宾馆" target="条件:黄山:P6_否定建议:住宿:一般建议避雷" id="条件建议">
+<edge source="POI:黄山:白云宾馆" target="条件:黄山:P6_否定建议:住宿:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -23439,11 +23439,11 @@
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:步仙桥" target="条件:黄山:P4_建议推断:天气:天气条件句内" id="条件建议">
+<edge source="POI:黄山:步仙桥" target="条件:黄山:P4_建议推断:天气:天气条件（句内）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
-<edge source="POI:黄山:步仙桥" target="条件:黄山:P6_否定建议:住宿:一般建议避雷" id="条件建议">
+<edge source="POI:黄山:步仙桥" target="条件:黄山:P6_否定建议:住宿:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
@@ -23544,7 +23544,7 @@
   <data key="d16">["XHS_6aa027a70000000028037a9e"]</data>
   <data key="d17">1</data>
 </edge>
-<edge source="POI:九寨沟:草海" target="条件:九寨沟:P6_否定建议:一般:一般建议避雷" id="条件建议">
+<edge source="POI:九寨沟:草海" target="条件:九寨沟:P6_否定建议:一般:一般建议（避雷）" id="条件建议">
   <data key="d12">条件建议</data>
   <data key="d13">1</data>
 </edge>
