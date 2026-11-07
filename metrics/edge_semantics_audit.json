@@ -1,0 +1,196 @@
+{
+ "title": "先后顺序边语义抽样审计（10 边溯源到官方路线/游客序列的相邻共现）",
+ "n_sampled": 10,
+ "n_verified": 10,
+ "n_failed": 0,
+ "audit": [
+  {
+   "edge": "犀牛海→树正磨房",
+   "scenic": "九寨沟",
+   "weight": 0.5,
+   "official_routes_n": 0,
+   "tourist_support": 1,
+   "verified_sources": [
+    [
+     "tourist",
+     "CTRIP_4057070"
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "edge": "海心亭→天海",
+   "scenic": "黄山",
+   "weight": 1.5,
+   "official_routes_n": 0,
+   "tourist_support": 1,
+   "verified_sources": [
+    [
+     "tourist",
+     "CTRIP_4006823"
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "edge": "石笋矼→狮子峰",
+   "scenic": "黄山",
+   "weight": 0.5,
+   "official_routes_n": 0,
+   "tourist_support": 1,
+   "verified_sources": [
+    [
+     "tourist",
+     "CTRIP_3993157"
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "edge": "排云溪→光明顶",
+   "scenic": "黄山",
+   "weight": 1.5,
+   "official_routes_n": 0,
+   "tourist_support": 3,
+   "verified_sources": [
+    [
+     "tourist",
+     "CTRIP_4005841"
+    ],
+    [
+     "tourist",
+     "CTRIP_3951546"
+    ],
+    [
+     "tourist",
+     "CTRIP_3953404"
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "edge": "飞来石→丹霞峰",
+   "scenic": "黄山",
+   "weight": 2.0,
+   "official_routes_n": 12,
+   "tourist_support": 2,
+   "verified_sources": [
+    [
+     "official",
+     "HS-EXTRA1-R1"
+    ],
+    [
+     "tourist",
+     "CTRIP_3539977"
+    ],
+    [
+     "tourist",
+     "CTRIP_1333628"
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "edge": "猴子观海→排云亭",
+   "scenic": "黄山",
+   "weight": 2.5,
+   "official_routes_n": 0,
+   "tourist_support": 4,
+   "verified_sources": [
+    [
+     "tourist",
+     "CTRIP_3999208"
+    ],
+    [
+     "tourist",
+     "XHS_6a5357f9000000001c025a3a"
+    ],
+    [
+     "tourist",
+     "XHS_69ca605e000000001d01c761"
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "edge": "犀牛海→双龙海",
+   "scenic": "九寨沟",
+   "weight": 1.5,
+   "official_routes_n": 0,
+   "tourist_support": 3,
+   "verified_sources": [
+    [
+     "tourist",
+     "CTRIP_4008520"
+    ],
+    [
+     "tourist",
+     "XHS_6a23ceb700000000160251f1"
+    ],
+    [
+     "tourist",
+     "XHS_6a7af58b000000000e03f400"
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "edge": "珍珠滩瀑布→诺日朗瀑布",
+   "scenic": "九寨沟",
+   "weight": 2.5,
+   "official_routes_n": 0,
+   "tourist_support": 5,
+   "verified_sources": [
+    [
+     "tourist",
+     "CTRIP_3975883"
+    ],
+    [
+     "tourist",
+     "CTRIP_4037691"
+    ],
+    [
+     "tourist",
+     "CTRIP_3939862"
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "edge": "玉屏峰→迎客松",
+   "scenic": "黄山",
+   "weight": 1.0,
+   "official_routes_n": 0,
+   "tourist_support": 2,
+   "verified_sources": [
+    [
+     "official",
+     "HS-EXTRA2-R1"
+    ],
+    [
+     "tourist",
+     "CTRIP_4137198"
+    ],
+    [
+     "tourist",
+     "CTRIP_1016507"
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "edge": "耕织图→石舫",
+   "scenic": "颐和园",
+   "weight": 1.0,
+   "official_routes_n": 12,
+   "tourist_support": null,
+   "verified_sources": [
+    [
+     "official",
+     "YHY-EXP11-R1"
+    ]
+   ],
+   "ok": true
+  }
+ ]
+}

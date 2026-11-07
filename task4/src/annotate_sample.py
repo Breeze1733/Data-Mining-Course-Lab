@@ -419,9 +419,24 @@ def score(cases: list[dict]) -> None:
         sp = doc_split[r["record_id"]]
         by_split[sp][1] += 1
         by_split[sp][0] += r["correct"]
+    # D04：弃权口径——"无明确先行词"为可解释弃权；覆盖率与准确率分开报告
+    abstain_by_class = defaultdict(lambda: [0, 0])
+    for r in rows:
+        abstain_by_class[r["pronoun_class"]][1] += 1
+        abstain_by_class[r["pronoun_class"]][0] += (r["cur_pred"] == "NONE")
+    abstain_overall = [sum(v[0] for v in abstain_by_class.values()), len(rows)]
     result = {
         "n": len(rows),
         "accuracy_overall": round(acc_overall, 3),
+        "abstention": {
+            "note": "弃权=解析为 NONE（可解释的不定位）；覆盖率=1−弃权率，与准确率分开解读",
+            "overall": {"n": abstain_overall[1],
+                        "abstained": abstain_overall[0],
+                        "coverage": round(1 - abstain_overall[0] / max(1, abstain_overall[1]), 3)},
+            "by_class": {k: {"n": v[1], "abstained": v[0],
+                             "coverage": round(1 - v[0] / max(1, v[1]), 3)}
+                         for k, v in sorted(abstain_by_class.items())},
+        },
         "accuracy_by_class": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_class.items())},
         "accuracy_by_split": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3)} for k, v in sorted(by_split.items())},
         "errors_by_split": {k: v[1] - v[0] for k, v in sorted(by_split.items())},

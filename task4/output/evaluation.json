@@ -1,6 +1,36 @@
 {
  "n": 180,
  "accuracy_overall": 0.678,
+ "abstention": {
+  "note": "弃权=解析为 NONE（可解释的不定位）；覆盖率=1−弃权率，与准确率分开解读",
+  "overall": {
+   "n": 180,
+   "abstained": 3,
+   "coverage": 0.983
+  },
+  "by_class": {
+   "locative": {
+    "n": 45,
+    "abstained": 1,
+    "coverage": 0.978
+   },
+   "object": {
+    "n": 45,
+    "abstained": 2,
+    "coverage": 0.956
+   },
+   "person": {
+    "n": 45,
+    "abstained": 0,
+    "coverage": 1.0
+   },
+   "set": {
+    "n": 45,
+    "abstained": 0,
+    "coverage": 1.0
+   }
+  }
+ },
  "accuracy_by_class": {
   "locative": {
    "n": 45,

@@ -99,10 +99,24 @@ def main() -> int:
     if n_nodes != gstats.get("total_nodes"):
         violations.append(f"graph_nodes 行数 {n_nodes} != stats {gstats.get('total_nodes')}")
 
+    # E14：条数守恒——条件对 JSONL 与映射表行数一致（导出截断仅用于显示，不丢事实行）
+    def jsonl_count(path: Path) -> int:
+        return sum(1 for _ in path.open(encoding="utf-8")) if path.exists() else -1
+
+    pairs_n = jsonl_count(REPO / "task5/output/conditional_pairs.jsonl")
+    mapping = json.loads((REPO / "task5/output/mapping_table.json").read_text(encoding="utf-8"))
+    mapping_n = len(mapping["rows"] if isinstance(mapping, dict) else mapping)
+    stats5 = json.loads((REPO / "task5/output/extraction_stats.json").read_text(encoding="utf-8"))
+    # 不变量：JSONL=去重前原始对；映射表=去重+归属过滤后的发布对
+    if pairs_n != stats5.get("raw_pairs"):
+        violations.append(f"条件对 JSONL({pairs_n}) != 抽取统计 raw_pairs({stats5.get('raw_pairs')})")
+    if mapping_n != stats5.get("after_dedup"):
+        violations.append(f"映射表({mapping_n}) != 抽取统计 after_dedup({stats5.get('after_dedup')})")
+
     report = {
         "title": "跨任务数据契约校验",
         "checked": ["entities_refined", "parsed_routes", "tourist_routes", "pronoun_cases",
-                    "conditional_pairs", "task7 itineraries", "graph_nodes"],
+                    "conditional_pairs", "mapping_table", "task7 itineraries", "graph_nodes"],
         "n_violations": len(violations),
         "violations": violations[:50],
     }
