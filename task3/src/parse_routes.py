@@ -205,7 +205,9 @@ class RouteParser:
                     steps.append(sub)
         # 纯前置句过滤：arrow_chain 格式下无 POI 且无时间的开场白不算步骤
         if fmt == "arrow_chain":
-            steps = [s for s in steps if s["pois"] or s["time_range"] or s.get("station_tag")]
+            # C02：纯移动事件（"乘索道下山"，有交通无 POI）也是路线步骤，不再丢弃
+            steps = [s for s in steps
+                     if s["pois"] or s["time_range"] or s.get("station_tag") or s["transport"]]
             for i, s in enumerate(steps, 1):
                 s["step_no"] = i
         # 住宿点标记（宾馆/饭店/酒店/民宿）

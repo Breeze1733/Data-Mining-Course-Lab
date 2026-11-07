@@ -780,7 +780,8 @@ def main(argv=None) -> int:
 
                         continue
 
-                    all_pairs.append({
+                    polarity = "NEG" if p["pattern"] == "否定建议" else "POS"
+                    all_pairs.append({"polarity": polarity, 
 
                         "record_id": row["record_id"], "scenic_area": row["scenic_area"],
 

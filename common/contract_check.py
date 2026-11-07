@@ -113,8 +113,22 @@ def main() -> int:
     if mapping_n != stats5.get("after_dedup"):
         violations.append(f"映射表({mapping_n}) != 抽取统计 after_dedup({stats5.get('after_dedup')})")
 
+    # A10：缺失字段统计（非违例，供数据质量画像）
+    field_nulls = {}
+    for line in (REPO / "task1/data/processed/dataset_clean.jsonl").open(encoding="utf-8"):
+        r = json.loads(line)
+        for f in ("source_url", "collected_at", "published_at", "author", "content_sha256"):
+            if not r.get(f):
+                field_nulls[f] = field_nulls.get(f, 0) + 1
+    # D01：分句规则差异备案——task4 含分号/半角感叹，task5 不含；跨任务匹配用包含式容忍
     report = {
         "title": "跨任务数据契约校验",
+        "sentence_split_difference": {
+            "task4": "按 。！？；!?与换行分句（含分号与半角）",
+            "task5": "按 。！？与换行分句（分号并入句内）",
+            "mitigation": "实验4↔5 交叉匹配采用 record+包含式比对（对齐口径），分句差异不产生错位打分",
+        },
+        "missing_field_counts": field_nulls,
         "checked": ["entities_refined", "parsed_routes", "tourist_routes", "pronoun_cases",
                     "conditional_pairs", "mapping_table", "task7 itineraries", "graph_nodes"],
         "n_violations": len(violations),

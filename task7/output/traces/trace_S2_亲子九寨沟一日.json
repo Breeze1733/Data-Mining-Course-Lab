@@ -48,7 +48,7 @@
   {
    "step": "observation",
    "tool": "query_route",
-   "summary": "路线 一日精华游，共 21 步"
+   "summary": "路线 一日精华游，共 22 步"
   },
   {
    "step": "action",
@@ -269,5 +269,5 @@
   "template_route": "JZG-EXP01-R1 一日精华游",
   "template_src": "（参考官方路线 JZG-EXP01-R1 2016版一日游）"
  },
- "elapsed": 0.01
+ "elapsed": 0.0
 }

@@ -1182,20 +1182,20 @@
   <data key="d3">4</data>
   <data key="d4">须弥灵境遗址</data>
 </node>
-<node id="时段:九寨沟:上午">
-  <data key="d0">时段</data>
-  <data key="d1">上午</data>
-  <data key="d2">上午</data>
+<node id="交通操作:九寨沟:观光车">
+  <data key="d0">交通操作</data>
+  <data key="d1">观光车</data>
+  <data key="d2">观光车</data>
 </node>
 <node id="交通操作:九寨沟:步行">
   <data key="d0">交通操作</data>
   <data key="d1">步行</data>
   <data key="d2">步行</data>
 </node>
-<node id="交通操作:九寨沟:观光车">
-  <data key="d0">交通操作</data>
-  <data key="d1">观光车</data>
-  <data key="d2">观光车</data>
+<node id="时段:九寨沟:上午">
+  <data key="d0">时段</data>
+  <data key="d1">上午</data>
+  <data key="d2">上午</data>
 </node>
 <node id="时段:九寨沟:中午">
   <data key="d0">时段</data>

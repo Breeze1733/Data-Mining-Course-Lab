@@ -48,7 +48,7 @@
   {
    "step": "observation",
    "tool": "query_route",
-   "summary": "路线 冬季南门二日游，共 14 步"
+   "summary": "路线 冬季南门二日游，共 16 步"
   },
   {
    "step": "action",
@@ -425,5 +425,5 @@
   "template_route": "HS-EXTRA1-R2 冬季南门二日游",
   "template_src": "（参考官方路线 HS-EXTRA1-R2 南门二日游）"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }

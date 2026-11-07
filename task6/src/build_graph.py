@@ -327,6 +327,14 @@ def main() -> int:
     print(json.dumps({"cond_raw_pairs": _stats.get("cond_raw"), "cond_cluster_nodes": _stats.get("cond_clusters")}, ensure_ascii=False))
     # ── 导出与统计 ──────────────────────────────────────────────
     OUT.mkdir(parents=True, exist_ok=True)
+    # 非路经语境守卫的连带清理：仅靠被剔子句连通的交通操作等节点成为孤点——移除
+    # （景区根节点有包含边，永不孤点）
+    orphans = [n for n in G.nodes if G.degree(n) == 0 and G.nodes[n].get("kind") != "景区"]
+    for n in orphans:
+        G.remove_node(n)
+    if orphans:
+        print(f"移除孤点 {len(orphans)}: {[G.nodes[n].get('label', n) if n in G else n for n in orphans]}")
+
     import csv
     _buf = io.StringIO()
     w = csv.writer(_buf, lineterminator=chr(13) + chr(10))

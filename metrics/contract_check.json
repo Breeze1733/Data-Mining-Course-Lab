@@ -1,5 +1,14 @@
 {
  "title": "跨任务数据契约校验",
+ "sentence_split_difference": {
+  "task4": "按 。！？；!?与换行分句（含分号与半角）",
+  "task5": "按 。！？与换行分句（分号并入句内）",
+  "mitigation": "实验4↔5 交叉匹配采用 record+包含式比对（对齐口径），分句差异不产生错位打分"
+ },
+ "missing_field_counts": {
+  "published_at": 5,
+  "author": 48
+ },
  "checked": [
   "entities_refined",
   "parsed_routes",

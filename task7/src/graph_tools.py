@@ -45,9 +45,18 @@ TOOL_SCHEMAS = [
 NEG_ADVICE_RE = re.compile(r"不要|别去|千万别|不宜|不适合|避免|慎|忌|禁止|不建议|别走|别爬")
 
 
+_GRAPH_CACHE: dict = {}
+
+
 class GraphTools:
     def __init__(self):
-        self.G = nx.read_graphml(OUT6 / "knowledge_graph.graphml")
+        # G16：graphml 解析结果按文件改动时间缓存——评估链每次新建 Agent 实例
+        # 不再重复解析同一图谱（语义不变，进程内共享只读对象）
+        mtime = (OUT6 / "knowledge_graph.graphml").stat().st_mtime
+        if _GRAPH_CACHE.get("mtime") != mtime:
+            _GRAPH_CACHE["mtime"] = mtime
+            _GRAPH_CACHE["G"] = nx.read_graphml(OUT6 / "knowledge_graph.graphml")
+        self.G = _GRAPH_CACHE["G"]
         self.routes = [json.loads(l) for l in (TASK3 / "parsed_routes.jsonl").open(encoding="utf-8")]
         self.trace: list[dict] = []
 
