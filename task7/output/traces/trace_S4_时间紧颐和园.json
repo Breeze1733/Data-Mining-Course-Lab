@@ -11,7 +11,10 @@
   "avoid": [],
   "must": [],
   "entrance": null,
-  "exit_gate": null
+  "exit_gate": null,
+  "explicit_fields": [
+   "days"
+  ]
  },
  "trace": [
   {
@@ -64,7 +67,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '颐和园', 'visitor_type': None, 'visitor_types': [], 'days': 0.5, 'days_explicit': True, 'month': None, 'special': [], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': None}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '颐和园', 'visitor_type': None, 'visitor_types': [], 'days': 0.5, 'days_explicit': True, 'month': None, 'special': [], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': None, 'explicit_fields': ['days']}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",

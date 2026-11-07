@@ -11,7 +11,10 @@
   "avoid": [],
   "must": [],
   "entrance": null,
-  "exit_gate": null
+  "exit_gate": null,
+  "explicit_fields": [
+   "days"
+  ]
  },
  "trace": [
   {

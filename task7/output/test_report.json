@@ -34,11 +34,16 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "days",
+     "special",
+     "visitor_type"
+    ]
    },
    "n_tool_calls": 7,
    "answer_head": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 2026西堤省力赏花线）：\n上午：万寿山\n上午：画中游（步行前往）\n中午：佛香阁（步行前往）\n贴士（来自游记经验）：[人群] 可以不登,去下一站画中游同样好看)——画中游(在半山",
-   "elapsed": 0.01
+   "elapsed": 0.02
   },
   {
    "scenario": "S2_亲子九寨沟一日",
@@ -67,7 +72,11 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "days",
+     "visitor_type"
+    ]
    },
    "n_tool_calls": 9,
    "answer_head": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 2016版一日游）：\n上午：沟口\n上午：原始森林（步行前往）\n中午：长海（步行前往）\n下午：五彩池（步行前往）\n下午：镜海（步行前往）\n贴士（来自游记经验）：[装备] 不建议去原",
@@ -103,11 +112,17 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": "想看日"
+    "exit_gate": "想看日",
+    "explicit_fields": [
+     "days",
+     "exit_gate",
+     "special",
+     "visitor_type"
+    ]
    },
    "n_tool_calls": 14,
    "answer_head": "为您规划黄山两日游（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）：\n第一天·上午：始信峰\n第一天·上午：西海（步行前往）\n第一天·中午：西海大峡谷（步行前往）\n第一天·下午：迎客松（步行前往）\n第一天·下午：莲花峰（步行前往）\n",
-   "elapsed": 0.01
+   "elapsed": 0.0
   },
   {
    "scenario": "S4_时间紧颐和园",
@@ -134,7 +149,10 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "days"
+    ]
    },
    "n_tool_calls": 7,
    "answer_head": "为您规划颐和园半日游（参考官方路线 YHY-EXP05-R1 APEC世界文化遗产经典线）：\n上午：万寿山\n上午：佛香阁（步行前往）\n中午：昆明湖（步行前往）\n贴士（来自游记经验）：[人群] 儿童:西线游相对容易,从14号敌楼出发,向20号",
@@ -162,7 +180,10 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "days"
+    ]
    },
    "n_tool_calls": 0,
    "answer_head": "抱歉，当前仅支持 黄山/九寨沟/颐和园 三个景区的规划。您可以试试：“带老人颐和园半日游”“九寨沟亲子一日游”“黄山两日看日出”。",
@@ -196,11 +217,16 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": "天时间在黄山看日"
+    "exit_gate": "天时间在黄山看日",
+    "explicit_fields": [
+     "days",
+     "exit_gate",
+     "special"
+    ]
    },
    "n_tool_calls": 7,
    "answer_head": "提示：半日游难以兼顾看日出——日出需要清晨身处山顶，通常要求前晚住宿山上。建议改为两日行程（首日上山宿山顶，次日看日出后下山），或舍弃看日出安排。\n\n为您规划黄山半日游（参考官方路线 HS-EXTRA1-R2 黄山主体山岳游 第1至3天）：",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S7_可行性提示",
@@ -228,11 +254,14 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "days"
+    ]
    },
    "n_tool_calls": 9,
    "answer_head": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 2016版一日游）：\n上午：沟口\n上午：原始森林（步行前往）\n中午：长海（步行前往）\n下午：五彩池（步行前往）\n下午：镜海（步行前往）\n贴士（来自游记经验）：[人群] 那边由于道",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S8_多跳动线",
@@ -259,11 +288,14 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": "九寨沟从长海"
+    "exit_gate": "九寨沟从长海",
+    "explicit_fields": [
+     "exit_gate"
+    ]
    },
    "n_tool_calls": 11,
    "answer_head": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 2016版一日游）：\n上午：沟口\n上午：原始森林（步行前往）\n中午：五彩池（步行前往）\n下午：镜海（步行前往）\n下午：诺日朗（步行前往）\n晚上：长海（步行前往）\n贴士（来自游记经",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S9_冬季时段提示",
@@ -292,7 +324,11 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "days",
+     "month"
+    ]
    },
    "n_tool_calls": 13,
    "answer_head": "为您规划黄山两日游，出行时段12月（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）：\n第一天·上午：始信峰\n第一天·上午：西海（步行前往）\n第一天·中午：西海大峡谷（步行前往）\n第一天·下午：迎客松（步行前往）\n第一天·下午：莲花",
@@ -323,7 +359,10 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "days"
+    ]
    },
    "n_tool_calls": 14,
    "answer_head": "为您规划九寨沟三日游（参考官方路线 JZG-EXP01-R2 2016版二日游）：\n第一天·上午：沟口\n第一天·上午：原始森林（步行前往）\n第一天·中午：长海（步行前往）\n第一天·下午：五彩池（步行前往）\n第二天·上午：镜海（步行前往）\n第",
@@ -359,11 +398,16 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "days",
+     "special",
+     "visitor_type"
+    ]
    },
    "n_tool_calls": 9,
    "answer_head": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 2016版一日游）：\n上午：沟口\n上午：原始森林（步行前往）\n中午：长海（步行前往）\n下午：五彩池（步行前往）\n下午：镜海（步行前往）\n贴士（来自游记经验）：[装备] 不建议去原",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S12_不去地点",
@@ -392,11 +436,15 @@
     ],
     "must": [],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "avoid",
+     "days"
+    ]
    },
    "n_tool_calls": 9,
    "answer_head": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 2016版一日游）：\n上午：沟口\n上午：长海（乘坐观光车前往）\n中午：五彩池（步行前往）\n下午：镜海（步行前往）\n下午：诺日朗（步行前往）\n贴士（来自游记经验）：[人群] 那边由",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S13_未知景点",
@@ -423,11 +471,14 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "days"
+    ]
    },
    "n_tool_calls": 9,
    "answer_head": "为您规划九寨沟一日游（参考官方路线 JZG-EXP01-R1 2016版一日游）：\n上午：沟口\n上午：原始森林（步行前往）\n中午：长海（步行前往）\n下午：五彩池（步行前往）\n下午：镜海（步行前往）\n贴士（来自游记经验）：[人群] 那边由于道",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S14_多约束集成",
@@ -460,11 +511,17 @@
     ],
     "must": [],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "avoid",
+     "days",
+     "month",
+     "special"
+    ]
    },
    "n_tool_calls": 14,
    "answer_head": "为您规划黄山三日游，出行时段12月（参考官方路线 HS-EXTRA1-R2 南门二日游）：\n第一天·上午：始信峰\n第一天·上午：排云亭（步行前往）\n第一天·中午：西海（步行前往）\n第一天·下午：西海大峡谷（观光缆车前往）\n第二天·上午：迎客",
-   "elapsed": 0.0
+   "elapsed": 0.01
   },
   {
    "scenario": "S15_必去地点",
@@ -493,7 +550,11 @@
      "天都峰"
     ],
     "entrance": null,
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "days",
+     "must"
+    ]
    },
    "n_tool_calls": 13,
    "answer_head": "为您规划黄山两日游（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）：\n第一天·上午：始信峰\n第一天·上午：西海（步行前往）\n第一天·中午：西海大峡谷（步行前往）\n第一天·下午：迎客松（步行前往）\n第一天·下午：莲花峰（步行前往）\n",
@@ -526,7 +587,12 @@
     "avoid": [],
     "must": [],
     "entrance": null,
-    "exit_gate": "想看日"
+    "exit_gate": "想看日",
+    "explicit_fields": [
+     "days",
+     "exit_gate",
+     "special"
+    ]
    },
    "n_tool_calls": 12,
    "answer_head": "为您规划颐和园两日游（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）：\n第一天·上午：万寿山\n第一天·上午：石舫（步行前往）\n第一天·中午：长廊（步行前往）\n第一天·下午：画中游（步行前往）\n第二天·上午：佛香阁（步行前往）\n第二",
@@ -557,7 +623,11 @@
     "avoid": [],
     "must": [],
     "entrance": "北宫门",
-    "exit_gate": null
+    "exit_gate": null,
+    "explicit_fields": [
+     "days",
+     "entrance"
+    ]
    },
    "n_tool_calls": 9,
    "answer_head": "为您规划颐和园一日游（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）：\n上午：北宫门\n上午：万寿山（步行前往）\n中午：佛香阁（步行前往）\n下午：昆明湖（步行前往）\n下午：东宫门（步行前往）\n贴士（来自游记经验）：[人群] 儿童:西",

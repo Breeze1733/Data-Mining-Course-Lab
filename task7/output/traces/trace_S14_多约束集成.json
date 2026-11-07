@@ -15,7 +15,13 @@
   ],
   "must": [],
   "entrance": null,
-  "exit_gate": null
+  "exit_gate": null,
+  "explicit_fields": [
+   "avoid",
+   "days",
+   "month",
+   "special"
+  ]
  },
  "trace": [
   {
@@ -68,7 +74,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '黄山', 'visitor_type': None, 'visitor_types': [], 'days': 3, 'days_explicit': True, 'month': 12, 'special': ['避开人流'], 'avoid': ['莲花峰'], 'must': [], 'entrance': None, 'exit_gate': None}；先查核心 POI（limit=12），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '黄山', 'visitor_type': None, 'visitor_types': [], 'days': 3, 'days_explicit': True, 'month': 12, 'special': ['避开人流'], 'avoid': ['莲花峰'], 'must': [], 'entrance': None, 'exit_gate': None, 'explicit_fields': ['avoid', 'days', 'month', 'special']}；先查核心 POI（limit=12），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -427,5 +433,5 @@
   "template_route": "HS-EXTRA1-R2 冬季南门二日游",
   "template_src": "（参考官方路线 HS-EXTRA1-R2 南门二日游）"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }

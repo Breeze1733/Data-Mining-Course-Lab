@@ -13,7 +13,12 @@
   "avoid": [],
   "must": [],
   "entrance": null,
-  "exit_gate": "天时间在黄山看日"
+  "exit_gate": "天时间在黄山看日",
+  "explicit_fields": [
+   "days",
+   "exit_gate",
+   "special"
+  ]
  },
  "trace": [
   {
@@ -70,7 +75,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '黄山', 'visitor_type': None, 'visitor_types': [], 'days': 0.5, 'days_explicit': True, 'month': None, 'special': ['看日出'], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': '天时间在黄山看日'}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '黄山', 'visitor_type': None, 'visitor_types': [], 'days': 0.5, 'days_explicit': True, 'month': None, 'special': ['看日出'], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': '天时间在黄山看日', 'explicit_fields': ['days', 'exit_gate', 'special']}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -257,5 +262,5 @@
   "template_route": "HS-EXTRA1-R2 冬季南门二日游",
   "template_src": "（参考官方路线 HS-EXTRA1-R2 黄山主体山岳游 第1至3天）"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }

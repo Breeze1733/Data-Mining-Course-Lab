@@ -33,8 +33,13 @@ class EmptyLLM(FakeLLM):
 
 
 class OkLLM(FakeLLM):
+    """忠实润色：从 plan JSON 中取全部站点名回填文本（模拟真实润色保留站点）。"""
+
     def complete(self, system, user, temperature=0.4):
-        return "【润色文案】黄山两日游安排如下（mock）"
+        import json as _json
+        plan = _json.loads(user)
+        pois = "、".join(it["poi"] for it in plan.get("itinerary", []))
+        return f"【润色文案】为您安排：{pois}（mock）"
 
 
 class LLMMockTests(unittest.TestCase):
@@ -55,6 +60,19 @@ class LLMMockTests(unittest.TestCase):
         r = self._run(EmptyLLM(None))
         self.assertTrue(r["answer"].strip(), "空响应须回退模板，不得透传空串")
         self.assertTrue(any(t.get("via") == "fallback" for t in r["trace"]))
+
+    def test_poi_loss_falls_back(self):
+        """G11：润色文本站点覆盖率不足 60% 时回退模板（防润色遗漏）。"""
+
+        class LossyLLM(FakeLLM):
+            def complete(self, system, user, temperature=0.4):
+                return "黄山很美，两天玩得很开心，推荐大家去玩。"  # 无站点名
+
+        r = self._run(LossyLLM(None))
+        self.assertTrue(r["answer"].strip())
+        self.assertTrue(any(t.get("via") == "fallback" for t in r["trace"]),
+                        "站点覆盖不足须回退模板")
+        self.assertTrue(any("覆盖不足" in t.get("thought", "") for t in r["trace"]))
 
     def test_normal_response_used(self):
         r = self._run(OkLLM(None))

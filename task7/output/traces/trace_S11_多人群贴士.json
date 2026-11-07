@@ -16,7 +16,12 @@
   "avoid": [],
   "must": [],
   "entrance": null,
-  "exit_gate": null
+  "exit_gate": null,
+  "explicit_fields": [
+   "days",
+   "special",
+   "visitor_type"
+  ]
  },
  "trace": [
   {
@@ -75,7 +80,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': '老人', 'visitor_types': ['老人', '孩子'], 'days': 1, 'days_explicit': True, 'month': None, 'special': ['省力'], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': None}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': '老人', 'visitor_types': ['老人', '孩子'], 'days': 1, 'days_explicit': True, 'month': None, 'special': ['省力'], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': None, 'explicit_fields': ['days', 'special', 'visitor_type']}；先查核心 POI（limit=8），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -278,5 +283,5 @@
   "template_route": "JZG-EXP01-R1 一日精华游",
   "template_src": "（参考官方路线 JZG-EXP01-R1 2016版一日游）"
  },
- "elapsed": 0.0
+ "elapsed": 0.01
 }

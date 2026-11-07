@@ -218,7 +218,15 @@ class IntentParser:
         return {"scenic": scenic or "未知", "visitor_type": visitor, "visitor_types": visitor_hits,
                 "days": days, "days_explicit": days_explicit,
                 "month": month, "special": special, "avoid": avoid, "must": must,
-                "entrance": entrance, "exit_gate": exit_gate}
+                "entrance": entrance, "exit_gate": exit_gate,
+                # G01：字段来源标注（机器可读）——显式给定 vs 默认/推断
+                "explicit_fields": sorted(
+                    (["days"] if days_explicit else [])
+                    + (["visitor_type"] if visitor_hits else [])
+                    + (["month"] if month else [])
+                    + (["avoid"] if avoid else []) + (["must"] if must else [])
+                    + (["entrance"] if entrance else []) + (["exit_gate"] if exit_gate else [])
+                    + (["special"] if special else []))}
 
 
 class ReActAgent:
@@ -669,6 +677,11 @@ class ReActAgent:
         if self.llm and self.llm.available:
             try:
                 text = self.llm.complete(self.POLISH_PROMPT, json.dumps(plan, ensure_ascii=False))
+                # G11：润色后覆盖检查——站点名覆盖率不足 60% 视为遗漏，回退模板
+                _pois = [it["poi"] for it in plan.get("itinerary", [])]
+                _hit = sum(1 for q in _pois if q in text)
+                if _pois and _hit < max(1, int(0.6 * len(_pois))):
+                    raise ValueError(f"润色文本站点覆盖不足（{_hit}/{len(_pois)}）")
                 # 空/纯空白响应与异常同视为润色失败——直接透传会产生空回答
                 if not text or not text.strip():
                     raise ValueError("LLM 返回空响应")

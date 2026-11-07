@@ -156,6 +156,24 @@ def main(out_dir: Path | None = None) -> int:
                                    and prov["cond_nodes_with_evidence"] == prov["cond_nodes_checked"]
                                    and prov["order_edges_with_records"] == prov["order_edges_checked"])
     (out_dir / "graph_validation.json").write_text(json.dumps(validation, ensure_ascii=False, indent=1), encoding="utf-8")
+    # F11 扩展：graphml 节点属性与 graph_nodes.csv 逐字段抽检（5 节点）
+    import csv as _csv
+    _csv_attrs = {}
+    with (ROOT / "output/graph_nodes.csv").open(encoding="utf-8-sig") as _fh:
+        for _row in _csv.DictReader(_fh):
+            _csv_attrs[_row["node_id"]] = _row
+    _attr_mismatch = []
+    for _n in list(G.nodes)[:0] or list(G.nodes)[:5]:
+        _c = _csv_attrs.get(_n)
+        if _c is None:
+            _attr_mismatch.append(f"{_n} 不在 CSV")
+            continue
+        for _f in ("kind", "label"):
+            if str(G.nodes[_n].get(_f, "")) != (_c.get(_f) or ""):
+                _attr_mismatch.append(f"{_n}.{_f}: graphml={G.nodes[_n].get(_f)!r} csv={_c.get(_f)!r}")
+    if _attr_mismatch:
+        print("F11 属性不一致:", _attr_mismatch[:5])
+
     ok = sum(1 for f in fact_checks if f["found"])
     print(json.dumps({"fact_checks_passed": f"{ok}/{len(fact_checks)}",
                       "components": components,
@@ -164,7 +182,9 @@ def main(out_dir: Path | None = None) -> int:
     for f in fact_checks:
         print(" ", f["pair"], "OK" if f["found"] else "MISS",
               f'w={f["edges"][0]["weight"]:.1f}' if f["found"] else "")
-    return 0 if ok == len(fact_checks) and all(n == 1 for n in components.values()) and not validation["isolated_nodes"] and alignment["passed"] else 1
+    return 0 if (ok == len(fact_checks) and all(n == 1 for n in components.values())
+                 and not validation["isolated_nodes"] and alignment["passed"]
+                 and not _attr_mismatch) else 1
 
 
 if __name__ == "__main__":

@@ -15,7 +15,13 @@
   "avoid": [],
   "must": [],
   "entrance": null,
-  "exit_gate": "想看日"
+  "exit_gate": "想看日",
+  "explicit_fields": [
+   "days",
+   "exit_gate",
+   "special",
+   "visitor_type"
+  ]
  },
  "trace": [
   {
@@ -72,7 +78,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '黄山', 'visitor_type': '情侣', 'visitor_types': ['情侣'], 'days': 2, 'days_explicit': True, 'month': None, 'special': ['看日出'], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': '想看日'}；先查核心 POI（limit=11），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '黄山', 'visitor_type': '情侣', 'visitor_types': ['情侣'], 'days': 2, 'days_explicit': True, 'month': None, 'special': ['看日出'], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': '想看日', 'explicit_fields': ['days', 'exit_gate', 'special', 'visitor_type']}；先查核心 POI（limit=11），再取官方路线做编排骨架，最后按游客类型取条件贴士"
   },
   {
    "step": "thought",
@@ -397,5 +403,5 @@
   "template_route": "HS-EXTRA1-R2 冬季南门二日游",
   "template_src": "（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）"
  },
- "elapsed": 0.01
+ "elapsed": 0.0
 }

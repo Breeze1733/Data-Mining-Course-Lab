@@ -74,6 +74,7 @@ def main() -> int:
             ents[r["record_id"]] = r["entities"]
 
     stats = {"POI": [0, 0, 0], "交通": [0, 0, 0], "时间": [0, 0, 0]}
+    strict_hit = {"POI": 0, "交通": 0, "时间": 0}  # B01：严格口径（命中即精确等文本）
     stats_oos = {"POI": [0, 0, 0]}  # 设计排除口径（根景区名/城市名）：tp/fn 单独计数
     missed, false_pos = [], []
     sentence_stats = []  # 每句局部 (tp,fp,fn)，供分层报告
@@ -106,6 +107,8 @@ def main() -> int:
                         if pp["text"] and (pp["text"] in gtext or gtext in pp["text"]):
                             used[i] = True
                             hit = True
+                            if pp["text"] == gtext:
+                                strict_hit[gtype] += 1
                             break
             if hit:
                 stats[gtype][0] += 1
@@ -134,6 +137,9 @@ def main() -> int:
         "annotated_by": gold_doc["annotated_by"],
         "match_policy": gold_doc.get("out_of_scope_note", "根景区名与城市名按设计不作为 POI 实体抽取"),
         "per_type": {t: prf(*v) for t, v in stats.items()},
+        # B01 双口径：宽松（包含式变体命中，主口径）与严格（命中文本精确相等）
+        "strict_ratio": {t: round(strict_hit[t] / max(1, v[0]), 3)
+                         for t, v in stats.items() if v[0]},
         "missed": missed,
         "false_positives": false_pos,
         "scope_note": {},
