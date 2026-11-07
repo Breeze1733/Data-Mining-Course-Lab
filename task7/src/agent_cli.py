@@ -228,6 +228,17 @@ class ReActAgent:
                      "再取官方路线做编排骨架，最后按游客类型取条件贴士"})
 
         selected = [p["poi"] for p in pois_res["pois"]]
+        # G04/U88：软偏好参与选点排序——"拍照片"把挂有拍照类条件的已选 POI 前置
+        # （稳定排序只提位不新增；此前该特殊需求仅被解析、从未作用于规划）
+        photo_pois: set = set()
+        if "拍照片" in (intent.get("special") or []):
+            for poi in list(selected):
+                pc = self.tools.call("query_poi_conditions", {"scenic": scenic, "poi": poi}, trace)
+                if any(c.get("cond_type") == "拍照" for c in pc.get("conditions", [])):
+                    photo_pois.add(poi)
+            if photo_pois:
+                trace.append({"step": "thought",
+                              "thought": f"软偏好「拍照片」：{sorted(photo_pois)} 挂有拍照点位条件（编排后前置）"})
         # G02b：不去地点从行程剔除并说明；必去地点优先保留
         avoid = [a for a in (intent.get("avoid") or []) if a]
         must = [m0 for m0 in (intent.get("must") or []) if m0]
@@ -296,6 +307,11 @@ class ReActAgent:
         template = best_route["route_title"] if best_route else ""
         _sunrise_poi = None
         ordered = self._order_pois(scenic, selected, template_pos)
+        # G04/U88：软偏好提升在编排序之后生效（此前置于 selected 上会被 _order_pois 覆盖）
+        if photo_pois:
+            ordered.sort(key=lambda x: x not in photo_pois)
+            trace.append({"step": "thought",
+                          "thought": f"软偏好「拍照片」提升：{sorted(photo_pois)} 前置于行程"})
         if removed_by_avoid:
             special_notes.append("已按您的要求避开：" + "、".join(removed_by_avoid))
         lodging_in_plan = [p for p in selected if any(k in p for k in ("宾馆", "酒店", "民宿"))]
