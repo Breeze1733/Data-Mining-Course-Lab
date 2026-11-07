@@ -630,7 +630,8 @@ class ReActAgent:
         tips = "；".join(f'[{t["cond_type"]}] {t["suggestion"][:30]}' for t in plan["tips"][:4])
         # 可行性警告进入最终回答（此前仅存在于内部字段）
         warnings = plan.get("feasibility_warnings") or []
-        warn_text = "".join(f'\n⚠ {w[:70]}' for w in warnings[:4])
+        # F07：可行性提示来自历史游记语料——标注时效属性，不冒充实时开放状态
+        warn_text = "".join(f"\n⚠ {w[:70]}（语料经验，出行前请核实）" for w in warnings[:4])
         day_label = {0.5: "半日", 1: "一日", 1.5: "一日半", 2: "两日", 3: "三日", 3.5: "三日半", 4: "四日", 5: "五日"}
         month_tag = f'，出行时段{plan["trip_month"]}月' if plan.get("trip_month") else ""
         sp_notes = "".join(f'{chr(10)}说明：{n}' for n in (plan.get("special_notes") or []))

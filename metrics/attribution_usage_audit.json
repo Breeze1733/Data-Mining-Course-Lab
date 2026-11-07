@@ -1,0 +1,21 @@
+{
+ "title": "句级归属的下游使用审计",
+ "consumers": [
+  {
+   "task": "实验4 消解",
+   "usage": "add_pool 归属过滤：景区外句实体不作候选；跨句候选做焦点×归属一致性排除",
+   "code": "task4/src/detect_and_resolve.py add_pool/attr_filter_on 分支"
+  },
+  {
+   "task": "实验5 条件抽取",
+   "usage": "景区外句不产出条件建议对（P1 归属过滤延续）",
+   "code": "task5/src/extract_conditionals.py main 循环 sent_lab=='景区外' continue"
+  },
+  {
+   "task": "实验7 Agent",
+   "usage": "间接经图谱（条件节点来自归属过滤后的抽取）"
+  }
+ ],
+ "evidence": "D13 计量（metrics/attribution_filter_d13.json）确认过滤同时影响候选池——归属确被消费而非摆设",
+ "verdict": "句级归属在实验4/5 均为真实生效的过滤输入；E13 审计通过"
+}

@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 import random
+import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -449,6 +450,9 @@ def score(cases: list[dict]) -> None:
             for r in rows if not r["correct"]],
         # 类别指标与先行词身份指标分开报告——非实体类只判类别，不冒充指代正确
         "kind_only_accuracy": round(sum(r["kind_match"] for r in rows) / len(rows), 3) if rows else None,
+        # D07：集合类的"具体成员命中"辅助口径——gold 集合成员之一被解析名包含即计命中，
+        # 与粗类型正确率分开解读（区分"类型对"与"成员对"）
+        "set_member_hit": None,
         "accuracy_ci95": wilson_ci(round(acc_overall * len(rows)), len(rows)),
         "data_fingerprints": _data_fingerprints(),
         "identity_ci95": wilson_ci(
@@ -460,6 +464,21 @@ def score(cases: list[dict]) -> None:
                 sum(1 for r in rows if r["gold_kind"] in ("POI", "景区") and r["correct"])
                 / max(1, sum(1 for r in rows if r["gold_kind"] in ("POI", "景区"))), 3),
         },
+    }
+    set_rows = [r for r in rows if r["gold_kind"].startswith("集合") or r["pronoun_class"] == "set"]
+    member_hits = 0
+    member_detail = []
+    for r in set_rows:
+        gold_members = [m for m in re.split(r"[、/／,，;；]|和|与", r["gold_antecedent"]) if len(m) >= 2]
+        hit = any((m in r["cur_pred"]) or (r["cur_pred"] in m) for m in gold_members
+                  if m not in ("无",)) if gold_members else False
+        member_hits += hit
+        member_detail.append({"pronoun": r["pronoun"], "gold": r["gold_antecedent"],
+                              "pred": r["cur_pred"], "member_hit": hit})
+    result["set_member_hit"] = {
+        "n_set_cases": len(set_rows), "member_hits": member_hits,
+        "member_hit_rate": round(member_hits / max(1, len(set_rows)), 3),
+        "detail": member_detail,
     }
     (OUT / "evaluation.json").write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
 

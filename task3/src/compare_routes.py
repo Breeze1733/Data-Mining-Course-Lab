@@ -513,6 +513,9 @@ def main() -> int:
             "order_tau_mean": round(sum(taus) / len(taus), 3) if taus else None,
 
             "n_order_pairs": len(taus),
+            # C07：未匹配样本——公共 POI<5 而无法计算 tau 的游客路线数与匹配规则说明
+            "n_tourists_unmatched": len(tourists_here) - len(taus),
+            "matching_rule": "每条游客路线取各官方路线中公共POI≥5 的最大 tau（择优，敏感性见 tau_aggregation_sensitivity）",
 
             "official_has_time_info": has_official_time,
 
