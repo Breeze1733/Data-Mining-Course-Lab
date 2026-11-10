@@ -4,7 +4,7 @@
 
 - `data/processed/dataset_clean.jsonl`：271条清洗后正文，是后续实验的统一输入。
 - `data/raw/official_routes.jsonl`：46条官方路线分支，供实验3解析。
-- `data/processed/quality_report.json`、`cleaning_examples.json`、`rejected_records.jsonl`：清洗质量、前后样例及拒绝原因。
+- `data/processed/quality_report.json`、`rejected_records.jsonl`：清洗质量审计与拒绝记录（`cleaning_examples.json` 为可重建示例，不入库）。
 - `data/collected/scenic_guide_dataset.xlsx`：数据集交付工作簿。
 - `src/build_records.py`、`preprocess.py`：原始材料组装与清洗。
 - 报告再生成脚本在 `../local/`（不随仓库分发）。

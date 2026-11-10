@@ -8,11 +8,14 @@
 from __future__ import annotations
 
 import argparse
+import io
 import json
 import random
 import re
 import sys
+import zipfile
 from collections import Counter, defaultdict
+from datetime import datetime
 from pathlib import Path
 
 from openpyxl import Workbook
@@ -244,6 +247,8 @@ def export_xlsx():
     review = json.loads((OUT / "review_summary.json").read_text(encoding="utf-8"))
 
     wb = Workbook()
+    # 固定 docProps 时间戳：内容不变则字节不变，重建产物保持确定性
+    wb.properties.created = wb.properties.modified = datetime(2026, 1, 1)
     ws = wb.active
     ws.title = "条件-建议映射表"
     headers = ["条件类型", "条件描述", "建议内容", "触发词", "抽取模式", "景区", "频次", "来源记录（前5）"]
@@ -276,7 +281,27 @@ def export_xlsx():
 
     out = OUT / "conditional_mapping_table.xlsx"
     wb.save(out)
+    _normalize_xlsx(out)
     print(json.dumps({"output": out.as_posix(), "rows": len(mapping)}, ensure_ascii=False))
+
+
+def _normalize_xlsx(path: Path) -> None:
+    """openpyxl 对 zip 条目时间戳和 core.xml 的 modified 强制写当前时刻，统一改写为固定值：
+    内容不变则字节不变（产物确定性）。"""
+    stamp = b"2026-01-01T00:00:00Z"
+    core_mod = (b'<dcterms:modified xmlns:dcterms="http://purl.org/dc/terms/" '
+                b'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+                b'xsi:type="dcterms:W3CDTF">' + stamp + b"</dcterms:modified>")
+    src = zipfile.ZipFile(io.BytesIO(path.read_bytes()))
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as dst:
+        for info in src.infolist():
+            data = src.read(info.filename)
+            if info.filename == "docProps/core.xml":
+                data = re.sub(rb"<dcterms:modified[^>]*>.*?</dcterms:modified>", core_mod, data)
+            fixed = zipfile.ZipInfo(info.filename, date_time=(1980, 1, 1, 0, 0, 0))
+            fixed.compress_type = info.compress_type
+            fixed.external_attr = info.external_attr
+            dst.writestr(fixed, data)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

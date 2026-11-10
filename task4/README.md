@@ -10,7 +10,6 @@ output/
   annotation_sample_dev/test.json  开发 120 例 / 测试 60 例抽样清单
   annotation_gold.json    人工标注（先行词、类别、备注）
   evaluation.json         准确率（总体/分类别）与 69 个错误案例
-  resolved_examples.json  消解后文本改写示例
   figs/coref_evaluation.png
 report.docx             实验项目4报告
 ```
