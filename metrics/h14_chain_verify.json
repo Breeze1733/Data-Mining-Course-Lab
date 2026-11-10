@@ -1,0 +1,7 @@
+{
+ "title": "H14 交付包全链验证",
+ "handin_dir": "local\\handin\\20261108_044715",
+ "chain_exit": 2,
+ "unit_tests_pass": false,
+ "note": "交付包从副本独立运行全链（测试+部分管线），验证不依赖 local/"
+}
