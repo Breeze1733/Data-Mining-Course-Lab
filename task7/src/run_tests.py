@@ -281,10 +281,11 @@ def main() -> int:
         passed = all(checks.values())
         results.append({"scenario": sc["id"], "query": sc["query"], "passed": passed,
                         "checks": checks, "intent": result["intent"],
-                        "n_tool_calls": len(tool_calls), "answer_head": result["answer"][:120],
-                        "elapsed": result["elapsed"]})
+                        "n_tool_calls": len(tool_calls), "answer_head": result["answer"][:120]})
+        # elapsed 只打印不入库：持久化产物保持确定性，重复构建零 diff
         (trace_dir / f'trace_{sc["id"]}.json').write_text(
-            json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
+            json.dumps({k: v for k, v in result.items() if k != "elapsed"},
+                       ensure_ascii=False, indent=1), encoding="utf-8")
         print(f'{"PASS" if passed else "FAIL"} {sc["id"]} | tools={len(tool_calls)} | {result["elapsed"]}s')
 
     report = {
