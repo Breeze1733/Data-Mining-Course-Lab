@@ -5,12 +5,9 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-import sys as _sys
-from pathlib import Path as _P
-_sys.path.insert(0, str(_P(__file__).resolve().parents[2] / "task2/src"))
 from dictionary import Gazetteer, load_transport_lexicon
 
-RESOURCES = Path(__file__).resolve().parents[2] / "task2/resources"
+RESOURCES = Path(__file__).resolve().parents[1] / "task2/resources"
 
 
 class TransportRuleTests(unittest.TestCase):

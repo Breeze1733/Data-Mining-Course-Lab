@@ -5,7 +5,6 @@ import unittest
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "task7/src"))
 from graph_tools import TOOL_SCHEMAS, GraphTools  # noqa: E402
 
 

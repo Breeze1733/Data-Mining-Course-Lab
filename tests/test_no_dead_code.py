@@ -9,7 +9,7 @@ import ast
 import unittest
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[2]
+REPO = Path(__file__).resolve().parents[1]
 SCAN_GLOBS = ["task*/src/*.py", "common/*.py", "tests/*.py"]
 
 

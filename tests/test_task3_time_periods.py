@@ -1,7 +1,6 @@
 import unittest
 import sys as _sys
 from pathlib import Path as _P
-_sys.path.insert(0, str(_P(__file__).resolve().parents[2] / "task3/src"))
 from compare_routes import entity_period
 
 

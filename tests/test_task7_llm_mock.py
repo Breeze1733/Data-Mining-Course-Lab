@@ -9,7 +9,6 @@ import unittest
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "task7/src"))
 from agent_cli import ReActAgent  # noqa: E402
 
 

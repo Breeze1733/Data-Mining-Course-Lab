@@ -4,7 +4,6 @@ import unittest
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "task7/src"))
 from agent_cli import IntentParser  # noqa: E402
 
 VALID_DAYS = {0.5, 1, 1.5, 2, 3, 3.5, 4, 5}

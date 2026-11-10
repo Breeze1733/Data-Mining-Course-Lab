@@ -11,7 +11,6 @@ from pathlib import Path
 
 import sys as _sys
 from pathlib import Path as _P
-_sys.path.insert(0, str(_P(__file__).resolve().parents[2] / "task1/src"))
 from preprocess import canonicalize_url, clean_text, export_outputs, preprocess_records
 
 

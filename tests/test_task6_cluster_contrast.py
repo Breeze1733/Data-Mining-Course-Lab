@@ -4,7 +4,6 @@ import unittest
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "task6/src"))
 from build_graph import _contrast_blocked, _norm_cond_m as _norm_cond  # noqa: E402
 
 

@@ -3,7 +3,6 @@ import unittest
 from pathlib import Path
 import sys as _sys
 from pathlib import Path as _P
-_sys.path.insert(0, str(_P(__file__).resolve().parents[2] / "common"))
 from entity_identity import canonical_name, read_aliases, build_poi_lookup
 
 
