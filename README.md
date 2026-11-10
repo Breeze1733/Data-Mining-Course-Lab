@@ -40,8 +40,8 @@ Agent 未配置 API 时使用规则模式；配置 `task7/config.json`（OpenAI 
 | task6 | 知识图谱融合 | task6/report.docx |
 | task7 | 旅游规划 Agent | task7/report.docx |
 | task1/scripts | 采集爬虫 | — |
-| common | 回归守护 / 审计 / 快照等评测基础设施 | — |
-| docs | 过程账本（PROGRESS / METRICS / DECISIONS / BACKLOG / review） | — |
+| common | 数据契约与防篡改指纹校验、报告-数据一致性审计 | — |
+| docs | 过程账本（PROGRESS / METRICS / DECISIONS / README） | — |
 | metrics | 指标快照（`snapshot_latest.json` 为最新） | — |
 
 总结反思为根目录的 `实验总结反思.docx`。公共名称映射在 `task2/resources`、

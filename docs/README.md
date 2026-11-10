@@ -1,15 +1,15 @@
 # docs — 过程账本
 
-本目录是项目的过程记录（PROGRESS / METRICS / DECISIONS / TOKENS / BACKLOG / review/），
+本目录是项目的过程记录（PROGRESS / METRICS / DECISIONS / README），
 供开发者查阅；代码与八份实验报告不引用本目录。
 
 ## 仓库结构
 
 - `task1/`–`task7/`：实验1–7 的源码（`src/`）、产物（`output/`）与报告（`report.docx`）；
   task1 另含采集脚本（`scripts/`）与白名单跟踪的数据（`data/`）。
-- `common/`：评测与守护工具（指标快照、人工标注评测集回归守护、报告-数据一致性审计）。
-- `tests/`：链路重建入口 `run.py` 与 65 个单元测试。
-- `docs/`：本账本；`metrics/`：指标快照。
+- `common/`：评测与守护工具（跨任务数据契约与防篡改指纹校验、报告-数据一致性审计）。
+- `tests/`：链路重建入口 `run.py` 与单元测试（单文件 `test_all.py`）。
+- `docs/`：本账本；`metrics/`：指标账本与最新快照。
 - 根目录：八份报告中的《实验总结反思》与任务书原文；`requirements.txt` 为全项目依赖。
 
 ## 技术路线：实验1–6 静态、LLM 仅实验7

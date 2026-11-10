@@ -20,7 +20,6 @@ data/**
 !data/processed/
 !data/processed/dataset_clean.jsonl
 !data/processed/quality_report.json
-!data/processed/cleaning_examples.json
 !data/processed/rejected_records.jsonl
 
 # 旧版爬虫来源配置（遗留，不入库）

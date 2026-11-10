@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-"""实体识别的句级完整评测（查全率首次可测）。
+"""Sentence-level recall evaluation for entity recognition.
 
-此前评测为"命中样本查准抽检"（spot_check 53/53+46/46），无法度量漏检。
-本评测在 40 句原始句子上以人工判读金标准（entity_sentence_gold.json，AI 逐句判读并声明来源）
-对当前抽取器打分：POI/交通严格跨度（含包含式变体命中），时间用重叠口径。
-口径说明：根景区名（黄山/九寨沟/颐和园）与城市名（北京/成都）按设计不作为 POI 抽取，
-分母中单列（entity_sentence_eval.json 的 scope_note）。
-
- 发现与修复：本文件曾在 main 中段插入模块级 import，将结果构建/落盘全部截断为
-prf() 内 return 之后的不可达代码——脚本无输出且无异常报告（exit 0 且不写产物）。现已复原 main
-完整闭环：评测 → 结果构建 → 落盘 → 打印。
+Prior evaluation was precision-only spot checks (53/53 + 46/46 hits) and could not
+measure misses. This evaluation scores the current extractor on 40 raw sentences
+against a sentence-level gold standard (entity_sentence_gold.json): strict span
+matching for POI/transport (with containment variants), overlap-based matching for
+time. Root scenic-area names (黄山/九寨沟/颐和园) and city names (北京/成都) are by
+design not extracted as POI and are listed separately in the denominator
+(scope_note of entity_sentence_eval.json).
 
 用法：python src/entity_sentence_eval.py
 """
