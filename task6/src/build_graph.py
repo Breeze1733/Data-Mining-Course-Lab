@@ -125,8 +125,10 @@ def main() -> int:
             if scenic == "通用":
                 continue
             freq = mention_counter.get(e["canonical"], 0)
+            in_scenic = bool(e["scenic_areas"])  # 空列表 = 周边地标（不进步行路径）
             G.add_node(node_id("POI", scenic, e["canonical"]), kind=e["subtype"], name=e["canonical"],
-                       label=e["canonical"], mention_freq=freq, aliases=e["name"])
+                       label=e["canonical"], mention_freq=freq, aliases=e["name"],
+                       in_scenic=in_scenic)
             rel = "周边关联" if e["subtype"] == "周边景点" else "包含"
             G.add_edge(node_id("景区", scenic, scenic), node_id("POI", scenic, e["canonical"]),
                        key=rel, relation=rel, weight=1)

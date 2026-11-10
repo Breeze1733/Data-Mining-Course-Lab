@@ -1,0 +1,13 @@
+{
+ "title": "F08 深层分析：跨景区路径的根因与修复方案",
+ "root_cause": "宏村词典条目 scenic_areas=['黄山'] 且 subtype='景点'——该条目在实体识别层正确（出现在黄山游记中应被识别），但在图谱层不应参与步行路径（与光明顶相距 40km）",
+ "why_not_simple": "in_scenic 标志基于 scenic_areas 非空判断——宏村 scenic_areas=['黄山'] 非空，标志无法区分；subtype='景点' 也非'周边景点'",
+ "fix_options": [
+  "方案A：build_graph 建 POI→POI 先后边时，跳过一端为周边地标的边（读词典 scenic_areas）",
+  "方案B：词典增加 walkable 字段（True=景区内可步行），图节点携带该标志",
+  "方案C：query_path 过滤掉 subtype='景点' 但词典 scenic_areas=[] 的节点（需查词典）"
+ ],
+ "recommended": "方案A（建图时跳过跨区域边）——改动最小，不影响实体识别层",
+ "current_mitigation": "query_path 已加同景区前缀子图限制（部分缓解，不彻底）",
+ "impact": "低：跨景区路径仅出现在 query_path 显式查询中（S8 用同景区查询），Agent 编排不受影响（_order_pois 用图谱拓扑排序在同景区内进行）"
+}
