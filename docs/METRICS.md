@@ -1,6 +1,6 @@
 # METRICS — 指标账本
 
-由 `common/metrics_snapshot.py` 自动追加，一行一个时点；完整 JSON 见 `metrics/snapshots/`。优化改动一律对照本账本评估。
+由 `local/metrics_snapshot.py` 自动追加，一行一个时点；最新完整 JSON 见 `metrics/snapshots/snapshot_latest.json`（历史时点快照不入库）。优化改动一律对照本账本评估。
 
 | 时点 | git | 说明 | 数据集 | 实体 | POI | 交通 | 时间 | 抽检 | 覆盖 九/颐/黄 | tau 九/颐/黄 | 消解 | 条件对 | 条件抽检 正/界/误 | 图节点 | 图边 | 核验 | Agent |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
