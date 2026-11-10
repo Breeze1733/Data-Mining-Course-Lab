@@ -157,7 +157,7 @@ def _is_emoji_or_decoration(ch: str) -> bool:
 def normalize_width_only(text: str) -> tuple[str, int]:
     """Normalize fullwidth ASCII and ideographic space without semantic folding.
 
-    General NFKC is deliberately avoided: ①, Ⅰ, ², ₂ and ℃ are meaningful
+    General NFKC is deliberately avoided: 1., Ⅰ, ², ₂ and ℃ are meaningful
     notation, and flattening 2²km into 22km would corrupt source information.
     """
     parts = []

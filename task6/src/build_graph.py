@@ -117,7 +117,7 @@ def main() -> int:
     def node_id(kind: str, scenic: str, name: str) -> str:
         return f"{kind}:{scenic}:{name}"
 
-    # ── 景区与 POI 节点 ─────────────────────────────────────────
+
     for scenic in AREAS:
         G.add_node(node_id("景区", scenic, scenic), kind="景区", name=scenic, label=scenic)
     for e in poi_of.values():
@@ -133,7 +133,7 @@ def main() -> int:
             G.add_edge(node_id("景区", scenic, scenic), node_id("POI", scenic, e["canonical"]),
                        key=rel, relation=rel, weight=1)
 
-    # ── 先后顺序边（官方路线 + 游客序列，双源加权）───────────────
+
     official_support: dict[tuple, list[str]] = defaultdict(list)
     for p in parsed:
         if not p["ordered_route"]:
@@ -192,7 +192,7 @@ def main() -> int:
             G[u][v]["先后顺序"]["tourist_records"] = json.dumps(recs, ensure_ascii=False)
             G[u][v]["先后顺序"]["tourist_support"] = tourist_support.get((u, v), 0)
 
-    # ── 时段与交通（来自官方路线步骤）────────────────────────────
+
     period_freq: dict[str, Counter] = defaultdict(Counter)
     transport_freq: dict[str, Counter] = defaultdict(Counter)
     for p in parsed:
@@ -225,7 +225,7 @@ def main() -> int:
                         G.add_edge(u, tn, key="交通方式", relation="交通方式", weight=1)
 
     _stats: dict = {}
-    # ── 条件建议边（实验5映射表 → 句中 POI）──────────────────────
+
     # P5 聚类归一：同景区+同类型+归一文本 char-bigram Jaccard>=0.4 的条件合并为一个节点，
     # 保留代表文本（频次最高）、全部变体与合计频次；边按成员逐条挂接、权重累加。
     def _norm_cond(t: str) -> str:
@@ -340,7 +340,7 @@ def main() -> int:
                 cond_to_scenic += 1
 
     print(json.dumps({"cond_raw_pairs": _stats.get("cond_raw"), "cond_cluster_nodes": _stats.get("cond_clusters")}, ensure_ascii=False))
-    # ── 导出与统计 ──────────────────────────────────────────────
+
     OUT.mkdir(parents=True, exist_ok=True)
     # 非路经语境守卫的连带清理：仅靠被剔子句连通的交通操作等节点成为孤点——移除
     # （景区根节点有包含边，永不孤点）

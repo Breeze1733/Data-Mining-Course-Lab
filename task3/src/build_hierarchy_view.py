@@ -83,7 +83,6 @@ def draw_tree(hierarchy: dict, title: str, path: Path):
     plt.close(fig)
 
 
-
 def entity_period(entity: dict) -> str | None:
     """归一化时钟/时段词 → 四大报告时段（与 compare_routes 内联版同源）。"""
     import re as _re

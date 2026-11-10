@@ -1,7 +1,6 @@
 """实验5：条件性游览建议抽取。
 
 
-
 模式（优先级从高到低，同一句内每个触发点独立成案）：
 
   P1 显式条件连词：如果/假如/若是/要是/万一/一旦/只要/除非 + 条件子句 + （则/就/最好/建议…）建议子句
@@ -27,7 +26,6 @@
 from __future__ import annotations
 
 
-
 import io
 
 import json
@@ -41,11 +39,9 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 
-
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from common.atomic import atomic_write_text
-
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,15 +51,12 @@ TASK1 = ROOT.parent / "task1"
 OUT = ROOT / "output"
 
 
-
 if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout, io.TextIOWrapper):
 
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 
-
 SENT_SPLIT = re.compile(r"[。！？\n]+")
-
 
 
 COND_MARKERS = ("如果", "假如", "假若", "若是", "若", "要是", "万一", "一旦", "只要", "除非")
@@ -95,7 +88,6 @@ SAFETY_RE = re.compile(r"高反|高原反应|缺氧|体力|悬崖|安全|危险|
 NEG_RE = re.compile(r"^(不要|别|避免|慎|切勿|忌)")
 
 
-
 CONDITION_TYPES = [
 
     ("天气", WEATHER_RE), ("人群", CROWD_RE), ("装备", EQUIP_RE), ("预约票务", TICKET_RE),
@@ -103,9 +95,6 @@ CONDITION_TYPES = [
     ("交通", TRANSPORT_RE), ("体力安全", SAFETY_RE), ("时间", TIME_RE),
 
 ]
-
-
-
 
 
 def classify_condition(text: str) -> str:
@@ -117,9 +106,6 @@ def classify_condition(text: str) -> str:
             return name
 
     return "其他"
-
-
-
 
 
 def crowd_subtype(text: str) -> str | None:
@@ -145,9 +131,6 @@ def crowd_subtype(text: str) -> str | None:
     return None
 
 
-
-
-
 def split_multi_suggestions(sugg: str) -> list[str]:
 
     parts = [s for s in re.split(r"[；;]", sugg) if s.strip()]
@@ -171,9 +154,6 @@ def split_multi_suggestions(sugg: str) -> list[str]:
     return [p.strip(" ，,。；;") for p in parts if p.strip(" ，,。；;")]
 
 
-
-
-
 # P4 极性/边界守卫（2026-10-30，依据 review_dev wrong 样例回归）：
 
 # 1) 平台话术不是旅游建议；2) 呼吁/评论句不是给游客的建议；
@@ -195,17 +175,11 @@ APPEAL_RE = re.compile(r"管理部门|引起重视|呼吁")
 CITY_SKIP_RE = re.compile(r"青岛|南京|苏州(?!街)|无锡|厦门|天津|杭州|大连|哈尔滨|洛阳|西安")
 
 
-
-
-
 def skip_sentence(sent: str) -> bool:
 
     return bool(PLATFORM_PHRASE_RE.search(sent) or APPEAL_RE.search(sent)
 
                 or CITY_SKIP_RE.search(sent) or LYRICAL_RE.search(sent))
-
-
-
 
 
 _PHOTO_HINT = re.compile(r"拍照|出片|机位|镜头|拍摄|摄影|合影|角度|光线|构图")
@@ -237,7 +211,6 @@ def extract_from_sentence(sent: str) -> list[dict]:
     seen_spans = set()
 
 
-
     # 优先：否则分支拆分（比 P1 更好的解析——分别保存互斥分支，不合并）
 
     for m in re.finditer(r"(如果|要是|若)([^。！？；]{1,40}?)就([^，。！？；]{1,30})[，,]?否则([^。！？；]{1,40})", sent):
@@ -261,7 +234,6 @@ def extract_from_sentence(sent: str) -> list[dict]:
     if pairs:
 
         return pairs
-
 
 
     # P1/P2/P3：显式条件（含”…的话就/可以/建议Y”无逗号紧邻变体，+4 例真实建议）
@@ -319,7 +291,6 @@ def extract_from_sentence(sent: str) -> list[dict]:
                           "suggestions": [sugg], "sentence": sent})
 
         seen_spans.add(m.start())
-
 
 
     # 扩展A：裸"X的话，Y"（无如果/要是 前置）——"玩黄龙的话住松潘古城"（ 扩充样本实证漏抽）
@@ -424,7 +395,6 @@ def extract_from_sentence(sent: str) -> list[dict]:
         seen_spans.add(m.start())
 
 
-
     # P3 当/遇到…时
 
     for m in re.finditer(r"(?:当(?!时|初|年|地|下|然)|遇到|遇上|碰到)([^。！？；，]{1,24}?)(的时候|时)[，,]?", sent):
@@ -450,11 +420,9 @@ def extract_from_sentence(sent: str) -> list[dict]:
         seen_spans.add(m.start())
 
 
-
     if pairs:
 
         return pairs
-
 
 
     # P4 建议类（带人群/情境推断）
@@ -506,7 +474,6 @@ def extract_from_sentence(sent: str) -> list[dict]:
             return pairs
 
 
-
     # P5 人群主语 + 可以
 
     for m in re.finditer(
@@ -536,7 +503,6 @@ def extract_from_sentence(sent: str) -> list[dict]:
                           "condition_type": "人群"})
 
         return pairs
-
 
 
     # P6 否定建议
@@ -587,11 +553,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
         return pairs
 
 
-
     return pairs
-
-
-
 
 
 # P4 对立建议自动标记：同景区内"否定式 vs 肯定式"同核建议共存并互带来源引用。
@@ -601,15 +563,9 @@ NEG_PREFIX_RE = re.compile(r"^(不要|不宜|不建议|别|切勿|避免|慎|忌
 AFF_HEDGE_RE = re.compile(r"^(最好|建议|推荐|可以|记得|务必|千万|尽量|不妨|适合|适宜)")
 
 
-
-
-
 def _norm_sugg(s: str) -> str:
 
     return re.sub(r"[\s，,。；;、！？!?]+", "", s)
-
-
-
 
 
 def mark_opposing(mapping: list[dict]) -> list[dict]:
@@ -705,15 +661,9 @@ def mark_opposing(mapping: list[dict]) -> list[dict]:
     return mapping
 
 
-
-
-
 def norm(s: str) -> str:
 
     return re.sub(r"[\s，,。；;、！？!?\[\]()【】]+", "", s)
-
-
-
 
 
 def main(argv=None) -> int:
@@ -729,7 +679,6 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
 
 
-
     attr = None
 
     if not args.no_attribution_filter:
@@ -741,7 +690,6 @@ def main(argv=None) -> int:
         from attribute_sentences import Attributor, SENT_SPLIT as ATTR_SPLIT
 
         attr = Attributor()
-
 
 
     rows = [json.loads(l) for l in (TASK1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8")]
@@ -802,7 +750,6 @@ def main(argv=None) -> int:
                     })
 
 
-
     # 条件类型细化（批量）
     for p in all_pairs:
         p["condition_type"] = refine_condition_type(
@@ -856,7 +803,6 @@ def main(argv=None) -> int:
         m["sources"] = list(dict.fromkeys(m["sources"]))[:10]
 
 
-
     OUT.mkdir(parents=True, exist_ok=True)
 
     with (OUT / "conditional_pairs.jsonl").open("w", encoding="utf-8") as fh:
@@ -868,7 +814,6 @@ def main(argv=None) -> int:
     atomic_write_text(OUT / "mapping_table.json",
 
         json.dumps(mapping, ensure_ascii=False, indent=1))
-
 
 
     stats = {
@@ -901,9 +846,6 @@ def main(argv=None) -> int:
     print(json.dumps(stats, ensure_ascii=False, indent=1))
 
     return 0
-
-
-
 
 
 if __name__ == "__main__":

@@ -28,7 +28,7 @@ RULE_NOTES = {
     "html_noncontent_blocks_removed": "script/style/隐藏块等无内容区域整块跳过",
     "html_comments_removed": "HTML 注释剔除",
     "html_entities_decoded": "HTML 实体解码（含二次转义）",
-    "fullwidth_characters_normalized": "全角 ASCII/全角空格归一（保留①Ⅰ²℃等记号）",
+    "fullwidth_characters_normalized": "全角 ASCII/全角空格归一（保留1.Ⅰ²℃等记号）",
     "urls_removed": "URL 剔除",
     "private_or_surrogate_characters_removed": "私用区/代理对字符剔除",
     "control_and_zero_width_characters_removed": "控制符与零宽字符剔除",
@@ -68,7 +68,7 @@ def main() -> int:
 
     wb = Workbook()
 
-    # ── Sheet 1: 数据总览 ──────────────────────────────────────────
+
     ws = wb.active
     ws.title = "数据总览"
     sheet_header(ws, ["指标", "值"])
@@ -96,7 +96,7 @@ def main() -> int:
     ws.column_dimensions["A"].width = 36
     ws.column_dimensions["B"].width = 50
 
-    # ── Sheet 2: 清洗后数据集 ──────────────────────────────────────
+
     ws = wb.create_sheet("清洗后数据集")
     cols = ["record_id", "scenic_area", "source_platform", "text_type", "title", "author",
             "published_at", "source_url", "clean_char_count", "clean_nonspace_char_count",
@@ -115,7 +115,7 @@ def main() -> int:
     ws.column_dimensions["H"].width = 40
     ws.column_dimensions["M"].width = 60
 
-    # ── Sheet 3: 清洗前后样例 ──────────────────────────────────────
+
     ws = wb.create_sheet("清洗前后样例")
     sheet_header(ws, ["record_id", "景区", "平台", "标题", "raw_format", "清洗前（节选）", "清洗后（节选）", "清洗规则命中"])
     platform_of = {r["record_id"]: r["source_platform"] for r in rows}
@@ -145,7 +145,7 @@ def main() -> int:
         for cell in row[5:7]:
             cell.alignment = Alignment(wrap_text=True, vertical="top")
 
-    # ── Sheet 4: 拒绝记录 ─────────────────────────────────────────
+
     ws = wb.create_sheet("拒绝记录")
     sheet_header(ws, ["record_id", "景区", "平台", "标题", "拒绝原因", "清洗后非空白字符数", "清洗内容（节选）"])
     for row in rejected:
@@ -158,7 +158,7 @@ def main() -> int:
     for col, width in zip("ABCDEFG", (22, 9, 11, 34, 34, 12, 50)):
         ws.column_dimensions[col].width = width
 
-    # ── Sheet 5: 清洗规则统计 ─────────────────────────────────────
+
     ws = wb.create_sheet("清洗规则统计")
     sheet_header(ws, ["清洗规则", "命中次数（全部输入）", "说明"])
     totals = report["cleaning_rule_totals_all_inputs"]

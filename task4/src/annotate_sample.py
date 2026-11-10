@@ -31,7 +31,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei"]
 plt.rcParams["axes.unicode_minus"] = False
 
-# ── 人工判定（--sample 打印上下文后逐条复核填写：key = 序号，value = (antecedent, kind, note)）──
+
 GOLD: dict[int, tuple[str, str, str]] = {
     0: ("镜海", "POI", ""),
     1: ("九寨沟", "景区", "“这里的水”指九寨沟当地（夜宿地）"),
@@ -156,7 +156,6 @@ GOLD: dict[int, tuple[str, str, str]] = {
 }
 
 
-# ── 扩容轮人工判定（--expand-sample 打印上下文后逐条填写：key = 扩容样本序号，value = (antecedent, kind, note)）──
 EXPAND_GOLD: dict[int, tuple[str, str, str]] = {
     0: ("九寨沟", "景区", "“这里的水”指夜宿地九寨沟当地，同第1例口径"),
     1: ("诺日朗", "POI", "“汇合点在这里”指诺日朗换乘中心"),
@@ -392,7 +391,6 @@ def doc_grouped_split(gold_rows: list[dict], target_test: int = 60) -> dict:
                 if target == "test":
                     n_test += sizes[member]
     return split
-
 
 
 sys.path.insert(0, str(ROOT.parent))

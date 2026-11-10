@@ -137,7 +137,6 @@ def _norm5(t: str) -> str:
     return re.sub(r"[\s，,。；;、！？!?\[\]()【】的了吗呢啊呀的]", "", t or "")
 
 
-
 def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
     """Wilson 95% 置信区间（小样本比例的稳健区间）。"""
     if n == 0:
@@ -237,8 +236,6 @@ def charts() -> None:
     plt.close(fig)
     print(json.dumps({"figs": ["cond_type_by_scenic.png", "crowd_breakdown.png"],
                       "crowd": dict(crowd)}, ensure_ascii=False))
-
-
 
 
 def export_xlsx():

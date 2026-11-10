@@ -90,7 +90,6 @@ def v_float(x, nd=3) -> list[str]:
     return sorted(out)
 
 
-# ── 数据源快捷引用 ──────────────────────────────────────────────
 Q1 = load(ROOT / "task1/data/processed/quality_report.json") or {}
 EB = load(ROOT / "task2/output/exp2/entity_stats_baseline.json") or {}
 ER = load(ROOT / "task2/output/exp2/entity_stats_refined.json") or {}

@@ -238,7 +238,7 @@ class ReActAgent:
         self.llm = llm
         self.parser = IntentParser(llm)
 
-    # ── 规则模式规划 ────────────────────────────────────────────
+
     def _plan_rule(self, intent: dict, trace: list) -> dict:
         scenic, days, visitor = intent["scenic"], intent["days"], intent["visitor_type"]
         limit = {0.5: 5, 1: 8, 1.5: 9, 2: 11, 3: 12, 3.5: 13, 4: 14, 5: 15}.get(days, 11)
@@ -682,7 +682,7 @@ class ReActAgent:
                 return f'乘坐{sorted(shared)[0]}'
         return "步行"
 
-    # ── 最终回答生成 ────────────────────────────────────────────
+
     POLISH_PROMPT = """你是导游。把下面的结构化行程改写成 150 字以内的中文行程说明，按时间顺序、口语化、
 保留全部景点名与提示。行程 JSON："""
 
@@ -722,7 +722,7 @@ class ReActAgent:
                 f'{plan.get("template_src", "")}：\n' + "\n".join(lines) +
                 (f'\n贴士（来自游记经验）：{tips}' if tips else "") + warn_text + sp_notes)
 
-    # ── ReAct 主循环 ────────────────────────────────────────────
+
     def run(self, query: str) -> dict:
         started = time.time()
         trace: list[dict] = [{"step": "start", "thought": f"接收请求：{query}", "mode":

@@ -70,7 +70,7 @@ class GraphTools:
         self.trace: list[dict] = []
         self._qcache: dict = {}
 
-    # ── 基础查询 ────────────────────────────────────────────────
+
     def poi_nodes(self, scenic: str) -> list[str]:
         return [n for n, d in self.G.nodes(data=True)
                 if d.get("kind") in ("景点", "周边景点") and f":{scenic}:" in n]
@@ -87,7 +87,7 @@ class GraphTools:
                 return True
         return False
 
-    # ── 工具1：query_pois ───────────────────────────────────────
+
     def query_pois(self, scenic: str, visitor_type: str | None = None, limit: int = 8) -> dict:
         if scenic not in AREAS:
             return {"error": f"不支持的景区：{scenic}（仅支持 {'/'.join(AREAS)}）"}
@@ -130,7 +130,7 @@ class GraphTools:
                   reverse=True)
         return {"scenic": scenic, "visitor_type": visitor_type, "pois": cand[:limit]}
 
-    # ── 工具2：query_route ──────────────────────────────────────
+
     def query_route(self, scenic: str, days: int = 1) -> dict:
         if scenic not in AREAS:
             return {"error": f"不支持的景区：{scenic}"}
@@ -155,7 +155,7 @@ class GraphTools:
         exact = [r for r in cands if max((st["day"] for st in r["steps"]), default=1) == days] or cands
         return exact
 
-    # ── 工具3：query_conditions ─────────────────────────────────
+
     def query_conditions(self, scenic: str, visitor_type: str | None = None, limit: int = 6) -> dict:
         if scenic not in AREAS:
             return {"error": f"不支持的景区：{scenic}"}
@@ -190,7 +190,7 @@ class GraphTools:
         conds.sort(key=lambda c: (type_rank.get(c["cond_type"], 9), -c["frequency"]))
         return {"scenic": scenic, "visitor_type": visitor_type, "conditions": conds[:limit]}
 
-    # ── 工具4：query_order ──────────────────────────────────────
+
     def query_order(self, scenic: str, poi: str) -> dict:
         node = next((n for n in self.poi_nodes(scenic) if self.poi_label(n) == poi), None)
         if node is None:
@@ -206,7 +206,7 @@ class GraphTools:
         predecessors.sort(key=lambda x: -x["weight"])
         return {"poi": poi, "next": successors[:6], "prev": predecessors[:6]}
 
-    # ── 工具5：query_poi_conditions（P6 行程可行性）──────────────
+
     def query_poi_conditions(self, scenic: str, poi: str) -> dict:
         node = next((n for n in self.poi_nodes(scenic) if self.poi_label(n) == poi), None)
         if node is None:
@@ -222,7 +222,7 @@ class GraphTools:
         conds.sort(key=lambda c: -c["frequency"])
         return {"poi": poi, "scenic": scenic, "conditions": conds}
 
-    # ── 工具6：query_path（P5 多跳动线）──────────────────────────
+
     def _resolve_poi(self, scenic: str, name: str):
         """POI 名解析：精确 → 前缀互含 → 子串。"""
         labels = {self.poi_label(n): n for n in self.poi_nodes(scenic)}
@@ -254,7 +254,7 @@ class GraphTools:
         labels = [self.poi_label(n) for n in path]
         return {"from": from_poi, "to": to_poi, "path": labels, "hops": len(labels) - 1}
 
-    # ── 统一调用入口（记录 trace；trace 传入时同步 action/observation 两步）──
+
     def call(self, tool: str, args: dict, trace: list | None = None) -> dict:
         if self.G is None:
             return {"error": f"图谱不可用：{getattr(self, 'load_error', '加载失败')}"}

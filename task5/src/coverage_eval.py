@@ -137,10 +137,6 @@ def _eval_batch(batch: str, sample: list[dict]) -> dict:
     }
 
 
-
-
-
-
 # 覆盖样本追抽（原独立脚本，内联；先抽样后评测可一次完成）
 SENT_SPLIT = re.compile(r"[。！？；!?\n]+")
 
@@ -216,8 +212,6 @@ def expand_sample() -> int:
                                     for a in ("黄山", "九寨沟", "颐和园")}},
                      ensure_ascii=False))
     return 0
-
-
 
 
 if __name__ == "__main__":

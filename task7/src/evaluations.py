@@ -27,7 +27,6 @@ OUT = ROOT / "output"
 from agent_cli import GraphTools, IntentParser, ReActAgent  # noqa: E402
 from run_tests import SCENARIOS, evaluate_scenario  # noqa: E402
 
-# ── 模块消融 ──
 
 _ORIG = {}  # 原方法引用，_make_patches 时填充
 
@@ -55,7 +54,7 @@ def _make_patches() -> dict[str, tuple[str, callable, callable]]:
     def add(name, desc, apply, undo):
         patches[name] = (desc, apply, undo)
 
-    # ── 工具层消融 ──────────────────────────────────────────────
+
     add("no_tips", "禁用 query_conditions（条件贴士消失）",
         lambda: setattr(GraphTools, "query_conditions",
                         lambda self, scenic, visitor_type=None, limit=6: _err()),
@@ -82,7 +81,7 @@ def _make_patches() -> dict[str, tuple[str, callable, callable]]:
         lambda: (setattr(GraphTools, "query_pois", _ORIG["query_pois"]),
                  setattr(GraphTools, "query_conditions", _ORIG["query_conditions"])))
 
-    # ── 规划器方法消融 ──────────────────────────────────────────
+
     add("no_lodging", "禁用住宿注入（多日行程无住宿 POI）",
         lambda: setattr(ReActAgent, "_find_lodging_poi", lambda self, scenic: None),
         lambda: setattr(ReActAgent, "_find_lodging_poi", _ORIG["_find_lodging_poi"]))
@@ -94,7 +93,7 @@ def _make_patches() -> dict[str, tuple[str, callable, callable]]:
                         lambda self, ordered, days, n_days, sp, notes, trace: ordered),
         lambda: setattr(ReActAgent, "_apply_time_budget", _ORIG["_apply_time_budget"]))
 
-    # ── 意图解析消融（包装 parse，丢弃 avoid/must）───────────────
+
     def _parse_no_avoid(self, query, trace):
         intent = _ORIG["parse"](self, query, trace)
         intent["avoid"] = []
@@ -164,9 +163,6 @@ def run_module_ablation() -> int:
     print(json.dumps({r["ablation"]: r["contribution_n_scenarios"] for r in rows},
                      ensure_ascii=False, indent=1))
     return 0
-
-
-# ── 权重方案敏感性 ──
 
 
 def kendall_tau(a: list, b: list) -> float | None:

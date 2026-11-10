@@ -1,19 +1,17 @@
 """实验3：游客实际路线提取 + 官方/游客路线对比（高阶任务）。
 
 
-
 游客路线：从实验2实体输出中按阅读顺序取景区内 POI 序列（连续去重，≥4 个不同 POI）。
 
-对比维度：①景点覆盖度（游客路线对官方 POI 集合的覆盖、Jaccard）；②顺序一致性（公共 POI ≥5 时
+对比维度：1.景点覆盖度（游客路线对官方 POI 集合的覆盖、Jaccard）；2.顺序一致性（公共 POI ≥5 时
 
-         计算 Kendall tau）；③时间分配（官方时段-时长分布 vs 游客文本时段词分布）。
+         计算 Kendall tau）；3.时间分配（官方时段-时长分布 vs 游客文本时段词分布）。
 
 输出：task3/output/tourist_routes.jsonl、official_vs_tourist.json、figs/
 
 """
 
 from __future__ import annotations
-
 
 
 import io
@@ -31,13 +29,11 @@ from itertools import combinations
 from pathlib import Path
 
 
-
 import matplotlib
 
 matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
-
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,7 +47,6 @@ OUT = ROOT / "output"
 FIGS = OUT / "figs"
 
 
-
 if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout, io.TextIOWrapper):
 
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
@@ -61,7 +56,6 @@ plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei"]
 plt.rcParams["axes.unicode_minus"] = False
 
 
-
 PERIODS = ("上午", "中午", "下午", "晚上")
 
 sys.path.insert(0, str(ROOT.parent / "common"))
@@ -69,9 +63,6 @@ sys.path.insert(0, str(ROOT.parent / "common"))
 from entity_identity import build_poi_lookup
 
 POI_LOOKUP = build_poi_lookup(json.loads((TASK2 / "output/exp2/entity_dictionary.json").read_text(encoding="utf-8"))["poi"])
-
-
-
 
 
 def kendall_tau(a: list, b: list) -> float:
@@ -105,9 +96,6 @@ def kendall_tau(a: list, b: list) -> float:
             discordant += 1
 
     return (concordant - discordant) / (concordant + discordant) if (concordant + discordant) else float("nan")
-
-
-
 
 
 def extract_tourist_routes() -> list[dict]:
@@ -159,9 +147,6 @@ def extract_tourist_routes() -> list[dict]:
     return routes
 
 
-
-
-
 def official_routes_by_scenic() -> dict[str, list[dict]]:
 
     parsed = [json.loads(l) for l in (OUT / "parsed_routes.jsonl").open(encoding="utf-8")]
@@ -191,9 +176,6 @@ def official_routes_by_scenic() -> dict[str, list[dict]]:
     return by_scenic
 
 
-
-
-
 def duration_minutes(dur: str) -> int | None:
 
     if not dur:
@@ -213,9 +195,6 @@ def duration_minutes(dur: str) -> int | None:
     val = float(m.group(1))
 
     return int(val * 60 if m.group(2) in ("小时", "钟头") else val)
-
-
-
 
 
 def official_period_allocation(parsed: list[dict]) -> dict:
@@ -263,9 +242,6 @@ def official_period_allocation(parsed: list[dict]) -> dict:
             "n_unknown_steps": sum(alloc_steps.values())}
 
 
-
-
-
 # 时段归桶（原独立模块，内联）
 import re
 
@@ -292,10 +268,6 @@ def entity_period(entity: dict) -> str | None:
         return None
     hour = int(match.group(1))
     return "上午" if 5 <= hour < 12 else "中午" if 12 <= hour < 14 else "下午" if 14 <= hour < 19 else "晚上"
-
-
-
-
 
 
 def tourist_period_allocation() -> dict[str, Counter]:
@@ -345,9 +317,6 @@ def tourist_period_allocation() -> dict[str, Counter]:
     return merged
 
 
-
-
-
 def main() -> int:
 
     FIGS.mkdir(parents=True, exist_ok=True)
@@ -361,11 +330,9 @@ def main() -> int:
             fh.write(json.dumps(t, ensure_ascii=False) + "\n")
 
 
-
     official = official_routes_by_scenic()
 
     t_period = tourist_period_allocation()
-
 
 
     comparison = {}
@@ -469,7 +436,6 @@ def main() -> int:
                     tau_sens[scenic][thr].append(best_thr)
 
 
-
         off_alloc = official_period_allocation(officials)
 
         off_min = off_alloc.get("minutes", {})
@@ -483,7 +449,6 @@ def main() -> int:
                              or sum(off_steps.get(k, 0) for k in PERIODS) > 0)
 
 
-
         def pct(c: Counter) -> dict:
 
             total = sum(c[k] for k in PERIODS)
@@ -493,7 +458,6 @@ def main() -> int:
                 return {k: None for k in PERIODS}
 
             return {k: round(c[k] / total, 3) for k in PERIODS}
-
 
 
         comparison[scenic] = {
@@ -553,7 +517,6 @@ def main() -> int:
         }
 
 
-
     result = {
 
         "metrics_definition": {
@@ -574,9 +537,6 @@ def main() -> int:
 
     (OUT / "official_vs_tourist.json").write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
 
-
-
-    # ── 图 1：覆盖度与顺序一致性 ──
 
     areas = list(comparison)
 
@@ -623,9 +583,6 @@ def main() -> int:
     plt.close(fig)
 
 
-
-    # ── 图 2：时间分配对比（分景区双子图）──
-
     fig, axes = plt.subplots(1, len(areas), figsize=(12, 4.2), dpi=150, sharey=True)
 
     for ax, scenic in zip(axes, areas):
@@ -669,7 +626,6 @@ def main() -> int:
     plt.close(fig)
 
 
-
     print(json.dumps({a: {k: v for k, v in comparison[a].items()
 
                           if k in ("n_tourist_routes", "coverage_mean", "jaccard_mean",
@@ -681,9 +637,6 @@ def main() -> int:
                       for a in comparison}, ensure_ascii=False, indent=1))
 
     return 0
-
-
-
 
 
 if __name__ == "__main__":

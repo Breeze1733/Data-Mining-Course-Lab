@@ -147,7 +147,6 @@ def export_dictionary():
     print({k: len(data[k]) for k in ("poi", "transport", "domain_stopwords")})
 
 
-
 def _append_poi(data, names, rows, source):
     added = 0
     for name, canonical, areas, why in rows:
