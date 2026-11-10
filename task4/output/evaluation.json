@@ -52,11 +52,11 @@
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.742
+   "accuracy": 0.717
   },
   "test": {
    "n": 60,
-   "accuracy": 0.55
+   "accuracy": 0.6
   }
  },
  "accuracy_by_scenic": {
@@ -104,8 +104,8 @@
   }
  },
  "errors_by_split": {
-  "dev": 31,
-  "test": 27
+  "dev": 34,
+  "test": 24
  },
  "split_method": "文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
  "errors": [

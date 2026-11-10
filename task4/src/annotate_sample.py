@@ -351,6 +351,7 @@ def doc_grouped_split(gold_rows: list[dict], target_test: int = 60) -> dict:
     """按文档分组划分 dev/test——句级随机划分存在同文档泄漏（原两轮样本有 25 篇共同文档）。
 
     确定性：文档列表排序后 rng(42) 洗牌，整文档依次划入 test 直至样本数达标，其余归 dev。
+    近重复约束：近重复对强制同侧（A05 修复——此前 2 对跨集泄漏）。
     返回 {record_id: "dev"|"test"}。
     """
     import random
@@ -358,13 +359,38 @@ def doc_grouped_split(gold_rows: list[dict], target_test: int = 60) -> dict:
     rng = random.Random(42)
     rng.shuffle(doc_ids)
     sizes = {d: sum(1 for g in gold_rows if g["record_id"] == d) for d in doc_ids}
+    # A05：近重复对 → 传递闭包分组 → 组内统一归属
+    quality_path = ROOT.parent / "task1/data/processed/quality_report.json"
+    near_dup_groups = []
+    if quality_path.exists():
+        quality = json.loads(quality_path.read_text(encoding="utf-8"))
+        for _d in quality.get("near_duplicate_pairs", []):
+            _a, _b = _d["record_id_a"], _d["record_id_b"]
+            for _grp in near_dup_groups:
+                if _a in _grp or _b in _grp:
+                    _grp.add(_b)
+                    _grp.add(_a)
+                    break
+            else:
+                near_dup_groups.append({_a, _b})
+    rec2grp = {}
+    for _gi, _grp in enumerate(near_dup_groups):
+        for _r in _grp:
+            rec2grp[_r] = _gi
+    # 按组而非按文档划分（组内首遇文档决定整组归属）
+    assigned = set()
     split, n_test = {}, 0
     for d in doc_ids:
-        if n_test < target_test:
-            split[d] = "test"
-            n_test += sizes[d]
-        else:
-            split[d] = "dev"
+        if d in assigned:
+            continue
+        grp = near_dup_groups[rec2grp[d]] if d in rec2grp else {d}
+        target = "test" if n_test < target_test else "dev"
+        for member in sorted(grp):
+            if member in sizes:
+                split[member] = target
+                assigned.add(member)
+                if target == "test":
+                    n_test += sizes[member]
     return split
 
 
