@@ -83,7 +83,7 @@
 3. 报告与 METRICS 主口径改为 180 例总体准确率（当前 0.483 = 开发 0.583 / 留出 0.283），
    并同时报告分轮数字；evaluation.json 新增 accuracy_by_round / errors_by_round；
 4. 打分器 canon 与判定逻辑不变（历史可比）；0.483 取代 0.583 成为守护指标 task4.coref_accuracy 的新基准，
-   已 --update-state 留痕（本轮变更见 PROGRESS U21）。
+   已 --update-state 记录变更（本轮变更见 PROGRESS U21）。
 
 **补注（2026-10-31）**：文件与字段已按学术界通行的 dev/test 口径命名——annotation_sample_dev/test.json、
 人工标注评测集行内 `split` 字段（dev/test）；实验5 的两份判定样本更名为 review_dev.json（49 例，守护夹具）

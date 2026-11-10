@@ -9,7 +9,7 @@ output/
   pronoun_cases.jsonl     全部 1940 处代词（位置/所在句/候选池/消解结果）
   annotation_sample_dev/test.json  开发 120 例 / 测试 60 例抽样清单
   annotation_gold.json    人工标注（先行词、类别、备注）
-  evaluation.json         准确率（总体/分类别）与 69 个错误案例
+  evaluation.json         准确率（总体/分类别）与 58 个错误案例
   figs/coref_evaluation.png
 report.docx             实验项目4报告
 ```
@@ -22,6 +22,6 @@ cd task1
 ..\.venv\Scripts\python.exe -X utf8 ..\task4\src\annotate_sample.py --score   # 评估
 ```
 ## 关键结论
-- 规则消解总体准确率 42.5%（v1 27.5% → v2 42.5%）：处所 40% / 物体 36.7% / 人称 36.7% / 集合 56.7%。
+- 规则消解总体准确率 67.8%（180 例 = 开发 120 + 留出 60；开发 71.7% / 留出 60.0%；v1 26.7% 起六层机制逐级改进）：处所 57.8% / 物体 73.3% / 人称 77.8% / 集合 62.2%。
 - 两类结构性难题：多景点游记的“景区外指代”（主景区标签 ≠ 句子叙述焦点）；“其中”类部分格结构的普通名词先行词。
 - 人工标注含多景点漂移、后置命名、同句劫持、人称语境依赖等典型案例，可作为实验7 LLM 消解的对照测试集。
