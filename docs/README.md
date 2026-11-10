@@ -16,9 +16,11 @@
 
 实验1–6 的管线与评估全部为 jieba + 词典 + 正则 + 规则的确定性实现，无外部服务依赖，
 克隆后按各实验 README 的冒烟链即可离线复现（"可复现性"为任务书评分维度之一，
-技术路线允许等价替换）。调用 LLM API 的代码只有实验7 三处：
+技术路线允许等价替换）。调用 LLM API 的交付代码只有实验7 两处：
 `task7/src/agent_cli.py`（LLMClient，OpenAI 兼容接口，读 task7/config.json，未配置自动回退规则规划器）、
-`task7/src/run_tests.py`（场景测试入口）、`task7/src/llm_intent_eval.py`（意图解析对比实验）。
+`task7/src/run_tests.py`（场景测试入口）。意图解析对比实验（`llm_intent_eval.py`）、
+模块消融与权重敏感性（`evaluations.py`）、同义改写扰动（`intent_robustness.py`）等一次性
+分析脚本移至 `local/tools/`（不随仓库分发，结果已入库为对应 metrics/output json）。
 task1 的 `build_official_expansion.py` 命中 "urlopen" 为网页抓取（采集爬虫），不是 LLM API。
 
 任务7 验收双模式（`tests/run.py --task7 rules|llm|both`，默认 rules）：
