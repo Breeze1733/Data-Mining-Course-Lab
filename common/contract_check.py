@@ -1,18 +1,22 @@
 # -*- coding: utf-8 -*-
-"""跨任务数据契约校验——各任务边界产物的基础字段一致性 + 人工标注评测集防篡改指纹。
+"""Cross-task data contract checks -- basic field consistency of each task's boundary
+artifacts + anti-tampering fingerprints for the human-annotated eval set.
 
-校验（只读，不修数据）：
-- 所有出现 record_id 的产物，其 id 必须存在于 task1 数据集；
-- scenic_area ∈ {黄山, 九寨沟, 颐和园}（或官方路线文档同值）；
-- 偏移字段 start<end≥0；行程 day≥1；实体 type ∈ 枚举；
-- 图谱 CSV 与 jsonl 行数守恒（与 graph_stats 三方校验互补，此处校验字段层）；
-- 人工标注评测集（task2 抽检 / task4 标注 / task5 复核）SHA256 指纹与上次认可状态一致，
-  task2/task5 汇总数与样本重算自洽，数据集行数不漂移。
-任何违例即退出码 1。输出 metrics/contract_check.json。
+Checks (read-only, never repairs data):
+- every artifact that carries record_id must reference ids present in the task1 dataset;
+- scenic_area ∈ {黄山, 九寨沟, 颐和园} (or the same values as the official route documents);
+- offset fields start<end≥0; itinerary day≥1; entity type within the enum;
+- graph CSV and jsonl row counts are conserved (complementary to the graph_stats
+  three-way check; this checks the field layer);
+- the human-annotated eval set (task2 spot check / task4 annotation / task5 review)
+  SHA256 fingerprints match the last accepted state; task2/task5 summaries are
+  self-consistent with recomputation from samples; the dataset row count does not drift.
+Any violation exits with code 1. Writes metrics/contract_check.json.
 
-指纹基准存 metrics/regression_state.json；确需变更 gold 文件时先说明，再运行
+Fingerprint baselines live in metrics/regression_state.json; when a gold file genuinely
+must change, state the reason first, then run
     python common/contract_check.py --update-state
-固化新基准。
+to freeze the new baseline.
 """
 from __future__ import annotations
 
@@ -32,7 +36,7 @@ if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout,
 SCENICS = {"黄山", "九寨沟", "颐和园"}
 ENT_TYPES = {"景点POI", "交通方式", "时间节点"}
 STATE_PATH = REPO / "metrics" / "regression_state.json"
-# 人工标注评测集：判定只允许追加复核，不允许为好看而改判——指纹变化必须显式备案
+# human-annotated eval set: verdicts may only be extended by additional review, never re-judged for cosmetics -- fingerprint changes must be explicitly documented
 GOLD_FILES = {
     "task2_spot_checks": REPO / "task2/output/exp2/spot_checks.json",
     "task4_annotation_gold": REPO / "task4/output/annotation_gold.json",
@@ -55,12 +59,13 @@ def load_json(path: Path):
 
 
 def collect_guards() -> dict:
-    """收集防篡改守护指标：数据集行数、gold 指纹、task2/task5 汇总与样本重算自洽。"""
+    """Collect anti-tampering guard metrics: dataset row count, gold fingerprints,
+    task2/task5 summary-vs-sample self-consistency."""
     g: dict = {}
     ds = REPO / "task1/data/processed/dataset_clean.jsonl"
     g["dataset.count"] = sum(1 for ln in ds.open(encoding="utf-8") if ln.strip()) if ds.exists() else None
 
-    # task2 抽检汇总 vs 样本重算
+    # task2 spot-check summary vs recomputation from samples
     sp = load_json(GOLD_FILES["task2_spot_checks"])
     if sp:
         present = [s for s in sp.get("samples", []) if s.get("present_in_current_output")]
@@ -75,7 +80,7 @@ def collect_guards() -> dict:
     else:
         g["task2.spot_self_consistent"] = False
 
-    # task5 复核汇总 vs 人工标注评测集重算
+    # task5 review summary vs recomputation from the human-annotated eval set
     rg = load_json(GOLD_FILES["task5_review_dev"])
     rs5 = load_json(REPO / "task5/output/review_summary.json")
     if rg and rs5:
@@ -99,8 +104,9 @@ def collect_guards() -> dict:
 
 
 def check_guards(violations: list[str]) -> dict:
-    """指纹/计数与上次认可基准比对；自洽性检查与基准无关，始终执行。
-    返回本次实测指标（含 gold.sha256）。"""
+    """Compare fingerprints/counts against the last accepted baseline; self-consistency
+    checks are baseline-independent and always run.
+    Returns the metrics measured this run (including gold.sha256)."""
     now = collect_guards()
     state = load_json(STATE_PATH)
     if state:
@@ -157,7 +163,7 @@ def main() -> int:
                         violations.append(f"{path.name}:{i} 缺字段 {f}")
         return n
 
-    # task2 实体
+    # task2 entities
     n = check_jsonl(REPO / "task2/output/exp2/entities_refined.jsonl", fields=("entities",))
     with (REPO / "task2/output/exp2/entities_refined.jsonl").open(encoding="utf-8") as fh:
         for i, line in enumerate(fh):
@@ -168,16 +174,16 @@ def main() -> int:
                 if not (0 <= e["start"] < e["end"] <= len(r["clean_content"]) if "clean_content" in e else 0 <= e["start"] < e["end"]):
                     violations.append(f"entities_refined:{i} 偏移异常 {e.get('text')}")
 
-    # task3 路线 / 游客动线
+    # task3 routes / visitor routes
     check_jsonl(REPO / "task3/output/parsed_routes.jsonl", fields=("steps",))
     check_jsonl(REPO / "task3/output/tourist_routes.jsonl", fields=("poi_sequence",))
 
-    # task4 案例 / task5 条件对
+    # task4 cases / task5 conditional pairs
     check_jsonl(REPO / "task4/output/pronoun_cases.jsonl", fields=("pronoun", "sentence"))
     check_jsonl(REPO / "task5/output/conditional_pairs.jsonl",
                 fields=("condition_text", "suggestion_text"))
 
-    # task7 行程 trace：day≥1、period 枚举
+    # task7 itinerary traces: day≥1, period enum
     traces = REPO / "task7/output/traces"
     n_tr = 0
     for f in sorted(traces.glob("trace_*.json")):
@@ -192,7 +198,7 @@ def main() -> int:
             if it.get("period") not in ("上午", "中午", "下午", "晚上", "未标注时段"):
                 violations.append(f"{f.name} period 非法: {it.get('period')}")
 
-    # task6 CSV 字段层：node_id 非空、kind 枚举、行数与 stats 一致
+    # task6 CSV field layer: node_id non-empty, kind enum, row count matches stats
     gstats = json.loads((REPO / "task6/output/graph_stats.json").read_text(encoding="utf-8"))
     kinds = {"景区", "景点", "周边景点", "时段", "交通操作", "条件"}
     n_nodes = 0
@@ -206,7 +212,7 @@ def main() -> int:
     if n_nodes != gstats.get("total_nodes"):
         violations.append(f"graph_nodes 行数 {n_nodes} != stats {gstats.get('total_nodes')}")
 
-    # E14：条数守恒——条件对 JSONL 与映射表行数一致（导出截断仅用于显示，不丢事实行）
+    # Count conservation -- the conditional-pairs JSONL row count matches the mapping table (export truncation is display-only, no fact rows lost)
     def jsonl_count(path: Path) -> int:
         return sum(1 for _ in path.open(encoding="utf-8")) if path.exists() else -1
 
@@ -214,31 +220,31 @@ def main() -> int:
     mapping = json.loads((REPO / "task5/output/mapping_table.json").read_text(encoding="utf-8"))
     mapping_n = len(mapping["rows"] if isinstance(mapping, dict) else mapping)
     stats5 = json.loads((REPO / "task5/output/extraction_stats.json").read_text(encoding="utf-8"))
-    # 不变量：JSONL=去重前原始对；映射表=去重+归属过滤后的发布对
+    # invariant: JSONL=raw pairs before dedup; mapping table=published pairs after dedup + attribution filtering
     if pairs_n != stats5.get("raw_pairs"):
         violations.append(f"条件对 JSONL({pairs_n}) != 抽取统计 raw_pairs({stats5.get('raw_pairs')})")
     if mapping_n != stats5.get("after_dedup"):
         violations.append(f"映射表({mapping_n}) != 抽取统计 after_dedup({stats5.get('after_dedup')})")
 
-    # A10：缺失字段统计（非违例，供数据质量画像）
+    # A10: missing-field statistics (not violations; used for the data-quality profile)
     field_nulls = {}
     for line in (REPO / "task1/data/processed/dataset_clean.jsonl").open(encoding="utf-8"):
         r = json.loads(line)
         for f in ("source_url", "collected_at", "published_at", "author", "content_sha256"):
             if not r.get(f):
                 field_nulls[f] = field_nulls.get(f, 0) + 1
-    # 人工标注评测集防篡改守护（原 regression_check 并入；重打分由全链 rebuild 覆盖）
+    # human-annotated eval set anti-tampering guard (the former regression_check merged in; re-scoring is covered by the full-chain rebuild)
     now = check_guards(violations)
     if args.update_state:
         write_state(now)
-        # 固化后守护类违例清零；契约类违例（record_id/字段/枚举）仍如实保留
+        # after freezing, guard-type violations are cleared; contract violations (record_id/fields/enums) are still reported honestly
         violations = [v for v in violations if not v.startswith(("dataset.count", "gold "))]
         guards = {k: v for k, v in now.items() if k != "gold.sha256"} | {"gold.fingerprints_match": True}
     else:
         state = load_json(STATE_PATH)
         guards = {k: v for k, v in now.items() if k != "gold.sha256"} | {"gold.fingerprints_match":
             not state or all(v == state.get("gold.sha256", {}).get(k) for k, v in now["gold.sha256"].items())}
-    # D01：分句规则差异备案——task4 含分号/半角感叹，task5 不含；跨任务匹配用包含式容忍
+    # D01: documented sentence-split rule difference -- task4 includes semicolons/half-width exclamation, task5 does not; cross-task matching tolerates it via containment
     report = {
         "title": "跨任务数据契约校验",
         "sentence_split_difference": {

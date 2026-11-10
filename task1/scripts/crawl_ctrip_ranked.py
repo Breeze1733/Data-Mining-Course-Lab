@@ -1,7 +1,7 @@
-"""按阅读量筛选携程游记；可缓存重跑，初次自动发现热门目录。
+"""Filter 携程 travelogues by public read count; re-runs reuse the cache, and hot directories are discovered automatically on the first run.
 
 python src/crawl_ctrip_ranked.py --area all --pool-size 40 --max-pages 120
-这里不调用数据清洗/Word/Excel导出。
+This script does not invoke data cleaning or Word/Excel export.
 """
 from __future__ import annotations
 import argparse, json, re, hashlib
@@ -41,7 +41,7 @@ def store_article(meta,rows,refresh=False):
 def run(area='all',pool_size=40,max_pages=120,offline=False,retry_failed=False):
     rows={}
     if OUT.exists():rows={r['record_id']:r for r in json.loads(OUT.read_text('utf-8'))}
-    # 首轮已实际抓取的目录/文章可以直接复用，不二次请求文章正文。
+    # Directories/articles actually fetched in the first round are reused directly; article bodies are not requested twice.
     for p in [ROOT/'data/crawl/ctrip_expansion.json']:
         if p.exists():
             for r in json.loads(p.read_text('utf-8')):
@@ -53,9 +53,9 @@ def run(area='all',pool_size=40,max_pages=120,offline=False,retry_failed=False):
     if retry_failed and not offline:
         for old in list(rows.values()):
             if old.get('error') and area in ('all',old['scenic_area']):
-                # 仅重试请求/提取失败；有效正文的质量拒绝不因重跑被放宽。
+                # Retry only request/extraction failures; quality rejections of valid bodies are not relaxed by re-running.
                 store_article(old,rows,refresh=True);dump(rows,logs)
-    # 固定公开种子也是候选发现入口，首次克隆时不依赖历史JSON缓存。
+    # The fixed public seeds also serve as a candidate discovery entry point, so a fresh clone does not depend on the historical JSON cache.
     if not offline and area in ('all','颐和园'):
         for url in base.BEIJING_SEEDS:
             rid='CTRIP_'+base.article_id(url)
@@ -65,8 +65,10 @@ def run(area='all',pool_size=40,max_pages=120,offline=False,retry_failed=False):
     for spot,slug in [('黄山','huangshan19'),('九寨沟','jiuzhaigou25'),('颐和园','beijing1')]:
         if area not in ('all',spot):continue
         pool=lambda:[r for r in rows.values() if r.get('scenic_area')==spot and r.get('accepted') and r.get('read_count') is not None]
-        # 热门是发现入口，最终仍按公开阅读量数值重排。两个小目录完整遍历；
-        # 北京全城目录采用显式页数边界，不能把“热门”误称为阅读量排序。
+        # Hot lists are a discovery entry point; final ranking still uses the public
+        # read count values. The two smaller directories are walked in full; the
+        # Beijing citywide directory uses an explicit page bound, so “hot” must not
+        # be mislabeled as read-count ordering.
         page_limit=min(max_pages,{'黄山':15,'九寨沟':38,'颐和园':120}[spot])
         for page in range(1,page_limit+1):
             if offline:break
@@ -86,7 +88,7 @@ def run(area='all',pool_size=40,max_pages=120,offline=False,retry_failed=False):
                     rid='CTRIP_'+m[1];title=''.join(c.xpath('.//h2//text()')).strip()
                     if base.PROMO_TITLE.search(title):continue
                     summary=' '.join(c.xpath('.//p//text()'))
-                    # 北京目录含全城内容；只核验目标标题或可能含颐和园的综合实游。
+                    # The Beijing directory includes citywide content; verify only targeted titles or general trip reports that may cover 颐和园.
                     if spot=='颐和园' and not re.search(r'颐和园|北京|京城|帝都|四九城|北平',title+' '+summary):continue
                     text=c.text_content();before=text.split('发表于',1)[0];author=before[len(title):].strip() if before.startswith(title) else ''
                     read=''.join(c.xpath('.//*[@title="浏览"]//text()')).strip()
@@ -94,11 +96,13 @@ def run(area='all',pool_size=40,max_pages=120,offline=False,retry_failed=False):
                         if read:rows[rid].update(directory_read_count_display=read,directory_read_count=number(read))
                         continue
                     metas.append(dict(scenic_area=spot,title=title,url=link,author=author[:50],summary=summary,directory_url=url,read_count_display=read,read_count=number(read)))
-                # 卡片阅读量已显式标注，先核验高阅读量正文。
+                # Card read counts are explicitly labeled; verify the highest-read-count bodies first.
                 metas.sort(key=lambda x:x['read_count'] if x['read_count'] is not None else -1,reverse=True)
                 for meta in metas:
-                    # 已验证池足够后，只请求可能进入阅读量前25的新增正文。
-                    # 标记为范围内采样，未假称网站提供全站阅读量排序接口。
+                    # Once the verified pool is large enough, only new bodies that could
+                    # enter the top 25 by read count are requested.
+                    # This is labeled as in-range sampling; the site is not claimed to
+                    # offer a site-wide read-count ranking API.
                     reads=sorted((r['read_count'] for r in pool()),reverse=True)
                     if len(reads)>=pool_size and meta.get('read_count') is not None and meta['read_count']<reads[pool_size-1]:continue
                     store_article(meta,rows);dump(rows,logs)

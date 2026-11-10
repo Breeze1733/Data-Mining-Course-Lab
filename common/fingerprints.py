@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-"""数据版本指纹——评估产物绑定其输入数据的 SHA256 前缀，
-旧结果未重算时不再被当作新版本证据。"""
+"""Data version fingerprints -- evaluation artifacts are bound to the SHA256 prefix of
+their input data, so stale results that were not recomputed no longer pass as
+new-version evidence."""
 import hashlib
 from pathlib import Path
 

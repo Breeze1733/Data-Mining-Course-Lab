@@ -1,14 +1,15 @@
-"""词典加载、最长匹配与跨类型重叠消解。
+"""Dictionary loading, longest matching, and cross-type overlap resolution.
 
-词典文件:
+Dictionary files:
     resources/poi_gazetteer.csv
     resources/transport_lexicon.csv
 
-匹配规则:
-    - 同一位置按 (surface 长度降序, priority 降序) 选最长；
-    - POI 严格按景区隔离；
-    - 具名交通设施（带 linked_poi 的索道/缆车等）优先于其内部的 POI 名；
-    - 同一字符区间只保留一个实体，被抑制项写入审计。
+Matching rules:
+    - At the same position, pick the longest by (surface length desc, priority desc);
+    - POIs are strictly isolated per scenic area;
+    - Named transport facilities (cableways/cable cars with linked_poi) take precedence over
+      POI names nested inside them;
+    - Only one entity is kept per character span; suppressed items are written to the audit.
 """
 
 from __future__ import annotations
@@ -276,7 +277,7 @@ class Gazetteer:
     def resolve_overlaps(
         self, candidates: Iterable[Candidate]
     ) -> tuple[list[Candidate], list[Candidate]]:
-        """按起点、长度、rank 贪心选取互不重叠的实体。"""
+        """Greedily select non-overlapping entities by start, length, and rank."""
         unique: dict[tuple[int, int, str], Candidate] = {}
         for candidate in candidates:
             key = (candidate.start, candidate.end, candidate.type)
@@ -306,9 +307,10 @@ class Gazetteer:
 
 
 def jieba_boundary_report(gazetteer: Gazetteer, text: str, limit: int = 0) -> list[str]:
-    """用 jieba 自定义词典做边界校验（不改变最终实体边界）。
+    """Boundary validation with the jieba custom dictionary (does not change final entity boundaries).
 
-    返回 jieba.search 分词中包含词典词的 token 列表，供报告说明 jieba 的用途。
+    Returns the tokens from jieba.search segmentation that contain dictionary words, to document
+    the role of jieba in the report.
     """
     try:
         import jieba

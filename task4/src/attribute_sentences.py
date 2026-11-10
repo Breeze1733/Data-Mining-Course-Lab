@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
-"""P1 句子级叙述焦点：方案A（记录级标签）vs 方案B（特征规则）评估。
+"""P1 sentence-level narrative focus: evaluation of Plan A (record-level label) vs Plan B (feature rules).
 
-方案B按记录顺序处理全量句子，特征：
-  1. 景区专名命中（词典POI + 补充地标词，长词优先）：命中景区得分 +3/次；
-  2. 景区外信号：联游景区/城市地标/住宿餐饮/往返大交通关键词，+2/次；
-  3. 园内基础设施（索道/观光车/栈道/门票/检票/观景台）：仅证明"在景区内"，+1；
-  4. 转移词（接着|然后|下一站|继续|回到|前往）：无专名冲突时继承前句标签；
-  5. 无任何信号：仅有基础设施词 → 记录级标签（弱证据）；否则 → 无法判断。
+Plan B processes all sentences in record order with features:
+  1. Scenic-area proper-name hit (dictionary POIs + supplementary landmark words, longer words first): +3 per hit for that scenic area;
+  2. Outside-area signals: joint-tour scenic areas / city landmarks / lodging and dining / long-haul transport keywords, +2 per hit;
+  3. In-park infrastructure (cableway / sightseeing bus / boardwalk / ticket / gate / viewing platform): only proves "inside a scenic area", +1;
+  4. Transition words (接着|然后|下一站|继续|回到|前往): inherit the previous sentence's label when no proper-name conflict;
+  5. No signal at all: infrastructure words only -> record-level label (weak evidence); otherwise -> 无法判断.
 
-评估：只在 sentence_attribution.jsonl 的 495 个标注位置上打分（5类准确率）。
-调参纪律：seed=42 对半分，权重只在 tune 半区迭代，holdout 半区只做最终一次评估。
+Evaluation: scored only on the 495 annotated positions in sentence_attribution.jsonl (5-class accuracy).
+Tuning discipline: split in half with seed=42; weights are iterated only on the tune half; the holdout half is evaluated exactly once at the end.
 
-用法：
-  python src/attribute_sentences.py --evaluate           # A/B 对比评估
-  python src/attribute_sentences.py --output out.jsonl   # 全量归属落盘（供下游）
+Usage:
+  python src/attribute_sentences.py --evaluate           # A/B comparative evaluation
+  python src/attribute_sentences.py --output out.jsonl   # full-corpus attribution written to disk (for downstream)
 """
 from __future__ import annotations
 
@@ -28,10 +28,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]  # task4/
 TASK1 = ROOT.parent / "task1"
 ATTR = ROOT / "output/attribution"
-EXP2 = ROOT.parent / "task2/output/exp2"  # 词典是实验2 的产物（只读引用）
+EXP2 = ROOT.parent / "task2/output/exp2"  # the dictionary is a product of experiment 2 (read-only reference)
 
 def ensure_utf8_stdout() -> None:
-    """仅在自身作为主脚本运行时包装 stdout；被其他脚本导入时不动其流（避免旧包装器被GC后关闭底层缓冲）。"""
+    """Wrap stdout only when running as the main script; leave streams untouched when imported by other scripts (avoids closing the underlying buffer after the old wrapper is GC'd)."""
     enc = getattr(sys.stdout, "encoding", "") or ""
     if enc.lower().replace("-", "") != "utf8":
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
@@ -45,10 +45,10 @@ OUTSIDE_W = 2.0
 INFRA_W = 1.0
 WEAK_W = 0.6
 
-# 根景区名（词典排除根景区，这里补回；九寨 是常见简称）
+# Root scenic-area names (the dictionary excludes root scenic areas; restored here; 九寨 is a common short form)
 ROOT_ALIASES = {"黄山": "黄山", "九寨沟": "九寨沟", "九寨": "九寨沟", "颐和园": "颐和园"}
 
-# 词典未收录但对归属判别有用的地标/设施（人工补充，多来自标注中反复出现的误判点）
+# Landmarks/facilities missing from the dictionary but useful for attribution (manually added, mostly from repeatedly mis-attributed spots in the annotations)
 SUPPLEMENT_POI = {
     "黄山": ["汤口", "换乘中心", "新国线", "挑夫", "地轨", "小火车", "西海大峡谷观光缆车",
              "白云宾馆", "光明顶山庄", "北海宾馆", "西海饭店", "西海宾馆", "狮林大酒店",
@@ -63,11 +63,11 @@ SUPPLEMENT_POI = {
                "西堤", "玉泉山", "凤凰墩", "藻鉴堂", "治镜阁", "十七孔桥"],
 }
 
-# 景区内常驻酒店名 → 视为该景区 POI 证据（口径D1：山上/园内住宿属景区内）
+# Hotels resident inside scenic areas -> treated as POI evidence for that scenic area (D1 policy: lodging on the mountain / inside the park belongs to the scenic area)
 IN_AREA_HOTELS = ["白云宾馆", "光明顶山庄", "北海宾馆", "西海饭店", "西海宾馆", "狮林大酒店",
                   "天海山庄", "白鹅山庄", "玉屏楼宾馆", "排云楼宾馆", "云谷山庄"]
 
-# 景区外信号 v2：联游景区/城市/餐饮购物/大交通
+# Outside-area signals v2: joint-tour scenic areas / cities / dining and shopping / long-haul transport
 OUTSIDE_LANDMARKS = [    "黄龙", "川主寺", "松潘", "叠溪海子", "牟尼沟", "神仙池", "中查", "鲁能胜地",
     "若尔盖", "红原", "月亮湾", "达古冰川", "汶川", "茂县", "都江堰", "二王庙",
     "青城山", "峨眉", "乐山大佛", "凌云大佛", "三星堆", "宽窄巷子", "锦里",
@@ -94,20 +94,20 @@ OUTSIDE_LANDMARKS = [    "黄龙", "川主寺", "松潘", "叠溪海子", "牟�
     "火锅", "烤鸭", "小吃", "美食", "餐厅", "餐馆", "食堂", "宵夜", "夜市",
     "早餐", "午餐", "晚餐", "早饭", "晚饭", "点心", "蛋糕", "奶茶", "咖啡",
     "涮肉", "涮", "臭鳜鱼", "老干妈", "雪糕", "包浆豆腐", "青稞酒", "骨汤",
-    # 大交通词（高铁/飞机/火车/动车/机场/航班/登机/值机/地勤）移入 TRANSPORT_RE 专属机制，
-    # 带"旅游意图守卫"（谷底/上山/下山/换乘/徒步等不再误判景区外）；此处不再重复计分
+    # Long-haul transport words (高铁/飞机/火车/动车/机场/航班/登机/值机/地勤) moved into the dedicated TRANSPORT_RE mechanism,
+    # with a "tourism-intent guard" (谷底/上山/下山/换乘/徒步 etc. are within-scenic movement contexts, not outside-area); not double-counted here
     "机场大巴",
     "一卡通", "高速费", "收费站", "加油站", "导航", "机场大巴",
     "步行街", "商场", "超市", "纪念品", "特产", "免税", "礼品卡", "摊贩",
 ]
-# v3 文博词汇：寺/殿/馆藏/出土类描述多出现在城市人文景点与博物馆段落（弱景区外信号，调参定权重）
+# v3 museum/heritage vocabulary: temple/hall/collection/excavation descriptions mostly appear in urban heritage and museum paragraphs (weak outside-area signal; weight set by tuning)
 MUSEUM_WORDS = [
     "青铜器", "玉器", "瓷器", "陶器", "馆藏", "藏品", "出土", "造像", "供奉", "碑刻",
     "佛像", "菩萨像", "舍利", "石窟", "窟龛", "殿内", "大殿", "正殿", "配殿", "藏经",
     "展馆", "展厅", "陈列", "文物", "古迹", "祠堂", "牌坊", "庙宇", "寺院",
 ]
 
-# 基础设施词：证明"在景区游览语境"，但不指明哪个景区
+# Infrastructure words: prove "touring-inside-a-scenic-area context" but do not indicate which scenic area
 INFRA_WORDS = [
     "索道", "缆车", "观光车", "环保车", "摆渡车", "景区大巴", "中转车",
     "门票", "检票", "购票", "票价", "预约", "入园", "闭园", "开园",
@@ -115,7 +115,7 @@ INFRA_WORDS = [
     "步道", "栈桥", "游船码头", "机位", "停车场", "进沟", "出沟", "进景区",
     "出景区", "景区内", "二进沟",
 ]
-# 各景区弱特征词（无专名时的景观/活动词，低权重）
+# Per-scenic-area weak feature words (scenery/activity words when no proper name appears, low weight)
 WEAK_SCENIC_WORDS = {
     "黄山": ["山上", "上山", "下山", "山顶", "山腰", "山脚", "登山", "爬山", "日出",
              "日落", "云海", "云雾", "怪石", "奇松", "险峻", "上坡", "下坡", "登山杖"],
@@ -123,14 +123,14 @@ WEAK_SCENIC_WORDS = {
                "藏民", "藏文化", "高原", "碧蓝", "碧绿", "沟内", "钙华", "海子"],
     "颐和园": ["园内", "游园", "御苑", "御题", "皇家", "乾隆", "慈禧", "光绪", "园中园", "湖"],
 }
-MUSEUM_W = 2.0  # v3 文博词汇景区外信号权重（tune 半区定参；0 关闭）
+MUSEUM_W = 2.0  # v3 outside-area signal weight for museum/heritage words (parameter set on the tune half; 0 disables)
 TRANSITION_RE = re.compile(r"^(接着|然后|随后|下一站|继续|回到|返程|前往|乘(车|坐)|坐(车|上))")
-# 大交通覆盖：出现即判景区外，除非句中带游览意图词，或交通词紧跟 景区/园内/沟内（园内交通）
+# Long-haul transport override: presence marks outside-area, unless the sentence carries tourism-intent words, or the transport word directly follows 景区/园内/沟内 (in-park transport)
 TRANSPORT_RE = re.compile(
     r"班车|大巴|公交|地铁|高铁|动车|火车|飞机|机场|航班|登机|值机|地勤|"
     r"打车|包车|拼车|自驾|发往|班次|一卡通|高速|登机牌|国道|省道|县道|乡道")
-# 补移动词——谷底/上山/下山/换乘/徒步/观光 属景区内移动语境，
-# 不再被大交通覆盖误判为景区外（如“坐火车（峡谷小火车）下到谷底”）
+# Added movement words — 谷底/上山/下山/换乘/徒步/观光 are within-scenic-area movement contexts,
+# keeps these from being misjudged as outside-area by the transport override (e.g. “坐火车（峡谷小火车）下到谷底”)
 TOURISM_INTENT_RE = re.compile(r"爬山|登山|游玩|游览|旅游|上山|下山|谷底|换乘|徒步|观光|赏|逛园|景区游")
 HOTEL_RE = re.compile(r"酒店|宾馆|民宿|客栈|旅舍|招待所")
 HOTEL_DESC_RE = re.compile(r"外观|装修|房间|性价比|推荐|管家|前台|隔音|床位|泳池|温泉|早餐|房型|设施|卫生|榻榻米")
@@ -140,7 +140,7 @@ OFFICIAL_GUARD_RE = re.compile(r"线路|路线|游|门|索道|车|票|时间|园
 
 
 def load_dict() -> tuple[dict[str, list[str]], dict[str, list[str]]]:
-    """返回 (scenic -> [POI名，长词在前], 全部POI名 -> scenic_areas)"""
+    """Returns (scenic -> [POI names, longest first], all POI names -> scenic_areas)"""
     d = json.loads((EXP2 / "entity_dictionary.json").read_text(encoding="utf-8"))
     scenic2poi: dict[str, list[str]] = {"黄山": [], "九寨沟": [], "颐和园": []}
     for e in d["poi"]:
@@ -177,13 +177,13 @@ class Attributor:
         scores = {"黄山": 0.0, "九寨沟": 0.0, "颐和园": 0.0}
         outside = 0.0
         infra = False
-        text_ctx = sent.replace("风景区店", "")  # 酒店"风景区店"分支后缀不是景区语境
+        text_ctx = sent.replace("风景区店", "")  # the hotel "风景区店" branch suffix is not scenic-area context
         for scenic, names in self.scenic2poi.items():
             for name in names:
                 if len(name) < 2:
                     continue
                 if name in sent:
-                    scores[scenic] += self.poi_w  # 出现即计一次，避免重复刷分
+                    scores[scenic] += self.poi_w  # count once per appearance to avoid repeated score farming
         for kw in OUTSIDE_LANDMARKS:
             if kw in sent:
                 outside += self.outside_w
@@ -191,7 +191,7 @@ class Attributor:
             for kw in MUSEUM_WORDS:
                 if kw in sent:
                     outside += self.museum_w
-                    break  # 同类词汇成段出现只计一次，避免长文博段落刷分
+                    break  # count only once when such words appear in runs, so long museum paragraphs cannot farm score
         for kw in INFRA_WORDS:
             if kw in sent:
                 infra = True
@@ -201,16 +201,16 @@ class Attributor:
             for kw in kws:
                 if kw in sent:
                     weak[scenic] += self.weak_w
-        # 酒店语境处理（口径D1：山上/园内酒店属景区内，其余住宿属景区外）
+        # Hotel context handling (D1 policy: on-mountain/in-park hotels belong to the scenic area; other lodging is outside)
         hotel_desc = hotel_ctx = False
         if HOTEL_RE.search(sent):
             named = [h for h in self.in_area_hotel2scenic if h in sent]
             if named:
                 scores[self.in_area_hotel2scenic[named[0]]] += self.poi_w
             elif HOTEL_DESC_RE.search(sent):
-                outside += self.outside_w  # 酒店推销/体验描写 → 景区外
+                outside += self.outside_w  # hotel marketing/experience descriptions -> outside area
             elif IN_AREA_HOTEL_CTX_RE.search(text_ctx):
-                hotel_ctx = True  # 登山/园内语境下提及酒店 → 景区内配套
+                hotel_ctx = True  # hotel mentioned in a climbing/in-park context -> in-area facility
                 infra = True
             else:
                 outside += self.outside_w
@@ -231,7 +231,7 @@ class Attributor:
             weak_val, weak_second = f["weak"][weak_best], sorted(
                 (v for k, v in f["weak"].items() if k != weak_best), reverse=True)[0]
 
-            # 大交通覆盖：交通词出现且无游览意图 → 景区外（园内交通不受影响）
+            # Long-haul transport override: transport word present and no tourism intent -> outside area (in-park transport unaffected)
             transport_override = False
             if TRANSPORT_RE.search(sent) and not TOURISM_INTENT_RE.search(sent):
                 stripped = re.sub(r"(景区|园内|沟内)[^，。]{0,4}(大巴|观光车|中转车|环保车|摆渡车|交通车)", "", sent)
@@ -243,11 +243,11 @@ class Attributor:
             elif outside > 0 and outside >= best_val:
                 label = "景区外"
             elif f["hotel_ctx"] and best_val == 0 and second_val == 0 and outside == 0:
-                label = record_label  # 景区内酒店语境且无冲突信号
+                label = record_label  # in-area hotel context with no conflicting signals
             elif best_val > 0 and best_val > second_val:
                 label = best_scenic
             elif best_val > 0 and best_val == second_val:
-                label = "无法判断"  # 两景区专名并列
+                label = "无法判断"  # two scenic-area proper names tied
             elif outside > best_val:
                 label = "景区外"
             elif weak_val > 0 and weak_val > weak_second and outside == 0:
@@ -257,7 +257,7 @@ class Attributor:
             elif infra:
                 label = record_label
             elif text_type == "official_route" and OFFICIAL_GUARD_RE.search(sent):
-                label = record_label  # 官方文本默认叙述本景区
+                label = record_label  # official text defaults to narrating its own scenic area
             else:
                 label = "无法判断"
             result.append(label)
@@ -280,7 +280,7 @@ def split_spans(text: str) -> list[tuple[int, int, str]]:
 
 
 def run_all(output_path: Path | None) -> dict[tuple[str, int], str]:
-    """全量归因。返回 (record_id, start) -> label，供评估与下游使用。"""
+    """Full-corpus attribution. Returns (record_id, start) -> label, for evaluation and downstream use."""
     rows = [json.loads(l) for l in
             (TASK1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8")]
     attr = Attributor()
@@ -304,9 +304,9 @@ def run_all(output_path: Path | None) -> dict[tuple[str, int], str]:
 
 
 def tune_holdout_split() -> tuple[set[str], set[str]]:
-    """按文档（记录）分组对半分——句级随机划分有 81 篇文档横跨 tune/holdout，存在同文档泄漏。
+    """Split in half grouped by document (record) — sentence-level random splits leave 81 documents spanning tune/holdout, leaking within-document info.
 
-    确定性：记录列表排序后 rng(42) 洗牌，整记录划入 tune / holdout；句子归属跟随其记录。
+    Deterministic: sort the record list, shuffle with rng(42), assign whole records to tune / holdout; each sentence follows its record.
     """
     gold_rows = [json.loads(l) for l in (ATTR / "sentence_attribution.jsonl").open(encoding="utf-8")]
     import random
@@ -322,9 +322,9 @@ def tune_holdout_split() -> tuple[set[str], set[str]]:
 
 def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None,
              splits: tuple[set[str], set[str]] | None = None) -> dict:
-    """在 495 句标注集上评估方案A（记录级标签）与方案B（特征规则）的准确率与混淆。
+    """Evaluate accuracy and confusion of Plan A (record-level label) and Plan B (feature rules) on the 495-sentence annotated set.
 
-    splits=(tune_sids, holdout_sids) 时额外输出分半口径；错误导出仅含 tune 半区（holdout 不参与迭代）。
+    When splits=(tune_sids, holdout_sids) is given, also emit split-half metrics; error export covers only the tune half (holdout never participates in iteration).
     """
     gold_rows = [json.loads(l) for l in (ATTR / "sentence_attribution.jsonl").open(encoding="utf-8")]
     err_fh = errors_path.open("w", encoding="utf-8") if errors_path else None

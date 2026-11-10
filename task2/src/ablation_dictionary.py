@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-"""词典扩充消融——把  冻结测试的召回增益按扩充批次归因。
+"""Dictionary-expansion ablation -- attributes the frozen-test recall gain to expansion batches.
 
-配置（在冻结测试 40 句上以 DictMatcher 直接打分，金标准与正式评测同源）：
-  full            当前 refined 全量
-  minus_recall    去掉 recall_eval 批次（POI 25 + 交通 2 + 时间规则 3）
-  minus_p2        再去掉 peripheral_expansion 批次（56 条）
-  seed_only       仅保留 seed/manual/merged 主干
-输出：各配置的 P/R/F1 与每批次边际贡献（ΔR）。
+Configurations (DictMatcher scores the 40 frozen-test sentences directly, with the gold standard
+drawn from the same source as the formal evaluation):
+  full            current full refined set
+  minus_recall    drop the recall_eval batch (POI 25 + transport 2 + time rules 3)
+  minus_p2        additionally drop the peripheral_expansion batch (56 entries)
+  seed_only       keep only the seed/manual/merged backbone
+Output: P/R/F1 per configuration and per-batch marginal contribution (ΔR).
 """
 from __future__ import annotations
 
@@ -172,7 +173,7 @@ def main() -> int:
     import io as _io
     for name, (es, pats) in configs.items():
         m = DictMatcher(es, stopwords)
-        # 时间实体：临时切换全局规则集（entity_rules.time_entities 读取模块级 _time_rules）
+        # Time entities: temporarily swap in a global rule set (entity_rules.time_entities reads the module-level _time_rules)
         saved = ER._time_rules
         ER._time_rules = time_with(pats)
         with contextlib.redirect_stdout(_io.StringIO()):

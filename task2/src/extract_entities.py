@@ -1,6 +1,6 @@
-"""实验2唯一实体识别器。默认读取实验1主语料，结果供实验3至7使用。
+"""The single entity recognizer for Experiment 2. Reads the Experiment 1 main corpus by default; results feed Experiments 3-7.
 
-baseline和refined是同一识别器的词典迭代参数，不是两套实现。
+baseline and refined are dictionary-iteration parameters of the same recognizer, not two implementations.
 """
 from __future__ import annotations
 import argparse
@@ -62,7 +62,7 @@ def main(argv: list[str] | None = None) -> int:
     with out_path.open("w", encoding="utf-8") as fh:
         for row in rows:
             text = row["clean_content"]
-            # jieba 分词证据（词典词已通过 load_userdict 保证成词；分词结果用于统计与实验3参考）
+            # jieba segmentation evidence (dictionary words are guaranteed to segment via load_userdict; segmentation results are used for statistics and as reference in Experiment 3)
             toks = [t for t in jieba.cut(text) if t.strip()]
             segmentation_tokens += len(toks)
             ents = resolve_record_entities(matcher.find(text, scenic=row["scenic_area"]) + time_entities(text))

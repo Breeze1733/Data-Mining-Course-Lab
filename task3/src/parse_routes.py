@@ -1,13 +1,13 @@
-"""实验3：官方路线的结构化解析与时间层级构建。
+"""Experiment 3: structured parsing of official routes and time-hierarchy construction.
 
-输入：task1/data/raw/official_routes.jsonl（46 条官方路线分支）
-     task2/output/exp2/{entity_dictionary.json, entities_refined.jsonl}（词典与实体）
-输出：task3/output/
-     route_format_analysis.json   格式规律分析
-     name_normalization.json      名称归一化规则与应用统计
-     parsed_routes.jsonl          逐条结构化路线（步骤/时段/天数/POI/交通/时间）
-     time_hierarchy.jsonl         上午/中午/下午/晚上 时间层级视图
-用法：python src/parse_routes.py（在 task1 venv 内，-X utf8）
+Input: task1/data/raw/official_routes.jsonl (46 official route branches)
+       task2/output/exp2/{entity_dictionary.json, entities_refined.jsonl} (dictionary and entities)
+Output: task3/output/
+       route_format_analysis.json   format-pattern analysis
+       name_normalization.json      name-normalization rules and application statistics
+       parsed_routes.jsonl          structured route per entry (steps/periods/days/POIs/transport/time)
+       time_hierarchy.jsonl         上午/中午/下午/晚上 (morning/noon/afternoon/evening) time-hierarchy view
+Usage: python src/parse_routes.py (inside the task1 venv, -X utf8)
 """
 from __future__ import annotations
 
@@ -28,9 +28,9 @@ if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout,
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 
-# 规则1：词典 canonical（清晏舫→石舫、诺日朗游客中心→诺日朗中心等，见 entity_dictionary.json）
-# 规则2：地理限定语剥离（黄山南大门/黄山风景区→南大门；“XX景区”后缀剥离）
-# 规则3：等同名异点（五彩池）保留景区限定，不强行合并
+# Rule 1: dictionary canonical (清晏舫→石舫, 诺日朗游客中心→诺日朗中心, etc.)
+# Rule 2: geographic-qualifier stripping (黄山南大门/黄山风景区→南大门; strip the “XX景区” suffix)
+# Rule 3: same name, different places (五彩池) keep the scenic-area qualifier and are not forcibly merged
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
 from entity_identity import normalize  # noqa: E402
 
@@ -43,9 +43,8 @@ DUR_RE = re.compile(r"(?:约|大概|将近|近)?\d+(?:\.\d+)?\s*(?:个)?(?:小�
 PERIOD_WORDS = ("清晨", "早上", "上午", "中午", "下午", "傍晚", "晚上", "夜里", "深夜", "凌晨", "全天")
 DAY_MARK = re.compile(r"[【\[]\s*(第[一二三四五六七八九十\d]+[日天]|Day\s*\d+)\s*[】\]]|第([一二三四五六七八九十\d]+)天|Day\s*(\d+)")
 PERIOD_MARK = re.compile(r"[【\[]\s*(上午|中午|下午|晚上|清晨|傍晚|全天)\s*[】\]]|(上午|中午|下午|晚上|清晨|傍晚)[:：]")
-# 复合天+时段标记（"【第一天·晚上】"）——此前 DAY/PERIOD 各自都不命中复合形，
-# 天与时段双双丢失
-# C05/U? 无：非路经语境子句守卫——未去/放弃、他人行程、背景罗列的 POI 不是步骤
+# Composite day+period marker ("【第一天·晚上】") -- matched as a whole so both the day and the period are captured
+# Non-route-context clause guard -- POIs of 未去/放弃 (not visited / given up), others' itineraries, or background listings are not steps
 NON_ROUTE_CLAUSE_RE = re.compile(
     r"未(?:去|能前往|能成行|开放)|没有?去|没能(?:前往|到达|成行)|放弃|取消了?|原计划"
     r"|本来(?:想|打算|计划)|计划去"
@@ -82,19 +81,19 @@ class RouteParser:
         self.matcher = matcher
 
     def annotate(self, token: str, scenic: str | None = None) -> dict:
-        """解析单个链节点：POI、交通、时间、备注。"""
+        """Parse a single chain node: POIs, transport, time, and notes."""
         note_parts = PAREN_RE.findall(token)
         core = PAREN_RE.sub("", token).strip(" 　,，。;；")
         pois, transports = [], []
         for e in self.matcher.find(core, scenic):
             if e["type"] == "景点POI":
                 if not e.get("in_scenic", True):
-                    continue  # 周边地标（汤口镇/黄龙等后勤提及）不作为路线步骤
+                    continue  # peripheral landmarks (logistics mentions such as 汤口镇/黄龙) are not route steps
                 pois.append({"name": e["canonical"], "mention": e["text"],
                              "normalized": normalize(e["canonical"])})
             elif e["type"] == "交通方式":
                 transports.append(e["canonical"])
-        # 括号里的交通/时间信息
+        # Transport/time information inside parentheses
         paren_text = " ".join(note_parts)
         for e in self.matcher.find(paren_text):
             if e["type"] == "交通方式" and e["canonical"] not in transports:
@@ -125,7 +124,7 @@ class RouteParser:
         steps: list[dict] = []
         day, period = 1, None
         step_no = 0
-        # C11：保留行/段在 raw_content 中的字符跨度（步骤原句可溯源）
+        # Keep character spans of lines/segments within raw_content (step source sentences are traceable)
         lines = []
         pos = 0
         for ln in text.split("\n"):
@@ -134,7 +133,7 @@ class RouteParser:
                 start = text.find(stripped, pos)
                 lines.append((stripped, start, start + len(stripped)))
             pos += len(ln) + 1
-        # 散文式路线整段无换行，先分句再逐句解析
+        # Prose-style routes have whole paragraphs without newlines: split into sentences first, then parse sentence by sentence
         if fmt in ("prose", "theme_prose"):
             sents_with_span: list[tuple[str, int, int]] = []
             for ln, ln_start, ln_end in lines:
@@ -150,15 +149,15 @@ class RouteParser:
                     offset = _i + len(s)
             lines = sents_with_span
         for line, line_start, line_end in lines:
-            # 段级处理：一天/时段标记可能出现在行首或链中间（如“…—【第二日】丹霞峰…”）
+            # Segment-level handling: day/period markers may appear at line start or mid-chain (e.g. “…—【第二日】丹霞峰…”)
             for seg in CHAIN_SEP.split(line):
                 seg = seg.strip()
                 if not seg:
                     continue
                 mdp = DAY_PERIOD_MARK.search(seg)
                 if mdp:
-                    # 复合标记同时设定天与时段；天变更仍重置时段（次日第一站
-                    # 不继承前一日晚上—— 要求，跨日重置在复合标记同样成立）
+                    # A composite marker sets both day and period; a day change still resets the period (the first stop
+                    # of the next day does not inherit the previous day's 晚上—— required; the cross-day reset also holds for composite markers)
                     day = self._cn_day(mdp.group(1))
                     period = mdp.group(2)
                 elif m := DAY_MARK.search(seg):
@@ -172,8 +171,8 @@ class RouteParser:
                     _i = line.find(seg_content)
                     if _i >= 0:
                         seg_span = [line_start + _i, line_start + _i + len(seg_content)]
-                # C05：子句级语境守卫——剔除"未去/放弃/他人行程/背景罗列"子句后再解析，
-                # 避免把没去成的景点、介绍性罗列当成真实路经（构造探针实证三类误包含）
+                # Clause-level context guard -- strip clauses of "未去/放弃/他人行程/背景罗列" (not visited / given up / others' itineraries / background lists) before parsing,
+                # so unvisited attractions and introductory listings are not taken as actual route passes (probes constructed to evidence the three mis-inclusion types)
                 if NON_ROUTE_CLAUSE_RE.search(seg_content):
                     clauses = re.split(r"([，,])", seg_content)
                     kept = [c for i, c in enumerate(clauses)
@@ -183,7 +182,7 @@ class RouteParser:
                         continue
                 if not seg_content:
                     continue
-                # 站点列表行（第一站：…）
+                # Station-list line (第一站：…)
                 if m := STATION_MARK.search(seg_content):
                     step_no += 1
                     ann = self.annotate(seg_content)
@@ -191,7 +190,7 @@ class RouteParser:
                                 "station_tag": f"第{m.group(1)}站", "span": seg_span})
                     steps.append(ann)
                     continue
-                # KV 字段行（活动路线：… / 活动时长：约2小时）
+                # KV field lines (活动路线：… / 活动时长：约2小时)
                 if fmt == "kv_route_line" and re.match(r"^[A-Za-z\u4e00-\u9fff]+[:：]", seg_content):
                     label, _, val = seg_content.partition("：") if "：" in seg_content else seg_content.partition(":")
                     label = label.rstrip(":：")
@@ -208,7 +207,7 @@ class RouteParser:
                     continue
                 segs = self.parse_line(seg_content, scenic)
                 if not segs:
-                    # 叙述句默认处理：整句作为一个潜在步骤（含POI时保留）
+                    # Default handling for narrative sentences: keep the whole sentence as one potential step (retained when it contains a POI)
                     if fmt in ("prose", "theme_prose") and CJK_RE.search(seg_content):
                         ann = self.annotate(seg_content)
                         if ann["pois"] and len(seg_content) <= 140:
@@ -217,7 +216,7 @@ class RouteParser:
                             steps.append(ann)
                     continue
                 for sub in segs:
-                    # 链式连接点去重：仅有单个POI且与上一步末尾POI相同、无其他信息的段
+                    # Chain-connector dedup: drop segments with only a single POI, identical to the previous step's last POI, and carrying no other information
                     if (sub["pois"] and len(sub["pois"]) == 1 and not sub["transport"]
                             and not sub["time_range"] and not sub["duration"] and not sub["note"]
                             and steps and steps[-1]["pois"]
@@ -227,14 +226,14 @@ class RouteParser:
                     sub.update({"step_no": step_no, "day": day, "period": period,
                                 "span": seg_span})
                     steps.append(sub)
-        # 纯前置句过滤：arrow_chain 格式下无 POI 且无时间的开场白不算步骤
+        # Pure-opening filter: in arrow_chain format, openings with neither POI nor time do not count as steps
         if fmt == "arrow_chain":
-            # C02：纯移动事件（"乘索道下山"，有交通无 POI）也是路线步骤，不再丢弃
+            # Pure movement events ("乘索道下山", transport without POI) are also route steps, no longer dropped
             steps = [s for s in steps
                      if s["pois"] or s["time_range"] or s.get("station_tag") or s["transport"]]
             for i, s in enumerate(steps, 1):
                 s["step_no"] = i
-        # 住宿点标记（宾馆/饭店/酒店/民宿）与步骤类型（C02：停留 vs 移动事件）
+        # Lodging markers (宾馆/饭店/酒店/民宿) and step kinds (stay vs movement event)
         for s in steps:
             s["lodging"] = bool(re.search(r"宾馆|饭店|酒店|民宿", s["text"]))
             if not s["pois"] and s["transport"]:
@@ -243,7 +242,7 @@ class RouteParser:
                 s["step_kind"] = "住宿停留"
             else:
                 s["step_kind"] = "景点停留"
-        # 时段前向填充：带时段标记的行只设置后续步骤的 period
+        # Period forward-fill: lines with a period marker only set the period of subsequent steps
         self._fill_periods(steps)
         return {
             "route_id": route["route_id"], "scenic_area": route["scenic_area"],
@@ -280,9 +279,9 @@ class RouteParser:
 
     @staticmethod
     def _fill_periods(steps: list[dict]) -> None:
-        """时段标记行本身不含 POI（如“【上午】”），标记只对后续步骤生效；
-        首个标记前若已有步骤，沿用 step 里的 period_hint。
-        ：跨日重置——次日第一站不得继承前一日时段（如前一晚"晚上"）。"""
+        """Period-marker lines themselves contain no POI (e.g. “【上午】”); a marker only takes effect on subsequent steps.
+        If steps exist before the first marker, fall back to the step's period_hint.
+        ：cross-day reset -- the first stop of a new day must not inherit the previous day's period (e.g. the previous evening "晚上")."""
         current = None
         prev_day = None
         for s in steps:
@@ -299,7 +298,7 @@ class RouteParser:
 
 
 def build_hierarchy(parsed: dict) -> dict:
-    """天数 → 时段 → 步骤 三层视图。"""
+    """Three-level view: day → period → step."""
     hierarchy: dict[int, dict] = {}
     for s in parsed["steps"]:
         day = hierarchy.setdefault(s["day"], {})
@@ -335,7 +334,7 @@ def main() -> int:
         for h in hierarchies:
             fh.write(json.dumps(h, ensure_ascii=False) + "\n")
 
-    # 格式分析
+    # Format analysis
     format_analysis = {
         "total_routes": len(routes),
         "ordered_routes": sum(1 for r in routes if r.get("ordered_route")),
@@ -352,7 +351,7 @@ def main() -> int:
     }
     (OUT / "route_format_analysis.json").write_text(json.dumps(format_analysis, ensure_ascii=False, indent=1), encoding="utf-8")
 
-    # 名称归一化统计
+    # Name-normalization statistics
     norm_stats = {
         "rules": [
             "词典 canonical 映射（清晏舫→石舫、诺日朗游客中心→诺日朗中心、玉屏→玉屏景区、云谷→云谷景区）",
@@ -369,7 +368,7 @@ def main() -> int:
                     norm_stats["normalized_examples"].setdefault(poi["mention"], poi["normalized"])
     (OUT / "name_normalization.json").write_text(json.dumps(norm_stats, ensure_ascii=False, indent=1), encoding="utf-8")
 
-    # 解析质量摘要
+    # Parsing-quality summary
     ok = [p for p in parsed_routes if p["ordered_route"] and p["step_count"] >= 2]
     print(json.dumps({
         "routes": len(parsed_routes),

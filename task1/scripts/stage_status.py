@@ -1,9 +1,10 @@
-"""检查各阶段完成情况，供 run_collection.ps1 判断是否跳过。
+"""Check completion status of each stage so run_collection.ps1 can decide whether to skip.
 
-完成度以数据本身为准，不依赖额外状态文件；每次运行前重新计算，
-所以删除或损坏数据后不会误判为已完成。
+Completion is judged from the data itself, not from extra state files; it is
+recomputed before every run, so deleted or corrupted data is never mistaken
+for completed.
 
-用法: python src/stage_status.py [每平台篇数]
+Usage: python src/stage_status.py [per-platform count]
 """
 from __future__ import annotations
 import importlib.util, json, sys

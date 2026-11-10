@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-"""实验4：消解后文本改写示例（resolved_examples.json）。
+"""Experiment 4: post-resolution text rewrite examples (resolved_examples.json).
 
-从当前规则消解结果（pronoun_cases.jsonl）与人工标注（annotation_gold.json）中选取判定正确的
-实体指代案例，把句中代词替换为【先行词】生成 before/after 对照。选择规则：判定正确、代词在句内
-唯一出现（替换无歧义）、按类别均衡取样、同记录不重复。
+Selects correctly resolved entity-coreference cases from the current rule-resolution results
+(pronoun_cases.jsonl) and the manual annotations (annotation_gold.json), replacing the pronoun
+in the sentence with 【antecedent】 to build before/after pairs. Selection rules: correct verdict,
+pronoun occurs exactly once in the sentence (unambiguous replacement), balanced sampling by class,
+no repeated records.
 
-用法：python src/build_resolved_examples.py
+Usage: python src/build_resolved_examples.py
 """
 from __future__ import annotations
 
@@ -42,7 +44,7 @@ def main() -> int:
         if not (kind_ok and name_ok):
             continue
         if g["gold_kind"] not in ("POI", "景区", "路线"):
-            continue  # 改写示例只呈现可代入实词的指代
+            continue  # rewrite examples only show resolvable substantive references
         text = records.get(c["record_id"], "")
         sent_start = text.find(c["sentence"], max(0, c["doc_start"] - 400))
         if sent_start < 0:
@@ -51,7 +53,7 @@ def main() -> int:
         if c["sentence"][lo:hi] != c["pronoun"]:
             continue
         if c["sentence"].count(c["pronoun"]) != 1:
-            continue  # 代词在句内多处出现时不做示例，保证替换无歧义
+            continue  # skip examples when the pronoun occurs multiple times in the sentence, ensuring unambiguous replacement
         rows.append({
             "record_id": c["record_id"], "pronoun": c["pronoun"], "class": c["pronoun_class"],
             "antecedent": c["resolution"], "gold": g["gold_antecedent"],

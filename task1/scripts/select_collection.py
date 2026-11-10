@@ -1,7 +1,7 @@
-"""仅汇总采集结果：正文完整性、来源追溯、去重和分平台热度筛选。
+"""Aggregate collection results only: body completeness, source provenance, deduplication, and per-platform popularity-based selection.
 
 python src/select_collection.py --per-platform 25
-不覆盖旧版预处理产物，不执行分词、实体抽取或路线推断。
+Does not overwrite legacy preprocessing outputs; performs no tokenization, entity extraction, or route inference.
 """
 from __future__ import annotations
 import argparse
@@ -89,7 +89,7 @@ def xhs_candidates():
         record_id = 'XHS_'+url.rsplit('/',1)[-1]
         snap = ROOT/'data/raw/notes'/f'{record_id}.json'
         snap.parent.mkdir(parents=True, exist_ok=True)
-        # 此处固化浏览器导出的真实文本；不保存Cookie、评论或AI搜索总结。
+        # Freeze the real text from the browser export here; cookies, comments, and AI search summaries are not saved.
         snap.write_text(json.dumps({**r,'source_url':url},ensure_ascii=False,indent=2), 'utf-8')
         rows.append(dict(record_id=record_id, scenic_area=area, source_platform='小红书',
             text_type='游客游记', source_url=url, source_url_with_token=r.get('source_url_with_token',''), title=r.get('title',''), author=r.get('author',''),
@@ -131,10 +131,11 @@ def write_csv(path, rows):
     with path.open('w',encoding='utf-8-sig',newline='') as f:
         writer=csv.DictWriter(f,fieldnames=fields,extrasaction='ignore');writer.writeheader()
         for r in rows:
-            # HTML含大量图片标签，不宜放入Excel单元格；CSV保留完整可读正文，
-            # 未改动的HTML原文仍在JSONL及snapshot_file中。
+            # HTML contains many image tags and is unsuitable for Excel cells; the CSV
+            # keeps the full readable body text, while the untouched HTML original
+            # remains in the JSONL and snapshot_file.
             r={**r,'raw_content':r['body_text'],'raw_format':'text'}
-            # 防止来自网页的文本被表格软件作为公式执行；JSONL保留未经此转义的原文。
+            # Prevent web-sourced text from being executed as formulas by spreadsheet software; the JSONL keeps the original without this escaping.
             writer.writerow({k:("'"+str(v) if isinstance(v,str) and v.startswith(('=','+','-','@')) else v) for k,v in r.items()})
 
 def run(per_platform=25):

@@ -1,7 +1,7 @@
-"""实验6：知识图谱可视化（静态 PNG + pyvis 交互 HTML）。
+"""Experiment 6: knowledge graph visualization (static PNG + pyvis interactive HTML).
 
-静态图：每景区一张，POI 节点按度数着色突出关键节点；条件节点只显示频次≥2 的前 12 条。
-交互图：pyvis HTML，含物理布局，节点可拖拽、点选查看属性。
+Static graph: one per scenic area; POI nodes colored by degree to highlight key nodes; condition nodes show only the top 12 with frequency>=2.
+Interactive graph: pyvis HTML with physics layout; nodes are draggable and clickable to inspect attributes.
 """
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ def load_graph() -> nx.MultiDiGraph:
 def subgraph_for(G: nx.MultiDiGraph, scenic: str, max_conds: int = 12) -> nx.MultiDiGraph:
     nodes = [n for n in G.nodes if f":{scenic}:" in n]
     sub = G.subgraph(nodes).copy()
-    # 条件节点只保留频次高的前 N 条，避免淹没 POI 网络
+    # Keep only the top-N condition nodes by frequency so they do not drown the POI network
     conds = [(n, d.get("frequency", 1)) for n, d in sub.nodes(data=True) if d.get("kind") == "条件"]
     keep = {n for n, f in sorted(conds, key=lambda x: -x[1])[:max_conds] if f >= 2}
     drop = [n for n, d in sub.nodes(data=True) if d.get("kind") == "条件" and n not in keep]
@@ -46,7 +46,7 @@ def subgraph_for(G: nx.MultiDiGraph, scenic: str, max_conds: int = 12) -> nx.Mul
 
 
 def draw_static(sub: nx.MultiDiGraph, scenic: str, path: Path):
-    # 主网络（POI/景区/时段/交通）做 spring 布局；条件节点锚定在邻居外侧，避免飞出画面
+    # The main network (POI/scenic area/period/transport) gets a spring layout; condition nodes anchor outside their neighbors to avoid flying off-canvas
     main_nodes = [n for n, d in sub.nodes(data=True) if d.get("kind") != "条件"]
     cond_nodes = [n for n, d in sub.nodes(data=True) if d.get("kind") == "条件"]
     main = sub.subgraph(main_nodes)
@@ -55,7 +55,7 @@ def draw_static(sub: nx.MultiDiGraph, scenic: str, path: Path):
         anchors = [pos[u] for u in sub.predecessors(cn) if u in pos] or list(pos.values())[:1]
         cx = sum(p[0] for p in anchors) / len(anchors)
         cy = sum(p[1] for p in anchors) / len(anchors)
-        # 沿远离主网络重心的方向外推
+        # Extrapolate along the direction away from the main network's centroid
         gx = sum(p[0] for p in pos.values()) / len(pos)
         gy = sum(p[1] for p in pos.values()) / len(pos)
         dx, dy = cx - gx, cy - gy
@@ -67,7 +67,7 @@ def draw_static(sub: nx.MultiDiGraph, scenic: str, path: Path):
     max_deg = max(degrees.values()) or 1
     fig, ax = plt.subplots(figsize=(14, 10.5), dpi=150)
 
-    # 分层画边：包含/周边关联最淡，先后最深
+    # Layered edge drawing: 包含/周边关联 faintest, 先后顺序 darkest
     style = {"包含": (dict(width=0.5, edge_color="#CFD8DC", alpha=0.5, style="dashed")),
              "周边关联": (dict(width=0.5, edge_color="#C5E1A5", alpha=0.5, style="dashed")),
              "先后顺序": (dict(width=1.1, edge_color="#37474F", alpha=0.55)),

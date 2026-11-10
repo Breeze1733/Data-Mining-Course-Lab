@@ -1,10 +1,10 @@
-"""实验6：图谱质量验证（查询与统计，结果落盘 graph_validation.json）。
+"""Experiment 6: graph quality verification (queries and statistics; results written to graph_validation.json).
 
-验证项：
-  1. 已知事实核验：官方路线中的经典先后对是否存在（含反向）；
-  2. 关键节点分析：各景区度中心性 Top（排除景区/条件节点后的 POI 核心）；
-  3. 结构完整性：孤立节点、POI 连通分量、边类型分布；
-  4. 融合正确性：同名异点隔离检查（五彩池/北海按景区分节点）。
+Checks:
+  1. Known-fact verification: whether classic order pairs from the official routes exist (including reverse);
+  2. Key-node analysis: degree-centrality top per scenic area (POI core after excluding scenic-area/condition nodes);
+  3. Structural integrity: isolated nodes, POI connected components, edge-type distribution;
+  4. Fusion correctness: same-name-different-place isolation check (五彩池/北海 split into per-area nodes).
 """
 from __future__ import annotations
 
@@ -46,13 +46,13 @@ def verify_names(graph):
 
 
 def main(out_dir: Path | None = None) -> int:
-    """out_dir 可指向产物副本——故障注入测试对损坏副本运行真实检查。"""
+    """out_dir may point at an artifact copy — fault-injection tests run the real checks against the damaged copy."""
     out_dir = Path(out_dir) if out_dir else OUT
     G = nx.read_graphml(out_dir / "knowledge_graph.graphml")
 
     def edges_between(u_name: str, v_name: str, scenic: str):
-        """事实核验只认正向有向边——路线先后是方向性知识，反向边（折返游记
-        产生的 v→u）不能顶替正向事实；反向存在单独记录供透明查看。"""
+        """Fact checks accept only forward directed edges — route order is directional knowledge; reverse edges (v→u produced by
+        backtracking travelogues) cannot stand in for forward facts; reverse existence is recorded separately for transparency."""
         u, v = f"POI:{scenic}:{u_name}", f"POI:{scenic}:{v_name}"
 
         def edge_items(a, b):
@@ -110,7 +110,7 @@ def main(out_dir: Path | None = None) -> int:
             "各景区子图均为单一连通分量（条件节点挂靠在 POI/景区上），无孤立节点；",
         ],
     }
-    # 三方一致性——graphml / nodes.csv / edges.csv / stats 行列数互相印证
+    # Three-way consistency — graphml / nodes.csv / edges.csv / stats row counts cross-check each other
     import csv as _csv
     import json as _json
     try:
@@ -128,7 +128,7 @@ def main(out_dir: Path | None = None) -> int:
     except Exception as _exc:
         validation["roundtrip"] = {"ok": False, "error": str(_exc)}
 
-    # 溯源抽检：条件节点与游客先后边的逐条证据必须完整可解析
+    # Provenance spot-check: per-item evidence of condition nodes and tourist order edges must be complete and parseable
     import json as _json
     prov = {"cond_nodes_checked": 0, "cond_nodes_with_evidence": 0,
             "order_edges_checked": 0, "order_edges_with_records": 0, "parse_failures": 0}
@@ -156,7 +156,7 @@ def main(out_dir: Path | None = None) -> int:
                                    and prov["cond_nodes_with_evidence"] == prov["cond_nodes_checked"]
                                    and prov["order_edges_with_records"] == prov["order_edges_checked"])
     (out_dir / "graph_validation.json").write_text(json.dumps(validation, ensure_ascii=False, indent=1), encoding="utf-8")
-    # F11 扩展：graphml 节点属性与 graph_nodes.csv 逐字段抽检（5 节点）
+    # Field-by-field spot-check of graphml node attributes against graph_nodes.csv (5 nodes)
     import csv as _csv
     _csv_attrs = {}
     with (ROOT / "output/graph_nodes.csv").open(encoding="utf-8-sig") as _fh:

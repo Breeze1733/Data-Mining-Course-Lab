@@ -1,9 +1,9 @@
-"""实验2：实体人工质检抽样（分层随机，固定种子）。
+"""Experiment 2: manual entity QC sampling (stratified random, fixed seed).
 
-用法：
-  python src/spot_check.py --sample          # 生成抽样并打印上下文
-  python src/spot_check.py --score           # 依据人工判定计算样例正确率
-判定写在 VERDICTS 中（correct/incorrect/ambiguous + note），随 output 提交。
+Usage:
+  python src/spot_check.py --sample          # generate the sample and print contexts
+  python src/spot_check.py --score           # compute sample accuracy from manual verdicts
+Verdicts go into VERDICTS (correct/incorrect/ambiguous + note), committed with the output.
 """
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ TASK1 = ROOT.parent / "task1"
 N_PER_CELL = 6
 SEED = 42
 
-# 人工判定（spot_check.py --sample 生成后逐条复核填写）
+# Manual verdicts (filled in item by item after spot_check.py --sample generates them)
 VERDICTS: dict[str, dict] = {}
 
 

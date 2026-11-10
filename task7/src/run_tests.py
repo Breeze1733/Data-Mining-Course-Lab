@@ -1,7 +1,9 @@
-"""实验7：Agent 多场景批量测试（8 场景，证据落盘）。
+"""Experiment 7: Agent multi-scenario batch tests (8 scenarios, evidence written to disk).
 
-场景覆盖：不同景区 × 游客类型 × 时长、特殊需求、无匹配景区回退、半日+特殊需求冲突提示、条件节点可行性提示。
-输出：output/traces/trace_*.json、itineraries.json、test_report.json
+Scenario coverage: scenic areas × visitor types × durations, special needs, fallback when
+no scenic area matches, half-day + special-needs conflict notice, conditional-node
+feasibility notices.
+Output: output/traces/trace_*.json, itineraries.json, test_report.json
 """
 from __future__ import annotations
 
@@ -63,9 +65,11 @@ SCENARIOS = [
 
 
 def check_half_tail_multi_day(result):
-    """验收：小数天数不退化为单日——1.5 天须跨 2 天且尾日为半日（时段封顶上午/中午）。
+    """Acceptance: fractional day counts must not degrade to a single day -- 1.5 days must
+    span 2 days with the tail day being a half day (periods capped to 上午/中午).
 
-    此前 int(1.5)=1 把一天半游退化为单日成单日 4 站（低于 sizing 下限 6）。
+    Previously int(1.5)=1 degraded a 1.5-day trip into a single day of 4 stops
+    (below the sizing floor of 6).
     """
     plan = result.get("plan") or {}
     it = plan.get("itinerary", [])
@@ -77,7 +81,7 @@ def check_half_tail_multi_day(result):
 
 
 def check_sunrise_tradeoff(result):
-    """验收：唯一山上住宿被避开时，日出安排必须给出取舍说明而非照常声称住宿山上。"""
+    """Acceptance: when the only on-mountain lodging is avoided, the sunrise arrangement must state the trade-off instead of claiming on-mountain lodging as usual."""
     plan = result.get("plan") or {}
     pois = [it["poi"] for it in plan.get("itinerary", [])]
     no_lodging = not any(any(k in p for k in ("宾馆", "酒店", "民宿")) for p in pois)
@@ -87,26 +91,26 @@ def check_sunrise_tradeoff(result):
 
 
 def check_entrance_exit(result, en, ex):
-    """验收：入口 POI 为行程首站、出口 POI 为末站（识别出入口被忽略的退化）。"""
+    """Acceptance: the entrance POI is the first stop and the exit POI the last stop of the itinerary (detects the regression where entrance/exit are ignored)."""
     plan = result.get("plan") or {}
     pois = [it["poi"] for it in plan.get("itinerary", [])]
     return bool(pois) and pois[0] == en and pois[-1] == ex
 
 
 def check_sunrise_honest(result):
-    """验收：景区无日出观景点时不得伪造日出安排——须如实说明并照常给出行程。"""
+    """Acceptance: when the scenic area has no sunrise viewpoint, no fake sunrise arrangement may be fabricated -- it must be stated honestly while the itinerary is still given as usual."""
     plan = result.get("plan") or {}
     notes = plan.get("special_notes") or []
     noted = any("无日出观景点" in n for n in notes)
     no_fake = all("日出" not in it["period"] and "日出" not in it["poi"] for it in plan.get("itinerary", []))
     return bool(plan.get("itinerary")) and noted and no_fake
 def check_unknown_poi(result, poi):
-    """ 验收：图谱中不存在的景点不得被编造进行程。"""
+    """ Acceptance: POIs that do not exist in the knowledge graph must not be fabricated into the itinerary."""
     plan = result.get("plan") or {}
     pois = [it["poi"] for it in plan.get("itinerary", [])]
     return plan is not None and all(poi not in p for p in pois)
 def check_avoid(result, expect_poi):
-    """ 验收：不去地点不出现在行程，且回答说明避开。"""
+    """ Acceptance: avoided POIs must not appear in the itinerary, and the answer must state that they are avoided."""
     plan = result.get("plan") or {}
     pois = [it["poi"] for it in plan.get("itinerary", [])]
     not_in = all(expect_poi not in p for p in pois)
@@ -114,8 +118,10 @@ def check_avoid(result, expect_poi):
                 for _ in [0]) or any(expect_poi in n for n in (plan.get("special_notes") or []))
     return not_in and noted
 def check_sunrise(result, expect_poi):
-    """ 验收（语义口径）：日出观景点排最后一日首位，且住宿前提以任意表述进入回答——
-    规则模式渲染“说明：看日出…住宿山上”，在线润色会转述（如“夜宿山顶”），断言语义不断言前缀。"""
+    """ Acceptance (semantic criteria): the sunrise viewpoint is placed first on the last day,
+    and the lodging premise enters the answer in any wording --
+    rules mode renders “说明：看日出…住宿山上”, online polishing may paraphrase (e.g. “夜宿山顶”);
+    the assertion is semantic and does not pin the prefix."""
     plan = result.get("plan") or {}
     it = plan.get("itinerary", [])
     last_day = max((x["day"] for x in it), default=1)
@@ -131,8 +137,9 @@ def check_multi_day(result):
 
 
 def check_invariants(result):
-    """行程不变量（凡有计划的场景通用）——天号连续、日内时段单调、
-    半日封顶上午/中午、住宿节点固定晚上。任何一条被破坏即规划回归。"""
+    """Itinerary invariants (common to every scenario that produces a plan) -- day numbers
+    contiguous, periods within a day monotonic, half-day capped to 上午/中午,
+    lodging nodes fixed to 晚上. Any violation is a planning regression."""
     plan = result.get("plan") or {}
     it = plan.get("itinerary", [])
     if not it:
@@ -155,7 +162,7 @@ def check_invariants(result):
 
 
 def check_must(result, expect_poi):
-    """验收：必去地点必须在行程中，且回答/贴士说明必去落实（识别 must 不可达代码退化）。"""
+    """Acceptance: must-visit POIs must appear in the itinerary, and the answer/tips must state that the must-visit is honored (detects the regression where the must code path is unreachable)."""
     plan = result.get("plan") or {}
     pois = [it["poi"] for it in plan.get("itinerary", [])]
     in_plan = any(expect_poi in p for p in pois)
@@ -165,10 +172,12 @@ def check_must(result, expect_poi):
 
 
 def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
-    """单场景验收检查（run_tests 与  消融共用同一口径，避免两处断言漂移）。
+    """Per-scenario acceptance checks (run_tests and the ablation share the same criteria,
+    avoiding assertion drift between the two).
 
-    rules=True 时 tips_in_answer 为硬检查（离线渲染器必须保证贴士进回答）；
-    在线润色可能转述/省略，为软检查（计划里有贴士即可）。
+    With rules=True, tips_in_answer is a hard check (the offline renderer must guarantee
+    tips reach the answer); online polishing may paraphrase/omit, so it is a soft check
+    (tips present in the plan suffices).
     """
     checks = {}
     intent = result["intent"]
@@ -206,7 +215,7 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
             pois = [it["poi"] for it in plan.get("itinerary", [])]
             checks["entrance_first"] = check_entrance_exit(result, v, sc["expect"]["exit_last"])
         elif k == "exit_last":
-            pass  # 已并入 entrance_first 的端点检查
+            pass  # already merged into the entrance_first endpoint check
         elif k == "sunrise_tradeoff":
             checks["sunrise_tradeoff"] = check_sunrise_tradeoff(result)
         elif k == "half_tail_multi_day":
@@ -220,7 +229,7 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
             warnings = (result["plan"] or {}).get("feasibility_warnings", [])
             checks["seasonal_note"] = any("时段提示" in w for w in warnings)
         elif k == "tips_in_answer":
-            # 离线渲染器保证贴士进回答（硬检查）；在线润色可能省略（软检查）
+            # offline renderer guarantees tips reach the answer (hard check); online polishing may omit them (soft check)
             plan = result.get("plan") or {}
             if not rules:
                 checks["tips_in_answer"] = plan is not None and len(plan.get("tips") or []) > 0
@@ -229,7 +238,7 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
                 checks["tips_in_answer"] = plan is not None and any(
                     k in result["answer"] for k in tip_keys if k)
         elif k == "feasibility_in_answer":
-            # 验收：警告文本出现在最终回答中
+            # acceptance: the warning text appears in the final answer
             checks["feasibility_in_answer"] = v in result["answer"]
         else:
             checks[k] = intent.get(k) == v
@@ -237,8 +246,9 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
     checks["tools_called"] = len(tool_calls) >= (0 if sc["expect"].get("fallback") else 3)
 
     def answer_covers_plan(res):
-        """最终回答必须覆盖计划内容（真实检查，非恒真）——
-        有计划时回答需提及至少 60% 行程站点名；回退场景需列出全部支持景区。"""
+        """The final answer must cover the plan content (a real check, not a tautology) --
+        with a plan, the answer must mention at least 60% of the itinerary stop names;
+        in the fallback scenario it must list all supported scenic areas."""
         plan = res.get("plan")
         if plan is None:
             return all(a in res["answer"] for a in ("黄山", "九寨沟", "颐和园"))
@@ -282,7 +292,7 @@ def main() -> int:
         results.append({"scenario": sc["id"], "query": sc["query"], "passed": passed,
                         "checks": checks, "intent": result["intent"],
                         "n_tool_calls": len(tool_calls), "answer_head": result["answer"][:120]})
-        # elapsed 只打印不入库：持久化产物保持确定性，重复构建零 diff
+        # elapsed is printed only, never persisted: persisted artifacts stay deterministic, repeat builds produce zero diff
         (trace_dir / f'trace_{sc["id"]}.json').write_text(
             json.dumps({k: v for k, v in result.items() if k != "elapsed"},
                        ensure_ascii=False, indent=1), encoding="utf-8")
@@ -297,7 +307,7 @@ def main() -> int:
         "results": results,
         "evidence": "每次运行的完整 ReAct trace（含每步 thought/action/observation）见 output/traces/",
     }
-    # 在线模式单独记录，不覆盖离线验收证据（提示词 §2.3）
+    # online mode is recorded separately and does not overwrite offline acceptance evidence (prompt §2.3)
     suffix = "_llm" if online else ""
     trace_dir = OUT / ("traces" if not online else "traces_llm")
     trace_dir.mkdir(exist_ok=True)

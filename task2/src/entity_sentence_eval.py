@@ -9,7 +9,7 @@ time. Root scenic-area names (黄山/九寨沟/颐和园) and city names (北京
 design not extracted as POI and are listed separately in the denominator
 (scope_note of entity_sentence_eval.json).
 
-用法：python src/entity_sentence_eval.py
+Usage: python src/entity_sentence_eval.py
 """
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ def load_json(path: Path):
 
 
 def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
-    """Wilson 95% 置信区间（小样本比例的稳健区间）。"""
+    """Wilson 95% confidence interval (robust interval for small-sample proportions)."""
     if n == 0:
         return {"lo": None, "hi": None}
     p = k / n
@@ -72,11 +72,11 @@ def main() -> int:
             ents[r["record_id"]] = r["entities"]
 
     stats = {"POI": [0, 0, 0], "交通": [0, 0, 0], "时间": [0, 0, 0]}
-    strict_hit = {"POI": 0, "交通": 0, "时间": 0}  # B01：严格口径（命中即精确等文本）
-    strict_by_span = {}  # B02：跨度长度分层 {长度桶: [严格命中, 总命中]}
-    stats_oos = {"POI": [0, 0, 0]}  # 设计排除口径（根景区名/城市名）：tp/fn 单独计数
+    strict_hit = {"POI": 0, "交通": 0, "时间": 0}  # B01: strict criterion (a hit must be exactly equal text)
+    strict_by_span = {}  # B02: stratified by span length {length bucket: [strict hits, total hits]}
+    stats_oos = {"POI": [0, 0, 0]}  # out-of-scope-by-design criterion (root scenic names / city names): tp/fn counted separately
     missed, false_pos = [], []
-    sentence_stats = []  # 每句局部 (tp,fp,fn)，供分层报告
+    sentence_stats = []  # per-sentence local (tp, fp, fn), for stratified reporting
     for o in sample:
         sent_stats = {"POI": [0, 0, 0], "交通": [0, 0, 0], "时间": [0, 0, 0]}
         sid, sent = o["sid"], o["sentence"]
@@ -130,7 +130,7 @@ def main() -> int:
                 sent_stats[_t][1] += 1
                 false_pos.append({"sid": sid, "text": pp["text"], "type": pp["type"],
                                   "sentence": sent[:60]})
-        # 设计排除口径：根景区名/城市名的提及单独计数（判 missed 即计入该口径 FN）
+        # Out-of-scope-by-design criterion: mentions of root scenic names / city names are counted separately (counted as FN in that criterion when marked missed)
         for gtext, gtype in gold.get(sid, []):
             if gtype == "POI" and gtext in OUT_OF_SCOPE and gpos_found(sent, gtext):
                 stats_oos["POI"][2] += 1
@@ -141,16 +141,16 @@ def main() -> int:
         "annotated_by": gold_doc["annotated_by"],
         "match_policy": gold_doc.get("out_of_scope_note", "根景区名与城市名按设计不作为 POI 实体抽取"),
         "per_type": {t: prf(*v) for t, v in stats.items()},
-        # B01 双口径：宽松（包含式变体命中，主口径）与严格（命中文本精确相等）
+        # Dual criteria: lenient (containment-variant hits, primary) vs strict (hit text exactly equal)
         "strict_ratio": {t: round(strict_hit[t] / max(1, v[0]), 3)
                          for t, v in stats.items() if v[0]},
-        # B02：命中实体的跨度长度分层（2字/3-4字/5字+）的严格占比
+        # Strict ratio stratified by matched-entity span length (2字/3-4字/5字+)
         "strict_by_span_len": strict_by_span,
         "missed": missed,
         "false_positives": false_pos,
         "scope_note": {},
     }
-    # 分层报告（冻结样本仅测量，不改规则）——按平台/景区/来源跨度长度
+    # Stratified reporting (frozen sample: measure only, no rule changes) -- by platform / scenic area / source span length
     def _strata(keyfn, name):
         agg = {}
         for o, sent_stats in sentence_stats:
@@ -174,7 +174,7 @@ def main() -> int:
     result["overall"]["precision_ci95"] = wilson_ci(tot(0), tot(0) + tot(1))
     result["data_fingerprints"] = _data_fingerprints()
     result["overall"]["recall_ci95"] = wilson_ci(tot(0), tot(0) + tot(2))
-    # 双口径：把设计排除项（根景区名/城市）从 FN 分母移除后的查全率
+    # Dual criterion: recall after removing by-design exclusions (root scenic names / cities) from the FN denominator
     oos_fn = sum(1 for m in missed if m.get("out_of_scope_design"))
     in_scope_fn = result["overall"]["fn"] - oos_fn
     tp = result["overall"]["tp"]

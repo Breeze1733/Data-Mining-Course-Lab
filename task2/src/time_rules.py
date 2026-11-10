@@ -1,10 +1,12 @@
-"""时间节点识别：正则、区间合并与归一化。
+"""Time-node recognition: regex, span merging, and normalization.
 
-口径:
-    - 时刻/时刻区间/时段/日期/日期区间/月份区间/相对日/季节/节日/重复 属于时间节点；
-    - 时长（2小时/半小时/个来小时）保留为 TIME 子类，但 counts_as_time_node=False，
-      词频与图表单独分列，供项目 3 的停留时长复用；
-    - 距离、价格、一日游、单独一行的 00:00 视频时间戳不进入 TIME。
+Policy:
+    - 时刻 (clock time) / 时刻区间 (clock range) / 时段 (period) / 日期 (date) / 日期区间 (date range) /
+      月份区间 (month range) / 相对日 (relative day) / 季节 (season) / 节日 (holiday) / 重复 (recurrence)
+      count as time nodes;
+    - 时长 (duration, e.g. 2小时/半小时/个来小时) stays a TIME subtype but with counts_as_time_node=False;
+      frequency and charts list it separately, for reuse by Project 3's dwell-duration analysis;
+    - Distances, prices, one-day tours, and standalone 00:00 video timestamps do not enter TIME.
 """
 
 from __future__ import annotations
@@ -84,7 +86,7 @@ def _split_period(surface: str) -> tuple[str, str]:
 
 
 def _apply_period(hour: int, period: str) -> tuple[int, bool, str]:
-    """返回 (24h hour, ambiguous, note)。"""
+    """Returns (24h hour, ambiguous, note)."""
     if not period:
         return hour, hour <= 12, ""
     note = ""
@@ -184,7 +186,7 @@ def normalize_date_range(surface: str) -> str:
         return normalize_date(surface)
     left = normalize_date(parts[0])
     right = normalize_date(parts[1])
-    # “5月6日-9日”：右端只有日，沿用左端月份
+    # “5月6日-9日”: right end has only the day; reuse the month from the left end
     left_match = re.match(r"(?P<month>\d{2})-(?P<day>\d{2})$", left)
     right_day = re.search(r"(?P<day>3[01]|[12]\d|0?[1-9])\s*[日号]", parts[1])
     if left_match and right_day and re.fullmatch(r"\d{1,2}\s*[日号]", parts[1].strip()):
@@ -264,7 +266,7 @@ def normalize_duration(surface: str) -> str:
 
 
 def _normalize(surface: str, subtype: str, rule_id: str) -> tuple[str, bool, str, bool]:
-    """返回 (normalized, ambiguous, notes, counts_as_time_node)。"""
+    """Returns (normalized, ambiguous, notes, counts_as_time_node)."""
     if subtype == "时刻":
         value, ambiguous, notes = normalize_clock(surface)
         return value, ambiguous, notes, True
@@ -334,8 +336,8 @@ class TimeRules:
                 if any(ex_start <= start and end <= ex_end for ex_start, ex_end, _ in exclusion_spans):
                     continue
                 surface = text[start:end]
-                # “一点/半点”常是副词（一点也不、半点办法），裸用时按非时间处理；
-                # 带时段前缀的“下午一点”仍保留。
+                # “一点/半点” are often adverbs (一点也不, 半点办法); bare occurrences are treated as non-time;
+                # with a period prefix, e.g. “下午一点”, they are still kept.
                 if pattern["id"] == "TIME_CLOCK_CN" and surface.replace(" ", "") in {"一点", "半点"}:
                     continue
                 normalized, ambiguous, notes, counts_as_time_node = _normalize(
@@ -371,7 +373,7 @@ class TimeRules:
                     )
                 )
 
-        # 同一 span 去重；再做时间内部的区间/嵌套消解
+        # Deduplicate identical spans; then resolve ranges/nesting within time entities
         unique: dict[tuple[int, int, str], Candidate] = {}
         for candidate in candidates:
             key = (candidate.start, candidate.end, candidate.subtype)

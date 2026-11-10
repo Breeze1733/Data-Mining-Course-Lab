@@ -1,8 +1,8 @@
-"""实验4：人工标注抽样与评估。
+"""Experiment 4: manual annotation sampling and evaluation.
 
---sample  生成分层随机样本（pronoun_class × scenic_area，seed=42），打印上下文
---fill    把人工判定写入 annotation_gold.json（GOLD 判定内嵌本文件，修改后重跑）
---score   规则消解 vs 人工标注：总体/分类别准确率 + 混淆样例 + 图
+--sample  Generate a stratified random sample (pronoun_class × scenic_area, seed=42) and print contexts
+--fill    Write manual verdicts into annotation_gold.json (GOLD verdicts are embedded in this file; rerun after editing)
+--score   Rule-based resolution vs manual annotation: overall/per-class accuracy + confusion examples + charts
 """
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ OUT = ROOT / "output"
 FIGS = OUT / "figs"
 N_PER_CELL = 10
 SEED = 42
-# 扩容轮：在既有 120 例之外追加标注（每格 5 例，独立种子，排除已标注 case）
+# Expansion round: append annotations beyond the existing 120 cases (5 per cell, independent seed, excluding already-annotated cases)
 N_PER_CELL_EXPAND = 5
 SEED_EXPAND = 43
 
@@ -254,7 +254,7 @@ def sample(cases: list[dict]) -> None:
 
 
 def expand_sample(cases: list[dict]) -> None:
-    """扩容抽样：排除已标注 case，每格再抽 N_PER_CELL_EXPAND 例（独立种子）。"""
+    """Expansion sampling: exclude already-annotated cases, then draw N_PER_CELL_EXPAND more per cell (independent seed)."""
     gold = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
     annotated = {g["case_index"] for g in gold}
     cells: dict[tuple[str, str], list[int]] = defaultdict(list)
@@ -313,7 +313,7 @@ def fill(cases: list[dict]) -> None:
 
 
 def fill_expand(cases: list[dict]) -> None:
-    """扩容标注合并：既有 120 行原样保留（追加式），新增行来自 EXPAND_GOLD + 扩容抽样文件。"""
+    """Merge expansion annotations: keep the existing 120 rows untouched (append-only); new rows come from EXPAND_GOLD + the expansion sampling file."""
     data = json.loads((OUT / "annotation_sample_test.json").read_text(encoding="utf-8"))
     gold_doc = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))
     existing = gold_doc["annotations"]
@@ -347,18 +347,18 @@ def fill_expand(cases: list[dict]) -> None:
 
 
 def doc_grouped_split(gold_rows: list[dict], target_test: int = 60) -> dict:
-    """按文档分组划分 dev/test——句级随机划分存在同文档泄漏（原两轮样本有 25 篇共同文档）。
+    """Doc-grouped dev/test split — sentence-level random splits leak within-document info (the two original rounds share 25 documents).
 
-    确定性：文档列表排序后 rng(42) 洗牌，整文档依次划入 test 直至样本数达标，其余归 dev。
-    近重复约束：近重复对强制同侧（A05 修复——此前 2 对跨集泄漏）。
-    返回 {record_id: "dev"|"test"}。
+    Deterministic: sort the document list, shuffle with rng(42), assign whole documents to test until the sample quota is met, the rest go to dev.
+    Near-duplicate constraint: near-duplicate pairs are forced to the same side (A05 fix — 2 pairs previously leaked across splits).
+    Returns {record_id: "dev"|"test"}.
     """
     import random
     doc_ids = sorted({g["record_id"] for g in gold_rows})
     rng = random.Random(42)
     rng.shuffle(doc_ids)
     sizes = {d: sum(1 for g in gold_rows if g["record_id"] == d) for d in doc_ids}
-    # A05：近重复对 → 传递闭包分组 → 组内统一归属
+    # A05: near-duplicate pairs -> transitive-closure grouping -> one side per group
     quality_path = ROOT.parent / "task1/data/processed/quality_report.json"
     near_dup_groups = []
     if quality_path.exists():
@@ -376,7 +376,7 @@ def doc_grouped_split(gold_rows: list[dict], target_test: int = 60) -> dict:
     for _gi, _grp in enumerate(near_dup_groups):
         for _r in _grp:
             rec2grp[_r] = _gi
-    # 按组而非按文档划分（组内首遇文档决定整组归属）
+    # Split by group rather than by document (the first document of a group encountered decides the whole group's side)
     assigned = set()
     split, n_test = {}, 0
     for d in doc_ids:
@@ -398,7 +398,7 @@ from common.fingerprints import data_fingerprints as _data_fingerprints
 
 
 def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
-    """Wilson 95% 置信区间（小样本比例的稳健区间）。"""
+    """Wilson 95% confidence interval (robust interval for small-sample proportions)."""
     if n == 0:
         return {"lo": None, "hi": None}
     p = k / n
@@ -419,8 +419,8 @@ def score(cases: list[dict]) -> None:
             if field not in g or case[field] != g[field]:
                 raise ValueError(f"Stale coreference annotation at {g['case_index']}: {field}; re-align the gold set before scoring")
         pred, truth = case["resolution"], g["gold_antecedent"]
-        # 判定对错：类别一致且指称一致（人称/集合/无先行词按特殊类比较；景区名回退算“POI/景区”粒度）
-        # 补"其他"映射——单名词先行词（非实体概念）按 gold 谱系判"其他"，与"名词集合"（多元素集合）区分
+        # Correctness: kind must match and identity must match (person/set/none compared by their special kinds; scenic-name fallback counts as “POI/景区” granularity)
+        # Add the "其他" mapping — single-noun antecedents (non-entity concepts) are judged "其他" per the gold lineage, distinguished from "名词集合" (multi-element sets)
         canon = {"POI": "POI", "交通": "交通", "景区名": "景区", "他人": "他人", "同行者": "同行者",
                  "名词集合": "集合-其他", "其他": "其他", "前文POI集合": "集合-POI", "人称集合": "集合-人", "路线": "路线", "设施": "设施", "无明确先行词": "无"}
         kind_match = canon.get(case["resolution_kind"]) == g["gold_kind"]
@@ -437,14 +437,14 @@ def score(cases: list[dict]) -> None:
     for r in rows:
         by_class[r["pronoun_class"]][1] += 1
         by_class[r["pronoun_class"]][0] += r["correct"]
-    # split 口径（ 文档分组）：整文档划入 dev/test，消除同文档泄漏
+    # Split metric (doc-grouped): whole documents go into dev/test, eliminating within-document leakage
     doc_split = doc_grouped_split(gold)
     by_split = defaultdict(lambda: [0, 0])
     for r in rows:
         sp = doc_split[r["record_id"]]
         by_split[sp][1] += 1
         by_split[sp][0] += r["correct"]
-    # D04：弃权口径——"无明确先行词"为可解释弃权；覆盖率与准确率分开报告
+    # D04: abstention metric — "无明确先行词" is an interpretable abstention; coverage and accuracy are reported separately
     by_scenic_acc = defaultdict(lambda: [0, 0])
     by_platform_acc = defaultdict(lambda: [0, 0])
     for r in rows:
@@ -474,22 +474,22 @@ def score(cases: list[dict]) -> None:
         "accuracy_by_scenic": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3),
                                    "ci95": wilson_ci(v[0], v[1])}
                                for k, v in sorted(by_scenic_acc.items())},
-        # H07：按平台分层（XHS vs 携程），附 CI
+        # Stratified by platform (XHS vs 携程), with CI
         "accuracy_by_platform": {k: {"n": v[1], "accuracy": round(v[0] / v[1], 3),
                                      "ci95": wilson_ci(v[0], v[1])}
                                  for k, v in sorted(by_platform_acc.items())},
         "errors_by_split": {k: v[1] - v[0] for k, v in sorted(by_split.items())},
         "split_method": "文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
-        # 错误清单引用当前预测（历史 rule_resolution 快照仅存于 gold 文件备查）
+        # Error list cites the current predictions (historical rule_resolution snapshots remain only in the gold file for reference)
         "errors": [
             {"pronoun": r["pronoun"], "class": r["pronoun_class"], "scenic": r["scenic_area"],
              "pred": r["cur_pred"], "pred_kind": r["cur_kind"], "evidence": r["cur_evidence"],
              "gold": r["gold_antecedent"], "gold_kind": r["gold_kind"], "note": r["note"]}
             for r in rows if not r["correct"]],
-        # 类别指标与先行词身份指标分开报告——非实体类只判类别，不冒充指代正确
+        # Kind metrics and antecedent-identity metrics are reported separately — non-entity kinds are judged on kind only, never counted as identity-correct
         "kind_only_accuracy": round(sum(r["kind_match"] for r in rows) / len(rows), 3) if rows else None,
-        # D07：集合类的"具体成员命中"辅助口径——gold 集合成员之一被解析名包含即计命中，
-        # 与粗类型正确率分开解读（区分"类型对"与"成员对"）
+        # D07: auxiliary "specific member hit" metric for set kinds — counted when the resolved name contains one of the gold set members,
+        # read separately from the coarse kind accuracy (distinguishing "kind-correct" from "member-correct")
         "set_member_hit": None,
         "accuracy_ci95": wilson_ci(round(acc_overall * len(rows)), len(rows)),
         "data_fingerprints": _data_fingerprints(),
@@ -520,7 +520,7 @@ def score(cases: list[dict]) -> None:
     }
     (OUT / "evaluation.json").write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
 
-    # 图：分类别准确率 + 代词分布
+    # Charts: per-class accuracy + pronoun distribution
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.2), dpi=150)
     cls = sorted(by_class)
     accs = [by_class[c][0] / by_class[c][1] for c in cls]
@@ -552,7 +552,7 @@ def run_propagation() -> int:
              "名词集合": "集合-其他", "其他": "其他", "前文POI集合": "集合-POI", "人称集合": "集合-人",
              "路线": "路线", "设施": "设施", "无明确先行词": "无"}
 
-    # 每记录实体池：POI/交通实体数（来自当前 entities_refined）
+    # Per-record entity pools: POI/transport entity counts (from the current entities_refined)
     pools = {}
     rec_type = {}
     ents_by_rec = {}
@@ -579,7 +579,7 @@ def run_propagation() -> int:
         else:
             nm = True
         n_poi, n_tra = pools.get(c["record_id"], (0, 0))
-        # 分层改用有方差的机械维度：同句干扰实体数、代词-最近实体距离
+        # Stratification instead uses mechanical dimensions with variance: same-sentence distractor count, pronoun-to-nearest-entity distance
         _ents = ents_by_rec.get(c["record_id"], [])
         _ds, _de = c["doc_start"], c["doc_end"]
         _sent_lo, _sent_hi = c["doc_start"] - len(c["prev_sentence"]), c["doc_end"] + 10 ** 9

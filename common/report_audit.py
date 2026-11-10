@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-"""报告-数据一致性审计：报告 docx 中出现的承重数字，必须能在 output 数据文件中找到出处。
+"""Report-data consistency audit: load-bearing numbers appearing in a report docx must
+be traceable to the output data files.
 
-用法：
-    python common/report_audit.py            # 全量审计，有 FAIL 时退出码 1
+Usage:
+    python common/report_audit.py            # full audit, exit code 1 on any FAIL
 
-原理：每个报告维护一组"承重声明"（claim）。声明由数据文件实时计算期望值，
-生成若干格式变体（带/不带千分位、百分比一位/零位小数等），在 docx 全文
-（段落+表格）中反查。任一变体命中即通过。数据改动导致报告漂移时，对应
-claim 会 FAIL——此时应重跑该报告的 build_reportN.py 而不是手改数字。
+Principle: each report maintains a set of load-bearing claims. A claim computes its
+expected value from the data files at run time, generates several format variants
+(with/without thousands separators, percentages at one/zero decimal places, etc.) and
+searches for them across the full docx text (paragraphs + tables). Any variant hit
+passes. When data changes make the report drift, the corresponding claim FAILs --
+rerun that report's build_reportN.py instead of hand-editing numbers.
 """
 import json
 import re
@@ -36,7 +39,7 @@ def count_lines(path: Path) -> int | None:
 
 
 def _bounded_match_span(text: str, variant: str) -> re.Match | None:
-    """带边界的数字匹配，返回 Match（供上下文共现检查定位）。"""
+    """Digit matching with boundaries; returns a Match (used to locate context co-occurrence checks)."""
     if not variant:
         return None
     esc = re.escape(variant)
@@ -53,7 +56,7 @@ def _bounded_match_span(text: str, variant: str) -> re.Match | None:
 
 
 def _bounded_match(text: str, variant: str) -> bool:
-    """数字类变体带前后边界匹配（数字/千分位/小数点不相连才算命中）。"""
+    """Boundary-aware matching for numeric variants (only a hit when not adjacent to digits/thousands separators/decimal points)."""
     if not variant:
         return False
     esc = re.escape(variant)
@@ -75,7 +78,7 @@ def v_int(x) -> list[str]:
 
 
 def v_pct(x) -> list[str]:
-    """0.425 -> ['42.5%', '42%', '43%']（四舍五入两位备选，容忍报告的不同舍入）"""
+    """0.425 -> ['42.5%', '42%', '43%'] (rounding alternates included, tolerating the report's different rounding)"""
     if x is None:
         return []
     p = x * 100
@@ -105,7 +108,7 @@ sum_by_prefix = lambda d, p: sum(v for k, v in d.items() if k.startswith(p))
 
 
 def build_claims() -> dict[str, list[dict]]:
-    """报告相对路径 -> 声明列表。claim: {name, variants|regex, required}"""
+    """Report relative path -> list of claims. claim: {name, variants|regex, required}"""
     scenic = OVT.get("by_scenic_area", {})
     jzg, yhy, hs = scenic.get("九寨沟", {}), scenic.get("颐和园", {}), scenic.get("黄山", {})
     acc = EVAL.get("accuracy_by_class", {})
@@ -243,9 +246,9 @@ def main() -> int:
                     warns.append(f"{c['name']}(数据源缺失)")
                     n_missing_src += 1
                     continue
-                # 数字带边界匹配——防止 79 命中 179、0.5 命中 30.5 这类短数字误配
-                # near 语义绑定——数值须与指定上下文（分母/样本范围/方法名）在
-                # ±window 字符内共现，防"数字对但挂错指标名/分母"的漂移
+                # bounded matching for numbers -- prevents short-number false hits such as 79 matching 179 or 0.5 matching 30.5
+                # near semantic binding -- the value must co-occur within ±window characters of the specified
+                # context (denominator/sample scope/method name), preventing "right number, wrong metric/denominator" drift
                 near = c.get("near")
                 hit = False
                 for v in variants:

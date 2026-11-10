@@ -1,7 +1,7 @@
-"""实验7：知识图谱查询工具层（供 Agent 调用）。
+"""Experiment 7: knowledge graph query tool layer (called by the Agent).
 
-每个工具都有名称、描述、参数 Schema 与结构化返回，并记录调用日志。
-数据源：task6/output/knowledge_graph.graphml + task3/output/parsed_routes.jsonl。
+Every tool has a name, description, parameter schema and structured return, and logs its calls.
+Data sources: task6/output/knowledge_graph.graphml + task3/output/parsed_routes.jsonl.
 """
 from __future__ import annotations
 
@@ -50,14 +50,14 @@ _GRAPH_CACHE: dict = {}
 
 class GraphTools:
     def __init__(self):
-        # G16：graphml 解析结果按文件改动时间缓存——评估链每次新建 Agent 实例
-        # 不再重复解析同一图谱（语义不变，进程内共享只读对象）
+        # Cache the graphml parse result by file mtime -- the eval chain builds a new Agent instance each time;
+        # the cache avoids re-parsing the same graph, which is read-only within the process
         mtime = (OUT6 / "knowledge_graph.graphml").stat().st_mtime
         if _GRAPH_CACHE.get("mtime") != mtime:
             try:
                 _GRAPH_CACHE["G"] = nx.read_graphml(OUT6 / "knowledge_graph.graphml")
             except Exception as exc:
-                # G09：图文件损坏 → 结构化错误而非构造崩溃（Agent 可给出稳定回退）
+                # Corrupted graph file -> structured error instead of a constructor crash (the Agent can fall back stably)
                 _GRAPH_CACHE["G"] = None
                 _GRAPH_CACHE["load_error"] = f"图谱文件解析失败：{exc}"
             _GRAPH_CACHE["mtime"] = mtime
@@ -91,7 +91,7 @@ class GraphTools:
     def query_pois(self, scenic: str, visitor_type: str | None = None, limit: int = 8) -> dict:
         if scenic not in AREAS:
             return {"error": f"不支持的景区：{scenic}（仅支持 {'/'.join(AREAS)}）"}
-        # limit 类型/范围校验（负数切片曾把结果尾部砍掉而非报错）
+        # limit type/range validation (a negative slice once cut off the tail of results instead of raising)
         try:
             limit = int(limit)
         except (TypeError, ValueError):
@@ -115,8 +115,8 @@ class GraphTools:
                         if not self._match_visitor(text, visitor_type):
                             continue
                         if NEG_ADVICE_RE.search(text):
-                            # 负向人群建议（如“老人千万别走中轴线爬山”）不是正向适配——
-                            # 降权并记入站点提示，而不是当加分项
+                            # negative visitor-group advice (e.g. “老人千万别走中轴线爬山”) is not positive fit --
+                            # downweight it and record it as a caveat, not as a bonus
                             fit -= float(e.get("weight", 1))
                             caveats.append(self.G.nodes[v].get("suggestion", "")[:40])
                         else:
@@ -125,7 +125,7 @@ class GraphTools:
                          "mention_freq": int(float(d.get("mention_freq", 0) or 0)),
                          "periods": periods, "transports": transports, "visitor_fit": fit,
                          "visitor_caveats": caveats[:2]})
-        # 有游客类型适配的优先（适配度高者在前），其次图谱度数、提及词频
+        # POIs with visitor-type fit come first (higher fit first), then graph degree and mention frequency
         cand.sort(key=lambda x: (x["visitor_fit"] > 0, x["visitor_fit"], x["degree"], x["mention_freq"]),
                   reverse=True)
         return {"scenic": scenic, "visitor_type": visitor_type, "pois": cand[:limit]}
@@ -136,7 +136,7 @@ class GraphTools:
             return {"error": f"不支持的景区：{scenic}"}
         cands = [r for r in self.routes
                  if r["scenic_area"] == scenic and r["ordered_route"] and r["step_count"] >= 2]
-        # 优先天数匹配（步骤里出现的最大天数），其次步骤数
+        # prefer day-count matches (max day appearing in the steps), then step count
         def route_days(r):
             return max((s["day"] for s in r["steps"]), default=1)
 
@@ -184,7 +184,7 @@ class GraphTools:
                           "suggestion": d.get("suggestion"),
                           "all_suggestions": all_sugg[:5],
                           "frequency": int(float(d.get("frequency", 1) or 1))})
-        # 人群类匹配游客类型的优先；其余按类型相关性排序
+        # visitor-group conditions matching the visitor type come first; the rest sort by type relevance
         type_rank = {"人群": 0, "装备": 1, "体力安全": 2, "住宿": 3, "天气": 4, "时间": 5,
                      "预约票务": 6, "交通": 7, "美食": 8, "拍照": 9, "一般": 10, "其他": 11}
         conds.sort(key=lambda c: (type_rank.get(c["cond_type"], 9), -c["frequency"]))
@@ -224,7 +224,7 @@ class GraphTools:
 
 
     def _resolve_poi(self, scenic: str, name: str):
-        """POI 名解析：精确 → 前缀互含 → 子串。"""
+        """POI name resolution: exact -> mutual prefix -> substring."""
         labels = {self.poi_label(n): n for n in self.poi_nodes(scenic)}
         if name in labels:
             return labels[name]
@@ -243,7 +243,7 @@ class GraphTools:
             return {"error": f"{scenic} 中未找到景点：{from_poi if src is None else to_poi}"}
         if src == dst:
             return {"from": from_poi, "to": to_poi, "path": [from_poi], "hops": 0}
-        # F08：路径限定在同景区 POI 内——跨景区先后顺序边（如周边地标→山上）不代表可步行到达
+        # Paths are restricted to same-scenic-area POIs -- cross-area precedence edges (e.g. surrounding landmark -> on-mountain) do not imply walkability
         same_scenic = {n for n in self.G.nodes
                        if f":{scenic}:" in n and self.G.nodes[n].get("kind") in ("景点", "周边景点")}
         try:
@@ -261,7 +261,7 @@ class GraphTools:
         if tool not in {t["name"] for t in TOOL_SCHEMAS}:
             result = {"error": f"未知工具：{tool}"}
         else:
-            # G16：同实例内同参确定性查询缓存（trace 仍逐步记录）
+            # Deterministic same-args query cache within one instance (the trace still records every step)
             key = (tool, json.dumps(args, ensure_ascii=False, sort_keys=True, default=str))
             if key not in self._qcache:
                 self._qcache[key] = getattr(self, tool)(**args)

@@ -1,25 +1,25 @@
-"""实验5：条件性游览建议抽取。
+"""Experiment 5: conditional sightseeing-advice extraction.
 
 
-模式（优先级从高到低，同一句内每个触发点独立成案）：
+Patterns (highest to lowest priority; each trigger site in a sentence becomes its own case):
 
-  P1 显式条件连词：如果/假如/若是/要是/万一/一旦/只要/除非 + 条件子句 + （则/就/最好/建议…）建议子句
+  P1 explicit conditional conjunctions: 如果/假如/若是/要是/万一/一旦/只要/除非 + condition clause + (则/就/最好/建议…) advice clause
 
-  P2 “…的话”：条件子句+的话 + 建议子句
+  P2 “…的话”: condition clause + 的话 + advice clause
 
-  P3 “当/遇到…时”：时间/情境条件 + 建议子句
+  P3 “当/遇到…时”: time/situation condition + advice clause
 
-  P4 建议/推荐/适合 + 子句：条件从子句内人群/情境词推断，缺省为“一般建议”
+  P4 建议/推荐/适合 + clause: condition inferred from crowd/situation words in the clause, defaulting to “一般建议”
 
-  P5 人群主语 + 可以：老人/孩子/情侣…可以… → 条件=人群
+  P5 crowd subject + 可以: 老人/孩子/情侣…可以… -> condition=人群
 
-  P6 否定建议：不要/别/避免/慎 + VP → 条件从句内天气/装备/时间词推断
+  P6 negative advice: 不要/别/避免/慎 + VP -> condition inferred from in-clause weather/equipment/time words
 
-多建议句：建议子句按 ； 切分；按 ， 切分需后半以建议动词开头（避免误切动宾）。
+Multi-advice sentences: advice clauses split on ； ； splitting on ， requires the second half to start with an advice verb (to avoid cutting verb-object phrases).
 
-“可以”仅在 P5（人群主语）或否定式出现，裸“可以”多为叙述能力句，不抽——边界规则见报告。
+“可以” appears only in P5 (crowd subject) or the negative form; bare “可以” is usually a capability statement and is not extracted — boundary rules in the report.
 
-输出：output/conditional_pairs.jsonl（逐条）、mapping_table.json（去重后映射表）、extraction_stats.json
+Output: output/conditional_pairs.jsonl (per pair), mapping_table.json (deduplicated mapping table), extraction_stats.json
 
 """
 
@@ -61,7 +61,7 @@ SENT_SPLIT = re.compile(r"[。！？\n]+")
 
 COND_MARKERS = ("如果", "假如", "假若", "若是", "若", "要是", "万一", "一旦", "只要", "除非")
 
-# 补全动作动词——逗号后接动作动词时切分为独立建议（穿/带/吃/住 等常见旅游建议动词）
+# Supplement action verbs — split into separate advice when an action verb follows a comma (common travel-advice verbs such as 穿/带/吃/住)
 
 SUGG_VERB = re.compile(r"^(则|就|那|然后|最好|建议|推荐|记得|千万|尽量|务必|一定要|可以|不妨|选择|改|换|提前|避开|放弃|考虑|穿|带|买|吃|住|坐|乘|走|游览|参观|步行|前往|返回|入住|预定|预约|排队|自驾|徒步|登|第[一二三四五六七八九十]+天)")
 
@@ -139,7 +139,7 @@ def split_multi_suggestions(sugg: str) -> list[str]:
 
         parts = [sugg]
 
-        # 仅当逗号后半以建议动词开头才切（避免切断动宾/名词短语）
+        # Split only when the post-comma half starts with an advice verb (to avoid cutting verb-object/noun phrases)
 
         for m in re.finditer(r"[，,]", sugg):
 
@@ -154,15 +154,15 @@ def split_multi_suggestions(sugg: str) -> list[str]:
     return [p.strip(" ，,。；;") for p in parts if p.strip(" ，,。；;")]
 
 
-# P4 极性/边界守卫（2026-10-30，依据 review_dev wrong 样例回归）：
+# Polarity/boundary guards (from review_dev wrong-sample regressions):
 
-# 1) 平台话术不是旅游建议；2) 呼吁/评论句不是给游客的建议；
+# 1) platform boilerplate is not travel advice; 2) appeal/comment sentences are not advice for tourists;
 
-# 3) 联游城市段落的条件对归属价值低（苏州街为颐和园内景点，需排除）。
+# 3) condition pairs in joint-tour city paragraphs carry little attribution value (苏州街 is a sight inside 颐和园 and must be excluded).
 
 PLATFORM_PHRASE_RE = re.compile(r"点赞|收藏|一键三连|评论区|私信|关注我们|转发|推荐阅读")
 
-# 守卫（依据 review_test 新鲜抽检 8 wrong 归因）：
+# Guards (based on attribution of 8 fresh wrong samples spot-checked in review_test):
 
 LYRICAL_RE = re.compile(r"人生|岁月|初心|青春|梦想|心态|老得太快|明白得太迟|否定了自己|自己的想法")
 
@@ -189,7 +189,7 @@ _FOOD_HINT = re.compile(r"吃|餐|食|饭|菜|小吃|美食|特产|零食|面包
 
 
 def refine_condition_type(cond_text: str, sugg_text: str, current: str) -> str:
-    """对"其他/一般"类型做关键词细化分类。不改既有特定类型。"""
+    """Refine "其他/一般" (other/general) types by keyword. Existing specific types are left unchanged."""
     if current not in ("其他", "一般"):
         return current
     text = cond_text + " " + sugg_text
@@ -211,7 +211,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
     seen_spans = set()
 
 
-    # 优先：否则分支拆分（比 P1 更好的解析——分别保存互斥分支，不合并）
+    # Priority: otherwise-branch splitting (a better parse than the explicit-condition branch — store the mutually exclusive branches separately, no merging)
 
     for m in re.finditer(r"(如果|要是|若)([^。！？；]{1,40}?)就([^，。！？；]{1,30})[，,]?否则([^。！？；]{1,40})", sent):
 
@@ -236,9 +236,9 @@ def extract_from_sentence(sent: str) -> list[dict]:
         return pairs
 
 
-    # P1/P2/P3：显式条件（含”…的话就/可以/建议Y”无逗号紧邻变体，+4 例真实建议）
+    # Explicit conditions (including the no-comma adjacent variants ”…的话就/可以/建议Y”, +4 real advice cases)
 
-    # E06：转述话语守卫——"导游说/司机说…如果…"的建议对象是叙述者，非游客
+    # Reported-speech guard — the advice target of "导游说/司机说…如果…" is the narrator, not tourists
     if re.search(r"(?:导游|司机|师傅|工作人员|店员|讲解员)说[^。！？；]{0,8}(?:如果|要是|若)", sent):
         return pairs
 
@@ -254,11 +254,11 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         trigger = m.group(1) + ("…的话" if m.group(3) else "")
 
-        # E06：修辞守卫两口径——"如果说"落在条件文本（连词组只捕 2 字）；转述话语
-        # （导游说/司机说…+如果）的建议对象是叙述者，非游客建议
+        # Rhetorical guard on two fronts — "如果说" lands in the condition text (the conjunction group captures only 2 chars); reported speech
+        # (导游说/司机说…+如果) targets the narrator, not tourist advice
         if (RHETORIC_IFSAY_RE.match(trigger) or cond.startswith("说")) and rest.startswith(("那么", "那 ")):
 
-            continue  # "如果说X,那么Y"为对仗修辞，非条件建议
+            continue  # "如果说X,那么Y" is parallel rhetoric, not conditional advice
 
         for sugg in split_multi_suggestions(rest):
 
@@ -293,13 +293,13 @@ def extract_from_sentence(sent: str) -> list[dict]:
         seen_spans.add(m.start())
 
 
-    # 扩展A：裸"X的话，Y"（无如果/要是 前置）——"玩黄龙的话住松潘古城"（ 扩充样本实证漏抽）
+    # Extension A: bare "X的话，Y" (no 如果/要是 prefix) — "玩黄龙的话住松潘古城" (miss confirmed on the expanded sample)
     for m in re.finditer(r"([一-龥A-Za-z0-9]{2,12})的话[，,]?\s*", sent):
         if m.start() in seen_spans:
             continue
         cond = m.group(1).strip()
         if cond.startswith(("如果", "要是", "若", "假如", "既然", "就是说")):
-            continue  # 连词型由 P1 处理
+            continue  # conjunction forms are handled by P1
         rest = sent[m.end():].strip()
         if not rest or not (SUGG_VERB.match(rest)
                             or re.match(r"(?:建议|最好|推荐|记得|不妨|务必|要|选|住|坐|乘|带|穿|备|订|避)", rest)):
@@ -309,7 +309,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
                           "condition_text": cond, "suggestions": [sugg], "sentence": sent})
         seen_spans.add(m.start())
 
-    # 扩展B：空格分隔的"条件 出现 + 祈使"——"高反情况出现 路上随时休息补氧"
+    # Extension B: space-separated "condition occurrence + imperative" — "高反情况出现 路上随时休息补氧"
     for m in re.finditer(r"([一-龥A-Za-z0-9]{2,14}(?:出现|的时候?))[ 　]+([一-龥][^。！？；]{1,28})", sent):
         cond, rest = m.group(1), m.group(2).strip()
         if not re.search(r"(?:休息|补氧|带上?|备|穿|涂|错峰|排队|慢行|提前)", rest[:10]):
@@ -318,7 +318,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
                       "condition_text": cond, "suggestions": [rest], "sentence": sent,
                       "condition_type": "体力安全" if ("高反" in cond or "体力" in cond) else "一般"})
 
-    # 扩展C：须做/禁入规定（"你需要乘坐新国线登山车"/"私家车不允许进入"）
+    # Extension C: must-do/no-entry regulations ("你需要乘坐新国线登山车"/"私家车不允许进入")
     for m in re.finditer(r"(需要?|须)(乘坐?|购买|预订|预约)[^。！？；，]{1,26}", sent):
         pairs.append({"pattern": "依据规定", "trigger": m.group(1) + m.group(2),
                       "condition_text": "入园/通行规定（句内）", "suggestions": [m.group(0)],
@@ -327,18 +327,18 @@ def extract_from_sentence(sent: str) -> list[dict]:
     for m in re.finditer(r"(不允许|禁止|不得)[^。！？；，]{1,26}", sent):
         back = sent[max(0, m.start() - 12):m.start()]
         if re.search(r"(估计|可能|将|恐怕|也许|说不定)", back):
-            continue  # 预测性语境（"估计不久将禁止"）非现行规定
+            continue  # predictive context ("估计不久将禁止"), not a current regulation
         pairs.append({"pattern": "否定建议", "trigger": m.group(1),
                       "condition_text": "入园/通行规定（句内）", "suggestions": [m.group(0)],
                       "sentence": sent, "condition_type": "一般"})
-    # 扩展D：注意+闭馆/不开放类规定（"需要注意的是北京很多景点周一都不开放"）
+    # Extension D: note + closure/not-open regulations ("需要注意的是北京很多景点周一都不开放")
     for m in re.finditer(r"(需要注意的是?|注意)[^。！？；]{0,18}(不开放|闭馆|关闭|停运|暂停开放)[^。！？；]{0,20}", sent):
         pairs.append({"pattern": "依据规定", "trigger": m.group(1),
                       "condition_text": "开放时间规定（句内）",
                       "suggestions": [m.group(0)[:40]], "sentence": sent,
                       "condition_type": "时间"})
 
-    # P7 依据规定：按照/根据+要求/规定/政策/须知 的条件性规则信息（无显式条件连词）
+    # P7 by-regulation: conditional rule information from 按照/根据+要求/规定/政策/须知 (no explicit conditional conjunction)
 
     for m in re.finditer(r"((?:按照|根据|依据)[^。！？；]{0,16}?(?:要求|规定|政策|须知|提示))[^。！？；]{0,12}?[，,]\s*([^。！？；]{1,60})", sent):
 
@@ -370,7 +370,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             seen_spans.add(m.start())
 
-    # 否则分支拆分——"如果A就B，否则C"拆为 A→B 和 非A→C 两个条件对
+    # Otherwise-branch splitting — "如果A就B，否则C" splits into two condition pairs: A→B and not-A→C
 
     for m in re.finditer(r"(如果|要是|若)([^。！？；]{1,40}?)就([^，。！？；]{1,30})[，,]?否则([^。！？；]{1,40})", sent):
 
@@ -395,7 +395,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
         seen_spans.add(m.start())
 
 
-    # P3 当/遇到…时
+    # 当/遇到…时 (time-point conditions)
 
     for m in re.finditer(r"(?:当(?!时|初|年|地|下|然)|遇到|遇上|碰到)([^。！？；，]{1,24}?)(的时候|时)[，,]?", sent):
 
@@ -425,7 +425,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
         return pairs
 
 
-    # P4 建议类（带人群/情境推断）
+    # Advice class (with crowd/situation inference)
 
     for m in re.finditer(r"((?<![不])建议(?!的话)|推荐|(?<![的])最好|尽量|务必|记得|千万|不妨|(?<![不合舒])适合|(?<![舒])适宜)([^。！？；]{1,60})", sent):
 
@@ -433,7 +433,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         if m.group(1) == "最好" and clause.startswith("的"):
 
-            continue  # "最好的天气,就是…"为形容词用法，非建议（"最好是+建议"保留）
+            continue  # "最好的天气,就是…" is adjectival usage, not advice ("最好是+advice" kept)
 
         crowd = crowd_subtype(clause) or crowd_subtype(sent)
 
@@ -459,7 +459,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             if re.match(r"^[第其][一二三四五六七八九十]", sugg.strip()):
 
-                continue  # 列举项（"第二,房卡"）非建议
+                continue  # enumeration items ("第二,房卡") are not advice
 
             pairs.append({"pattern": "建议推断", "trigger": m.group(1),
 
@@ -474,7 +474,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
             return pairs
 
 
-    # P5 人群主语 + 可以
+    # Crowd subject + 可以
 
     for m in re.finditer(
 
@@ -486,9 +486,8 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         segs = split_multi_suggestions(m.group(2))
 
-        # 扩展E：首段并回"可以"动词线索——建议从动词起（此前"可以不下了"被截成"不下了"，
-
-        # 3 字建议被最短长度过滤淘汰， 扩充样本实证）
+        # Extension: re-attach the leading "可以" verb cue to the first segment — advice starts from the verb
+        # (without it "可以不下了" would be cut to "不下了" and the 3-char advice dropped by the minimum-length filter)
 
         if segs:
 
@@ -505,7 +504,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
         return pairs
 
 
-    # P6 否定建议
+    # Negative advice
 
     for m in re.finditer(r"((?<!要)不要(?![要不要门票钱票])|不建议|不宜|(?<![特级区差分别参离告])别(?=[去走买坐赶忘信贪乱省图踩拒绝玩用管抢急费听折腾改])|避免|(?<![不])慎|切勿|(?<![禁])忌|(?<![要])不用(?=[去走买带])|不必(?=[去走买带])|无需|没必要)([^。！？；]{1,50})", sent):
 
@@ -513,11 +512,11 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         if re.match(r"不要(太多|要好|要太好|不要的)", clause):
 
-            continue  # 口语夸张比较（"好了不要太多"），非建议
+            continue  # colloquial exaggerated comparison ("好了不要太多"), not advice
 
         if COGNITIVE_RE.match(clause):
 
-            continue  # "不要认为/觉得/以为"极性反转的修辞，非避雷建议
+            continue  # "不要认为/觉得/以为" polarity-reversing rhetoric, not pitfall-avoidance advice
 
         if WEATHER_RE.search(sent):
 
@@ -535,8 +534,8 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             cond_text, cond_type = "一般建议（避雷）", "一般"
 
-        # 扩展F：回扩动词短语——否定词前的"带/穿/买/选…"短语属于同一建议
-        # （"带老人、小孩慎选"此前仅存"慎选)"，3 字被最短长度过滤淘汰）
+        # Extension: re-extend the verb phrase — the "带/穿/买/选…" phrase before the negative word belongs to the same advice
+        # (without it "带老人、小孩慎选" would keep only "慎选", dropping the 3-char advice "带老人、小孩")
         back = sent[max(0, m.start(1) - 8):m.start(1)]
         back_m = re.search(r"(带|穿|买|选|点|准备|记得)([^，。！？；；]{0,6})$", back)
         if back_m:
@@ -556,7 +555,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
     return pairs
 
 
-# P4 对立建议自动标记：同景区内"否定式 vs 肯定式"同核建议共存并互带来源引用。
+# Opposing-advice auto-marking: within the same scenic area, negative vs affirmative advice sharing the same core coexist and cite each other's sources.
 
 NEG_PREFIX_RE = re.compile(r"^(不要|不宜|不建议|别|切勿|避免|慎|忌|最好不|无法|不能)")
 
@@ -610,7 +609,7 @@ def mark_opposing(mapping: list[dict]) -> list[dict]:
 
                 if mb:
 
-                    continue  # 对面必须是肯定式
+                    continue  # the counterpart must be affirmative
 
                 core_b = AFF_HEDGE_RE.sub("", nb)
 
@@ -618,7 +617,7 @@ def mark_opposing(mapping: list[dict]) -> list[dict]:
 
                     continue
 
-                # 最长公共前缀作为对齐词项
+                # Longest common prefix serves as the aligned term
 
                 lcp = 0
 
@@ -714,7 +713,7 @@ def main(argv=None) -> int:
 
             if sent_lab == "景区外":
 
-                continue  # P1 归属过滤：景区外句子不产出条件建议对
+                continue  # P1 attribution filter: outside-area sentences produce no conditional-advice pairs
 
             if not (8 <= len(sent) <= 160):
 
@@ -722,7 +721,7 @@ def main(argv=None) -> int:
 
             if skip_sentence(sent):
 
-                continue  # 平台话术/呼吁句/联游城市段落守卫
+                continue  # platform boilerplate / appeal sentence / joint-tour city paragraph guard
 
             for p in extract_from_sentence(sent):
 
@@ -750,13 +749,13 @@ def main(argv=None) -> int:
                     })
 
 
-    # 条件类型细化（批量）
+    # Condition-type refinement (batch)
     for p in all_pairs:
         p["condition_type"] = refine_condition_type(
             p.get("condition_text", ""), p.get("suggestion_text", ""),
             p.get("condition_type", "其他"))
 
-    # 去重：同景区 + 条件/建议归一文本相同 → 合并来源；另产出全局跨景区重复合并视图
+    # Dedup: same scenic area + identical normalized condition/advice text -> merge sources; also produce a merged view of global cross-area duplicates
 
     merged: dict[tuple, dict] = {}
 

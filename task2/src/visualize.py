@@ -1,8 +1,8 @@
-"""实验2：实体词频可视化（柱状图 + 词云）与两轮迭代对比。
+"""Experiment 2: entity word-frequency visualization (bar charts + word clouds) and comparison across the two iterations.
 
-用法：python src/visualize.py --iteration refined
-输入：output/exp2/entity_stats_{iteration}.json
-输出：output/exp2/figs/*.png
+Usage: python src/visualize.py --iteration refined
+Input: output/exp2/entity_stats_{iteration}.json
+Output: output/exp2/figs/*.png
 """
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from wordcloud import WordCloud
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output/exp2"
-FIGS = None  # 运行时按迭代设定
+FIGS = None  # set at runtime according to the iteration
 FONT = "C:/Windows/Fonts/simhei.ttf"
 
 plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei"]
@@ -70,7 +70,7 @@ def main() -> int:
         bar_chart(freq, f"{etype} 词频 Top15（{args.iteration}）", FIGS / f"bar_{etype}.png", COLORS[etype])
         wordcloud_chart(freq, f"{etype} 词云（{args.iteration}）", FIGS / f"wc_{etype}.png", colormap[etype])
 
-    # 三景区 × 三类型对比柱状图
+    # Comparison bar chart: three scenic areas x three types
     by_scenic = stats["by_scenic_area"]
     areas = list(by_scenic)
     types = ["景点POI", "交通方式", "时间节点"]

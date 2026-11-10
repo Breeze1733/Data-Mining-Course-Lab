@@ -1,16 +1,16 @@
-"""实验6：多源程序性知识融合与知识图谱构建（NetworkX）。
+"""Experiment 6: multi-source procedural knowledge fusion and knowledge graph construction (NetworkX).
 
-Schema：
-  节点：景区 / 景点POI（含周边景点子类）/ 交通操作（观光车、索道…）/ 时段（上午…晚上）/ 条件（人群/天气/时间/装备…）
-  边：  包含（景区→POI）、周边关联（景区→周边景点）、先后顺序（POI→POI，官方+游客双源加权）、
-        时段归属（POI→时段）、交通方式（POI→交通操作）、条件建议（POI→条件节点）
+Schema:
+  Nodes: scenic area / sight POI (with surrounding-sight subtype) / transport operation (sightseeing bus, cableway…)/ time period (上午…晚上)/ condition (人群/天气/时间/装备…)
+  Edges:  包含 (scenic area->POI), 周边关联 (scenic area->surrounding sight), 先后顺序 (POI->POI, weighted from official + tourist sources),
+        时段归属 (POI->time period), 交通方式 (POI->transport operation), 条件建议 (POI->condition node)
 
-融合策略：
-  1. 实体对齐：以实验2词典 canonical 为唯一键，景区内命名空间（五彩池按景区隔离，北海限定黄山）；
-  2. 来源合并：先后边记录 official_routes / tourist_records 两组来源并分权重（官方 1.0/条，游客 0.5/条）；
-  3. 频次加权：时段归属、交通方式边按步骤出现次数累计；
-  4. 噪声过滤：仅收录词典内 POI；条件建议边只挂到句中出现的 POI，无 POI 挂景区节点并标记。
-输出：graph_nodes.csv、graph_edges.csv、knowledge_graph.graphml、graph_stats.json
+Fusion policy:
+  1. Entity alignment: the experiment-2 dictionary canonical is the unique key, with per-scenic-area namespaces (五彩池 isolated by area, 北海 restricted to 黄山);
+  2. Source merging: order edges record the official_routes / tourist_records source groups with separate weights (official 1.0 per route, tourist 0.5 per record);
+  3. Frequency weighting: period-membership and transport-mode edges accumulate per step occurrence;
+  4. Noise filtering: only dictionary POIs are included; condition-advice edges attach only to POIs appearing in the sentence, otherwise attach to the scenic-area node and are flagged.
+Output: graph_nodes.csv, graph_edges.csv, knowledge_graph.graphml, graph_stats.json
 """
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ import networkx as nx
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
-from entity_identity import normalize  # noqa: E402  与实验3相同的归一化
+from entity_identity import normalize  # noqa: E402  same normalization as experiment 3
 
 ROOT = Path(__file__).resolve().parents[1]
 TASK1 = ROOT.parent / "task1"
@@ -44,7 +44,7 @@ AREAS = ("黄山", "九寨沟", "颐和园")
 PERIODS = ("上午", "中午", "下午", "晚上")
 
 
-# （模块级供单测复用）：对比词守卫——等长文本恰一处差异且互为对比词→语义相斥
+# (module level for unit-test reuse): contrast-word guard — equal-length texts differing at exactly one position where the chars are a contrast pair -> semantically exclusive
 _CONTRAST = [("多", "少"), ("雨", "雪"), ("早", "晚"), ("上", "下"), ("有", "无"),
              ("大", "小"), ("开", "关"), ("高", "低"), ("冷", "热"), ("快", "慢"), ("贵", "廉")]
 
@@ -64,7 +64,7 @@ def _contrast_blocked(ta: str, tb: str) -> bool:
 
 
 def dedup_groups_from_quality(quality: dict) -> tuple[list[set], dict[str, int]]:
-    """F05：近重复对 → 传递闭包分组与 record→组号映射（键名与 preprocess 输出一致）。"""
+    """F05: near-duplicate pairs -> transitive-closure grouping and record->group-id mapping (key names match the preprocess output)."""
     groups: list[set] = []
     for _d in quality.get("near_duplicate_pairs", []):
         _a, _b = _d["record_id_a"], _d["record_id_b"]
@@ -90,7 +90,7 @@ def main() -> int:
     matcher = DictMatcher(entries, stopwords)
     poi_of = {e["name"]: e for e in entries if e["entity_type"] == "景点POI"}
     transport_of = {e["name"]: e for e in entries if e["entity_type"] == "交通方式"}
-    # 名称解析：实验3步骤名经过 normalize（剥离“景区”后缀），与词典 canonical 对齐
+    # Name resolution: experiment-3 step names pass through normalize (stripping the “景区” suffix) to align with dictionary canonicals
     from entity_identity import build_poi_lookup
     name2canon = build_poi_lookup(list(poi_of.values()))
     canonical_areas = defaultdict(set)
@@ -103,7 +103,7 @@ def main() -> int:
     parsed = [json.loads(l) for l in (TASK3 / "output/parsed_routes.jsonl").open(encoding="utf-8")]
     tourists = [json.loads(l) for l in (TASK3 / "output/tourist_routes.jsonl").open(encoding="utf-8")]
     mapping = json.loads((TASK5 / "output/mapping_table.json").read_text(encoding="utf-8"))
-    # 提及频次直接从实体全量统计（此前依赖 top_canonical 截断表——仅 3 条，127 个 POI 节点频次为 0）
+    # Mention frequency taken directly from full entity statistics (the top_canonical table is truncated and misses low-frequency POIs)
     mention_counter: Counter = Counter()
     with (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8") as _fh:
         for _line in _fh:
@@ -125,7 +125,7 @@ def main() -> int:
             if scenic == "通用":
                 continue
             freq = mention_counter.get(e["canonical"], 0)
-            in_scenic = bool(e["scenic_areas"])  # 空列表 = 周边地标（不进步行路径）
+            in_scenic = bool(e["scenic_areas"])  # empty list = surrounding landmark (excluded from walking routes)
             G.add_node(node_id("POI", scenic, e["canonical"]), kind=e["subtype"], name=e["canonical"],
                        label=e["canonical"], mention_freq=freq, aliases=e["name"],
                        in_scenic=in_scenic)
@@ -149,12 +149,12 @@ def main() -> int:
             else:
                 G.add_edge(u, v, key="先后顺序", relation="先后顺序", weight=1.0, source="官方路线")
             official_support[(u, v)].append(p["route_id"])
-    # 近重复游记去重——同组记录对同一条边只计 1 次支持
+    # Near-duplicate travelogue dedup — records in the same group contribute at most 1 support per edge
     _quality = json.loads((TASK1 / "data/processed/quality_report.json").read_text(encoding="utf-8"))
     _dup_groups, _rec2grp = dedup_groups_from_quality(_quality)
 
-    # F08 方案A：周边地标（scenic_areas=[]）与景区内 POI 间不建先后边——
-    # 跨区域边（宏村→光明顶 40km）不代表可步行到达
+    # No order edges between surrounding landmarks (scenic_areas=[]) and in-area POIs —
+    # cross-region edges (宏村→光明顶, 40km) do not imply walkability
     _nearby = {e["canonical"] for e in poi_of.values() if not e["scenic_areas"]}
     tourist_support: dict[tuple, int] = Counter()
     tourist_records: dict[tuple, list] = defaultdict(list)
@@ -162,10 +162,10 @@ def main() -> int:
     for t in tourists:
         scenic = t["scenic_area"]
         rid = t.get("record_id")
-        # 图边取完整 poi_sequence（保留折返与重复到访），权重累加承载访问强度
+        # Graph edges use the full poi_sequence (preserving backtracking and repeated visits); accumulated weights carry visit intensity
         for a, b in zip(t["poi_sequence"], t["poi_sequence"][1:]):
             u, v = node_id("POI", scenic, resolve(scenic, a)), node_id("POI", scenic, resolve(scenic, b))
-            # F08 方案A：跳过跨区域对（一端为周边地标、另一端为景区内 POI）
+            # Skip cross-region pairs (one end a surrounding landmark, the other an in-area POI)
             if (resolve(scenic, a) in _nearby) != (resolve(scenic, b) in _nearby):
                 continue
             if not (G.has_node(u) and G.has_node(v)):
@@ -174,7 +174,7 @@ def main() -> int:
                 G[u][v]["先后顺序"]["weight"] += 0.5
             else:
                 G.add_edge(u, v, key="先后顺序", relation="先后顺序", weight=0.5, source="游客序列")
-            # 同近重复组对同一条边只计 1 次支持
+            # Records in the same near-duplicate group contribute at most 1 support per edge
             grp_id = _rec2grp.get(rid, rid)
             if grp_id in tourist_group_seen[(u, v)]:
                 continue
@@ -184,9 +184,9 @@ def main() -> int:
                 tourist_records[(u, v)].append(rid)
     for (u, v), route_ids in official_support.items():
         if G.has_edge(u, v, key="先后顺序"):
-            # 来源清单不截断（官方路线ID + 游客逐记录证据）
+            # Source lists are not truncated (official route IDs + per-record tourist evidence)
             G[u][v]["先后顺序"]["official_routes"] = "；".join(dict.fromkeys(route_ids))
-    # 游客证据对官方/纯游客两类先后边统一回写（纯游客边此前拿不到记录清单）
+    # Tourist evidence is written back uniformly to both official and tourist-only order edges
     for (u, v), recs in tourist_records.items():
         if G.has_edge(u, v, key="先后顺序") and recs:
             G[u][v]["先后顺序"]["tourist_records"] = json.dumps(recs, ensure_ascii=False)
@@ -226,8 +226,8 @@ def main() -> int:
 
     _stats: dict = {}
 
-    # P5 聚类归一：同景区+同类型+归一文本 char-bigram Jaccard>=0.4 的条件合并为一个节点，
-    # 保留代表文本（频次最高）、全部变体与合计频次；边按成员逐条挂接、权重累加。
+    # Cluster normalization: conditions with the same scenic area + same type + normalized-text char-bigram Jaccard>=0.4 merge into one node,
+    # keeping the representative text (highest frequency), all variants, and the summed frequency; edges attach per member with accumulated weights.
     def _norm_cond(t: str) -> str:
         return re.sub(r"[\s，,。；;、！？!?\[\]()【】的了吗呢啊呀]", "", t)
 
@@ -238,8 +238,8 @@ def main() -> int:
         t = _norm_cond(m["condition_text"])[:4]
         return "NEG" if re.search(r"^(不要|不去|别|切勿|避免|慎|忌|没带|没有带|没有|不宜|不建议)", t) else "POS"
 
-    # 代表建议选优：代表成员的建议不一定最可操作（如“避暑旅游”弱于“携带保暖衣物”）。
-    # 动作信号 > 成员频次 > 长度，从全组建议中选代表落图。
+    # Representative-advice selection: the representative member's advice is not necessarily the most actionable (e.g. “避暑旅游” is weaker than “携带保暖衣物”).
+    # Action signal > member frequency > length; pick the representative advice for the graph from the whole group.
     _SUGG_ACT = re.compile(
         r"(?:不要|别去|别走|千万|建议|记得|最好|需要|可以尝试|避开|注意|慎|宜|忌|"
         r"带[上着]?|穿|涂|订|预约|乘|坐|尝|早点|提前|步行|前往|游览|下山|上山|错峰|托运)")
@@ -256,14 +256,14 @@ def main() -> int:
         rec_year[_r["record_id"]] = str(_r.get("published_at") or "")
 
     clusters: list[dict] = []
-    # 对比词守卫见模块级 _contrast_blocked（真实图谱 0 对受影响，潜在风险加固）
+    # Contrast-word guard: see module-level _contrast_blocked (0 pairs affected in the real graph; hardening against a latent risk)
     reps: list[tuple[str, str, str, str, set]] = []
     for m in mapping:
         key_text = _norm_cond(m["condition_text"])
         bg = _bigrams(key_text)
         hit = None
         for scenic0, ctype0, pat0, pol0, bg0, cluster0 in reps:
-            # 极性不同不合并（P4建议/P6避雷，及条件文本自身的否定前缀）
+            # Different polarity is never merged (P4 advice/P6 pitfall-avoidance, plus negation prefixes in the condition text itself)
             if (scenic0 == m["scenic_area"] and ctype0 == m["condition_type"]
                     and pat0 == m["pattern"] and pol0 == _polarity(m)):
                 inter, union = len(bg0 & bg), len(bg0 | bg)
@@ -289,12 +289,12 @@ def main() -> int:
         members = cluster["members"]
         rep = sorted(members, key=lambda x: (-x["frequency"], x["condition_text"]))[0]
         scenic = rep["scenic_area"]
-        # ID 纳入抽取模式——推断型标签（“时间条件（句内）”）的 P4 建议与 P6 避雷是
-        # 不同语义节点，聚类已按 pattern 分离，节点身份必须同步携带，否则互相碰撞
+        # Include the extraction pattern in the ID — P4 advice and P6 pitfall-avoidance with inferred labels (“时间条件（句内）”) are
+        # different semantic nodes; clustering already separates them by pattern, so node identity must carry it too or they collide
         cn = node_id("条件", scenic,
                      f'{rep["pattern"]}:{rep["condition_type"]}:{_norm_cond(rep["condition_text"])}')
         if not G.has_node(cn):
-            # 全量证据落图——不截断 variants/suggestions，逐条来源与抽取方法可追溯
+            # Full evidence lands in the graph — variants/suggestions are not truncated; per-item sources and extraction methods stay traceable
             seen_cond, seen_sugg, seen_src = [], [], []
             evidence = []
             for x in members:
@@ -342,8 +342,8 @@ def main() -> int:
     print(json.dumps({"cond_raw_pairs": _stats.get("cond_raw"), "cond_cluster_nodes": _stats.get("cond_clusters")}, ensure_ascii=False))
 
     OUT.mkdir(parents=True, exist_ok=True)
-    # 非路经语境守卫的连带清理：仅靠被剔子句连通的交通操作等节点成为孤点——移除
-    # （景区根节点有包含边，永不孤点）
+    # Collateral cleanup of the non-route-context guard: transport-operation nodes etc. connected only via removed clauses become orphans — remove them
+    # (scenic-area root nodes have 包含 edges and are never orphans)
     orphans = [n for n in G.nodes if G.degree(n) == 0 and G.nodes[n].get("kind") != "景区"]
     for n in orphans:
         G.remove_node(n)
@@ -396,7 +396,7 @@ def main() -> int:
         "by_relation": dict(Counter(d.get("relation", "?") for _, _, d in G.edges(data=True))),
         "cond_edges_to_poi": cond_edges, "cond_edges_to_scenic": cond_to_scenic,
         "per_scenic": per_scenic,
-        # F13：图谱与输入的版本绑定（词典/语料指纹，防旧图配新词典）
+        # Version binding between the graph and its inputs (dictionary/corpus fingerprints, preventing an old graph paired with a new dictionary)
         "input_fingerprints": _graph_fingerprints(),
         "fusion_policy": {
             "entity_alignment": "实验2词典 canonical 为唯一键，景区命名空间隔离（五彩池/北海不跨景区合并）",

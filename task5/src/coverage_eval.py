@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-"""条件建议抽取的原句级覆盖评测（查全/过抽首次可测）。
+"""Sentence-level coverage evaluation of conditional-advice extraction (recall/over-extraction measurable for the first time).
 
-此前评测只在"系统已抽出的对"上测准确率，无法度量漏抽。本评测复用  的 40 句原始抽样
-（task2/output/exp2/entity_sentence_sample.json），对每句判读"是否含给游客的建议"
-（AI 逐句判读，来源如实声明），再对照当前映射表（mapping_table.json）报告：
-  - advice_recall：含建议句中被抽出≥1 对的比例；
-  - over_extraction：无建议句中被抽出的对数（过抽）；
-  - 逐句明细（含未覆盖建议的 gist）。
-判读口径：给游客的建议（条件性或建议性），个人计划/纯描述/官方规定陈述不计（防疫通告类
-条件性规则信息按 boundary 计入）。
+Previous evaluation measured accuracy only on "pairs the system already extracted" and could not measure misses. This evaluation reuses the  original 40-sentence sample
+(task2/output/exp2/entity_sentence_sample.json), judges each sentence for "whether it contains advice for tourists"
+(AI sentence-by-sentence judging, source declared as-is), then reports against the current mapping table (mapping_table.json):
+  - advice_recall: fraction of advice-containing sentences with >=1 extracted pair;
+  - over_extraction: number of pairs extracted from non-advice sentences (over-extraction);
+  - per-sentence detail (including the gist of uncovered advice).
+Judging scope: advice for tourists (conditional or suggestive); personal plans / pure description / official regulation statements excluded (epidemic-prevention
+conditional rule information is counted as boundary).
 """
 from __future__ import annotations
 
@@ -21,8 +21,8 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
 TASK2 = ROOT.parent / "task2"
 
-# 逐句判读（AI）。in_scope=True 表示句内含**条件性建议或带触发词的建议**（实验5 任务口径：
-# 如果/若/建议/推荐/最好/适合/不要 等触发结构）；一般性路线罗列与无触发词的泛建议为任务外。
+# Sentence-by-sentence judging (AI). in_scope=True means the sentence contains **conditional advice or advice with trigger words** (experiment 5 task scope:
+# trigger structures such as 如果/若/建议/推荐/最好/适合/不要); generic route listings and triggerless blanket advice are out of scope.
 ADVICE = {4: (False, "中午12点上山、下午4点前下山（攻略式时间安排，无触发词）"),
           5: (False, "手机购票免现场排队（无触发词）"),
           6: (True, "建议后山上前山下、早点下山、坐索道避开人流"),
@@ -38,8 +38,8 @@ ADVICE = {4: (False, "中午12点上山、下午4点前下山（攻略式时间�
 
 
 def _load_batches() -> list[dict]:
-    """ 扩充：第一轮 dev 40 句（ADVICE 字典判读）+ 追抽 60 句（coverage_sample_expanded.json，
-    ai_advice 字段随样本存储）。两批口径一致，分批与合并同时报告。"""
+    """ Expansion: round-1 dev 40 sentences (judged via the ADVICE dict) + 60 additional sentences (coverage_sample_expanded.json,
+    with the ai_advice field stored alongside the sample). Both batches share the same criteria; report per-batch and merged. """
     batches = []
     dev = json.loads((TASK2 / "output/exp2/entity_sentence_sample_dev.json").read_text(encoding="utf-8"))["sentences"]
     batches.append({"batch": "round1_dev", "sentences": [
@@ -113,7 +113,7 @@ def _eval_batch(batch: str, sample: list[dict]) -> dict:
             detail.append({"sid": sid, "in_scope": True, "design_excluded": True,
                            "n_pairs": 0, "gist": gist})
             continue
-        # 精神：按 record + 句子包含匹配（task5 分句与抽样分句的规则不同，精确等值会漏配）
+        # Spirit: match by record + sentence containment (task5's splitter differs from the sampling splitter; exact equality would miss pairs)
         pairs = [r for (rr, ss), rs in by_sentence.items() if rr == rid and (ss in sent or sent in ss)
                  for r in rs]
         if in_scope:
@@ -137,7 +137,7 @@ def _eval_batch(batch: str, sample: list[dict]) -> dict:
     }
 
 
-# 覆盖样本追抽（原独立脚本，内联；先抽样后评测可一次完成）
+# Expanded coverage sampling (originally a separate script, inlined; sampling then evaluation in one pass)
 SENT_SPLIT = re.compile(r"[。！？；!?\n]+")
 
 
@@ -201,7 +201,7 @@ def expand_sample() -> int:
             break
     sentences = list(picked.values())
     for i, o in enumerate(sentences):
-        o["sid"] = 1000 + i  # 与既有 40/66 句 sid 空间错开
+        o["sid"] = 1000 + i  # offset from the existing 40/66-sentence sid space
     doc = {"draw_seed": 77, "sampling": "travelogue 正文句，排除既有抽样记录；scenic×platform 分层，每记录≤2句",
            "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注）——判读后回填 ai_advice/gist",
            "n": len(sentences), "sentences": sentences}

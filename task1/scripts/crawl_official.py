@@ -1,7 +1,9 @@
-"""重新采集已核实的全部官方来源及其全部原文路线分支。
+"""Re-collect every verified official source with all of its original route variants.
 
-不把同页分支伪装成多个来源。保留主题指南、历史版本、图片原件。
---offline 只重读本地快照；缺快照会失败，不编造成功。
+Variants on the same page are not disguised as multiple sources. Theme guides,
+historical versions, and original images are kept.
+--offline only re-reads local snapshots; a missing snapshot fails rather than
+fabricating success.
 """
 from __future__ import annotations
 import argparse, importlib.util, json, hashlib, re, urllib.request, time
@@ -32,7 +34,7 @@ def extract(page: str, source: dict):
         date = re.search(r'(?:发表于|发布于|更新于)\s*(\d{4}[-/.]\d{1,2}[-/.]\d{1,2})', t.text_content())
         if date: published = date[1].replace('/', '-').replace('.', '-')
         selector = 'travel-content-wrapper | rich-text-container （首个正文容器）'
-        # 多目的地游记按已核验的段落边界截取；完整网页仍保留在 pages/。
+        # Multi-destination travelogues are cut at verified paragraph boundaries; the full page remains in pages/.
         if source.get('section_start'):
             selected, active = [], False
             for child in nodes[0]:
@@ -43,7 +45,7 @@ def extract(page: str, source: dict):
             nodes = selected
             selector += '; section_start=' + source['section_start'] + '; section_end=' + source.get('section_end','EOF')
     elif kind == 'huangshan':
-        # 直接渲染的正文与内嵌 JSON 重复，只取第一个正文内第20问。
+        # The directly rendered body duplicates the embedded JSON; take only question 20 within the first body.
         content = t.xpath('//div[contains(concat(" ",@class," ")," article-con ")]')[0]
         paras = content.xpath('./p')
         nodes, active = [], False
@@ -118,7 +120,7 @@ def run(offline=False):
                     one,two=part.split('一日游：',1)[1].split('二日游：',1)
                     variants.extend([dict(title=f'冬季{gate}一日游',source_text=one.strip()),dict(title=f'冬季{gate}二日游',source_text=two.strip())])
             else:
-                # 原文第1–3天为黄山主体，第4天起为宏村/太平湖等周边。
+                # Days 1–3 of the source text are the 黄山 main mountain section; from day 4 onward it covers nearby areas such as 宏村/太平湖.
                 m=re.search(r'第[四4]天',content)
                 main=content[:m.start()] if m else content
                 variants=[dict(title='黄山主体山岳游 第1至3天',source_text=main.strip())]

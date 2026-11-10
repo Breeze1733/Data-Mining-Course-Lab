@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
-"""正式产物的原子写出——先写临时文件再 os.replace，杜绝半写文件污染正式结果。
+"""Atomic write for official artifacts -- write to a temp file first, then os.replace,
+so half-written files can never pollute official results.
 
-Windows 下 os.replace 对刚关闭的临时文件偶发 PermissionError（WinError 5，
-杀毒/索引器短暂持锁，实测约数轮触发一次，曾致 unittest 随机红）。统一在此小退避重试。
+On Windows, os.replace occasionally raises PermissionError (WinError 5) on a just-closed
+temp file (antivirus/indexer briefly holds the lock; observed roughly once every few
+rounds, and it once caused random unittest failures). A small backoff retry is applied
+uniformly here.
 """
 import os
 import time
@@ -22,9 +25,9 @@ def _replace_with_retry(tmp: Path, path: Path, attempts: int = 5, delay: float =
 
 def atomic_write_text(path: Path | str, text: str, encoding: str = "utf-8",
                       newline: str | None = None) -> None:
-    """newline 语义与 open 一致：None=平台翻译（JSON 等默认）；""=原样写出（CSV 的 CRLF 由
-    csv.writer 自己产生，二次翻译会产生
-）。"""
+    """newline semantics match open: None=platform translation (the default for JSON etc.);
+    ""=write out as-is (CSV's CRLF is produced by csv.writer itself; a second
+translation would corrupt it)."""
     path = Path(path)
     tmp = path.with_suffix(path.suffix + ".tmp")
     with tmp.open("w", encoding=encoding, newline=newline) as fh:

@@ -1,4 +1,4 @@
-"""最终实体识别规则：领域词典、交通过滤、时间归一化与区间消解。"""
+"""Final entity recognition rules: domain dictionary, transport filtering, time normalization, and span resolution."""
 from __future__ import annotations
 
 import json
@@ -48,7 +48,7 @@ class DictMatcher:
         for item in entries:
             if item["entity_type"] != "景点POI":
                 continue
-            # scenic_areas=[] 表示"周边地标"：可匹配、可作消解候选，但不属于任何景区内集合
+            # scenic_areas=[] means "周边地标" (peripheral landmark): matchable and usable as a coref-resolution candidate, but not part of any in-scenic set
             for area in (item["scenic_areas"] or ["周边"]):
                 template = templates.get((area, item["name"]))
                 if template:

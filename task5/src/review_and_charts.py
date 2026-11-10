@@ -1,9 +1,9 @@
-"""实验5：条件-建议对的人工抽检与可视化。
+"""Experiment 5: manual spot-check and visualization of condition-advice pairs.
 
---sample  分层抽样（pattern × scenic_area，seed=42）打印上下文
---fill    写入人工判定（GOLD 内嵌本文件）
---score   计算抽检正确率/误抽漏抽分类
---charts  条件类型 × 景区柱状图、人群细分图
+--sample  Stratified sampling (pattern × scenic_area, seed=42); print contexts
+--fill    Write manual verdicts (GOLD verdicts embedded in this file)
+--score   Compute spot-check accuracy / misextraction and missed-extraction classification
+--charts  Condition type × scenic-area bar charts, crowd breakdown chart
 """
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei"]
 plt.rcParams["axes.unicode_minus"] = False
 
-# 人工判定：key=(pattern, scenic, 条件归一, 建议归一) → (verdict, note)
+# Manual verdicts: key=(pattern, scenic, normalized condition, normalized advice) -> (verdict, note)
 def _norm(s: str) -> str:
     import re as _re
     return _re.sub(r"[\s，,。；;、！？!?()【】\[\]]+", "", s)
@@ -141,7 +141,7 @@ def _norm5(t: str) -> str:
 
 
 def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
-    """Wilson 95% 置信区间（小样本比例的稳健区间）。"""
+    """Wilson 95% confidence interval (robust interval for small-sample proportions)."""
     if n == 0:
         return {"lo": None, "hi": None}
     p = k / n
@@ -158,8 +158,8 @@ from common.fingerprints import data_fingerprints as _data_fingerprints
 
 def score() -> None:
     data = json.loads((OUT / "review_dev.json").read_text(encoding="utf-8"))["reviews"]
-    # 与当前抽取对齐——复核行是否仍被当前规则抽出（identical/changed/missing），
-    # 抽取器退化（误抽漏抽）不再对指标不可见
+    # Align with the current extraction — check whether reviewed rows are still extracted by the current rules (identical/changed/missing),
+    # so extractor regressions (misextraction/missed extraction) are no longer invisible to the metrics
     mapping = json.loads((OUT / "mapping_table.json").read_text(encoding="utf-8"))
     mrows = mapping["rows"] if isinstance(mapping, dict) else mapping
     pair_index = {(r["scenic_area"], _norm5(r["condition_text"]), _norm5(r["suggestion_text"]))
@@ -192,7 +192,7 @@ def charts() -> None:
     mapping = json.loads((OUT / "mapping_table.json").read_text(encoding="utf-8"))
     FIGS.mkdir(parents=True, exist_ok=True)
 
-    # 图1：条件类型 × 景区（按频次加权）
+    # Chart 1: condition type × scenic area (weighted by frequency)
     types = ["人群", "天气", "时间", "装备", "预约票务", "交通", "体力安全", "一般", "其他"]
     areas = ["黄山", "九寨沟", "颐和园"]
     weighted = {a: Counter() for a in areas}
@@ -214,7 +214,7 @@ def charts() -> None:
     fig.savefig(FIGS / "cond_type_by_scenic.png")
     plt.close(fig)
 
-    # 图2：人群类细分（游客类型）
+    # Chart 2: crowd-class breakdown (visitor types)
     crowd = Counter()
     for m in mapping:
         if m["condition_type"] == "人群":
@@ -247,7 +247,7 @@ def export_xlsx():
     review = json.loads((OUT / "review_summary.json").read_text(encoding="utf-8"))
 
     wb = Workbook()
-    # 固定 docProps 时间戳：内容不变则字节不变，重建产物保持确定性
+    # Fixed docProps timestamps: identical content yields identical bytes, keeping rebuilt artifacts deterministic
     wb.properties.created = wb.properties.modified = datetime(2026, 1, 1)
     ws = wb.active
     ws.title = "条件-建议映射表"
@@ -286,8 +286,8 @@ def export_xlsx():
 
 
 def _normalize_xlsx(path: Path) -> None:
-    """openpyxl 对 zip 条目时间戳和 core.xml 的 modified 强制写当前时刻，统一改写为固定值：
-    内容不变则字节不变（产物确定性）。"""
+    """openpyxl forces zip entry timestamps and core.xml's modified to the current moment; rewrite both to fixed values:
+    identical content yields identical bytes (artifact determinism)."""
     stamp = b"2026-01-01T00:00:00Z"
     core_mod = (b'<dcterms:modified xmlns:dcterms="http://purl.org/dc/terms/" '
                 b'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '

@@ -1,13 +1,13 @@
-"""实验3：游客实际路线提取 + 官方/游客路线对比（高阶任务）。
+"""Experiment 3: tourist actual-route extraction + official/tourist route comparison (advanced task).
 
 
-游客路线：从实验2实体输出中按阅读顺序取景区内 POI 序列（连续去重，≥4 个不同 POI）。
+Tourist routes: take the in-scenic POI sequence in reading order from the Experiment 2 entity output (consecutive duplicates merged, >= 4 distinct POIs).
 
-对比维度：1.景点覆盖度（游客路线对官方 POI 集合的覆盖、Jaccard）；2.顺序一致性（公共 POI ≥5 时
+Comparison dimensions: 1. attraction coverage (tourist-route coverage of the official POI set, Jaccard); 2. order consistency (when >= 5 common POIs,
 
-         计算 Kendall tau）；3.时间分配（官方时段-时长分布 vs 游客文本时段词分布）。
+         compute Kendall tau); 3. time allocation (official period-duration distribution vs tourist-text period-word distribution).
 
-输出：task3/output/tourist_routes.jsonl、official_vs_tourist.json、figs/
+Output: task3/output/tourist_routes.jsonl, official_vs_tourist.json, figs/
 
 """
 
@@ -67,7 +67,7 @@ POI_LOOKUP = build_poi_lookup(json.loads((TASK2 / "output/exp2/entity_dictionary
 
 def kendall_tau(a: list, b: list) -> float:
 
-    """两个序列（同一集合的不同排序）的 Kendall tau。"""
+    """Kendall tau between two sequences (different orderings of the same set)."""
 
     pairs = list(combinations(range(len(a)), 2))
 
@@ -114,7 +114,7 @@ def extract_tourist_routes() -> list[dict]:
 
         for e in rec["entities"]:
 
-            # 只取主景区内 POI（in_scenic 标记），排除多景点游记的跨景区实体
+            # Take only POIs inside the main scenic area (in_scenic flag), excluding cross-scenic entities from multi-attraction travelogues
 
             if e["type"] == "景点POI" and e["subtype"] == "景点" and e.get("in_scenic", True):
 
@@ -136,9 +136,9 @@ def extract_tourist_routes() -> list[dict]:
 
                 "n_distinct": len(distinct),
 
-                # po_sequence 保留折返与重复到访（连续重复已合并）；图边取完整序列；
+                # po_sequence keeps backtracking and repeated visits (consecutive duplicates already merged); graph edges use the full sequence;
 
-                # distinct_pois 仅用于覆盖率/tau 的集合口径
+                # distinct_pois is only for the set-based criterion of coverage/tau
 
                 "evidence_note": "POI 阅读顺序序列（弱证据：含介绍/推荐提及，非全部为实际移动）",
 
@@ -157,7 +157,7 @@ def official_routes_by_scenic() -> dict[str, list[dict]]:
 
         if p["ordered_route"] and p["pois_in_order"]:
 
-            # 连续去重后的官方 POI 序列
+            # Official POI sequence after consecutive deduplication
 
             seq = []
 
@@ -199,7 +199,7 @@ def duration_minutes(dur: str) -> int | None:
 
 def official_period_allocation(parsed: list[dict]) -> dict:
 
-    """§4.1-4：官方时段分配分离两种量纲——已知分钟与无时长步数各自统计。"""
+    """§4.1-4: official period allocation separates two measures -- known minutes and steps without durations are counted separately."""
 
     alloc_minutes = Counter()
 
@@ -242,10 +242,10 @@ def official_period_allocation(parsed: list[dict]) -> dict:
             "n_unknown_steps": sum(alloc_steps.values())}
 
 
-# 时段归桶（原独立模块，内联）
+# Period bucketing (originally a separate module, inlined)
 import re
 
-# 四大报告时段的词元组（时段词直查 + 时刻前缀回退共用）
+# Word tuples of the four report periods (shared by direct period-word lookup and clock-prefix fallback)
 _GROUPS = {
     "上午": {"清晨", "早晨", "早上", "上午"}, "中午": {"正午", "中午"},
     "下午": {"下午", "傍晚"}, "晚上": {"晚上", "夜间", "夜里", "深夜", "凌晨", "半夜"},
@@ -259,7 +259,7 @@ def entity_period(entity: dict) -> str | None:
     if entity.get("subtype") not in {"时刻", "时刻区间"}:
         return None
     value = entity.get("normalized") or entity["text"]
-    # 约数/范围时刻（"下午四五点"）无具体钟点——按开头时段词归桶
+    # Approximate/range clock times ("下午四五点") have no exact hour -- bucket by the leading period word
     for key, values in _GROUPS.items():
         if value.startswith(tuple(values)):
             return key
@@ -272,7 +272,7 @@ def entity_period(entity: dict) -> str | None:
 
 def tourist_period_allocation() -> dict[str, Counter]:
 
-    """游客文本的时段分布：时段词出现次数（叙述型）+ 时钟时刻落点。"""
+    """Period distribution of tourist text: period-word occurrence counts (narrative) + clock-time placements."""
 
     ents = [json.loads(l) for l in (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8")]
 
@@ -296,7 +296,7 @@ def tourist_period_allocation() -> dict[str, Counter]:
 
                 alloc[rec["scenic_area"]][bucket] += 1
 
-    # 归并到四大时段（清晨→上午、傍晚→下午、深夜→晚上）
+    # Merge into the four main periods (清晨→上午、傍晚→下午、深夜→晚上)
 
     merged: dict[str, Counter] = {}
 
@@ -339,9 +339,9 @@ def main() -> int:
 
     tau_sens = {scenic: {3: [], 5: [], 7: []} for scenic in official}
 
-    # 扩展：聚合规则敏感性——同一批 (游客, 官方路线) tau 对，按三种聚合规则汇总：
-    # best（择优匹配，主口径）／mean（全部有效对均值）／first（仅第一条官方路线）。
-    # 择优匹配天然乐观，须与另两种口径并列呈现，避免乐观解释。
+    # Extension: aggregation-rule sensitivity -- the same batch of (tourist, official route) tau pairs, summarized under three aggregation rules:
+    # best (best-match, primary criterion) / mean (mean over all valid pairs) / first (only the first official route).
+    # Best-match is inherently optimistic; it must be presented alongside the other two criteria to avoid optimistic interpretation.
     tau_agg = {scenic: {r: [] for r in ("best", "mean", "first")} for scenic in official}
 
     for scenic, officials in official.items():
@@ -370,9 +370,9 @@ def main() -> int:
 
                 o_set = set(o["norm_sequence"])
 
-                common = [p for p in o["norm_sequence"] if p in tset]  # 官方顺序
+                common = [p for p in o["norm_sequence"] if p in tset]  # official order
 
-                t_common = [p for p in t["distinct_pois"] if p in o_set]  # 游客顺序
+                t_common = [p for p in t["distinct_pois"] if p in o_set]  # tourist order
 
                 if len(common) >= 5:
 
@@ -386,7 +386,7 @@ def main() -> int:
 
                 taus.append(best_tau)
 
-            # 扩展：聚合规则敏感性（本轮游客路线的全部有效 tau 对）
+            # Extension: aggregation-rule sensitivity (all valid tau pairs for this tourist route)
             all_taus = []
             for o in officials:
                 o_set = set(o["norm_sequence"])
@@ -399,7 +399,7 @@ def main() -> int:
             if all_taus:
                 tau_agg[scenic]["best"].append(max(all_taus))
                 tau_agg[scenic]["mean"].append(sum(all_taus) / len(all_taus))
-            # first：仅对第一条官方路线（固定参考，不择优；每条游客独立计算）
+            # first: only against the first official route (fixed reference, no best-match; computed independently per tourist route)
             o = officials[0]
             o_set = set(o["norm_sequence"])
             common = [q for q in o["norm_sequence"] if q in tset]
@@ -409,7 +409,7 @@ def main() -> int:
                 if tau_first == tau_first:
                     tau_agg[scenic]["first"].append(tau_first)
 
-            # 阈值敏感性——不同公共 POI 下限下的最佳 tau（供稳健性查看）
+            # Threshold sensitivity -- best tau under different common-POI lower bounds (for robustness inspection)
 
             for thr in (3, 5, 7):
 
@@ -477,21 +477,21 @@ def main() -> int:
             "order_tau_mean": round(sum(taus) / len(taus), 3) if taus else None,
 
             "n_order_pairs": len(taus),
-            # C07：未匹配样本——公共 POI<5 而无法计算 tau 的游客路线数与匹配规则说明
+            # Unmatched samples -- number of tourist routes with < 5 common POIs (tau not computable) and a note on the matching rule
             "n_tourists_unmatched": len(tourists_here) - len(taus),
             "matching_rule": "每条游客路线取各官方路线中公共POI≥5 的最大 tau（择优，敏感性见 tau_aggregation_sensitivity）",
 
             "official_has_time_info": has_official_time,
 
-            # 两种测量量纲不同——官方为路线标注时长（分钟）分布，游客为文本时段词提及频次，
+            # The two measures have different units -- official is the distribution of route-annotated durations (minutes), tourist is the mention frequency of period words in text,
 
-            # 只能作代理指标对照，不可直接相除比较
+            # they can only serve as proxy indicators for comparison, not be divided directly
 
             "official_time_basis": "路线标注时长（分钟，已知）+ 无时长步骤数（分别统计）",
 
             "tourist_time_basis": "文本时段词提及频次",
 
-            # 扩展：聚合规则敏感性（择优匹配天然乐观，与 mean/first 并列呈现）
+            # Extension: aggregation-rule sensitivity (best-match is inherently optimistic; presented alongside mean/first)
             "tau_aggregation_sensitivity": {
                 r: {"n": len(tau_agg[scenic][r]),
                     "mean": round(sum(tau_agg[scenic][r]) / len(tau_agg[scenic][r]), 3)

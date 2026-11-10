@@ -1,13 +1,15 @@
-"""把三类已采集的原始数据组装为 preprocess.py 可读的 data/raw/records.jsonl。
+"""Assemble the three kinds of captured raw data into data/raw/records.jsonl that preprocess.py can read.
 
-输入（全部为本机已有快照，不发网络请求）：
-  data/raw/official_documents.jsonl            官方文档（include_in_main_dataset=true 的进入主数据集）
-  data/crawl/ctrip_ranked_candidates.json      携程候选（accepted=true 且快照存在的进入）
-  data/raw/xiaohongshu_browser_export.json     小红书笔记导出（全部进入，短文本由清洗阶段按长度规则淘汰）
+Inputs (all local snapshots already on this machine; no network requests):
+  data/raw/official_documents.jsonl            official documents (include_in_main_dataset=true entries enter the main dataset)
+  data/crawl/ctrip_ranked_candidates.json      携程 candidates (accepted=true entries with an existing snapshot enter)
+  data/raw/xiaohongshu_browser_export.json     小红书 note export (all enter; short texts are dropped by the cleaning stage's length rules)
 
-携程记录的 raw_content 取正文容器（travel-content-wrapper，缺省时 rich-text-container）
-的外层 HTML 片段：站点导航、页脚等页面杂项不进入，容器内的 HTML 标签交给
-preprocess.clean_text 的 HTML 清洗规则处理，清洗效果可审计。
+For 携程 records, raw_content is the outer HTML fragment of the article body
+container (travel-content-wrapper, falling back to rich-text-container):
+site navigation, footers, and other page furniture are excluded, while HTML
+tags inside the container are handed to the HTML cleaning rules of
+preprocess.clean_text, keeping the cleaning effect auditable.
 """
 from __future__ import annotations
 
@@ -38,7 +40,7 @@ def note_id(url: str) -> str:
 
 
 def wrapper_fragment(page_bytes: bytes) -> tuple[str, str]:
-    """返回正文容器外层 HTML 片段与实际使用的选择器。"""
+    """Return the outer HTML fragment of the article body container and the selector actually used."""
     doc = html.fromstring(page_bytes)
     nodes = doc.xpath('//*[contains(concat(" ", normalize-space(@class), " "), " travel-content-wrapper ")]')
     selector = "travel-content-wrapper"
@@ -77,8 +79,10 @@ def build_official(docs: list[dict]) -> list[dict]:
             "published_at": doc.get("published_at", ""),
             "provenance_note": doc.get("provenance_note", ""),
             "snapshot_sha256": doc.get("snapshot_sha256", ""),
-            # 采集阶段只把有具体节点顺序的文档计入有序路线数（include_in_main_dataset）；
-            # 无固定顺序的主题方案仍是官方语料，保留标记供实验3区分使用方式。
+            # Only documents with an explicit node order count as ordered routes
+            # (include_in_main_dataset); theme plans without a fixed order remain
+            # official corpus, with the marker kept so Experiment 3 can tell the
+            # two usages apart.
             "official_scope": "main" if doc.get("include_in_main_dataset") else "supplementary_theme",
         })
     return records

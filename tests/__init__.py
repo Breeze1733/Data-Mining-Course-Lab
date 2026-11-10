@@ -1,4 +1,4 @@
-# 统一路径设置：所有测试共享，不需要逐文件配置
+# unified path setup: shared by all tests, no per-file configuration needed
 import sys
 from pathlib import Path
 

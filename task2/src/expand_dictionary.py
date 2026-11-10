@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
-"""领域词典扩充与导出：三个证据驱动批次（全部幂等）+ 词典导出。
+"""Domain dictionary expansion and export: three evidence-driven batches (all idempotent) + dictionary export.
 
-批次（城市名/根景区名按设计不作为 POI； scenic_areas=[] 表示周边地标，
-可匹配、可作消解候选，in_scenic 恒为 False，不进游客路线与图谱）：
-1. peripheral_expansion：周边地标 + 景区内遗漏 POI + 写法变体（task4 人工标注注释 + 高频语料）
-2. recall_eval：句级实体评测漏检清单 + 全语料频次≥2 证据（POI/交通/时间规则）
-3. coref_gold_dev：消解 dev gold 先行词证据（语料频次≥2 纪律；墨海/白石海 各 1 次为样本特例排除）
+Batches (city names / root scenic names are by design not POIs; scenic_areas=[] denotes 周边地标
+(peripheral landmarks), matchable and usable as coref-resolution candidates, with in_scenic
+always False, excluded from tourist routes and the graph):
+1. peripheral_expansion: peripheral landmarks + missed in-scenic POIs + spelling variants (task4 manual-annotation comments + high-frequency corpus)
+2. recall_eval: sentence-level entity-eval miss list + corpus-wide frequency>=2 evidence (POI/transport/time rules)
+3. coref_gold_dev: coref dev-gold antecedent evidence (corpus frequency>=2 discipline; 墨海/白石海 with 1 occurrence each are excluded as sample-specific cases)
 
-运行：python src/expand_dictionary.py
-→ 依次追加入 resources/domain_seed.json 与 time_rules.json，再导出
-   output/exp2/entity_dictionary.json、entity_userdict.txt、entity_schema.md。
+Usage: python src/expand_dictionary.py
+→ appends to resources/domain_seed.json and time_rules.json in turn, then exports
+   output/exp2/entity_dictionary.json, entity_userdict.txt, entity_schema.md.
 """
 import json
 import sys
@@ -23,10 +24,10 @@ from entity_rules import refined_dictionary  # noqa: E402
 
 SOURCE_PERIPH = "peripheral_expansion_2026-10-30"
 ADDITIONS_PERIPH = [
-    # 景区内遗漏
+    # Missed in-scenic POIs
     ("扎如寺", "扎如寺", ["九寨沟"], "九寨沟景区内景点（扎如生态游线路终点），语料20次"),
     ("颐和园博物馆", "颐和园博物馆", ["颐和园"], "颐和园文昌院内展馆，官方路线出现"),
-    # 人工标注评测集背书（task4 注释"未收录实体"）
+    # Endorsed by the manual-annotation eval set (task4 comment "未收录实体")
     ("梦幻景区", "西海大峡谷", ["黄山"], "游客对西海大峡谷的代称，task4人工标注注释"),
     ("松潘古城", "松潘古城", [], "task4人工标注注释'真先行词松潘古城未收录'"),
     ("磁器口", "磁器口", [], "task4 人工标注评测集：'这里'指重庆磁器口"),
@@ -39,7 +40,7 @@ ADDITIONS_PERIPH = [
     ("北京大学", "北京大学", [], "task4 人工标注评测集：'这里'指北大"),
     ("清华大学", "清华大学", [], "task4 人工标注评测集（注：gold原文'清华大学校园'仍不相等，边界如实保留）"),
     ("清华", "清华大学", [], "清华大学短写法"),
-    # 高频周边地标（北京，多出现于颐和园游记）
+    # High-frequency peripheral landmarks (Beijing, mostly in 颐和园 travelogues)
     ("故宫", "故宫", [], "语料190次"),
     ("天坛", "天坛", [], "语料81次"),
     ("圆明园", "圆明园", [], "语料160次"),
@@ -59,7 +60,7 @@ ADDITIONS_PERIPH = [
     ("鸟巢", "鸟巢", [], "语料53次"),
     ("水立方", "水立方", [], "语料32次"),
     ("国家博物馆", "国家博物馆", [], "语料32次"),
-    # 高频周边地标（川渝，多出现于九寨沟游记）
+    # High-frequency peripheral landmarks (Sichuan-Chongqing, mostly in 九寨沟 travelogues)
     ("三星堆博物馆", "三星堆博物馆", [], "语料33次"),
     ("三星堆", "三星堆博物馆", [], "三星堆博物馆短写法"),
     ("都江堰", "都江堰", [], "语料82次"),
@@ -70,7 +71,7 @@ ADDITIONS_PERIPH = [
     ("武侯祠", "武侯祠", [], "语料38次"),
     ("锦里", "锦里", [], "语料41次"),
     ("洪崖洞", "洪崖洞", [], "语料9次"),
-    # 高频周边地标（皖/浙，多出现于黄山游记）
+    # High-frequency peripheral landmarks (Anhui/Zhejiang, mostly in 黄山 travelogues)
     ("西递", "西递", ["黄山"], "语料40次；与宏村同为黄山联游惯例（in_scenic 跟随宏村先例）"),
     ("徽州古城", "徽州古城", [], "语料7次"),
     ("千岛湖", "千岛湖", [], "语料21次"),
@@ -78,7 +79,7 @@ ADDITIONS_PERIPH = [
     ("汤口镇", "汤口镇", [], "语料82次；黄山门户集散地，非景区内游览点"),
     ("汤口", "汤口镇", [], "汤口镇短写法"),
     ("黄龙五彩池", "黄龙五彩池", [], "语料10次；与九寨沟五彩池同名异点，独立canonical消歧"),
-    # 写法变体（共享 canonical）
+    # Spelling variants (shared canonical)
     ("则渣洼沟", "则查洼沟", ["九寨沟"], "则查洼沟常见异写，语料16次"),
     ("查洼沟", "则查洼沟", ["九寨沟"], "则查洼沟口语省写，语料独立出现4次"),
 ]
