@@ -316,7 +316,7 @@ class ReActAgent:
             trace.append({"step": "thought",
                           "thought": f"必去地点处理：{len(must_keep)} 个进入豁免名单"
                                      f"（含新加入），未找到项见贴士"})
-        # G02 出入口：入口/出口 POI 加入行程并豁免预算（硬性动线端点）
+        # G02 出入口：入口/出口 POI 加入行程并豁免预算（强约束路线端点）
         entrance_label = exit_label = None
         for role, raw, kind in (("入口", intent.get("entrance"), "en"),
                                 ("出口", intent.get("exit_gate"), "ex")):

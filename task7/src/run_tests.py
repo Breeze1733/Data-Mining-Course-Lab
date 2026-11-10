@@ -57,15 +57,15 @@ SCENARIOS = [
     {"id": "S18_避开住宿日出取舍", "query": "黄山两日游想看日出，不要住白云宾馆",
      "expect": {"scenic": "黄山", "days": 2, "avoid_respected": "白云宾馆",
                 "sunrise_tradeoff": True}},
-    {"id": "S19_一天半游不坍缩", "query": "黄山一天半游",
+    {"id": "S19_一天半游不退化为单日", "query": "黄山一天半游",
      "expect": {"scenic": "黄山", "days": 1.5, "half_tail_multi_day": True}},
 ]
 
 
 def check_half_tail_multi_day(result):
-    """验收：小数天数不坍缩——1.5 天须跨 2 天且尾日为半日（时段封顶上午/中午）。
+    """验收：小数天数不退化为单日——1.5 天须跨 2 天且尾日为半日（时段封顶上午/中午）。
 
-    此前 int(1.5)=1 把一天半游坍缩成单日 4 站（低于 sizing 下限 6）。
+    此前 int(1.5)=1 把一天半游退化为单日成单日 4 站（低于 sizing 下限 6）。
     """
     plan = result.get("plan") or {}
     it = plan.get("itinerary", [])
@@ -155,7 +155,7 @@ def check_invariants(result):
 
 
 def check_must(result, expect_poi):
-    """验收：必去地点必须在行程中，且回答/贴士说明必去落实（识别 must 死代码退化）。"""
+    """验收：必去地点必须在行程中，且回答/贴士说明必去落实（识别 must 不可达代码退化）。"""
     plan = result.get("plan") or {}
     pois = [it["poi"] for it in plan.get("itinerary", [])]
     in_plan = any(expect_poi in p for p in pois)

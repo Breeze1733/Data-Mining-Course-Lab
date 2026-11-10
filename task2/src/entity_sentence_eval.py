@@ -8,7 +8,7 @@
 分母中单列（entity_sentence_eval.json 的 scope_note）。
 
  发现与修复：本文件曾在 main 中段插入模块级 import，将结果构建/落盘全部截断为
-prf() 内 return 之后的死代码——脚本静默零产出（exit 0 且不写产物）。现已复原 main
+prf() 内 return 之后的不可达代码——脚本无输出且无异常报告（exit 0 且不写产物）。现已复原 main
 完整闭环：评测 → 结果构建 → 落盘 → 打印。
 
 用法：python src/entity_sentence_eval.py

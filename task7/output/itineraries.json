@@ -2232,7 +2232,7 @@
   "template_src": "（编排依据：图谱游客动线拓扑排序，未匹配到合适的官方路线）"
  },
  {
-  "scenario": "S19_一天半游不坍缩",
+  "scenario": "S19_一天半游不退化为单日",
   "scenic": "黄山",
   "days": 1.5,
   "visitor_type": null,

@@ -58,7 +58,7 @@ def _pseg_cut(text: str) -> list[tuple[str, str]]:
 
 
 def _noun_enum_signal(text: str) -> bool:
-    """窗口内顿号/和连接的 ≥2 个普通名词 → 真集合。"""
+    """窗口内顿号/和连接的 ≥2 个普通名词 → 多元素集合。"""
     if not text:
         return False
     pos, words = 0, []
@@ -71,7 +71,7 @@ def _noun_enum_signal(text: str) -> bool:
 
 
 def _plural_prefix_signal(text: str, offset: int) -> bool:
-    """最近名词前紧邻复数指示词（这些松树/各种会议）→ 真集合。"""
+    """最近名词前紧邻复数指示词（这些松树/各种会议）→ 多元素集合。"""
     return bool(text and offset > 0 and _PLURAL_PREFIX_RE.search(text[:offset]))
 
 
@@ -430,7 +430,7 @@ def main(argv=None) -> int:
                                 break
                         if noun:
                             # 谱系对齐（dev 证据 +5）：jieba 回退取的是单个最近名词，
-                            # 单名词先行词按"其他"（非实体概念）判定；仅当窗口存在真集合信号
+                            # 单名词先行词按"其他"（非实体概念）判定；仅当窗口存在多元素集合信号
                             # （顿号/和连接的≥2普通名词、数量词短语守卫、复数指示前缀）时才判"名词集合"——
                             # 避免把"恭王府占地面积…其中"这类单概念先行词误标为集合。
                             sent_prefix = case["sentence"][: doc_start - cur_sent_start]

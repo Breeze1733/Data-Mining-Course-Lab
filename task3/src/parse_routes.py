@@ -173,7 +173,7 @@ class RouteParser:
                     if _i >= 0:
                         seg_span = [line_start + _i, line_start + _i + len(seg_content)]
                 # C05：子句级语境守卫——剔除"未去/放弃/他人行程/背景罗列"子句后再解析，
-                # 避免把没去成的景点、介绍性罗列当成真实路经（构造探针实证三类误吞）
+                # 避免把没去成的景点、介绍性罗列当成真实路经（构造探针实证三类误包含）
                 if NON_ROUTE_CLAUSE_RE.search(seg_content):
                     clauses = re.split(r"([，,])", seg_content)
                     kept = [c for i, c in enumerate(clauses)
@@ -208,7 +208,7 @@ class RouteParser:
                     continue
                 segs = self.parse_line(seg_content, scenic)
                 if not segs:
-                    # 叙述句兜底：整句作为一个潜在步骤（含POI时保留）
+                    # 叙述句默认处理：整句作为一个潜在步骤（含POI时保留）
                     if fmt in ("prose", "theme_prose") and CJK_RE.search(seg_content):
                         ann = self.annotate(seg_content)
                         if ann["pois"] and len(seg_content) <= 140:

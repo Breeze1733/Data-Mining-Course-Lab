@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-""" 回归：全仓扫描"return/raise 后同层不可达语句"死代码。
+""" 回归：全仓扫描"return/raise 后同层不可达语句"不可达代码。
 
 背景：task2/src/entity_sentence_eval.py 曾因在 main 中段插入模块级 import，
-结果构建/落盘代码全部落入 prf() 内 return 之后成为死代码——评测脚本静默零产出
+结果构建/落盘代码全部落入 prf() 内 return 之后成为不可达代码——评测脚本无输出且无异常报告
 （exit 0 且不写产物），链条与审计均不可见。本测试把该缺陷模式固化为静态检查。
 """
 import ast
@@ -57,7 +57,7 @@ class TestNoDeadCode(unittest.TestCase):
         files = sorted(set(f for g in SCAN_GLOBS for f in REPO.glob(g)))
         self.assertGreater(len(files), 20, "扫描范围异常：源文件数过少")
         hits = [h for f in files for h in unreachable_after_return(f)]
-        self.assertEqual(hits, [], "发现 return 后不可达死代码（静默零产出风险）:\n" + "\n".join(hits))
+        self.assertEqual(hits, [], "发现 return 后不可达不可达代码（无输出且无异常报告风险）:\n" + "\n".join(hits))
 
 
 if __name__ == "__main__":
