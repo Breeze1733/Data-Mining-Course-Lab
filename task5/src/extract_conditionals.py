@@ -188,7 +188,7 @@ LYRICAL_RE = re.compile(r"人生|岁月|初心|青春|梦想|心态|老得太快
 
 COGNITIVE_RE = re.compile(r"^(不要|别)(认为|觉得|以为|担心)")
 
-RHETORIC_P1_RE = re.compile(r"^如果说")
+RHETORIC_IFSAY_RE = re.compile(r"^如果说")
 
 APPEAL_RE = re.compile(r"管理部门|引起重视|呼吁")
 
@@ -284,7 +284,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         # E06：修辞守卫两口径——"如果说"落在条件文本（连词组只捕 2 字）；转述话语
         # （导游说/司机说…+如果）的建议对象是叙述者，非游客建议
-        if (RHETORIC_P1_RE.match(trigger) or cond.startswith("说")) and rest.startswith(("那么", "那 ")):
+        if (RHETORIC_IFSAY_RE.match(trigger) or cond.startswith("说")) and rest.startswith(("那么", "那 ")):
 
             continue  # "如果说X,那么Y"为对仗修辞，非条件建议
 
@@ -306,7 +306,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         rest = sent[m.start(2) + len(m.group(2)):]
 
-        if not rest or RHETORIC_P1_RE.match(trigger):
+        if not rest or RHETORIC_IFSAY_RE.match(trigger):
 
             continue
 
