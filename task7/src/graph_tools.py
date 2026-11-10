@@ -243,8 +243,11 @@ class GraphTools:
             return {"error": f"{scenic} 中未找到景点：{from_poi if src is None else to_poi}"}
         if src == dst:
             return {"from": from_poi, "to": to_poi, "path": [from_poi], "hops": 0}
+        # F08：路径限定在同景区 POI 内——跨景区先后顺序边（如周边地标→山上）不代表可步行到达
+        same_scenic = {n for n in self.G.nodes
+                       if f":{scenic}:" in n and self.G.nodes[n].get("kind") in ("景点", "周边景点")}
         try:
-            path = nx.shortest_path(self.G, src, dst, weight=None)
+            path = nx.shortest_path(self.G.subgraph(same_scenic), src, dst, weight=None)
         except nx.NetworkXNoPath:
             return {"from": from_poi, "to": to_poi, "path": [], "hops": None,
                     "note": "先后顺序图中无有向路径（可反向查询或分段游览）"}
