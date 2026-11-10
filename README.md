@@ -8,11 +8,17 @@
 使用仓库根目录的同一个 Python 环境（`.venv`），安装 `requirements.txt` 中的依赖后，在仓库根目录运行：
 
 ```bash
-python tests/run.py                              # 静态复现：全链路重建 + 单元测试 + 任务7 离线规则模式
-python tests/run.py --task7 llm                  # 动态验收：任务7 在线 LLM 模式（产物写入 *_llm.json / traces_llm/）
-python tests/run.py --task7 both                 # 先静态复现，再在线动态验收
-python common/regression_check.py                # 人工标注评测集回归守护（应全绿）
+python tests/run.py                              # 静态复现：全链重建 + 单元测试 + 契约/指纹守护 + 任务7 离线规则模式（应 19/19）
 python common/report_audit.py                    # 报告-数据一致性审计（应 70/70）
+python tests/run.py --task7 llm                  # （可选）动态验收：任务7 在线 LLM 模式（产物写入 *_llm.json / traces_llm/）
+```
+
+快速自检（两条命令内的等价检查，供抽查）：
+
+```bash
+wc -l task1/data/processed/dataset_clean.jsonl          # 数据集 271 条
+python -c "import json;d=json.load(open('task7/output/test_report.json',encoding='utf-8'));print(d['n_passed'],'/',d['n_scenarios'])"   # Agent 场景 19/19
+python common/contract_check.py --update-state          # 仅在确有说明地变更人工标注评测集后固化指纹基准
 ```
 
 程序读取已入库的 `task1/data/processed/dataset_clean.jsonl`，顺序执行实体识别及下游实验，

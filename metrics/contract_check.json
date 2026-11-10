@@ -19,6 +19,15 @@
   "task7 itineraries",
   "graph_nodes"
  ],
+ "guards": {
+  "dataset.count": 271,
+  "task2.spot_n": 53,
+  "task2.spot_self_consistent": true,
+  "task5.review_n": 79,
+  "task5.verdicts": "39/19/21",
+  "task5.review_self_consistent": true,
+  "gold.fingerprints_match": true
+ },
  "n_violations": 0,
  "violations": []
 }

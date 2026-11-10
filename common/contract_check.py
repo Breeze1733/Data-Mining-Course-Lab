@@ -1,19 +1,28 @@
 # -*- coding: utf-8 -*-
-"""跨任务数据契约校验——各任务边界产物的基础字段一致性。
+"""跨任务数据契约校验——各任务边界产物的基础字段一致性 + 人工标注评测集防篡改指纹。
 
 校验（只读，不修数据）：
 - 所有出现 record_id 的产物，其 id 必须存在于 task1 数据集；
 - scenic_area ∈ {黄山, 九寨沟, 颐和园}（或官方路线文档同值）；
 - 偏移字段 start<end≥0；行程 day≥1；实体 type ∈ 枚举；
-- 图谱 CSV 与 jsonl 行数守恒（与 graph_stats 三方校验互补，此处校验字段层）。
+- 图谱 CSV 与 jsonl 行数守恒（与 graph_stats 三方校验互补，此处校验字段层）；
+- 人工标注评测集（task2 抽检 / task4 标注 / task5 复核）SHA256 指纹与上次认可状态一致，
+  task2/task5 汇总数与样本重算自洽，数据集行数不漂移。
 任何违例即退出码 1。输出 metrics/contract_check.json。
+
+指纹基准存 metrics/regression_state.json；确需变更 gold 文件时先说明，再运行
+    python common/contract_check.py --update-state
+固化新基准。
 """
 from __future__ import annotations
 
+import argparse
 import csv
+import hashlib
 import io
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -22,9 +31,107 @@ if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout,
 
 SCENICS = {"黄山", "九寨沟", "颐和园"}
 ENT_TYPES = {"景点POI", "交通方式", "时间节点"}
+STATE_PATH = REPO / "metrics" / "regression_state.json"
+# 人工标注评测集：判定只允许追加复核，不允许为好看而改判——指纹变化必须显式备案
+GOLD_FILES = {
+    "task2_spot_checks": REPO / "task2/output/exp2/spot_checks.json",
+    "task4_annotation_gold": REPO / "task4/output/annotation_gold.json",
+    "task5_review_dev": REPO / "task5/output/review_dev.json",
+}
+
+
+def sha256(path: Path) -> str | None:
+    if not path.exists():
+        return None
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def load_json(path: Path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        print(f"[warn] 读取失败 {path}: {e}", file=sys.stderr)
+        return None
+
+
+def collect_guards() -> dict:
+    """收集防篡改守护指标：数据集行数、gold 指纹、task2/task5 汇总与样本重算自洽。"""
+    g: dict = {}
+    ds = REPO / "task1/data/processed/dataset_clean.jsonl"
+    g["dataset.count"] = sum(1 for ln in ds.open(encoding="utf-8") if ln.strip()) if ds.exists() else None
+
+    # task2 抽检汇总 vs 样本重算
+    sp = load_json(GOLD_FILES["task2_spot_checks"])
+    if sp:
+        present = [s for s in sp.get("samples", []) if s.get("present_in_current_output")]
+        verdicts: dict = {}
+        for s in present:
+            verdicts[s.get("verdict")] = verdicts.get(s.get("verdict"), 0) + 1
+        rs = sp.get("review_summary", {})
+        g["task2.spot_n"] = rs.get("n")
+        g["task2.spot_self_consistent"] = (
+            rs.get("n") == len(present) and rs.get("correct") == verdicts.get("correct")
+        )
+    else:
+        g["task2.spot_self_consistent"] = False
+
+    # task5 复核汇总 vs 人工标注评测集重算
+    rg = load_json(GOLD_FILES["task5_review_dev"])
+    rs5 = load_json(REPO / "task5/output/review_summary.json")
+    if rg and rs5:
+        counts: dict = {}
+        for r in rg.get("reviews", []):
+            counts[r.get("verdict")] = counts.get(r.get("verdict"), 0) + 1
+        v = rs5.get("verdicts", {})
+        g["task5.review_n"] = rs5.get("n")
+        g["task5.verdicts"] = f"{counts.get('correct', 0)}/{counts.get('boundary', 0)}/{counts.get('wrong', 0)}"
+        g["task5.review_self_consistent"] = (
+            rs5.get("n") == rg.get("n")
+            and v.get("correct") == counts.get("correct")
+            and v.get("boundary") == counts.get("boundary")
+            and v.get("wrong") == counts.get("wrong")
+        )
+    else:
+        g["task5.review_self_consistent"] = False
+
+    g["gold.sha256"] = {k: sha256(p) for k, p in GOLD_FILES.items()}
+    return g
+
+
+def check_guards(violations: list[str]) -> dict:
+    """指纹/计数与上次认可基准比对；自洽性检查与基准无关，始终执行。
+    返回本次实测指标（含 gold.sha256）。"""
+    now = collect_guards()
+    state = load_json(STATE_PATH)
+    if state:
+        last = state.get("guards", {})
+        if last.get("dataset.count") not in (None, now.get("dataset.count")):
+            violations.append(f"dataset.count {now.get('dataset.count')} != 认可基准 {last.get('dataset.count')}")
+        changed = [k for k, v in now["gold.sha256"].items() if v != state.get("gold.sha256", {}).get(k)]
+        for k in changed:
+            violations.append(f"gold 指纹变化（人工标注评测集不得改判；确认合理后 --update-state）: {k}")
+    for name in ("task2.spot_self_consistent", "task5.review_self_consistent"):
+        if now.get(name) is False:
+            violations.append(f"{name} 为 False：汇总与样本重算不一致")
+    return now
+
+
+def write_state(g: dict) -> None:
+    payload = {
+        "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "guards": {k: v for k, v in g.items() if k != "gold.sha256"},
+        "gold.sha256": g["gold.sha256"],
+        "notes": "人工标注判定只允许追加复核；指纹变化必须在变更说明后固化新基准。",
+    }
+    STATE_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"[state] 已更新基准 -> {STATE_PATH.relative_to(REPO)}")
 
 
 def main() -> int:
+    ap = argparse.ArgumentParser(description="跨任务数据契约校验")
+    ap.add_argument("--update-state", action="store_true",
+                    help="把当前指纹/计数固化为新基准（须先人工确认变更合理）")
+    args = ap.parse_args()
     violations: list[str] = []
     ds_ids = set()
     with (REPO / "task1/data/processed/dataset_clean.jsonl").open(encoding="utf-8") as fh:
@@ -120,6 +227,17 @@ def main() -> int:
         for f in ("source_url", "collected_at", "published_at", "author", "content_sha256"):
             if not r.get(f):
                 field_nulls[f] = field_nulls.get(f, 0) + 1
+    # 人工标注评测集防篡改守护（原 regression_check 并入；重打分由全链 rebuild 覆盖）
+    now = check_guards(violations)
+    if args.update_state:
+        write_state(now)
+        # 固化后守护类违例清零；契约类违例（record_id/字段/枚举）仍如实保留
+        violations = [v for v in violations if not v.startswith(("dataset.count", "gold "))]
+        guards = {k: v for k, v in now.items() if k != "gold.sha256"} | {"gold.fingerprints_match": True}
+    else:
+        state = load_json(STATE_PATH)
+        guards = {k: v for k, v in now.items() if k != "gold.sha256"} | {"gold.fingerprints_match":
+            not state or all(v == state.get("gold.sha256", {}).get(k) for k, v in now["gold.sha256"].items())}
     # D01：分句规则差异备案——task4 含分号/半角感叹，task5 不含；跨任务匹配用包含式容忍
     report = {
         "title": "跨任务数据契约校验",
@@ -131,6 +249,7 @@ def main() -> int:
         "missing_field_counts": field_nulls,
         "checked": ["entities_refined", "parsed_routes", "tourist_routes", "pronoun_cases",
                     "conditional_pairs", "mapping_table", "task7 itineraries", "graph_nodes"],
+        "guards": guards,
         "n_violations": len(violations),
         "violations": violations[:50],
     }
@@ -138,6 +257,7 @@ def main() -> int:
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({"n_violations": len(violations),
+                      "gold.fingerprints_match": guards["gold.fingerprints_match"],
                       "sample": violations[:5]}, ensure_ascii=False))
     return 1 if violations else 0
 
