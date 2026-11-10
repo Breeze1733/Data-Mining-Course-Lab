@@ -1,9 +1,0 @@
-{
- "title": "E12 稳定对齐复查（模式名迁移后）",
- "alignment": {
-  "retained_identical": 50,
-  "missing": 18,
-  "changed_same_sentence": 11
- },
- "note": "对齐键=(景区,条件,建议)不含模式名——改名不影响对齐；missing=当前抽取已不产出的历史复核行（P16 口径如实呈现）"
-}

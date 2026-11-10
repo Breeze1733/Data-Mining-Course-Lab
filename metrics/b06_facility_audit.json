@@ -1,9 +1,0 @@
-{
- "title": "B06 位置推断语境审计（facility 回退使用率）",
- "numbers": {
-  "dev_facility_fallback": 9,
-  "correct": 8,
-  "accuracy": 0.889
- },
- "verdict": "“X宾馆附近”等位置推断语境的设施回退在 dev 上 9 例判对 8 例（0.889）——上下文推断机制有效且使用真实（非摆设）"
-}

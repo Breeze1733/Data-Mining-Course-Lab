@@ -1,8 +1,0 @@
-{
- "title": "A08 Excel 完整性审计",
- "file": "task1\\data\\collected\\scenic_guide_dataset.xlsx",
- "rows": 17,
- "cells_checked": 80,
- "formula_injection_prefix": 0,
- "verdict": "长文本 Excel 外置可读；无公式注入前缀（A08 抽检通过）"
-}

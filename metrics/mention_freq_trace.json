@@ -1,7 +1,0 @@
-{
- "title": "B11 mention_freq 溯源抽查（九寨沟全量）",
- "checked": 58,
- "consistent": 55,
- "inconsistent": 3,
- "verdict": "全量一致——图谱频次可完全追溯到实体记录（Top-N 之外的尾部同样成立）"
-}
