@@ -1,0 +1,8 @@
+{
+ "title": "F08 方案A 实施结果",
+ "attempted": "跳过 scenic_areas=[] 与 scenic_areas≠[] 之间的先后边",
+ "result": "边仍存在——宏村词典 scenic_areas=['黄山']（seed 原有条目），B03 补充的 scenic_areas=[] 被幂等检查跳过",
+ "root_cause": "scenic_areas 双义性（识别范围 vs 物理位置）在词典层不可分——需新增独立字段（如 physical_location）",
+ "impact": "低：跨景区路径仅影响 query_path 显式查询；Agent 编排（_order_pois）在同景区内拓扑排序，不受影响",
+ "recommendation": "H09/H14 收官阶段统一处理（若需改 schema 则同步迁移词典+图谱+下游）"
+}

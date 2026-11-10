@@ -153,6 +153,9 @@ def main() -> int:
     _quality = json.loads((TASK1 / "data/processed/quality_report.json").read_text(encoding="utf-8"))
     _dup_groups, _rec2grp = dedup_groups_from_quality(_quality)
 
+    # F08 方案A：周边地标（scenic_areas=[]）与景区内 POI 间不建先后边——
+    # 跨区域边（宏村→光明顶 40km）不代表可步行到达
+    _nearby = {e["canonical"] for e in poi_of.values() if not e["scenic_areas"]}
     tourist_support: dict[tuple, int] = Counter()
     tourist_records: dict[tuple, list] = defaultdict(list)
     tourist_group_seen: dict[tuple, set] = defaultdict(set)
@@ -162,6 +165,9 @@ def main() -> int:
         # 图边取完整 poi_sequence（保留折返与重复到访），权重累加承载访问强度
         for a, b in zip(t["poi_sequence"], t["poi_sequence"][1:]):
             u, v = node_id("POI", scenic, resolve(scenic, a)), node_id("POI", scenic, resolve(scenic, b))
+            # F08 方案A：跳过跨区域对（一端为周边地标、另一端为景区内 POI）
+            if (resolve(scenic, a) in _nearby) != (resolve(scenic, b) in _nearby):
+                continue
             if not (G.has_node(u) and G.has_node(v)):
                 continue
             if G.has_edge(u, v, key="先后顺序"):
