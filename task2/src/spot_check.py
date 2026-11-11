@@ -9,9 +9,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output/exp2"
+EVAL = ROOT / "resources/eval"
 TASK1 = ROOT.parent / "task1"
 def score() -> None:
-    data = json.loads((OUT / "spot_checks.json").read_text(encoding="utf-8"))
+    data = json.loads((EVAL / "spot_checks.json").read_text(encoding="utf-8"))
     filled = [s for s in data["samples"] if s.get("verdict")]
     by_type: dict[str, list] = defaultdict(list)
     for s in filled:
@@ -25,7 +26,7 @@ def score() -> None:
 
 
 def reconcile():
-    path = OUT / "spot_checks.json"
+    path = EVAL / "spot_checks.json"
     data = json.loads(path.read_text(encoding="utf-8"))
     data.setdefault("historical_review_summary", data["review_summary"])
     current = {}

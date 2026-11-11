@@ -1,6 +1,5 @@
 {
  "draw_seed": 20261106,
- "sampling": "B01 第二轮（词典扩充后重抽，冻结测试）：3景区×(前5开头+随机正文)，14/14/12，seed=20261106；第一轮样本（entity_sentence_sample_dev.json）因驱动了 B03 词典扩充转为开发历史",
  "n": 40,
  "sentences": [
   {

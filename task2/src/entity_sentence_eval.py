@@ -18,10 +18,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT.parent))
-from common.fingerprints import data_fingerprints as _data_fingerprints  # noqa: E402
 
 EXP2 = ROOT / "output/exp2"
+EVAL = ROOT / "resources/eval"
 TASK1 = ROOT.parent / "task1"
 
 ROOT_SCENIC = {"黄山", "九寨沟", "颐和园"}
@@ -57,8 +56,8 @@ def gpos_found(sent: str, gtext: str) -> bool:
 
 
 def main() -> int:
-    sample = load_json(EXP2 / "entity_sentence_sample.json")["sentences"]
-    gold_doc = load_json(EXP2 / "entity_sentence_gold.json")
+    sample = load_json(EVAL / "entity_sentence_sample.json")["sentences"]
+    gold_doc = load_json(EVAL / "entity_sentence_gold.json")
     gold = {g["sid"]: g["entities"] for g in gold_doc["gold"]}
     records = {}
     with (TASK1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8") as fh:
@@ -94,8 +93,8 @@ def main() -> int:
     sample = [o for o in sample if o["record_id"] in records]
 
     stats = {"POI": [0, 0, 0], "交通": [0, 0, 0], "时间": [0, 0, 0]}
-    strict_hit = {"POI": 0, "交通": 0, "时间": 0}  # B01: strict criterion (a hit must be exactly equal text)
-    strict_by_span = {}  # B02: stratified by span length {length bucket: [strict hits, total hits]}
+    strict_hit = {"POI": 0, "交通": 0, "时间": 0}  # strict criterion (a hit must be exactly equal text)
+    strict_by_span = {}  # stratified by span length {length bucket: [strict hits, total hits]}
     stats_oos = {"POI": [0, 0, 0]}  # out-of-scope-by-design criterion (root scenic names / city names): tp/fn counted separately
     missed, false_pos = [], []
     sentence_stats = []  # per-sentence local (tp, fp, fn), for stratified reporting
@@ -168,7 +167,7 @@ def main() -> int:
             "skipped_sids": skipped,
             "note": "task1 物理去重后，原抽样文档若已移除，则映射到同组 canonical 记录；找不到原句时才跳过。",
         },
-        "annotated_by": gold_doc["annotated_by"],
+        "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注；POI/交通严格跨度含包含式变体，时间重叠口径）",
         "match_policy": gold_doc.get("out_of_scope_note", "根景区名与城市名按设计不作为 POI 实体抽取"),
         "per_type": {t: prf(*v) for t, v in stats.items()},
         # Dual criteria: lenient (containment-variant hits, primary) vs strict (hit text exactly equal)
@@ -202,7 +201,6 @@ def main() -> int:
     tot = lambda i: sum(v[i] for v in stats.values())
     result["overall"] = prf(tot(0), tot(1), tot(2))
     result["overall"]["precision_ci95"] = wilson_ci(tot(0), tot(0) + tot(1))
-    result["data_fingerprints"] = _data_fingerprints()
     result["overall"]["recall_ci95"] = wilson_ci(tot(0), tot(0) + tot(2))
     # Dual criterion: recall after removing by-design exclusions (root scenic names / cities) from the FN denominator
     oos_fn = sum(1 for m in missed if m.get("out_of_scope_design"))

@@ -1,6 +1,4 @@
 {
- "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注；POI/交通严格跨度含包含式变体，时间重叠口径）",
- "round": "B01 第二轮冻结测试（词典 B03 扩充之后重抽，seed=20261106；第一轮样本已转开发历史 entity_sentence_gold_dev.json）；冻结纪律：本样本判读完成后规则不再据其修改",
  "gold": [
   {
    "sid": 0,
