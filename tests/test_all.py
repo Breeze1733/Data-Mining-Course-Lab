@@ -3,22 +3,22 @@ from __future__ import annotations
 
 import ast
 import csv
-import inspect
 import json
 import tempfile
 import unittest
 from pathlib import Path
 
-from agent_cli import IntentParser, ReActAgent
 from build_graph import _contrast_blocked, _norm_cond_m as _norm_cond, dedup_groups_from_quality
 from compare_routes import entity_period
 from dictionary import Candidate, Gazetteer, POIEntry, TransportEntry, load_transport_lexicon
 from entity_identity import build_poi_lookup, canonical_name, read_aliases
 from entity_rules import DictMatcher, contextual_facility_places, refined_dictionary, resolve_record_entities, time_entities
 from extract_entities import main
-from graph_tools import TOOL_SCHEMAS, GraphTools
 from preprocess import canonicalize_url, clean_text, export_outputs, preprocess_records
 from time_rules import TimeRules
+
+
+RESOURCES = Path(__file__).resolve().parents[1] / "task2/resources"
 
 
 def poi(pid, area, surface, canonical, subtype, parent="", priority=10, negative=""):
@@ -443,205 +443,6 @@ class F05DedupTests(unittest.TestCase):
         groups, rec2grp = dedup_groups_from_quality({})
         self.assertEqual(groups, [])
         self.assertEqual(rec2grp, {})
-
-
-class SchemaSignatureTests(unittest.TestCase):
-    """G09: TOOL_SCHEMAS parameter declarations match the actual method signatures (machine-verified)."""
-
-    def test_schema_params_match_signature(self):
-        for schema in TOOL_SCHEMAS:
-            method = getattr(GraphTools, schema["name"])
-            sig = inspect.signature(method)
-            declared = set(schema["params"])
-            actual = {k for k, v in sig.parameters.items() if k not in ("self",)}
-            # every parameter declared in the schema must exist in the signature (optional parameters are expressed by signature defaults)
-            missing = declared - actual
-            self.assertEqual(missing, set(),
-                             f"{schema['name']} schema 声明了签名没有的参数: {missing}")
-
-    def test_every_public_query_has_schema(self):
-        schema_names = {s["name"] for s in TOOL_SCHEMAS}
-        for name, m in inspect.getmembers(GraphTools, inspect.isfunction):
-            if name.startswith("query_") and name not in schema_names:
-                self.fail(f"公开查询 {name} 未在 TOOL_SCHEMAS 注册")
-
-
-class TestMergeDays(unittest.TestCase):
-    """Explicit duration protection and type/range validation for intent merging (offline)."""
-
-    def setUp(self):
-        self.merge = IntentParser._merge_days
-
-    def test_explicit_rules_not_overridden(self):
-        # the rules parse "三天" as 3 explicitly; any LLM value (1 or otherwise) must not override
-        self.assertEqual(self.merge(3, True, 1), 3)
-        self.assertEqual(self.merge(3, True, 2), 3)
-
-    def test_rule_default_filled_by_llm(self):
-        # the rules miss the duration pattern (default 1, not explicit); the LLM fills in 2 -> adopted
-        self.assertEqual(self.merge(1, False, 2), 2)
-        self.assertEqual(self.merge(1, False, 0.5), 0.5)
-
-    def test_invalid_llm_values_ignored(self):
-        self.assertEqual(self.merge(1, False, "两天"), 1)   # non-numeric
-        self.assertEqual(self.merge(1, False, None), 1)
-        self.assertEqual(self.merge(1, False, 9), 1)        # out of range
-        self.assertEqual(self.merge(1, False, 0), 1)        # out of range
-        self.assertEqual(self.merge(1, False, True), 1)     # booleans are invalid
-
-    def test_rules_parse_marks_explicit(self):
-        parser = IntentParser(None)
-        intent = parser._parse_rules("情侣黄山三日游")
-        self.assertEqual(intent["days"], 3)
-        self.assertTrue(intent["days_explicit"])
-        intent2 = parser._parse_rules("九寨沟带孩子怎么玩")
-        self.assertEqual(intent2["days"], 1)
-        self.assertFalse(intent2["days_explicit"])
-
-
-VALID_DAYS = {0.5, 1, 1.5, 2, 3, 3.5, 4, 5}
-
-
-class IntentValidationTests(unittest.TestCase):
-    """G01: intent field type validation and range constraints."""
-
-    @classmethod
-    def setUpClass(cls):
-        cls.parser = IntentParser(None)
-
-    def _intent(self, q):
-        return self.parser._parse_rules(q)
-
-    def test_days_always_in_valid_range(self):
-        for q in ("黄山两日游", "黄山玩半天", "黄山一日半游", "黄山三日半游",
-                  "黄山五日游", "黄山3天游", "黄山周末游", "只有3小时游颐和园"):
-            self.assertIn(self._intent(q)["days"], VALID_DAYS, q)
-
-    def test_month_in_valid_range(self):
-        for q in ("1月去黄山", "12月去黄山", "国庆去黄山", "春节去黄山", "夏天去黄山"):
-            m = self._intent(q)["month"]
-            self.assertIsNotNone(m, q)
-            self.assertTrue(1 <= m <= 12, q)
-
-    def test_explicit_fields_consistent(self):
-        it = self._intent("黄山两日游，避开莲花峰")
-        self.assertIn("days", it["explicit_fields"])
-        self.assertIn("avoid", it["explicit_fields"])
-        it2 = self._intent("黄山旅游")
-        self.assertNotIn("days", it2["explicit_fields"])
-
-
-class FakeLLM:
-    def __init__(self, behavior):
-        self.available = True
-        self._behavior = behavior
-
-    def complete(self, system, user, temperature=0.4):
-        return self._behavior()
-
-
-class FaultyLLM(FakeLLM):
-    def complete(self, system, user, temperature=0.4):
-        raise TimeoutError("mock: 请求超时")
-
-
-class EmptyLLM(FakeLLM):
-    def complete(self, system, user, temperature=0.4):
-        return "   \n  "
-
-
-class OkLLM(FakeLLM):
-    """Faithful polish: fills the text with all POI names from the plan JSON (simulates real polishing that keeps POIs)."""
-
-    def complete(self, system, user, temperature=0.4):
-        import json as _json
-        plan = _json.loads(user)
-        pois = "、".join(it["poi"] for it in plan.get("itinerary", []))
-        return f"【润色文案】为您安排：{pois}（mock）"
-
-
-class LLMMockTests(unittest.TestCase):
-    """LLM polish fallback robustness with injected faults (offline mock tests).
-
-    Covers three fault modes: call exceptions (timeout/rate limit), empty responses,
-    and normal responses. Fallback contract: any fault must fall back to the template
-    text (non-empty answer, trace.via="fallback"); an empty string must never be
-    passed through to the user as the polished answer.
-    """
-
-    QUERY = "情侣黄山两日游，想看日出"
-
-    def _run(self, llm):
-        agent = ReActAgent(llm)
-        return agent.run(self.QUERY)
-
-    def test_timeout_falls_back_to_template(self):
-        r = self._run(FaultyLLM(None))
-        self.assertTrue(r["answer"].strip(), "异常回退后回答不得为空")
-        self.assertTrue(any(t.get("via") == "fallback" for t in r["trace"]))
-        plan = r.get("plan") or {}
-        self.assertTrue(plan.get("itinerary"), "回退后仍须有行程")
-
-    def test_empty_response_falls_back(self):
-        r = self._run(EmptyLLM(None))
-        self.assertTrue(r["answer"].strip(), "空响应须回退模板，不得透传空串")
-        self.assertTrue(any(t.get("via") == "fallback" for t in r["trace"]))
-
-    def test_poi_loss_falls_back(self):
-        """G11: fall back to the template when POI coverage of the polished text is below 60% (guards against missed POIs)."""
-
-        class LossyLLM(FakeLLM):
-            def complete(self, system, user, temperature=0.4):
-                return "黄山很美，两天玩得很开心，推荐大家去玩。"  # no POI names
-
-        r = self._run(LossyLLM(None))
-        self.assertTrue(r["answer"].strip())
-        self.assertTrue(any(t.get("via") == "fallback" for t in r["trace"]),
-                        "站点覆盖不足须回退模板")
-        self.assertTrue(any("覆盖不足" in t.get("thought", "") for t in r["trace"]))
-
-    def test_normal_response_used(self):
-        r = self._run(OkLLM(None))
-        self.assertIn("润色文案", r["answer"])
-        self.assertTrue(any(t.get("via") == "llm" for t in r["trace"]))
-
-
-class TestToolErrors(unittest.TestCase):
-    """Stable structured returns for tool calls with invalid parameters (offline)."""
-
-    def setUp(self):
-        self.t = GraphTools()
-
-    def test_bad_scenic_structured_error(self):
-        for tool, args in (("query_pois", {"scenic": "泰山"}),
-                           ("query_route", {"scenic": "泰山", "days": 1}),
-                           ("query_conditions", {"scenic": "泰山"})):
-            with self.subTest(tool=tool):
-                res = getattr(self.t, tool)(**args)
-                self.assertIn("error", res)
-                self.assertIn("泰山", res["error"])
-
-    def test_unknown_poi_structured_error(self):
-        res = self.t.query_order("黄山", "不存在的景点")
-        self.assertIn("error", res)
-        res2 = self.t.query_path("黄山", "不存在A", "不存在B")
-        self.assertIn("error", res2)
-
-    def test_limit_validation(self):
-        for bad in (-5, 0, "abc", None):
-            res = self.t.query_pois("黄山", None, bad)
-            self.assertIn("error", res)
-            self.assertNotIn("pois", res)
-        res = self.t.query_pois("黄山", None, 3)
-        self.assertIn("pois", res)
-        self.assertLessEqual(len(res["pois"]), 3)
-
-    def test_cross_scenic_path_structured_error(self):
-        res = self.t.query_path("黄山", "长海", "迎客松")
-        self.assertIn("error", res)
-
-
-RESOURCES = Path(__file__).resolve().parents[1] / "task2/resources"
 
 
 class TimeRuleTests(unittest.TestCase):

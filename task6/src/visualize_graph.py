@@ -1,12 +1,11 @@
 """Experiment 6: knowledge graph visualization (static PNG + pyvis interactive HTML).
 
 Static graph: one per scenic area; POI nodes colored by degree to highlight key nodes; condition nodes show only the top 12 with frequency>=2.
-Interactive graph: pyvis HTML with physics layout; nodes are draggable and clickable to inspect attributes.
+Interactive graph: full scenic-area subgraphs in pyvis HTML with embedded graph assets.
 """
 from __future__ import annotations
 
 import io
-import json
 import sys
 from pathlib import Path
 
@@ -34,12 +33,11 @@ def load_graph() -> nx.MultiDiGraph:
     return nx.read_graphml(OUT / "knowledge_graph.graphml")
 
 
-def subgraph_for(G: nx.MultiDiGraph, scenic: str, max_conds: int = 12) -> nx.MultiDiGraph:
-    nodes = [n for n in G.nodes if f":{scenic}:" in n]
-    sub = G.subgraph(nodes).copy()
+def static_overview(graph: nx.MultiDiGraph) -> nx.MultiDiGraph:
+    sub = graph.copy()
     # Keep only the top-N condition nodes by frequency so they do not drown the POI network
     conds = [(n, d.get("frequency", 1)) for n, d in sub.nodes(data=True) if d.get("kind") == "条件"]
-    keep = {n for n, f in sorted(conds, key=lambda x: -x[1])[:max_conds] if f >= 2}
+    keep = {n for n, f in sorted(conds, key=lambda x: -x[1])[:12] if f >= 2}
     drop = [n for n, d in sub.nodes(data=True) if d.get("kind") == "条件" and n not in keep]
     sub.remove_nodes_from(drop)
     return sub
@@ -107,11 +105,11 @@ def draw_static(sub: nx.MultiDiGraph, scenic: str, path: Path):
     plt.close(fig)
 
 
-def draw_interactive(G: nx.MultiDiGraph, scenic: str, path: Path):
+def draw_interactive(sub: nx.MultiDiGraph, scenic: str, path: Path):
     from pyvis.network import Network
-    sub = subgraph_for(G, scenic, max_conds=25)
     net = Network(height="750px", width="100%", directed=True, notebook=False, font_color="#333333",
-                  cdn_resources="remote")
+                  cdn_resources="in_line",
+                  heading=f"{scenic}游览知识图谱（{sub.number_of_nodes()} 节点 / {sub.number_of_edges()} 边）")
     net.barnes_hut(gravity=-6000, spring_length=120)
     for n, d in sub.nodes(data=True):
         kind = d.get("kind", "景点")
@@ -123,17 +121,20 @@ def draw_interactive(G: nx.MultiDiGraph, scenic: str, path: Path):
         net.add_edge(u, v, title=f'{d.get("relation")} w={d.get("weight", 1):.1f}',
                      width=min(4, 0.6 + float(d.get("weight", 1)) ** 0.5 * 0.5),
                      color={"先后顺序": "#37474F", "条件建议": "#F9A825"}.get(d.get("relation"), "#B0BEC5"))
-    net.write_html(str(path))
+    html = "\n".join(line.rstrip() for line in net.generate_html().splitlines())
+    path.write_text(html + "\n", encoding="utf-8", newline="\n")
 
 
 def main() -> int:
     FIGS.mkdir(parents=True, exist_ok=True)
     G = load_graph()
     for scenic in AREAS:
-        sub = subgraph_for(G, scenic)
-        draw_static(sub, scenic, FIGS / f"graph_{scenic}.png")
-        draw_interactive(G, scenic, OUT / f"graph_{scenic}.html")
-        print(f"{scenic}: static {sub.number_of_nodes()}n/{sub.number_of_edges()}e, html ok")
+        full = G.subgraph(n for n in G if n.split(":", 2)[1] == scenic)
+        overview = static_overview(full)
+        draw_static(overview, scenic, FIGS / f"graph_{scenic}.png")
+        draw_interactive(full, scenic, OUT / f"graph_{scenic}.html")
+        print(f"{scenic}: static {overview.number_of_nodes()}n/{overview.number_of_edges()}e, "
+              f"HTML {full.number_of_nodes()}n/{full.number_of_edges()}e")
     return 0
 
 

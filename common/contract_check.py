@@ -183,20 +183,43 @@ def main() -> int:
     check_jsonl(REPO / "task5/output/conditional_pairs.jsonl",
                 fields=("condition_text", "suggestion_text"))
 
-    # task7 itinerary traces: day≥1, period enum
-    traces = REPO / "task7/output/traces"
-    n_tr = 0
-    for f in sorted(traces.glob("trace_*.json")):
+    # Check the submitted online run without contacting the model.
+    online = REPO / "task7/evidence/online"
+    agent_report = load_json(online / "test_report_llm.json") or {}
+    scenarios = {f"trace_{r['scenario']}.json": r for r in agent_report.get("results", [])}
+    traces = sorted((online / "traces_llm").glob("trace_*.json"))
+    if (not str(agent_report.get("mode", "")).startswith("llm")
+            or not scenarios
+            or len(scenarios) != agent_report.get("n_scenarios")
+            or sum(r["passed"] for r in scenarios.values()) != agent_report.get("n_passed")
+            or {f.name for f in traces} != scenarios.keys()):
+        violations.append("实验7在线报告、通过数或场景轨迹清单不一致")
+    model_responses = 0
+    plans = []
+    for f in traces:
         t = json.loads(f.read_text(encoding="utf-8"))
+        steps = t["trace"]
+        model_responses += any(step.get("via") in ("hybrid", "llm") for step in steps)
+        if f.name in scenarios:
+            summary = scenarios[f.name]
+            if (t.get("query") != summary["query"]
+                    or sum(step.get("step") == "action" for step in steps) != summary["n_tool_calls"]):
+                violations.append(f"{f.name} 与在线报告的请求或调用次数不一致")
         plan = t.get("plan")
         if not plan:
             continue
-        n_tr += 1
+        plans.append({"scenario": f.stem.removeprefix("trace_"), **plan})
         for it in plan.get("itinerary", []):
             if not (isinstance(it.get("day"), int) and it["day"] >= 1):
                 violations.append(f"{f.name} day 非法: {it.get('day')}")
             if it.get("period") not in ("上午", "中午", "下午", "晚上", "未标注时段"):
                 violations.append(f"{f.name} period 非法: {it.get('period')}")
+    if not model_responses:
+        violations.append("实验7在线轨迹缺少成功的模型响应")
+    saved_plans = load_json(online / "itineraries_llm.json")
+    if saved_plans is None or sorted(plans, key=lambda p: p["scenario"]) != sorted(
+            saved_plans, key=lambda p: p["scenario"]):
+        violations.append("实验7在线行程汇总与轨迹不一致")
 
     # task6 CSV field layer: node_id non-empty, kind enum, row count matches stats
     gstats = json.loads((REPO / "task6/output/graph_stats.json").read_text(encoding="utf-8"))

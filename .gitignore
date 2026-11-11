@@ -24,7 +24,7 @@ Thumbs.db
 /uv.lock
 /pyproject.toml
 
-# 本地报告生成工具（不入库）
+# 本地资料、诊断脚本和打包结果
 /local/
 
 # 可由离线脚本生成的中间产物

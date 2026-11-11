@@ -1,5 +1,5 @@
 {
-  "base_url": "https://open.bigmodel.cn/api/paas/v4",
+  "base_url": "在这里填入baseurl",
   "api_key": "在这里填入你的 API Key",
-  "model": "glm-4-flash"
+  "model": "在这里填入模型名称"
 }

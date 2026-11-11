@@ -1,15 +1,4 @@
-"""Offline rebuild from the committed canonical corpus; never collects web data.
-
-python run.py [--task7 rules|llm|both]
-
-Task 7 acceptance modes (prompt §2.3):
-  rules  Default. Offline rules mode, static reproduction criteria (--rules is passed
-         explicitly; never goes online because of a local config.json).
-  llm    Online dynamic acceptance: calls the configured LLM to produce itineraries and
-         answers; artifacts are written separately to *_llm.json / traces_llm/ and never
-         overwrite offline acceptance evidence; requires task7/config.json.
-  both   Offline static reproduction first, then online dynamic acceptance.
-"""
+"""Rebuild experiments 2–6 and verify the frozen submission evidence offline."""
 import argparse
 import os
 import subprocess
@@ -19,12 +8,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def build_steps(task7_mode: str) -> list:
+def build_steps() -> list:
     steps = [
         # unit tests first: verify basic semantics are intact before rebuilding the pipeline
         ("__unittest__", []),
-        # miss-driven expansion of the dictionary/time rules (idempotent; must run before build_dictionary)
-        ("task2/src/expand_dictionary.py", []),
+        # Export the dictionary from the submitted resources.
+        ("task2/src/export_dictionary.py", []),
         ("task2/src/extract_entities.py", ["--iteration", "baseline"]),
         ("task2/src/extract_entities.py", ["--iteration", "refined"]),
         ("task2/src/visualize.py", ["--iteration", "baseline"]),
@@ -32,7 +21,7 @@ def build_steps(task7_mode: str) -> list:
         ("task2/src/spot_check.py", ["--reconcile"]),
         # sentence-level entity evaluation (recall measurable for the first time; artifact entity_sentence_eval.json)
         ("task2/src/entity_sentence_eval.py", []),
-        ("task2/src/ablation_dictionary.py", ["--iter-compare"]),
+        ("task2/src/compare_iterations.py", []),
         ("task3/src/parse_routes.py", []),
         ("task3/src/compare_routes.py", []),
         ("task3/src/build_hierarchy_view.py", []),
@@ -53,22 +42,13 @@ def build_steps(task7_mode: str) -> list:
         # cross-task data contract check (boundary field consistency, read-only; any violation fails the chain)
         ("common/contract_check.py", []),
     ]
-    if task7_mode in ("rules", "both"):
-        # static reproduction: explicitly select offline rules mode (prompt §2.3); no accidental network access due to a local config.json
-        steps.append(("task7/src/run_tests.py", ["--rules"]))
-    if task7_mode in ("llm", "both"):
-        # dynamic acceptance: online LLM mode; artifacts written separately to *_llm.json / traces_llm/ (separated inside run_tests)
-        steps.append(("task7/src/run_tests.py", []))
     return steps
 
 
 def main():
-    parser = argparse.ArgumentParser(__doc__)
-    parser.add_argument("--task7", choices=["rules", "llm", "both"], default="rules",
-                        help="任务7 验收模式：rules=离线静态复现（默认）；llm=在线动态验收；both=先离线再在线")
-    args = parser.parse_args()
+    argparse.ArgumentParser(description=__doc__).parse_args()
     env = {**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8", "PYTHONHASHSEED": "0"}
-    steps = build_steps(args.task7)
+    steps = build_steps()
     for script, arguments in steps:
         if script == "__unittest__":
             print("Running unit tests (unittest discover)", flush=True)

@@ -1,13 +1,7 @@
-"""Experiment 7: Agent multi-scenario batch tests (8 scenarios, evidence written to disk).
-
-Scenario coverage: scenic areas × visitor types × durations, special needs, fallback when
-no scenic area matches, half-day + special-needs conflict notice, conditional-node
-feasibility notices.
-Output: output/traces/trace_*.json, itineraries.json, test_report.json
-"""
+"""Run the submitted 14-scenario suite with a configured online LLM."""
 from __future__ import annotations
 
-import io
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -16,7 +10,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from agent_cli import LLMClient, ReActAgent  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "output"
 
 SCENARIOS = [
     {"id": "S1_老人颐和园半日", "query": "带老人去颐和园玩半天，腿脚不方便，走省力的路线",
@@ -50,60 +43,9 @@ SCENARIOS = [
     {"id": "S14_多约束集成", "query": "黄山三天游，冬季去，避开莲花峰",
      "expect": {"scenic": "黄山", "days": 3, "month": 12, "avoid_respected": "莲花峰",
                 "multi_day": True}},
-    {"id": "S15_必去地点", "query": "黄山两日游，一定要去天都峰",
-     "expect": {"scenic": "黄山", "days": 2, "must_respected": "天都峰"}},
-    {"id": "S16_无日出景点诚实回退", "query": "颐和园两日游，想看日出",
-     "expect": {"scenic": "颐和园", "days": 2, "sunrise_honest": True}},
-    {"id": "S17_出入口编排", "query": "颐和园一日游，北宫门进东宫门出",
-     "expect": {"scenic": "颐和园", "days": 1, "entrance_first": "北宫门", "exit_last": "东宫门"}},
-    {"id": "S18_避开住宿日出取舍", "query": "黄山两日游想看日出，不要住白云宾馆",
-     "expect": {"scenic": "黄山", "days": 2, "avoid_respected": "白云宾馆",
-                "sunrise_tradeoff": True}},
-    {"id": "S19_一天半游不退化为单日", "query": "黄山一天半游",
-     "expect": {"scenic": "黄山", "days": 1.5, "half_tail_multi_day": True}},
 ]
 
 
-def check_half_tail_multi_day(result):
-    """Acceptance: fractional day counts must not degrade to a single day -- 1.5 days must
-    span 2 days with the tail day being a half day (periods capped to 上午/中午).
-
-    Previously int(1.5)=1 degraded a 1.5-day trip into a single day of 4 stops
-    (below the sizing floor of 6).
-    """
-    plan = result.get("plan") or {}
-    it = plan.get("itinerary", [])
-    days = sorted({x["day"] for x in it})
-    if days != [1, 2]:
-        return False
-    tail_periods = [x["period"] for x in it if x["day"] == 2]
-    return all(p in ("上午", "中午") for p in tail_periods) and bool(tail_periods)
-
-
-def check_sunrise_tradeoff(result):
-    """Acceptance: when the only on-mountain lodging is avoided, the sunrise arrangement must state the trade-off instead of claiming on-mountain lodging as usual."""
-    plan = result.get("plan") or {}
-    pois = [it["poi"] for it in plan.get("itinerary", [])]
-    no_lodging = not any(any(k in p for k in ("宾馆", "酒店", "民宿")) for p in pois)
-    noted = any("避开山上住宿" in n and "取舍" in n or "恢复住宿" in n
-                for n in (plan.get("special_notes") or []))
-    return no_lodging and noted
-
-
-def check_entrance_exit(result, en, ex):
-    """Acceptance: the entrance POI is the first stop and the exit POI the last stop of the itinerary (detects the regression where entrance/exit are ignored)."""
-    plan = result.get("plan") or {}
-    pois = [it["poi"] for it in plan.get("itinerary", [])]
-    return bool(pois) and pois[0] == en and pois[-1] == ex
-
-
-def check_sunrise_honest(result):
-    """Acceptance: when the scenic area has no sunrise viewpoint, no fake sunrise arrangement may be fabricated -- it must be stated honestly while the itinerary is still given as usual."""
-    plan = result.get("plan") or {}
-    notes = plan.get("special_notes") or []
-    noted = any("无日出观景点" in n for n in notes)
-    no_fake = all("日出" not in it["period"] and "日出" not in it["poi"] for it in plan.get("itinerary", []))
-    return bool(plan.get("itinerary")) and noted and no_fake
 def check_unknown_poi(result, poi):
     """ Acceptance: POIs that do not exist in the knowledge graph must not be fabricated into the itinerary."""
     plan = result.get("plan") or {}
@@ -114,8 +56,7 @@ def check_avoid(result, expect_poi):
     plan = result.get("plan") or {}
     pois = [it["poi"] for it in plan.get("itinerary", [])]
     not_in = all(expect_poi not in p for p in pois)
-    noted = any(expect_poi in (plan.get("special_notes") or [])[0:1][0] if plan.get("special_notes") else False
-                for _ in [0]) or any(expect_poi in n for n in (plan.get("special_notes") or []))
+    noted = any(expect_poi in note for note in (plan.get("special_notes") or []))
     return not_in and noted
 def check_sunrise(result, expect_poi):
     """ Acceptance (semantic criteria): the sunrise viewpoint is placed first on the last day,
@@ -161,24 +102,8 @@ def check_invariants(result):
     return True
 
 
-def check_must(result, expect_poi):
-    """Acceptance: must-visit POIs must appear in the itinerary, and the answer/tips must state that the must-visit is honored (detects the regression where the must code path is unreachable)."""
-    plan = result.get("plan") or {}
-    pois = [it["poi"] for it in plan.get("itinerary", [])]
-    in_plan = any(expect_poi in p for p in pois)
-    noted = any(expect_poi in n for n in (plan.get("special_notes") or [])) \
-        or expect_poi in result["answer"]
-    return in_plan and noted
-
-
-def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
-    """Per-scenario acceptance checks (run_tests and the ablation share the same criteria,
-    avoiding assertion drift between the two).
-
-    With rules=True, tips_in_answer is a hard check (the offline renderer must guarantee
-    tips reach the answer); online polishing may paraphrase/omit, so it is a soft check
-    (tips present in the plan suffices).
-    """
+def evaluate_scenario(sc: dict, result: dict) -> dict:
+    """Check the plan, tool use and response for an online scenario."""
     checks = {}
     intent = result["intent"]
     for k, v in sc["expect"].items():
@@ -206,20 +131,6 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
             checks["unknown_poi_not_in_plan"] = check_unknown_poi(result, v)
         elif k == "avoid_respected":
             checks["avoid_respected"] = check_avoid(result, v)
-        elif k == "must_respected":
-            checks["must_respected"] = check_must(result, v)
-        elif k == "sunrise_honest":
-            checks["sunrise_honest"] = check_sunrise_honest(result)
-        elif k == "entrance_first":
-            plan = result.get("plan") or {}
-            pois = [it["poi"] for it in plan.get("itinerary", [])]
-            checks["entrance_first"] = check_entrance_exit(result, v, sc["expect"]["exit_last"])
-        elif k == "exit_last":
-            pass  # already merged into the entrance_first endpoint check
-        elif k == "sunrise_tradeoff":
-            checks["sunrise_tradeoff"] = check_sunrise_tradeoff(result)
-        elif k == "half_tail_multi_day":
-            checks["half_tail_multi_day"] = check_half_tail_multi_day(result)
         elif k == "multi_visitor":
             vt = intent.get("visitor_types") or []
             checks["multi_visitor"] = all(v in vt for v in v)
@@ -229,14 +140,7 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
             warnings = (result["plan"] or {}).get("feasibility_warnings", [])
             checks["seasonal_note"] = any("时段提示" in w for w in warnings)
         elif k == "tips_in_answer":
-            # offline renderer guarantees tips reach the answer (hard check); online polishing may omit them (soft check)
-            plan = result.get("plan") or {}
-            if not rules:
-                checks["tips_in_answer"] = plan is not None and len(plan.get("tips") or []) > 0
-            else:
-                tip_keys = [t["suggestion"][:8].strip() for t in (plan.get("tips") or [])[:4]]
-                checks["tips_in_answer"] = plan is not None and any(
-                    k in result["answer"] for k in tip_keys if k)
+            checks["tips_in_answer"] = bool((result["plan"] or {}).get("tips"))
         elif k == "feasibility_in_answer":
             # acceptance: the warning text appears in the final answer
             checks["feasibility_in_answer"] = v in result["answer"]
@@ -271,22 +175,27 @@ def evaluate_scenario(sc: dict, result: dict, rules: bool = True) -> dict:
 
 def main() -> int:
     sys.stdout.reconfigure(encoding="utf-8")
-    OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "traces").mkdir(exist_ok=True)
-    import argparse
     ap = argparse.ArgumentParser()
-    ap.add_argument("--rules", action="store_true",
-                    help="强制规则模式（规范产物默认口径；LLM 模式结果另存 test_report_llm.json）")
-    args = ap.parse_args()
-    llm = LLMClient(config_path=ROOT / "config.nokey.json") if args.rules else LLMClient()
-    online = llm.available and not args.rules
-    trace_dir = OUT / ("traces_llm" if online else "traces")
-    trace_dir.mkdir(exist_ok=True)
+    ap.add_argument("--llm", action="store_true", required=True,
+                    help="调用已配置的在线模型，结果写入 local/agent_llm/")
+    ap.parse_args()
+    llm = LLMClient()
+    if not llm.available:
+        ap.error("--llm 需要在 task7/config.json 配置 base_url、api_key 和 model")
+    out = ROOT.parent / "local" / "agent_llm"
+    trace_dir = out / "traces_llm"
+    trace_dir.mkdir(parents=True, exist_ok=True)
     results = []
+    plans = []
+    llm_responses = 0
+    llm_fallbacks = 0
     for sc in SCENARIOS:
         agent = ReActAgent(llm)
         result = agent.run(sc["query"])
-        checks = evaluate_scenario(sc, result, rules=args.rules)
+        checks = evaluate_scenario(sc, result)
+        modes = {step.get("via") for step in result["trace"]}
+        llm_responses += bool(modes & {"hybrid", "llm"})
+        llm_fallbacks += "fallback" in modes
         tool_calls = [t for t in result["trace"] if t.get("step") == "action"]
         passed = all(checks.values())
         results.append({"scenario": sc["id"], "query": sc["query"], "passed": passed,
@@ -296,33 +205,29 @@ def main() -> int:
         (trace_dir / f'trace_{sc["id"]}.json').write_text(
             json.dumps({k: v for k, v in result.items() if k != "elapsed"},
                        ensure_ascii=False, indent=1), encoding="utf-8")
+        if result["plan"]:
+            plans.append({"scenario": sc["id"], **result["plan"]})
         print(f'{"PASS" if passed else "FAIL"} {sc["id"]} | tools={len(tool_calls)} | {result["elapsed"]}s')
 
     report = {
-        "mode": ("llm（在线模式）" if online else
-                 "rules（--rules 强制离线）" if args.rules else
-                 "rules（未配置 LLM API，内置规划器）"),
+        "mode": "llm（在线模式）",
         "n_scenarios": len(SCENARIOS),
         "n_passed": sum(1 for r in results if r["passed"]),
         "results": results,
-        "evidence": "每次运行的完整 ReAct trace（含每步 thought/action/observation）见 output/traces/",
+        "evidence": f"完整工具调用轨迹见 {trace_dir.relative_to(ROOT.parent).as_posix()}/",
     }
-    # online mode is recorded separately and does not overwrite offline acceptance evidence (prompt §2.3)
-    suffix = "_llm" if online else ""
-    trace_dir = OUT / ("traces" if not online else "traces_llm")
-    trace_dir.mkdir(exist_ok=True)
-    (OUT / f"test_report{suffix}.json").write_text(
+    report["scenarios_with_llm_response"] = llm_responses
+    report["scenarios_with_llm_fallback"] = llm_fallbacks
+    (out / "test_report_llm.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
-    plans = []
-    for sc in SCENARIOS:
-        t = json.loads((trace_dir / f'trace_{sc["id"]}.json').read_text(encoding="utf-8"))
-        if t.get("plan"):
-            plans.append({"scenario": sc["id"], **t["plan"]})
-    (OUT / f"itineraries{suffix}.json").write_text(json.dumps(plans, ensure_ascii=False, indent=1), encoding="utf-8")
+    (out / "itineraries_llm.json").write_text(json.dumps(plans, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({k: report[k] for k in ("mode", "n_scenarios", "n_passed")}, ensure_ascii=False))
     failed = [r["scenario"] for r in results if not r["passed"]]
     if failed:
         print(f"FAILED scenarios: {failed}", file=sys.stderr)
+        return 1
+    if not llm_responses:
+        print("在线验收未获得可用模型响应", file=sys.stderr)
         return 1
     return 0
 

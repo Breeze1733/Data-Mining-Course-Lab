@@ -102,7 +102,7 @@ EVAL = load(ROOT / "task4/output/evaluation.json") or {}
 STAT5 = load(ROOT / "task5/output/extraction_stats.json") or {}
 REV5 = load(ROOT / "task5/output/review_summary.json") or {}
 GS = load(ROOT / "task6/output/graph_stats.json") or {}
-TR = load(ROOT / "task7/output/test_report.json") or {}
+TR = load(ROOT / "task7/evidence/online/test_report_llm.json") or {}
 
 sum_by_prefix = lambda d, p: sum(v for k, v in d.items() if k.startswith(p))
 

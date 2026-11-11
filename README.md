@@ -1,53 +1,39 @@
-# 《数据挖掘》探索性实验：景区游览指南的程序性知识挖掘
+# 景区游览指南的程序性知识挖掘
 
-黄山 / 九寨沟 / 颐和园三景区多源文本的程序性知识挖掘，按实验项目存放于 task1 至 task7：
-采集清洗 → 实体识别 → 路线解析 → 共指消解 → 条件建议抽取 → 知识图谱 → 旅游规划 Agent。
+本实验以黄山、九寨沟和颐和园的官方指南及游客游记为语料，完成数据清洗、实体识别、路线解析、共指消解、条件建议抽取、知识图谱和旅游规划 Agent。
 
-## 复现
+## 提交材料
 
-使用仓库根目录的同一个 Python 环境（`.venv`），安装 `requirements.txt` 中的依赖后，在仓库根目录运行：
+按任务书提交 `task1/report.docx` 至 `task7/report.docx` 和根目录的 [实验总结反思](实验总结反思.docx)，共八份报告。随报告附上代码、结构化结果和下表中的证据，保留目录结构以便核查。**Git 跟踪的文件组成提交树**。打包时使用 Git 跟踪清单，或从包含本次整理的提交执行 `git archive`，不要直接压缩整个工作区。
 
-```bash
-python tests/run.py                              # 静态复现：实验 2–7 重建、单元测试、契约校验与离线规则验收（应 19/19）
-python common/report_audit.py                    # 报告-数据一致性审计（应 70/70）
-python tests/run.py --task7 llm                  # （可选）动态验收：任务7 在线 LLM 模式（产物写入 *_llm.json / traces_llm/）
+| 实验 | 提交证据与结果 |
+|---|---|
+| 1 采集与清洗 | [数据工作簿](task1/data/collected/scenic_guide_dataset.xlsx)、`task1/data/processed/` 的主语料和清洗审计。三景区共 271 条保留记录，均达到每景区至少 1 条官方路线和 5 篇游记的目标。官方路线分支见 `task1/data/raw/official_routes.jsonl`。 |
+| 2 实体识别 | `task2/resources/` 和 `task2/output/exp2/` 的实体规范、带位置实体、人工抽检、词频图及优化前后对比。句级抽样评测精确率 85.2%，召回率 69.7%。 |
+| 3 路线结构 | `task3/output/` 的格式分析、步骤、时间层级和官方与游客对比。46 条官方分支中 39 条有序，36 条拆成多步骤，另 3 条是含多个景点的单步骤段落。对比使用 229 条游客路线。 |
+| 4 共指消解 | `task4/output/` 的代词位置、候选和消解结果，以及 180 例冻结人工标注。总体准确率 67.8%，留出集 60.0%。报告列出正确与失败例。 |
+| 5 条件建议 | `task5/output/` 的原句、映射表 Excel/JSON、分组图和人工复核。1,025 对候选去重后保留 966 对。79 条开发复核中 39 条判为正确，边界切分与误抽仍是主要限制。 |
+| 6 知识图谱 | `task6/output/` 的节点和边 CSV、GraphML、静态概览、完整分景区交互图及核验结果。638 节点、2,941 边，6/6 条已知事实核验通过。 |
+| 7 旅游规划 Agent | [单次在线实测](task7/evidence/online/)保存同一批次的 14 场景汇总、结构化行程和全部轨迹。14/14 达到当批断言，12 个场景成功采用混合意图解析，13 个场景完成模型润色。报告注明回退、时段与景区归属局限。 |
+| 总结反思 | 三类主要失败的归因与改进，及以句子级景区归属为突破点的学期研究方案。 |
+
+`task1/` 至 `task7/` 的源码和必要资源、`requirements.txt`、`tests/`、`common/` 和 `metrics/regression_state.json` 随包提供。冻结标注、关键中间证据及实验 2 的优化前后对比属于评分材料。
+
+## 复现与核查
+
+在仓库根目录的 Python 环境（已验证 Python 3.13，图表使用 SimHei／Microsoft YaHei）运行：
+
+```text
+python -m pip install -r requirements.txt
+python tests/run.py
+python common/report_audit.py
 ```
 
-快速自检（两条命令内的等价检查，供抽查）：
+`tests/run.py` 使用提交版语料重建实验 2–6，并核对数据契约、人工标注指纹和实验 7 已归档的在线证据。实验 1 的清洗复现见 [task1](task1/README.md)。实验 7 的报告以归档批次为准，核查无需密钥或联网重跑。另行在线试用见 [task7](task7/README.md)。
 
-```bash
-wc -l task1/data/processed/dataset_clean.jsonl          # 数据集 271 条
-python -c "import json;d=json.load(open('task7/output/test_report.json',encoding='utf-8'));print(d['n_passed'],'/',d['n_scenarios'])"   # Agent 场景 19/19
-```
+## 本地自留
 
-程序读取已入库的 `task1/data/processed/dataset_clean.jsonl`，顺序执行实体识别及下游实验，
-更新各实验输出与图表。默认离线运行。实验 1 的原始记录和快照保存在本地，清洗复现方法见 `task1/README.md`。
-Agent 未配置 API 时使用规则模式；配置 `task7/config.json`（OpenAI 兼容接口）后启用 LLM。
-
-实验2 的 baseline 和 refined 由同一个识别器运行，分别用于迭代对比和最终下游输入；
-正式结果统一保存在各任务的 `output` 目录。
-
-## 目录结构
-
-| 目录 | 实验 | 报告 |
-|---|---|---|
-| task1 | 数据采集与预处理 | task1/report.docx |
-| task2 | 实体识别 | task2/report.docx |
-| task3 | 路线层级结构 | task3/report.docx |
-| task4 | 共指消解 | task4/report.docx |
-| task5 | 条件建议抽取 | task5/report.docx |
-| task6 | 知识图谱融合 | task6/report.docx |
-| task7 | 旅游规划 Agent | task7/report.docx |
-| task1/scripts | 采集爬虫 | — |
-| common | 数据契约与防篡改指纹校验、报告-数据一致性审计 | — |
-| docs | 过程账本（PROGRESS / METRICS / DECISIONS / README） | — |
-| metrics | 指标快照（`snapshot_latest.json` 为最新） | — |
-
-总结反思为根目录的 `实验总结反思.docx`。公共名称映射在 `task2/resources`、
-`common/entity_identity.py`，地点别名在 `task2/resources/poi_aliases.csv`，由实体、路线和图谱统一读取。
-
-## 技术路线
-
-实验1–6 为纯静态管线（jieba + 词典 + 正则 + 规则，无 key 可复现）；LLM 仅实验7 按任务书要求使用
-（意图解析混合模式、文案润色），`docs/README.md` 有接入范围与命名约定的完整说明。
-最终指标见 `docs/METRICS.md` 终表。
+- `local/reference/` 保存教师提供的任务书，`local/archive/` 保存历史诊断和旧版标注准备材料。报告构建器、验收笔记、渲染预览、打包文件和之后的在线试跑结果也放在 `local/`。整个目录由 Git 忽略。
+- 原始采集快照、爬虫工作区、浏览器导出、组装记录和重建副本由 `task1/.gitignore` 管理。
+- 实验 2 的 baseline 逐条识别、实验 3 的游客时间层级明细、实验 4 的重写示例临时 JSON 和契约检查日志按具体路径忽略。正式统计、图表和报告里的代表样例随包提交。
+- `task7/config.json`、`.env`、依赖环境、缓存和运行日志留在本地。提交包仅含无密钥的配置模板。

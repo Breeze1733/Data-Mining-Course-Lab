@@ -13,7 +13,6 @@ data/**
 !data/collected/
 !data/collected/collection_summary.json
 !data/collected/candidate_audit.jsonl
-!data/collected/eligible_candidate_pool.csv
 !data/collected/scenic_guide_dataset.xlsx
 !data/processed/
 !data/processed/dataset_clean.jsonl

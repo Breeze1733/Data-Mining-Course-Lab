@@ -1,27 +1,9 @@
-# 实验项目6：多源程序性知识融合与图谱可视化
-融合实验2（实体）、实验3（路线结构）、实验5（条件建议）为景区游览知识图谱（NetworkX），563 节点 / 2,409 边，含分景区可视化、质量验证与逐条溯源（条件节点 sources/evidence、先后边逐记录证据）。
-## 目录结构
-```
-src/
-  build_graph.py       图谱构建（Schema、实体对齐、双源加权、条件边、CSV/GraphML 导出）
-  visualize_graph.py   静态 PNG（分景区）+ pyvis 交互 HTML
-  verify_graph.py      质量验证（已知事实核验、连通性、同名隔离）
-output/
-  graph_nodes.csv / graph_edges.csv / knowledge_graph.graphml
-  graph_stats.json / graph_validation.json
-  graph_{景区}.html     交互图谱
-  figs/graph_*.png
-report.docx           实验项目6报告
-```
-## 运行方法（在 task1 虚拟环境内）
-```powershell
-cd task1
-..\.venv\Scripts\python.exe -X utf8 ..\task6\src\build_graph.py
-..\.venv\Scripts\python.exe -X utf8 ..\task6\src\visualize_graph.py
-..\.venv\Scripts\python.exe -X utf8 ..\task6\src\verify_graph.py
-```
-## 关键结论
-- Schema：景区/景点POI/时段/交通操作/条件 5 类节点；包含/先后顺序/时段归属/交通方式/条件建议 5 类边。
-- 融合：canonical+景区命名空间对齐（五彩池/北海不跨景区合并）；先后边=官方 1.0/条+游客 0.5/条，保留路线 ID 溯源。
-- 验证：6/6 已知事实核验通过，各景区子图单连通，无孤立节点；核心节点（光明顶/五彩池/佛香阁）与领域常识一致。
-地点别名与路线引用检查由src/verify_graph.py统一执行，结果写入output/graph_validation.json。
+# 实验 6 知识图谱融合与可视化
+
+融合实体、路线结构与条件建议，构建 638 节点、2,941 边的游览知识图谱。实体以规范名和景区对齐，顺序边保留官方及游记证据，条件建议保留可追溯来源。已知事实核验 6/6，各景区子图连通，无孤点。
+
+- `output/knowledge_graph.graphml`、`graph_nodes.csv` 和 `graph_edges.csv` 保存结构化图谱。
+- [九寨沟](output/graph_九寨沟.html)、[黄山](output/graph_黄山.html)和[颐和园](output/graph_颐和园.html)交互图保留各景区的全部节点和关系。`output/figs/` 的静态概览筛选高频条件节点，突出主路线。
+- `output/graph_stats.json` 和 `graph_validation.json` 保存计数与核验。
+
+在仓库根目录运行 `python tests/run.py`。本实验入口为 `src/build_graph.py`、`src/verify_graph.py`、`src/visualize_graph.py`。

@@ -1,36 +1,14 @@
-# 实验项目7：旅游规划 Agent（ReAct 模式）
-基于实验6知识图谱的旅游规划 Agent：意图解析 → 图谱查询工具调用 → 行程编排 → 文案生成，
-显式“思考-行动-观察”循环并记录完整 trace。
-## LLM 配置（可选）
-复制 `config.example.json` 为 `config.json` 并填入任意 OpenAI 兼容接口（智谱/通义/DeepSeek/OpenAI 均可）
-的 `base_url`、`api_key`、`model`。**未配置时自动使用内置规则规划器**（意图解析、编排、文案全部离线可复现），
-LLM 仅用于意图解析与最终文案润色，行程编排始终基于图谱查询结果。
-## 目录结构
+# 实验 7 旅游规划 Agent
+
+提交结果取自 2026 年 11 月 7 日入库的一批在线 LLM 实测，14/14 达到该批功能断言。12 个场景使用混合意图解析，S1 和 S5 出现意图回退。13 个支持景区的场景调用图谱工具并完成 LLM 润色。报告分析了回退、封闭景点和跨景区归属的局限。
+
+[evidence/online/](evidence/online/) 保存该批原始汇总、行程及 14 份轨迹。历史汇总中的输出路径沿用采集时的写法，实际轨迹在同级 `traces_llm/`。评阅可直接核对归档。
+
+如需在线试用，在 `task7/` 将 `config.example.json` 复制为 `config.json`，填写 API Key 和可用模型。模板的 `base_url` 为 `https://api.breeze.qzz.io/v1`。从仓库根目录运行：
+
+```text
+python task7/src/agent_cli.py
+python task7/src/run_tests.py --llm
 ```
-src/
-  graph_tools.py    图谱查询工具层（4 个工具，带参数 Schema 与调用 trace）
-  agent_cli.py      LLMClient + IntentParser + ReActAgent + 交互命令行
-  run_tests.py      10 场景批量测试（离线 rules / 在线 LLM 产物分离落盘）
-output/
-  traces/trace_*.json   每个场景的完整 ReAct 轨迹（thought/action/observation）
-  itineraries.json      结构化行程
-  test_report.json      测试汇总
-config.example.json    LLM 配置模板
-report.docx            实验项目7报告
-```
-## 运行方法（在 task1 虚拟环境内）
-```powershell
-cd task1
-..\.venv\Scripts\python.exe -X utf8 ..\task7\src\run_tests.py      # 批量测试
-..\.venv\Scripts\python.exe -X utf8 ..\task7\src\agent_cli.py      # 交互命令行
-```
-## 工具清单
-| 工具 | 输入 | 输出 |
-|---|---|---|
-| query_pois | 景区、游客类型、limit | POI 列表（度数/词频/时段/交通/游客适配度） |
-| query_route | 景区、天数 | 官方路线结构化步骤 |
-| query_conditions | 景区、游客类型 | 条件性建议（人群/装备/天气…） |
-| query_order | 景区、POI | 官方先后邻接（前驱/后继+权重） |
-## 关键结论
-- 10/10 场景通过（离线与在线双模式）：含回退（S5）、冲突提示（S6）、可行性提示（S7）、多跳动线（S8）、冬季时段（S9）、三日编排（S10）。
-- 每次规划真实调用 6 个图谱工具，官方路线模板按已选 POI 覆盖率选用（<60% 时改用图谱先后边拓扑排序），警告与特殊需求说明进入最终回答。
+
+第二条命令可另行运行在线场景，产物写入 Git 忽略的 `local/agent_llm/`。归档批次供正式报告使用。

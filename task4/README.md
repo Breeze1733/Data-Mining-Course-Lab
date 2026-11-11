@@ -1,27 +1,7 @@
-# 实验项目4：程序性知识的共指消解
-从 249 篇游记中检测 1,940 处代词（它/这里/那里/他们/其中等 12 类），实现规则消解（POI 优先 + 距离约束 + 语义类别分流 + 焦点×归属一致性过滤），180 例人工标注评测（开发 120 + 测试 60，按文档分组）。
-## 目录结构
-```
-src/
-  detect_and_resolve.py   代词检测 + 规则消解（v2：人称角色词表、jieba 名词先行词）
-  annotate_sample.py      分层抽样（seed=42）、人工判定写入、评估与图
-output/
-  pronoun_cases.jsonl     全部 1940 处代词（位置/所在句/候选池/消解结果）
-  annotation_sample_dev/test.json  开发 120 例 / 测试 60 例抽样清单
-  annotation_gold.json    人工标注（先行词、类别、备注）
-  evaluation.json         准确率（总体/分类别）与 58 个错误案例
-  figs/coref_evaluation.png
-report.docx             实验项目4报告
-```
-## 运行方法（在 task1 虚拟环境内）
-```powershell
-cd task1
-..\.venv\Scripts\python.exe -X utf8 ..\task4\src\detect_and_resolve.py     # 检测 + 消解
-..\.venv\Scripts\python.exe -X utf8 ..\task4\src\annotate_sample.py --sample  # 生成抽样
-..\.venv\Scripts\python.exe -X utf8 ..\task4\src\annotate_sample.py --fill    # 写入人工判定
-..\.venv\Scripts\python.exe -X utf8 ..\task4\src\annotate_sample.py --score   # 评估
-```
-## 关键结论
-- 规则消解总体准确率 67.8%（180 例 = 开发 120 + 留出 60；开发 71.7% / 留出 60.0%；v1 26.7% 起六层机制逐级改进）：处所 57.8% / 物体 73.3% / 人称 77.8% / 集合 62.2%。
-- 两类结构性难题：多景点游记的“景区外指代”（主景区标签 ≠ 句子叙述焦点）；“其中”类部分格结构的普通名词先行词。
-- 人工标注含多景点漂移、后置命名、同句劫持、人称语境依赖等典型案例，可作为实验7 LLM 消解的对照测试集。
+# 实验 4 程序性知识的共指消解
+
+在 249 篇游记中检测出 1,940 处代词，输出来源、字符偏移、候选与消解结果。规则结合 POI、距离、语义类别和句子景区归属。冻结人工标注共 180 例，按文档划分开发 120 例和留出 60 例。总体准确率 67.8%，开发 71.7%，留出 60.0%。
+
+`output/pronoun_cases.jsonl` 保存逐例结果，`annotation_gold.json` 保存人工先行词与判定备注，`evaluation.json` 保存指标和误差案例。`output/attribution/` 保存句子归属结果、标注和评估。
+
+在仓库根目录运行 `python tests/run.py`。本实验依次完成句子归属、检测与消解、冻结标注计分和文本改写示例生成。计分入口为 `src/annotate_sample.py --score`。
