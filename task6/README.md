@@ -6,4 +6,4 @@
 - [九寨沟](output/graph_九寨沟.html)、[黄山](output/graph_黄山.html)和[颐和园](output/graph_颐和园.html)交互图保留各景区的全部节点和关系。`output/figs/` 的静态概览筛选高频条件节点，突出主路线。
 - `output/graph_stats.json` 和 `graph_validation.json` 保存计数与核验。
 
-在仓库根目录运行 `python tests/run.py`。本实验入口为 `src/build_graph.py`、`src/verify_graph.py`、`src/visualize_graph.py`。
+在仓库根目录依次运行 `python task6/src/build_graph.py`、`python task6/src/verify_graph.py`、`python task6/src/visualize_graph.py`。

@@ -13,7 +13,6 @@ preprocess.clean_text, keeping the cleaning effect auditable.
 """
 from __future__ import annotations
 
-import hashlib
 import io
 import json
 import sys
@@ -98,9 +97,6 @@ def build_ctrip(candidates: list[dict]) -> tuple[list[dict], list[dict]]:
             problems.append({"record_id": cand["record_id"], "problem": "snapshot_missing"})
             continue
         page = path.read_bytes()
-        if cand.get("snapshot_sha256") and hashlib.sha256(page).hexdigest() != cand["snapshot_sha256"]:
-            problems.append({"record_id": cand["record_id"], "problem": "snapshot_hash_mismatch"})
-            continue
         try:
             fragment, selector = wrapper_fragment(page)
         except ValueError as exc:

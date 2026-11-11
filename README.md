@@ -17,23 +17,21 @@
 | 7 旅游规划 Agent | [单次在线实测](task7/evidence/online/)保存同一批次的 14 场景汇总、结构化行程和全部轨迹。14/14 达到当批断言，12 个场景成功采用混合意图解析，13 个场景完成模型润色。报告注明回退、时段与景区归属局限。 |
 | 总结反思 | 三类主要失败的归因与改进，及以句子级景区归属为突破点的学期研究方案。 |
 
-`task1/` 至 `task7/` 的源码和必要资源、`requirements.txt`、`tests/`、`common/` 和 `metrics/regression_state.json` 随包提供。冻结标注、关键中间证据及实验 2 的优化前后对比属于评分材料。
+`task1/` 至 `task7/` 的源码和必要资源、`requirements.txt` 和共用代码 `common/` 随包提供。冻结标注、关键中间证据及实验 2 的优化前后对比属于评分材料。
 
-## 复现与核查
+## 运行实验
 
 在仓库根目录的 Python 环境（已验证 Python 3.13，图表使用 SimHei／Microsoft YaHei）运行：
 
 ```text
 python -m pip install -r requirements.txt
-python tests/run.py
-python common/report_audit.py
 ```
 
-`tests/run.py` 使用提交版语料重建实验 2–6，并核对数据契约、人工标注指纹和实验 7 已归档的在线证据。实验 1 的清洗复现见 [task1](task1/README.md)。实验 7 的报告以归档批次为准，核查无需密钥或联网重跑。另行在线试用见 [task7](task7/README.md)。
+各实验的入口和运行说明见 [实验 1](task1/README.md)、[实验 2](task2/README.md)、[实验 3](task3/README.md)、[实验 4](task4/README.md)、[实验 5](task5/README.md)、[实验 6](task6/README.md)和[实验 7](task7/README.md)。
 
 ## 本地自留
 
 - `local/reference/` 保存教师提供的任务书，`local/archive/` 保存历史诊断和旧版标注准备材料。报告构建器、验收笔记、渲染预览、打包文件和之后的在线试跑结果也放在 `local/`。整个目录由 Git 忽略。
 - 原始采集快照、爬虫工作区、浏览器导出、组装记录和重建副本由 `task1/.gitignore` 管理。
-- 实验 2 的 baseline 逐条识别、实验 3 的游客时间层级明细、实验 4 的重写示例临时 JSON 和契约检查日志按具体路径忽略。正式统计、图表和报告里的代表样例随包提交。
+- 实验 2 的 baseline 逐条识别、实验 3 的游客时间层级明细和实验 4 的重写示例临时 JSON 按具体路径忽略。正式统计、图表和报告里的代表样例随包提交。
 - `task7/config.json`、`.env`、依赖环境、缓存和运行日志留在本地。提交包仅含无密钥的配置模板。

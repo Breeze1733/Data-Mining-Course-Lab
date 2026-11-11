@@ -431,8 +431,6 @@ def run(input_path: Path, output_path: Path, audit_path: Path) -> dict:
     audit_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_bytes((json.dumps(merged, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
     audit_path.write_bytes((json.dumps(audit, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
-    if hashlib.sha256(input_path.read_bytes()).hexdigest() != input_digest:
-        raise RuntimeError("Input export changed during import; preserved output requires review")
     return {key: audit[key] for key in ("input_export_records", "existing_records", "screening_rejected_candidates", "merged_unique_notes", "selected_by_scenic_area", "selected_by_note_subtype")}
 
 

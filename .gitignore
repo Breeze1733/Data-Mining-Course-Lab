@@ -28,7 +28,6 @@ Thumbs.db
 /local/
 
 # 可由离线脚本生成的中间产物
-/metrics/contract_check.json
 /task2/output/exp2/entities_baseline.jsonl
 /task3/output/tourist_time_hierarchy.jsonl
 /task4/output/resolved_examples.json

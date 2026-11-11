@@ -4,4 +4,11 @@
 
 `output/pronoun_cases.jsonl` 保存逐例结果，`annotation_gold.json` 保存人工先行词与判定备注，`evaluation.json` 保存指标和误差案例。`output/attribution/` 保存句子归属结果、标注和评估。
 
-在仓库根目录运行 `python tests/run.py`。本实验依次完成句子归属、检测与消解、冻结标注计分和文本改写示例生成。计分入口为 `src/annotate_sample.py --score`。
+在仓库根目录依次运行：
+
+```text
+python task4/src/attribute_sentences.py --output task4/output/attribution/attributed_sentences.jsonl
+python task4/src/detect_and_resolve.py
+python task4/src/annotate_sample.py --score
+python task4/src/build_resolved_examples.py
+```
