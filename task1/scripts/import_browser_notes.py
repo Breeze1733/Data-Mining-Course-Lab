@@ -316,7 +316,7 @@ def run(input_path: Path, output_path: Path, audit_path: Path) -> dict:
         except (ValueError, TypeError):
             continue
     # An earlier collection may hold a timestamp absent from the legacy notes.
-    current_records = ROOT / "data/raw/records.jsonl"
+    current_records = ROOT / "data/raw/dataset_raw.jsonl"
     if current_records.exists():
         for line in current_records.read_text(encoding="utf-8-sig").splitlines():
             if not line.strip():

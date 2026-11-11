@@ -1,10 +1,9 @@
 """Task 1: clean captured scenic-area articles and export auditable datasets.
 
 Offline entry point (run from task1):
-    python src/preprocess.py --input data/raw/records.jsonl --output-dir data/rebuild
+    python src/preprocess.py --input data/raw/dataset_raw.jsonl --output-dir data/rebuild
 
-Only the Python standard library is required for preprocessing. The rebuild
-uses the saved records and local source snapshots.
+Only the Python standard library and the saved raw dataset are required for preprocessing.
 """
 
 from __future__ import annotations
@@ -24,7 +23,6 @@ from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 
-TASK_ROOT = Path(__file__).resolve().parents[1]
 SCENIC_AREAS = ("黄山", "九寨沟", "颐和园")
 SCENIC_ALIASES = {
     "黄山": ("黄山", "迎客松", "光明顶", "始信峰", "玉屏", "云谷", "西海大峡谷", "huangshan"),
@@ -315,6 +313,7 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
     near_duplicates: list[dict] = []
     for position, original in enumerate(records, start=1):
         row = dict(original)
+        row.pop("provenance_note", None)
         # Preserve source data types in raw JSON; normalize only scalar metadata.
         for key in BASE_FIELDS:
             if key != "raw_content":
@@ -482,25 +481,6 @@ def read_jsonl(path: Path) -> list[dict]:
     return records
 
 
-def fill_snapshot_hashes(rows: list[dict]) -> None:
-    """Backfill accepted records from available local source snapshots."""
-    data_dir = (TASK_ROOT / "data").resolve()
-    hashes = {}
-    for row in rows:
-        if row.get("snapshot_sha256"):
-            continue
-        raw_file = row["raw_file"]
-        if raw_file not in hashes:
-            snapshot = (TASK_ROOT / raw_file).resolve()
-            hashes[raw_file] = (
-                hashlib.sha256(snapshot.read_bytes()).hexdigest()
-                if snapshot.is_relative_to(data_dir) and snapshot.is_file()
-                else None
-            )
-        if hashes[raw_file] is not None:
-            row["snapshot_sha256"] = hashes[raw_file]
-
-
 def _json(path: Path, data) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
@@ -532,10 +512,11 @@ def export_outputs(output_dir: Path, rows: list[dict], report: dict,
     _jsonl(output_dir / "rejected_records.jsonl", rejected)
     _json(output_dir / "cleaning_examples.json", examples)
     with (output_dir / "dataset_clean.csv").open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
+        csv_fields = [key for key in fields if key != "provenance_note"]
+        writer = csv.DictWriter(handle, fieldnames=csv_fields, extrasaction="ignore")
         writer.writeheader()
         for row in rows:
-            writer.writerow({key: _scalar(row.get(key, "")) for key in fields})
+            writer.writerow({key: _scalar(row.get(key, "")) for key in csv_fields})
 
     externalized = []
     long_dir = output_dir / "long_text"
@@ -563,7 +544,7 @@ def export_outputs(output_dir: Path, rows: list[dict], report: dict,
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Clean scenic-area captures and export CSV/JSONL with quality audit.")
-    parser.add_argument("--input", type=Path, default=Path("data/raw/records.jsonl"))
+    parser.add_argument("--input", type=Path, default=Path("data/raw/dataset_raw.jsonl"))
     parser.add_argument("--output-dir", type=Path, default=Path("data/rebuild"))
     parser.add_argument("--min-travelogue-length", type=int, default=80)
     parser.add_argument("--min-official-length", type=int, default=30)
@@ -571,7 +552,6 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     records = read_jsonl(args.input)
     rows, report, rejected, examples = preprocess_records(records, args.min_travelogue_length, args.min_official_length)
-    fill_snapshot_hashes(rows)
     report["input_path"] = args.input.as_posix()
     report["input_sha256"] = hashlib.sha256(args.input.read_bytes()).hexdigest()
     export_outputs(args.output_dir, rows, report, rejected, examples)

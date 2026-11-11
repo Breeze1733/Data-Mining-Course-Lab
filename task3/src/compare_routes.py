@@ -140,8 +140,6 @@ def extract_tourist_routes() -> list[dict]:
 
                 # distinct_pois is only for the set-based criterion of coverage/tau
 
-                "evidence_note": "POI 阅读顺序序列（弱证据：含介绍/推荐提及，非全部为实际移动）",
-
             })
 
     return routes

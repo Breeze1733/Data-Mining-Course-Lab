@@ -8,8 +8,8 @@
 
 | 实验 | 提交证据与结果 |
 |---|---|
-| 1 采集与清洗 | [数据工作簿](task1/data/collected/scenic_guide_dataset.xlsx)、`task1/data/processed/` 的主语料和清洗审计。三景区共 271 条保留记录，均达到每景区至少 1 条官方路线和 5 篇游记的目标。官方路线分支见 `task1/data/raw/official_routes.jsonl`。 |
-| 2 实体识别 | `task2/resources/` 和 `task2/output/exp2/` 的实体规范、带位置实体、人工抽检、词频图及优化前后对比。句级抽样评测精确率 85.2%，召回率 69.7%。 |
+| 1 采集与清洗 | `task1/data/raw/dataset_raw.jsonl` 的原始语料、[数据工作簿](task1/data/collected/scenic_guide_dataset.xlsx)和 `task1/data/processed/` 的清洗结果。三景区共 271 条保留记录，均达到每景区至少 1 条官方路线和 5 篇游记的目标。官方路线分支见 `task1/data/raw/official_routes.jsonl`。 |
+| 2 实体识别 | `task2/resources/` 和 `task2/output/exp2/` 的领域词典、带位置实体、人工抽检、词频图及优化前后对比。句级抽样评测精确率 85.2%，召回率 69.7%。 |
 | 3 路线结构 | `task3/output/` 的格式分析、步骤、时间层级和官方与游客对比。46 条官方分支中 39 条有序，36 条拆成多步骤，另 3 条是含多个景点的单步骤段落。对比使用 229 条游客路线。 |
 | 4 共指消解 | `task4/output/` 的代词位置、候选和消解结果，以及 180 例冻结人工标注。总体准确率 67.8%，留出集 60.0%。报告列出正确与失败例。 |
 | 5 条件建议 | `task5/output/` 的原句、映射表 Excel/JSON、分组图和人工复核。1,025 对候选去重后保留 966 对。79 条开发复核中 39 条判为正确，边界切分与误抽仍是主要限制。 |
@@ -28,10 +28,3 @@ python -m pip install -r requirements.txt
 ```
 
 各实验的入口和运行说明见 [实验 1](task1/README.md)、[实验 2](task2/README.md)、[实验 3](task3/README.md)、[实验 4](task4/README.md)、[实验 5](task5/README.md)、[实验 6](task6/README.md)和[实验 7](task7/README.md)。
-
-## 本地自留
-
-- `local/reference/` 保存教师提供的任务书，`local/archive/` 保存历史诊断和旧版标注准备材料。报告构建器、验收笔记、渲染预览、打包文件和之后的在线试跑结果也放在 `local/`。整个目录由 Git 忽略。
-- 原始采集快照、爬虫工作区、浏览器导出、组装记录和重建副本由 `task1/.gitignore` 管理。
-- 实验 2 的 baseline 逐条识别、实验 3 的游客时间层级明细和实验 4 的重写示例临时 JSON 按具体路径忽略。正式统计、图表和报告里的代表样例随包提交。
-- `task7/config.json`、`.env`、依赖环境、缓存和运行日志留在本地。提交包仅含无密钥的配置模板。

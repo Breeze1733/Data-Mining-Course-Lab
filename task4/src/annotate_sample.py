@@ -108,8 +108,7 @@ def score(cases: list[dict]) -> None:
             name_match = True
         rows.append({**g, "correct": bool(kind_match and name_match),
                      "kind_match": bool(kind_match), "name_match": bool(name_match),
-                     "cur_pred": pred, "cur_kind": case["resolution_kind"],
-                     "cur_evidence": case.get("evidence", "")})
+                     "cur_pred": pred, "cur_kind": case["resolution_kind"]})
     acc_overall = sum(r["correct"] for r in rows) / len(rows)
     by_class = defaultdict(lambda: [0, 0])
     for r in rows:
@@ -161,7 +160,7 @@ def score(cases: list[dict]) -> None:
         # Error list cites the current predictions (historical rule_resolution snapshots remain only in the gold file for reference)
         "errors": [
             {"pronoun": r["pronoun"], "class": r["pronoun_class"], "scenic": r["scenic_area"],
-             "pred": r["cur_pred"], "pred_kind": r["cur_kind"], "evidence": r["cur_evidence"],
+             "pred": r["cur_pred"], "pred_kind": r["cur_kind"],
              "gold": r["gold_antecedent"], "gold_kind": r["gold_kind"], "note": r["note"]}
             for r in rows if not r["correct"]],
         # Kind metrics and antecedent-identity metrics are reported separately — non-entity kinds are judged on kind only, never counted as identity-correct

@@ -783,8 +783,6 @@ def main(argv=None) -> int:
 
     atomic_write_text(OUT / "opposing_pairs.json", json.dumps({
 
-        "note": "P4 对立建议自动标记：同景区内否定式与肯定式同核建议共存（互带 row_id 与来源）",
-
         "n_marked_rows": len(_opp),
 
         "pairs": [{"scenic_area": r["scenic_area"], "term": r["opposing"]["term"],

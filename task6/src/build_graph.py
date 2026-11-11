@@ -353,22 +353,16 @@ def main() -> int:
     import csv
     _buf = io.StringIO()
     w = csv.writer(_buf, lineterminator=chr(13) + chr(10))
-    w.writerow(["node_id", "kind", "name", "label", "mention_freq", "cond_type", "suggestion", "frequency",
-                "variants", "suggestions", "sources", "evidence"])
+    w.writerow(["node_id", "kind", "name", "label"])
     for n, d in G.nodes(data=True):
-        w.writerow([n, d.get("kind", ""), d.get("name", ""), d.get("label", ""),
-                    d.get("mention_freq", ""), d.get("cond_type", ""), d.get("suggestion", ""),
-                    d.get("frequency", ""), d.get("variants", ""), d.get("suggestions", ""),
-                    d.get("sources", ""), d.get("evidence", "")])
+        w.writerow([n, d.get("kind", ""), d.get("name", ""), d.get("label", "")])
     atomic_write_text(OUT / "graph_nodes.csv", _buf.getvalue(), encoding="utf-8-sig", newline="")
 
     _buf2 = io.StringIO()
     w2 = csv.writer(_buf2, lineterminator=chr(13) + chr(10))
-    w2.writerow(["src", "dst", "relation", "weight", "source", "official_routes", "tourist_support", "tourist_records"])
+    w2.writerow(["src", "dst", "relation", "weight"])
     for u, v, d in G.edges(data=True):
-        w2.writerow([u, v, d.get("relation", ""), round(d.get("weight", 1), 2),
-                     d.get("source", ""), d.get("official_routes", ""), d.get("tourist_support", ""),
-                     d.get("tourist_records", "")])
+        w2.writerow([u, v, d.get("relation", ""), round(d.get("weight", 1), 2)])
     atomic_write_text(OUT / "graph_edges.csv", _buf2.getvalue(), encoding="utf-8-sig", newline="")
 
     _tmp_gml = OUT / "knowledge_graph.graphml.tmp"

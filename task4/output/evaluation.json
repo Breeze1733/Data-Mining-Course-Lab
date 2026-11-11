@@ -115,7 +115,6 @@
    "scenic": "颐和园",
    "pred": "颐和园",
    "pred_kind": "景区名",
-   "evidence": "窗口内无实体，回退到景区名",
    "gold": "圆明园残石",
    "gold_kind": "其他",
    "note": "“它们”指圆明园遗址残石，虚化集体指代"
@@ -126,7 +125,6 @@
    "scenic": "颐和园",
    "pred": "长廊",
    "pred_kind": "POI",
-   "evidence": "前句最近POI，距离38字符",
    "gold": "石舫",
    "gold_kind": "POI",
    "note": "同句“长廊”劫持，真先行词为句首主语清晏舫（石舫）"
@@ -137,7 +135,6 @@
    "scenic": "颐和园",
    "pred": "travel_party",
    "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
    "gold": "格鲁一家（虚构角色）",
    "gold_kind": "其他",
    "note": "小黄人项目角色"
@@ -148,7 +145,6 @@
    "scenic": "颐和园",
    "pred": "noun:中心",
    "pred_kind": "名词集合",
-   "evidence": "最近的普通名词“中心”（jieba 词性；集合信号：数量词/枚举/复数指示）",
    "gold": "太和殿/中和殿/保和殿三大殿",
    "gold_kind": "集合-POI",
    "note": "“其中”承接三大殿枚举"
@@ -159,7 +155,6 @@
    "scenic": "颐和园",
    "pred": "noun:城门",
    "pred_kind": "其他",
-   "evidence": "窗口无实体且焦点在景区外，回退同句代词前最近普通名词（概念先行词）",
    "gold": "紫禁城",
    "gold_kind": "景区",
    "note": "“这座皇城”指紫禁城，多景点游记（故宫段）"
@@ -170,7 +165,6 @@
    "scenic": "颐和园",
    "pred": "travel_party",
    "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
    "gold": "江南官吏",
    "gold_kind": "他人",
    "note": "同句主语“江南官吏”，历史叙述"
@@ -181,7 +175,6 @@
    "scenic": "颐和园",
    "pred": "noun:占地面积",
    "pred_kind": "名词集合",
-   "evidence": "最近的普通名词“占地面积”（jieba 词性；集合信号：数量词/枚举/复数指示）",
    "gold": "恭王府",
    "gold_kind": "POI",
    "note": "“其中”承接王府整体；多景点游记"
@@ -192,7 +185,6 @@
    "scenic": "颐和园",
    "pred": "noun:居住区",
    "pred_kind": "其他",
-   "evidence": "最近的普通名词“居住区”（jieba 词性；单名词无集合信号）",
    "gold": "东四胡同群",
    "gold_kind": "集合-其他",
    "note": ""
@@ -203,7 +195,6 @@
    "scenic": "颐和园",
    "pred": "国家博物馆",
    "pred_kind": "POI",
-   "evidence": "前两句最近POI，距离82字符",
    "gold": "全聚德烤鸭店",
    "gold_kind": "设施",
    "note": "“这里食客等位”指餐厅"
@@ -214,7 +205,6 @@
    "scenic": "颐和园",
    "pred": "颐和园",
    "pred_kind": "景区名",
-   "evidence": "窗口内无实体，回退到景区名",
    "gold": "清华大学校园",
    "gold_kind": "景区",
    "note": "多景点游记（清华段）"
@@ -225,7 +215,6 @@
    "scenic": "黄山",
    "pred": "玉屏楼",
    "pred_kind": "POI",
-   "evidence": "前句最近POI，距离30字符",
    "gold": "玉屏楼宾馆",
    "gold_kind": "POI",
    "note": "景区内酒店，参照第27例（北海宾馆→POI）口径"
@@ -236,7 +225,6 @@
    "scenic": "黄山",
    "pred": "庐山",
    "pred_kind": "POI",
-   "evidence": "前句最近POI，距离28字符",
    "gold": "庐山老别墅",
    "gold_kind": "其他",
    "note": "多景区游记（庐山段）"
@@ -247,7 +235,6 @@
    "scenic": "黄山",
    "pred": "noun:意思",
    "pred_kind": "名词集合",
-   "evidence": "最近的普通名词“意思”（jieba 词性；集合信号：数量词/枚举/复数指示）",
    "gold": "宅内陈列",
    "gold_kind": "其他",
    "note": ""
@@ -258,7 +245,6 @@
    "scenic": "黄山",
    "pred": "facility",
    "pred_kind": "设施",
-   "evidence": "“他们家/后院/店里”指店家设施",
    "gold": "馄饨店主一家",
    "gold_kind": "他人",
    "note": ""
@@ -269,7 +255,6 @@
    "scenic": "黄山",
    "pred": "noun:建筑",
    "pred_kind": "其他",
-   "evidence": "最近的普通名词“建筑”（jieba 词性；单名词无集合信号）",
    "gold": "月沼",
    "gold_kind": "POI",
    "note": "“倒映其中”指月沼水体；前句POI劫持"
@@ -280,7 +265,6 @@
    "scenic": "黄山",
    "pred": "noun:黄山",
    "pred_kind": "名词集合",
-   "evidence": "最近的普通名词“黄山”（jieba 词性；集合信号：数量词/枚举/复数指示）",
    "gold": "黄山全部景观",
    "gold_kind": "其他",
    "note": "整体-部分：黄山景观全体中的一部分"
@@ -291,7 +275,6 @@
    "scenic": "黄山",
    "pred": "白云宾馆",
    "pred_kind": "POI",
-   "evidence": "前两句最近POI，距离80字符（语义兼容加成）",
    "gold": "山上的大平台",
    "gold_kind": "设施",
    "note": "文本未给出平台专名，指山上可供饮食与过夜的公共平台"
@@ -302,7 +285,6 @@
    "scenic": "黄山",
    "pred": "高铁",
    "pred_kind": "交通",
-   "evidence": "前句最近交通，距离3字符",
    "gold": "泰安",
    "gold_kind": "景区",
    "note": "多景区游记（泰安/泰山段），“这里”指泰安当地"
@@ -313,7 +295,6 @@
    "scenic": "黄山",
    "pred": "黄山",
    "pred_kind": "景区名",
-   "evidence": "窗口内无实体，回退到景区名",
    "gold": "三清山",
    "gold_kind": "景区",
    "note": "多景区游记（三清山段）"
@@ -324,7 +305,6 @@
    "scenic": "黄山",
    "pred": "黄山",
    "pred_kind": "景区名",
-   "evidence": "窗口内无实体，回退到景区名",
    "gold": "西海岸景区",
    "gold_kind": "景区",
    "note": "同句“西海岸景区”，多景区游记（三清山段）"
@@ -335,7 +315,6 @@
    "scenic": "黄山",
    "pred": "黄山",
    "pred_kind": "景区名",
-   "evidence": "窗口内无实体，回退到景区名",
    "gold": "五步蛇",
    "gold_kind": "其他",
    "note": "“它的利用价值”指五步蛇"
@@ -346,7 +325,6 @@
    "scenic": "黄山",
    "pred": "travel_party",
    "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
    "gold": "隔壁的金华人游客",
    "gold_kind": "他人",
    "note": ""
@@ -357,7 +335,6 @@
    "scenic": "黄山",
    "pred": "other_person",
    "pred_kind": "他人",
-   "evidence": "他人指代跟随信号：代词紧邻人物词“游客”",
    "gold": "光明顶/迎客松等景点",
    "gold_kind": "集合-POI",
    "note": "人称代词指景点集合，类别跨越 person→POI 集合"
@@ -368,7 +345,6 @@
    "scenic": "九寨沟",
    "pred": "noun:下山",
    "pred_kind": "名词集合",
-   "evidence": "最近的普通名词“下山”（jieba 词性；集合信号：数量词/枚举/复数指示）",
    "gold": "没有下来的两组人",
    "gold_kind": "集合-人",
    "note": "“其中”承接前句“两组人”"
@@ -379,7 +355,6 @@
    "scenic": "九寨沟",
    "pred": "九寨沟",
    "pred_kind": "景区名",
-   "evidence": "窗口内无实体，回退到景区名",
    "gold": "无",
    "gold_kind": "无",
    "note": "“此处只能省略一万字”指文中省略内容，非地点"
@@ -390,7 +365,6 @@
    "scenic": "九寨沟",
    "pred": "noun:花海",
    "pred_kind": "其他",
-   "evidence": "窗口无实体且焦点在景区外，回退同句代词前最近普通名词（概念先行词）",
    "gold": "红原",
    "gold_kind": "景区",
    "note": "“它的缠绵悱恻”指红原四季；红原未收录"
@@ -401,7 +375,6 @@
    "scenic": "九寨沟",
    "pred": "travel_party",
    "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
    "gold": "无",
    "gold_kind": "无",
    "note": "诗化指代“这片土地”，无明确实体"
@@ -412,7 +385,6 @@
    "scenic": "九寨沟",
    "pred": "travel_party",
    "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
    "gold": "沈阳6人老年团队",
    "gold_kind": "他人",
    "note": "前句“6人老年人团队”，非作者同行者"
@@ -423,7 +395,6 @@
    "scenic": "九寨沟",
    "pred": "other_person",
    "pred_kind": "他人",
-   "evidence": "他人指代跟随信号：代词紧邻人物词“阿姨”",
    "gold": "同行者",
    "gold_kind": "同行者",
    "note": "前句“他们”即同行队伍"
@@ -434,7 +405,6 @@
    "scenic": "九寨沟",
    "pred": "成都东",
    "pred_kind": "POI",
-   "evidence": "同句最近POI，距离11字符",
    "gold": "成都",
    "gold_kind": "景区",
    "note": "“这座城市”指成都；同句“动车票”干扰"
@@ -445,7 +415,6 @@
    "scenic": "九寨沟",
    "pred": "noun:花草",
    "pred_kind": "名词集合",
-   "evidence": "最近的普通名词“花草”（jieba 词性；集合信号：数量词/枚举/复数指示）",
    "gold": "墨海",
    "gold_kind": "POI",
    "note": "“倒映其中”指墨海湖面（前句明名）"
@@ -456,7 +425,6 @@
    "scenic": "九寨沟",
    "pred": "noun:树林",
    "pred_kind": "名词集合",
-   "evidence": "最近的普通名词“树林”（jieba 词性；集合信号：数量词/枚举/复数指示）",
    "gold": "白石海",
    "gold_kind": "POI",
    "note": "“倒映其中”指白石海湖面（前句明名），参照第114例口径"
@@ -467,7 +435,6 @@
    "scenic": "九寨沟",
    "pred": "NONE",
    "pred_kind": "无明确先行词",
-   "evidence": "句子焦点在景区外，不回退主景区名",
    "gold": "乐山大佛景区",
    "gold_kind": "景区",
    "note": "“这里有13路公交站”指乐山大佛附近；平台主景区标签为九寨沟"
@@ -478,7 +445,6 @@
    "scenic": "九寨沟",
    "pred": "磁器口",
    "pred_kind": "POI",
-   "evidence": "前句最近POI，距离18字符",
    "gold": "磁器口",
    "gold_kind": "景区",
    "note": "多景点游记，“这里”指重庆磁器口"
@@ -489,7 +455,6 @@
    "scenic": "九寨沟",
    "pred": "九寨沟",
    "pred_kind": "景区名",
-   "evidence": "窗口内无实体，回退到景区名",
    "gold": "郎木寺",
    "gold_kind": "景区",
    "note": "多景点游记（郎木寺段）"
@@ -500,7 +465,6 @@
    "scenic": "九寨沟",
    "pred": "noun:雕塑",
    "pred_kind": "其他",
-   "evidence": "最近的普通名词“雕塑”（jieba 词性；单名词无集合信号）",
    "gold": "窟龛与雕像",
    "gold_kind": "集合-其他",
    "note": ""
@@ -511,7 +475,6 @@
    "scenic": "九寨沟",
    "pred": "黄龙",
    "pred_kind": "POI",
-   "evidence": "同句最近POI，距离12字符",
    "gold": "松潘古城",
    "gold_kind": "POI",
    "note": "同句“黄龙”干扰；真先行词为前文“松潘古城”（未收录实体）"
@@ -522,7 +485,6 @@
    "scenic": "九寨沟",
    "pred": "黄龙",
    "pred_kind": "POI",
-   "evidence": "窗口内唯一POI，“其中”为'在其中'用法",
    "gold": "岩溶层色调",
    "gold_kind": "其他",
    "note": "“其中”指岩溶层金黄主色调之中，普通名词"
@@ -533,7 +495,6 @@
    "scenic": "九寨沟",
    "pred": "noun:建筑面积",
    "pred_kind": "其他",
-   "evidence": "最近的普通名词“建筑面积”（jieba 词性；单名词无集合信号）",
    "gold": "扎如寺",
    "gold_kind": "POI",
    "note": "“寺院标志性建筑”即扎如寺（九寨沟周边）"
@@ -544,7 +505,6 @@
    "scenic": "九寨沟",
    "pred": "noun:会议",
    "pred_kind": "其他",
-   "evidence": "最近的普通名词“会议”（jieba 词性；单名词无集合信号）",
    "gold": "五次重要会议",
    "gold_kind": "集合-其他",
    "note": "普通名词集合"
@@ -555,7 +515,6 @@
    "scenic": "九寨沟",
    "pred": "noun:泉州",
    "pred_kind": "其他",
-   "evidence": "最近的普通名词“泉州”（jieba 词性；单名词无集合信号）",
    "gold": "无",
    "gold_kind": "无",
    "note": "承接行程单，无明确集合实体"
@@ -566,7 +525,6 @@
    "scenic": "九寨沟",
    "pred": "黄龙",
    "pred_kind": "POI",
-   "evidence": "前两句最近POI，距离105字符",
    "gold": "黄龙",
    "gold_kind": "景区",
    "note": "“它”指黄龙（联游景区段）"
@@ -577,7 +535,6 @@
    "scenic": "九寨沟",
    "pred": "九寨沟",
    "pred_kind": "景区名",
-   "evidence": "窗口内无实体，回退到景区名",
    "gold": "那群大型飞鸟",
    "gold_kind": "其他",
    "note": "指前句的飞鸟群，非实体体系内对象"
@@ -588,7 +545,6 @@
    "scenic": "九寨沟",
    "pred": "travel_party",
    "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
    "gold": "三个川大男孩",
    "gold_kind": "他人",
    "note": "前句偶遇的川大学生，非同行者"
@@ -599,7 +555,6 @@
    "scenic": "九寨沟",
    "pred": "noun:地貌",
    "pred_kind": "其他",
-   "evidence": "最近的普通名词“地貌”（jieba 词性；单名词无集合信号）",
    "gold": "冰川地貌类型",
    "gold_kind": "集合-其他",
    "note": "前句“悬冰川、冰斗冰川和平顶冰川”"
@@ -610,7 +565,6 @@
    "scenic": "九寨沟",
    "pred": "九寨沟",
    "pred_kind": "景区名",
-   "evidence": "窗口内无实体，回退到景区名",
    "gold": "就餐的餐馆",
    "gold_kind": "设施",
    "note": "“这里的消费”指等位就餐的餐厅"
@@ -621,7 +575,6 @@
    "scenic": "九寨沟",
    "pred": "五花海",
    "pred_kind": "POI",
-   "evidence": "前句最近POI，距离32字符",
    "gold": "无",
    "gold_kind": "无",
    "note": "“那边”指附近拍照点，文本无足够线索确定具体位置"
@@ -632,7 +585,6 @@
    "scenic": "颐和园",
    "pred": "noun:项目",
    "pred_kind": "其他",
-   "evidence": "最近的普通名词“项目”（jieba 词性；单名词无集合信号）",
    "gold": "718联合厂拆分后的各厂",
    "gold_kind": "集合-其他",
    "note": ""
@@ -643,7 +595,6 @@
    "scenic": "颐和园",
    "pred": "乐寿堂",
    "pred_kind": "POI",
-   "evidence": "前句最近POI，距离54字符",
    "gold": "青芝岫（乐寿堂大石头）",
    "gold_kind": "其他",
    "note": "“它”指青芝岫巨石，未入实体体系"
@@ -654,7 +605,6 @@
    "scenic": "颐和园",
    "pred": "西堤",
    "pred_kind": "POI",
-   "evidence": "前句最近POI，距离14字符",
    "gold": "界湖桥",
    "gold_kind": "POI",
    "note": "“这座桥”承前指界湖桥（清漪园时期名柳桥）"
@@ -665,7 +615,6 @@
    "scenic": "颐和园",
    "pred": "noun:词汇",
    "pred_kind": "其他",
-   "evidence": "窗口无实体且焦点在景区外，回退同句代词前最近普通名词（概念先行词）",
    "gold": "紫禁城",
    "gold_kind": "景区",
    "note": "多景点游记（故宫/紫禁城段）"
@@ -676,7 +625,6 @@
    "scenic": "颐和园",
    "pred": "travel_party",
    "pred_kind": "同行者",
-   "evidence": "一手游记默认指作者及同行者",
    "gold": "司机与导游们",
    "gold_kind": "他人",
    "note": "前文“他的另一个同事”指导游群体"
@@ -687,7 +635,6 @@
    "scenic": "颐和园",
    "pred": "北京大学",
    "pred_kind": "POI",
-   "evidence": "前句最近POI，距离81字符",
    "gold": "北京大学",
    "gold_kind": "景区",
    "note": "多景点游记（北大段）"
@@ -698,7 +645,6 @@
    "scenic": "颐和园",
    "pred": "颐和园",
    "pred_kind": "景区名",
-   "evidence": "窗口内无实体，回退到景区名",
    "gold": "三里屯太古里",
    "gold_kind": "景区",
    "note": "多景点游记（三里屯段），前句明名“北京三里屯太古里”"
@@ -709,7 +655,6 @@
    "scenic": "颐和园",
    "pred": "noun:大事",
    "pred_kind": "其他",
-   "evidence": "窗口无实体且焦点在景区外，回退同句代词前最近普通名词（概念先行词）",
    "gold": "避暑山庄",
    "gold_kind": "景区",
    "note": "多景点游记（承德避暑山庄段）"
@@ -720,7 +665,6 @@
    "scenic": "颐和园",
    "pred": "八达岭长城",
    "pred_kind": "POI",
-   "evidence": "前两句最近POI，距离121字符",
    "gold": "金山岭长城",
    "gold_kind": "POI",
    "note": "多景点游记（长城段）"
@@ -731,7 +675,6 @@
    "scenic": "颐和园",
    "pred": "noun:令人",
    "pred_kind": "名词集合",
-   "evidence": "最近的普通名词“令人”（jieba 词性；集合信号：数量词/枚举/复数指示）",
    "gold": "胁侍塑像的图案",
    "gold_kind": "其他",
    "note": "“其中”指塑像衣纹图案之中"
@@ -742,7 +685,6 @@
    "scenic": "颐和园",
    "pred": "乐寿堂",
    "pred_kind": "POI",
-   "evidence": "前两句最近POI，距离98字符",
    "gold": "长廊",
    "gold_kind": "POI",
    "note": "先行词为“廊上斑驳的画”，归至长廊实体"

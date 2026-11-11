@@ -4,11 +4,10 @@ logs/
 qa/
 node_modules/
 
-# data/ 默认全部忽略：HTML 快照、爬虫工作区、中间产物体量大且无需入库。
-# 只跟踪下游实验的输入与交付审计文件。
+# 保留清洗输入和实验所需结果；原始页面及采集中间产物默认忽略。
 data/**
 !data/raw/
-!data/raw/official_documents.jsonl
+!data/raw/dataset_raw.jsonl
 !data/raw/official_routes.jsonl
 !data/collected/
 !data/collected/collection_summary.json
@@ -18,6 +17,3 @@ data/**
 !data/processed/dataset_clean.jsonl
 !data/processed/quality_report.json
 !data/processed/rejected_records.jsonl
-
-# 旧版爬虫来源配置（遗留，不入库）
-sources.json

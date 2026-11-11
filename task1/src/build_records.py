@@ -1,4 +1,4 @@
-"""Assemble the three kinds of captured raw data into data/raw/records.jsonl that preprocess.py can read.
+"""Assemble captured source data into data/raw/dataset_raw.jsonl for preprocessing.
 
 Inputs (all local snapshots already on this machine; no network requests):
   data/raw/official_documents.jsonl            official documents (include_in_main_dataset=true entries enter the main dataset)
@@ -76,7 +76,6 @@ def build_official(docs: list[dict]) -> list[dict]:
             "content_scope": "official_target_route_section",
             "author": "",
             "published_at": doc.get("published_at", ""),
-            "provenance_note": doc.get("provenance_note", ""),
             "snapshot_sha256": doc.get("snapshot_sha256", ""),
             # Only documents with an explicit node order count as ordered routes
             # (include_in_main_dataset); theme plans without a fixed order remain
@@ -162,7 +161,7 @@ def main() -> int:
         seen.add(row["record_id"])
         records.append(row)
 
-    out = ROOT / "data/raw/records.jsonl"
+    out = ROOT / "data/raw/dataset_raw.jsonl"
     with out.open("w", encoding="utf-8", newline="\n") as handle:
         for row in records:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")

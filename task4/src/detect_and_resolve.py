@@ -169,8 +169,7 @@ def main(argv=None) -> int:
                     # Route reference: "这条(路|线…)" refers to the road/route itself, not POIs along it;
                     # "这条沟" refers to a water/gully POI ending in "沟" within the window (则查洼沟 case)
                     if pron == "这条" and re.search(r"这条路|这条线|该路线", case["sentence"]):
-                        case.update({"resolution": "路线", "resolution_kind": "路线",
-                                     "evidence": "这条+路/线 指代道路/线路本身"})
+                        case.update({"resolution": "路线", "resolution_kind": "路线"})
                         fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                         n_cases += 1
                         continue
@@ -180,15 +179,13 @@ def main(argv=None) -> int:
                                  and e["canonical"].endswith("沟")]
                         if gully:
                             named = min(gully, key=lambda e: doc_start - e["end"])
-                            case.update({"resolution": named["canonical"], "resolution_kind": "POI",
-                                         "evidence": "“这条沟”承前指沟谷 POI"})
+                            case.update({"resolution": named["canonical"], "resolution_kind": "POI"})
                             fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                             n_cases += 1
                             continue
                     # “其它” is a determiner (其+它), not an anaphoric pronoun (2 cases held out in the manual-annotation evaluation set)
                     if pron in ("它", "它们") and doc_start > 0 and text[doc_start - 1] == "其":
-                        case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
-                                     "evidence": "“其它”为限定词，非回指代词，检测保留但消解为无"})
+                        case.update({"resolution": "NONE", "resolution_kind": "无明确先行词"})
                         fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                         n_cases += 1
                         continue
@@ -243,9 +240,7 @@ def main(argv=None) -> int:
                                 and not re.search(r"[，。；！？,;!?]", _gap)
                                 and any(re.fullmatch(r"[、和与及/,,\s]{1,3}", text[a["end"]:b["start"]])
                                         for a, b in zip(cur_pois, cur_pois[1:]))):
-                            case.update({"resolution": "preceding_set", "resolution_kind": "前文POI集合",
-                                         "evidence": "处所代词紧跟同句 POI 枚举（A、B和C那里；"
-                                                     "枚举后缀可含未入池的入口/大门名）"})
+                            case.update({"resolution": "preceding_set", "resolution_kind": "前文POI集合"})
                             fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                             n_cases += 1
                             continue
@@ -265,19 +260,16 @@ def main(argv=None) -> int:
                             named = min(after, key=lambda e: e["start"])
                             case.update({
                                 "resolution": named["canonical"],
-                                "resolution_kind": "POI" if named["type"] == "景点POI" else "交通",
-                                "evidence": "后置命名（名为/称作…）的同位专名"})
+                                "resolution_kind": "POI" if named["type"] == "景点POI" else "交通"})
                             fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                             n_cases += 1
                             continue
                     # Naming sentence: "X在这里被叫做Y" denotes the area rather than a window entity (1 case in the manual-annotation evaluation set)
                     if re.search(r"被叫做|被称作|被叫作|被唤作", case["sentence"]):
                         if focus == "景区外":
-                            case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
-                                         "evidence": "命名句且焦点在景区外，不回退主景区名"})
+                            case.update({"resolution": "NONE", "resolution_kind": "无明确先行词"})
                         else:
-                            case.update({"resolution": scenic_area, "resolution_kind": "景区名",
-                                         "evidence": "命名句（被叫做…）指景区范围"})
+                            case.update({"resolution": scenic_area, "resolution_kind": "景区名"})
                         fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                         n_cases += 1
                         continue
@@ -285,8 +277,7 @@ def main(argv=None) -> int:
                         # Facility fallback: no entity in the window but a hotel/restaurant/guesthouse etc. is mentioned -> "这里/那里" usually refers to that facility
                         if re.search(r"酒店|民宿|餐厅|饭馆|烤鸭店|客栈|宾馆|农家乐|店家|客房",
                                      case["sentence"] + case["prev_sentence"]):
-                            case.update({"resolution": "facility", "resolution_kind": "设施",
-                                         "evidence": "窗口无实体但提及住宿/餐饮设施"})
+                            case.update({"resolution": "facility", "resolution_kind": "设施"})
                         elif focus == "景区外":
                             # When the focus is outside the scenic area, falling back to the main scenic-area name is directionally wrong: record no-explicit-antecedent truthfully
                             # Conceptual-antecedent fallback for outside-area sentences — the nearest common noun before the pronoun in the same sentence
@@ -298,15 +289,11 @@ def main(argv=None) -> int:
                                     if f.startswith("n") and len(w) >= 2:
                                         _nb = w
                             if _nb:
-                                case.update({"resolution": f"noun:{_nb}", "resolution_kind": "其他",
-                                             "evidence": "窗口无实体且焦点在景区外，"
-                                                         "回退同句代词前最近普通名词（概念先行词）"})
+                                case.update({"resolution": f"noun:{_nb}", "resolution_kind": "其他"})
                             else:
-                                case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
-                                             "evidence": "句子焦点在景区外，不回退主景区名"})
+                                case.update({"resolution": "NONE", "resolution_kind": "无明确先行词"})
                         else:
-                            case.update({"resolution": scenic_area, "resolution_kind": "景区名",
-                                         "evidence": "窗口内无实体，回退到景区名"})
+                            case.update({"resolution": scenic_area, "resolution_kind": "景区名"})
                     else:
                         # Candidate ordering — POI beats transport, nearer wins, and
                         # locatives (这里/那里) prefer scenery POIs (lodging/facilities excluded)
@@ -320,9 +307,7 @@ def main(argv=None) -> int:
                                                   compat_bonus(c),
                                                   c["distance"]))
                         best = cands[0]
-                        case.update({"resolution": best["name"], "resolution_kind": best["kind"],
-                                     "evidence": f'{best["scope"]}最近{best["kind"]}，距离{best["distance"]}字符'
-                                                 + (f'（语义兼容加成）' if compat_bonus(best) else '')})
+                        case.update({"resolution": best["name"], "resolution_kind": best["kind"]})
                     case["candidates"] = cands[:6]
                 elif cls == "person":
                     window = case["sentence"] + case["prev_sentence"]
@@ -336,8 +321,7 @@ def main(argv=None) -> int:
                     # “他们(家|自家|后院|店里)” refers to the establishment's facilities, not people (4 cases in the manual-annotation evaluation set)
                     # The guard must end with write+continue: falling through to the independent if-chain below would be overwritten by travel_party
                     if re.search(r"(他们|她们)(家|自家|后院|店里)", case["sentence"]):
-                        case.update({"resolution": "facility", "resolution_kind": "设施",
-                                     "evidence": "“他们家/后院/店里”指店家设施"})
+                        case.update({"resolution": "facility", "resolution_kind": "设施"})
                         fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                         n_cases += 1
                         continue
@@ -358,28 +342,22 @@ def main(argv=None) -> int:
                                     and PERSON_HINT_EXT.search(case["prev_sentence"]):
                                 _hint_hit = PERSON_HINT_EXT.search(case["prev_sentence"])
                         if _hint_hit:
-                            case.update({"resolution": "other_person", "resolution_kind": "他人",
-                                         "evidence": f'他人指代跟随信号：代词紧邻人物词“{_hint_hit.group(0)}”'})
+                            case.update({"resolution": "other_person", "resolution_kind": "他人"})
                             fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                             n_cases += 1
                             continue
                     if PERSON_HINT_RE.search(case["sentence"]) and not party_cur:
-                        case.update({"resolution": "other_person", "resolution_kind": "他人",
-                                     "evidence": "句中含他人角色词且无同行者信号"})
+                        case.update({"resolution": "other_person", "resolution_kind": "他人"})
                     elif not party_signal and PERSON_HINT_RE.search(case["prev_sentence"]):
-                        case.update({"resolution": "other_person", "resolution_kind": "他人",
-                                     "evidence": "前句含他人角色词且本窗口无同行者信号"})
+                        case.update({"resolution": "other_person", "resolution_kind": "他人"})
                     elif (not party_signal3 and not re.search(r"我|你", case["prev_sentence"])
                           and PERSON_HINT_RE.search(case["prev2_sentence"])):
-                        case.update({"resolution": "other_person", "resolution_kind": "他人",
-                                     "evidence": "前二句含他人角色词、前句非第一人称叙述且窗口无同行者信号（扩窗）"})
+                        case.update({"resolution": "other_person", "resolution_kind": "他人"})
                     elif not party_cur and not PERSON_HINT_RE.search(case["sentence"]) and re.search(
                             r"酒店|宾馆|民宿|客栈|餐厅|饭馆|旅馆|客房|房间", case["sentence"]):
-                        case.update({"resolution": "facility", "resolution_kind": "设施",
-                                     "evidence": "无同行者信号且本句提及住宿/餐饮场所，“他们”指店家"})
+                        case.update({"resolution": "facility", "resolution_kind": "设施"})
                     else:
-                        case.update({"resolution": "travel_party", "resolution_kind": "同行者",
-                                     "evidence": "一手游记默认指作者及同行者"})
+                        case.update({"resolution": "travel_party", "resolution_kind": "同行者"})
                 else:  # set: antecedent of "其中" by priority: person set > POI enumeration > single POI ("在其中") > common noun
                     import jieba.posseg as pseg
                     cur_sent_start = sentences[si][0]
@@ -406,17 +384,13 @@ def main(argv=None) -> int:
                     # Alternative means: in "可以X也可以Y", "其中" takes the set of means rather than a POI enumeration (1 case in the manual-annotation evaluation set)
                     alternatives = re.search(r"可以[^，。？！;；]{1,12}也可以", window_text)
                     if person_set:
-                        case.update({"resolution": "person_set", "resolution_kind": "人称集合",
-                                     "evidence": "窗口内数量人称短语（一行/几位+人）"})
+                        case.update({"resolution": "person_set", "resolution_kind": "人称集合"})
                     elif not qty_guard and alternatives:
-                        case.update({"resolution": "alternatives", "resolution_kind": "名词集合",
-                                     "evidence": "窗口内可替代方式（可以X也可以Y）"})
+                        case.update({"resolution": "alternatives", "resolution_kind": "名词集合"})
                     elif not qty_guard and enum_set:
-                        case.update({"resolution": "preceding_set", "resolution_kind": "前文POI集合",
-                                     "evidence": "窗口内 POI 枚举（顿号/和连接）"})
+                        case.update({"resolution": "preceding_set", "resolution_kind": "前文POI集合"})
                     elif not qty_guard and len(pois_in_win) == 1:
-                        case.update({"resolution": pois_in_win[0], "resolution_kind": "POI",
-                                     "evidence": "窗口内唯一POI，“其中”为'在其中'用法"})
+                        case.update({"resolution": pois_in_win[0], "resolution_kind": "POI"})
                     else:
                         noun = None
                         for text_before in (case["sentence"][: doc_start - cur_sent_start],
@@ -436,12 +410,9 @@ def main(argv=None) -> int:
                             e1, p1 = _span_set_signals(sent_prefix)
                             e2, p2 = _span_set_signals(case.get("prev_sentence") or "")
                             kind = "名词集合" if (qty_guard or e1 or e2 or p1 or p2) else "其他"
-                            case.update({"resolution": f"noun:{noun}", "resolution_kind": kind,
-                                         "evidence": f"最近的普通名词“{noun}”（jieba 词性；"
-                                                     f"{'集合信号：数量词/枚举/复数指示' if kind == '名词集合' else '单名词无集合信号'}）"})
+                            case.update({"resolution": f"noun:{noun}", "resolution_kind": kind})
                         else:
-                            case.update({"resolution": "NONE", "resolution_kind": "无明确先行词",
-                                         "evidence": "窗口内无 POI 也无普通名词"})
+                            case.update({"resolution": "NONE", "resolution_kind": "无明确先行词"})
                 fh.write(json.dumps(case, ensure_ascii=False) + "\n")
                 n_cases += 1
 

@@ -96,10 +96,7 @@ def run(offline=False):
         try:
             if not offline or not p.exists():
                 if offline:
-                    old={'HS-EXTRA1':'HS_EXTRA_OFFICIAL_1','HS-EXTRA2':'HS_EXTRA_OFFICIAL_2'}.get(s['evidence_id'])
-                    oldp=ROOT/'data/raw/pages'/f'{old}.html'
-                    if not old or not oldp.exists():raise FileNotFoundError(p)
-                    p.write_bytes(oldp.read_bytes())
+                    raise FileNotFoundError(p)
                 else:
                     with urllib.request.urlopen(urllib.request.Request(s['source_url'],headers={'User-Agent':'Mozilla/5.0'}),timeout=35) as r:p.write_bytes(r.read())
             data=p.read_bytes();tree=html.fromstring(data);nodes=tree.xpath(s['xpath'])

@@ -2,7 +2,6 @@
 
 The directory boundary is the site's observed 15 Huangshan Scenic Area pages
 and 38 Jiuzhaigou pages. Beijing is searched using separately verified URLs.
-The script never writes sources.json; the reviewer merges the separate manifest.
 """
 from __future__ import annotations
 import argparse
@@ -184,13 +183,9 @@ def verify_one(meta,refresh=False):
   rec.update(accepted=False,error=str(exc),rejection_reasons=['fetch_or_extraction_failed'])
  return rec
 
-def manifest(records):
- return [dict(record_id=r['record_id'],scenic_area=r['scenic_area'],source_platform='携程游记',source_url=r['url'],text_type='travelogue',extractor='ctrip',raw_file=r['raw_file'],published_at=r.get('published_at',''),date_note='平台显示日期，可能为更新日期',content_scope='article_body',selection_note=f"扩展目录筛选；目标POI {r['poi_count']}，路线段落 {r['route_paragraph_count']}，正文需复核",collected_at=r['collected_at'],expected_title=r['title'],author_hint=r.get('author','')) for r in records if r.get('accepted')]
-
 def run(skip_discovery=False):
  logpath=CRAWL/'ctrip_expansion_discovery.json'
  resultpath=CRAWL/'ctrip_expansion.json'
- manifestpath=CRAWL/'ctrip_expansion_sources.json'
  previous=json.loads(resultpath.read_text('utf-8')) if resultpath.exists() else []
  records={r['url']:r for r in previous}
  discovered=[];logs=[]
@@ -204,17 +199,15 @@ def run(skip_discovery=False):
     save(logpath,{'candidates':discovered,'requests':logs,'complete':False})
     print('DIRECTORY',log['scenic_area'],log['page'],log.get('article_links',0),log.get('error',''),flush=True)
   save(logpath,{'candidates':discovered,'requests':logs,'complete':True})
- existing=json.loads((ROOT/'sources.json').read_text('utf-8')) if (ROOT/'sources.json').exists() else []
- oldids={article_id(s['source_url']) for s in existing if '/travels/' in s.get('source_url','') and re.search(r'/\d+\.html',s['source_url'])}
- unique={article_id(r['url']):r for r in discovered if not r.get('directory_rejection') and article_id(r['url']) not in oldids}
+ unique={article_id(r['url']):r for r in discovered if not r.get('directory_rejection')}
  for url in BEIJING_SEEDS:
-  if article_id(url) not in oldids:unique[article_id(url)]={'scenic_area':'颐和园','url':url,'title':'','author':'','summary':'聚焦搜索候选'}
+  unique[article_id(url)]={'scenic_area':'颐和园','url':url,'title':'','author':'','summary':'聚焦搜索候选'}
  jobs=[r for r in unique.values() if r['url'] not in records]
  print('VERIFY_JOBS',len(jobs),flush=True)
  with ThreadPoolExecutor(max_workers=2) as pool:
   for fut in as_completed([pool.submit(verify_one,r) for r in jobs]):
    r=fut.result();records[r['url']]=r
-   save(resultpath,list(records.values()));save(manifestpath,manifest(list(records.values())))
+   save(resultpath,list(records.values()))
    print('ARTICLE',r['scenic_area'],r['record_id'],r.get('accepted'),r.get('text_length',0),r.get('poi_count',0),r.get('route_paragraph_count',0),r.get('title','')[:50],r.get('rejection_reasons'),flush=True)
  print('COMPLETE',len(records),'accepted',sum(r.get('accepted',False) for r in records.values()),flush=True)
 

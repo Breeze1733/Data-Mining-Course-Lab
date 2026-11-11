@@ -184,7 +184,6 @@ def main() -> int:
         "representative_trees": tree_meta,
         "official_period_poi_counts": {k: dict(v) for k, v in official_period_pois.items()},
         "tourist_period_poi_counts": tourist_stats,
-        "note": "颐和园/黄山官方路线大多不携带时段信息（节点链式指南），时段结构主要来自九寨沟官方文本与游客自述的时间轴",
     }
     (OUT / "time_hierarchy_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({"trees": list(tree_meta), "official": {k: dict(v) for k, v in official_period_pois.items()},

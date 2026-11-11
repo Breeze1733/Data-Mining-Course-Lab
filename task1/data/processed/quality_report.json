@@ -6494,7 +6494,7 @@
     "main_target": "Each of 3 scenic areas: >=1 official route and >=5 travelogues",
     "minimum_target": "Each of 3 scenic areas: >=1 official route and >=3 travelogues"
   },
-  "input_path": "data/raw/records.jsonl",
+  "input_path": "data/raw/dataset_raw.jsonl",
   "input_sha256": "bb808a33d1f2e0eed0ef05b99f6f561e36683e4845441ff3f6c0bf895b6167a2",
   "xlsx_authoring": {
     "engine": "@oai/artifact-tool",
