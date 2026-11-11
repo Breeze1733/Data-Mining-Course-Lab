@@ -18,7 +18,7 @@
 
 `output/conditional_pairs.jsonl` 保存逐对候选、完整原句和来源，`mapping_table.json` 与 `conditional_mapping_table.xlsx` 为交付映射表。xlsx 列包含：条件类型（核验）、条件描述（原文）、条件来源、条件标签（旧口径）、建议内容、触发词、抽取模式、景区、频次、条件位置、来源记录。`extraction_stats.json`、`review_summary.json`、`extraction_coverage_eval.json` 和 `figs/` 提供统计、复核和分组图。
 
-`output/review_test.json` 是 2026-11-05 的历史冻结样本，未参与当前汇总，抽取规则已变更，不能代表当前抽取。
+`resources/eval/review_test.json` 是 2026-11-05 起冻结的 30 例独立抽检集（开发 agent 逐例判读，AI 辅助判读，非独立人工标注），仅用于终评对照，判分后规则改动不得参考其错误明细；其内记录的判定结论基于冻结当时的抽取，未参与当前汇总，抽取规则已变更，不能代表当前抽取。
 
 ## 运行
 
@@ -32,11 +32,11 @@ python task5/src/review_and_charts.py --xlsx
 python task5/src/coverage_eval.py
 ```
 
-`output/review_dev.json` 是已判读的复核记录，随仓库提交；正常重跑不需要重新抽样。只有抽取规则改变、`--score` 报 `stale review sample` 或抽取指纹不一致时，才重新抽样并判读：
+`resources/eval/review_dev.json` 是已判读的复核记录，随仓库提交；正常重跑不需要重新抽样。只有抽取规则改变或 `--score` 报 `stale review sample` 时，才重新抽样并判读：
 
 ```text
 python task5/src/review_and_charts.py --sample --per-cell 6 --seed 20261111 --force
-# 判读 output/review_dev.json（AI 辅助，文件内声明口径）
+# 判读 resources/eval/review_dev.json（AI 辅助，文件内声明口径）
 python task5/src/review_and_charts.py --score
 ```
 

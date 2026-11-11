@@ -1,8 +1,6 @@
 {
  "n": 30,
  "draw_seed": 20261105,
- "annotated_by": "开发 agent 逐例判读（AI 辅助判读，非独立人工标注；来源如实声明）",
- "frozen_discipline": "P19 冻结纪律：本样本自 2026-11-05 起冻结，仅用于终评对照；后续规则改动不得参考其错误明细",
  "review_summary": {
   "correct": 15,
   "boundary": 6,

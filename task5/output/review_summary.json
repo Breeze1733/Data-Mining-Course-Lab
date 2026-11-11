@@ -128,7 +128,6 @@
   "missing": 0,
   "content_drift": 0
  },
- "sample_fingerprint_matches_current": true,
  "sample_meta": {
   "source": "output/mapping_table.json",
   "strata": [
@@ -138,18 +137,7 @@
   "per_cell": 6,
   "seed": 20261111,
   "n_cells": 16,
-  "generated_by": "python task5/src/review_and_charts.py --sample --per-cell 6 --seed 20261111",
-  "extraction_fingerprint": {
-   "conditional_pairs": "cb7ab3b62d76",
-   "mapping_table": "cee4dee9852c"
-  }
+  "generated_by": "python task5/src/review_and_charts.py --sample --per-cell 6 --seed 20261111"
  },
- "annotated_by": "AI-assisted single annotator (Claude Code agent), not independent human annotation",
- "data_fingerprints": {
-  "dataset_clean": "304605837c1f",
-  "entity_dictionary": "7226607ea20a",
-  "entities_refined": "b93058ec0d7e",
-  "conditional_pairs": "cb7ab3b62d76",
-  "mapping_table": "cee4dee9852c"
- }
+ "annotated_by": "AI-assisted single annotator (Claude Code agent), not independent human annotation"
 }

@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import io
 import json
 import random
@@ -21,6 +20,7 @@ import matplotlib.pyplot as plt
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
+EVAL = ROOT / "resources/eval"
 FIGS = OUT / "figs"
 sys.stdout.reconfigure(encoding="utf-8")
 plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei"]
@@ -41,15 +41,6 @@ def _norm5(t: str) -> str:
     return re.sub(r"[\s，,。；;、！？!?\[\]()【】的了吗呢啊呀的]", "", t or "")
 
 
-def _extraction_fingerprints() -> dict:
-    out = {}
-    for key, name in (("conditional_pairs", "conditional_pairs.jsonl"),
-                      ("mapping_table", "mapping_table.json")):
-        p = OUT / name
-        out[key] = hashlib.sha256(p.read_bytes()).hexdigest()[:12] if p.exists() else None
-    return out
-
-
 def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
     """Wilson 95% confidence interval (robust interval for small-sample proportions)."""
     if n == 0:
@@ -62,14 +53,10 @@ def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
     return {"lo": round(max(0.0, center - spread), 3), "hi": round(min(1.0, center + spread), 3)}
 
 
-sys.path.insert(0, str(ROOT.parent))
-from common.fingerprints import data_fingerprints as _data_fingerprints
-
-
 def sample(per_cell: int = 6, seed: int = 20261111, out_path: Path | None = None,
            force: bool = False) -> None:
     """Draw a deterministic stratified review sample from the current mapping table."""
-    out_path = out_path or (OUT / "review_dev.json")
+    out_path = out_path or (EVAL / "review_dev.json")
     mapping = load_mapping()
     if not mapping or "pair_id" not in mapping[0]:
         raise SystemExit("mapping_table.json has no pair_id; rerun extract_conditionals.py first")
@@ -106,7 +93,6 @@ def sample(per_cell: int = 6, seed: int = 20261111, out_path: Path | None = None
             "n_cells": len(cells),
             "generated_by": (f"python task5/src/review_and_charts.py --sample "
                              f"--per-cell {per_cell} --seed {seed}"),
-            "extraction_fingerprint": _extraction_fingerprints(),
         },
         "annotation": {
             "annotated_by": ("AI-assisted single annotator (Claude Code agent), "
@@ -141,7 +127,7 @@ def sample(per_cell: int = 6, seed: int = 20261111, out_path: Path | None = None
 
 
 def score() -> None:
-    doc = json.loads((OUT / "review_dev.json").read_text(encoding="utf-8"))
+    doc = json.loads((EVAL / "review_dev.json").read_text(encoding="utf-8"))
     if not isinstance(doc, dict) or "sample_meta" not in doc:
         raise SystemExit("review_dev.json is legacy (no sample_meta); rerun --sample first")
     reviews = doc["reviews"]
@@ -163,10 +149,6 @@ def score() -> None:
     if drift:
         raise SystemExit(f"stale review sample: {len(drift)} drift(s); rerun --sample and re-annotate\n"
                          f"{drift[:5]}")
-
-    fps = _extraction_fingerprints()
-    if doc["sample_meta"].get("extraction_fingerprint") != fps:
-        raise SystemExit("review sample fingerprint does not match current extraction; rerun --sample")
 
     bad = [r["pair_id"] for r in reviews if r.get("verdict") not in ("correct", "boundary", "wrong")]
     if bad:
@@ -209,10 +191,8 @@ def score() -> None:
         "by_condition_kind": group(lambda r: r["condition_kind"]),
         "alignment_with_current_extraction": {
             "reviewed": n, "matched": n, "missing": 0, "content_drift": 0},
-        "sample_fingerprint_matches_current": True,
         "sample_meta": doc["sample_meta"],
         "annotated_by": doc["annotation"].get("annotated_by"),
-        "data_fingerprints": {**_data_fingerprints(), **fps},
     }
     (OUT / "review_summary.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")

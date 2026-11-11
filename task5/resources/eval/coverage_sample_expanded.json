@@ -1,7 +1,5 @@
 {
  "draw_seed": 77,
- "sampling": "travelogue 正文句，排除既有抽样记录；scenic×platform 分层，每记录≤2句",
- "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注）——判读后回填 ai_advice/gist",
  "n": 60,
  "sentences": [
   {
@@ -607,7 +605,6 @@
   }
  ],
  "n_advice": 9,
- "annotation_note": "AI 逐句判读（口径同第一轮：条件性建议或带触发词的建议计入；攻略式时间安排/路线罗列/无触发词泛建议任务外）",
  "design_excluded_sids": [
   {
    "sid": 23,
