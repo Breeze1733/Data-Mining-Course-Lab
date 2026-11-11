@@ -3,7 +3,7 @@
 The cleaning policy is: within one scenic area, the earliest accepted record is
 the canonical copy; later records with clean-text similarity >= 0.9 are removed.
 This script applies that policy to ``data/processed/dataset_clean.jsonl`` without
-re-cleaning the text, so the 249 post-hoc ``snapshot_sha256`` backfills survive.
+re-cleaning the text.
 
 Removed rows are appended to ``rejected_records.jsonl`` with rejection reason
 ``near_duplicate_of:<canonical>`` (audit trail), not silently dropped. Retained
@@ -157,7 +157,7 @@ def main(argv: list[str] | None = None) -> int:
         report.get("input_records", len(accepted) + len(rejected)),
         positions, 80, 30,
     )
-    for key in ("input_path", "input_sha256"):
+    for key in ("input_path",):
         if key in report:
             new_report[key] = report[key]
 

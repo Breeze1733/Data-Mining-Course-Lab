@@ -6561,7 +6561,6 @@
     "content_scope",
     "author",
     "published_at",
-    "snapshot_sha256",
     "official_scope",
     "clean_content",
     "raw_char_count",
@@ -6570,7 +6569,6 @@
     "clean_nonspace_char_count",
     "retention_ratio",
     "canonical_source_url",
-    "content_sha256",
     "cleaning_counts",
     "quality_flags",
     "duplicate_group",
@@ -6593,6 +6591,5 @@
     "cleaning_examples": "cleaning_examples.json",
     "rejected_records": "rejected_records.jsonl"
   },
-  "input_path": "data/raw/dataset_raw.jsonl",
-  "input_sha256": "bb808a33d1f2e0eed0ef05b99f6f561e36683e4845441ff3f6c0bf895b6167a2"
+  "input_path": "data/raw/dataset_raw.jsonl"
 }

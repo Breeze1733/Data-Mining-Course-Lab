@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
 import html
 import json
 import re
@@ -39,7 +38,7 @@ BASE_FIELDS = list(REQUIRED_FIELDS) + ["author", "published_at"]
 DERIVED_FIELDS = [
     "clean_content", "raw_char_count", "extracted_char_count", "clean_char_count",
     "clean_nonspace_char_count", "retention_ratio", "canonical_source_url",
-    "content_sha256", "cleaning_counts", "quality_flags",
+    "cleaning_counts", "quality_flags",
 ]
 DUPLICATE_FIELDS = ("duplicate_group", "duplicate_role", "duplicate_of", "dedup_weight")
 NEAR_DUPLICATE_THRESHOLD = 0.9
@@ -285,14 +284,6 @@ def _nonspace(text: str) -> str:
     return re.sub(r"\s", "", text)
 
 
-def _content_fingerprint(text: str) -> str:
-    # Exact-content rejection may ignore whitespace, never punctuation/symbols:
-    # "A+B", "A-B", "✔可走" and "✘可走" are different source statements.
-    # Similar-but-not-identical records are handled by the warning-only check.
-    normalized = _nonspace(text)
-    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
-
-
 def _date_is_iso(value: str) -> bool:
     try:
         datetime.fromisoformat(value.replace("Z", "+00:00"))
@@ -442,7 +433,7 @@ def summarize_dataset(accepted: list[dict], rejected: list[dict], deduplicated: 
         "missing_required_fields_in_accepted": {key: sum(row.get(key) in (None, "") for row in accepted) for key in REQUIRED_FIELDS},
         "optional_fields_missing_in_accepted": {key: sum(not row.get(key) for row in accepted) for key in ("author", "published_at")},
         "duplicate_source_urls_in_accepted": len(accepted) - len({r["canonical_source_url"] for r in accepted}),
-        "duplicate_clean_contents_in_accepted": len(accepted) - len({_content_fingerprint(r["clean_content"]) for r in accepted}),
+        "duplicate_clean_contents_in_accepted": len(accepted) - len({_nonspace(r["clean_content"]) for r in accepted}),
         "near_duplicate_pairs": near_duplicates,
         "near_duplicate_groups": groups,
         "near_duplicate_group_count": len(groups),
@@ -498,7 +489,7 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
     record_checks: list[dict] = []
     seen_ids: dict[str, str] = {}
     seen_urls: dict[str, str] = {}
-    seen_fingerprints: dict[str, str] = {}
+    seen_clean_texts: dict[str, str] = {}
     aggregate_rules: Counter = Counter()
     input_missing: Counter = Counter()
     near_duplicates: list[dict] = []
@@ -506,6 +497,8 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
     for position, original in enumerate(records, start=1):
         row = dict(original)
         row.pop("provenance_note", None)
+        # Crawl-side snapshot hashes stay in the raw layer; delivered records carry no hash fields.
+        row.pop("snapshot_sha256", None)
         # Preserve source data types in raw JSON; normalize only scalar metadata.
         for key in BASE_FIELDS:
             if key != "raw_content":
@@ -539,13 +532,16 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
         if cleaned and nonspace_length < minimum:
             errors.append(f"content_too_short:{nonspace_length}<{minimum}")
         canonical = canonicalize_url(row["source_url"]) if valid_http_url(row["source_url"]) else row["source_url"]
-        fingerprint = _content_fingerprint(cleaned)
+        # Exact-content equality ignores whitespace, never punctuation/symbols:
+        # "A+B", "A-B", "✔可走" and "✘可走" are different source statements.
+        # Similar-but-not-identical records are handled by the warning-only check.
+        clean_text_key = _nonspace(cleaned)
         if row["record_id"] in seen_ids:
             errors.append("duplicate_record_id:" + seen_ids[row["record_id"]])
         if canonical in seen_urls:
             errors.append("duplicate_source_url:" + seen_urls[canonical])
-        if cleaned and fingerprint in seen_fingerprints:
-            errors.append("duplicate_clean_content:" + seen_fingerprints[fingerprint])
+        if cleaned and clean_text_key in seen_clean_texts:
+            errors.append("duplicate_clean_content:" + seen_clean_texts[clean_text_key])
         if "\ufffd" in cleaned:
             flags.append("replacement_character_present")
         # Typical double-decoded UTF-8 sequences are warnings, never auto-repairs.
@@ -569,7 +565,6 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
             "clean_nonspace_char_count": nonspace_length,
             "retention_ratio": round(len(cleaned) / extracted_length, 6) if extracted_length else 0,
             "canonical_source_url": canonical,
-            "content_sha256": hashlib.sha256(cleaned.encode("utf-8")).hexdigest(),
             "cleaning_counts": rule_counts,
             "quality_flags": flags,
         })
@@ -602,14 +597,14 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
             # of an input record, so keep the duplicate keys for subsequent rows.
             seen_ids[row["record_id"]] = row["record_id"]
             seen_urls[canonical] = row["record_id"]
-            seen_fingerprints[fingerprint] = row["record_id"]
+            seen_clean_texts[clean_text_key] = row["record_id"]
             deduplicated.append(row)
             rejected.append(row)
             continue
         accepted.append(row)
         seen_ids[row["record_id"]] = row["record_id"]
         seen_urls[canonical] = row["record_id"]
-        seen_fingerprints[fingerprint] = row["record_id"]
+        seen_clean_texts[clean_text_key] = row["record_id"]
         examples.append({"record_id": row["record_id"], "scenic_area": row["scenic_area"], "title": row["title"],
                          "source_url": row["source_url"], "raw_format": row["raw_format"],
                          "before": raw[:1500], "after": cleaned[:1500], "raw_char_count": len(raw),
@@ -685,12 +680,10 @@ def export_outputs(output_dir: Path, rows: list[dict], report: dict,
                 long_dir.mkdir(exist_ok=True)
                 safe_id = re.sub(r"[^A-Za-z0-9._-]+", "_", row["record_id"]) or f"row{row_index}"
                 target = long_dir / f"{row_index:04d}_{safe_id}_{key}.txt"
-                # Byte-exact UTF-8 prevents Windows newline translation from
-                # changing the sidecar or making its SHA-256 audit inaccurate.
+                # Byte-exact UTF-8 prevents Windows newline translation from changing the sidecar.
                 target.write_bytes(value.encode("utf-8"))
                 rel_path = target.relative_to(output_dir).as_posix()
-                externalized.append({"record_id": row["record_id"], "field": key, "characters": len(value), "path": rel_path,
-                                     "sha256": hashlib.sha256(value.encode("utf-8")).hexdigest()})
+                externalized.append({"record_id": row["record_id"], "field": key, "characters": len(value), "path": rel_path})
     report["xlsx_authoring"] = {"engine": "openpyxl", "script": "src/export_dataset_xlsx.py",
                                 "status": "generated"}
     report["dataset_fields"] = fields
@@ -713,7 +706,6 @@ def main(argv: list[str] | None = None) -> int:
     records = read_jsonl(args.input)
     rows, report, rejected, examples = preprocess_records(records, args.min_travelogue_length, args.min_official_length)
     report["input_path"] = args.input.as_posix()
-    report["input_sha256"] = hashlib.sha256(args.input.read_bytes()).hexdigest()
     export_outputs(args.output_dir, rows, report, rejected, examples)
     print(json.dumps({key: report[key] for key in ("input_records", "accepted_records", "rejected_records", "deduplicated_records", "main_target_met", "minimum_target_met")}, ensure_ascii=False))
     return 2 if args.require_target and not report["main_target_met"] else 0
