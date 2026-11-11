@@ -135,7 +135,7 @@
    "rule_kind": "同行者",
    "doc_start": 465,
    "doc_end": 467,
-   "split": "dev"
+   "split": "test"
   },
   {
    "case_index": 44,
@@ -180,7 +180,7 @@
    "rule_kind": "名词集合",
    "doc_start": 3300,
    "doc_end": 3302,
-   "split": "test"
+   "split": "dev"
   },
   {
    "case_index": 53,
@@ -195,7 +195,7 @@
    "rule_kind": "景区名",
    "doc_start": 3786,
    "doc_end": 3788,
-   "split": "test"
+   "split": "dev"
   },
   {
    "case_index": 62,
@@ -210,7 +210,7 @@
    "rule_kind": "景区名",
    "doc_start": 5821,
    "doc_end": 5823,
-   "split": "test"
+   "split": "dev"
   },
   {
    "case_index": 66,
@@ -690,7 +690,7 @@
    "rule_kind": "前文POI集合",
    "doc_start": 2331,
    "doc_end": 2333,
-   "split": "dev"
+   "split": "test"
   },
   {
    "case_index": 315,
@@ -765,7 +765,7 @@
    "rule_kind": "同行者",
    "doc_start": 1838,
    "doc_end": 1840,
-   "split": "dev"
+   "split": "test"
   },
   {
    "case_index": 361,
@@ -1215,7 +1215,7 @@
    "rule_kind": "同行者",
    "doc_start": 2677,
    "doc_end": 2679,
-   "split": "dev"
+   "split": "test"
   },
   {
    "case_index": 684,
@@ -1230,7 +1230,7 @@
    "rule_kind": "同行者",
    "doc_start": 3250,
    "doc_end": 3252,
-   "split": "dev"
+   "split": "test"
   },
   {
    "case_index": 698,
@@ -1383,97 +1383,97 @@
    "split": "dev"
   },
   {
-   "case_index": 808,
+   "case_index": 756,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
-   "record_id": "CTRIP_4027753",
+   "record_id": "CTRIP_4005525",
    "gold_antecedent": "无",
    "gold_kind": "无",
    "note": "诗化指代“这片土地”，无明确实体",
    "rule_resolution": "travel_party",
    "rule_kind": "同行者",
-   "doc_start": 3914,
-   "doc_end": 3916,
-   "split": "test"
+   "doc_start": 4096,
+   "doc_end": 4098,
+   "split": "dev"
   },
   {
-   "case_index": 811,
+   "case_index": 759,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
-   "record_id": "CTRIP_4027753",
+   "record_id": "CTRIP_4005525",
    "gold_antecedent": "沈阳6人老年团队",
    "gold_kind": "他人",
    "note": "前句“6人老年人团队”，非作者同行者",
    "rule_resolution": "travel_party",
    "rule_kind": "同行者",
-   "doc_start": 4365,
-   "doc_end": 4367,
-   "split": "test"
+   "doc_start": 4547,
+   "doc_end": 4549,
+   "split": "dev"
   },
   {
-   "case_index": 815,
+   "case_index": 763,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
-   "record_id": "CTRIP_4027753",
+   "record_id": "CTRIP_4005525",
    "gold_antecedent": "同行者",
    "gold_kind": "同行者",
    "note": "前句“他们”即同行队伍",
    "rule_resolution": "travel_party",
    "rule_kind": "同行者",
-   "doc_start": 4518,
-   "doc_end": 4520,
-   "split": "test"
+   "doc_start": 4700,
+   "doc_end": 4702,
+   "split": "dev"
   },
   {
-   "case_index": 817,
+   "case_index": 765,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
-   "record_id": "CTRIP_4027753",
+   "record_id": "CTRIP_4005525",
    "gold_antecedent": "九寨沟",
    "gold_kind": "景区",
    "note": "“这里的水”指夜宿地九寨沟当地，同第1例口径",
    "rule_resolution": "九寨沟",
    "rule_kind": "景区名",
-   "doc_start": 4855,
-   "doc_end": 4857,
-   "split": "test"
+   "doc_start": 5037,
+   "doc_end": 5039,
+   "split": "dev"
   },
   {
-   "case_index": 827,
+   "case_index": 775,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
-   "record_id": "CTRIP_4027753",
+   "record_id": "CTRIP_4005525",
    "gold_antecedent": "同行者（郭枫）",
    "gold_kind": "同行者",
    "note": "",
    "rule_resolution": "travel_party",
    "rule_kind": "同行者",
-   "doc_start": 9026,
-   "doc_end": 9028,
-   "split": "test"
+   "doc_start": 9208,
+   "doc_end": 9210,
+   "split": "dev"
   },
   {
-   "case_index": 829,
+   "case_index": 777,
    "pronoun": "这座",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
-   "record_id": "CTRIP_4027753",
+   "record_id": "CTRIP_4005525",
    "gold_antecedent": "成都",
    "gold_kind": "景区",
    "note": "“这座城市”指成都；同句“动车票”干扰",
    "rule_resolution": "动车",
    "rule_kind": "交通",
-   "doc_start": 10121,
-   "doc_end": 10123,
-   "split": "test"
+   "doc_start": 10303,
+   "doc_end": 10305,
+   "split": "dev"
   },
   {
-   "case_index": 848,
+   "case_index": 820,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -1488,7 +1488,7 @@
    "split": "dev"
   },
   {
-   "case_index": 849,
+   "case_index": 821,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -1503,7 +1503,7 @@
    "split": "dev"
   },
   {
-   "case_index": 857,
+   "case_index": 829,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
@@ -1515,10 +1515,10 @@
    "rule_kind": "同行者",
    "doc_start": 2743,
    "doc_end": 2745,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 863,
+   "case_index": 835,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
@@ -1530,10 +1530,10 @@
    "rule_kind": "同行者",
    "doc_start": 3276,
    "doc_end": 3278,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 867,
+   "case_index": 839,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -1545,10 +1545,10 @@
    "rule_kind": "前文POI集合",
    "doc_start": 4034,
    "doc_end": 4036,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 872,
+   "case_index": 844,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
@@ -1560,40 +1560,40 @@
    "rule_kind": "同行者",
    "doc_start": 5595,
    "doc_end": 5597,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 909,
+   "case_index": 768,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
-   "record_id": "CTRIP_4018116",
+   "record_id": "CTRIP_4005525",
    "gold_antecedent": "九寨沟",
    "gold_kind": "景区",
    "note": "“湖在这里被叫做海子”指九寨沟整体；前句“箭竹海”为干扰",
    "rule_resolution": "箭竹海",
    "rule_kind": "POI",
-   "doc_start": 7152,
-   "doc_end": 7154,
+   "doc_start": 7163,
+   "doc_end": 7165,
    "split": "dev"
   },
   {
-   "case_index": 911,
+   "case_index": 770,
    "pronoun": "这条",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
-   "record_id": "CTRIP_4018116",
+   "record_id": "CTRIP_4005525",
    "gold_antecedent": "则查洼沟",
    "gold_kind": "POI",
    "note": "前句“下一条沟—查洼沟”；文本变体“查洼沟”未入词典",
    "rule_resolution": "诺日朗中心",
    "rule_kind": "POI",
-   "doc_start": 7995,
-   "doc_end": 7997,
+   "doc_start": 8006,
+   "doc_end": 8008,
    "split": "dev"
   },
   {
-   "case_index": 947,
+   "case_index": 884,
    "pronoun": "这条",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
@@ -1608,7 +1608,7 @@
    "split": "test"
   },
   {
-   "case_index": 948,
+   "case_index": 885,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
@@ -1623,7 +1623,7 @@
    "split": "test"
   },
   {
-   "case_index": 963,
+   "case_index": 900,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
@@ -1638,7 +1638,7 @@
    "split": "test"
   },
   {
-   "case_index": 999,
+   "case_index": 936,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
@@ -1653,7 +1653,7 @@
    "split": "test"
   },
   {
-   "case_index": 1013,
+   "case_index": 950,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -1665,10 +1665,10 @@
    "rule_kind": "无明确先行词",
    "doc_start": 2229,
    "doc_end": 2231,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 1020,
+   "case_index": 957,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
@@ -1683,7 +1683,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1021,
+   "case_index": 958,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -1698,7 +1698,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1025,
+   "case_index": 962,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
@@ -1713,7 +1713,7 @@
    "split": "test"
   },
   {
-   "case_index": 1026,
+   "case_index": 963,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
@@ -1728,7 +1728,7 @@
    "split": "test"
   },
   {
-   "case_index": 1052,
+   "case_index": 989,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
@@ -1743,7 +1743,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1073,
+   "case_index": 1010,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
@@ -1758,7 +1758,7 @@
    "split": "test"
   },
   {
-   "case_index": 1108,
+   "case_index": 1045,
    "pronoun": "她们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
@@ -1770,10 +1770,10 @@
    "rule_kind": "同行者",
    "doc_start": 1067,
    "doc_end": 1069,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 1109,
+   "case_index": 1046,
    "pronoun": "她们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
@@ -1785,10 +1785,10 @@
    "rule_kind": "同行者",
    "doc_start": 1071,
    "doc_end": 1073,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 1111,
+   "case_index": 1048,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
@@ -1800,10 +1800,10 @@
    "rule_kind": "POI",
    "doc_start": 2387,
    "doc_end": 2388,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 1160,
+   "case_index": 1097,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -1818,7 +1818,7 @@
    "split": "test"
   },
   {
-   "case_index": 1175,
+   "case_index": 1112,
    "pronoun": "那里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
@@ -1833,7 +1833,7 @@
    "split": "test"
   },
   {
-   "case_index": 1190,
+   "case_index": 1127,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -1848,7 +1848,7 @@
    "split": "test"
   },
   {
-   "case_index": 1207,
+   "case_index": 1144,
    "pronoun": "那里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
@@ -1863,7 +1863,7 @@
    "split": "test"
   },
   {
-   "case_index": 1218,
+   "case_index": 1155,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -1878,7 +1878,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1237,
+   "case_index": 1174,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -1893,7 +1893,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1241,
+   "case_index": 1178,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -1908,7 +1908,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1258,
+   "case_index": 1195,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
@@ -1923,7 +1923,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1273,
+   "case_index": 1210,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -1935,10 +1935,10 @@
    "rule_kind": "前文POI集合",
    "doc_start": 355,
    "doc_end": 357,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 1275,
+   "case_index": 1212,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
@@ -1950,10 +1950,10 @@
    "rule_kind": "POI",
    "doc_start": 1167,
    "doc_end": 1168,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 1293,
+   "case_index": 1230,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
@@ -1968,7 +1968,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1309,
+   "case_index": 1246,
    "pronoun": "它们",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
@@ -1983,7 +1983,7 @@
    "split": "test"
   },
   {
-   "case_index": 1317,
+   "case_index": 1254,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
@@ -1998,7 +1998,7 @@
    "split": "test"
   },
   {
-   "case_index": 1356,
+   "case_index": 1293,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -2010,10 +2010,10 @@
    "rule_kind": "前文POI集合",
    "doc_start": 171,
    "doc_end": 173,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 1357,
+   "case_index": 1294,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
@@ -2025,10 +2025,10 @@
    "rule_kind": "同行者",
    "doc_start": 238,
    "doc_end": 240,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 1378,
+   "case_index": 1315,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "九寨沟",
@@ -2040,10 +2040,10 @@
    "rule_kind": "无明确先行词",
    "doc_start": 3913,
    "doc_end": 3915,
-   "split": "test"
+   "split": "dev"
   },
   {
-   "case_index": 1381,
+   "case_index": 1318,
    "pronoun": "这条",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
@@ -2058,7 +2058,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1457,
+   "case_index": 1394,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
@@ -2073,7 +2073,7 @@
    "split": "test"
   },
   {
-   "case_index": 1475,
+   "case_index": 1412,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
@@ -2085,10 +2085,10 @@
    "rule_kind": "他人",
    "doc_start": 2096,
    "doc_end": 2098,
-   "split": "test"
+   "split": "dev"
   },
   {
-   "case_index": 1492,
+   "case_index": 1429,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
@@ -2100,10 +2100,10 @@
    "rule_kind": "景区名",
    "doc_start": 4145,
    "doc_end": 4147,
-   "split": "test"
+   "split": "dev"
   },
   {
-   "case_index": 1523,
+   "case_index": 1460,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
@@ -2115,10 +2115,10 @@
    "rule_kind": "景区名",
    "doc_start": 8086,
    "doc_end": 8087,
-   "split": "test"
+   "split": "dev"
   },
   {
-   "case_index": 1529,
+   "case_index": 1466,
    "pronoun": "她们",
    "pronoun_class": "person",
    "scenic_area": "九寨沟",
@@ -2130,10 +2130,10 @@
    "rule_kind": "同行者",
    "doc_start": 8502,
    "doc_end": 8504,
-   "split": "test"
+   "split": "dev"
   },
   {
-   "case_index": 1563,
+   "case_index": 1500,
    "pronoun": "那里",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
@@ -2145,10 +2145,10 @@
    "rule_kind": "POI",
    "doc_start": 11896,
    "doc_end": 11898,
-   "split": "test"
+   "split": "dev"
   },
   {
-   "case_index": 1623,
+   "case_index": 1560,
    "pronoun": "那边",
    "pronoun_class": "locative",
    "scenic_area": "九寨沟",
@@ -2163,7 +2163,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1661,
+   "case_index": 1598,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "颐和园",
@@ -2178,7 +2178,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1664,
+   "case_index": 1601,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "颐和园",
@@ -2193,7 +2193,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1665,
+   "case_index": 1602,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "颐和园",
@@ -2208,7 +2208,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1676,
+   "case_index": 1613,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "颐和园",
@@ -2223,7 +2223,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1685,
+   "case_index": 1622,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "颐和园",
@@ -2238,7 +2238,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1690,
+   "case_index": 1627,
    "pronoun": "这座",
    "pronoun_class": "object",
    "scenic_area": "颐和园",
@@ -2253,7 +2253,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1713,
+   "case_index": 1650,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "颐和园",
@@ -2265,10 +2265,10 @@
    "rule_kind": "同行者",
    "doc_start": 5899,
    "doc_end": 5901,
-   "split": "test"
+   "split": "dev"
   },
   {
-   "case_index": 1716,
+   "case_index": 1653,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "颐和园",
@@ -2280,10 +2280,10 @@
    "rule_kind": "POI",
    "doc_start": 3149,
    "doc_end": 3150,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 1726,
+   "case_index": 1663,
    "pronoun": "这座",
    "pronoun_class": "object",
    "scenic_area": "颐和园",
@@ -2295,10 +2295,10 @@
    "rule_kind": "POI",
    "doc_start": 6163,
    "doc_end": 6165,
-   "split": "dev"
+   "split": "test"
   },
   {
-   "case_index": 1732,
+   "case_index": 1669,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "颐和园",
@@ -2313,7 +2313,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1738,
+   "case_index": 1675,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "颐和园",
@@ -2328,7 +2328,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1740,
+   "case_index": 1677,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "颐和园",
@@ -2343,7 +2343,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1742,
+   "case_index": 1679,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "颐和园",
@@ -2358,7 +2358,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1753,
+   "case_index": 1690,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "颐和园",
@@ -2370,10 +2370,10 @@
    "rule_kind": "景区名",
    "doc_start": 876,
    "doc_end": 878,
-   "split": "test"
+   "split": "dev"
   },
   {
-   "case_index": 1758,
+   "case_index": 1695,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "颐和园",
@@ -2385,10 +2385,10 @@
    "rule_kind": "景区名",
    "doc_start": 1423,
    "doc_end": 1425,
-   "split": "test"
+   "split": "dev"
   },
   {
-   "case_index": 1773,
+   "case_index": 1710,
    "pronoun": "这座",
    "pronoun_class": "object",
    "scenic_area": "颐和园",
@@ -2403,7 +2403,7 @@
    "split": "test"
   },
   {
-   "case_index": 1774,
+   "case_index": 1711,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "颐和园",
@@ -2418,7 +2418,7 @@
    "split": "test"
   },
   {
-   "case_index": 1788,
+   "case_index": 1725,
    "pronoun": "此处",
    "pronoun_class": "locative",
    "scenic_area": "颐和园",
@@ -2433,7 +2433,7 @@
    "split": "test"
   },
   {
-   "case_index": 1799,
+   "case_index": 1736,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "颐和园",
@@ -2448,7 +2448,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1803,
+   "case_index": 1740,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "颐和园",
@@ -2463,7 +2463,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1811,
+   "case_index": 1748,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "颐和园",
@@ -2478,7 +2478,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1814,
+   "case_index": 1751,
    "pronoun": "此处",
    "pronoun_class": "locative",
    "scenic_area": "颐和园",
@@ -2493,7 +2493,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1821,
+   "case_index": 1758,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "颐和园",
@@ -2508,7 +2508,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1822,
+   "case_index": 1759,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "颐和园",
@@ -2523,7 +2523,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1823,
+   "case_index": 1760,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "颐和园",
@@ -2538,7 +2538,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1825,
+   "case_index": 1762,
    "pronoun": "其中",
    "pronoun_class": "set",
    "scenic_area": "颐和园",
@@ -2553,7 +2553,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1833,
+   "case_index": 1770,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "颐和园",
@@ -2568,7 +2568,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1850,
+   "case_index": 1787,
    "pronoun": "他们",
    "pronoun_class": "person",
    "scenic_area": "黄山",
@@ -2583,7 +2583,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1851,
+   "case_index": 1788,
    "pronoun": "这条",
    "pronoun_class": "object",
    "scenic_area": "黄山",
@@ -2598,7 +2598,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1852,
+   "case_index": 1789,
    "pronoun": "这条",
    "pronoun_class": "object",
    "scenic_area": "黄山",
@@ -2613,7 +2613,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1856,
+   "case_index": 1793,
    "pronoun": "这条",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
@@ -2625,10 +2625,10 @@
    "rule_kind": "POI",
    "doc_start": 371,
    "doc_end": 373,
-   "split": "test"
+   "split": "dev"
   },
   {
-   "case_index": 1899,
+   "case_index": 1836,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "九寨沟",
@@ -2643,7 +2643,7 @@
    "split": "test"
   },
   {
-   "case_index": 1919,
+   "case_index": 1856,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "颐和园",
@@ -2658,7 +2658,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1922,
+   "case_index": 1859,
    "pronoun": "它",
    "pronoun_class": "object",
    "scenic_area": "颐和园",
@@ -2673,7 +2673,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1926,
+   "case_index": 1863,
    "pronoun": "这条",
    "pronoun_class": "object",
    "scenic_area": "颐和园",
@@ -2688,7 +2688,7 @@
    "split": "dev"
   },
   {
-   "case_index": 1936,
+   "case_index": 1873,
    "pronoun": "这里",
    "pronoun_class": "locative",
    "scenic_area": "颐和园",
@@ -2703,11 +2703,131 @@
    "split": "dev"
   }
  ],
- "alignment_policy": "record_id + pronoun + doc_start + doc_end; fail on changed text location",
+ "alignment_policy": "record_id + pronoun + doc_start + doc_end; near-duplicate copies removed by task1 are remapped to the canonical record by identical sentence text plus relative pronoun offset",
  "expansion": {
   "seed": 43,
   "n_per_cell": 5,
   "n_added": 60,
   "split": "test"
+ },
+ "alignment_note": {
+  "exact_matches": 172,
+  "remapped_from_near_duplicate_copies": 8,
+  "remapped_cases": [
+   {
+    "from_record": "CTRIP_4027753",
+    "from_span": [
+     3914,
+     3916
+    ],
+    "to_record": "CTRIP_4005525",
+    "to_span": [
+     4096,
+     4098
+    ],
+    "pronoun": "他们",
+    "old_case_index": 808
+   },
+   {
+    "from_record": "CTRIP_4027753",
+    "from_span": [
+     4365,
+     4367
+    ],
+    "to_record": "CTRIP_4005525",
+    "to_span": [
+     4547,
+     4549
+    ],
+    "pronoun": "他们",
+    "old_case_index": 811
+   },
+   {
+    "from_record": "CTRIP_4027753",
+    "from_span": [
+     4518,
+     4520
+    ],
+    "to_record": "CTRIP_4005525",
+    "to_span": [
+     4700,
+     4702
+    ],
+    "pronoun": "他们",
+    "old_case_index": 815
+   },
+   {
+    "from_record": "CTRIP_4027753",
+    "from_span": [
+     4855,
+     4857
+    ],
+    "to_record": "CTRIP_4005525",
+    "to_span": [
+     5037,
+     5039
+    ],
+    "pronoun": "这里",
+    "old_case_index": 817
+   },
+   {
+    "from_record": "CTRIP_4027753",
+    "from_span": [
+     9026,
+     9028
+    ],
+    "to_record": "CTRIP_4005525",
+    "to_span": [
+     9208,
+     9210
+    ],
+    "pronoun": "他们",
+    "old_case_index": 827
+   },
+   {
+    "from_record": "CTRIP_4027753",
+    "from_span": [
+     10121,
+     10123
+    ],
+    "to_record": "CTRIP_4005525",
+    "to_span": [
+     10303,
+     10305
+    ],
+    "pronoun": "这座",
+    "old_case_index": 829
+   },
+   {
+    "from_record": "CTRIP_4018116",
+    "from_span": [
+     7152,
+     7154
+    ],
+    "to_record": "CTRIP_4005525",
+    "to_span": [
+     7163,
+     7165
+    ],
+    "pronoun": "这里",
+    "old_case_index": 909
+   },
+   {
+    "from_record": "CTRIP_4018116",
+    "from_span": [
+     7995,
+     7997
+    ],
+    "to_record": "CTRIP_4005525",
+    "to_span": [
+     8006,
+     8008
+    ],
+    "pronoun": "这条",
+    "old_case_index": 911
+   }
+  ],
+  "total_annotations": 180,
+  "split_updated_to_doc_grouped": 38
  }
 }
