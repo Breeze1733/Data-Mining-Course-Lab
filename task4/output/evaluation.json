@@ -984,11 +984,6 @@
   "lo": 0.606,
   "hi": 0.742
  },
- "data_fingerprints": {
-  "dataset_clean": "304605837c1f",
-  "entity_dictionary": "7226607ea20a",
-  "entities_refined": "b93058ec0d7e"
- },
  "identity_ci95": {
   "lo": 0.518,
   "hi": 0.736

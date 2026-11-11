@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
+EVAL = ROOT / "resources/eval"
 FIGS = OUT / "figs"
 sys.stdout.reconfigure(encoding="utf-8")
 plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei"]
@@ -71,10 +72,6 @@ def doc_grouped_split(gold_rows: list[dict], target_test: int = 60) -> dict:
     return split
 
 
-sys.path.insert(0, str(ROOT.parent))
-from common.fingerprints import data_fingerprints as _data_fingerprints
-
-
 def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
     """Wilson 95% confidence interval (robust interval for small-sample proportions)."""
     if n == 0:
@@ -88,7 +85,7 @@ def wilson_ci(k: int, n: int, z: float = 1.96) -> dict:
 
 
 def score(cases: list[dict]) -> None:
-    gold = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
+    gold = json.loads((EVAL / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
     FIGS.mkdir(parents=True, exist_ok=True)
     rows = []
     for g in gold:
@@ -169,7 +166,6 @@ def score(cases: list[dict]) -> None:
         # read separately from the coarse kind accuracy (distinguishing "kind-correct" from "member-correct")
         "set_member_hit": None,
         "accuracy_ci95": wilson_ci(round(acc_overall * len(rows)), len(rows)),
-        "data_fingerprints": _data_fingerprints(),
         "identity_ci95": wilson_ci(
             sum(1 for r in rows if r["gold_kind"] in ("POI", "景区") and r["correct"]),
             sum(1 for r in rows if r["gold_kind"] in ("POI", "景区"))),

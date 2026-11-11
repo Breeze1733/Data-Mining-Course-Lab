@@ -18,6 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
+EVAL = ROOT / "resources/eval"
 
 CANON = {"POI": "POI", "交通": "交通", "景区名": "景区", "他人": "他人", "同行者": "同行者",
          "名词集合": "集合-其他", "前文POI集合": "集合-POI", "人称集合": "集合-人",
@@ -29,7 +30,7 @@ N_EXAMPLES = 6
 def main() -> int:
     sys.stdout.reconfigure(encoding="utf-8")
     cases = [json.loads(l) for l in (OUT / "pronoun_cases.jsonl").open(encoding="utf-8")]
-    gold = json.loads((OUT / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
+    gold = json.loads((EVAL / "annotation_gold.json").read_text(encoding="utf-8"))["annotations"]
     records = {}
     for line in (ROOT.parent / "task1/data/processed/dataset_clean.jsonl").open(encoding="utf-8"):
         r = json.loads(line)
