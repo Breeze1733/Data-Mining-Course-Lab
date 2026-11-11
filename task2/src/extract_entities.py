@@ -33,6 +33,15 @@ def load_dictionary(iteration: str):
     return entries, set(), False
 
 
+def _number(value):
+    """Keep weighted counts integer-valued unless a fractional weight was supplied."""
+    return int(value) if float(value).is_integer() else round(float(value), 4)
+
+
+def _counter(counter: Counter) -> dict:
+    return {key: _number(value) for key, value in counter.items()}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--iteration", choices=["baseline", "refined"], default="refined")
@@ -55,13 +64,21 @@ def main(argv: list[str] | None = None) -> int:
         raise ValueError("输入数据集为空")
     out_path = out / f"entities_{args.iteration}.jsonl"
     type_scenic = defaultdict(Counter)
+    type_scenic_in_scenic = defaultdict(Counter)
     subtype_counter = Counter()
     canonical_freq: dict[str, Counter] = defaultdict(Counter)
+    canonical_in_scenic: dict[str, Counter] = defaultdict(Counter)
+    canonical_by_scenic: dict[str, dict[str, Counter]] = defaultdict(lambda: defaultdict(Counter))
     per_record_counts = []
+    per_record_weights = []
     segmentation_tokens = 0
+    canonical_whitespace = 0
+    weighted_entity_total = 0
     with out_path.open("w", encoding="utf-8") as fh:
         for row in rows:
             text = row["clean_content"]
+            weight = int(float(row.get("dedup_weight", 1.0)))
+            duplicate_group = row.get("duplicate_group") or ""
             # jieba segmentation evidence (dictionary words are guaranteed to segment via load_userdict; segmentation results are used for statistics and as reference in Experiment 3)
             toks = [t for t in jieba.cut(text) if t.strip()]
             segmentation_tokens += len(toks)
@@ -70,29 +87,64 @@ def main(argv: list[str] | None = None) -> int:
             ents.sort(key=lambda e: (e["start"], e["end"]))
             assert all(a["end"] <= b["start"] for a, b in zip(ents, ents[1:]))
             for e in ents:
-                type_scenic[row["scenic_area"]][e["type"]] += 1
-                subtype_counter[f'{e["type"]}/{e["subtype"]}'] += 1
-                canonical_freq[e["type"]][e["canonical"]] += 1
+                if any(ch.isspace() for ch in e["canonical"]):
+                    canonical_whitespace += 1
+                if not weight:
+                    continue
+                area = row["scenic_area"]
+                type_scenic[area][e["type"]] += weight
+                subtype_counter[f'{e["type"]}/{e["subtype"]}'] += weight
+                canonical_freq[e["type"]][e["canonical"]] += weight
+                if e.get("in_scenic", True):
+                    type_scenic_in_scenic[area][e["type"]] += weight
+                    canonical_in_scenic[e["type"]][e["canonical"]] += weight
+                    canonical_by_scenic[area][e["type"]][e["canonical"]] += weight
+            weighted_entity_total += len(ents) * weight
             rec = {
                 "record_id": row["record_id"], "scenic_area": row["scenic_area"],
                 "source_platform": row["source_platform"], "text_type": row["text_type"],
-                "clean_char_count": row["clean_char_count"], "entities": ents,
+                "clean_char_count": row["clean_char_count"],
+                "duplicate_group": duplicate_group,
+                "duplicate_role": row.get("duplicate_role") or "",
+                "duplicate_of": row.get("duplicate_of") or "",
+                "dedup_weight": weight,
+                "entities": ents,
             }
             fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
             per_record_counts.append(len(ents))
+            per_record_weights.append(weight)
 
+    records_after_dedup = _number(sum(per_record_weights))
+    duplicate_records = len(rows) - records_after_dedup
     stats = {
         "iteration": args.iteration,
         "dictionary_size": {"poi": sum(1 for e in entries if e["entity_type"] == "景点POI"),
                             "transport": sum(1 for e in entries if e["entity_type"] == "交通方式"),
                             "stopwords": len(stopwords)},
         "records": len(rows),
-        "total_entities": sum(per_record_counts),
-        "entities_per_record_mean": round(sum(per_record_counts) / len(rows), 2),
+        "records_after_dedup": records_after_dedup,
+        "duplicate_records": duplicate_records,
+        "records_in_duplicate_groups": sum(1 for row in rows if row.get("duplicate_group")),
+        "total_entities": weighted_entity_total,
+        "total_entities_raw": sum(per_record_counts),
+        "entities_per_record_mean": round(weighted_entity_total / records_after_dedup, 2) if records_after_dedup else 0,
+        "entities_per_record_mean_raw": round(sum(per_record_counts) / len(rows), 2),
         "segmentation_tokens_total": segmentation_tokens,
-        "by_scenic_area": {k: dict(v) for k, v in type_scenic.items()},
-        "by_subtype": dict(subtype_counter),
-        "top_canonical": {t: dict(c.most_common(40)) for t, c in canonical_freq.items()},
+        "by_scenic_area": {k: _counter(v) for k, v in type_scenic.items()},
+        "by_scenic_area_in_scenic": {k: _counter(v) for k, v in type_scenic_in_scenic.items()},
+        "by_subtype": _counter(subtype_counter),
+        "top_canonical": {t: {k: _number(v) for k, v in c.most_common(40)}
+                          for t, c in canonical_freq.items()},
+        "top_canonical_in_scenic": {t: {k: _number(v) for k, v in c.most_common(40)}
+                                    for t, c in canonical_in_scenic.items()},
+        "top_canonical_by_scenic": {
+            area: {t: {k: _number(v) for k, v in c.most_common(20)} for t, c in types.items()}
+            for area, types in canonical_by_scenic.items()
+        },
+        "qc": {
+            "canonical_with_whitespace": canonical_whitespace,
+            "input_records_with_dedup_weight": sum(1 for row in rows if "dedup_weight" in row),
+        },
     }
     (out / f"entity_stats_{args.iteration}.json").write_text(
         json.dumps(stats, ensure_ascii=False, indent=1), encoding="utf-8")

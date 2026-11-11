@@ -132,7 +132,11 @@ def time_entities(text: str) -> list[dict]:
         _time_rules = TimeRules.load(RES / "time_rules.json")
     candidates, _ = Gazetteer([], []).resolve_overlaps(_time_rules.extract(text))
     return [{"text": c.surface, "type": c.type, "subtype": c.subtype,
-             "start": c.start, "end": c.end, "canonical": c.surface,
+             "start": c.start, "end": c.end,
+             # canonical is a vocabulary key: strip internal whitespace while
+             # keeping text/start/end as the verbatim source span.
+             "canonical": (re.sub(r"\s+", "", c.normalized or c.surface)
+                           if any(ch.isspace() for ch in c.surface) else c.surface),
              "normalized": c.normalized, "in_scenic": True,
              "counts_as_time_node": c.counts_as_time_node,
              "method": c.method, "rule_id": c.rule_id} for c in candidates]

@@ -1264,11 +1264,10 @@
    "name": "黄龙",
    "entity_type": "景点POI",
    "subtype": "景点",
-   "scenic_areas": [
-    "九寨沟"
-   ],
+   "scenic_areas": [],
    "canonical": "黄龙",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed+manual_review_of_mined_candidates",
+   "note": "九寨沟—黄龙联游地标，不在九寨沟景区范围内；按周边地标处理（与黄龙五彩池一致）"
   },
   {
    "name": "黑虎松",

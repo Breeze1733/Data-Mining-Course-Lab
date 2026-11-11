@@ -24,4 +24,6 @@ python task2/src/compare_iterations.py
 
 baseline 与 refined 由同一识别器运行。两组统计和图表随仓库提供，图表位于 `figs/baseline/` 和 `figs/refined/`。运行上述命令可生成 baseline 逐条结果。下游统一读取入库的 `entities_refined.jsonl`。
 
+统计口径：输入需先运行 `task1/src/label_near_duplicates.py` 写入 `dedup_weight`；`extract_entities.py` 读取该字段，`by_scenic_area`、`by_subtype`、`top_canonical` 为加权结果（同组近重复只计一次）；`records_after_dedup`、`duplicate_records`、`total_entities_raw` 等给出原始口径。分景区核心榜见 `top_canonical_in_scenic` 与 `top_canonical_by_scenic`，只统计 `in_scenic=true`。时间实体 `canonical` 去除内部空白，`text` 仍是原文切片，`start/end` 可直接回溯原文。
+
 地点别名通过`common/entity_identity.py`统一处理。实体写出前检查字符位置和区间重叠；历史抽检仅在文档、类型、原文及位置一致时继承判定。
