@@ -268,9 +268,13 @@ def entity_period(entity: dict) -> str | None:
     return "上午" if 5 <= hour < 12 else "中午" if 12 <= hour < 14 else "下午" if 14 <= hour < 19 else "晚上"
 
 
-def tourist_period_allocation() -> dict[str, Counter]:
+def tourist_period_allocation(tourist_ids: set[str] | None = None) -> dict[str, Counter]:
 
-    """Period distribution of tourist text: period-word occurrence counts (narrative) + clock-time placements."""
+    """Period distribution of tourist text: period-word occurrence counts (narrative) + clock-time placements.
+
+    When ``tourist_ids`` is supplied, only the same routes as tourist_routes.jsonl
+    are counted so the allocation shares the coverage/order denominator.
+    """
 
     ents = [json.loads(l) for l in (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8")]
 
@@ -279,6 +283,10 @@ def tourist_period_allocation() -> dict[str, Counter]:
     for rec in ents:
 
         if rec["text_type"] != "travelogue":
+
+            continue
+
+        if tourist_ids is not None and rec["record_id"] not in tourist_ids:
 
             continue
 
@@ -330,7 +338,9 @@ def main() -> int:
 
     official = official_routes_by_scenic()
 
-    t_period = tourist_period_allocation()
+    tourist_ids = {t["record_id"] for t in tourists}
+
+    t_period = tourist_period_allocation(tourist_ids)
 
 
     comparison = {}
@@ -525,7 +535,7 @@ def main() -> int:
 
             "order_tau": "公共 POI≥5 时，游客序列与最佳匹配官方序列的 Kendall tau（取各官方路线中的最大值，均值）",
 
-            "time_allocation": "官方按时段累计时长占比；游客按文本时段词+时刻落点计数占比",
+            "time_allocation": "官方按时段累计时长占比；游客按文本时段词+时刻落点计数占比，且只统计 tourist_routes 的同一批路线",
 
         },
 

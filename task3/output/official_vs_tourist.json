@@ -3,13 +3,13 @@
   "coverage": "游客路线与官方 POI 全集的交集 / 官方全集（均值）",
   "jaccard": "交集 / 并集（均值）",
   "order_tau": "公共 POI≥5 时，游客序列与最佳匹配官方序列的 Kendall tau（取各官方路线中的最大值，均值）",
-  "time_allocation": "官方按时段累计时长占比；游客按文本时段词+时刻落点计数占比"
+  "time_allocation": "官方按时段累计时长占比；游客按文本时段词+时刻落点计数占比，且只统计 tourist_routes 的同一批路线"
  },
  "by_scenic_area": {
   "九寨沟": {
    "n_official_routes": 9,
    "n_official_pois": 41,
-   "n_tourist_routes": 84,
+   "n_tourist_routes": 80,
    "official_pois": [
     "沟口",
     "原始森林",
@@ -53,10 +53,10 @@
     "树正景区",
     "树正沟"
    ],
-   "coverage_mean": 0.38,
-   "jaccard_mean": 0.357,
-   "order_tau_mean": 0.68,
-   "n_order_pairs": 84,
+   "coverage_mean": 0.378,
+   "jaccard_mean": 0.361,
+   "order_tau_mean": 0.676,
+   "n_order_pairs": 80,
    "n_tourists_unmatched": 0,
    "matching_rule": "每条游客路线取各官方路线中公共POI≥5 的最大 tau（择优，敏感性见 tau_aggregation_sensitivity）",
    "official_has_time_info": true,
@@ -64,30 +64,30 @@
    "tourist_time_basis": "文本时段词提及频次",
    "tau_aggregation_sensitivity": {
     "best": {
-     "n": 84,
-     "mean": 0.68
+     "n": 80,
+     "mean": 0.676
     },
     "mean": {
-     "n": 84,
-     "mean": 0.326
+     "n": 80,
+     "mean": 0.32
     },
     "first": {
-     "n": 75,
-     "mean": 0.464
+     "n": 71,
+     "mean": 0.449
     }
    },
    "tau_sensitivity": {
     "3": {
-     "n": 84,
-     "mean": 0.754
+     "n": 80,
+     "mean": 0.748
     },
     "5": {
-     "n": 84,
-     "mean": 0.68
+     "n": 80,
+     "mean": 0.676
     },
     "7": {
-     "n": 79,
-     "mean": 0.633
+     "n": 75,
+     "mean": 0.625
     }
    },
    "official_time_allocation_pct": {
@@ -97,7 +97,7 @@
     "晚上": 0.0
    },
    "official_time_steps": {
-    "未标注": 61,
+    "未标注": 57,
     "上午": 38,
     "下午": 27
    },
@@ -108,16 +108,16 @@
     "未标注": 150
    },
    "tourist_time_allocation_pct": {
-    "上午": 0.456,
-    "中午": 0.128,
-    "下午": 0.24,
-    "晚上": 0.176
+    "上午": 0.459,
+    "中午": 0.132,
+    "下午": 0.247,
+    "晚上": 0.162
    },
    "tourist_time_counts": {
-    "上午": 666,
-    "下午": 350,
-    "中午": 187,
-    "晚上": 257
+    "上午": 603,
+    "下午": 325,
+    "中午": 174,
+    "晚上": 213
    }
   },
   "颐和园": {
@@ -211,22 +211,22 @@
     "晚上": null
    },
    "official_time_steps": {
-    "未标注": 126
+    "未标注": 111
    },
    "official_time_minutes": {
     "未标注": 120
    },
    "tourist_time_allocation_pct": {
-    "上午": 0.456,
-    "中午": 0.072,
-    "下午": 0.248,
-    "晚上": 0.225
+    "上午": 0.458,
+    "中午": 0.071,
+    "下午": 0.25,
+    "晚上": 0.222
    },
    "tourist_time_counts": {
-    "中午": 31,
-    "下午": 107,
-    "上午": 197,
-    "晚上": 97
+    "中午": 30,
+    "下午": 106,
+    "上午": 194,
+    "晚上": 94
    }
   },
   "黄山": {
@@ -308,15 +308,15 @@
    },
    "official_time_minutes": {},
    "tourist_time_allocation_pct": {
-    "上午": 0.481,
-    "中午": 0.113,
+    "上午": 0.482,
+    "中午": 0.114,
     "下午": 0.221,
-    "晚上": 0.185
+    "晚上": 0.183
    },
    "tourist_time_counts": {
     "下午": 255,
-    "上午": 556,
-    "晚上": 214,
+    "上午": 555,
+    "晚上": 211,
     "中午": 131
    }
   }
