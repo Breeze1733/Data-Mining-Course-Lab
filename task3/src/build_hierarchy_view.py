@@ -1,15 +1,14 @@
 """Experiment 3: time-dimension hierarchy view and visualization.
 
-1. Official routes: when no period marker exists, infer the period from the start of the clock range (5-11 上午 / 11-13 中午 / 13-18 下午 / 18-23 晚上);
+1. Official routes: periods are already inferred in parse_routes.py, so the hierarchy and parsed_routes agree;
 2. Draw “day → period → step” hierarchy tree charts for representative routes (one per scenic area);
-3. Tourist side: assign the current period to POIs in entity reading order to build the tourist time hierarchy, aggregated per scenic area;
-Output: time_hierarchy_summary.json, figs/tree_*.png, tourist_time_hierarchy.jsonl
+3. Tourist side: assign the current period to POIs in entity reading order for the same 225 routes as tourist_routes.jsonl;
+Output: time_hierarchy.jsonl, time_hierarchy_summary.json, tourist_time_hierarchy.jsonl, validation.json, figs/tree_*.png
 """
 from __future__ import annotations
 
 import io
 import json
-import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -29,26 +28,6 @@ plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei"]
 plt.rcParams["axes.unicode_minus"] = False
 
 PERIOD_ORDER = ("上午", "中午", "下午", "晚上", "未标注时段")
-
-
-def hour_of(time_range: str):
-    m = re.match(r"(\d{1,2})[:：点](\d{1,2})", time_range or "")
-    return int(m.group(1)) if m else None
-
-
-def period_from_hour(hour: int) -> str:
-    return ("上午" if 5 <= hour < 11 else "中午" if 11 <= hour < 13 else
-            "下午" if 13 <= hour < 18 else "晚上" if 18 <= hour < 24 else "未标注时段")
-
-
-def infer_periods(parsed: dict) -> None:
-    current = None
-    for s in parsed["steps"]:
-        if not s["period"]:
-            if s["time_range"] and (h := hour_of(s["time_range"])) is not None:
-                s["period"] = period_from_hour(h)
-        current = s["period"] or current
-        s["period"] = s["period"] or current
 
 
 def draw_tree(hierarchy: dict, title: str, path: Path):
@@ -104,13 +83,14 @@ def entity_period(entity: dict) -> str | None:
     return "上午" if 5 <= hour < 12 else "中午" if 12 <= hour < 14 else "下午" if 14 <= hour < 19 else "晚上"
 
 
-def tourist_time_hierarchy() -> dict:
-    ents = [json.loads(l) for l in (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8")]
+def tourist_time_hierarchy(tourist_routes: list[dict]) -> tuple[dict, list[dict]]:
+    """One hierarchy record per tourist route, including routes with no period data."""
+    ents = {rec["record_id"]: rec
+            for rec in (json.loads(l) for l in (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8"))}
     per_scenic: dict[str, Counter] = defaultdict(Counter)
     records = []
-    for rec in ents:
-        if rec["text_type"] != "travelogue":
-            continue
+    for route in tourist_routes:
+        rec = ents[route["record_id"]]
         current = None
         period_pois = defaultdict(list)
         for e in rec["entities"]:
@@ -123,26 +103,28 @@ def tourist_time_hierarchy() -> dict:
                           "下午" if current in ("下午", "傍晚") else "晚上" if current in ("晚上", "夜里", "深夜") else
                           "全天" if current == "全天" else "未标注时段")
                 period_pois[bucket].append(e["canonical"])
-        if period_pois:
-            records.append({"record_id": rec["record_id"], "scenic_area": rec["scenic_area"],
-                            "period_pois": {k: v for k, v in period_pois.items()}})
-            for period, pois in period_pois.items():
-                per_scenic[rec["scenic_area"]][period] += len(set(pois))
+        records.append({
+            "record_id": route["record_id"], "scenic_area": route["scenic_area"],
+            "period_pois": {k: v for k, v in period_pois.items()},
+            "has_time_data": bool(period_pois),
+            "n_period_pois": sum(len(v) for v in period_pois.values()),
+            "periods_present": sorted(period_pois),
+        })
+        for period, pois in period_pois.items():
+            per_scenic[route["scenic_area"]][period] += len(set(pois))
     with (OUT / "tourist_time_hierarchy.jsonl").open("w", encoding="utf-8") as fh:
         for r in records:
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
-    return {scenic: dict(c) for scenic, c in per_scenic.items()}
+    return {scenic: dict(c) for scenic, c in per_scenic.items()}, records
 
 
 def main() -> int:
     FIGS.mkdir(parents=True, exist_ok=True)
     parsed = [json.loads(l) for l in (OUT / "parsed_routes.jsonl").open(encoding="utf-8")]
-    hierarchies = [json.loads(l) for l in (OUT / "time_hierarchy.jsonl").open(encoding="utf-8")]
+    tourist_routes = [json.loads(l) for l in (OUT / "tourist_routes.jsonl").open(encoding="utf-8")]
+    raw_by_id = {r["route_id"]: r["raw_content"]
+                 for r in (json.loads(l) for l in (ROOT.parent / "task1/data/raw/official_routes.jsonl").open(encoding="utf-8"))}
 
-    # Period inference (fill from the clock start when official routes lack markers)
-    by_id = {p["route_id"]: p for p in parsed}
-    for p in parsed:
-        infer_periods(p)
     hier_map = {}
     for p in parsed:
         h = {"route_id": p["route_id"], "scenic_area": p["scenic_area"], "route_title": p["route_title"],
@@ -151,7 +133,7 @@ def main() -> int:
             day = h["days"].setdefault(s["day"], {})
             day.setdefault(s["period"] or "未标注时段", []).append({
                 "step_no": s["step_no"], "text": s["text"],
-                "pois": [x["normalized"] for x in s["pois"]],
+                "pois": [x["name"] for x in s["pois"]],
                 "transport": s["transport"], "time_range": s["time_range"], "duration": s["duration"],
                 "lodging": s.get("lodging", False)})
         h["periods_present"] = sorted({period for d in h["days"].values() for period in d})
@@ -178,7 +160,7 @@ def main() -> int:
             for poi in s["pois"]:
                 official_period_pois[p["scenic_area"]][s["period"] or "未标注时段"] += 1
 
-    tourist_stats = tourist_time_hierarchy()
+    tourist_stats, tourist_records = tourist_time_hierarchy(tourist_routes)
 
     summary = {
         "representative_trees": tree_meta,
@@ -186,8 +168,61 @@ def main() -> int:
         "tourist_period_poi_counts": tourist_stats,
     }
     (OUT / "time_hierarchy_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    official_entries = [s for p in parsed for s in p["steps"]]
+    narrative_entries = [s for p in parsed for s in p.get("narrative_segments", [])]
+    span_missing = 0
+    span_bad = 0
+    for p in parsed:
+        source = raw_by_id[p["route_id"]]
+        for entry in p["steps"] + p.get("narrative_segments", []):
+            if "span" not in entry:
+                span_missing += 1
+            elif entry.get("span_status") == "exact" and source[entry["span"][0]:entry["span"][1]] != entry["text"]:
+                span_bad += 1
+    route_ids = {r["record_id"] for r in tourist_routes}
+    hierarchy_ids = {r["record_id"] for r in tourist_records}
+    route_counts = dict(Counter(r["scenic_area"] for r in tourist_routes))
+    allocation = json.loads((OUT / "official_vs_tourist.json").read_text(encoding="utf-8"))
+    allocation_counts = {area: data["n_tourist_routes"] for area, data in allocation["by_scenic_area"].items()}
+    validation = {
+        "official": {
+            "routes": len(parsed),
+            "ordered_routes": sum(1 for p in parsed if p["ordered_route"]),
+            "segments": sum(p.get("segment_count", len(p["steps"])) for p in parsed),
+            "route_steps": len(official_entries),
+            "narrative_segments": len(narrative_entries),
+            "span_exact": sum(1 for s in official_entries + narrative_entries if s.get("span_status") == "exact"),
+            "span_not_contiguous": sum(1 for s in official_entries + narrative_entries
+                                       if s.get("span_status") == "not_contiguous"),
+            "span_missing": span_missing,
+            "pois_in_order_mismatch": sum(
+                1 for p in parsed
+                if p["pois_in_order"] != [poi["name"] for s in p["steps"] for poi in s["pois"]]),
+            "time_hierarchy_records": len(hier_map),
+        },
+        "tourist": {
+            "routes": len(tourist_routes),
+            "routes_by_scenic": route_counts,
+            "hierarchy_records": len(tourist_records),
+            "hierarchy_with_time": sum(1 for r in tourist_records if r["has_time_data"]),
+            "hierarchy_empty": sum(1 for r in tourist_records if not r["has_time_data"]),
+            "hierarchy_not_in_routes": len(hierarchy_ids - route_ids),
+            "routes_without_hierarchy": len(route_ids - hierarchy_ids),
+            "time_allocation_population": allocation_counts,
+        },
+        "checks": {
+            "spans_exact": span_missing == 0 and span_bad == 0,
+            "pois_in_order_consistent": True,
+            "tourist_join_ok": route_ids == hierarchy_ids,
+            "tourist_allocation_population_ok": route_counts == allocation_counts,
+        },
+    }
+    validation["checks"]["pois_in_order_consistent"] = validation["official"]["pois_in_order_mismatch"] == 0
+    assert all(validation["checks"].values()), validation
+    (OUT / "validation.json").write_text(json.dumps(validation, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({"trees": list(tree_meta), "official": {k: dict(v) for k, v in official_period_pois.items()},
-                      "tourist": tourist_stats}, ensure_ascii=False))
+                      "tourist": tourist_stats, "validation": validation["checks"]}, ensure_ascii=False))
     return 0
 
 

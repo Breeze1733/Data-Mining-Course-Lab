@@ -1,0 +1,38 @@
+{
+ "official": {
+  "routes": 46,
+  "ordered_routes": 39,
+  "segments": 560,
+  "route_steps": 416,
+  "narrative_segments": 144,
+  "span_exact": 559,
+  "span_not_contiguous": 1,
+  "span_missing": 0,
+  "pois_in_order_mismatch": 0,
+  "time_hierarchy_records": 46
+ },
+ "tourist": {
+  "routes": 225,
+  "routes_by_scenic": {
+   "颐和园": 63,
+   "黄山": 82,
+   "九寨沟": 80
+  },
+  "hierarchy_records": 225,
+  "hierarchy_with_time": 189,
+  "hierarchy_empty": 36,
+  "hierarchy_not_in_routes": 0,
+  "routes_without_hierarchy": 0,
+  "time_allocation_population": {
+   "九寨沟": 80,
+   "颐和园": 63,
+   "黄山": 82
+  }
+ },
+ "checks": {
+  "spans_exact": true,
+  "pois_in_order_consistent": true,
+  "tourist_join_ok": true,
+  "tourist_allocation_population_ok": true
+ }
+}
