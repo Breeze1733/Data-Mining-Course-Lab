@@ -5,8 +5,7 @@ Input: task1/data/raw/official_routes.jsonl (46 official route branches)
 Output: task3/output/
        route_format_analysis.json   format-pattern analysis
        name_normalization.json      name-normalization rules and application statistics
-       parsed_routes.jsonl          structured route per entry (steps/periods/days/POIs/transport/time)
-       time_hierarchy.jsonl         上午/中午/下午/晚上 (morning/noon/afternoon/evening) time-hierarchy view
+       parsed_routes.jsonl          structured route per entry (steps/narrative segments/periods/POIs/transport/time)
 Usage: python src/parse_routes.py (inside the task1 venv, -X utf8)
 """
 from __future__ import annotations
@@ -56,6 +55,63 @@ DAY_PERIOD_MARK = re.compile(
 STATION_MARK = re.compile(r"第([一二三四五六七八九十\d]+)站[:：]")
 STOP_TOKEN = re.compile(r"^(?:反之也可|以此类推|等等|依此类推)$")
 CJK_RE = re.compile(r"[\u4e00-\u9fff]")
+
+
+def hour_of(time_range: str):
+    match = re.match(r"(\d{1,2})[:：点](\d{1,2})", time_range or "")
+    return int(match.group(1)) if match else None
+
+
+def period_from_hour(hour: int) -> str:
+    return ("上午" if 5 <= hour < 11 else "中午" if 11 <= hour < 13 else
+            "下午" if 13 <= hour < 18 else "晚上" if 18 <= hour < 24 else "未标注时段")
+
+
+def infer_periods(steps: list[dict]) -> None:
+    """Fill a missing period from the clock start; later steps inherit the last known period."""
+    current = None
+    for step in steps:
+        if not step["period"] and step["time_range"] and (hour := hour_of(step["time_range"])) is not None:
+            step["period"] = period_from_hour(hour)
+        current = step["period"] or current
+        step["period"] = step["period"] or current
+
+
+def repair_spans(entries: list[dict], raw_text: str) -> None:
+    """Recompute every span from the step text itself.
+
+    The parser normalizes labels/arrows and sometimes joins clauses, so its
+    incremental offsets can drift. Exact text search is authoritative: a unique
+    occurrence wins, multiple occurrences pick the one nearest the old offset
+    (or the previous entry), and non-contiguous synthesized text is marked
+    ``not_contiguous`` with ``span=None`` instead of pointing at the wrong place.
+    """
+    last_end = 0
+    for entry in entries:
+        text = entry.get("text") or ""
+        if not text:
+            entry["span"], entry["span_status"] = None, "empty_text"
+            continue
+        positions = [match.start() for match in re.finditer(re.escape(text), raw_text)]
+        if not positions:
+            entry["span"], entry["span_status"] = None, "not_contiguous"
+            continue
+        anchor = entry.get("span")[0] if entry.get("span") else last_end
+        start = min(positions, key=lambda position: abs(position - anchor))
+        entry["span"] = [start, start + len(text)]
+        entry["span_status"] = "exact"
+        last_end = start + len(text)
+
+
+def step_kind(step: dict) -> str:
+    """A step label derived from its actual signals, not from a default."""
+    if not step["pois"] and step["transport"]:
+        return "移动事件"
+    if step["lodging"]:
+        return "住宿停留"
+    if step["pois"] or step.get("station_tag"):
+        return "景点停留"
+    return "说明"
 
 
 def classify_format(text: str, ordered: bool) -> str:
@@ -137,16 +193,16 @@ class RouteParser:
         if fmt in ("prose", "theme_prose"):
             sents_with_span: list[tuple[str, int, int]] = []
             for ln, ln_start, ln_end in lines:
-                offset = ln_start
+                cursor = 0
                 for s in re.split(r"(?<=[。！？；])", ln):
                     s = s.strip()
                     if not s:
                         continue
-                    _i = ln.find(s, offset - ln_start)
+                    _i = ln.find(s, cursor)
                     if _i < 0:
-                        _i = offset - ln_start
+                        _i = cursor
                     sents_with_span.append((s, ln_start + _i, ln_start + _i + len(s)))
-                    offset = _i + len(s)
+                    cursor = _i + len(s)
             lines = sents_with_span
         for line, line_start, line_end in lines:
             # Segment-level handling: day/period markers may appear at line start or mid-chain (e.g. “…—【第二日】丹霞峰…”)
@@ -166,11 +222,6 @@ class RouteParser:
                 if m := PERIOD_MARK.search(seg):
                     period = (m.group(1) or m.group(2))
                 seg_content = DAY_MARK.sub("", PERIOD_MARK.sub("", seg)).strip()
-                seg_span = None
-                if seg_content:
-                    _i = line.find(seg_content)
-                    if _i >= 0:
-                        seg_span = [line_start + _i, line_start + _i + len(seg_content)]
                 # Clause-level context guard -- strip clauses of "未去/放弃/他人行程/背景罗列" (not visited / given up / others' itineraries / background lists) before parsing,
                 # so unvisited attractions and introductory listings are not taken as actual route passes (probes constructed to evidence the three mis-inclusion types)
                 if NON_ROUTE_CLAUSE_RE.search(seg_content):
@@ -182,6 +233,11 @@ class RouteParser:
                         continue
                 if not seg_content:
                     continue
+                # Compute the span after the clause guard: the final text may be shorter than the raw segment.
+                seg_span = None
+                _i = line.find(seg_content)
+                if _i >= 0:
+                    seg_span = [line_start + _i, line_start + _i + len(seg_content)]
                 # Station-list line (第一站：…)
                 if m := STATION_MARK.search(seg_content):
                     step_no += 1
@@ -212,7 +268,8 @@ class RouteParser:
                         ann = self.annotate(seg_content)
                         if ann["pois"] and len(seg_content) <= 140:
                             step_no += 1
-                            ann.update({"step_no": step_no, "day": day, "period": period})
+                            ann.update({"step_no": step_no, "day": day, "period": period,
+                                        "span": seg_span})
                             steps.append(ann)
                     continue
                 for sub in segs:
@@ -226,31 +283,47 @@ class RouteParser:
                     sub.update({"step_no": step_no, "day": day, "period": period,
                                 "span": seg_span})
                     steps.append(sub)
-        # Pure-opening filter: in arrow_chain format, openings with neither POI nor time do not count as steps
+        # arrow_chain pure openings with neither POI nor time are not route steps (kept out of the audited population)
         if fmt == "arrow_chain":
-            # Pure movement events ("乘索道下山", transport without POI) are also route steps, no longer dropped
             steps = [s for s in steps
                      if s["pois"] or s["time_range"] or s.get("station_tag") or s["transport"]]
             for i, s in enumerate(steps, 1):
                 s["step_no"] = i
-        # Lodging markers (宾馆/饭店/酒店/民宿) and step kinds (stay vs movement event)
+        # Lodging markers (宾馆/饭店/酒店/民宿)
         for s in steps:
             s["lodging"] = bool(re.search(r"宾馆|饭店|酒店|民宿", s["text"]))
-            if not s["pois"] and s["transport"]:
-                s["step_kind"] = "移动事件"
-            elif s["lodging"]:
-                s["step_kind"] = "住宿停留"
-            else:
-                s["step_kind"] = "景点停留"
-        # Period forward-fill: lines with a period marker only set the period of subsequent steps
+        # Period forward-fill, then clock inference, so parsed_routes and the hierarchy agree.
         self._fill_periods(steps)
+        infer_periods(steps)
+        # Partition route steps from narrative segments. A route step needs at least
+        # one route signal; narration is kept in its own list for traceability.
+        route_steps: list[dict] = []
+        narrative: list[dict] = []
+        for segment_no, s in enumerate(steps, 1):
+            has_signal = bool(s["pois"] or s["transport"] or s["time_range"]
+                              or s["duration"] or s.get("station_tag") or s["lodging"])
+            if has_signal:
+                s["step_kind"] = step_kind(s)
+                route_steps.append(s)
+            else:
+                narrative.append({
+                    "segment_no": segment_no, "text": s["text"], "span": s.get("span"),
+                    "span_status": s.get("span_status"), "day": s["day"],
+                    "period": s["period"], "step_kind": "叙述",
+                })
+        for i, s in enumerate(route_steps, 1):
+            s["step_no"] = i
+        repair_spans(route_steps, text)
+        repair_spans(narrative, text)
         return {
             "route_id": route["route_id"], "scenic_area": route["scenic_area"],
             "route_title": route["title"], "source_record_id": route["source_record_id"],
             "source_url": route["source_url"], "ordered_route": route.get("ordered_route", True),
-            "format": fmt, "step_count": len(steps),
-            "pois_in_order": [p["normalized"] for s in steps for p in s["pois"]],
-            "steps": steps,
+            "format": fmt, "step_count": len(route_steps),
+            "segment_count": len(route_steps) + len(narrative),
+            "narrative_step_count": len(narrative),
+            "pois_in_order": [p["name"] for s in route_steps for p in s["pois"]],
+            "steps": route_steps, "narrative_segments": narrative,
         }
 
     @staticmethod
@@ -297,42 +370,25 @@ class RouteParser:
                 s["period"] = current
 
 
-def build_hierarchy(parsed: dict) -> dict:
-    """Three-level view: day → period → step."""
-    hierarchy: dict[int, dict] = {}
-    for s in parsed["steps"]:
-        day = hierarchy.setdefault(s["day"], {})
-        period = s["period"] or "未标注时段"
-        day.setdefault(period, []).append({
-            "step_no": s["step_no"], "text": s["text"], "pois": [p["normalized"] for p in s["pois"]],
-            "transport": s["transport"], "time_range": s["time_range"], "duration": s["duration"],
-        })
-    return {"route_id": parsed["route_id"], "scenic_area": parsed["scenic_area"],
-            "route_title": parsed["route_title"], "days": hierarchy,
-            "periods_present": sorted({p for d in hierarchy.values() for p in d})}
-
-
 def main() -> int:
     entries, stopwords, _ = load_dictionary("refined")
     matcher = DictMatcher(entries, stopwords)
     routes = [json.loads(l) for l in (ROOT.parent / "task1/data/raw/official_routes.jsonl").open(encoding="utf-8")]
     parser = RouteParser(matcher)
 
-    parsed_routes, hierarchies = [], []
+    parsed_routes = []
+    raw_by_id = {}
     fmt_counter = Counter()
     for route in routes:
         p = parser.parse(route)
         fmt_counter[(route["scenic_area"], p["format"])] += 1
         parsed_routes.append(p)
-        hierarchies.append(build_hierarchy(p))
+        raw_by_id[route["route_id"]] = route["raw_content"]
 
     OUT.mkdir(parents=True, exist_ok=True)
     with (OUT / "parsed_routes.jsonl").open("w", encoding="utf-8") as fh:
         for p in parsed_routes:
             fh.write(json.dumps(p, ensure_ascii=False) + "\n")
-    with (OUT / "time_hierarchy.jsonl").open("w", encoding="utf-8") as fh:
-        for h in hierarchies:
-            fh.write(json.dumps(h, ensure_ascii=False) + "\n")
 
     # Format analysis
     format_analysis = {
@@ -349,6 +405,33 @@ def main() -> int:
         },
         "period_marker_styles": ["【上午】式方括号标记", "上午：式冒号标记", "无标记（由时间范围推断）"],
     }
+    all_steps = [s for p in parsed_routes for s in p["steps"]]
+    all_narrative = [s for p in parsed_routes for s in p["narrative_segments"]]
+    span_missing = 0
+    for p in parsed_routes:
+        source = raw_by_id[p["route_id"]]
+        for entry in p["steps"] + p["narrative_segments"]:
+            if "span" not in entry:
+                span_missing += 1
+            elif entry.get("span_status") == "exact":
+                start, end = entry["span"]
+                assert source[start:end] == entry["text"], (p["route_id"], entry["text"])
+    poi_mismatch = sum(
+        1 for p in parsed_routes
+        if p["pois_in_order"] != [poi["name"] for s in p["steps"] for poi in s["pois"]]
+    )
+    format_analysis["validation"] = {
+        "segments": len(all_steps) + len(all_narrative),
+        "route_steps": len(all_steps),
+        "narrative_segments": len(all_narrative),
+        "span_exact": sum(1 for s in all_steps + all_narrative if s.get("span_status") == "exact"),
+        "span_not_contiguous": sum(1 for s in all_steps + all_narrative if s.get("span_status") == "not_contiguous"),
+        "span_missing": span_missing,
+        "pois_in_order_mismatch": poi_mismatch,
+        "station_steps_without_poi": sum(1 for s in all_steps if s.get("station_tag") and not s["pois"]),
+    }
+    assert span_missing == 0
+    assert poi_mismatch == 0
     (OUT / "route_format_analysis.json").write_text(json.dumps(format_analysis, ensure_ascii=False, indent=1), encoding="utf-8")
 
     # Name-normalization statistics

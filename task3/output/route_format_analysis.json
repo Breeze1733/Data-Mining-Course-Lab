@@ -24,5 +24,15 @@
   "【上午】式方括号标记",
   "上午：式冒号标记",
   "无标记（由时间范围推断）"
- ]
+ ],
+ "validation": {
+  "segments": 560,
+  "route_steps": 416,
+  "narrative_segments": 144,
+  "span_exact": 559,
+  "span_not_contiguous": 1,
+  "span_missing": 0,
+  "pois_in_order_mismatch": 0,
+  "station_steps_without_poi": 2
+ }
 }
