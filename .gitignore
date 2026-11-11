@@ -23,6 +23,7 @@ Thumbs.db
 /.python-version
 /uv.lock
 /pyproject.toml
+/CLAUDE.md
 
 # 本地资料、诊断脚本和打包结果
 /local/
