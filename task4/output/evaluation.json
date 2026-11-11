@@ -52,11 +52,11 @@
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.717
+   "accuracy": 0.708
   },
   "test": {
    "n": 60,
-   "accuracy": 0.6
+   "accuracy": 0.617
   }
  },
  "accuracy_by_scenic": {
@@ -104,8 +104,8 @@
   }
  },
  "errors_by_split": {
-  "dev": 34,
-  "test": 24
+  "dev": 35,
+  "test": 23
  },
  "split_method": "文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
  "errors": [
@@ -985,9 +985,9 @@
   "hi": 0.742
  },
  "data_fingerprints": {
-  "dataset_clean": "e4ac54cded0c",
-  "entity_dictionary": "e275e19c11e5",
-  "entities_refined": "f999bf7cd6ab"
+  "dataset_clean": "304605837c1f",
+  "entity_dictionary": "7226607ea20a",
+  "entities_refined": "b93058ec0d7e"
  },
  "identity_ci95": {
   "lo": 0.518,
