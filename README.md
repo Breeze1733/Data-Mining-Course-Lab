@@ -8,9 +8,9 @@
 
 | 实验 | 提交证据与结果 |
 |---|---|
-| 1 采集与清洗 | `task1/data/raw/dataset_raw.jsonl` 的原始语料、[数据工作簿](task1/data/collected/scenic_guide_dataset.xlsx)和 `task1/data/processed/` 的清洗结果。三景区共 271 条保留记录，均达到每景区至少 1 条官方路线和 5 篇游记的目标。官方路线分支见 `task1/data/raw/official_routes.jsonl`。 |
+| 1 采集与清洗 | `task1/data/raw/dataset_raw.jsonl` 的原始语料、[数据工作簿](task1/data/collected/scenic_guide_dataset.xlsx)和 `task1/data/processed/` 的清洗结果。三景区共 267 条保留记录（近重复已物理去重），均达到每景区至少 1 条官方路线和 5 篇游记的目标。官方路线分支见 `task1/data/raw/official_routes.jsonl`。 |
 | 2 实体识别 | `task2/resources/` 和 `task2/output/exp2/` 的领域词典、带位置实体、人工抽检、词频图及优化前后对比。句级抽样评测精确率 85.2%，召回率 69.7%。 |
-| 3 路线结构 | `task3/output/` 的格式分析、步骤、时间层级和官方与游客对比。46 条官方分支中 39 条有序，36 条拆成多步骤，另 3 条是含多个景点的单步骤段落。对比使用 229 条游客路线。 |
+| 3 路线结构 | `task3/output/` 的格式分析、步骤、时间层级和官方与游客对比。46 条官方分支中 39 条有序，34 条拆成多个路线步骤，另 5 条是含多个景点的单步骤段落；叙述片段与路线步骤分开存放。对比使用 225 条游客路线。 |
 | 4 共指消解 | `task4/output/` 的代词位置、候选和消解结果，以及 180 例冻结人工标注。总体准确率 67.8%，留出集 60.0%。报告列出正确与失败例。 |
 | 5 条件建议 | `task5/output/` 的原句、映射表 Excel/JSON、分组图和人工复核。1,025 对候选去重后保留 966 对。79 条开发复核中 39 条判为正确，边界切分与误抽仍是主要限制。 |
 | 6 知识图谱 | `task6/output/` 的节点和边 CSV、GraphML、静态概览、完整分景区交互图及核验结果。638 节点、2,941 边，6/6 条已知事实核验通过。 |
