@@ -155,8 +155,6 @@ def run(per_platform=25):
         for r in ctrip+xhs:
             entry={**{k:r.get(k,'') for k in pool_fields},'selected':(r['scenic_area'],r['record_id']) in selected_ids}
             w.writerow({k:("'"+v if isinstance(v,str) and v.startswith(('=','+','-','@')) else v) for k,v in entry.items()})
-    write_jsonl(OUT/'official_documents.jsonl',docs)
-    write_jsonl(OUT/'official_routes.jsonl',routes)
     write_jsonl(OUT/'candidate_audit.jsonl',ca+xa)
     for area in AREAS:
         for label, arr in [('ctrip',cs),('xiaohongshu',xs)]:

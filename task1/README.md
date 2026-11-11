@@ -1,22 +1,11 @@
 # 实验1 景区指南数据采集与预处理
 
-项目复现统一在仓库根目录运行`python tests/run.py`，使用已经入库的主语料。
+在仓库根目录运行 `python tests/run.py`，从入库的 271 条主语料和 46 条官方路线分支复现实验 2–7。
 
-- `data/processed/dataset_clean.jsonl`：271条清洗后正文，是后续实验的统一输入。
-- `data/raw/official_routes.jsonl`：46条官方路线分支，供实验3解析。
-- `data/processed/quality_report.json`、`rejected_records.jsonl`：清洗质量审计与拒绝记录（`cleaning_examples.json` 为可重建示例，不入库）。
-- `data/collected/scenic_guide_dataset.xlsx`：数据集交付工作簿。
-- `src/build_records.py`、`preprocess.py`：原始材料组装与清洗。
-- 报告再生成脚本在 `../local/`（不随仓库分发）。
+- `data/processed/` 保存主语料 `dataset_clean.jsonl`、清洗审计 `quality_report.json` 和拒绝记录 `rejected_records.jsonl`。
+- `data/raw/` 保存官方来源文档和实验 3 读取的 `official_routes.jsonl`。
+- `data/collected/` 保存采集汇总、候选审计和交付工作簿 `scenic_guide_dataset.xlsx`。实验 1 报告的清洗样例取自工作簿。
 
-## 目录结构
+保留本地 `data/raw/records.jsonl` 和原始快照时，可在 `task1/` 用仓库共享的 Python 环境运行 `python src/preprocess.py`。默认输出到 `data/rebuild/`，清洗后按原始快照字节补齐缺失的 `snapshot_sha256`。核对重建文件与 `data/processed/` 的 SHA-256 即可验证提交版。只有原始记录而缺少快照时，仍可清洗正文，缺失的快照哈希无法补齐。
 
-- `src/`：清洗与分析（`build_records.py`、`preprocess.py`、`build_official_expansion.py`）。
-- `scripts/`：采集爬虫与配套（`crawl_official.py`、`crawl_ctrip_ranked.py`、`crawl_xiaohongshu.mjs`、`expand_ctrip.py`、`select_collection.py`、`stage_status.py`、`import_browser_notes.py`）。
-- `data/`：只入库下游实验的输入与交付审计文件——`processed/dataset_clean.jsonl`（实验2-7统一输入）、`raw/official_routes.jsonl`（实验3输入）、`processed/quality_report.json`、`rejected_records.jsonl` 等清洗审计文件，以及`collected/`的汇总、候选审计与`scenic_guide_dataset.xlsx`交付簿。HTML快照、爬虫工作区`crawl/`与中间产物不入库。
-- `run_collection.ps1`：三平台联网采集总入口（日常复现不需要运行）。
-- `package.json`、`package-lock.json`：浏览器采集（Playwright/Node）的依赖清单，入库；`node_modules/` 由 `npm install` 生成，不入库。
-
-Python依赖为仓库根目录的共享环境（根目录`requirements.txt`），本目录不再单独放置。
-
-采集工具和来源说明见`docs/`。重新联网采集依赖平台访问和登录状态，不保证与已保存批次完全一致；日常实验复现不需要重新采集。
+`src/build_records.py` 从本地采集资料组装原始记录。新一轮采集使用 `run_collection.ps1` 和 `scripts/`，需要平台访问，浏览器采集依赖见 `package.json`。原始记录、HTML 快照和爬虫工作目录仅保存在本地。

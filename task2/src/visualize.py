@@ -17,7 +17,6 @@ from wordcloud import WordCloud
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output/exp2"
-FIGS = None  # set at runtime according to the iteration
 FONT = "C:/Windows/Fonts/simhei.ttf"
 
 plt.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei"]
@@ -61,14 +60,13 @@ def main() -> int:
     parser.add_argument("--iteration", default="refined")
     args = parser.parse_args()
     stats = json.loads((OUT / f"entity_stats_{args.iteration}.json").read_text(encoding="utf-8"))
-    global FIGS
-    FIGS = OUT / "figs" / args.iteration
-    FIGS.mkdir(parents=True, exist_ok=True)
+    figs = OUT / "figs" / args.iteration
+    figs.mkdir(parents=True, exist_ok=True)
 
     colormap = {"景点POI": "Greens", "交通方式": "Blues", "时间节点": "Reds"}
     for etype, freq in stats["top_canonical"].items():
-        bar_chart(freq, f"{etype} 词频 Top15（{args.iteration}）", FIGS / f"bar_{etype}.png", COLORS[etype])
-        wordcloud_chart(freq, f"{etype} 词云（{args.iteration}）", FIGS / f"wc_{etype}.png", colormap[etype])
+        bar_chart(freq, f"{etype} 词频 Top15（{args.iteration}）", figs / f"bar_{etype}.png", COLORS[etype])
+        wordcloud_chart(freq, f"{etype} 词云（{args.iteration}）", figs / f"wc_{etype}.png", colormap[etype])
 
     # Comparison bar chart: three scenic areas x three types
     by_scenic = stats["by_scenic_area"]
@@ -87,14 +85,10 @@ def main() -> int:
     ax.legend()
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
-    fig.savefig(FIGS / "bar_by_scenic.png")
+    fig.savefig(figs / "bar_by_scenic.png")
     plt.close(fig)
 
-    if args.iteration == "refined":
-        import shutil
-        for chart in FIGS.glob("*.png"):
-            shutil.copy2(chart, FIGS.parent / chart.name)
-    print(json.dumps({"figs": sorted(p.name for p in FIGS.glob("*.png"))}, ensure_ascii=False))
+    print(json.dumps({"figs": sorted(p.name for p in figs.glob("*.png"))}, ensure_ascii=False))
     return 0
 
 

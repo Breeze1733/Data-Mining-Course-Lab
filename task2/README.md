@@ -8,9 +8,9 @@
 - `src/extract_entities.py`：唯一识别器，使用jieba、领域词典和规则，记录Unicode字符位置。
 - `src/entity_rules.py`、`dictionary.py`、`time_rules.py`：词典匹配、交通语境、时间归一化和区间消解。
 - `resources/`：领域词表、POI及交通规则、时间规则、实体定义和地点别名。
-- `src/build_dictionary.py`、`visualize.py`、`spot_check.py`、`iter_compare.py`：词典、图表、抽检和迭代统计。
+- `src/visualize.py`、`spot_check.py`、`ablation_dictionary.py`：图表、抽检和词典迭代对比。
 - 报告再生成脚本在 `../local/`（不随仓库分发）。
 
-baseline与refined是同一程序的两次词典迭代，保留其结果以满足任务书的优化前后对比要求。下游统一读取`entities_refined.jsonl`，不需要选择代码版本或切换数据口径。
+baseline 与 refined 由同一识别器运行。两组统计和图表随仓库提供，图表位于 `figs/baseline/` 和 `figs/refined/`。运行复现入口可生成 baseline 逐条结果。下游统一读取入库的 `entities_refined.jsonl`。
 
 地点别名通过`common/entity_identity.py`统一处理。实体写出前检查字符位置和区间重叠；历史抽检仅在文档、类型、原文及位置一致时继承判定。

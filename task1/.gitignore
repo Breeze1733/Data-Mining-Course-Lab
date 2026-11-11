@@ -14,8 +14,6 @@ data/**
 !data/collected/collection_summary.json
 !data/collected/candidate_audit.jsonl
 !data/collected/eligible_candidate_pool.csv
-!data/collected/official_documents.jsonl
-!data/collected/official_routes.jsonl
 !data/collected/scenic_guide_dataset.xlsx
 !data/processed/
 !data/processed/dataset_clean.jsonl
