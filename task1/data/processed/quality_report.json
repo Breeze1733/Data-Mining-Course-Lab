@@ -90,31 +90,31 @@
       "record_id_a": "CTRIP_4005525",
       "record_id_b": "CTRIP_4027753",
       "similarity": 0.992,
-      "action": "retain_and_review"
+      "action": "retain_with_group_label"
     },
     {
       "record_id_a": "CTRIP_4005525",
       "record_id_b": "CTRIP_4018116",
       "similarity": 0.9995,
-      "action": "retain_and_review"
+      "action": "retain_with_group_label"
     },
     {
       "record_id_a": "CTRIP_4027753",
       "record_id_b": "CTRIP_4018116",
       "similarity": 0.9925,
-      "action": "retain_and_review"
+      "action": "retain_with_group_label"
     },
     {
       "record_id_a": "CTRIP_3996473",
       "record_id_b": "CTRIP_4027862",
       "similarity": 0.9982,
-      "action": "retain_and_review"
+      "action": "retain_with_group_label"
     },
     {
       "record_id_a": "CTRIP_4002122",
       "record_id_b": "CTRIP_4018975",
       "similarity": 0.9995,
-      "action": "retain_and_review"
+      "action": "retain_with_group_label"
     }
   ],
   "warning_counts": {
@@ -6488,18 +6488,26 @@
     "suspected_mojibake_action": "flag_only_no_guessed_repair",
     "unicode_normalization": "fullwidth ASCII U+FF01..U+FF5E and ideographic space U+3000 only; preserve superscripts, subscripts, circled numbers, Roman numerals and units",
     "semantic_symbols": "preserve route arrows, check/cross marks, plus/minus, warning and prohibition symbols",
-    "near_duplicate_action": "flag_only_manual_review",
+    "near_duplicate_action": "keep_all_records_annotate_group_and_weight",
     "exact_content_duplicate_key": "clean text with whitespace removed; punctuation, case and semantic symbols preserved",
     "title_and_article_content_used_for_scenic_relevance": true,
     "main_target": "Each of 3 scenic areas: >=1 official route and >=5 travelogues",
-    "minimum_target": "Each of 3 scenic areas: >=1 official route and >=3 travelogues"
+    "minimum_target": "Each of 3 scenic areas: >=1 official route and >=3 travelogues",
+    "dedup_weight_policy": "canonical=1.0, duplicate=0.0; all accepted records retained",
+    "duplicate_group_rule": "transitive closure of near_duplicate_pairs; canonical = earliest input record",
+    "duplicate_fields": [
+      "duplicate_group",
+      "duplicate_role",
+      "duplicate_of",
+      "dedup_weight"
+    ]
   },
   "input_path": "data/raw/dataset_raw.jsonl",
   "input_sha256": "bb808a33d1f2e0eed0ef05b99f6f561e36683e4845441ff3f6c0bf895b6167a2",
   "xlsx_authoring": {
-    "engine": "@oai/artifact-tool",
-    "command": "node src/export_xlsx.mjs --input-dir data/processed",
-    "status": "optional_export_pending"
+    "engine": "openpyxl",
+    "script": "src/export_dataset_xlsx.py",
+    "status": "generated"
   },
   "dataset_fields": [
     "record_id",
@@ -6516,6 +6524,8 @@
     "content_scope",
     "author",
     "published_at",
+    "snapshot_sha256",
+    "official_scope",
     "clean_content",
     "raw_char_count",
     "extracted_char_count",
@@ -6526,496 +6536,13 @@
     "content_sha256",
     "cleaning_counts",
     "quality_flags",
-    "like_count",
-    "official_scope",
-    "provenance_note",
-    "snapshot_sha256"
+    "duplicate_group",
+    "duplicate_role",
+    "duplicate_of",
+    "dedup_weight",
+    "like_count"
   ],
-  "xlsx_long_text_externalization": [
-    {
-      "record_id": "CTRIP_3996366",
-      "field": "raw_content",
-      "characters": 69306,
-      "path": "long_text/0024_CTRIP_3996366_raw_content.txt",
-      "sha256": "33d886428f597e184388f4cbde204759c08cabde4cda0e4d69e8b4eaaccb0a84"
-    },
-    {
-      "record_id": "CTRIP_4178417",
-      "field": "raw_content",
-      "characters": 78461,
-      "path": "long_text/0025_CTRIP_4178417_raw_content.txt",
-      "sha256": "efb1d84b5d0d407d64c424e2f45c1688f129d9c23701a436b1ab4e2401bd5371"
-    },
-    {
-      "record_id": "CTRIP_4011856",
-      "field": "raw_content",
-      "characters": 72893,
-      "path": "long_text/0033_CTRIP_4011856_raw_content.txt",
-      "sha256": "9de1195eba7ce6c7c43a77b3737c1a9d6b1a3a64f2e929352a0bffab7359e4cd"
-    },
-    {
-      "record_id": "CTRIP_3889684",
-      "field": "raw_content",
-      "characters": 40405,
-      "path": "long_text/0034_CTRIP_3889684_raw_content.txt",
-      "sha256": "d9fc37c7089985d82a8026197f3549915cf8c7a47054049d3b2d835670243763"
-    },
-    {
-      "record_id": "CTRIP_4132000",
-      "field": "raw_content",
-      "characters": 82874,
-      "path": "long_text/0035_CTRIP_4132000_raw_content.txt",
-      "sha256": "f955db985e405207d8e6f5daa25e0c7adb10a4330c47fac2333e158ccf3aea5e"
-    },
-    {
-      "record_id": "CTRIP_4005841",
-      "field": "raw_content",
-      "characters": 96745,
-      "path": "long_text/0037_CTRIP_4005841_raw_content.txt",
-      "sha256": "0daa8766458cb1f89853cc34c5a883cbf1ada9d60ec69eae4201f0b3a773d3f3"
-    },
-    {
-      "record_id": "CTRIP_4019387",
-      "field": "raw_content",
-      "characters": 331244,
-      "path": "long_text/0039_CTRIP_4019387_raw_content.txt",
-      "sha256": "9658c4cc2a265b9da55ceed9d6dfd17ca66149c529428894c1acdff206a65060"
-    },
-    {
-      "record_id": "CTRIP_4037923",
-      "field": "raw_content",
-      "characters": 97535,
-      "path": "long_text/0040_CTRIP_4037923_raw_content.txt",
-      "sha256": "0bed1a74c92bb7c75173e25b531205dfe4b200bb2fadedbc0133ef9b98bd750c"
-    },
-    {
-      "record_id": "CTRIP_3989929",
-      "field": "raw_content",
-      "characters": 38543,
-      "path": "long_text/0041_CTRIP_3989929_raw_content.txt",
-      "sha256": "2c548bb4ccb9c9a3806fde492af4f3e9dcfbed20799044a75cc73c7ee527520e"
-    },
-    {
-      "record_id": "CTRIP_4031821",
-      "field": "raw_content",
-      "characters": 61775,
-      "path": "long_text/0042_CTRIP_4031821_raw_content.txt",
-      "sha256": "72ce7bbdc5413e56684b4f83a583eb650dfda11913e300ef61cec5040d66b72b"
-    },
-    {
-      "record_id": "CTRIP_4023752",
-      "field": "raw_content",
-      "characters": 491640,
-      "path": "long_text/0043_CTRIP_4023752_raw_content.txt",
-      "sha256": "d9c35c70e54253973e9d1ebde9adef814ffa9d0439b1035dc8c255543e2b1ad8"
-    },
-    {
-      "record_id": "CTRIP_3951546",
-      "field": "raw_content",
-      "characters": 45039,
-      "path": "long_text/0046_CTRIP_3951546_raw_content.txt",
-      "sha256": "4a44583384161e7e52dcdc99cea36f1b13bc84331113e3f5dfc716644a0be183"
-    },
-    {
-      "record_id": "CTRIP_3991429",
-      "field": "raw_content",
-      "characters": 49452,
-      "path": "long_text/0047_CTRIP_3991429_raw_content.txt",
-      "sha256": "88b1af06672a033fdfaed101c4accc47b8f390f06b103da3df9e1fde08b2e708"
-    },
-    {
-      "record_id": "CTRIP_3993157",
-      "field": "raw_content",
-      "characters": 64677,
-      "path": "long_text/0048_CTRIP_3993157_raw_content.txt",
-      "sha256": "109a7d4a10a84a2051db79f4f2bc29ddf783d043006d373725652ce2c648691d"
-    },
-    {
-      "record_id": "CTRIP_4004475",
-      "field": "raw_content",
-      "characters": 38030,
-      "path": "long_text/0049_CTRIP_4004475_raw_content.txt",
-      "sha256": "665caa2e9af6192546516545de4f623182a178ad790d1897ac8b011282348417"
-    },
-    {
-      "record_id": "CTRIP_4016094",
-      "field": "raw_content",
-      "characters": 40616,
-      "path": "long_text/0050_CTRIP_4016094_raw_content.txt",
-      "sha256": "252f5c9423923dda79945968736b0d1caf5a5387baa87368f35b665497b96465"
-    },
-    {
-      "record_id": "CTRIP_4123390",
-      "field": "raw_content",
-      "characters": 34081,
-      "path": "long_text/0051_CTRIP_4123390_raw_content.txt",
-      "sha256": "5c8a55a2d3b8a0e4577158cbcc4ad6f25a806cc438e5cd03cc967c271a2517fd"
-    },
-    {
-      "record_id": "CTRIP_3961636",
-      "field": "raw_content",
-      "characters": 46542,
-      "path": "long_text/0052_CTRIP_3961636_raw_content.txt",
-      "sha256": "a6d0aae763871472ebc278607fe770316917d871fde076a419ee634de34b26f3"
-    },
-    {
-      "record_id": "CTRIP_2953624",
-      "field": "raw_content",
-      "characters": 86597,
-      "path": "long_text/0053_CTRIP_2953624_raw_content.txt",
-      "sha256": "ff10681214419eb61810989f5fe5b35bcfacce6947597827acd1b2d79a5391d3"
-    },
-    {
-      "record_id": "CTRIP_4034449",
-      "field": "raw_content",
-      "characters": 64478,
-      "path": "long_text/0057_CTRIP_4034449_raw_content.txt",
-      "sha256": "35e20ffa0c1b441c7f0e0e9721790948d23e4f14e60757cd1e7d9cdca4e6e991"
-    },
-    {
-      "record_id": "CTRIP_4011981",
-      "field": "raw_content",
-      "characters": 47050,
-      "path": "long_text/0059_CTRIP_4011981_raw_content.txt",
-      "sha256": "f3184cdaf31718a22eb1d3982933746362d9ba8dd5afa5fdb7401137a5d3f146"
-    },
-    {
-      "record_id": "CTRIP_3999208",
-      "field": "raw_content",
-      "characters": 75853,
-      "path": "long_text/0066_CTRIP_3999208_raw_content.txt",
-      "sha256": "60826bf41219cee34290c4162c873149f57720f918a33f833cec2857edb84eb3"
-    },
-    {
-      "record_id": "CTRIP_3995811",
-      "field": "raw_content",
-      "characters": 213305,
-      "path": "long_text/0067_CTRIP_3995811_raw_content.txt",
-      "sha256": "664f118087175aef7bc01680612c74386d9218287c836312b136c3e6187fbfac"
-    },
-    {
-      "record_id": "CTRIP_3963679",
-      "field": "raw_content",
-      "characters": 33223,
-      "path": "long_text/0068_CTRIP_3963679_raw_content.txt",
-      "sha256": "1eb80205052ec25372d467fb3c5d4a337e9148cc8d4d244aee36b95ea318b73a"
-    },
-    {
-      "record_id": "CTRIP_4006823",
-      "field": "raw_content",
-      "characters": 70555,
-      "path": "long_text/0070_CTRIP_4006823_raw_content.txt",
-      "sha256": "f93eac8b975142f2d80a1ab6de877e399e9ad6c1230898142043b0df9c939935"
-    },
-    {
-      "record_id": "CTRIP_4109335",
-      "field": "raw_content",
-      "characters": 64759,
-      "path": "long_text/0075_CTRIP_4109335_raw_content.txt",
-      "sha256": "47523fb932a977cb44b8c2cd3b08de0afc4df1444d437f507d3f7b6ee873096f"
-    },
-    {
-      "record_id": "CTRIP_3539977",
-      "field": "raw_content",
-      "characters": 99884,
-      "path": "long_text/0078_CTRIP_3539977_raw_content.txt",
-      "sha256": "3d5dd757b4105ab2c3da9872c5e2f4e599c9753b78e66a291be25f061d5727e1"
-    },
-    {
-      "record_id": "CTRIP_3976836",
-      "field": "raw_content",
-      "characters": 52721,
-      "path": "long_text/0080_CTRIP_3976836_raw_content.txt",
-      "sha256": "ebe2b635112ee7b1ad7fefdf9322652158cf18ac5946d4e30713ad4671581464"
-    },
-    {
-      "record_id": "CTRIP_3970738",
-      "field": "raw_content",
-      "characters": 100267,
-      "path": "long_text/0088_CTRIP_3970738_raw_content.txt",
-      "sha256": "1d6850e00531d83d1c34b5976e6279e7414b542c72edd1dc23a90e9ea339ab89"
-    },
-    {
-      "record_id": "CTRIP_3971596",
-      "field": "raw_content",
-      "characters": 68725,
-      "path": "long_text/0089_CTRIP_3971596_raw_content.txt",
-      "sha256": "1ea7711df37d1d8bc57bfd75b01b98f33da7e0d62db940ce99ac95f1824e363a"
-    },
-    {
-      "record_id": "CTRIP_4005525",
-      "field": "raw_content",
-      "characters": 52607,
-      "path": "long_text/0090_CTRIP_4005525_raw_content.txt",
-      "sha256": "20fd71cb8b4c40c7decf9bde817e3ae71170f3cf6ef2c99a0033da69535fef2e"
-    },
-    {
-      "record_id": "CTRIP_4002947",
-      "field": "raw_content",
-      "characters": 249128,
-      "path": "long_text/0091_CTRIP_4002947_raw_content.txt",
-      "sha256": "1c8d39c52ab520d1f2df1aeb15919b65c3028c6b28a947f3d9346eaaf4f01267"
-    },
-    {
-      "record_id": "CTRIP_4027753",
-      "field": "raw_content",
-      "characters": 48816,
-      "path": "long_text/0092_CTRIP_4027753_raw_content.txt",
-      "sha256": "3303afb43b7e0076feff1d0aac0bf3200d481fb2f0e2163a082a4d5646606a28"
-    },
-    {
-      "record_id": "CTRIP_4114244",
-      "field": "raw_content",
-      "characters": 126643,
-      "path": "long_text/0093_CTRIP_4114244_raw_content.txt",
-      "sha256": "569ec8e5eec3a0187cddd89021425075fc6c9964871ab665300886672d54028c"
-    },
-    {
-      "record_id": "CTRIP_4066061",
-      "field": "raw_content",
-      "characters": 151061,
-      "path": "long_text/0094_CTRIP_4066061_raw_content.txt",
-      "sha256": "99866262afb5100e702b0bcaae2bdaad170d2f7e9155c4b602ba73b2912f3f93"
-    },
-    {
-      "record_id": "CTRIP_3996473",
-      "field": "raw_content",
-      "characters": 169546,
-      "path": "long_text/0095_CTRIP_3996473_raw_content.txt",
-      "sha256": "f0c11449f8bf7c145f187e254e7e3555ffde8c884e19631036192e84fb5f0ea5"
-    },
-    {
-      "record_id": "CTRIP_4019798",
-      "field": "raw_content",
-      "characters": 422529,
-      "path": "long_text/0096_CTRIP_4019798_raw_content.txt",
-      "sha256": "3a29ff24eb23176c75d25b0b49714ccc04dd804cb5cf82359dfee03306a60795"
-    },
-    {
-      "record_id": "CTRIP_4018116",
-      "field": "raw_content",
-      "characters": 51423,
-      "path": "long_text/0097_CTRIP_4018116_raw_content.txt",
-      "sha256": "58f8db84984361ff32c7e2b6a2abf99c0459efb95630801e25d047f94d7d451f"
-    },
-    {
-      "record_id": "CTRIP_4027862",
-      "field": "raw_content",
-      "characters": 141443,
-      "path": "long_text/0099_CTRIP_4027862_raw_content.txt",
-      "sha256": "d70a7a5855a6c080e150681fe287d27a89de5ed80a92001afa1b64ab2e0752fe"
-    },
-    {
-      "record_id": "CTRIP_4059371",
-      "field": "raw_content",
-      "characters": 138872,
-      "path": "long_text/0102_CTRIP_4059371_raw_content.txt",
-      "sha256": "6a4200314824cf664f85ea426991c1e88f21b2863d9fe7a52ed8754cb8541eba"
-    },
-    {
-      "record_id": "CTRIP_3969978",
-      "field": "raw_content",
-      "characters": 59944,
-      "path": "long_text/0103_CTRIP_3969978_raw_content.txt",
-      "sha256": "0de7cacd417ac408689ff878cd149d0839e57fbf3faad94a32668fb1ac96f5fb"
-    },
-    {
-      "record_id": "CTRIP_2117447",
-      "field": "raw_content",
-      "characters": 72507,
-      "path": "long_text/0104_CTRIP_2117447_raw_content.txt",
-      "sha256": "fad0c632f234310fe2271dac28c57052d80063cdb27f765efad21b8770c4cbd4"
-    },
-    {
-      "record_id": "CTRIP_3975883",
-      "field": "raw_content",
-      "characters": 39194,
-      "path": "long_text/0105_CTRIP_3975883_raw_content.txt",
-      "sha256": "7d7675924a219a0802b6eaa91b4030122c0dc45491b2b39f892eda283d96afb4"
-    },
-    {
-      "record_id": "CTRIP_4037691",
-      "field": "raw_content",
-      "characters": 128256,
-      "path": "long_text/0108_CTRIP_4037691_raw_content.txt",
-      "sha256": "5069e561bff13dcd21aa25c8e24c46120f8e0680ecfabbaf1a4faa227a8ee225"
-    },
-    {
-      "record_id": "CTRIP_4057070",
-      "field": "raw_content",
-      "characters": 43158,
-      "path": "long_text/0109_CTRIP_4057070_raw_content.txt",
-      "sha256": "e8f61c2e7e56f0d69b1b41773e8461a109d93b7a40e1ce4cca2c67080c033f33"
-    },
-    {
-      "record_id": "CTRIP_4032329",
-      "field": "raw_content",
-      "characters": 97825,
-      "path": "long_text/0110_CTRIP_4032329_raw_content.txt",
-      "sha256": "ac8f5b71b7c2237ebfc8f3312ff59dc9b417669af3aabcf14e1f35fe7387503c"
-    },
-    {
-      "record_id": "CTRIP_4055037",
-      "field": "raw_content",
-      "characters": 77121,
-      "path": "long_text/0112_CTRIP_4055037_raw_content.txt",
-      "sha256": "9482a323298ace918b0557a601d63ebf3e56c4035fc8ac9d460cce84bda11881"
-    },
-    {
-      "record_id": "CTRIP_4044973",
-      "field": "raw_content",
-      "characters": 60232,
-      "path": "long_text/0113_CTRIP_4044973_raw_content.txt",
-      "sha256": "d6eff6d2f9f83b28e37e04fe84d563db91d7eca8a8fabc924bbbc080e76d409d"
-    },
-    {
-      "record_id": "CTRIP_3975508",
-      "field": "raw_content",
-      "characters": 88197,
-      "path": "long_text/0114_CTRIP_3975508_raw_content.txt",
-      "sha256": "be08bf805dc3bde47f6daf9bcde9357be8a6d31b081a1429575b5d0bdff031d9"
-    },
-    {
-      "record_id": "CTRIP_4002122",
-      "field": "raw_content",
-      "characters": 46553,
-      "path": "long_text/0115_CTRIP_4002122_raw_content.txt",
-      "sha256": "b5dc0b38011ce7291cc84530198dbc79bc0a11d8fe43fa7cc3fd96be92a7229a"
-    },
-    {
-      "record_id": "CTRIP_4018975",
-      "field": "raw_content",
-      "characters": 40876,
-      "path": "long_text/0116_CTRIP_4018975_raw_content.txt",
-      "sha256": "4d5e9a1a9ef5f7962fcd2fee969b716234d7c204f7add9b62fdae4c6a5053666"
-    },
-    {
-      "record_id": "CTRIP_3970034",
-      "field": "raw_content",
-      "characters": 52261,
-      "path": "long_text/0117_CTRIP_3970034_raw_content.txt",
-      "sha256": "39366ed823fc299baeba4a90458e8ab07dcb1b7601dcad2dab3949f1ad859b87"
-    },
-    {
-      "record_id": "CTRIP_3007155",
-      "field": "raw_content",
-      "characters": 100254,
-      "path": "long_text/0118_CTRIP_3007155_raw_content.txt",
-      "sha256": "55c602013b118822f4a91b7ebd072afd8319716c65fe8c0e5325ac3b93af1801"
-    },
-    {
-      "record_id": "CTRIP_3939862",
-      "field": "raw_content",
-      "characters": 70727,
-      "path": "long_text/0120_CTRIP_3939862_raw_content.txt",
-      "sha256": "73ff78a3c56cb0ca6efec6440a262887ac665cde5d197f38ae8d4663f7e1218a"
-    },
-    {
-      "record_id": "CTRIP_4050446",
-      "field": "raw_content",
-      "characters": 55529,
-      "path": "long_text/0126_CTRIP_4050446_raw_content.txt",
-      "sha256": "f96625913d58e0154a96693084dcfd20b62ed0fd4992f14334c26b7ef8ebe172"
-    },
-    {
-      "record_id": "CTRIP_4040944",
-      "field": "raw_content",
-      "characters": 53376,
-      "path": "long_text/0128_CTRIP_4040944_raw_content.txt",
-      "sha256": "79e2a41f2b4467cd85a26d076074cbeb55f32b95b7b21ca4b6159e5b7c6061c7"
-    },
-    {
-      "record_id": "CTRIP_4033780",
-      "field": "raw_content",
-      "characters": 64807,
-      "path": "long_text/0129_CTRIP_4033780_raw_content.txt",
-      "sha256": "e63ad002972dbc3945756cc747a7929f772dada1a6c9fb64129a8dce3ff2038a"
-    },
-    {
-      "record_id": "CTRIP_4107245",
-      "field": "raw_content",
-      "characters": 45509,
-      "path": "long_text/0132_CTRIP_4107245_raw_content.txt",
-      "sha256": "54f2f4e03fd62bbcfd6a482faa78977ee3c63769c2a67763e0f8329e2a6b61a2"
-    },
-    {
-      "record_id": "CTRIP_1336416",
-      "field": "raw_content",
-      "characters": 480211,
-      "path": "long_text/0136_CTRIP_1336416_raw_content.txt",
-      "sha256": "7de6f744f3208a9b5fd009c7f7f6fa64f76b47c4f236c343a6307042cb2a624a"
-    },
-    {
-      "record_id": "CTRIP_3941430",
-      "field": "raw_content",
-      "characters": 38720,
-      "path": "long_text/0139_CTRIP_3941430_raw_content.txt",
-      "sha256": "01ffd0b21855f5340a37a57fbee5415a5f7c8f74227cfe184173756d0aa5f6a7"
-    },
-    {
-      "record_id": "CTRIP_4046620",
-      "field": "raw_content",
-      "characters": 468302,
-      "path": "long_text/0140_CTRIP_4046620_raw_content.txt",
-      "sha256": "283612b4a8c1da2102916b66d8094a9189b31b81ea64bd64086b39507d433816"
-    },
-    {
-      "record_id": "CTRIP_4114227",
-      "field": "raw_content",
-      "characters": 168411,
-      "path": "long_text/0141_CTRIP_4114227_raw_content.txt",
-      "sha256": "0d1b67a65671e1de71766660ac0dc2a9e16f3017d854ff1f90af3ce5c1c99e2a"
-    },
-    {
-      "record_id": "CTRIP_3969287",
-      "field": "raw_content",
-      "characters": 84549,
-      "path": "long_text/0142_CTRIP_3969287_raw_content.txt",
-      "sha256": "9a843d8e8d8acb04b43a236bb24966e392cc6eae271a86bb17465ec73a4e5810"
-    },
-    {
-      "record_id": "CTRIP_4076734",
-      "field": "raw_content",
-      "characters": 127897,
-      "path": "long_text/0143_CTRIP_4076734_raw_content.txt",
-      "sha256": "175a96621f24fb09e4303f0d83093d93f1872353a61b6ea0d758097987e6ef9d"
-    },
-    {
-      "record_id": "CTRIP_4076286",
-      "field": "raw_content",
-      "characters": 102934,
-      "path": "long_text/0144_CTRIP_4076286_raw_content.txt",
-      "sha256": "b8834b0db28f0f83eaac02ffcbaa14950aab5679fe4544c24de4044e688d240c"
-    },
-    {
-      "record_id": "CTRIP_4076390",
-      "field": "raw_content",
-      "characters": 93414,
-      "path": "long_text/0147_CTRIP_4076390_raw_content.txt",
-      "sha256": "6a7ba20ae512eb0f6fa16e3e337e6cb8a335b9c03860ed88fc944be0dc1c723e"
-    },
-    {
-      "record_id": "CTRIP_4076742",
-      "field": "raw_content",
-      "characters": 37321,
-      "path": "long_text/0148_CTRIP_4076742_raw_content.txt",
-      "sha256": "f8d0e9b50987ea683bae0a5c66f1f8809fcb707a417f7b1390f257fe92784935"
-    },
-    {
-      "record_id": "CTRIP_4137972",
-      "field": "raw_content",
-      "characters": 43624,
-      "path": "long_text/0150_CTRIP_4137972_raw_content.txt",
-      "sha256": "14a9901530b631e061b343233e336ca1a129d3e257426994936f8849dab4e428"
-    },
-    {
-      "record_id": "CTRIP_4030611",
-      "field": "raw_content",
-      "characters": 145335,
-      "path": "long_text/0154_CTRIP_4030611_raw_content.txt",
-      "sha256": "f384cc2a6f5b252673cbc667a7d3dbb6ba99c5eb5571fe8fd1025adde9044eda"
-    }
-  ],
+  "xlsx_long_text_externalization": [],
   "output_files": {
     "csv": "dataset_clean.csv",
     "jsonl": "dataset_clean.jsonl",
@@ -7023,5 +6550,55 @@
     "quality_report": "quality_report.json",
     "cleaning_examples": "cleaning_examples.json",
     "rejected_records": "rejected_records.jsonl"
-  }
+  },
+  "near_duplicate_groups": [
+    {
+      "group_id": "DUP_001",
+      "canonical_record_id": "CTRIP_4005525",
+      "record_ids": [
+        "CTRIP_4005525",
+        "CTRIP_4027753",
+        "CTRIP_4018116"
+      ],
+      "duplicate_record_ids": [
+        "CTRIP_4027753",
+        "CTRIP_4018116"
+      ],
+      "member_count": 3,
+      "duplicate_count": 2,
+      "max_similarity": 0.9995
+    },
+    {
+      "group_id": "DUP_002",
+      "canonical_record_id": "CTRIP_3996473",
+      "record_ids": [
+        "CTRIP_3996473",
+        "CTRIP_4027862"
+      ],
+      "duplicate_record_ids": [
+        "CTRIP_4027862"
+      ],
+      "member_count": 2,
+      "duplicate_count": 1,
+      "max_similarity": 0.9982
+    },
+    {
+      "group_id": "DUP_003",
+      "canonical_record_id": "CTRIP_4002122",
+      "record_ids": [
+        "CTRIP_4002122",
+        "CTRIP_4018975"
+      ],
+      "duplicate_record_ids": [
+        "CTRIP_4018975"
+      ],
+      "member_count": 2,
+      "duplicate_count": 1,
+      "max_similarity": 0.9995
+    }
+  ],
+  "near_duplicate_group_count": 3,
+  "near_duplicate_records_in_groups": 7,
+  "near_duplicate_redundant_records": 4,
+  "effective_records_after_dedup": 267
 }
