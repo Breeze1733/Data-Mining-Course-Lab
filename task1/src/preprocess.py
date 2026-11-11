@@ -463,7 +463,7 @@ def summarize_dataset(accepted: list[dict], rejected: list[dict], deduplicated: 
                               "near_duplicate_action": "remove_later_duplicates_keep_earliest_record",
                               "exact_content_duplicate_key": "clean text with whitespace removed; punctuation, case and semantic symbols preserved",
                               "title_and_article_content_used_for_scenic_relevance": True,
-                              "dedup_weight_policy": "retained records=1.0; removed duplicates are absent from dataset_clean and listed in deduplicated_records.jsonl",
+                              "dedup_weight_policy": "retained records=1.0; removed duplicates are absent from dataset_clean and listed in rejected_records.jsonl with reason near_duplicate_of:<canonical>",
                               "duplicate_group_rule": "transitive closure of near_duplicate_pairs; canonical = earliest input record; later members removed",
                               "duplicate_fields": list(DUPLICATE_FIELDS),
                               "main_target": "Each of 3 scenic areas: >=1 official route and >=5 travelogues",
@@ -484,13 +484,12 @@ def summarize_dataset(accepted: list[dict], rejected: list[dict], deduplicated: 
     report["output_files"] = {"csv": "dataset_clean.csv", "jsonl": "dataset_clean.jsonl",
                               "xlsx": "dataset_clean.xlsx", "quality_report": "quality_report.json",
                               "cleaning_examples": "cleaning_examples.json",
-                              "rejected_records": "rejected_records.jsonl",
-                              "deduplicated_records": "deduplicated_records.jsonl"}
+                              "rejected_records": "rejected_records.jsonl"}
     return report
 
 
 def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
-                       min_official_length: int = 30) -> tuple[list[dict], dict, list[dict], list[dict], list[dict]]:
+                       min_official_length: int = 30) -> tuple[list[dict], dict, list[dict], list[dict]]:
     """Validate and clean records; reject invalid/exact-duplicate records and near-duplicate copies."""
     accepted: list[dict] = []
     rejected: list[dict] = []
@@ -593,6 +592,7 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
             row["deduplication_reason"] = reason
             row["near_duplicate_of"] = duplicate_of
             row["near_duplicate_similarity"] = round(duplicate_score, 4)
+            row["rejection_reasons"] = [reason]
             row["input_position"] = position
             check["errors"] = [reason]
             check["accepted"] = False
@@ -604,6 +604,7 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
             seen_urls[canonical] = row["record_id"]
             seen_fingerprints[fingerprint] = row["record_id"]
             deduplicated.append(row)
+            rejected.append(row)
             continue
         accepted.append(row)
         seen_ids[row["record_id"]] = row["record_id"]
@@ -618,7 +619,7 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
     report = summarize_dataset(accepted, rejected, deduplicated, near_duplicates, record_checks,
                                dict(aggregate_rules), dict(input_missing), len(records), positions,
                                min_travelogue_length, min_official_length)
-    return accepted, report, rejected, deduplicated, examples
+    return accepted, report, rejected, examples
 
 
 def read_jsonl(path: Path) -> list[dict]:
@@ -654,13 +655,12 @@ def _scalar(value):
 
 
 def export_outputs(output_dir: Path, rows: list[dict], report: dict,
-                   rejected: list[dict], deduplicated: list[dict],
-                   examples: list[dict]) -> None:
+                   rejected: list[dict], examples: list[dict]) -> None:
     """Write lossless CSV/JSONL and prepare long-cell sidecars for optional XLSX.
 
-    ``rows`` is the deduplicated corpus; removed near-duplicate copies go to
-    ``deduplicated_records.jsonl`` for audit. Use ``src/export_dataset_xlsx.py``
-    to author the deliverable workbook from these files.
+    ``rows`` is the deduplicated corpus; removed near-duplicate copies stay in
+    ``rejected_records.jsonl`` with reason ``near_duplicate_of:<canonical>``.
+    Use ``src/export_dataset_xlsx.py`` to author the deliverable workbook.
     """
     output_dir.mkdir(parents=True, exist_ok=True)
     fields = BASE_FIELDS + DERIVED_FIELDS
@@ -668,7 +668,6 @@ def export_outputs(output_dir: Path, rows: list[dict], report: dict,
     fields += extras
     _jsonl(output_dir / "dataset_clean.jsonl", rows)
     _jsonl(output_dir / "rejected_records.jsonl", rejected)
-    _jsonl(output_dir / "deduplicated_records.jsonl", deduplicated)
     _json(output_dir / "cleaning_examples.json", examples)
     with (output_dir / "dataset_clean.csv").open("w", encoding="utf-8-sig", newline="") as handle:
         csv_fields = [key for key in fields if key != "provenance_note"]
@@ -699,8 +698,7 @@ def export_outputs(output_dir: Path, rows: list[dict], report: dict,
     report["output_files"] = {"csv": "dataset_clean.csv", "jsonl": "dataset_clean.jsonl",
                               "xlsx": "dataset_clean.xlsx", "quality_report": "quality_report.json",
                               "cleaning_examples": "cleaning_examples.json",
-                              "rejected_records": "rejected_records.jsonl",
-                              "deduplicated_records": "deduplicated_records.jsonl"}
+                              "rejected_records": "rejected_records.jsonl"}
     _json(output_dir / "quality_report.json", report)
 
 
@@ -713,10 +711,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--require-target", action="store_true", help="Return exit code 2 if any scenic area lacks 1 official route and 5 travelogues.")
     args = parser.parse_args(argv)
     records = read_jsonl(args.input)
-    rows, report, rejected, deduplicated, examples = preprocess_records(records, args.min_travelogue_length, args.min_official_length)
+    rows, report, rejected, examples = preprocess_records(records, args.min_travelogue_length, args.min_official_length)
     report["input_path"] = args.input.as_posix()
     report["input_sha256"] = hashlib.sha256(args.input.read_bytes()).hexdigest()
-    export_outputs(args.output_dir, rows, report, rejected, deduplicated, examples)
+    export_outputs(args.output_dir, rows, report, rejected, examples)
     print(json.dumps({key: report[key] for key in ("input_records", "accepted_records", "rejected_records", "deduplicated_records", "main_target_met", "minimum_target_met")}, ensure_ascii=False))
     return 2 if args.require_target and not report["main_target_met"] else 0
 

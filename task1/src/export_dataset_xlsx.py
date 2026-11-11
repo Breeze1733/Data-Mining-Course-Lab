@@ -83,9 +83,6 @@ def main() -> int:
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
     rows = [json.loads(line) for line in (PROCESSED / "dataset_clean.jsonl").open(encoding="utf-8")]
     rejected = [json.loads(line) for line in (PROCESSED / "rejected_records.jsonl").open(encoding="utf-8")]
-    deduplicated_path = PROCESSED / "deduplicated_records.jsonl"
-    deduplicated = ([json.loads(line) for line in deduplicated_path.open(encoding="utf-8")]
-                    if deduplicated_path.exists() else [])
     examples_path = PROCESSED / "cleaning_examples.json"
     examples = (json.loads(examples_path.read_text(encoding="utf-8"))
                 if examples_path.exists() else examples_from_rows(rows))
@@ -101,7 +98,7 @@ def main() -> int:
         ("输入记录数", report["input_records"]),
         ("清洗后保留（已去重）", report["accepted_records"]),
         ("拒绝记录数", report["rejected_records"]),
-        ("近重复移除记录数", report.get("deduplicated_records", 0)),
+        ("其中近重复移除", report.get("deduplicated_records", 0)),
         ("景区覆盖", "黄山 / 九寨沟 / 颐和园"),
         ("每个景区 ≥1 官方路线 + ≥5 篇游记", "全部满足" if report["main_target_met"] else "未满足"),
         ("来源平台分布", "；".join(f"{k} {v} 条" for k, v in report["profile"]["source_platforms"].items())),
@@ -182,18 +179,6 @@ def main() -> int:
         ws.column_dimensions[col].width = width
 
 
-    ws = wb.create_sheet("去重移除记录")
-    sheet_header(ws, ["record_id", "景区", "平台", "标题", "近似于", "相似度", "所属组", "清洗后字符数"])
-    for row in deduplicated:
-        ws.append([
-            row["record_id"], row["scenic_area"], row["source_platform"], row["title"][:40],
-            row.get("near_duplicate_of", ""), row.get("near_duplicate_similarity", ""),
-            row.get("duplicate_group", ""), row.get("clean_char_count", ""),
-        ])
-    for col, width in zip("ABCDEFGH", (22, 9, 11, 34, 22, 10, 10, 12)):
-        ws.column_dimensions[col].width = width
-
-
     ws = wb.create_sheet("清洗规则统计")
     sheet_header(ws, ["清洗规则", "命中次数（全部输入）", "说明"])
     totals = report["cleaning_rule_totals_all_inputs"]
@@ -207,7 +192,6 @@ def main() -> int:
     wb.save(OUT)
     print(json.dumps({"output": OUT.as_posix(), "sheets": wb.sheetnames,
                       "dataset_rows": len(rows), "rejected_rows": len(rejected),
-                      "deduplicated_rows": len(deduplicated),
                       "example_rows": min(12, len(picked))}, ensure_ascii=False))
     return 0
 

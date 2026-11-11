@@ -1,7 +1,7 @@
 {
   "input_records": 303,
   "accepted_records": 267,
-  "rejected_records": 32,
+  "rejected_records": 36,
   "deduplicated_records": 4,
   "main_target_met": true,
   "minimum_target_met": true,
@@ -6535,7 +6535,7 @@
     "near_duplicate_action": "remove_later_duplicates_keep_earliest_record",
     "exact_content_duplicate_key": "clean text with whitespace removed; punctuation, case and semantic symbols preserved",
     "title_and_article_content_used_for_scenic_relevance": true,
-    "dedup_weight_policy": "retained records=1.0; removed duplicates are absent from dataset_clean and listed in deduplicated_records.jsonl",
+    "dedup_weight_policy": "retained records=1.0; removed duplicates are absent from dataset_clean and listed in rejected_records.jsonl with reason near_duplicate_of:<canonical>",
     "duplicate_group_rule": "transitive closure of near_duplicate_pairs; canonical = earliest input record; later members removed",
     "duplicate_fields": [
       "duplicate_group",
@@ -6591,8 +6591,7 @@
     "xlsx": "dataset_clean.xlsx",
     "quality_report": "quality_report.json",
     "cleaning_examples": "cleaning_examples.json",
-    "rejected_records": "rejected_records.jsonl",
-    "deduplicated_records": "deduplicated_records.jsonl"
+    "rejected_records": "rejected_records.jsonl"
   },
   "input_path": "data/raw/dataset_raw.jsonl",
   "input_sha256": "bb808a33d1f2e0eed0ef05b99f6f561e36683e4845441ff3f6c0bf895b6167a2"
