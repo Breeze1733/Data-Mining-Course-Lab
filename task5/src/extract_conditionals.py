@@ -26,6 +26,8 @@ Output: output/conditional_pairs.jsonl (per pair), mapping_table.json (deduplica
 from __future__ import annotations
 
 
+import hashlib
+
 import io
 
 import json
@@ -204,6 +206,158 @@ def refine_condition_type(cond_text: str, sugg_text: str, current: str) -> str:
     return current
 
 
+CLAUSE_DELIM = re.compile(r"[，,；;。！？!?\n]")
+
+LEGACY_LABELS = {
+    "一般建议", "一般建议（避雷）", "时间条件（句内）", "天气条件（句内）",
+    "装备条件（句内）", "入园/通行规定（句内）", "开放时间规定（句内）",
+}
+
+INFER_RE = {"人群": CROWD_RE, "天气": WEATHER_RE, "时间": TIME_RE, "装备": EQUIP_RE}
+
+
+def _span_in(sent: str, text: str, lo: int = 0):
+    """Return ([a,b], ambiguous) for the first exact occurrence of text at/after lo."""
+    if not text:
+        return None, False
+    a = sent.find(text, lo)
+    if a < 0:
+        return None, False
+    b = a + len(text)
+    return [a, b], sent.find(text, b) >= 0
+
+
+def _group_span(sent: str, m, group: int, suffix: str = ""):
+    """Exact (text, span) for a regex group, trimming whitespace and an optional suffix."""
+    raw = m.group(group)
+    text = raw.strip()
+    if suffix and text.endswith(suffix):
+        text = text[: -len(suffix)].rstrip()
+    if not text:
+        return "", None
+    lead = raw.find(text)
+    a = m.start(group) + (lead if lead >= 0 else 0)
+    b = a + len(text)
+    if sent[a:b] != text:
+        span, _ = _span_in(sent, text, m.start(group))
+        if span is None:
+            return text, None
+        return text, span
+    return text, [a, b]
+
+
+def _clause_span(sent: str, a: int, b: int, max_len: int = 40):
+    """Expand [a,b) to clause boundaries, falling back to the keyword span when too long."""
+    left = 0
+    for cm in CLAUSE_DELIM.finditer(sent, 0, a):
+        left = cm.end()
+    right = len(sent)
+    cm = CLAUSE_DELIM.search(sent, b)
+    if cm:
+        right = cm.start()
+    text = sent[left:right].strip()
+    if not text:
+        return "", None
+    lead = sent[left:right].find(text)
+    left = left + lead
+    if len(text) > max_len:
+        return sent[a:b], [a, b]
+    return text, [left, left + len(text)]
+
+
+def infer_condition(sent: str, advice_start: int, types: list[str], max_len: int = 40):
+    """Find a verbatim condition in the sentence.
+
+    Crowd words count anywhere in the sentence (they name the audience); weather/time/equipment
+    only count before the advice, otherwise the condition is not separable from the advice.
+    Returns (text, span, matched_type, absent_reason).
+    """
+    keyword_only_in_advice = False
+    for kind in types:
+        pat = INFER_RE.get(kind)
+        if pat is None:
+            continue
+        if kind == "人群":
+            m = pat.search(sent)
+            if m:
+                return m.group(0).strip(), [m.start(), m.end()], kind, None
+            continue
+        prefix = sent[:advice_start]
+        best = None
+        for m in pat.finditer(prefix):
+            best = m
+        if best is not None:
+            text, span = _clause_span(prefix, best.start(), best.end(), max_len)
+            if text and span:
+                return text, span, kind, None
+        if pat.search(sent, advice_start):
+            keyword_only_in_advice = True
+    return "", None, None, ("keyword_only_in_advice" if keyword_only_in_advice else "no_keyword")
+
+
+def _cond(text: str, span, kind: str, label: str = "", reason=None, negated: bool = False) -> dict:
+    """Build the condition-related fields; empty text is always an explicit 'absent' marker."""
+    return {
+        "condition_text": text or "",
+        "condition_span": span if text else None,
+        "condition_kind": kind if text else "absent",
+        "condition_label": label,
+        "condition_absent_reason": None if text else reason,
+        "condition_negated": negated,
+    }
+
+
+def _infer_fields(sent: str, advice_start: int, types: list[str], label: str) -> dict:
+    text, span, _, reason = infer_condition(sent, advice_start, types)
+    if not text and types == ["人群"] and reason == "no_keyword":
+        reason = "no_crowd_span"
+    return _cond(text, span, "inferred", label, reason)
+
+
+def _assign_pair_id(p: dict, seen: set) -> str:
+    payload = "|".join([
+        p.get("record_id", ""), p.get("pattern", ""), p.get("trigger", ""),
+        p.get("condition_text", ""), p.get("suggestion_text", ""),
+        p.get("sentence", ""), repr(p.get("condition_span")),
+    ])
+    base = "p" + hashlib.sha1(payload.encode("utf-8")).hexdigest()[:16]
+    pid = base
+    i = 2
+    while pid in seen:
+        pid = f"{base}-{i}"
+        i += 1
+    seen.add(pid)
+    p["pair_id"] = pid
+    return pid
+
+
+def validate_pairs(pairs: list[dict]) -> None:
+    """Fail before writing when a condition is not verifiable or an absent row is not marked."""
+    errors = []
+    for p in pairs:
+        text = p.get("condition_text", "")
+        span = p.get("condition_span")
+        sent = p.get("sentence", "")
+        if text:
+            ok = (isinstance(span, list) and len(span) == 2
+                  and all(isinstance(i, int) for i in span)
+                  and 0 <= span[0] <= span[1] <= len(sent)
+                  and sent[span[0]:span[1]] == text)
+            if not ok:
+                errors.append(f"bad condition span {p.get('pair_id')}: {text!r}")
+        elif span is not None or p.get("condition_kind") != "absent":
+            errors.append(f"empty condition not marked absent {p.get('pair_id')}")
+        if len(sent) > 160:
+            errors.append(f"sentence longer than 160 {p.get('pair_id')}: {len(sent)}")
+    ids = [p.get("pair_id") for p in pairs]
+    if any(not pid for pid in ids):
+        errors.append("missing pair_id")
+    if len(ids) != len(set(ids)):
+        errors.append("duplicate pair_id")
+    if errors:
+        raise SystemExit("condition validation failed:\n" + "\n".join(errors[:20]))
+
+
 def extract_from_sentence(sent: str) -> list[dict]:
 
     pairs = []
@@ -215,7 +369,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
     for m in re.finditer(r"(如果|要是|若)([^。！？；]{1,40}?)就([^，。！？；]{1,30})[，,]?否则([^。！？；]{1,40})", sent):
 
-        branch_a_cond = m.group(2).strip()
+        branch_a_cond, branch_a_span = _group_span(sent, m, 2)
 
         branch_a_sugg = "就" + m.group(3).strip()
 
@@ -223,11 +377,17 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         pairs.append({"pattern": "显式条件", "trigger": m.group(1),
 
-                      "condition_text": branch_a_cond, "suggestions": [branch_a_sugg], "sentence": sent})
+                      "suggestions": [branch_a_sugg], "sentence": sent,
+
+                      **_cond(branch_a_cond, branch_a_span, "explicit")})
 
         pairs.append({"pattern": "显式条件", "trigger": m.group(1) + "(否则)",
 
-                      "condition_text": "非" + branch_a_cond, "suggestions": [branch_b_sugg], "sentence": sent})
+                      "suggestions": [branch_b_sugg], "sentence": sent,
+
+                      **_cond(branch_a_cond, branch_a_span, "explicit",
+
+                             label="非" + branch_a_cond, negated=True)})
 
         seen_spans.add(m.start())
 
@@ -244,7 +404,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
     for m in re.finditer(r"(如果|假如|假若|若是|(?<![宛仿相如自普兰沉聊日的])若|要是|万一|一旦|只要|除非)([^。！？；]{1,40}?)(的话)?[，,]", sent):
 
-        cond = (m.group(2) or "").strip()
+        cond, cond_span = _group_span(sent, m, 2)
 
         rest = sent[m.end():].strip()
 
@@ -264,7 +424,9 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             pairs.append({"pattern": "显式条件", "trigger": trigger,
 
-                          "condition_text": cond, "suggestions": [sugg], "sentence": sent})
+                          "suggestions": [sugg], "sentence": sent,
+
+                          **_cond(cond, cond_span, "explicit")})
 
         seen_spans.add(m.start())
 
@@ -282,13 +444,15 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             continue
 
+        cond_text, cond_span = _group_span(sent, m, 2, suffix="的话")
+
         for sugg in split_multi_suggestions(rest):
 
             pairs.append({"pattern": "显式条件", "trigger": trigger,
 
-                          "condition_text": m.group(2).rstrip("的话").strip(),
+                          "suggestions": [sugg], "sentence": sent,
 
-                          "suggestions": [sugg], "sentence": sent})
+                          **_cond(cond_text, cond_span, "explicit")})
 
         seen_spans.add(m.start())
 
@@ -297,7 +461,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
     for m in re.finditer(r"([一-龥A-Za-z0-9]{2,12})的话[，,]?\s*", sent):
         if m.start() in seen_spans:
             continue
-        cond = m.group(1).strip()
+        cond, cond_span = _group_span(sent, m, 1)
         if cond.startswith(("如果", "要是", "若", "假如", "既然", "就是说")):
             continue  # conjunction forms are handled by P1
         rest = sent[m.end():].strip()
@@ -306,43 +470,49 @@ def extract_from_sentence(sent: str) -> list[dict]:
             continue
         for sugg in split_multi_suggestions(rest[:40]):
             pairs.append({"pattern": "显式条件", "trigger": "…的话(裸)",
-                          "condition_text": cond, "suggestions": [sugg], "sentence": sent})
+                          "suggestions": [sugg], "sentence": sent,
+                          **_cond(cond, cond_span, "explicit")})
         seen_spans.add(m.start())
 
     # Extension B: space-separated "condition occurrence + imperative" — "高反情况出现 路上随时休息补氧"
     for m in re.finditer(r"([一-龥A-Za-z0-9]{2,14}(?:出现|的时候?))[ 　]+([一-龥][^。！？；]{1,28})", sent):
-        cond, rest = m.group(1), m.group(2).strip()
+        cond, cond_span = _group_span(sent, m, 1)
+        rest = m.group(2).strip()
         if not re.search(r"(?:休息|补氧|带上?|备|穿|涂|错峰|排队|慢行|提前)", rest[:10]):
             continue
         pairs.append({"pattern": "句内条件", "trigger": "空格条件",
-                      "condition_text": cond, "suggestions": [rest], "sentence": sent,
-                      "condition_type": "体力安全" if ("高反" in cond or "体力" in cond) else "一般"})
+                      "suggestions": [rest], "sentence": sent,
+                      "condition_type": "体力安全" if ("高反" in cond or "体力" in cond) else "一般",
+                      **_cond(cond, cond_span, "explicit")})
 
     # Extension C: must-do/no-entry regulations ("你需要乘坐新国线登山车"/"私家车不允许进入")
     for m in re.finditer(r"(需要?|须)(乘坐?|购买|预订|预约)[^。！？；，]{1,26}", sent):
         pairs.append({"pattern": "依据规定", "trigger": m.group(1) + m.group(2),
-                      "condition_text": "入园/通行规定（句内）", "suggestions": [m.group(0)],
-                      "sentence": sent,
-                      "condition_type": "预约票务" if ("订" in m.group(2) or "预约" in m.group(2)) else "交通"})
+                      "suggestions": [m.group(0)], "sentence": sent,
+                      "condition_type": "预约票务" if ("订" in m.group(2) or "预约" in m.group(2)) else "交通",
+                      **_cond("", None, "absent", label="入园/通行规定（句内）",
+                             reason="regulation_not_conditional")})
     for m in re.finditer(r"(不允许|禁止|不得)[^。！？；，]{1,26}", sent):
         back = sent[max(0, m.start() - 12):m.start()]
         if re.search(r"(估计|可能|将|恐怕|也许|说不定)", back):
             continue  # predictive context ("估计不久将禁止"), not a current regulation
         pairs.append({"pattern": "否定建议", "trigger": m.group(1),
-                      "condition_text": "入园/通行规定（句内）", "suggestions": [m.group(0)],
-                      "sentence": sent, "condition_type": "一般"})
+                      "suggestions": [m.group(0)], "sentence": sent, "condition_type": "一般",
+                      **_cond("", None, "absent", label="入园/通行规定（句内）",
+                             reason="regulation_not_conditional")})
     # Extension D: note + closure/not-open regulations ("需要注意的是北京很多景点周一都不开放")
     for m in re.finditer(r"(需要注意的是?|注意)[^。！？；]{0,18}(不开放|闭馆|关闭|停运|暂停开放)[^。！？；]{0,20}", sent):
         pairs.append({"pattern": "依据规定", "trigger": m.group(1),
-                      "condition_text": "开放时间规定（句内）",
                       "suggestions": [m.group(0)[:40]], "sentence": sent,
-                      "condition_type": "时间"})
+                      "condition_type": "时间",
+                      **_cond("", None, "absent", label="开放时间规定（句内）",
+                             reason="regulation_not_conditional")})
 
     # P7 by-regulation: conditional rule information from 按照/根据+要求/规定/政策/须知 (no explicit conditional conjunction)
 
     for m in re.finditer(r"((?:按照|根据|依据)[^。！？；]{0,16}?(?:要求|规定|政策|须知|提示))[^。！？；]{0,12}?[，,]\s*([^。！？；]{1,60})", sent):
 
-        cond = m.group(1).strip()
+        cond, cond_span = _group_span(sent, m, 1)
 
         rest = m.group(2).strip()
 
@@ -360,40 +530,17 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             pairs.append({"pattern": "依据规定", "trigger": m.group(1),
 
-                          "condition_text": cond, "suggestions": [sugg], "sentence": sent,
+                          "suggestions": [sugg], "sentence": sent,
 
-                          "condition_type": "一般"})
+                          "condition_type": "一般",
+
+                          **_cond(cond, cond_span, "explicit")})
 
             emitted = True
 
         if emitted:
 
             seen_spans.add(m.start())
-
-    # Otherwise-branch splitting — "如果A就B，否则C" splits into two condition pairs: A→B and not-A→C
-
-    for m in re.finditer(r"(如果|要是|若)([^。！？；]{1,40}?)就([^，。！？；]{1,30})[，,]?否则([^。！？；]{1,40})", sent):
-
-        if m.start() in seen_spans:
-
-            continue
-
-        branch_a_cond = m.group(2).strip()
-
-        branch_a_sugg = "就" + m.group(3).strip()
-
-        branch_b_sugg = m.group(4).strip()
-
-        pairs.append({"pattern": "显式条件", "trigger": m.group(1),
-
-                      "condition_text": branch_a_cond, "suggestions": [branch_a_sugg], "sentence": sent})
-
-        pairs.append({"pattern": "显式条件", "trigger": m.group(1) + "(否则)",
-
-                      "condition_text": "非" + branch_a_cond, "suggestions": [branch_b_sugg], "sentence": sent})
-
-        seen_spans.add(m.start())
-
 
     # 当/遇到…时 (time-point conditions)
 
@@ -403,7 +550,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             continue
 
-        cond = m.group(1).strip()
+        cond, cond_span = _group_span(sent, m, 1)
 
         rest = sent[m.end():].strip()
 
@@ -415,7 +562,9 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             pairs.append({"pattern": "时点条件", "trigger": "当…时/遇到…时",
 
-                          "condition_text": cond, "suggestions": [sugg], "sentence": sent})
+                          "suggestions": [sugg], "sentence": sent,
+
+                          **_cond(cond, cond_span, "explicit")})
 
         seen_spans.add(m.start())
 
@@ -437,21 +586,31 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
         crowd = crowd_subtype(clause) or crowd_subtype(sent)
 
+        advice_start = m.end(1)
+
         if crowd:
 
-            cond_text, cond_type = f"游客为{crowd}", "人群"
+            cond_label, cond_type = f"游客为{crowd}", "人群"
+
+            cond_fields = _infer_fields(sent, advice_start, ["人群"], cond_label)
 
         elif WEATHER_RE.search(sent):
 
-            cond_text, cond_type = "天气条件（句内）", "天气"
+            cond_label, cond_type = "天气条件（句内）", "天气"
+
+            cond_fields = _infer_fields(sent, advice_start, ["天气"], cond_label)
 
         elif TIME_RE.search(sent):
 
-            cond_text, cond_type = "时间条件（句内）", "时间"
+            cond_label, cond_type = "时间条件（句内）", "时间"
+
+            cond_fields = _infer_fields(sent, advice_start, ["时间"], cond_label)
 
         else:
 
-            cond_text, cond_type = "一般建议", "一般"
+            cond_label, cond_type = "一般建议", "一般"
+
+            cond_fields = _infer_fields(sent, advice_start, ["装备"], cond_label)
 
         emitted = False
 
@@ -463,9 +622,9 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             pairs.append({"pattern": "建议推断", "trigger": m.group(1),
 
-                          "condition_text": cond_text, "suggestions": [sugg], "sentence": sent,
+                          "suggestions": [sugg], "sentence": sent,
 
-                          "condition_type": cond_type})
+                          "condition_type": cond_type, **cond_fields})
 
             emitted = True
 
@@ -482,7 +641,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             r"孕妇|腿脚[^。！？；，]{0,4}|体力[^。！？；，]{0,4}|新手|第一次[^。！？；，]{0,6}|学生|恐高|晕车)可以([^。！？；]{1,50})", sent):
 
-        crowd = m.group(1).strip()
+        crowd, crowd_span = _group_span(sent, m, 1)
 
         segs = split_multi_suggestions(m.group(2))
 
@@ -497,9 +656,11 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             pairs.append({"pattern": "人群可以", "trigger": "可以",
 
-                          "condition_text": f"游客为{crowd}", "suggestions": [sugg], "sentence": sent,
+                          "suggestions": [sugg], "sentence": sent,
 
-                          "condition_type": "人群"})
+                          "condition_type": "人群",
+
+                          **_cond(crowd, crowd_span, "inferred", f"游客为{crowd}")})
 
         return pairs
 
@@ -518,36 +679,46 @@ def extract_from_sentence(sent: str) -> list[dict]:
 
             continue  # "不要认为/觉得/以为" polarity-reversing rhetoric, not pitfall-avoidance advice
 
-        if WEATHER_RE.search(sent):
-
-            cond_text, cond_type = "天气条件（句内）", "天气"
-
-        elif TIME_RE.search(sent):
-
-            cond_text, cond_type = "时间条件（句内）", "时间"
-
-        elif EQUIP_RE.search(sent):
-
-            cond_text, cond_type = "装备条件（句内）", "装备"
-
-        else:
-
-            cond_text, cond_type = "一般建议（避雷）", "一般"
-
         # Extension: re-extend the verb phrase — the "带/穿/买/选…" phrase before the negative word belongs to the same advice
         # (without it "带老人、小孩慎选" would keep only "慎选", dropping the 3-char advice "带老人、小孩")
         back = sent[max(0, m.start(1) - 8):m.start(1)]
         back_m = re.search(r"(带|穿|买|选|点|准备|记得)([^，。！？；；]{0,6})$", back)
+        advice_start = m.start(1)
         if back_m:
+            advice_start = max(0, m.start(1) - 8) + back_m.start()
             clause = back_m.group(0) + clause
         clause = clause.rstrip(")）]】")
+
+        if WEATHER_RE.search(sent):
+
+            cond_label, cond_type = "天气条件（句内）", "天气"
+
+            cond_fields = _infer_fields(sent, advice_start, ["天气"], cond_label)
+
+        elif TIME_RE.search(sent):
+
+            cond_label, cond_type = "时间条件（句内）", "时间"
+
+            cond_fields = _infer_fields(sent, advice_start, ["时间"], cond_label)
+
+        elif EQUIP_RE.search(sent):
+
+            cond_label, cond_type = "装备条件（句内）", "装备"
+
+            cond_fields = _infer_fields(sent, advice_start, ["装备"], cond_label)
+
+        else:
+
+            cond_label, cond_type = "一般建议（避雷）", "一般"
+
+            cond_fields = _infer_fields(sent, advice_start, ["人群", "装备"], cond_label)
         for sugg in split_multi_suggestions(clause):
 
             pairs.append({"pattern": "否定建议", "trigger": m.group(1),
 
-                          "condition_text": cond_text, "suggestions": [sugg], "sentence": sent,
+                          "suggestions": [sugg], "sentence": sent,
 
-                          "condition_type": cond_type})
+                          "condition_type": cond_type, **cond_fields})
 
         return pairs
 
@@ -725,7 +896,39 @@ def main(argv=None) -> int:
 
             for p in extract_from_sentence(sent):
 
-                ctype = p.get("condition_type") or classify_condition(p["condition_text"])
+                ctype = p.get("condition_type") or classify_condition(p.get("condition_text", ""))
+
+                cfields = {key: p.get(key) for key in (
+                    "condition_text", "condition_span", "condition_kind",
+                    "condition_label", "condition_absent_reason", "condition_negated")}
+
+                # Safety net: any pair that did not go through a condition-aware emit site
+                # must still satisfy the verbatim-or-absent invariant.
+                if not cfields["condition_kind"]:
+
+                    if cfields["condition_text"]:
+
+                        span, _ = _span_in(sent, cfields["condition_text"])
+
+                        if span:
+
+                            cfields.update(condition_span=span, condition_kind="explicit")
+
+                        else:
+
+                            cfields.update(condition_label=cfields["condition_text"],
+
+                                           condition_text="", condition_span=None,
+
+                                           condition_kind="absent",
+
+                                           condition_absent_reason="label_unmapped")
+
+                    else:
+
+                        cfields.update(condition_kind="absent", condition_span=None,
+
+                                       condition_absent_reason="no_keyword")
 
                 for sugg in p["suggestions"]:
 
@@ -734,7 +937,7 @@ def main(argv=None) -> int:
                         continue
 
                     polarity = "NEG" if p["pattern"] == "否定建议" else "POS"
-                    all_pairs.append({"polarity": polarity, 
+                    all_pairs.append({"polarity": polarity,
 
                         "record_id": row["record_id"], "scenic_area": row["scenic_area"],
 
@@ -742,9 +945,21 @@ def main(argv=None) -> int:
 
                         "pattern": p["pattern"], "trigger": p["trigger"],
 
-                        "condition_text": p["condition_text"], "suggestion_text": sugg,
+                        "condition_text": cfields["condition_text"],
 
-                        "condition_type": ctype, "sentence": p["sentence"][:150],
+                        "condition_span": cfields["condition_span"],
+
+                        "condition_kind": cfields["condition_kind"],
+
+                        "condition_label": cfields["condition_label"] or "",
+
+                        "condition_absent_reason": cfields["condition_absent_reason"],
+
+                        "condition_negated": bool(cfields["condition_negated"]),
+
+                        "suggestion_text": sugg,
+
+                        "condition_type": ctype, "sentence": p["sentence"],
 
                     })
 
@@ -754,8 +969,17 @@ def main(argv=None) -> int:
         p["condition_type"] = refine_condition_type(
             p.get("condition_text", ""), p.get("suggestion_text", ""),
             p.get("condition_type", "其他"))
+        p["condition_type_verified"] = (classify_condition(p["condition_text"])
+                                        if p["condition_text"] else "无")
 
-    # Dedup: same scenic area + identical normalized condition/advice text -> merge sources; also produce a merged view of global cross-area duplicates
+    # Stable content ids (assigned before dedup so every merged row keeps its member ids)
+    seen_ids: set[str] = set()
+    for p in all_pairs:
+        _assign_pair_id(p, seen_ids)
+
+    validate_pairs(all_pairs)
+
+    # Dedup: same scenic area + condition provenance/label + normalized condition/advice text
 
     merged: dict[tuple, dict] = {}
 
@@ -763,17 +987,20 @@ def main(argv=None) -> int:
 
     for p in all_pairs:
 
-        key = (p["scenic_area"], norm(p["condition_text"])[:24], norm(p["suggestion_text"])[:40])
+        key = (p["scenic_area"], p["condition_kind"], norm(p["condition_label"])[:24],
+               norm(p["condition_text"])[:24], norm(p["suggestion_text"])[:40])
 
         if key in merged:
 
             merged[key]["sources"].append(p["record_id"])
 
+            merged[key]["pair_ids"].append(p["pair_id"])
+
             near_dup += 1
 
             continue
 
-        merged[key] = {**p, "sources": [p["record_id"]]}
+        merged[key] = {**p, "sources": [p["record_id"]], "pair_ids": [p["pair_id"]]}
 
     mapping = list(merged.values())
 
@@ -799,6 +1026,8 @@ def main(argv=None) -> int:
 
         m["sources"] = list(dict.fromkeys(m["sources"]))[:10]
 
+        m["pair_ids"] = list(dict.fromkeys(m["pair_ids"]))[:10]
+
 
     OUT.mkdir(parents=True, exist_ok=True)
 
@@ -813,6 +1042,16 @@ def main(argv=None) -> int:
         json.dumps(mapping, ensure_ascii=False, indent=1))
 
 
+    kind_raw = Counter(p["condition_kind"] for p in all_pairs)
+    kind_dedup = Counter()
+    for m in mapping:
+        kind_dedup[m["condition_kind"]] += m["frequency"]
+    nonempty_raw = sum(1 for p in all_pairs if p["condition_text"])
+    nonempty_dedup = sum(m["frequency"] for m in mapping if m["condition_text"])
+    pattern_kind = defaultdict(Counter)
+    for p in all_pairs:
+        pattern_kind[p["pattern"]][p["condition_kind"]] += 1
+
     stats = {
 
         "raw_pairs": len(all_pairs),
@@ -826,13 +1065,56 @@ def main(argv=None) -> int:
 
         "by_condition_type": dict(Counter(p["condition_type"] for p in all_pairs)),
 
+        "by_condition_type_verified": dict(Counter(p["condition_type_verified"] for p in all_pairs)),
+
+        "by_condition_kind": dict(kind_raw),
+
+        "by_condition_kind_dedup": dict(kind_dedup),
+
+        "by_pattern_condition_kind": {k: dict(v) for k, v in pattern_kind.items()},
+
+        "by_condition_label": dict(Counter(
+            p["condition_label"] for p in all_pairs if p["condition_label"])),
+
+        "by_absent_reason": dict(Counter(
+            p["condition_absent_reason"] for p in all_pairs if p["condition_absent_reason"])),
+
+        "nonempty_condition_pairs": nonempty_raw,
+
+        "absent_condition_pairs": len(all_pairs) - nonempty_raw,
+
+        "nonempty_condition_rate": round(nonempty_raw / max(1, len(all_pairs)), 3),
+
+        "nonempty_condition_rows": sum(1 for m in mapping if m["condition_text"]),
+
+        "nonempty_condition_row_rate": round(
+            sum(1 for m in mapping if m["condition_text"]) / max(1, len(mapping)), 3),
+
+        "nonempty_condition_rate_dedup": round(nonempty_dedup / max(1, len(all_pairs)), 3),
+
+        "condition_type_mismatch": sum(
+            1 for p in all_pairs
+            if p["condition_text"] and p["condition_type_verified"] != p["condition_type"]),
+
+        "label_like_nonempty": sum(
+            1 for p in all_pairs
+            if p["condition_text"] in LEGACY_LABELS or p["condition_text"].startswith("游客为")),
+
+        "condition_span_invalid": 0,
+
+        "sentence_max_len": max((len(p["sentence"]) for p in all_pairs), default=0),
+
+        "sentence_truncated_pairs": sum(1 for p in all_pairs if len(p["sentence"]) > 160),
+
+        "dedup_key_version": "v2:scenic|kind|label|condition|suggestion",
+
         "by_scenic": dict(Counter(p["scenic_area"] for p in all_pairs)),
 
         "by_text_type": dict(Counter(p["text_type"] for p in all_pairs)),
 
         "crowd_breakdown": dict(Counter(
 
-            crowd_subtype(p["condition_text"]) or "未细分"
+            crowd_subtype(p["condition_text"] or p.get("condition_label", "")) or "未细分"
 
             for p in all_pairs if p["condition_type"] == "人群")),
 

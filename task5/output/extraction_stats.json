@@ -1,51 +1,135 @@
 {
- "raw_pairs": 1025,
- "after_dedup": 966,
- "duplicates_merged": 59,
+ "raw_pairs": 963,
+ "after_dedup": 949,
+ "duplicates_merged": 14,
  "by_pattern": {
-  "建议推断": 373,
-  "显式条件": 471,
-  "否定建议": 156,
+  "建议推断": 353,
+  "显式条件": 442,
+  "否定建议": 143,
   "依据规定": 17,
   "人群可以": 7,
   "句内条件": 1
  },
  "by_polarity": {
-  "POS": 869,
-  "NEG": 156
+  "POS": 820,
+  "NEG": 143
  },
  "by_condition_type": {
-  "时间": 113,
-  "一般": 312,
-  "其他": 302,
-  "天气": 30,
-  "拍照": 37,
+  "时间": 106,
+  "一般": 293,
+  "其他": 281,
+  "天气": 29,
+  "拍照": 36,
   "预约票务": 41,
-  "住宿": 49,
+  "住宿": 48,
   "交通": 13,
-  "人群": 39,
-  "装备": 35,
-  "美食": 40,
+  "人群": 35,
+  "装备": 33,
+  "美食": 34,
   "体力安全": 14
  },
+ "by_condition_type_verified": {
+  "时间": 52,
+  "无": 412,
+  "其他": 356,
+  "天气": 26,
+  "装备": 45,
+  "人群": 34,
+  "预约票务": 8,
+  "交通": 8,
+  "体力安全": 22
+ },
+ "by_condition_kind": {
+  "inferred": 104,
+  "absent": 412,
+  "explicit": 447
+ },
+ "by_condition_kind_dedup": {
+  "inferred": 104,
+  "absent": 412,
+  "explicit": 447
+ },
+ "by_pattern_condition_kind": {
+  "建议推断": {
+   "inferred": 81,
+   "absent": 272
+  },
+  "显式条件": {
+   "explicit": 442
+  },
+  "否定建议": {
+   "absent": 127,
+   "inferred": 16
+  },
+  "依据规定": {
+   "absent": 13,
+   "explicit": 4
+  },
+  "人群可以": {
+   "inferred": 7
+  },
+  "句内条件": {
+   "explicit": 1
+  }
+ },
+ "by_condition_label": {
+  "时间条件（句内）": 79,
+  "一般建议": 245,
+  "天气条件（句内）": 20,
+  "一般建议（避雷）": 68,
+  "入园/通行规定（句内）": 64,
+  "游客为孩子": 3,
+  "开放时间规定（句内）": 2,
+  "游客为体力,": 2,
+  "装备条件（句内）": 13,
+  "游客为学生": 3,
+  "游客为体力有限": 3,
+  "游客为情侣": 2,
+  "游客为恐高": 1,
+  "游客为家庭": 2,
+  "游客为体力好的完全": 1,
+  "游客为老人": 2,
+  "游客为晕车": 2,
+  "游客为体力不足": 1,
+  "游客为体力的": 1,
+  "游客为体力好的": 1,
+  "游客为体力差的朋友": 1
+ },
+ "by_absent_reason": {
+  "no_keyword": 255,
+  "keyword_only_in_advice": 91,
+  "regulation_not_conditional": 66
+ },
+ "nonempty_condition_pairs": 551,
+ "absent_condition_pairs": 412,
+ "nonempty_condition_rate": 0.572,
+ "nonempty_condition_rows": 542,
+ "nonempty_condition_row_rate": 0.571,
+ "nonempty_condition_rate_dedup": 0.572,
+ "condition_type_mismatch": 110,
+ "label_like_nonempty": 0,
+ "condition_span_invalid": 0,
+ "sentence_max_len": 158,
+ "sentence_truncated_pairs": 0,
+ "dedup_key_version": "v2:scenic|kind|label|condition|suggestion",
  "by_scenic": {
-  "九寨沟": 507,
+  "九寨沟": 445,
   "颐和园": 159,
   "黄山": 359
  },
  "by_text_type": {
   "official_route": 16,
-  "travelogue": 1009
+  "travelogue": 947
  },
  "crowd_breakdown": {
   "孩子": 3,
-  "恐高": 6,
+  "恐高": 4,
   "初次游览": 2,
   "未细分": 5,
   "行动不便": 1,
-  "学生": 3,
-  "体力有限": 8,
-  "情侣": 4,
+  "学生": 4,
+  "体力有限": 6,
+  "情侣": 3,
   "家庭": 3,
   "老人": 2,
   "晕车": 2
