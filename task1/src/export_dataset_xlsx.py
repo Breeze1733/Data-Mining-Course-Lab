@@ -83,6 +83,9 @@ def main() -> int:
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
     rows = [json.loads(line) for line in (PROCESSED / "dataset_clean.jsonl").open(encoding="utf-8")]
     rejected = [json.loads(line) for line in (PROCESSED / "rejected_records.jsonl").open(encoding="utf-8")]
+    deduplicated_path = PROCESSED / "deduplicated_records.jsonl"
+    deduplicated = ([json.loads(line) for line in deduplicated_path.open(encoding="utf-8")]
+                    if deduplicated_path.exists() else [])
     examples_path = PROCESSED / "cleaning_examples.json"
     examples = (json.loads(examples_path.read_text(encoding="utf-8"))
                 if examples_path.exists() else examples_from_rows(rows))
@@ -96,8 +99,9 @@ def main() -> int:
     sheet_header(ws, ["指标", "值"])
     overview = [
         ("输入记录数", report["input_records"]),
-        ("清洗后保留", report["accepted_records"]),
+        ("清洗后保留（已去重）", report["accepted_records"]),
         ("拒绝记录数", report["rejected_records"]),
+        ("近重复移除记录数", report.get("deduplicated_records", 0)),
         ("景区覆盖", "黄山 / 九寨沟 / 颐和园"),
         ("每个景区 ≥1 官方路线 + ≥5 篇游记", "全部满足" if report["main_target_met"] else "未满足"),
         ("来源平台分布", "；".join(f"{k} {v} 条" for k, v in report["profile"]["source_platforms"].items())),
@@ -105,9 +109,9 @@ def main() -> int:
         ("清洗后长度（最短/中位/最长）",
          f"{report['profile']['clean_length_min']} / {report['profile']['clean_length_median']} / {report['profile']['clean_length_max']}"),
         ("精确重复内容（保留集中）", report["duplicate_clean_contents_in_accepted"]),
-        ("近似重复对（仅标记不删除）", len(report["near_duplicate_pairs"])),
-        ("近似重复组 / 冗余记录", f"{report.get('near_duplicate_group_count', 0)} / "
-                                  f"{report.get('near_duplicate_redundant_records', 0)}"),
+        ("近似重复组 / 已移除冗余",
+         f"{report.get('near_duplicate_group_count', 0)} / {report.get('near_duplicate_records_removed', 0)}"),
+        ("去重后有效记录数", report.get("effective_records_after_dedup", report["accepted_records"])),
     ]
     for k, v in overview:
         ws.append([k, v])
@@ -124,21 +128,15 @@ def main() -> int:
     ws = wb.create_sheet("清洗后数据集")
     cols = ["record_id", "scenic_area", "source_platform", "text_type", "title", "author",
             "published_at", "source_url", "clean_char_count", "clean_nonspace_char_count",
-            "retention_ratio", "quality_flags", "raw_content", "clean_content"]
+            "retention_ratio", "duplicate_group", "duplicate_role", "duplicate_of",
+            "dedup_weight", "quality_flags", "raw_content", "clean_content"]
     sheet_header(ws, cols)
     for row in rows:
         ws.append([clip(row.get(c, "") if c != "quality_flags" else "；".join(row.get("quality_flags", [])))
                    for c in cols])
-    ws.column_dimensions["A"].width = 22
-    ws.column_dimensions["B"].width = 9
-    ws.column_dimensions["C"].width = 11
-    ws.column_dimensions["D"].width = 13
-    ws.column_dimensions["E"].width = 30
-    ws.column_dimensions["F"].width = 12
-    ws.column_dimensions["G"].width = 12
-    ws.column_dimensions["H"].width = 40
-    ws.column_dimensions["M"].width = 60
-    ws.column_dimensions["N"].width = 60
+    for col, width in zip("ABCDEFGHIJKLMNOPQR",
+                          (22, 9, 11, 13, 30, 12, 12, 40, 10, 12, 12, 12, 11, 12, 11, 45, 60, 60)):
+        ws.column_dimensions[col].width = width
 
 
     ws = wb.create_sheet("清洗前后样例")
@@ -184,6 +182,18 @@ def main() -> int:
         ws.column_dimensions[col].width = width
 
 
+    ws = wb.create_sheet("去重移除记录")
+    sheet_header(ws, ["record_id", "景区", "平台", "标题", "近似于", "相似度", "所属组", "清洗后字符数"])
+    for row in deduplicated:
+        ws.append([
+            row["record_id"], row["scenic_area"], row["source_platform"], row["title"][:40],
+            row.get("near_duplicate_of", ""), row.get("near_duplicate_similarity", ""),
+            row.get("duplicate_group", ""), row.get("clean_char_count", ""),
+        ])
+    for col, width in zip("ABCDEFGH", (22, 9, 11, 34, 22, 10, 10, 12)):
+        ws.column_dimensions[col].width = width
+
+
     ws = wb.create_sheet("清洗规则统计")
     sheet_header(ws, ["清洗规则", "命中次数（全部输入）", "说明"])
     totals = report["cleaning_rule_totals_all_inputs"]
@@ -197,6 +207,7 @@ def main() -> int:
     wb.save(OUT)
     print(json.dumps({"output": OUT.as_posix(), "sheets": wb.sheetnames,
                       "dataset_rows": len(rows), "rejected_rows": len(rejected),
+                      "deduplicated_rows": len(deduplicated),
                       "example_rows": min(12, len(picked))}, ensure_ascii=False))
     return 0
 

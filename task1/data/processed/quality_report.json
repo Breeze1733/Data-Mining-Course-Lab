@@ -1,7 +1,8 @@
 {
   "input_records": 303,
-  "accepted_records": 271,
+  "accepted_records": 267,
   "rejected_records": 32,
+  "deduplicated_records": 4,
   "main_target_met": true,
   "minimum_target_met": true,
   "coverage_by_scenic_area": {
@@ -18,14 +19,14 @@
       }
     },
     "九寨沟": {
-      "total": 99,
+      "total": 95,
       "official_route": 8,
-      "travelogue": 91,
+      "travelogue": 87,
       "meets_main_target_1_official_5_travelogues": true,
       "meets_minimum_1_official_3_travelogues": true,
       "platforms": {
         "官方": 8,
-        "携程游记": 51,
+        "携程游记": 47,
         "小红书": 40
       }
     },
@@ -45,24 +46,24 @@
   "profile": {
     "source_platforms": {
       "官方": 22,
-      "携程游记": 134,
+      "携程游记": 130,
       "小红书": 115
     },
     "text_types": {
       "official_route": 22,
-      "travelogue": 249
+      "travelogue": 245
     },
     "raw_formats": {
       "text": 137,
-      "html": 134
+      "html": 130
     },
-    "raw_characters_total": 8381814,
-    "extracted_characters_total": 915640,
-    "clean_characters_total": 802589,
+    "raw_characters_total": 8099256,
+    "extracted_characters_total": 883411,
+    "clean_characters_total": 772067,
     "clean_length_min": 71,
     "clean_length_max": 28609,
-    "clean_length_mean": 2961.58,
-    "clean_length_median": 993.0
+    "clean_length_mean": 2891.64,
+    "clean_length_median": 990.0
   },
   "missing_required_fields_in_input": {},
   "missing_required_fields_in_accepted": {
@@ -90,39 +91,83 @@
       "record_id_a": "CTRIP_4005525",
       "record_id_b": "CTRIP_4027753",
       "similarity": 0.992,
-      "action": "retain_with_group_label"
+      "action": "removed_as_duplicate"
     },
     {
       "record_id_a": "CTRIP_4005525",
       "record_id_b": "CTRIP_4018116",
       "similarity": 0.9995,
-      "action": "retain_with_group_label"
-    },
-    {
-      "record_id_a": "CTRIP_4027753",
-      "record_id_b": "CTRIP_4018116",
-      "similarity": 0.9925,
-      "action": "retain_with_group_label"
+      "action": "removed_as_duplicate"
     },
     {
       "record_id_a": "CTRIP_3996473",
       "record_id_b": "CTRIP_4027862",
       "similarity": 0.9982,
-      "action": "retain_with_group_label"
+      "action": "removed_as_duplicate"
     },
     {
       "record_id_a": "CTRIP_4002122",
       "record_id_b": "CTRIP_4018975",
       "similarity": 0.9995,
-      "action": "retain_with_group_label"
+      "action": "removed_as_duplicate"
     }
   ],
+  "near_duplicate_groups": [
+    {
+      "group_id": "DUP_001",
+      "canonical_record_id": "CTRIP_4005525",
+      "record_ids": [
+        "CTRIP_4005525",
+        "CTRIP_4027753",
+        "CTRIP_4018116"
+      ],
+      "duplicate_record_ids": [
+        "CTRIP_4027753",
+        "CTRIP_4018116"
+      ],
+      "member_count": 3,
+      "duplicate_count": 2,
+      "max_similarity": 0.9995
+    },
+    {
+      "group_id": "DUP_002",
+      "canonical_record_id": "CTRIP_3996473",
+      "record_ids": [
+        "CTRIP_3996473",
+        "CTRIP_4027862"
+      ],
+      "duplicate_record_ids": [
+        "CTRIP_4027862"
+      ],
+      "member_count": 2,
+      "duplicate_count": 1,
+      "max_similarity": 0.9982
+    },
+    {
+      "group_id": "DUP_003",
+      "canonical_record_id": "CTRIP_4002122",
+      "record_ids": [
+        "CTRIP_4002122",
+        "CTRIP_4018975"
+      ],
+      "duplicate_record_ids": [
+        "CTRIP_4018975"
+      ],
+      "member_count": 2,
+      "duplicate_count": 1,
+      "max_similarity": 0.9995
+    }
+  ],
+  "near_duplicate_group_count": 3,
+  "near_duplicate_records_removed": 4,
+  "near_duplicate_records_in_groups": 3,
+  "near_duplicate_redundant_records": 4,
+  "effective_records_after_dedup": 267,
   "warning_counts": {
     "publication_date_missing": 5,
     "route_cues_require_review": 13,
     "scenic_relevance_requires_review": 1,
-    "author_missing": 26,
-    "near_duplicate": 5
+    "author_missing": 26
   },
   "cleaning_rule_totals_all_inputs": {
     "blank_lines_removed": 101530,
@@ -2163,11 +2208,11 @@
         "html_tags_removed": 433,
         "urls_removed": 0
       },
-      "errors": [],
-      "warnings": [
-        "near_duplicate:CTRIP_4005525"
+      "errors": [
+        "near_duplicate_of:CTRIP_4005525"
       ],
-      "accepted": true
+      "warnings": [],
+      "accepted": false
     },
     {
       "input_position": 94,
@@ -2421,12 +2466,11 @@
         "html_tags_removed": 465,
         "urls_removed": 0
       },
-      "errors": [],
-      "warnings": [
-        "near_duplicate:CTRIP_4005525",
-        "near_duplicate:CTRIP_4027753"
+      "errors": [
+        "near_duplicate_of:CTRIP_4005525"
       ],
-      "accepted": true
+      "warnings": [],
+      "accepted": false
     },
     {
       "input_position": 106,
@@ -2486,11 +2530,11 @@
         "html_tags_removed": 1270,
         "urls_removed": 0
       },
-      "errors": [],
-      "warnings": [
-        "near_duplicate:CTRIP_3996473"
+      "errors": [
+        "near_duplicate_of:CTRIP_3996473"
       ],
-      "accepted": true
+      "warnings": [],
+      "accepted": false
     },
     {
       "input_position": 109,
@@ -2921,11 +2965,11 @@
         "html_tags_removed": 432,
         "urls_removed": 0
       },
-      "errors": [],
-      "warnings": [
-        "near_duplicate:CTRIP_4002122"
+      "errors": [
+        "near_duplicate_of:CTRIP_4002122"
       ],
-      "accepted": true
+      "warnings": [],
+      "accepted": false
     },
     {
       "input_position": 129,
@@ -6488,26 +6532,19 @@
     "suspected_mojibake_action": "flag_only_no_guessed_repair",
     "unicode_normalization": "fullwidth ASCII U+FF01..U+FF5E and ideographic space U+3000 only; preserve superscripts, subscripts, circled numbers, Roman numerals and units",
     "semantic_symbols": "preserve route arrows, check/cross marks, plus/minus, warning and prohibition symbols",
-    "near_duplicate_action": "keep_all_records_annotate_group_and_weight",
+    "near_duplicate_action": "remove_later_duplicates_keep_earliest_record",
     "exact_content_duplicate_key": "clean text with whitespace removed; punctuation, case and semantic symbols preserved",
     "title_and_article_content_used_for_scenic_relevance": true,
-    "main_target": "Each of 3 scenic areas: >=1 official route and >=5 travelogues",
-    "minimum_target": "Each of 3 scenic areas: >=1 official route and >=3 travelogues",
-    "dedup_weight_policy": "canonical=1.0, duplicate=0.0; all accepted records retained",
-    "duplicate_group_rule": "transitive closure of near_duplicate_pairs; canonical = earliest input record",
+    "dedup_weight_policy": "retained records=1.0; removed duplicates are absent from dataset_clean and listed in deduplicated_records.jsonl",
+    "duplicate_group_rule": "transitive closure of near_duplicate_pairs; canonical = earliest input record; later members removed",
     "duplicate_fields": [
       "duplicate_group",
       "duplicate_role",
       "duplicate_of",
       "dedup_weight"
-    ]
-  },
-  "input_path": "data/raw/dataset_raw.jsonl",
-  "input_sha256": "bb808a33d1f2e0eed0ef05b99f6f561e36683e4845441ff3f6c0bf895b6167a2",
-  "xlsx_authoring": {
-    "engine": "openpyxl",
-    "script": "src/export_dataset_xlsx.py",
-    "status": "generated"
+    ],
+    "main_target": "Each of 3 scenic areas: >=1 official route and >=5 travelogues",
+    "minimum_target": "Each of 3 scenic areas: >=1 official route and >=3 travelogues"
   },
   "dataset_fields": [
     "record_id",
@@ -6542,6 +6579,11 @@
     "dedup_weight",
     "like_count"
   ],
+  "xlsx_authoring": {
+    "engine": "openpyxl",
+    "script": "src/export_dataset_xlsx.py",
+    "status": "generated"
+  },
   "xlsx_long_text_externalization": [],
   "output_files": {
     "csv": "dataset_clean.csv",
@@ -6549,56 +6591,9 @@
     "xlsx": "dataset_clean.xlsx",
     "quality_report": "quality_report.json",
     "cleaning_examples": "cleaning_examples.json",
-    "rejected_records": "rejected_records.jsonl"
+    "rejected_records": "rejected_records.jsonl",
+    "deduplicated_records": "deduplicated_records.jsonl"
   },
-  "near_duplicate_groups": [
-    {
-      "group_id": "DUP_001",
-      "canonical_record_id": "CTRIP_4005525",
-      "record_ids": [
-        "CTRIP_4005525",
-        "CTRIP_4027753",
-        "CTRIP_4018116"
-      ],
-      "duplicate_record_ids": [
-        "CTRIP_4027753",
-        "CTRIP_4018116"
-      ],
-      "member_count": 3,
-      "duplicate_count": 2,
-      "max_similarity": 0.9995
-    },
-    {
-      "group_id": "DUP_002",
-      "canonical_record_id": "CTRIP_3996473",
-      "record_ids": [
-        "CTRIP_3996473",
-        "CTRIP_4027862"
-      ],
-      "duplicate_record_ids": [
-        "CTRIP_4027862"
-      ],
-      "member_count": 2,
-      "duplicate_count": 1,
-      "max_similarity": 0.9982
-    },
-    {
-      "group_id": "DUP_003",
-      "canonical_record_id": "CTRIP_4002122",
-      "record_ids": [
-        "CTRIP_4002122",
-        "CTRIP_4018975"
-      ],
-      "duplicate_record_ids": [
-        "CTRIP_4018975"
-      ],
-      "member_count": 2,
-      "duplicate_count": 1,
-      "max_similarity": 0.9995
-    }
-  ],
-  "near_duplicate_group_count": 3,
-  "near_duplicate_records_in_groups": 7,
-  "near_duplicate_redundant_records": 4,
-  "effective_records_after_dedup": 267
+  "input_path": "data/raw/dataset_raw.jsonl",
+  "input_sha256": "bb808a33d1f2e0eed0ef05b99f6f561e36683e4845441ff3f6c0bf895b6167a2"
 }

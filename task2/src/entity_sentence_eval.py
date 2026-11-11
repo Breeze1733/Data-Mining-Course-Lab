@@ -71,6 +71,28 @@ def main() -> int:
             r = json.loads(line)
             ents[r["record_id"]] = r["entities"]
 
+    # Task 1 now removes near-duplicate documents physically. If a frozen sample
+    # sentence came from a removed copy, remap it to the group's canonical record
+    # when the exact sentence still exists there; otherwise skip it explicitly.
+    quality = load_json(TASK1 / "data/processed/quality_report.json")
+    canonical_of = {record_id: group["canonical_record_id"]
+                    for group in quality.get("near_duplicate_groups", [])
+                    for record_id in group["duplicate_record_ids"]}
+    remapped, skipped = [], []
+    for o in sample:
+        if o["record_id"] in records:
+            continue
+        canonical = canonical_of.get(o["record_id"])
+        pos = records[canonical].find(o["sentence"]) if canonical in records else -1
+        if pos >= 0:
+            o["remapped_from"] = o["record_id"]
+            o["record_id"] = canonical
+            o["start"] = pos
+            remapped.append(o["sid"])
+        else:
+            skipped.append(o["sid"])
+    sample = [o for o in sample if o["record_id"] in records]
+
     stats = {"POI": [0, 0, 0], "交通": [0, 0, 0], "时间": [0, 0, 0]}
     strict_hit = {"POI": 0, "交通": 0, "时间": 0}  # B01: strict criterion (a hit must be exactly equal text)
     strict_by_span = {}  # B02: stratified by span length {length bucket: [strict hits, total hits]}
@@ -138,6 +160,14 @@ def main() -> int:
 
     result = {
         "n_sentences": len(sample),
+        "sample_remap": {
+            "n_remapped": len(remapped),
+            "remapped_sids": remapped,
+            "already_remapped_sids": [o["sid"] for o in sample if o.get("remapped_from")],
+            "n_skipped_absent_records": len(skipped),
+            "skipped_sids": skipped,
+            "note": "task1 物理去重后，原抽样文档若已移除，则映射到同组 canonical 记录；找不到原句时才跳过。",
+        },
         "annotated_by": gold_doc["annotated_by"],
         "match_policy": gold_doc.get("out_of_scope_note", "根景区名与城市名按设计不作为 POI 实体抽取"),
         "per_type": {t: prf(*v) for t, v in stats.items()},

@@ -195,14 +195,15 @@
    "gist": ""
   },
   {
-   "record_id": "CTRIP_4027753",
+   "record_id": "CTRIP_4005525",
    "scenic": "九寨沟",
    "platform": "携程游记",
-   "start": 1683,
+   "start": 1865,
    "sentence": "由于发车时间是凌晨五点半,第二天凌晨四点我们就起床了,迷迷糊糊收拾完就到酒店大堂等着来接车的人,这也是跟团的一个好处之一,不用自己去张罗车",
    "sid": 1019,
    "ai_advice": false,
-   "gist": ""
+   "gist": "",
+   "remapped_from": "CTRIP_4027753"
   },
   {
    "record_id": "XHS_6ab3a3c9000000000a027646",

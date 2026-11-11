@@ -72,7 +72,7 @@
    "type": "交通方式",
    "subtype": "长途交通",
    "scenic_area": "九寨沟",
-   "record_id": "CTRIP_4018116",
+   "record_id": "CTRIP_4005525",
    "text": "飞机",
    "start": 183,
    "end": 185,
@@ -80,7 +80,8 @@
    "verdict": "correct",
    "note": "“下飞机”为到达动作，飞机作为交通方式成立",
    "present_in_current_output": true,
-   "review_provenance": "historical label; exact document/type/surface/span alignment"
+   "review_provenance": "historical label; exact document/type/surface/span alignment",
+   "remapped_from": "CTRIP_4018116"
   },
   {
    "type": "交通方式",
@@ -720,7 +721,8 @@
   "incorrect": 0,
   "historical_sample_count": 54,
   "removed_or_changed": 1,
-  "note": "仅对本轮仍存在的相同实体继承历史判定；非新一轮随机抽检，不估计总体准确率。新增实体尚待独立人工抽检。"
+  "remapped_to_canonical": 1,
+  "note": "仅对本轮仍存在的相同实体继承历史判定；近重复副本已删除时，同文同跨度的抽样映射到 canonical 记录。非新一轮随机抽检，不估计总体准确率。新增实体尚待独立人工抽检。"
  },
  "historical_review_summary": {
   "n": 54,

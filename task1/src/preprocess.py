@@ -14,6 +14,7 @@ import hashlib
 import html
 import json
 import re
+import sys
 import unicodedata
 from collections import Counter
 from datetime import datetime
@@ -40,6 +41,8 @@ DERIVED_FIELDS = [
     "clean_nonspace_char_count", "retention_ratio", "canonical_source_url",
     "content_sha256", "cleaning_counts", "quality_flags",
 ]
+DUPLICATE_FIELDS = ("duplicate_group", "duplicate_role", "duplicate_of", "dedup_weight")
+NEAR_DUPLICATE_THRESHOLD = 0.9
 BLOCK_TAGS = {
     "address", "article", "aside", "blockquote", "br", "dd", "div", "dl", "dt",
     "fieldset", "figcaption", "figure", "h1", "h2", "h3", "h4", "h5", "h6",
@@ -298,11 +301,200 @@ def _date_is_iso(value: str) -> bool:
         return False
 
 
+def find_near_duplicate(row: dict, accepted: list[dict]) -> tuple[str, float] | None:
+    """Return the earliest accepted same-area record whose clean text is nearly identical."""
+    text = _nonspace(row["clean_content"])
+    for earlier in accepted:
+        if earlier["scenic_area"] != row["scenic_area"]:
+            continue
+        other = _nonspace(earlier["clean_content"])
+        # A length upper bound avoids expensive comparisons for very different texts.
+        if 2 * min(len(other), len(text)) / max(1, len(other) + len(text)) < NEAR_DUPLICATE_THRESHOLD:
+            continue
+        score = SequenceMatcher(None, other, text, autojunk=False).ratio()
+        if score >= NEAR_DUPLICATE_THRESHOLD:
+            return earlier["record_id"], score
+    return None
+
+
+def build_near_duplicate_groups(pairs: list[dict], positions: dict[str, int]) -> list[dict]:
+    """Union-find the pair list; canonical = earliest input record.
+
+    Every non-canonical member of a group is removed from the delivered dataset.
+    The group record is kept in the quality report so the removed ids remain auditable.
+    """
+    parent: dict[str, str] = {}
+
+    def find(item: str) -> str:
+        parent.setdefault(item, item)
+        root = item
+        while parent[root] != root:
+            root = parent[root]
+        while parent[item] != root:
+            parent[item], item = root, parent[item]
+        return root
+
+    for pair in pairs:
+        left, right = pair["record_id_a"], pair["record_id_b"]
+        root_left, root_right = find(left), find(right)
+        if root_left != root_right:
+            parent[root_right] = root_left
+
+    members: dict[str, list[str]] = {}
+    for item in parent:
+        members.setdefault(find(item), []).append(item)
+
+    groups = []
+    for ids in members.values():
+        if len(ids) < 2:
+            continue
+        ids.sort(key=lambda record_id: positions.get(record_id, sys.maxsize))
+        groups.append(ids)
+    groups.sort(key=lambda ids: positions.get(ids[0], sys.maxsize))
+
+    pair_scores: dict[str, list[float]] = {}
+    for pair in pairs:
+        for record_id in (pair["record_id_a"], pair["record_id_b"]):
+            pair_scores.setdefault(record_id, []).append(float(pair.get("similarity", 0.0)))
+
+    result = []
+    for index, ids in enumerate(groups, start=1):
+        scores = [score for record_id in ids for score in pair_scores.get(record_id, [])]
+        result.append({
+            "group_id": f"DUP_{index:03d}",
+            "canonical_record_id": ids[0],
+            "record_ids": ids,
+            "duplicate_record_ids": ids[1:],
+            "member_count": len(ids),
+            "duplicate_count": len(ids) - 1,
+            "max_similarity": round(max(scores, default=0.0), 4),
+        })
+    return result
+
+
+def _number(value):
+    return int(value) if float(value).is_integer() else round(float(value), 4)
+
+
+def summarize_dataset(accepted: list[dict], rejected: list[dict], deduplicated: list[dict],
+                      near_duplicates: list[dict], record_checks: list[dict],
+                      aggregate_rules: dict, input_missing: dict, input_records: int,
+                      positions: dict[str, int], min_travelogue_length: int,
+                      min_official_length: int) -> dict:
+    """Build the quality report and annotate duplicate-group fields on rows.
+
+    ``accepted`` holds the records that remain after near-duplicate removal;
+    ``deduplicated`` holds the removed duplicates (kept in a separate audit file).
+    """
+    groups = build_near_duplicate_groups(near_duplicates, positions)
+    by_id = {row["record_id"]: row for row in accepted + deduplicated}
+    for row in accepted + deduplicated:
+        row["duplicate_group"] = ""
+        row["duplicate_role"] = ""
+        row["duplicate_of"] = ""
+        row["dedup_weight"] = 1.0
+    for group in groups:
+        canonical = group["canonical_record_id"]
+        for record_id in group["record_ids"]:
+            row = by_id.get(record_id)
+            if row is None:
+                continue
+            row["duplicate_group"] = group["group_id"]
+            if record_id == canonical:
+                row["duplicate_role"] = "canonical"
+                row["dedup_weight"] = 1.0
+            else:
+                row["duplicate_role"] = "duplicate"
+                row["duplicate_of"] = canonical
+                row["dedup_weight"] = 0.0
+
+    coverage = {}
+    for scenic_area in SCENIC_AREAS:
+        current = [r for r in accepted if r["scenic_area"] == scenic_area]
+        official = sum(r["text_type"] == "official_route" for r in current)
+        travelogue = sum(r["text_type"] == "travelogue" for r in current)
+        coverage[scenic_area] = {"total": len(current), "official_route": official, "travelogue": travelogue,
+                                 "meets_main_target_1_official_5_travelogues": official >= 1 and travelogue >= 5,
+                                 "meets_minimum_1_official_3_travelogues": official >= 1 and travelogue >= 3,
+                                 "platforms": dict(Counter(r["source_platform"] for r in current))}
+    lengths = sorted(r["clean_char_count"] for r in accepted)
+    median = (lengths[(len(lengths) - 1) // 2] + lengths[len(lengths) // 2]) / 2 if lengths else 0
+    warning_counts = Counter(flag.split(":", 1)[0] for row in accepted for flag in row["quality_flags"])
+    weight_sum = sum(row["dedup_weight"] for row in accepted)
+    report = {
+        "input_records": input_records,
+        "accepted_records": len(accepted),
+        "rejected_records": len(rejected),
+        "deduplicated_records": len(deduplicated),
+        "main_target_met": all(v["meets_main_target_1_official_5_travelogues"] for v in coverage.values()),
+        "minimum_target_met": all(v["meets_minimum_1_official_3_travelogues"] for v in coverage.values()),
+        "coverage_by_scenic_area": coverage,
+        "profile": {"source_platforms": dict(Counter(r["source_platform"] for r in accepted)),
+                    "text_types": dict(Counter(r["text_type"] for r in accepted)),
+                    "raw_formats": dict(Counter(r["raw_format"] for r in accepted)),
+                    "raw_characters_total": sum(r["raw_char_count"] for r in accepted),
+                    "extracted_characters_total": sum(r["extracted_char_count"] for r in accepted),
+                    "clean_characters_total": sum(lengths),
+                    "clean_length_min": min(lengths, default=0), "clean_length_max": max(lengths, default=0),
+                    "clean_length_mean": round(sum(lengths) / len(lengths), 2) if lengths else 0,
+                    "clean_length_median": median},
+        "missing_required_fields_in_input": dict(input_missing),
+        "missing_required_fields_in_accepted": {key: sum(row.get(key) in (None, "") for row in accepted) for key in REQUIRED_FIELDS},
+        "optional_fields_missing_in_accepted": {key: sum(not row.get(key) for row in accepted) for key in ("author", "published_at")},
+        "duplicate_source_urls_in_accepted": len(accepted) - len({r["canonical_source_url"] for r in accepted}),
+        "duplicate_clean_contents_in_accepted": len(accepted) - len({_content_fingerprint(r["clean_content"]) for r in accepted}),
+        "near_duplicate_pairs": near_duplicates,
+        "near_duplicate_groups": groups,
+        "near_duplicate_group_count": len(groups),
+        "near_duplicate_records_removed": len(deduplicated),
+        "near_duplicate_records_in_groups": sum(1 for r in accepted if r["duplicate_group"]),
+        "near_duplicate_redundant_records": len(deduplicated),
+        "effective_records_after_dedup": _number(weight_sum),
+        "warning_counts": dict(warning_counts),
+        "cleaning_rule_totals_all_inputs": dict(sorted(Counter(aggregate_rules).items())),
+        "record_checks": record_checks,
+        "validation_policy": {"min_travelogue_nonspace_characters": min_travelogue_length,
+                              "min_official_nonspace_characters": min_official_length,
+                              "near_duplicate_similarity_threshold": NEAR_DUPLICATE_THRESHOLD,
+                              "long_duplicate_paragraph_min_characters": 40,
+                              "suspected_mojibake_action": "flag_only_no_guessed_repair",
+                              "unicode_normalization": "fullwidth ASCII U+FF01..U+FF5E and ideographic space U+3000 only; preserve superscripts, subscripts, circled numbers, Roman numerals and units",
+                              "semantic_symbols": "preserve route arrows, check/cross marks, plus/minus, warning and prohibition symbols",
+                              "near_duplicate_action": "remove_later_duplicates_keep_earliest_record",
+                              "exact_content_duplicate_key": "clean text with whitespace removed; punctuation, case and semantic symbols preserved",
+                              "title_and_article_content_used_for_scenic_relevance": True,
+                              "dedup_weight_policy": "retained records=1.0; removed duplicates are absent from dataset_clean and listed in deduplicated_records.jsonl",
+                              "duplicate_group_rule": "transitive closure of near_duplicate_pairs; canonical = earliest input record; later members removed",
+                              "duplicate_fields": list(DUPLICATE_FIELDS),
+                              "main_target": "Each of 3 scenic areas: >=1 official route and >=5 travelogues",
+                              "minimum_target": "Each of 3 scenic areas: >=1 official route and >=3 travelogues"},
+    }
+    fields: list[str] = []
+    for row in accepted:
+        for key in row:
+            if key not in fields:
+                fields.append(key)
+    for key in DUPLICATE_FIELDS:
+        if key not in fields:
+            fields.append(key)
+    report["dataset_fields"] = fields
+    report["xlsx_authoring"] = {"engine": "openpyxl", "script": "src/export_dataset_xlsx.py",
+                                "status": "generated"}
+    report["xlsx_long_text_externalization"] = []
+    report["output_files"] = {"csv": "dataset_clean.csv", "jsonl": "dataset_clean.jsonl",
+                              "xlsx": "dataset_clean.xlsx", "quality_report": "quality_report.json",
+                              "cleaning_examples": "cleaning_examples.json",
+                              "rejected_records": "rejected_records.jsonl",
+                              "deduplicated_records": "deduplicated_records.jsonl"}
+    return report
+
+
 def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
-                       min_official_length: int = 30) -> tuple[list[dict], dict, list[dict], list[dict]]:
-    """Validate and clean records; reject empty/invalid/exact-duplicate records."""
+                       min_official_length: int = 30) -> tuple[list[dict], dict, list[dict], list[dict], list[dict]]:
+    """Validate and clean records; reject invalid/exact-duplicate records and near-duplicate copies."""
     accepted: list[dict] = []
     rejected: list[dict] = []
+    deduplicated: list[dict] = []
     examples: list[dict] = []
     record_checks: list[dict] = []
     seen_ids: dict[str, str] = {}
@@ -311,6 +503,7 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
     aggregate_rules: Counter = Counter()
     input_missing: Counter = Counter()
     near_duplicates: list[dict] = []
+    positions = {str(row.get("record_id", "")): index for index, row in enumerate(records, start=1)}
     for position, original in enumerate(records, start=1):
         row = dict(original)
         row.pop("provenance_note", None)
@@ -391,19 +584,27 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
             row["input_position"] = position
             rejected.append(row)
             continue
-        # Compare within a scenic area; flag near matches without automatic deletion.
-        for earlier in accepted:
-            if earlier["scenic_area"] != row["scenic_area"]:
-                continue
-            a, b = _nonspace(earlier["clean_content"]), _nonspace(cleaned)
-            # A length upper bound avoids expensive comparisons for very different texts.
-            if 2 * min(len(a), len(b)) / max(1, len(a) + len(b)) < 0.9:
-                continue
-            score = SequenceMatcher(None, a, b, autojunk=False).ratio()
-            if score >= 0.9:
-                near_duplicates.append({"record_id_a": earlier["record_id"], "record_id_b": row["record_id"],
-                                        "similarity": round(score, 4), "action": "retain_and_review"})
-                flags.append("near_duplicate:" + earlier["record_id"])
+        # Compare within a scenic area. The earliest accepted record is the canonical
+        # copy; later near-identical copies are removed from the delivered dataset.
+        match = find_near_duplicate(row, accepted)
+        if match is not None:
+            duplicate_of, duplicate_score = match
+            reason = f"near_duplicate_of:{duplicate_of}"
+            row["deduplication_reason"] = reason
+            row["near_duplicate_of"] = duplicate_of
+            row["near_duplicate_similarity"] = round(duplicate_score, 4)
+            row["input_position"] = position
+            check["errors"] = [reason]
+            check["accepted"] = False
+            near_duplicates.append({"record_id_a": duplicate_of, "record_id_b": row["record_id"],
+                                    "similarity": round(duplicate_score, 4), "action": "removed_as_duplicate"})
+            # A later exact copy of a removed near-duplicate is still an exact duplicate
+            # of an input record, so keep the duplicate keys for subsequent rows.
+            seen_ids[row["record_id"]] = row["record_id"]
+            seen_urls[canonical] = row["record_id"]
+            seen_fingerprints[fingerprint] = row["record_id"]
+            deduplicated.append(row)
+            continue
         accepted.append(row)
         seen_ids[row["record_id"]] = row["record_id"]
         seen_urls[canonical] = row["record_id"]
@@ -414,55 +615,10 @@ def preprocess_records(records: list[dict], min_travelogue_length: int = 80,
                          "clean_char_count": len(cleaned), "cleaning_counts": rule_counts,
                          "sample_is_excerpt": len(raw) > 1500 or len(cleaned) > 1500})
 
-    coverage = {}
-    for scenic_area in SCENIC_AREAS:
-        current = [r for r in accepted if r["scenic_area"] == scenic_area]
-        official = sum(r["text_type"] == "official_route" for r in current)
-        travelogue = sum(r["text_type"] == "travelogue" for r in current)
-        coverage[scenic_area] = {"total": len(current), "official_route": official, "travelogue": travelogue,
-                                 "meets_main_target_1_official_5_travelogues": official >= 1 and travelogue >= 5,
-                                 "meets_minimum_1_official_3_travelogues": official >= 1 and travelogue >= 3,
-                                 "platforms": dict(Counter(r["source_platform"] for r in current))}
-    lengths = sorted(r["clean_char_count"] for r in accepted)
-    median = (lengths[(len(lengths) - 1) // 2] + lengths[len(lengths) // 2]) / 2 if lengths else 0
-    warning_counts = Counter(flag.split(":", 1)[0] for row in accepted for flag in row["quality_flags"])
-    report = {
-        "input_records": len(records), "accepted_records": len(accepted), "rejected_records": len(rejected),
-        "main_target_met": all(v["meets_main_target_1_official_5_travelogues"] for v in coverage.values()),
-        "minimum_target_met": all(v["meets_minimum_1_official_3_travelogues"] for v in coverage.values()),
-        "coverage_by_scenic_area": coverage,
-        "profile": {"source_platforms": dict(Counter(r["source_platform"] for r in accepted)),
-                    "text_types": dict(Counter(r["text_type"] for r in accepted)),
-                    "raw_formats": dict(Counter(r["raw_format"] for r in accepted)),
-                    "raw_characters_total": sum(r["raw_char_count"] for r in accepted),
-                    "extracted_characters_total": sum(r["extracted_char_count"] for r in accepted),
-                    "clean_characters_total": sum(lengths),
-                    "clean_length_min": min(lengths, default=0), "clean_length_max": max(lengths, default=0),
-                    "clean_length_mean": round(sum(lengths) / len(lengths), 2) if lengths else 0,
-                    "clean_length_median": median},
-        "missing_required_fields_in_input": dict(input_missing),
-        "missing_required_fields_in_accepted": {key: sum(row.get(key) in (None, "") for row in accepted) for key in REQUIRED_FIELDS},
-        "optional_fields_missing_in_accepted": {key: sum(not row.get(key) for row in accepted) for key in ("author", "published_at")},
-        "duplicate_source_urls_in_accepted": len(accepted) - len({r["canonical_source_url"] for r in accepted}),
-        "duplicate_clean_contents_in_accepted": len(accepted) - len({_content_fingerprint(r["clean_content"]) for r in accepted}),
-        "near_duplicate_pairs": near_duplicates,
-        "warning_counts": dict(warning_counts),
-        "cleaning_rule_totals_all_inputs": dict(sorted(aggregate_rules.items())),
-        "record_checks": record_checks,
-        "validation_policy": {"min_travelogue_nonspace_characters": min_travelogue_length,
-                              "min_official_nonspace_characters": min_official_length,
-                              "near_duplicate_similarity_threshold": 0.9,
-                              "long_duplicate_paragraph_min_characters": 40,
-                              "suspected_mojibake_action": "flag_only_no_guessed_repair",
-                              "unicode_normalization": "fullwidth ASCII U+FF01..U+FF5E and ideographic space U+3000 only; preserve superscripts, subscripts, circled numbers, Roman numerals and units",
-                              "semantic_symbols": "preserve route arrows, check/cross marks, plus/minus, warning and prohibition symbols",
-                              "near_duplicate_action": "flag_only_manual_review",
-                              "exact_content_duplicate_key": "clean text with whitespace removed; punctuation, case and semantic symbols preserved",
-                              "title_and_article_content_used_for_scenic_relevance": True,
-                              "main_target": "Each of 3 scenic areas: >=1 official route and >=5 travelogues",
-                              "minimum_target": "Each of 3 scenic areas: >=1 official route and >=3 travelogues"},
-    }
-    return accepted, report, rejected, examples
+    report = summarize_dataset(accepted, rejected, deduplicated, near_duplicates, record_checks,
+                               dict(aggregate_rules), dict(input_missing), len(records), positions,
+                               min_travelogue_length, min_official_length)
+    return accepted, report, rejected, deduplicated, examples
 
 
 def read_jsonl(path: Path) -> list[dict]:
@@ -498,11 +654,13 @@ def _scalar(value):
 
 
 def export_outputs(output_dir: Path, rows: list[dict], report: dict,
-                   rejected: list[dict], examples: list[dict]) -> None:
+                   rejected: list[dict], deduplicated: list[dict],
+                   examples: list[dict]) -> None:
     """Write lossless CSV/JSONL and prepare long-cell sidecars for optional XLSX.
 
-    Run ``node src/export_xlsx.mjs`` after this command to author the workbook
-    with @oai/artifact-tool. This Python module never creates or edits XLSX files.
+    ``rows`` is the deduplicated corpus; removed near-duplicate copies go to
+    ``deduplicated_records.jsonl`` for audit. Use ``src/export_dataset_xlsx.py``
+    to author the deliverable workbook from these files.
     """
     output_dir.mkdir(parents=True, exist_ok=True)
     fields = BASE_FIELDS + DERIVED_FIELDS
@@ -510,6 +668,7 @@ def export_outputs(output_dir: Path, rows: list[dict], report: dict,
     fields += extras
     _jsonl(output_dir / "dataset_clean.jsonl", rows)
     _jsonl(output_dir / "rejected_records.jsonl", rejected)
+    _jsonl(output_dir / "deduplicated_records.jsonl", deduplicated)
     _json(output_dir / "cleaning_examples.json", examples)
     with (output_dir / "dataset_clean.csv").open("w", encoding="utf-8-sig", newline="") as handle:
         csv_fields = [key for key in fields if key != "provenance_note"]
@@ -533,12 +692,15 @@ def export_outputs(output_dir: Path, rows: list[dict], report: dict,
                 rel_path = target.relative_to(output_dir).as_posix()
                 externalized.append({"record_id": row["record_id"], "field": key, "characters": len(value), "path": rel_path,
                                      "sha256": hashlib.sha256(value.encode("utf-8")).hexdigest()})
-    report["xlsx_authoring"] = {"engine": "@oai/artifact-tool", "command": "node src/export_xlsx.mjs --input-dir data/processed", "status": "optional_export_pending"}
+    report["xlsx_authoring"] = {"engine": "openpyxl", "script": "src/export_dataset_xlsx.py",
+                                "status": "generated"}
     report["dataset_fields"] = fields
     report["xlsx_long_text_externalization"] = externalized
-    report["output_files"] = {"csv": "dataset_clean.csv", "jsonl": "dataset_clean.jsonl", "xlsx": "dataset_clean.xlsx",
-                              "quality_report": "quality_report.json", "cleaning_examples": "cleaning_examples.json",
-                              "rejected_records": "rejected_records.jsonl"}
+    report["output_files"] = {"csv": "dataset_clean.csv", "jsonl": "dataset_clean.jsonl",
+                              "xlsx": "dataset_clean.xlsx", "quality_report": "quality_report.json",
+                              "cleaning_examples": "cleaning_examples.json",
+                              "rejected_records": "rejected_records.jsonl",
+                              "deduplicated_records": "deduplicated_records.jsonl"}
     _json(output_dir / "quality_report.json", report)
 
 
@@ -551,11 +713,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--require-target", action="store_true", help="Return exit code 2 if any scenic area lacks 1 official route and 5 travelogues.")
     args = parser.parse_args(argv)
     records = read_jsonl(args.input)
-    rows, report, rejected, examples = preprocess_records(records, args.min_travelogue_length, args.min_official_length)
+    rows, report, rejected, deduplicated, examples = preprocess_records(records, args.min_travelogue_length, args.min_official_length)
     report["input_path"] = args.input.as_posix()
     report["input_sha256"] = hashlib.sha256(args.input.read_bytes()).hexdigest()
-    export_outputs(args.output_dir, rows, report, rejected, examples)
-    print(json.dumps({key: report[key] for key in ("input_records", "accepted_records", "rejected_records", "main_target_met", "minimum_target_met")}, ensure_ascii=False))
+    export_outputs(args.output_dir, rows, report, rejected, deduplicated, examples)
+    print(json.dumps({key: report[key] for key in ("input_records", "accepted_records", "rejected_records", "deduplicated_records", "main_target_met", "minimum_target_met")}, ensure_ascii=False))
     return 2 if args.require_target and not report["main_target_met"] else 0
 
 

@@ -44,6 +44,7 @@
   "incorrect": 0,
   "historical_sample_count": 54,
   "removed_or_changed": 1,
-  "note": "仅对本轮仍存在的相同实体继承历史判定；非新一轮随机抽检，不估计总体准确率。新增实体尚待独立人工抽检。"
+  "remapped_to_canonical": 1,
+  "note": "仅对本轮仍存在的相同实体继承历史判定；近重复副本已删除时，同文同跨度的抽样映射到 canonical 记录。非新一轮随机抽检，不估计总体准确率。新增实体尚待独立人工抽检。"
  }
 }

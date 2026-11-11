@@ -5,15 +5,15 @@
   "transport": 52,
   "stopwords": 15
  },
- "records": 271,
+ "records": 267,
  "records_after_dedup": 267,
- "duplicate_records": 4,
- "records_in_duplicate_groups": 7,
+ "duplicate_records": 0,
+ "records_in_duplicate_groups": 3,
  "total_entities": 23330,
- "total_entities_raw": 23960,
+ "total_entities_raw": 23330,
  "entities_per_record_mean": 87.38,
- "entities_per_record_mean_raw": 88.41,
- "segmentation_tokens_total": 472885,
+ "entities_per_record_mean_raw": 87.38,
+ "segmentation_tokens_total": 454134,
  "by_scenic_area": {
   "九寨沟": {
    "时间节点": 3294,
@@ -541,6 +541,6 @@
  },
  "qc": {
   "canonical_with_whitespace": 0,
-  "input_records_with_dedup_weight": 271
+  "input_records_with_dedup_weight": 267
  }
 }

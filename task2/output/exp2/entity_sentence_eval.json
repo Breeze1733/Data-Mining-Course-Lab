@@ -1,5 +1,15 @@
 {
  "n_sentences": 40,
+ "sample_remap": {
+  "n_remapped": 0,
+  "remapped_sids": [],
+  "already_remapped_sids": [
+   18
+  ],
+  "n_skipped_absent_records": 0,
+  "skipped_sids": [],
+  "note": "task1 物理去重后，原抽样文档若已移除，则映射到同组 canonical 记录；找不到原句时才跳过。"
+ },
  "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注；POI/交通严格跨度含包含式变体，时间重叠口径）",
  "match_policy": "根景区名与城市名按设计不作为 POI 实体抽取",
  "per_type": {
@@ -355,8 +365,8 @@
   }
  },
  "data_fingerprints": {
-  "dataset_clean": "b02a35832044",
+  "dataset_clean": "304605837c1f",
   "entity_dictionary": "7226607ea20a",
-  "entities_refined": "7917a090c810"
+  "entities_refined": "b93058ec0d7e"
  }
 }
