@@ -201,7 +201,7 @@
    ],
    [
     "西海",
-    43
+    44
    ],
    [
     "莲花峰",
@@ -211,7 +211,7 @@
   "九寨沟": [
    [
     "五花海",
-    55
+    56
    ],
    [
     "诺日朗",
@@ -227,11 +227,11 @@
    ],
    [
     "五彩池",
-    48
+    49
    ],
    [
     "沟口",
-    44
+    45
    ],
    [
     "原始森林",
@@ -293,31 +293,31 @@
  "edge_relation_distribution": {
   "包含": 159,
   "条件建议": 592,
-  "先后顺序": 1800,
+  "先后顺序": 1807,
   "时段归属": 143,
   "交通方式": 57
  },
  "isolated_nodes": [],
  "roundtrip": {
   "csv_nodes": 627,
-  "csv_edges": 2751,
+  "csv_edges": 2758,
   "graphml_nodes": 627,
-  "graphml_edges": 2751,
+  "graphml_edges": 2758,
   "ok": true
  },
  "provenance": {
   "cond_nodes_checked": 450,
   "cond_nodes_with_evidence": 450,
   "cond_nodes_placeholder_named": 0,
-  "order_edges_checked": 1557,
-  "order_edges_with_records": 1557,
+  "order_edges_checked": 1564,
+  "order_edges_with_records": 1564,
   "parse_failures": 0
  },
  "provenance_ok": true,
  "direction_resolution": {
-  "order_edges": 1800,
-  "unopposed_edges": 614,
-  "opposed_edges": 1186,
+  "order_edges": 1807,
+  "unopposed_edges": 617,
+  "opposed_edges": 1190,
   "tied_edges": 276,
   "invalid_edges": 0
  },

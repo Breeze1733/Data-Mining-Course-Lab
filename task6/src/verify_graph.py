@@ -25,12 +25,13 @@ if not isinstance(sys.stdout, io.TextIOWrapper):
 
 
 def verify_names(graph):
-    sys.path.insert(0, str(ROOT.parent / "common"))
-    from entity_identity import aliases, canonical_name, build_poi_lookup
-    entries = json.loads((ROOT.parent / "task2/output/exp2/entity_dictionary.json").read_text(encoding="utf-8"))["poi"]
+    data = json.loads((ROOT.parent / "task2/output/exp2/entity_dictionary.json").read_text(encoding="utf-8"))
+    entries = data["poi"]
     names = {(area, e["canonical"]) for e in entries for area in e["scenic_areas"]}
-    lookup = build_poi_lookup(entries)
-    unresolved = [(area, name) for area, name in aliases() if (area, canonical_name(name, area)) not in names]
+    lookup = {(r["scenic_area"], r["variant"]): r["canonical"] for r in data["poi_lookup"]}
+    alias_rows = data["aliases"]
+    unresolved = [(r["area"], r["alias"]) for r in alias_rows
+                  if (r["area"], r["canonical"]) not in names]
     missing = [name for name, data in graph.nodes(data=True) if not data.get("kind") or not data.get("name")]
     references = 0
     absent = []
@@ -42,7 +43,7 @@ def verify_names(graph):
                 name = lookup.get((route["scenic_area"], poi["normalized"]), poi["normalized"])
                 if f"POI:{route['scenic_area']}:{name}" not in graph:
                     absent.append([route["route_id"], name])
-    return {"alias_rows": len(aliases()), "route_poi_references_checked": references,
+    return {"alias_rows": len(alias_rows), "route_poi_references_checked": references,
             "unresolved_alias_targets": unresolved, "graph_nodes_without_identity": missing,
             "route_references_missing_from_graph": absent, "passed": not (unresolved or missing or absent)}
 

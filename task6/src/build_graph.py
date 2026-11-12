@@ -21,14 +21,9 @@ from collections import Counter, defaultdict
 import re
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from common.atomic import atomic_write_text
-
 import networkx as nx
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
-from entity_identity import normalize  # noqa: E402  same normalization as experiment 3
 
 ROOT = Path(__file__).resolve().parents[1]
 TASK1 = ROOT.parent / "task1"
@@ -70,16 +65,11 @@ def dedup_groups_from_quality(quality: dict) -> tuple[list[set], dict[str, int]]
 
 
 def main() -> int:
-    sys.path.insert(0, str(TASK2 / "src"))
-    from extract_entities import DictMatcher, load_dictionary
-
-    entries, stopwords, _ = load_dictionary("refined")
-    matcher = DictMatcher(entries, stopwords)
-    poi_of = {e["name"]: e for e in entries if e["entity_type"] == "景点POI"}
-    transport_of = {e["name"]: e for e in entries if e["entity_type"] == "交通方式"}
-    # Name resolution: experiment-3 step names pass through normalize (stripping the “景区” suffix) to align with dictionary canonicals
-    from entity_identity import build_poi_lookup
-    name2canon = build_poi_lookup(list(poi_of.values()))
+    dictionary = json.loads((TASK2 / "output/exp2/entity_dictionary.json").read_text(encoding="utf-8"))
+    poi_of = {e["name"]: e for e in dictionary["poi"]}
+    transport_of = {e["name"]: e for e in dictionary["transport"]}
+    # Name resolution: task3 step names map to task2 canonicals via the published lookup.
+    name2canon = {(r["scenic_area"], r["variant"]): r["canonical"] for r in dictionary["poi_lookup"]}
     canonical_areas = defaultdict(set)
     for entry in poi_of.values():
         canonical_areas[entry["canonical"]].update(entry["scenic_areas"])
@@ -95,12 +85,19 @@ def main() -> int:
         raise ValueError("task5 mapping and extraction statistics are inconsistent")
     # Mention frequency taken directly from full entity statistics (the top_canonical table is truncated and misses low-frequency POIs)
     mention_counter: Counter = Counter()
+    ents_by_id: dict[str, list[dict]] = {}
     with (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8") as _fh:
         for _line in _fh:
             _rec = json.loads(_line)
+            ents_by_id[_rec["record_id"]] = _rec["entities"]
             for _e in _rec["entities"]:
                 if _e["type"] == "景点POI":
                     mention_counter[_e["canonical"]] += 1
+    clean_by_id: dict[str, str] = {}
+    with (TASK1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8") as _fh:
+        for _line in _fh:
+            _rec = json.loads(_line)
+            clean_by_id[_rec["record_id"]] = _rec["clean_content"]
 
     G = nx.MultiDiGraph()
 
@@ -343,9 +340,21 @@ def main() -> int:
                        source_years=json.dumps(src_years, ensure_ascii=False),
                        evidence=json.dumps(evidence, ensure_ascii=False))
         for m in members:
-            text = m["condition_text"] + " " + m["suggestion_text"]
-            pois_in_text = [resolve(scenic, e["canonical"]) for e in matcher.find(text)
+            source = clean_by_id.get(m["record_id"])
+            if source is None:
+                raise ValueError(f"record not found in dataset_clean: {m['record_id']}")
+            spans = []
+            for field in ("condition_text", "suggestion_text"):
+                fragment = m.get(field) or ""
+                if not fragment:
+                    continue
+                start = source.find(fragment)
+                if start < 0:
+                    raise ValueError(f"{field} not found in {m['record_id']}")
+                spans.append((start, start + len(fragment)))
+            pois_in_text = [resolve(scenic, e["canonical"]) for e in ents_by_id.get(m["record_id"], [])
                             if e["type"] == "景点POI"
+                            and any(a <= e["start"] and e["end"] <= b for a, b in spans)
                             and scenic in canonical_areas.get(e["canonical"], set())
                             and node_id("POI", scenic, resolve(scenic, e["canonical"])) in G]
             targets = ([node_id("POI", scenic, poi) for poi in dict.fromkeys(pois_in_text)]
@@ -379,14 +388,14 @@ def main() -> int:
     w.writerow(["node_id", "kind", "name", "label"])
     for n, d in G.nodes(data=True):
         w.writerow([n, d.get("kind", ""), d.get("name", ""), d.get("label", "")])
-    atomic_write_text(OUT / "graph_nodes.csv", _buf.getvalue(), encoding="utf-8-sig", newline="")
+    (OUT / "graph_nodes.csv").write_text(_buf.getvalue(), encoding="utf-8-sig", newline="")
 
     _buf2 = io.StringIO()
     w2 = csv.writer(_buf2, lineterminator=chr(13) + chr(10))
     w2.writerow(["src", "dst", "relation", "weight"])
     for u, v, d in G.edges(data=True):
         w2.writerow([u, v, d.get("relation", ""), round(d.get("weight", 1), 2)])
-    atomic_write_text(OUT / "graph_edges.csv", _buf2.getvalue(), encoding="utf-8-sig", newline="")
+    (OUT / "graph_edges.csv").write_text(_buf2.getvalue(), encoding="utf-8-sig", newline="")
 
     _tmp_gml = OUT / "knowledge_graph.graphml.tmp"
     nx.write_graphml(G, _tmp_gml)
@@ -433,7 +442,7 @@ def main() -> int:
             "noise_filter": "仅词典内POI；游客序列需两端节点已存在；周边景点单列子类",
         },
     }
-    atomic_write_text(OUT / "graph_stats.json", json.dumps(graph_stats, ensure_ascii=False, indent=1))
+    (OUT / "graph_stats.json").write_text(json.dumps(graph_stats, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({k: graph_stats[k] for k in ("total_nodes", "total_edges", "by_kind", "by_relation")},
                      ensure_ascii=False, indent=1))
     for a in AREAS:
