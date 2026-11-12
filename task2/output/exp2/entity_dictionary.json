@@ -2065,5 +2065,934 @@
   "进山",
   "进沟"
  ],
- "source": "resources/domain_seed.json + CSV resources"
+ "source": "resources/domain_seed.json + CSV resources",
+ "aliases": [
+  {
+   "area": "九寨沟",
+   "alias": "树正磨坊",
+   "canonical": "树正磨房"
+  },
+  {
+   "area": "九寨沟",
+   "alias": "诺日朗中心站",
+   "canonical": "诺日朗中心"
+  },
+  {
+   "area": "九寨沟",
+   "alias": "诺日朗旅游服务中心",
+   "canonical": "诺日朗中心"
+  },
+  {
+   "area": "九寨沟",
+   "alias": "诺日朗游客中心",
+   "canonical": "诺日朗中心"
+  },
+  {
+   "area": "九寨沟",
+   "alias": "诺日朗游客服务中心",
+   "canonical": "诺日朗中心"
+  },
+  {
+   "area": "颐和园",
+   "alias": "清晏舫",
+   "canonical": "石舫"
+  },
+  {
+   "area": "颐和园",
+   "alias": "耕织图景区",
+   "canonical": "耕织图"
+  }
+ ],
+ "poi_lookup": [
+  {
+   "scenic_area": "九寨沟",
+   "variant": "上季节海",
+   "canonical": "上季节海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "下季节海",
+   "canonical": "下季节海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "中查沟",
+   "canonical": "中查沟"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "五彩池",
+   "canonical": "五彩池"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "五彩池畔",
+   "canonical": "五彩池畔"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "五花海",
+   "canonical": "五花海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "则查洼",
+   "canonical": "则查洼寨"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "则查洼寨",
+   "canonical": "则查洼寨"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "则查洼沟",
+   "canonical": "则查洼沟"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "则渣洼沟",
+   "canonical": "则查洼沟"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "卧龙海",
+   "canonical": "卧龙海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "原始森林",
+   "canonical": "原始森林"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "原始森林停车场",
+   "canonical": "原始森林停车场"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "双龙海",
+   "canonical": "双龙海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "天鹅海",
+   "canonical": "天鹅海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "孔雀河道",
+   "canonical": "孔雀河道"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "季节海",
+   "canonical": "季节海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "归心台",
+   "canonical": "归心台"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "扎如寺",
+   "canonical": "扎如寺"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "扎如沟",
+   "canonical": "扎如沟"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "日则沟",
+   "canonical": "日则沟"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "查洼沟",
+   "canonical": "则查洼沟"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "树正",
+   "canonical": "树正景区"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "树正寨",
+   "canonical": "树正寨"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "树正景区",
+   "canonical": "树正景区"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "树正水磨房",
+   "canonical": "树正磨房"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "树正沟",
+   "canonical": "树正沟"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "树正瀑布",
+   "canonical": "树正瀑布"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "树正磨坊",
+   "canonical": "树正磨房"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "树正磨房",
+   "canonical": "树正磨房"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "树正群海",
+   "canonical": "树正群海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "沟口",
+   "canonical": "沟口"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "清心台",
+   "canonical": "清心台"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "火花海",
+   "canonical": "火花海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "熊猫海",
+   "canonical": "熊猫海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "熊猫海瀑布",
+   "canonical": "熊猫海瀑布"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "牟尼沟",
+   "canonical": "牟尼沟"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "犀牛海",
+   "canonical": "犀牛海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "珍珠滩",
+   "canonical": "珍珠滩"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "珍珠滩瀑布",
+   "canonical": "珍珠滩瀑布"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "甘海子",
+   "canonical": "甘海子"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "盆景滩",
+   "canonical": "盆景滩"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "神仙池",
+   "canonical": "神仙池"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "箭竹海",
+   "canonical": "箭竹海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "箭竹海瀑布",
+   "canonical": "箭竹海瀑布"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "老虎海",
+   "canonical": "老虎海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "芦苇海",
+   "canonical": "芦苇海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "芳草海",
+   "canonical": "芳草海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "草海",
+   "canonical": "草海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "荷叶寨",
+   "canonical": "荷叶寨"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "诺日朗",
+   "canonical": "诺日朗"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "诺日朗中心",
+   "canonical": "诺日朗中心"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "诺日朗中心站",
+   "canonical": "诺日朗中心"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "诺日朗旅游服务中心",
+   "canonical": "诺日朗中心"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "诺日朗游客中心",
+   "canonical": "诺日朗中心"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "诺日朗游客服务中心",
+   "canonical": "诺日朗中心"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "诺日朗瀑布",
+   "canonical": "诺日朗瀑布"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "诺日朗群海",
+   "canonical": "诺日朗群海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "金铃海",
+   "canonical": "金铃海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "镜海",
+   "canonical": "镜海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "镜海停车场",
+   "canonical": "镜海停车场"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "长海",
+   "canonical": "长海"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "长海停车场",
+   "canonical": "长海停车场"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "随心台",
+   "canonical": "随心台"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "雪峰",
+   "canonical": "雪峰"
+  },
+  {
+   "scenic_area": "九寨沟",
+   "variant": "静心台",
+   "canonical": "静心台"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "万寿山",
+   "canonical": "万寿山"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "东宫门",
+   "canonical": "东宫门"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "东门",
+   "canonical": "东门"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "乐寿堂",
+   "canonical": "乐寿堂"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "仁寿殿",
+   "canonical": "仁寿殿"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "佛香阁",
+   "canonical": "佛香阁"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "养云轩",
+   "canonical": "养云轩"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "北如意门",
+   "canonical": "北如意门"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "北宫门",
+   "canonical": "北宫门"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "十七孔桥",
+   "canonical": "十七孔桥"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "半壁桥",
+   "canonical": "半壁桥"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "南如意门",
+   "canonical": "南如意门"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "南湖岛",
+   "canonical": "南湖岛"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "后湖",
+   "canonical": "后湖"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "后溪河",
+   "canonical": "后溪河"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "听鹂馆",
+   "canonical": "听鹂馆"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "四大部洲",
+   "canonical": "四大部洲"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "宜芸馆",
+   "canonical": "宜芸馆"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "宝云阁",
+   "canonical": "宝云阁"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "廓如亭",
+   "canonical": "廓如亭"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "德和园",
+   "canonical": "德和园"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "德辉殿",
+   "canonical": "德辉殿"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "慈福牌楼",
+   "canonical": "慈福牌楼"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "排云殿",
+   "canonical": "排云殿"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "排云门",
+   "canonical": "排云门"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "文昌阁",
+   "canonical": "文昌阁"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "文昌院",
+   "canonical": "文昌院"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "新宫门",
+   "canonical": "新宫门"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "新建宫门",
+   "canonical": "新建宫门"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "昆明湖",
+   "canonical": "昆明湖"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "景明楼",
+   "canonical": "景明楼"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "景福阁",
+   "canonical": "景福阁"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "智慧海",
+   "canonical": "智慧海"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "清晏舫",
+   "canonical": "石舫"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "玉带桥",
+   "canonical": "玉带桥"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "玉澜堂",
+   "canonical": "玉澜堂"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "画中游",
+   "canonical": "画中游"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "畅观堂",
+   "canonical": "畅观堂"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "界湖桥",
+   "canonical": "界湖桥"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "知春亭",
+   "canonical": "知春亭"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "石舫",
+   "canonical": "石舫"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "练桥",
+   "canonical": "练桥"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "绣漪桥",
+   "canonical": "绣漪桥"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "耕织图",
+   "canonical": "耕织图"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "耕织图景区",
+   "canonical": "耕织图"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "耶律楚材祠",
+   "canonical": "耶律楚材祠"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "苏州街",
+   "canonical": "苏州街"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "西堤",
+   "canonical": "西堤"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "西门",
+   "canonical": "西门"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "谐趣园",
+   "canonical": "谐趣园"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "豳风桥",
+   "canonical": "豳风桥"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "邀月门",
+   "canonical": "邀月门"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "铜牛",
+   "canonical": "铜牛"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "镜桥",
+   "canonical": "镜桥"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "长廊",
+   "canonical": "长廊"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "霁清轩",
+   "canonical": "霁清轩"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "须弥灵境遗址",
+   "canonical": "须弥灵境遗址"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "颐和园北宫门",
+   "canonical": "北宫门"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "颐和园博物馆",
+   "canonical": "颐和园博物馆"
+  },
+  {
+   "scenic_area": "颐和园",
+   "variant": "颐和园西门",
+   "canonical": "颐和园西门"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "一线天",
+   "canonical": "一线天"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "丹霞峰",
+   "canonical": "丹霞峰"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "九龙瀑",
+   "canonical": "九龙瀑"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "云谷",
+   "canonical": "云谷景区"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "云谷寺",
+   "canonical": "云谷寺"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "云谷景区",
+   "canonical": "云谷景区"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "光明顶",
+   "canonical": "光明顶"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "北海",
+   "canonical": "北海"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "半山寺",
+   "canonical": "半山寺"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "天海",
+   "canonical": "天海"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "天都峰",
+   "canonical": "天都峰"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "始信峰",
+   "canonical": "始信峰"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "慈光阁",
+   "canonical": "慈光阁"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "排云亭",
+   "canonical": "排云亭"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "排云溪",
+   "canonical": "排云溪"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "探海松",
+   "canonical": "探海松"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "散花坞",
+   "canonical": "散花坞"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "曙光亭",
+   "canonical": "曙光亭"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "松谷庵",
+   "canonical": "松谷庵"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "梦幻景区",
+   "canonical": "西海大峡谷"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "梦笔生花",
+   "canonical": "梦笔生花"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "步仙桥",
+   "canonical": "步仙桥"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "海心亭",
+   "canonical": "海心亭"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "清凉台",
+   "canonical": "清凉台"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "狮子峰",
+   "canonical": "狮子峰"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "猴子观海",
+   "canonical": "猴子观海"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "玉屏",
+   "canonical": "玉屏景区"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "玉屏峰",
+   "canonical": "玉屏峰"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "玉屏景区",
+   "canonical": "玉屏景区"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "玉屏楼",
+   "canonical": "玉屏楼"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "白云宾馆",
+   "canonical": "白云宾馆"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "白鹅岭",
+   "canonical": "白鹅岭"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "百步云梯",
+   "canonical": "百步云梯"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "石笋矼",
+   "canonical": "石笋矼"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "竖琴松",
+   "canonical": "竖琴松"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "翡翠谷",
+   "canonical": "翡翠谷"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "莲花峰",
+   "canonical": "莲花峰"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "西海",
+   "canonical": "西海"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "西海大峡谷",
+   "canonical": "西海大峡谷"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "西海门",
+   "canonical": "西海门"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "迎客松",
+   "canonical": "迎客松"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "连理松",
+   "canonical": "连理松"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "送客松",
+   "canonical": "送客松"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "飞来石",
+   "canonical": "飞来石"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "鳌鱼峰",
+   "canonical": "鳌鱼峰"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "麒麟松",
+   "canonical": "麒麟松"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "黄山南大门",
+   "canonical": "黄山南大门"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "黄山温泉",
+   "canonical": "黄山温泉"
+  },
+  {
+   "scenic_area": "黄山",
+   "variant": "黑虎松",
+   "canonical": "黑虎松"
+  }
+ ],
+ "normalization": {
+  "suffixes": [
+   "风景区",
+   "景区",
+   "入口",
+   "出口"
+  ],
+  "prefix_map": {
+   "黄山南大门": "南大门",
+   "黄山北大门": "北大门",
+   "黄山西门": "西门",
+   "九寨沟沟口": "沟口",
+   "九寨沟景区": "九寨沟"
+  }
+ }
 }

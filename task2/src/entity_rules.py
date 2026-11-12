@@ -8,7 +8,7 @@ from pathlib import Path
 
 from dictionary import Gazetteer, POIEntry, TransportEntry, load_poi_gazetteer, load_transport_lexicon
 from time_rules import TimeRules
-from entity_identity import canonical_name
+from poi_aliases import canonical_name
 
 ROOT = Path(__file__).resolve().parents[1]
 RES = ROOT / "resources"

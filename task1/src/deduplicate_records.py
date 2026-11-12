@@ -25,8 +25,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-sys.path.insert(0, str(ROOT.parent / "common"))
-from atomic import atomic_write_text  # noqa: E402
 from preprocess import find_near_duplicate, summarize_dataset  # noqa: E402
 
 PROCESSED = ROOT / "data/processed"
@@ -165,10 +163,10 @@ def main(argv: list[str] | None = None) -> int:
     rejected_text = "\n".join(json.dumps(row, ensure_ascii=False) for row in rejected) + "\n"
     report_text = json.dumps(new_report, ensure_ascii=False, indent=2).replace("\n", "\r\n") + "\r\n"
     examples_text = json.dumps(rebuild_examples(accepted), ensure_ascii=False, indent=2) + "\n"
-    atomic_write_text(dataset_path, dataset_text, newline="")
-    atomic_write_text(rejected_path, rejected_text, newline="")
-    atomic_write_text(report_path, report_text, newline="")
-    atomic_write_text(args.processed / "cleaning_examples.json", examples_text, newline="")
+    dataset_path.write_text(dataset_text, encoding="utf-8", newline="")
+    rejected_path.write_text(rejected_text, encoding="utf-8", newline="")
+    report_path.write_text(report_text, encoding="utf-8", newline="")
+    (args.processed / "cleaning_examples.json").write_text(examples_text, encoding="utf-8", newline="")
     if legacy_removed_path.exists():
         legacy_removed_path.unlink()
 

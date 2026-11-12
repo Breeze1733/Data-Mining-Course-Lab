@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -22,11 +21,10 @@ def load_dictionary(iteration: str):
         return refined_dictionary()
     if iteration != "baseline":
         raise ValueError(f"未知迭代: {iteration}")
-    sys.path.insert(0, str(TASK1 / "scripts"))
-    from expand_ctrip import NODES
+    nodes = json.loads((TASK1 / "data/processed/scenic_nodes.json").read_text(encoding="utf-8"))["scenic_nodes"]
     entries = [{"name": poi, "entity_type": "景点POI", "subtype": "景点",
                 "scenic_areas": [area], "canonical": poi, "source": "seed"}
-               for area, pois in NODES.items() for poi in pois]
+               for area, pois in nodes.items() for poi in pois]
     basic = ["观光车", "索道", "缆车", "步行", "徒步", "游船", "电瓶车", "摆渡车", "环保车"]
     entries += [{"name": word, "entity_type": "交通方式", "subtype": "通用",
                  "scenic_areas": ["通用"], "canonical": word, "source": "basic"} for word in basic]

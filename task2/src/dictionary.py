@@ -20,12 +20,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
 
+from poi_aliases import canonical_name
+
 TYPE_POI = "景点POI"
 TYPE_TIME = "时间节点"
 TYPE_TRANSPORT = "交通方式"
-import sys
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
-from entity_identity import canonical_name
 
 
 @dataclass(frozen=True)
