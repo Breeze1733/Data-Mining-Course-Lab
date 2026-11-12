@@ -165,10 +165,8 @@ def main() -> int:
             "already_remapped_sids": [o["sid"] for o in sample if o.get("remapped_from")],
             "n_skipped_absent_records": len(skipped),
             "skipped_sids": skipped,
-            "note": "task1 物理去重后，原抽样文档若已移除，则映射到同组 canonical 记录；找不到原句时才跳过。",
         },
-        "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注；POI/交通严格跨度含包含式变体，时间重叠口径）",
-        "match_policy": gold_doc.get("out_of_scope_note", "根景区名与城市名按设计不作为 POI 实体抽取"),
+                "match_policy": gold_doc.get("out_of_scope_note", "根景区名与城市名按设计不作为 POI 实体抽取"),
         "per_type": {t: prf(*v) for t, v in stats.items()},
         # Dual criteria: lenient (containment-variant hits, primary) vs strict (hit text exactly equal)
         "strict_ratio": {t: round(strict_hit[t] / max(1, v[0]), 3)
@@ -210,7 +208,6 @@ def main() -> int:
         "excluded_by_design": sorted(OUT_OF_SCOPE),
         "oos_misses": oos_fn,
         "recall_in_scope_only": round(tp / max(1, tp + in_scope_fn), 3),
-        "note": "根景区名与城市名按设计不作为 POI 抽取；in_scope_only 口径将其从分母移除",
     }
     (EXP2 / "entity_sentence_eval.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")

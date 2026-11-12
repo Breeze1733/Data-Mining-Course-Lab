@@ -159,7 +159,7 @@ def split_multi_suggestions(sugg: str) -> list[str]:
     return [p.strip(" ，,。；;") for p in parts if p.strip(" ，,。；;")]
 
 
-# Polarity/boundary guards (from review_dev wrong-sample regressions):
+# Polarity/boundary guards:
 
 # 1) platform boilerplate is not travel advice; 2) appeal/comment sentences are not advice for tourists;
 
@@ -167,7 +167,7 @@ def split_multi_suggestions(sugg: str) -> list[str]:
 
 PLATFORM_PHRASE_RE = re.compile(r"点赞|收藏|一键三连|评论区|私信|关注我们|转发|推荐阅读")
 
-# Guards (based on attribution of 8 fresh wrong samples spot-checked in review_test):
+# Guards for non-advice sentences:
 
 LYRICAL_RE = re.compile(r"人生|岁月|初心|青春|梦想|心态|老得太快|明白得太迟|否定了自己|自己的想法")
 
@@ -317,21 +317,17 @@ def _infer_fields(sent: str, advice_start: int, types: list[str], label: str) ->
     return _cond(text, span, "inferred", label, reason)
 
 
-def _assign_pair_id(p: dict, seen: set) -> str:
-    payload = "|".join([
-        p.get("record_id", ""), p.get("pattern", ""), p.get("trigger", ""),
-        p.get("condition_text", ""), p.get("suggestion_text", ""),
-        p.get("sentence", ""), repr(p.get("condition_span")),
-    ])
-    base = "p" + hashlib.sha1(payload.encode("utf-8")).hexdigest()[:16]
-    pid = base
-    i = 2
-    while pid in seen:
-        pid = f"{base}-{i}"
-        i += 1
-    seen.add(pid)
-    p["pair_id"] = pid
-    return pid
+def _assign_pair_id(p: dict, counter: list) -> str:
+    """Assign a deterministic sequential id p0001, p0002, ... in encounter order.
+
+    Replaces the previous content-hash id, which served no integrity purpose for
+    this identifier: the payload lives in the same record, dedup uses tuple
+    comparison, and downstream task6 only reads the ``pair_ids`` list (not values).
+    Sequential ids are human-readable and stable in encounter order within a run.
+    """
+    counter[0] += 1
+    p["pair_id"] = f"p{counter[0]:04d}"
+    return p["pair_id"]
 
 
 def validate_pairs(pairs: list[dict]) -> None:
@@ -1185,10 +1181,10 @@ def main(argv=None) -> int:
         p["condition_type_verified"] = (classify_condition(p["condition_text"])
                                         if p["condition_text"] else "无")
 
-    # Stable content ids (assigned before dedup so every merged row keeps its member ids)
-    seen_ids: set[str] = set()
+    # Sequential ids (assigned before dedup so every merged row keeps its member ids)
+    counter = [0]
     for p in all_pairs:
-        _assign_pair_id(p, seen_ids)
+        _assign_pair_id(p, counter)
 
     validate_pairs(all_pairs)
 

@@ -26,10 +26,10 @@
   "无标记（由时间范围推断）"
  ],
  "validation": {
-  "segments": 560,
-  "route_steps": 416,
+  "segments": 558,
+  "route_steps": 414,
   "narrative_segments": 144,
-  "span_exact": 559,
+  "span_exact": 557,
   "span_not_contiguous": 1,
   "span_missing": 0,
   "pois_in_order_mismatch": 0,

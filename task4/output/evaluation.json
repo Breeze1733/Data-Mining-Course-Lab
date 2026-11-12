@@ -1,18 +1,18 @@
 {
  "n": 180,
- "accuracy_overall": 0.678,
+ "accuracy_overall": 0.633,
  "abstention": {
   "note": "弃权=解析为 NONE（可解释的不定位）；覆盖率=1−弃权率，与准确率分开解读",
   "overall": {
    "n": 180,
-   "abstained": 3,
-   "coverage": 0.983
+   "abstained": 7,
+   "coverage": 0.961
   },
   "by_class": {
    "locative": {
     "n": 45,
-    "abstained": 1,
-    "coverage": 0.978
+    "abstained": 5,
+    "coverage": 0.889
    },
    "object": {
     "n": 45,
@@ -34,11 +34,11 @@
  "accuracy_by_class": {
   "locative": {
    "n": 45,
-   "accuracy": 0.578
+   "accuracy": 0.511
   },
   "object": {
    "n": 45,
-   "accuracy": 0.733
+   "accuracy": 0.689
   },
   "person": {
    "n": 45,
@@ -46,34 +46,34 @@
   },
   "set": {
    "n": 45,
-   "accuracy": 0.622
+   "accuracy": 0.556
   }
  },
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.708
+   "accuracy": 0.658
   },
   "test": {
    "n": 60,
-   "accuracy": 0.617
+   "accuracy": 0.583
   }
  },
  "accuracy_by_scenic": {
   "九寨沟": {
    "n": 60,
-   "accuracy": 0.6,
+   "accuracy": 0.583,
    "ci95": {
-    "lo": 0.474,
-    "hi": 0.714
+    "lo": 0.457,
+    "hi": 0.699
    }
   },
   "颐和园": {
    "n": 60,
-   "accuracy": 0.65,
+   "accuracy": 0.533,
    "ci95": {
-    "lo": 0.524,
-    "hi": 0.758
+    "lo": 0.409,
+    "hi": 0.654
    }
   },
   "黄山": {
@@ -88,10 +88,10 @@
  "accuracy_by_platform": {
   "CTRIP": {
    "n": 171,
-   "accuracy": 0.667,
+   "accuracy": 0.62,
    "ci95": {
-    "lo": 0.593,
-    "hi": 0.733
+    "lo": 0.545,
+    "hi": 0.689
    }
   },
   "XHS": {
@@ -104,11 +104,21 @@
   }
  },
  "errors_by_split": {
-  "dev": 35,
-  "test": 23
+  "dev": 41,
+  "test": 25
  },
  "split_method": "文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
  "errors": [
+  {
+   "pronoun": "其中",
+   "class": "set",
+   "scenic": "颐和园",
+   "pred": "noun:园林",
+   "pred_kind": "名词集合",
+   "gold": "圆明园",
+   "gold_kind": "POI",
+   "note": ""
+  },
   {
    "pronoun": "它们",
    "class": "object",
@@ -128,6 +138,16 @@
    "gold": "石舫",
    "gold_kind": "POI",
    "note": "同句“长廊”劫持，真先行词为句首主语清晏舫（石舫）"
+  },
+  {
+   "pronoun": "这里",
+   "class": "locative",
+   "scenic": "颐和园",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
+   "gold": "景山公园",
+   "gold_kind": "POI",
+   "note": "多景点游记（故宫/景山段）"
   },
   {
    "pronoun": "他们",
@@ -160,6 +180,16 @@
    "note": "“这座皇城”指紫禁城，多景点游记（故宫段）"
   },
   {
+   "pronoun": "这里",
+   "class": "locative",
+   "scenic": "颐和园",
+   "pred": "noun:文艺",
+   "pred_kind": "其他",
+   "gold": "南锣鼓巷",
+   "gold_kind": "POI",
+   "note": "多景点游记"
+  },
+  {
    "pronoun": "他们",
    "class": "person",
    "scenic": "颐和园",
@@ -180,6 +210,16 @@
    "note": "“其中”承接王府整体；多景点游记"
   },
   {
+   "pronoun": "这里",
+   "class": "locative",
+   "scenic": "颐和园",
+   "pred": "noun:店铺",
+   "pred_kind": "其他",
+   "gold": "荷花市场",
+   "gold_kind": "POI",
+   "note": "多景点游记（什刹海段）"
+  },
+  {
    "pronoun": "其中",
    "class": "set",
    "scenic": "颐和园",
@@ -190,11 +230,21 @@
    "note": ""
   },
   {
+   "pronoun": "这座",
+   "class": "object",
+   "scenic": "颐和园",
+   "pred": "noun:天安门广场",
+   "pred_kind": "其他",
+   "gold": "天安门广场",
+   "gold_kind": "POI",
+   "note": "多景点游记"
+  },
+  {
    "pronoun": "这里",
    "class": "locative",
    "scenic": "颐和园",
-   "pred": "国家博物馆",
-   "pred_kind": "POI",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
    "gold": "全聚德烤鸭店",
    "gold_kind": "设施",
    "note": "“这里食客等位”指餐厅"
@@ -220,16 +270,6 @@
    "note": "景区内酒店，参照第27例（北海宾馆→POI）口径"
   },
   {
-   "pronoun": "它",
-   "class": "object",
-   "scenic": "黄山",
-   "pred": "庐山",
-   "pred_kind": "POI",
-   "gold": "庐山老别墅",
-   "gold_kind": "其他",
-   "note": "多景区游记（庐山段）"
-  },
-  {
    "pronoun": "其中",
    "class": "set",
    "scenic": "黄山",
@@ -238,6 +278,16 @@
    "gold": "宅内陈列",
    "gold_kind": "其他",
    "note": ""
+  },
+  {
+   "pronoun": "其中",
+   "class": "set",
+   "scenic": "黄山",
+   "pred": "云谷寺",
+   "pred_kind": "POI",
+   "gold": "山间雾景",
+   "gold_kind": "其他",
+   "note": "虚化“走在其中”"
   },
   {
    "pronoun": "他们",
@@ -283,8 +333,8 @@
    "pronoun": "这里",
    "class": "locative",
    "scenic": "黄山",
-   "pred": "高铁",
-   "pred_kind": "交通",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
    "gold": "泰安",
    "gold_kind": "景区",
    "note": "多景区游记（泰安/泰山段），“这里”指泰安当地"
@@ -360,6 +410,16 @@
    "note": "“此处只能省略一万字”指文中省略内容，非地点"
   },
   {
+   "pronoun": "这座",
+   "class": "object",
+   "scenic": "九寨沟",
+   "pred": "九寨沟",
+   "pred_kind": "景区名",
+   "gold": "雅克夏雪山",
+   "gold_kind": "POI",
+   "note": ""
+  },
+  {
    "pronoun": "它",
    "class": "object",
    "scenic": "九寨沟",
@@ -403,8 +463,8 @@
    "pronoun": "这座",
    "class": "object",
    "scenic": "九寨沟",
-   "pred": "成都东",
-   "pred_kind": "POI",
+   "pred": "noun:成都",
+   "pred_kind": "其他",
    "gold": "成都",
    "gold_kind": "景区",
    "note": "“这座城市”指成都；同句“动车票”干扰"
@@ -443,8 +503,8 @@
    "pronoun": "这里",
    "class": "locative",
    "scenic": "九寨沟",
-   "pred": "磁器口",
-   "pred_kind": "POI",
+   "pred": "九寨沟",
+   "pred_kind": "景区名",
    "gold": "磁器口",
    "gold_kind": "景区",
    "note": "多景点游记，“这里”指重庆磁器口"
@@ -473,8 +533,8 @@
    "pronoun": "那里",
    "class": "locative",
    "scenic": "九寨沟",
-   "pred": "黄龙",
-   "pred_kind": "POI",
+   "pred": "noun:古城",
+   "pred_kind": "其他",
    "gold": "松潘古城",
    "gold_kind": "POI",
    "note": "同句“黄龙”干扰；真先行词为前文“松潘古城”（未收录实体）"
@@ -483,8 +543,8 @@
    "pronoun": "其中",
    "class": "set",
    "scenic": "九寨沟",
-   "pred": "黄龙",
-   "pred_kind": "POI",
+   "pred": "noun:板块",
+   "pred_kind": "名词集合",
    "gold": "岩溶层色调",
    "gold_kind": "其他",
    "note": "“其中”指岩溶层金黄主色调之中，普通名词"
@@ -523,8 +583,8 @@
    "pronoun": "它",
    "class": "object",
    "scenic": "九寨沟",
-   "pred": "黄龙",
-   "pred_kind": "POI",
+   "pred": "noun:明白",
+   "pred_kind": "其他",
    "gold": "黄龙",
    "gold_kind": "景区",
    "note": "“它”指黄龙（联游景区段）"
@@ -590,6 +650,16 @@
    "note": ""
   },
   {
+   "pronoun": "这座",
+   "class": "object",
+   "scenic": "颐和园",
+   "pred": "noun:典范",
+   "pred_kind": "其他",
+   "gold": "圆明园",
+   "gold_kind": "POI",
+   "note": "多景点游记（圆明园段）"
+  },
+  {
    "pronoun": "它",
    "class": "object",
    "scenic": "颐和园",
@@ -633,8 +703,8 @@
    "pronoun": "这里",
    "class": "locative",
    "scenic": "颐和园",
-   "pred": "北京大学",
-   "pred_kind": "POI",
+   "pred": "noun:历史感",
+   "pred_kind": "其他",
    "gold": "北京大学",
    "gold_kind": "景区",
    "note": "多景点游记（北大段）"
@@ -663,8 +733,8 @@
    "pronoun": "此处",
    "class": "locative",
    "scenic": "颐和园",
-   "pred": "八达岭长城",
-   "pred_kind": "POI",
+   "pred": "NONE",
+   "pred_kind": "无明确先行词",
    "gold": "金山岭长城",
    "gold_kind": "POI",
    "note": "多景点游记（长城段）"
@@ -680,6 +750,16 @@
    "note": "“其中”指塑像衣纹图案之中"
   },
   {
+   "pronoun": "其中",
+   "class": "set",
+   "scenic": "颐和园",
+   "pred": "noun:圆明园",
+   "pred_kind": "其他",
+   "gold": "圆明园",
+   "gold_kind": "POI",
+   "note": ""
+  },
+  {
    "pronoun": "它",
    "class": "object",
    "scenic": "颐和园",
@@ -690,17 +770,17 @@
    "note": "先行词为“廊上斑驳的画”，归至长廊实体"
   }
  ],
- "kind_only_accuracy": 0.739,
+ "kind_only_accuracy": 0.689,
  "set_member_hit": {
   "n_set_cases": 47,
-  "member_hits": 2,
-  "member_hit_rate": 0.043,
+  "member_hits": 1,
+  "member_hit_rate": 0.021,
   "detail": [
    {
     "pronoun": "其中",
     "gold": "圆明园",
-    "pred": "圆明园",
-    "member_hit": true
+    "pred": "noun:园林",
+    "member_hit": false
    },
    {
     "pronoun": "其中",
@@ -783,7 +863,7 @@
    {
     "pronoun": "其中",
     "gold": "山间雾景",
-    "pred": "noun:水墨画",
+    "pred": "云谷寺",
     "member_hit": false
    },
    {
@@ -897,7 +977,7 @@
    {
     "pronoun": "其中",
     "gold": "岩溶层色调",
-    "pred": "黄龙",
+    "pred": "noun:板块",
     "member_hit": false
    },
    {
@@ -975,21 +1055,21 @@
    {
     "pronoun": "其中",
     "gold": "圆明园",
-    "pred": "圆明园",
+    "pred": "noun:圆明园",
     "member_hit": true
    }
   ]
  },
  "accuracy_ci95": {
-  "lo": 0.606,
-  "hi": 0.742
+  "lo": 0.561,
+  "hi": 0.7
  },
  "identity_ci95": {
-  "lo": 0.518,
-  "hi": 0.736
+  "lo": 0.407,
+  "hi": 0.633
  },
  "identity_scope": {
   "n_identity_checked": 71,
-  "identity_accuracy": 0.634
+  "identity_accuracy": 0.521
  }
 }

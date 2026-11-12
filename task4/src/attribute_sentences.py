@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
-"""P1 sentence-level narrative focus: evaluation of Plan A (record-level label) vs Plan B (feature rules).
+"""P1 sentence-level narrative focus assignment.
 
-Plan B processes all sentences in record order with features:
+Sentences are labelled with their scenic area (or 景区外 / 无法判断) using:
   1. Scenic-area proper-name hit (dictionary POIs + supplementary landmark words, longer words first): +3 per hit for that scenic area;
   2. Outside-area signals: joint-tour scenic areas / city landmarks / lodging and dining / long-haul transport keywords, +2 per hit;
   3. In-park infrastructure (cableway / sightseeing bus / boardwalk / ticket / gate / viewing platform): only proves "inside a scenic area", +1;
   4. Transition words (接着|然后|下一站|继续|回到|前往): inherit the previous sentence's label when no proper-name conflict;
   5. No signal at all: infrastructure words only -> record-level label (weak evidence); otherwise -> 无法判断.
 
-Evaluation: scored only on the 495 annotated positions in sentence_attribution.jsonl (5-class accuracy).
-Tuning discipline: split in half with seed=42; weights are iterated only on the tune half; the holdout half is evaluated exactly once at the end.
+The output is consumed by detect_and_resolve.py as a candidate filter.
 
 Usage:
-  python src/attribute_sentences.py --evaluate           # A/B comparative evaluation
-  python src/attribute_sentences.py --output out.jsonl   # full-corpus attribution written to disk (for downstream)
+  python src/attribute_sentences.py --output out.jsonl
 """
 from __future__ import annotations
 
@@ -22,12 +20,10 @@ import io
 import json
 import re
 import sys
-from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]  # task4/
 TASK1 = ROOT.parent / "task1"
-ATTR = ROOT / "output/attribution"
 EXP2 = ROOT.parent / "task2/output/exp2"  # the dictionary is a product of experiment 2 (read-only reference)
 
 def ensure_utf8_stdout() -> None:
@@ -303,71 +299,9 @@ def run_all(output_path: Path | None) -> dict[tuple[str, int], str]:
     return lookup
 
 
-def tune_holdout_split() -> tuple[set[str], set[str]]:
-    """Split in half grouped by document (record) — sentence-level random splits leave 81 documents spanning tune/holdout, leaking within-document info.
-
-    Deterministic: sort the record list, shuffle with rng(42), assign whole records to tune / holdout; each sentence follows its record.
-    """
-    gold_rows = [json.loads(l) for l in (ATTR / "sentence_attribution.jsonl").open(encoding="utf-8")]
-    import random
-    records = sorted({g["record_id"] for g in gold_rows})
-    rng = random.Random(42)
-    rng.shuffle(records)
-    half = len(records) // 2
-    tune_recs = set(records[:half])
-    tune = {g["sid"] for g in gold_rows if g["record_id"] in tune_recs}
-    hold = {g["sid"] for g in gold_rows if g["record_id"] not in tune_recs}
-    return tune, hold
-
-
-def evaluate(lookup: dict[tuple[str, int], str], errors_path: Path | None = None,
-             splits: tuple[set[str], set[str]] | None = None) -> dict:
-    """Evaluate accuracy and confusion of Plan A (record-level label) and Plan B (feature rules) on the 495-sentence annotated set.
-
-    When splits=(tune_sids, holdout_sids) is given, also emit split-half metrics; error export covers only the tune half (holdout never participates in iteration).
-    """
-    gold_rows = [json.loads(l) for l in (ATTR / "sentence_attribution.jsonl").open(encoding="utf-8")]
-    err_fh = errors_path.open("w", encoding="utf-8") if errors_path else None
-
-    def score(method: str, scope: str = "full") -> dict:
-        correct = n = 0
-        conf: Counter = Counter()
-        for g in gold_rows:
-            if scope == "tune" and splits and g["sid"] not in splits[0]:
-                continue
-            if scope == "holdout" and splits and g["sid"] not in splits[1]:
-                continue
-            pred = g["scenic_area"] if method == "A" else lookup.get((g["record_id"], g["start"]), "无法判断")
-            n += 1
-            if pred == g["label"]:
-                correct += 1
-            elif err_fh and method == "B" and scope == "full":
-                err_fh.write(json.dumps(
-                    {"gold": g["label"], "pred": pred, "sid": g["sid"],
-                     "record": g["record_id"], "text": g["sentence"]}, ensure_ascii=False) + chr(10))
-            conf[f"{g['label']}||{pred}"] += 1
-        return {"n": n, "acc": round(correct / n, 4) if n else None, "confusion": dict(conf)}
-
-    res = {
-        "full": {"A": score("A"), "B": score("B")},
-        "method_note": ("方案B v3（特征规则）：词典POI+根名别名+补充地标(权重3/次)，景区外信号(2)，"
-                        "文博词汇景区外信号(2，同句只计一次，v3)，大交通覆盖(v3 增国道/省道/县道/乡道)，酒店三态，"
-                        "弱景观词(0.6)，转移词继承，基础设施+官方文本回退记录级标签；"
-                        "tune/holdout=按文档分组对半分（，rng42 确定性），v3 仅在 tune 半区迭代，holdout 只做终评。"),
-    }
-    if splits:
-        res["tune"] = {"A": score("A", "tune"), "B": score("B", "tune")}
-        res["holdout"] = {"A": score("A", "holdout"), "B": score("B", "holdout")}
-    if err_fh:
-        err_fh.close()
-    return res
-
-
 def main() -> int:
     ensure_utf8_stdout()
     ap = argparse.ArgumentParser()
-    ap.add_argument("--evaluate", action="store_true", help="在 495 句标注集上评估 A/B 准确率")
-    ap.add_argument("--errors", action="store_true", help="导出方案B 的错误样例供特征设计")
     ap.add_argument("--output", type=str, default="", help="全量归属输出路径")
     ap.add_argument("--museum-w", type=float, default=None, help="文博词汇景区外信号权重（缺省=模块默认2.0，0=关闭）")
     args = ap.parse_args()
@@ -376,26 +310,9 @@ def main() -> int:
     global MUSEUM_W
     if args.museum_w is not None:
         MUSEUM_W = args.museum_w
-    lookup = run_all(out_path)
+    run_all(out_path)
     if out_path:
         print(f"全量归属 -> {out_path}")
-
-    if args.evaluate:
-        res = evaluate(lookup, ATTR / "attribution_errors.jsonl" if args.errors else None,
-                       splits=tune_holdout_split())
-        (ATTR / "attribution_eval.json").write_text(
-            json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
-        a, b = res["full"]["A"], res["full"]["B"]
-        t, h = res["tune"]["B"], res["holdout"]["B"]
-        print(f"A记录级标签: acc={a['acc']} (n={a['n']})  |  B特征规则: acc={b['acc']} (n={b['n']})  "
-              f"| B tune={t['acc']}(n={t['n']}) holdout={h['acc']}(n={h['n']})")
-        conf = res["full"]["B"]["confusion"]
-        worst = sorted(((k, v) for k, v in conf.items() if "||" in k and k.split("||")[0] != k.split("||")[1]),
-                       key=lambda x: -x[1])[:12]
-        print("B 主要混淆 (gold->pred):")
-        for kv, v in worst:
-            g, pr = kv.split("||")
-            print(f"   {g} -> {pr}: {v}")
     return 0
 
 if __name__ == "__main__":

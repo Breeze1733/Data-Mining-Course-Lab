@@ -7,27 +7,25 @@
    18
   ],
   "n_skipped_absent_records": 0,
-  "skipped_sids": [],
-  "note": "task1 物理去重后，原抽样文档若已移除，则映射到同组 canonical 记录；找不到原句时才跳过。"
+  "skipped_sids": []
  },
- "annotated_by": "开发 agent 逐句判读（AI 辅助判读，非独立人工标注；POI/交通严格跨度含包含式变体，时间重叠口径）",
  "match_policy": "根景区名与城市名按设计不作为 POI 实体抽取",
  "per_type": {
   "POI": {
-   "tp": 22,
+   "tp": 16,
    "fp": 1,
-   "fn": 9,
-   "precision": 0.957,
-   "recall": 0.71,
-   "f1": 0.815
+   "fn": 0,
+   "precision": 0.941,
+   "recall": 1.0,
+   "f1": 0.97
   },
   "交通": {
-   "tp": 11,
+   "tp": 4,
    "fp": 1,
-   "fn": 6,
-   "precision": 0.917,
-   "recall": 0.647,
-   "f1": 0.759
+   "fn": 1,
+   "precision": 0.8,
+   "recall": 0.8,
+   "f1": 0.8
   },
   "时间": {
    "tp": 13,
@@ -39,59 +37,31 @@
   }
  },
  "strict_ratio": {
-  "POI": 0.955,
+  "POI": 1.0,
   "交通": 1.0,
   "时间": 0.0
  },
  "strict_by_span_len": {
-  "2字": [
-   11,
-   11
-  ],
   "5字+": [
-   2,
-   3
+   1,
+   1
   ],
   "3-4字": [
-   19,
-   19
+   16,
+   16
+  ],
+  "2字": [
+   3,
+   3
   ]
  },
  "missed": [
-  {
-   "sid": 1,
-   "text": "换乘车",
-   "type": "交通",
-   "out_of_scope_design": false,
-   "sentence": "完全特种兵行程,山上花费45,门票190,两头换乘车19+46,燃尽了"
-  },
   {
    "sid": 4,
    "text": "爬山",
    "type": "交通",
    "out_of_scope_design": false,
    "sentence": "沿途导游给我们介绍了徽州地方沿革和特产特色,敲定了爬山的行程"
-  },
-  {
-   "sid": 5,
-   "text": "黄山旅游换乘中心",
-   "type": "POI",
-   "out_of_scope_design": false,
-   "sentence": "酒店一定要选在黄山旅游换乘中心附近300米以内,不然就要走很多路"
-  },
-  {
-   "sid": 6,
-   "text": "智选假日酒店",
-   "type": "POI",
-   "out_of_scope_design": false,
-   "sentence": "住宿:智选假日酒店,这个酒店很新,也很干净,推荐"
-  },
-  {
-   "sid": 14,
-   "text": "高铁",
-   "type": "交通",
-   "out_of_scope_design": false,
-   "sentence": "我看很多人从成都去九寨沟,是坐早上最早6点多的车到黄龙九寨站,到了这个高铁站,还得坐一两小时大巴才能到九寨沟,这样的话留"
   },
   {
    "sid": 17,
@@ -101,39 +71,11 @@
    "sentence": "春节因假期比较长很多人都会和家人来一场春节之旅,当然对于国内著名的景区九寨沟来说春节前往的游客是非常多的,那么春节去九寨"
   },
   {
-   "sid": 18,
-   "text": "飞机",
-   "type": "交通",
-   "out_of_scope_design": false,
-   "sentence": "由于黄金周期间上海飞成都的机票较贵,且折扣机票的班次时间不够理想,所以我选择了坐动车D2206次,06:39开车,路程1"
-  },
-  {
-   "sid": 21,
-   "text": "搭车",
-   "type": "交通",
-   "out_of_scope_design": false,
-   "sentence": "景区大门上车后,观光车带我们直接到了Y字形左侧最上面的长海、五彩池,然后再回头往下,这条路线叫「则查洼沟」,基本用走的,"
-  },
-  {
-   "sid": 25,
-   "text": "拉卜楞寺",
-   "type": "POI",
-   "out_of_scope_design": false,
-   "sentence": "第六天一早出发去拉卜楞寺,路边起伏的高原草甸在蓝天白云的映衬下分外美丽"
-  },
-  {
    "sid": 25,
    "text": "一早",
    "type": "时间",
    "out_of_scope_design": false,
    "sentence": "第六天一早出发去拉卜楞寺,路边起伏的高原草甸在蓝天白云的映衬下分外美丽"
-  },
-  {
-   "sid": 26,
-   "text": "三苏祠",
-   "type": "POI",
-   "out_of_scope_design": false,
-   "sentence": "然后经过我的偶像--苏东波的故乡,三苏祠去看了一下,最喜欢:人有悲欢离合,月有阴晴圆缺,此事古难全"
   },
   {
    "sid": 29,
@@ -151,52 +93,10 @@
   },
   {
    "sid": 32,
-   "text": "天安门",
-   "type": "POI",
-   "out_of_scope_design": false,
-   "sentence": "这里已经不仅仅是景点,毫无疑问对于中华儿女天安门内含了太多的象征意义--这里是中华民族精神家园的根脉,国家政治、文化的中"
-  },
-  {
-   "sid": 32,
    "text": "明朝永乐年间",
    "type": "时间",
    "out_of_scope_design": false,
    "sentence": "这里已经不仅仅是景点,毫无疑问对于中华儿女天安门内含了太多的象征意义--这里是中华民族精神家园的根脉,国家政治、文化的中"
-  },
-  {
-   "sid": 33,
-   "text": "有轨电车",
-   "type": "交通",
-   "out_of_scope_design": false,
-   "sentence": "多路地面公交车在颐和园经停,地铁4号线北宫门有站,有轨电车西郊线有颐和园西门站"
-  },
-  {
-   "sid": 37,
-   "text": "南长城",
-   "type": "POI",
-   "out_of_scope_design": false,
-   "sentence": "尽管人很多,比起南长城简直就是游人如织,但好汉坡、好汉石、好汉碑都在北长城"
-  },
-  {
-   "sid": 37,
-   "text": "北长城",
-   "type": "POI",
-   "out_of_scope_design": false,
-   "sentence": "尽管人很多,比起南长城简直就是游人如织,但好汉坡、好汉石、好汉碑都在北长城"
-  },
-  {
-   "sid": 38,
-   "text": "琉璃塔",
-   "type": "POI",
-   "out_of_scope_design": false,
-   "sentence": "这个路线除了到苏州街和四大部洲的时候很晒很热外,开始往琉璃塔、谐趣园走的路上绿树成荫,后半程基本还是凉快的"
-  },
-  {
-   "sid": 39,
-   "text": "西苑站",
-   "type": "POI",
-   "out_of_scope_design": false,
-   "sentence": "新建宫门出,可以打车,也可以对面坐公交车437路两站,到西苑站下车"
   }
  ],
  "false_positives": [
@@ -258,8 +158,7 @@
    "黄山"
   ],
   "oos_misses": 0,
-  "recall_in_scope_only": 0.697,
-  "note": "根景区名与城市名按设计不作为 POI 抽取；in_scope_only 口径将其从分母移除"
+  "recall_in_scope_only": 0.846
  },
  "stratified": [
   {
@@ -267,22 +166,22 @@
    "buckets": {
     "小红书": {
      "overall": {
-      "tp": 24,
+      "tp": 18,
       "fp": 1,
-      "fn": 6,
-      "precision": 0.96,
-      "recall": 0.8,
-      "f1": 0.873
+      "fn": 0,
+      "precision": 0.947,
+      "recall": 1.0,
+      "f1": 0.973
      }
     },
     "携程游记": {
      "overall": {
-      "tp": 22,
+      "tp": 15,
       "fp": 7,
-      "fn": 14,
-      "precision": 0.759,
-      "recall": 0.611,
-      "f1": 0.677
+      "fn": 6,
+      "precision": 0.682,
+      "recall": 0.714,
+      "f1": 0.698
      }
     }
    }
@@ -292,32 +191,32 @@
    "buckets": {
     "九寨沟": {
      "overall": {
-      "tp": 23,
+      "tp": 17,
       "fp": 6,
-      "fn": 7,
-      "precision": 0.793,
-      "recall": 0.767,
-      "f1": 0.78
+      "fn": 2,
+      "precision": 0.739,
+      "recall": 0.895,
+      "f1": 0.81
      }
     },
     "颐和园": {
      "overall": {
-      "tp": 15,
+      "tp": 11,
       "fp": 1,
-      "fn": 9,
-      "precision": 0.938,
-      "recall": 0.625,
-      "f1": 0.75
+      "fn": 3,
+      "precision": 0.917,
+      "recall": 0.786,
+      "f1": 0.846
      }
     },
     "黄山": {
      "overall": {
-      "tp": 8,
+      "tp": 5,
       "fp": 1,
-      "fn": 4,
-      "precision": 0.889,
-      "recall": 0.667,
-      "f1": 0.762
+      "fn": 1,
+      "precision": 0.833,
+      "recall": 0.833,
+      "f1": 0.833
      }
     }
    }
@@ -329,39 +228,39 @@
      "overall": {
       "tp": 1,
       "fp": 0,
-      "fn": 2,
+      "fn": 1,
       "precision": 1.0,
-      "recall": 0.333,
-      "f1": 0.5
+      "recall": 0.5,
+      "f1": 0.667
      }
     },
     "长句≥30": {
      "overall": {
-      "tp": 45,
+      "tp": 32,
       "fp": 8,
-      "fn": 18,
-      "precision": 0.849,
-      "recall": 0.714,
-      "f1": 0.776
+      "fn": 5,
+      "precision": 0.8,
+      "recall": 0.865,
+      "f1": 0.831
      }
     }
    }
   }
  ],
  "overall": {
-  "tp": 46,
+  "tp": 33,
   "fp": 8,
-  "fn": 20,
-  "precision": 0.852,
-  "recall": 0.697,
-  "f1": 0.767,
+  "fn": 6,
+  "precision": 0.805,
+  "recall": 0.846,
+  "f1": 0.825,
   "precision_ci95": {
-   "lo": 0.734,
-   "hi": 0.923
+   "lo": 0.66,
+   "hi": 0.898
   },
   "recall_ci95": {
-   "lo": 0.578,
-   "hi": 0.794
+   "lo": 0.703,
+   "hi": 0.928
   }
  }
 }

@@ -1,21 +1,10 @@
 {
  "meta": {
-  "built_by": "src/exp2/build_dictionary.py",
-  "method": "jieba词频挖掘（后缀过滤，阈值≥8）+ 人工复核 + 采集种子合并；时间节点由正则规则识别，不入词典",
-  "review_date": "2026-10-29",
+  "built_by": "task2/src/export_dictionary.py",
+  "method": "domain_seed_and_rules",
   "counts": {
-   "poi": 128,
-   "transport": 37
-  },
-  "b03_expansion": {
-   "date": "2026-11-05",
-   "added_poi": 0,
-   "added_transport": 0,
-   "basis": "句级实体评测漏检清单 + 全语料频次≥2 证据"
-  },
-  "recall_expansion": {
-   "date": "2026-11-05",
-   "basis": "句级实体评测漏检清单 + 消解 gold 先行词 + 全语料频次≥2 证据"
+   "poi": 135,
+   "transport": 21
   }
  },
  "poi": [
@@ -27,7 +16,7 @@
     "黄山"
    ],
    "canonical": "一线天",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "万寿山",
@@ -37,7 +26,7 @@
     "颐和园"
    ],
    "canonical": "万寿山",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "上季节海",
@@ -47,7 +36,7 @@
     "九寨沟"
    ],
    "canonical": "上季节海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "下季节海",
@@ -57,7 +46,7 @@
     "九寨沟"
    ],
    "canonical": "下季节海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "东宫门",
@@ -67,7 +56,7 @@
     "颐和园"
    ],
    "canonical": "东宫门",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "东门",
@@ -77,7 +66,7 @@
     "颐和园"
    ],
    "canonical": "东门",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "中查沟",
@@ -87,7 +76,7 @@
     "九寨沟"
    ],
    "canonical": "中查沟",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "丹霞峰",
@@ -97,7 +86,7 @@
     "黄山"
    ],
    "canonical": "丹霞峰",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "乐寿堂",
@@ -107,7 +96,7 @@
     "颐和园"
    ],
    "canonical": "乐寿堂",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "九龙瀑",
@@ -117,7 +106,7 @@
     "黄山"
    ],
    "canonical": "九龙瀑",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "云谷",
@@ -127,7 +116,7 @@
     "黄山"
    ],
    "canonical": "云谷景区",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "云谷寺",
@@ -137,7 +126,7 @@
     "黄山"
    ],
    "canonical": "云谷寺",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "五彩池",
@@ -147,7 +136,7 @@
     "九寨沟"
    ],
    "canonical": "五彩池",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "五彩池畔",
@@ -157,7 +146,7 @@
     "九寨沟"
    ],
    "canonical": "五彩池畔",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "五花海",
@@ -167,7 +156,7 @@
     "九寨沟"
    ],
    "canonical": "五花海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "仁寿殿",
@@ -177,7 +166,7 @@
     "颐和园"
    ],
    "canonical": "仁寿殿",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "佛香阁",
@@ -187,7 +176,7 @@
     "颐和园"
    ],
    "canonical": "佛香阁",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "光明顶",
@@ -197,7 +186,7 @@
     "黄山"
    ],
    "canonical": "光明顶",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "则查洼沟",
@@ -207,7 +196,7 @@
     "九寨沟"
    ],
    "canonical": "则查洼沟",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "北如意门",
@@ -217,7 +206,7 @@
     "颐和园"
    ],
    "canonical": "北如意门",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "北宫门",
@@ -227,7 +216,7 @@
     "颐和园"
    ],
    "canonical": "北宫门",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "北海",
@@ -237,7 +226,7 @@
     "黄山"
    ],
    "canonical": "北海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "十七孔桥",
@@ -247,7 +236,7 @@
     "颐和园"
    ],
    "canonical": "十七孔桥",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "半山寺",
@@ -257,7 +246,7 @@
     "黄山"
    ],
    "canonical": "半山寺",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "南湖岛",
@@ -267,7 +256,7 @@
     "颐和园"
    ],
    "canonical": "南湖岛",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "卧龙海",
@@ -277,7 +266,7 @@
     "九寨沟"
    ],
    "canonical": "卧龙海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "原始森林",
@@ -287,7 +276,7 @@
     "九寨沟"
    ],
    "canonical": "原始森林",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "双龙海",
@@ -297,7 +286,7 @@
     "九寨沟"
    ],
    "canonical": "双龙海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "后溪河",
@@ -307,7 +296,7 @@
     "颐和园"
    ],
    "canonical": "后溪河",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "听鹂馆",
@@ -317,7 +306,7 @@
     "颐和园"
    ],
    "canonical": "听鹂馆",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "四大部洲",
@@ -327,7 +316,7 @@
     "颐和园"
    ],
    "canonical": "四大部洲",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "天海",
@@ -337,7 +326,7 @@
     "黄山"
    ],
    "canonical": "天海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "天都峰",
@@ -347,7 +336,7 @@
     "黄山"
    ],
    "canonical": "天都峰",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "天鹅海",
@@ -357,7 +346,7 @@
     "九寨沟"
    ],
    "canonical": "天鹅海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "始信峰",
@@ -367,7 +356,7 @@
     "黄山"
    ],
    "canonical": "始信峰",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "季节海",
@@ -377,17 +366,7 @@
     "九寨沟"
    ],
    "canonical": "季节海",
-   "source": "seed+manual_review_of_mined_candidates"
-  },
-  {
-   "name": "宏村",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [
-    "黄山"
-   ],
-   "canonical": "宏村",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "宜芸馆",
@@ -397,7 +376,7 @@
     "颐和园"
    ],
    "canonical": "宜芸馆",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "宝云阁",
@@ -407,27 +386,7 @@
     "颐和园"
    ],
    "canonical": "宝云阁",
-   "source": "seed+manual_review_of_mined_candidates"
-  },
-  {
-   "name": "屯溪老街",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [
-    "黄山"
-   ],
-   "canonical": "屯溪老街",
-   "source": "seed+manual_review_of_mined_candidates"
-  },
-  {
-   "name": "川主寺",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [
-    "九寨沟"
-   ],
-   "canonical": "川主寺",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "廓如亭",
@@ -437,7 +396,7 @@
     "颐和园"
    ],
    "canonical": "廓如亭",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "归心台",
@@ -447,7 +406,7 @@
     "九寨沟"
    ],
    "canonical": "归心台",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "德和园",
@@ -457,7 +416,7 @@
     "颐和园"
    ],
    "canonical": "德和园",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "慈光阁",
@@ -467,7 +426,7 @@
     "黄山"
    ],
    "canonical": "慈光阁",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "扎如沟",
@@ -477,7 +436,7 @@
     "九寨沟"
    ],
    "canonical": "扎如沟",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "排云亭",
@@ -487,7 +446,7 @@
     "黄山"
    ],
    "canonical": "排云亭",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "排云殿",
@@ -497,7 +456,7 @@
     "颐和园"
    ],
    "canonical": "排云殿",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "探海松",
@@ -507,7 +466,7 @@
     "黄山"
    ],
    "canonical": "探海松",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "散花坞",
@@ -517,7 +476,7 @@
     "黄山"
    ],
    "canonical": "散花坞",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "文昌阁",
@@ -527,7 +486,7 @@
     "颐和园"
    ],
    "canonical": "文昌阁",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "新建宫门",
@@ -537,7 +496,7 @@
     "颐和园"
    ],
    "canonical": "新建宫门",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "日则沟",
@@ -547,7 +506,7 @@
     "九寨沟"
    ],
    "canonical": "日则沟",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "昆明湖",
@@ -557,7 +516,7 @@
     "颐和园"
    ],
    "canonical": "昆明湖",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "景福阁",
@@ -567,7 +526,7 @@
     "颐和园"
    ],
    "canonical": "景福阁",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "智慧海",
@@ -577,7 +536,7 @@
     "颐和园"
    ],
    "canonical": "智慧海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "曙光亭",
@@ -587,7 +546,7 @@
     "黄山"
    ],
    "canonical": "曙光亭",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "松谷庵",
@@ -597,7 +556,7 @@
     "黄山"
    ],
    "canonical": "松谷庵",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "树正寨",
@@ -607,7 +566,7 @@
     "九寨沟"
    ],
    "canonical": "树正寨",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "树正沟",
@@ -617,7 +576,7 @@
     "九寨沟"
    ],
    "canonical": "树正沟",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "树正瀑布",
@@ -627,7 +586,7 @@
     "九寨沟"
    ],
    "canonical": "树正瀑布",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "树正磨坊",
@@ -637,7 +596,7 @@
     "九寨沟"
    ],
    "canonical": "树正磨坊",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "树正磨房",
@@ -647,7 +606,7 @@
     "九寨沟"
    ],
    "canonical": "树正磨房",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "树正群海",
@@ -657,7 +616,7 @@
     "九寨沟"
    ],
    "canonical": "树正群海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "梦笔生花",
@@ -667,7 +626,7 @@
     "黄山"
    ],
    "canonical": "梦笔生花",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "沟口",
@@ -677,7 +636,7 @@
     "九寨沟"
    ],
    "canonical": "沟口",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "清凉台",
@@ -687,7 +646,7 @@
     "黄山"
    ],
    "canonical": "清凉台",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "清心台",
@@ -697,7 +656,7 @@
     "九寨沟"
    ],
    "canonical": "清心台",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "清晏舫",
@@ -707,7 +666,7 @@
     "颐和园"
    ],
    "canonical": "石舫",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "火花海",
@@ -717,7 +676,7 @@
     "九寨沟"
    ],
    "canonical": "火花海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "熊猫海",
@@ -727,7 +686,7 @@
     "九寨沟"
    ],
    "canonical": "熊猫海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "熊猫海瀑布",
@@ -737,7 +696,7 @@
     "九寨沟"
    ],
    "canonical": "熊猫海瀑布",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "牟尼沟",
@@ -747,7 +706,7 @@
     "九寨沟"
    ],
    "canonical": "牟尼沟",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "犀牛海",
@@ -757,7 +716,7 @@
     "九寨沟"
    ],
    "canonical": "犀牛海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "狮子峰",
@@ -767,7 +726,7 @@
     "黄山"
    ],
    "canonical": "狮子峰",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "猴子观海",
@@ -777,7 +736,7 @@
     "黄山"
    ],
    "canonical": "猴子观海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "玉屏",
@@ -787,7 +746,7 @@
     "黄山"
    ],
    "canonical": "玉屏景区",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "玉屏楼",
@@ -797,7 +756,7 @@
     "黄山"
    ],
    "canonical": "玉屏楼",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "玉带桥",
@@ -807,7 +766,7 @@
     "颐和园"
    ],
    "canonical": "玉带桥",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "玉澜堂",
@@ -817,7 +776,7 @@
     "颐和园"
    ],
    "canonical": "玉澜堂",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "珍珠滩",
@@ -827,7 +786,7 @@
     "九寨沟"
    ],
    "canonical": "珍珠滩",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "珍珠滩瀑布",
@@ -837,7 +796,7 @@
     "九寨沟"
    ],
    "canonical": "珍珠滩瀑布",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "甘海子",
@@ -847,7 +806,7 @@
     "九寨沟"
    ],
    "canonical": "甘海子",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "画中游",
@@ -857,7 +816,7 @@
     "颐和园"
    ],
    "canonical": "画中游",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "界湖桥",
@@ -867,7 +826,7 @@
     "颐和园"
    ],
    "canonical": "界湖桥",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "白鹅岭",
@@ -877,7 +836,7 @@
     "黄山"
    ],
    "canonical": "白鹅岭",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "百步云梯",
@@ -887,7 +846,7 @@
     "黄山"
    ],
    "canonical": "百步云梯",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "盆景滩",
@@ -897,7 +856,7 @@
     "九寨沟"
    ],
    "canonical": "盆景滩",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "知春亭",
@@ -907,7 +866,7 @@
     "颐和园"
    ],
    "canonical": "知春亭",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "石笋矼",
@@ -917,7 +876,7 @@
     "黄山"
    ],
    "canonical": "石笋矼",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "石舫",
@@ -927,7 +886,7 @@
     "颐和园"
    ],
    "canonical": "石舫",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "神仙池",
@@ -937,7 +896,7 @@
     "九寨沟"
    ],
    "canonical": "神仙池",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "竖琴松",
@@ -947,7 +906,7 @@
     "黄山"
    ],
    "canonical": "竖琴松",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "箭竹海",
@@ -957,7 +916,7 @@
     "九寨沟"
    ],
    "canonical": "箭竹海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "箭竹海瀑布",
@@ -967,7 +926,7 @@
     "九寨沟"
    ],
    "canonical": "箭竹海瀑布",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "翡翠谷",
@@ -977,7 +936,7 @@
     "黄山"
    ],
    "canonical": "翡翠谷",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "老虎海",
@@ -987,7 +946,7 @@
     "九寨沟"
    ],
    "canonical": "老虎海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "耕织图",
@@ -997,7 +956,7 @@
     "颐和园"
    ],
    "canonical": "耕织图",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "芦苇海",
@@ -1007,7 +966,7 @@
     "九寨沟"
    ],
    "canonical": "芦苇海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "芳草海",
@@ -1017,7 +976,7 @@
     "九寨沟"
    ],
    "canonical": "芳草海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "苏州街",
@@ -1027,7 +986,7 @@
     "颐和园"
    ],
    "canonical": "苏州街",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "荷叶寨",
@@ -1037,7 +996,7 @@
     "九寨沟"
    ],
    "canonical": "荷叶寨",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "莲花峰",
@@ -1047,7 +1006,7 @@
     "黄山"
    ],
    "canonical": "莲花峰",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "西堤",
@@ -1057,7 +1016,7 @@
     "颐和园"
    ],
    "canonical": "西堤",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "西海",
@@ -1067,7 +1026,7 @@
     "黄山"
    ],
    "canonical": "西海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "西海大峡谷",
@@ -1077,7 +1036,7 @@
     "黄山"
    ],
    "canonical": "西海大峡谷",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "西门",
@@ -1087,7 +1046,7 @@
     "颐和园"
    ],
    "canonical": "西门",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "诺日朗",
@@ -1097,7 +1056,7 @@
     "九寨沟"
    ],
    "canonical": "诺日朗",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "诺日朗游客中心",
@@ -1107,7 +1066,7 @@
     "九寨沟"
    ],
    "canonical": "诺日朗中心",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "诺日朗瀑布",
@@ -1117,7 +1076,7 @@
     "九寨沟"
    ],
    "canonical": "诺日朗瀑布",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "谐趣园",
@@ -1127,7 +1086,7 @@
     "颐和园"
    ],
    "canonical": "谐趣园",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "豳风桥",
@@ -1137,7 +1096,7 @@
     "颐和园"
    ],
    "canonical": "豳风桥",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "迎客松",
@@ -1147,7 +1106,7 @@
     "黄山"
    ],
    "canonical": "迎客松",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "连理松",
@@ -1157,7 +1116,7 @@
     "黄山"
    ],
    "canonical": "连理松",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "铜牛",
@@ -1167,7 +1126,7 @@
     "颐和园"
    ],
    "canonical": "铜牛",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "镜海",
@@ -1177,7 +1136,7 @@
     "九寨沟"
    ],
    "canonical": "镜海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "长廊",
@@ -1187,7 +1146,7 @@
     "颐和园"
    ],
    "canonical": "长廊",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "长海",
@@ -1197,7 +1156,7 @@
     "九寨沟"
    ],
    "canonical": "长海",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "随心台",
@@ -1207,7 +1166,7 @@
     "九寨沟"
    ],
    "canonical": "随心台",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "雪峰",
@@ -1217,7 +1176,7 @@
     "九寨沟"
    ],
    "canonical": "雪峰",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "霁清轩",
@@ -1227,7 +1186,7 @@
     "颐和园"
    ],
    "canonical": "霁清轩",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "静心台",
@@ -1237,7 +1196,7 @@
     "九寨沟"
    ],
    "canonical": "静心台",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "颐和园西门",
@@ -1247,7 +1206,7 @@
     "颐和园"
    ],
    "canonical": "颐和园西门",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "飞来石",
@@ -1257,7 +1216,7 @@
     "黄山"
    ],
    "canonical": "飞来石",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "鳌鱼峰",
@@ -1267,7 +1226,7 @@
     "黄山"
    ],
    "canonical": "鳌鱼峰",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "麒麟松",
@@ -1277,16 +1236,7 @@
     "黄山"
    ],
    "canonical": "麒麟松",
-   "source": "seed+manual_review_of_mined_candidates"
-  },
-  {
-   "name": "黄龙",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "黄龙",
-   "source": "seed+manual_review_of_mined_candidates",
-   "note": "九寨沟—黄龙联游地标，不在九寨沟景区范围内；按周边地标处理（与黄龙五彩池一致）"
+   "source": "seed"
   },
   {
    "name": "黑虎松",
@@ -1296,7 +1246,7 @@
     "黄山"
    ],
    "canonical": "黑虎松",
-   "source": "seed+manual_review_of_mined_candidates"
+   "source": "seed"
   },
   {
    "name": "扎如寺",
@@ -1306,8 +1256,7 @@
     "九寨沟"
    ],
    "canonical": "扎如寺",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "九寨沟景区内景点（扎如生态游线路终点），语料20次"
+   "source": "seed"
   },
   {
    "name": "颐和园博物馆",
@@ -1317,8 +1266,7 @@
     "颐和园"
    ],
    "canonical": "颐和园博物馆",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "颐和园文昌院内展馆，官方路线出现"
+   "source": "seed"
   },
   {
    "name": "梦幻景区",
@@ -1328,433 +1276,7 @@
     "黄山"
    ],
    "canonical": "西海大峡谷",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "游客对西海大峡谷的代称，task4黄金注释"
-  },
-  {
-   "name": "松潘古城",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "松潘古城",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "task4黄金注释'真先行词松潘古城未收录'"
-  },
-  {
-   "name": "磁器口",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "磁器口",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "task4黄金：'这里'指重庆磁器口"
-  },
-  {
-   "name": "乐山大佛景区",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "乐山大佛景区",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "task4黄金：'这里有13路公交站'指乐山大佛附近"
-  },
-  {
-   "name": "乐山大佛",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "乐山大佛景区",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "同上，短写法归一到全称"
-  },
-  {
-   "name": "景山公园",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "景山公园",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "task4黄金：多景点游记景山段"
-  },
-  {
-   "name": "景山",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "景山公园",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "景山公园短写法"
-  },
-  {
-   "name": "南锣鼓巷",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "南锣鼓巷",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "task4黄金×2"
-  },
-  {
-   "name": "荷花市场",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "荷花市场",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "task4黄金"
-  },
-  {
-   "name": "北京大学",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "北京大学",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "task4黄金：'这里'指北大"
-  },
-  {
-   "name": "清华大学",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "清华大学",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "task4黄金（注：gold原文'清华大学校园'仍不相等，边界如实保留）"
-  },
-  {
-   "name": "清华",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "清华大学",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "清华大学短写法"
-  },
-  {
-   "name": "故宫",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "故宫",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料190次"
-  },
-  {
-   "name": "天坛",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "天坛",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料81次"
-  },
-  {
-   "name": "圆明园",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "圆明园",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料160次"
-  },
-  {
-   "name": "北海公园",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "北海公园",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料28次；与黄山'北海'(北海景区)不同名冲突，长词优先"
-  },
-  {
-   "name": "恭王府",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "恭王府",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料45次"
-  },
-  {
-   "name": "什刹海",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "什刹海",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料28次"
-  },
-  {
-   "name": "烟袋斜街",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "烟袋斜街",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料10次"
-  },
-  {
-   "name": "后海",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "后海",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料20次"
-  },
-  {
-   "name": "大栅栏",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "大栅栏",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料39次"
-  },
-  {
-   "name": "王府井",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "王府井",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料30次"
-  },
-  {
-   "name": "雍和宫",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "雍和宫",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料20次"
-  },
-  {
-   "name": "国子监",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "国子监",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料23次"
-  },
-  {
-   "name": "香山公园",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "香山公园",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料14次"
-  },
-  {
-   "name": "香山",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "香山公园",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "香山公园短写法"
-  },
-  {
-   "name": "八达岭长城",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "八达岭长城",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料23次"
-  },
-  {
-   "name": "慕田峪长城",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "慕田峪长城",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料14次"
-  },
-  {
-   "name": "鸟巢",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "鸟巢",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料53次"
-  },
-  {
-   "name": "水立方",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "水立方",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料32次"
-  },
-  {
-   "name": "国家博物馆",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "国家博物馆",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料32次"
-  },
-  {
-   "name": "三星堆博物馆",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "三星堆博物馆",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料33次"
-  },
-  {
-   "name": "三星堆",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "三星堆博物馆",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "三星堆博物馆短写法"
-  },
-  {
-   "name": "都江堰",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "都江堰",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料82次"
-  },
-  {
-   "name": "青城山",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "青城山",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料42次"
-  },
-  {
-   "name": "峨眉山",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "峨眉山",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料38次"
-  },
-  {
-   "name": "杜甫草堂",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "杜甫草堂",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料11次"
-  },
-  {
-   "name": "宽窄巷子",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "宽窄巷子",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料48次"
-  },
-  {
-   "name": "武侯祠",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "武侯祠",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料38次"
-  },
-  {
-   "name": "锦里",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "锦里",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料41次"
-  },
-  {
-   "name": "洪崖洞",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "洪崖洞",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料9次"
-  },
-  {
-   "name": "西递",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [
-    "黄山"
-   ],
-   "canonical": "西递",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料40次；与宏村同为黄山联游惯例（in_scenic 跟随宏村先例）"
-  },
-  {
-   "name": "徽州古城",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "徽州古城",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料7次"
-  },
-  {
-   "name": "千岛湖",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "千岛湖",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料21次"
-  },
-  {
-   "name": "苏堤",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "苏堤",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料14次（杭州西湖）"
-  },
-  {
-   "name": "汤口镇",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "汤口镇",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料82次；黄山门户集散地，非景区内游览点"
-  },
-  {
-   "name": "汤口",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "汤口镇",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "汤口镇短写法"
-  },
-  {
-   "name": "黄龙五彩池",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "黄龙五彩池",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "语料10次；与九寨沟五彩池同名异点，独立canonical消歧"
+   "source": "seed"
   },
   {
    "name": "则渣洼沟",
@@ -1764,8 +1286,7 @@
     "九寨沟"
    ],
    "canonical": "则查洼沟",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "则查洼沟常见异写，语料16次"
+   "source": "seed"
   },
   {
    "name": "查洼沟",
@@ -1775,76 +1296,7 @@
     "九寨沟"
    ],
    "canonical": "则查洼沟",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "则查洼沟口语省写，语料独立出现4次"
-  },
-  {
-   "name": "月沼",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "月沼",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "宏村内景点（月沼/南湖），供消解候选；不进景区内序列"
-  },
-  {
-   "name": "南湖",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "南湖",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "宏村内景点（月沼/南湖），供消解候选；不进景区内序列"
-  },
-  {
-   "name": "雅克夏雪山",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "雅克夏雪山",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "成都-九寨沟沿线雪山（G248），语料9次"
-  },
-  {
-   "name": "天安门广场",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "天安门广场",
-   "source": "peripheral_expansion_2026-10-30",
-   "note": "北京地标广场，语料40次"
-  },
-  {
-   "name": "庐山",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "庐山",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "三清山",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "三清山",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "徽州",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "徽州",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "歙县",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "歙县",
-   "source": "recall_eval_2026-11-05"
+   "source": "seed"
   },
   {
    "name": "黄山南大门",
@@ -1854,7 +1306,7 @@
     "黄山"
    ],
    "canonical": "黄山南大门",
-   "source": "recall_eval_2026-11-05"
+   "source": "seed"
   },
   {
    "name": "白云宾馆",
@@ -1864,7 +1316,7 @@
     "黄山"
    ],
    "canonical": "白云宾馆",
-   "source": "recall_eval_2026-11-05"
+   "source": "seed"
   },
   {
    "name": "后湖",
@@ -1874,7 +1326,7 @@
     "颐和园"
    ],
    "canonical": "后湖",
-   "source": "recall_eval_2026-11-05"
+   "source": "seed"
   },
   {
    "name": "慈福牌楼",
@@ -1884,7 +1336,7 @@
     "颐和园"
    ],
    "canonical": "慈福牌楼",
-   "source": "recall_eval_2026-11-05"
+   "source": "seed"
   },
   {
    "name": "新宫门",
@@ -1894,135 +1346,7 @@
     "颐和园"
    ],
    "canonical": "新宫门",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "敦煌",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "敦煌",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "麦积山",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "麦积山",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "莫高窟",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "莫高窟",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "鸣沙山",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "鸣沙山",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "嘉峪关关城",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "嘉峪关关城",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "横断山",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "横断山",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "归云山房",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "归云山房",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "国子监街",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "国子监街",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "五道营胡同",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "五道营胡同",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "北锣鼓巷",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "北锣鼓巷",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "恭王府博物馆",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "恭王府博物馆",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "九黄机场",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "九黄机场",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "成都东",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "成都东",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "成都东站",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "成都东站",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "天府机场",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "天府机场",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "虹桥火车站",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "虹桥火车站",
-   "source": "recall_eval_2026-11-05"
+   "source": "seed"
   },
   {
    "name": "送客松",
@@ -2032,15 +1356,7 @@
     "黄山"
    ],
    "canonical": "送客松",
-   "source": "coref_gold_dev_2026-11-07"
-  },
-  {
-   "name": "金山岭长城",
-   "entity_type": "景点POI",
-   "subtype": "景点",
-   "scenic_areas": [],
-   "canonical": "金山岭长城",
-   "source": "coref_gold_dev_2026-11-07"
+   "source": "seed"
   }
  ],
  "transport": [
@@ -2052,7 +1368,7 @@
     "通用"
    ],
    "canonical": "索道",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "缆车",
@@ -2062,7 +1378,7 @@
     "通用"
    ],
    "canonical": "缆车",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "观光缆车",
@@ -2072,7 +1388,7 @@
     "通用"
    ],
    "canonical": "观光缆车",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "玉屏索道",
@@ -2082,7 +1398,7 @@
     "通用"
    ],
    "canonical": "玉屏索道",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "云谷索道",
@@ -2092,7 +1408,7 @@
     "通用"
    ],
    "canonical": "云谷索道",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "太平索道",
@@ -2102,7 +1418,7 @@
     "通用"
    ],
    "canonical": "太平索道",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "西海观光缆车",
@@ -2112,7 +1428,7 @@
     "通用"
    ],
    "canonical": "西海观光缆车",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "观光车",
@@ -2122,7 +1438,7 @@
     "通用"
    ],
    "canonical": "观光车",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "景区大巴",
@@ -2132,7 +1448,7 @@
     "通用"
    ],
    "canonical": "景区大巴",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "摆渡车",
@@ -2142,7 +1458,7 @@
     "通用"
    ],
    "canonical": "摆渡车",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "环保车",
@@ -2152,7 +1468,7 @@
     "通用"
    ],
    "canonical": "环保车",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "接驳车",
@@ -2162,7 +1478,7 @@
     "通用"
    ],
    "canonical": "接驳车",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "电瓶车",
@@ -2172,7 +1488,7 @@
     "通用"
    ],
    "canonical": "电瓶车",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "小火车",
@@ -2182,127 +1498,7 @@
     "通用"
    ],
    "canonical": "小火车",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "大巴",
-   "entity_type": "交通方式",
-   "subtype": "景区车辆",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "大巴",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "巴士",
-   "entity_type": "交通方式",
-   "subtype": "景区车辆",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "巴士",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "公交车",
-   "entity_type": "交通方式",
-   "subtype": "公共交通",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "公交车",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "公交",
-   "entity_type": "交通方式",
-   "subtype": "公共交通",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "公交",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "地铁",
-   "entity_type": "交通方式",
-   "subtype": "公共交通",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "地铁",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "班车",
-   "entity_type": "交通方式",
-   "subtype": "公共交通",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "班车",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "出租车",
-   "entity_type": "交通方式",
-   "subtype": "公共交通",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "出租车",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "网约车",
-   "entity_type": "交通方式",
-   "subtype": "公共交通",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "网约车",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "高铁",
-   "entity_type": "交通方式",
-   "subtype": "长途交通",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "高铁",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "动车",
-   "entity_type": "交通方式",
-   "subtype": "长途交通",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "动车",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "火车",
-   "entity_type": "交通方式",
-   "subtype": "长途交通",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "火车",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "飞机",
-   "entity_type": "交通方式",
-   "subtype": "长途交通",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "飞机",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "轮渡",
@@ -2312,7 +1508,7 @@
     "通用"
    ],
    "canonical": "轮渡",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "渡轮",
@@ -2322,7 +1518,7 @@
     "通用"
    ],
    "canonical": "渡轮",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "游船",
@@ -2332,7 +1528,7 @@
     "通用"
    ],
    "canonical": "游船",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "游轮",
@@ -2342,37 +1538,7 @@
     "通用"
    ],
    "canonical": "游轮",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "自驾",
-   "entity_type": "交通方式",
-   "subtype": "自驾",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "自驾",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "包车",
-   "entity_type": "交通方式",
-   "subtype": "自驾",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "包车",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "租车",
-   "entity_type": "交通方式",
-   "subtype": "自驾",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "租车",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "步行",
@@ -2382,7 +1548,7 @@
     "通用"
    ],
    "canonical": "步行",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "徒步",
@@ -2392,7 +1558,7 @@
     "通用"
    ],
    "canonical": "徒步",
-   "source": "manual_vocabulary"
+   "source": "lexicon"
   },
   {
    "name": "登山",
@@ -2402,54 +1568,24 @@
     "通用"
    ],
    "canonical": "登山",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "骑行",
-   "entity_type": "交通方式",
-   "subtype": "骑行",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "骑行",
-   "source": "manual_vocabulary"
-  },
-  {
-   "name": "坐车",
-   "entity_type": "交通方式",
-   "subtype": "其他",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "坐车",
-   "source": "recall_eval_2026-11-05"
-  },
-  {
-   "name": "顺风车",
-   "entity_type": "交通方式",
-   "subtype": "其他",
-   "scenic_areas": [
-    "通用"
-   ],
-   "canonical": "顺风车",
-   "source": "recall_eval_2026-11-05"
+   "source": "lexicon"
   }
  ],
  "domain_stopwords": [
-  "上海",
-  "四姑娘山",
-  "知道",
-  "下山",
   "上山",
-  "爬山",
-  "公园",
-  "味道",
-  "轻松",
+  "上海",
+  "下山",
   "专门",
-  "开门",
-  "出门",
   "入园",
-  "进沟",
-  "进山"
+  "公园",
+  "出门",
+  "味道",
+  "四姑娘山",
+  "开门",
+  "爬山",
+  "知道",
+  "轻松",
+  "进山",
+  "进沟"
  ]
 }

@@ -1,7 +1,7 @@
 {
  "name_alignment": {
   "alias_rows": 7,
-  "route_poi_references_checked": 506,
+  "route_poi_references_checked": 505,
   "unresolved_alias_targets": [],
   "graph_nodes_without_identity": [],
   "route_references_missing_from_graph": [],
@@ -177,11 +177,11 @@
   "黄山": [
    [
     "光明顶",
-    63
+    59
    ],
    [
     "迎客松",
-    59
+    55
    ],
    [
     "始信峰",
@@ -189,57 +189,57 @@
    ],
    [
     "西海大峡谷",
-    50
+    49
    ],
    [
     "玉屏楼",
-    48
+    46
    ],
    [
     "北海",
-    45
-   ],
-   [
-    "天都峰",
     44
    ],
    [
     "西海",
-    44
+    43
+   ],
+   [
+    "莲花峰",
+    41
    ]
   ],
   "九寨沟": [
    [
     "五花海",
-    56
+    55
    ],
    [
     "诺日朗",
-    54
+    53
    ],
    [
     "长海",
     53
    ],
    [
-    "五彩池",
-    50
-   ],
-   [
     "诺日朗瀑布",
     50
    ],
    [
-    "沟口",
-    46
+    "五彩池",
+    48
    ],
    [
-    "原始森林",
+    "沟口",
     44
    ],
    [
+    "原始森林",
+    42
+   ],
+   [
     "树正沟",
-    43
+    42
    ]
   ],
   "颐和园": [
@@ -291,34 +291,34 @@
   "颐和园": 1
  },
  "edge_relation_distribution": {
-  "包含": 163,
-  "条件建议": 595,
-  "先后顺序": 1865,
-  "时段归属": 144,
-  "交通方式": 58
+  "包含": 159,
+  "条件建议": 592,
+  "先后顺序": 1800,
+  "时段归属": 143,
+  "交通方式": 57
  },
  "isolated_nodes": [],
  "roundtrip": {
-  "csv_nodes": 634,
-  "csv_edges": 2825,
-  "graphml_nodes": 634,
-  "graphml_edges": 2825,
+  "csv_nodes": 627,
+  "csv_edges": 2751,
+  "graphml_nodes": 627,
+  "graphml_edges": 2751,
   "ok": true
  },
  "provenance": {
-  "cond_nodes_checked": 452,
-  "cond_nodes_with_evidence": 452,
+  "cond_nodes_checked": 450,
+  "cond_nodes_with_evidence": 450,
   "cond_nodes_placeholder_named": 0,
-  "order_edges_checked": 1621,
-  "order_edges_with_records": 1621,
+  "order_edges_checked": 1557,
+  "order_edges_with_records": 1557,
   "parse_failures": 0
  },
  "provenance_ok": true,
  "direction_resolution": {
-  "order_edges": 1865,
-  "unopposed_edges": 643,
-  "opposed_edges": 1222,
-  "tied_edges": 288,
+  "order_edges": 1800,
+  "unopposed_edges": 614,
+  "opposed_edges": 1186,
+  "tied_edges": 276,
   "invalid_edges": 0
  },
  "direction_ok": true

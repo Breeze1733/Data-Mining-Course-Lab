@@ -27,10 +27,7 @@ def refined_dictionary():
                 "canonical": entry.canonical, "source": "merged_gazetteer",
             }
     transport = {e["name"]: dict(e) for e in data["transport"]}
-    # Unspecified actions remain actions, rather than inventing a vehicle.
     for entry in load_transport_lexicon(RES / "transport_lexicon.csv"):
-        if entry.surface in {"乘车", "坐车"}:
-            continue
         transport.setdefault(entry.surface, {
             "name": entry.surface, "entity_type": "交通方式", "subtype": entry.subtype,
             "scenic_areas": ["通用"], "canonical": entry.normalized, "source": "merged_lexicon",
@@ -48,8 +45,7 @@ class DictMatcher:
         for item in entries:
             if item["entity_type"] != "景点POI":
                 continue
-            # scenic_areas=[] means "周边地标" (peripheral landmark): matchable and usable as a coref-resolution candidate, but not part of any in-scenic set
-            for area in (item["scenic_areas"] or ["周边"]):
+            for area in item["scenic_areas"]:
                 template = templates.get((area, item["name"]))
                 if template:
                     entry = replace(template, canonical=item["canonical"])
@@ -66,8 +62,7 @@ class DictMatcher:
             if entry is None:
                 entry = TransportEntry("DOMAIN-" + item["name"], item["name"],
                                        item["canonical"], "其他", 8, False, "", "", "", "domain_seed")
-            # Prevent transport names from matching inside unrelated compound words.
-            guards = {"步行": "街", "登山": "杖|鞋|口|服|包|靴", "地铁": "站|口"}
+            guards = {"步行": "街", "登山": "杖|鞋|口|服|包|靴"}
             extra = guards.get(entry.surface, "")
             if extra:
                 entry = replace(entry, negative_after="|".join(filter(None, [entry.negative_after, extra])))
@@ -106,12 +101,6 @@ _time_rules = None
 
 
 def contextual_facility_places(text: str, scenic: str) -> list[dict]:
-    """Recover a location antecedent from explicit named-facility proximity.
-
-    A hotel alone is not a scenic POI. A clause such as 北海宾馆附近 explicitly
-    locates the narration, so coreference may use the associated named place.
-    This inference is kept out of entity frequency and route extraction.
-    """
     data = json.loads((RES / "domain_seed.json").read_text(encoding="utf-8"))
     found = []
     for entry in data["poi"]:
@@ -133,8 +122,6 @@ def time_entities(text: str) -> list[dict]:
     candidates, _ = Gazetteer([], []).resolve_overlaps(_time_rules.extract(text))
     return [{"text": c.surface, "type": c.type, "subtype": c.subtype,
              "start": c.start, "end": c.end,
-             # canonical is a vocabulary key: strip internal whitespace while
-             # keeping text/start/end as the verbatim source span.
              "canonical": (re.sub(r"\s+", "", c.normalized or c.surface)
                            if any(ch.isspace() for ch in c.surface) else c.surface),
              "normalized": c.normalized, "in_scenic": True,
@@ -143,7 +130,6 @@ def time_entities(text: str) -> list[dict]:
 
 
 def resolve_record_entities(entities: list[dict]) -> list[dict]:
-    """A duration regex must not consume the first character of a known POI."""
     pois = [e for e in entities if e["type"] == "景点POI"]
     return [e for e in entities if not (
         e["type"] == "时间节点" and e["subtype"] == "时长" and any(

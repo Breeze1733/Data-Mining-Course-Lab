@@ -25,7 +25,7 @@
    "end": 357,
    "context": ",最终历10h左右车程,抵达九寨天源豪生度假酒店,在换乘出租车约10分钟车程,于18:30抵达九寨鲁能希尔顿度假酒店,",
    "verdict": "correct",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -38,7 +38,7 @@
    "end": 2804,
    "context": "入住:同上⏎D6(9-25周五)行程:敦煌--嘉峪关南(自驾)--兰州(高铁)。自驾380km,4小时。⏎因为赶路,",
    "verdict": "correct",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -52,7 +52,7 @@
    "context": "到山上的最高点!保证不会让你失望。莲宝叶则完全有资格称为自驾游的天堂。⏎各莫寺⏎离阿坝县城13公里。有200多年历史",
    "verdict": "correct",
    "note": "复合词“自驾游”，方式判定成立",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -65,7 +65,7 @@
    "end": 3182,
    "context": "制消费,但会各种给吃给喝,让你不好意思到买一点):⏎1、包车(包车700,从早上酒店接,到黄龙,行李放车上,游玩结束",
    "verdict": "correct",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -79,7 +79,7 @@
    "context": "是,经过五天的不充足的准备,我们飞向了四川。⏎第一天一下飞机,成都便映入眼帘,原本以为会让我眼前一亮,但是结果却恰恰",
    "verdict": "correct",
    "note": "“下飞机”为到达动作，飞机作为交通方式成立",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment",
    "remapped_from": "CTRIP_4018116"
   },
@@ -107,7 +107,7 @@
    "end": 98,
    "context": "中孤单的一次释放。⏎第一天,国家博物馆。早上是8:45的高铁,出行路上妻的精力很充沛,还能跟出租车司机神侃,我只能积",
    "verdict": "correct",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -120,7 +120,7 @@
    "end": 787,
    "context": "天坛—承德⏎由于行程订得有点仓促,而且上海去承德没有直达高铁,要在北京转乘,然后北京到承德那一段的高铁时间早的都被订",
    "verdict": "correct",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -133,7 +133,7 @@
    "end": 1572,
    "context": "可在中轴线俯瞰故宫全景。我们从景山西门出来,因为交通管制网约车默认上车点很远,但实际上如需打车可以往前小走几步走到“景",
    "verdict": "correct",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -146,7 +146,7 @@
    "end": 6466,
    "context": "意图⏎国博内景⏎馆藏品一瞥⏎参观完国博,我们直奔恭王府,地铁一号线到西单转四号线到平安里转6号线到北海北门站下,出了",
    "verdict": "correct",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -227,7 +227,7 @@
    "context": "教育、节庆文化等功能于一体,是南京历史文化荟萃之地。⏎坐地铁到夫子庙,先来到瞻园。⏎瞻园位于江苏省南京市秦淮区夫子庙",
    "verdict": "correct",
    "note": "多城市游记（南京段），类型正确但非黄山内容",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -514,7 +514,7 @@
    "end": 8004,
    "context": "根,令人叹为观止。⏎黄龙⏎黄龙⏎黄龙⏎黄龙⏎黄龙⏎黄龙⏎黄龙⏎争艳池⏎争艳池⏎争艳池⏎争艳池⏎争艳池⏎婆萝彩池⏎婆萝",
    "verdict": "correct",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -527,7 +527,7 @@
    "end": 3039,
    "context": "来九寨沟!⏎去黄龙的路⏎7月18日早晨,我们从九寨沟前往黄龙。行车线路是:走G544到川主寺转S301(平松路)到黄",
    "verdict": "correct",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -644,7 +644,7 @@
    "end": 5971,
    "context": ",汩汩清泉从各户潺潺流过,自然景观与人文内涵交相辉映,是宏村区别于其他民居建筑布局的特色,成为当今世界历史文化遗产一",
    "verdict": "correct",
-   "present_in_current_output": true,
+   "present_in_current_output": false,
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   },
   {
@@ -713,22 +713,18 @@
    "review_provenance": "historical label; exact document/type/surface/span alignment"
   }
  ],
- "reviewed_at": "2026-10-29（时间正则优化后复检）",
  "review_summary": {
-  "n": 53,
-  "correct": 53,
+  "n": 40,
+  "correct": 40,
   "ambiguous": 0,
   "incorrect": 0,
-  "historical_sample_count": 54,
-  "removed_or_changed": 1,
-  "remapped_to_canonical": 1,
-  "note": "仅对本轮仍存在的相同实体继承历史判定；近重复副本已删除时，同文同跨度的抽样映射到 canonical 记录。非新一轮随机抽检，不估计总体准确率。新增实体尚待独立人工抽检。"
+  "total_samples": 54,
+  "removed_or_changed": 14
  },
  "historical_review_summary": {
   "n": 54,
   "correct": 54,
   "ambiguous": 0,
-  "incorrect": 0,
-  "note": "误报主要产生于复合词（步行街/火车站/登山杖/地铁站），经三轮守卫规则修复后复检通过；时间正则优化（en-dash范围、X点半、X点单独成词）后本批抽检全部正确。注意：本批抽样未包含此前轮次发现的同名异点个例（黄龙/九寨沟五彩池、爨底下村一线天、玉屏楼宾馆），这类歧义在总体中仍存在，属词典法的已知边界，见报告4.4。"
+  "incorrect": 0
  }
 }

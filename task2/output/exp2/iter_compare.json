@@ -4,47 +4,37 @@
    "iteration": "baseline",
    "dictionary": {
     "poi": 71,
-    "transport": 15,
+    "transport": 9,
     "stopwords": 0
    },
-   "total_entities": 17825,
+   "total_entities": 17062,
    "by_type": {
     "景点POI": 8339,
-    "交通方式": 2248,
+    "交通方式": 1485,
     "时间节点": 7238
-   },
-   "findings": [
-    "采集阶段种子词典；使用与refined相同的共享时间和交通规则；词典覆盖变化与规则替换分开比较。"
-   ]
+   }
   },
   {
    "iteration": "refined",
    "dictionary": {
-    "poi": 246,
-    "transport": 52,
+    "poi": 170,
+    "transport": 31,
     "stopwords": 15
    },
-   "total_entities": 23330,
+   "total_entities": 18975,
    "by_type": {
-    "景点POI": 12675,
-    "交通方式": 3417,
+    "景点POI": 9758,
+    "交通方式": 1979,
     "时间节点": 7238
-   },
-   "findings": [
-    "整合词表：POI 246 项、交通 52 项、停用词 15 项。",
-    "紧邻语境过滤、复合词守卫、最长区间消解与公共别名映射。",
-    "历史标签仅按文档、类型、原文及位置完全一致时继承；不是新一轮随机抽检。"
-   ]
+   }
   }
  ],
  "spot_check": {
-  "n": 53,
-  "correct": 53,
+  "n": 40,
+  "correct": 40,
   "ambiguous": 0,
   "incorrect": 0,
-  "historical_sample_count": 54,
-  "removed_or_changed": 1,
-  "remapped_to_canonical": 1,
-  "note": "仅对本轮仍存在的相同实体继承历史判定；近重复副本已删除时，同文同跨度的抽样映射到 canonical 记录。非新一轮随机抽检，不估计总体准确率。新增实体尚待独立人工抽检。"
+  "total_samples": 54,
+  "removed_or_changed": 14
  }
 }
