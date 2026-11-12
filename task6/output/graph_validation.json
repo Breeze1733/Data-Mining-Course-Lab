@@ -10,93 +10,167 @@
  "fact_checks": [
   {
    "pair": "颐和园:长廊→佛香阁",
-   "found": true,
-   "edges": [
-    {
-     "from": "长廊",
-     "to": "佛香阁",
-     "relation": "先后顺序",
-     "weight": 14.5,
-     "official_routes": "",
-     "tourist_support": 21
-    }
+   "official_route_ids": [
+    "YHY-EXP02-R1",
+    "YHY-EXP09-R3"
    ],
-   "reverse_found": true
+   "official_route_count": 2,
+   "graph_official_path": true,
+   "same_route_paths": {
+    "YHY-EXP02-R1": [
+     "长廊",
+     "排云殿",
+     "佛香阁"
+    ],
+    "YHY-EXP09-R3": [
+     "长廊",
+     "画中游",
+     "佛香阁"
+    ]
+   },
+   "found": true
   },
   {
-   "pair": "颐和园:昆明湖→十七孔桥",
-   "found": true,
-   "edges": [
-    {
-     "from": "昆明湖",
-     "to": "十七孔桥",
-     "relation": "先后顺序",
-     "weight": 10.0,
-     "official_routes": "",
-     "tourist_support": 14
-    }
+   "pair": "颐和园:长廊→石舫",
+   "official_route_ids": [
+    "YHY-EXP02-R1",
+    "YHY-EXP10-R2"
    ],
-   "reverse_found": true
+   "official_route_count": 2,
+   "graph_official_path": true,
+   "same_route_paths": {
+    "YHY-EXP02-R1": [
+     "长廊",
+     "排云殿",
+     "佛香阁",
+     "石舫"
+    ],
+    "YHY-EXP10-R2": [
+     "长廊",
+     "石舫"
+    ]
+   },
+   "found": true
   },
   {
    "pair": "黄山:迎客松→光明顶",
-   "found": true,
-   "edges": [
-    {
-     "from": "迎客松",
-     "to": "光明顶",
-     "relation": "先后顺序",
-     "weight": 7.5,
-     "official_routes": "",
-     "tourist_support": 14
-    }
+   "official_route_ids": [
+    "HS-EXTRA1-R1",
+    "HS-EXTRA2-R1"
    ],
-   "reverse_found": true
+   "official_route_count": 2,
+   "graph_official_path": true,
+   "same_route_paths": {
+    "HS-EXTRA1-R1": [
+     "迎客松",
+     "百步云梯",
+     "鳌鱼峰",
+     "光明顶"
+    ],
+    "HS-EXTRA2-R1": [
+     "迎客松",
+     "莲花峰",
+     "光明顶"
+    ]
+   },
+   "found": true
   },
   {
    "pair": "黄山:光明顶→飞来石",
-   "found": true,
-   "edges": [
-    {
-     "from": "光明顶",
-     "to": "飞来石",
-     "relation": "先后顺序",
-     "weight": 22.5,
-     "official_routes": "HS-O1-R3；HS-EXTRA1-R1；HS-EXTRA2-R1",
-     "tourist_support": 21
-    }
+   "official_route_ids": [
+    "HS-EXTRA1-R1",
+    "HS-EXTRA2-R1",
+    "HS-O1-R3"
    ],
-   "reverse_found": true
+   "official_route_count": 3,
+   "graph_official_path": true,
+   "same_route_paths": {
+    "HS-EXTRA1-R1": [
+     "光明顶",
+     "飞来石"
+    ],
+    "HS-EXTRA2-R1": [
+     "光明顶",
+     "飞来石"
+    ],
+    "HS-O1-R3": [
+     "光明顶",
+     "飞来石"
+    ]
+   },
+   "found": true
   },
   {
    "pair": "九寨沟:诺日朗→长海",
-   "found": true,
-   "edges": [
-    {
-     "from": "诺日朗",
-     "to": "长海",
-     "relation": "先后顺序",
-     "weight": 18.0,
-     "official_routes": "JZG-EXP02-R1；JZG-EXP03-R1",
-     "tourist_support": 29
-    }
+   "official_route_ids": [
+    "JZG-EXP02-R1",
+    "JZG-EXP03-R1",
+    "JZG-EXP04-R1"
    ],
-   "reverse_found": true
+   "official_route_count": 3,
+   "graph_official_path": true,
+   "same_route_paths": {
+    "JZG-EXP02-R1": [
+     "诺日朗",
+     "长海"
+    ],
+    "JZG-EXP03-R1": [
+     "诺日朗",
+     "长海"
+    ],
+    "JZG-EXP04-R1": [
+     "诺日朗",
+     "树正寨",
+     "树正群海",
+     "卧龙海",
+     "火花海",
+     "双龙海",
+     "芦苇海",
+     "盆景滩",
+     "长海"
+    ]
+   },
+   "found": true
   },
   {
    "pair": "九寨沟:长海→五彩池",
-   "found": true,
-   "edges": [
-    {
-     "from": "长海",
-     "to": "五彩池",
-     "relation": "先后顺序",
-     "weight": 65.0,
-     "official_routes": "JZG-EXP01-R1；JZG-EXP01-R2；JZG-EXP01-R3；JZG-EXP02-R1；JZG-EXP03-R1；JZG-EXP04-R1",
-     "tourist_support": 64
-    }
+   "official_route_ids": [
+    "JZG-EXP01-R1",
+    "JZG-EXP01-R2",
+    "JZG-EXP01-R3",
+    "JZG-EXP02-R1",
+    "JZG-EXP03-R1",
+    "JZG-EXP04-R1"
    ],
-   "reverse_found": true
+   "official_route_count": 6,
+   "graph_official_path": true,
+   "same_route_paths": {
+    "JZG-EXP01-R1": [
+     "长海",
+     "五彩池"
+    ],
+    "JZG-EXP01-R2": [
+     "长海",
+     "五彩池"
+    ],
+    "JZG-EXP01-R3": [
+     "长海",
+     "五彩池"
+    ],
+    "JZG-EXP02-R1": [
+     "长海",
+     "五彩池"
+    ],
+    "JZG-EXP03-R1": [
+     "长海",
+     "五彩池"
+    ],
+    "JZG-EXP04-R1": [
+     "长海",
+     "五彩池"
+    ]
+   },
+   "found": true
   }
  ],
  "key_poi_nodes_by_degree": {
@@ -110,11 +184,11 @@
     59
    ],
    [
-    "西海大峡谷",
+    "始信峰",
     50
    ],
    [
-    "始信峰",
+    "西海大峡谷",
     50
    ],
    [
@@ -126,46 +200,46 @@
     45
    ],
    [
-    "西海",
+    "天都峰",
     44
    ],
    [
-    "天都峰",
+    "西海",
     44
    ]
   ],
   "九寨沟": [
    [
     "五花海",
-    57
+    56
    ],
    [
     "诺日朗",
-    55
+    54
    ],
    [
     "长海",
-    52
+    53
+   ],
+   [
+    "五彩池",
+    50
    ],
    [
     "诺日朗瀑布",
-    51
+    50
    ],
    [
     "沟口",
-    45
-   ],
-   [
-    "树正沟",
-    45
+    46
    ],
    [
     "原始森林",
-    43
+    44
    ],
    [
-    "黄龙",
-    42
+    "树正沟",
+    43
    ]
   ],
   "颐和园": [
@@ -198,7 +272,7 @@
     43
    ],
    [
-    "北宫门",
+    "东宫门",
     39
    ]
   ]
@@ -217,31 +291,35 @@
   "颐和园": 1
  },
  "edge_relation_distribution": {
-  "包含": 164,
-  "条件建议": 692,
-  "先后顺序": 1883,
+  "包含": 163,
+  "条件建议": 595,
+  "先后顺序": 1865,
   "时段归属": 144,
   "交通方式": 58
  },
  "isolated_nodes": [],
- "verdict_notes": [
-  "经典先后对（长廊→佛香阁、迎客松→光明顶等）均有先后顺序边支撑，且带官方路线 ID 与游客支持计数；",
-  "五彩池/北海等同名异点按景区命名空间隔离，未跨景区合并；",
-  "各景区子图均为单一连通分量（条件节点挂靠在 POI/景区上），无孤立节点；"
- ],
  "roundtrip": {
-  "csv_nodes": 638,
-  "csv_edges": 2941,
-  "graphml_nodes": 638,
-  "graphml_edges": 2941,
+  "csv_nodes": 634,
+  "csv_edges": 2825,
+  "graphml_nodes": 634,
+  "graphml_edges": 2825,
   "ok": true
  },
  "provenance": {
-  "cond_nodes_checked": 455,
-  "cond_nodes_with_evidence": 455,
-  "order_edges_checked": 1639,
-  "order_edges_with_records": 1639,
+  "cond_nodes_checked": 452,
+  "cond_nodes_with_evidence": 452,
+  "cond_nodes_placeholder_named": 0,
+  "order_edges_checked": 1621,
+  "order_edges_with_records": 1621,
   "parse_failures": 0
  },
- "provenance_ok": true
+ "provenance_ok": true,
+ "direction_resolution": {
+  "order_edges": 1865,
+  "unopposed_edges": 643,
+  "opposed_edges": 1222,
+  "tied_edges": 288,
+  "invalid_edges": 0
+ },
+ "direction_ok": true
 }

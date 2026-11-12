@@ -1,15 +1,15 @@
 """Experiment 6: multi-source procedural knowledge fusion and knowledge graph construction (NetworkX).
 
 Schema:
-  Nodes: scenic area / sight POI (with surrounding-sight subtype) / transport operation (sightseeing bus, cableway…)/ time period (上午…晚上)/ condition (人群/天气/时间/装备…)
-  Edges:  包含 (scenic area->POI), 周边关联 (scenic area->surrounding sight), 先后顺序 (POI->POI, weighted from official + tourist sources),
-        时段归属 (POI->time period), 交通方式 (POI->transport operation), 条件建议 (POI->condition node)
+  Nodes: scenic area / sight POI (with surrounding-sight subtype) / transport operation (sightseeing bus, cableway…)/ time period (上午…晚上)/ condition (node name = the original condition-text fragment; type/label kept as attributes)
+  Edges:  包含 (scenic area->POI), 周边关联 (scenic area->surrounding sight), 先后顺序 (POI->POI, weighted from official + tourist sources, all observed directions retained),
+        时段归属 (POI->time period), 交通方式 (POI->transport operation), 条件建议 (POI/景区->condition node)
 
 Fusion policy:
   1. Entity alignment: the experiment-2 dictionary canonical is the unique key, with per-scenic-area namespaces (五彩池 isolated by area, 北海 restricted to 黄山);
-  2. Source merging: order edges record the official_routes / tourist_records source groups with separate weights (official 1.0 per route, tourist 0.5 per record);
-  3. Frequency weighting: period-membership and transport-mode edges accumulate per step occurrence;
-  4. Noise filtering: only dictionary POIs are included; condition-advice edges attach only to POIs appearing in the sentence, otherwise attach to the scenic-area node and are flagged.
+  2. Source merging: order edges preserve official_routes / tourist_records and both observed directions; each route contributes 1.0 and each record contributes 0.5 per directed edge; recommendation metadata records official priority;
+  3. Frequency weighting: period-membership and transport-mode edges accumulate per step occurrence; condition edges accumulate per member frequency on both POI and scenic-area fallback;
+  4. Noise filtering: only dictionary POIs are included; condition-advice edges attach only to POIs appearing in the sentence, otherwise attach to the scenic-area node; condition rows without an explicit condition (absent) never become condition nodes.
 Output: graph_nodes.csv, graph_edges.csv, knowledge_graph.graphml, graph_stats.json
 """
 from __future__ import annotations
@@ -49,10 +49,6 @@ _CONTRAST = [("多", "少"), ("雨", "雪"), ("早", "晚"), ("上", "下"), ("�
              ("大", "小"), ("开", "关"), ("高", "低"), ("冷", "热"), ("快", "慢"), ("贵", "廉")]
 
 
-def _norm_cond_m(t: str) -> str:
-    return re.sub(r"[\s，,。；;、！？!?\[\]()【】的了吗呢啊呀]", "", t)
-
-
 def _contrast_blocked(ta: str, tb: str) -> bool:
     if len(ta) != len(tb):
         return False
@@ -64,17 +60,8 @@ def _contrast_blocked(ta: str, tb: str) -> bool:
 
 
 def dedup_groups_from_quality(quality: dict) -> tuple[list[set], dict[str, int]]:
-    """F05: near-duplicate pairs -> transitive-closure grouping and record->group-id mapping (key names match the preprocess output)."""
-    groups: list[set] = []
-    for _d in quality.get("near_duplicate_pairs", []):
-        _a, _b = _d["record_id_a"], _d["record_id_b"]
-        for _grp in groups:
-            if _a in _grp or _b in _grp:
-                _grp.add(_b)
-                _grp.add(_a)
-                break
-        else:
-            groups.append({_a, _b})
+    """Use task1's precomputed transitive groups, including removed audit records."""
+    groups = [set(g["record_ids"]) for g in quality.get("near_duplicate_groups", [])]
     rec2grp: dict[str, int] = {}
     for _gi, _grp in enumerate(groups):
         for _r in _grp:
@@ -103,6 +90,9 @@ def main() -> int:
     parsed = [json.loads(l) for l in (TASK3 / "output/parsed_routes.jsonl").open(encoding="utf-8")]
     tourists = [json.loads(l) for l in (TASK3 / "output/tourist_routes.jsonl").open(encoding="utf-8")]
     mapping = json.loads((TASK5 / "output/mapping_table.json").read_text(encoding="utf-8"))
+    refinement_stats = json.loads((TASK5 / "output/extraction_stats.json").read_text(encoding="utf-8"))["condition_refinement"]
+    if len(mapping) != refinement_stats["input_rows"] or sum(bool(m["condition_text"]) for m in mapping) != refinement_stats["nonempty_after"]:
+        raise ValueError("task5 mapping and extraction statistics are inconsistent")
     # Mention frequency taken directly from full entity statistics (the top_canonical table is truncated and misses low-frequency POIs)
     mention_counter: Counter = Counter()
     with (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8") as _fh:
@@ -144,12 +134,14 @@ def main() -> int:
             if a == b:
                 continue
             u, v = node_id("POI", scenic, resolve(scenic, a)), node_id("POI", scenic, resolve(scenic, b))
+            if p["route_id"] in official_support[(u, v)]:
+                continue
             if G.has_edge(u, v, key="先后顺序"):
                 G[u][v]["先后顺序"]["weight"] += 1.0
             else:
                 G.add_edge(u, v, key="先后顺序", relation="先后顺序", weight=1.0, source="官方路线")
             official_support[(u, v)].append(p["route_id"])
-    # Near-duplicate travelogue dedup — records in the same group contribute at most 1 support per edge
+    # Task1 already removed near-duplicate records; group identity is retained as an additional guard.
     _quality = json.loads((TASK1 / "data/processed/quality_report.json").read_text(encoding="utf-8"))
     _dup_groups, _rec2grp = dedup_groups_from_quality(_quality)
 
@@ -162,7 +154,7 @@ def main() -> int:
     for t in tourists:
         scenic = t["scenic_area"]
         rid = t.get("record_id")
-        # Graph edges use the full poi_sequence (preserving backtracking and repeated visits); accumulated weights carry visit intensity
+        # Keep both directions, counting each record/group once per directed edge.
         for a, b in zip(t["poi_sequence"], t["poi_sequence"][1:]):
             u, v = node_id("POI", scenic, resolve(scenic, a)), node_id("POI", scenic, resolve(scenic, b))
             # Skip cross-region pairs (one end a surrounding landmark, the other an in-area POI)
@@ -170,15 +162,15 @@ def main() -> int:
                 continue
             if not (G.has_node(u) and G.has_node(v)):
                 continue
+            grp_id = _rec2grp.get(rid, rid)
+            if grp_id in tourist_group_seen[(u, v)]:
+                continue
+            tourist_group_seen[(u, v)].add(grp_id)
             if G.has_edge(u, v, key="先后顺序"):
                 G[u][v]["先后顺序"]["weight"] += 0.5
             else:
                 G.add_edge(u, v, key="先后顺序", relation="先后顺序", weight=0.5, source="游客序列")
             # Records in the same near-duplicate group contribute at most 1 support per edge
-            grp_id = _rec2grp.get(rid, rid)
-            if grp_id in tourist_group_seen[(u, v)]:
-                continue
-            tourist_group_seen[(u, v)].add(grp_id)
             tourist_support[(u, v)] += 1
             if rid and rid not in tourist_records[(u, v)]:
                 tourist_records[(u, v)].append(rid)
@@ -192,6 +184,40 @@ def main() -> int:
             G[u][v]["先后顺序"]["tourist_records"] = json.dumps(recs, ensure_ascii=False)
             G[u][v]["先后顺序"]["tourist_support"] = tourist_support.get((u, v), 0)
 
+    # Preserve every observed direction. Recommendation is metadata, never deletion of evidence.
+    _opp: dict[frozenset, list] = defaultdict(list)
+    for u, v, d in G.edges(data=True):
+        if d.get("relation") == "先后顺序":
+            _opp[frozenset((u, v))].append((u, v, d))
+    _dir_single = _dir_opposed = _dir_tied = 0
+    for items in _opp.values():
+        if len(items) == 1:
+            (u, v, d), = items
+            d["direction"] = "single"
+            d["recommended"] = True
+            d["direction_basis"] = "observed"
+            _dir_single += 1
+            continue
+        (u1, v1, d1), (u2, v2, d2) = items
+        off1, off2 = d1.get("official_routes") or "", d2.get("official_routes") or ""
+        _dir_opposed += 1
+        for d, reverse in ((d1, d2), (d2, d1)):
+            d["reverse_weight"] = reverse["weight"]
+            d["evidence_share"] = round(d["weight"] / (d["weight"] + reverse["weight"]), 3)
+        if off1 and off2:
+            for d in (d1, d2):
+                d.update(direction="opposed", recommended=True, direction_basis="official")
+        elif bool(off1) != bool(off2):
+            for d, official in ((d1, off1), (d2, off2)):
+                d.update(direction="opposed", recommended=bool(official), direction_basis="official")
+        elif d1["weight"] == d2["weight"]:
+            for d in (d1, d2):
+                d.update(direction="tied", recommended=True, direction_basis="weight")
+            _dir_tied += 1
+        else:
+            for d, reverse in ((d1, d2), (d2, d1)):
+                d.update(direction="opposed", recommended=d["weight"] > reverse["weight"], direction_basis="weight")
+
 
     period_freq: dict[str, Counter] = defaultdict(Counter)
     transport_freq: dict[str, Counter] = defaultdict(Counter)
@@ -201,7 +227,7 @@ def main() -> int:
         scenic = p["scenic_area"]
         for s in p["steps"]:
             period = s["period"] or "未标注时段"
-            for poi in {resolve(scenic, x["normalized"]) for x in s["pois"]}:
+            for poi in sorted({resolve(scenic, x["normalized"]) for x in s["pois"]}):
                 period_freq[scenic][period] += 1
                 u, v = node_id("POI", scenic, poi), node_id("时段", scenic, period)
                 if not G.has_node(v):
@@ -216,7 +242,7 @@ def main() -> int:
                 tn = node_id("交通操作", scenic, tr)
                 if not G.has_node(tn):
                     G.add_node(tn, kind="交通操作", name=tr, label=tr)
-                for poi in {resolve(scenic, x["normalized"]) for x in s["pois"]}:
+                for poi in sorted({resolve(scenic, x["normalized"]) for x in s["pois"]}):
                     u = node_id("POI", scenic, poi)
                     transport_freq[scenic][tr] += 1
                     if G.has_edge(u, tn, key="交通方式"):
@@ -226,17 +252,9 @@ def main() -> int:
 
     _stats: dict = {}
 
-    # Cluster normalization: conditions with the same scenic area + same type + normalized-text char-bigram Jaccard>=0.4 merge into one node,
-    # keeping the representative text (highest frequency), all variants, and the summed frequency; edges attach per member with accumulated weights.
+    # Exact condition identity after conservative whitespace and outer punctuation normalization.
     def _norm_cond(t: str) -> str:
-        return re.sub(r"[\s，,。；;、！？!?\[\]()【】的了吗呢啊呀]", "", t)
-
-    def _bigrams(t: str) -> set:
-        return {t[i:i + 2] for i in range(len(t) - 1)} if len(t) > 1 else {t}
-
-    def _polarity(m) -> str:
-        t = _norm_cond(m["condition_text"])[:4]
-        return "NEG" if re.search(r"^(不要|不去|别|切勿|避免|慎|忌|没带|没有带|没有|不宜|不建议)", t) else "POS"
+        return re.sub(r"\s+", "", t).strip("，,。；;、！？!?")
 
     # Representative-advice selection: the representative member's advice is not necessarily the most actionable (e.g. “避暑旅游” is weaker than “携带保暖衣物”).
     # Action signal > member frequency > length; pick the representative advice for the graph from the whole group.
@@ -256,43 +274,37 @@ def main() -> int:
         rec_year[_r["record_id"]] = str(_r.get("published_at") or "")
 
     clusters: list[dict] = []
-    # Contrast-word guard: see module-level _contrast_blocked (0 pairs affected in the real graph; hardening against a latent risk)
-    reps: list[tuple[str, str, str, str, set]] = []
+    by_condition: dict[tuple[str, str], dict] = {}
+    _absent = _unusable = 0
     for m in mapping:
+        if not m["condition_text"]:
+            _absent += 1
+            continue  # absent rows state no condition — there is no "如果X则Y" to graph
         key_text = _norm_cond(m["condition_text"])
-        bg = _bigrams(key_text)
-        hit = None
-        for scenic0, ctype0, pat0, pol0, bg0, cluster0 in reps:
-            # Different polarity is never merged (P4 advice/P6 pitfall-avoidance, plus negation prefixes in the condition text itself)
-            if (scenic0 == m["scenic_area"] and ctype0 == m["condition_type"]
-                    and pat0 == m["pattern"] and pol0 == _polarity(m)):
-                inter, union = len(bg0 & bg), len(bg0 | bg)
-                if union and inter / union >= 0.4:
-                    if _contrast_blocked(_norm_cond(m["condition_text"]),
-                                         _norm_cond(cluster0["members"][0]["condition_text"])):
-                        continue
-                    hit = cluster0
-                    break
-        if hit is not None:
-            hit["members"].append(m)
-        else:
-            cluster = {"scenic_area": m["scenic_area"], "condition_type": m["condition_type"],
-                       "members": [m]}
-            reps.append((m["scenic_area"], m["condition_type"], m["pattern"], _polarity(m), bg, cluster))
+        if not key_text:
+            _unusable += 1
+            continue  # punctuation-only fragments carry no condition semantics
+        key = (m["scenic_area"], key_text)
+        if key not in by_condition:
+            cluster = {"scenic_area": m["scenic_area"], "members": [m]}
+            by_condition[key] = cluster
             clusters.append(cluster)
-    _stats["cond_raw"] = len(mapping)
+        else:
+            by_condition[key]["members"].append(m)
+    _stats["cond_pairs_input"] = len(mapping)
+    _stats["cond_pairs_with_condition"] = len(mapping) - _absent - _unusable
+    _stats["cond_pairs_absent_skipped"] = _absent
+    _stats["cond_pairs_unusable_skipped"] = _unusable
     _stats["cond_clusters"] = len(clusters)
 
-    cond_edges = 0
-    cond_to_scenic = 0
     for cluster in clusters:
         members = cluster["members"]
         rep = sorted(members, key=lambda x: (-x["frequency"], x["condition_text"]))[0]
         scenic = rep["scenic_area"]
-        # Include the extraction pattern in the ID — P4 advice and P6 pitfall-avoidance with inferred labels (“时间条件（句内）”) are
-        # different semantic nodes; clustering already separates them by pattern, so node identity must carry it too or they collide
-        cn = node_id("条件", scenic,
-                     f'{rep["pattern"]}:{rep["condition_type"]}:{_norm_cond(rep["condition_text"])}')
+        # Node identity is the conservatively normalized condition text per scenic area. Extraction pattern and
+        # condition type/label are metadata attributes: the same condition reached via different patterns is one
+        # node carrying every advice variant, which is what downstream condition queries need.
+        cn = node_id("条件", scenic, _norm_cond(rep["condition_text"]))
         if not G.has_node(cn):
             # Full evidence lands in the graph — variants/suggestions are not truncated; per-item sources and extraction methods stay traceable
             seen_cond, seen_sugg, seen_src = [], [], []
@@ -303,17 +315,27 @@ def main() -> int:
                     seen_cond.append(ct)
                 if sg not in seen_sugg:
                     seen_sugg.append(sg)
-                if x.get("record_id") and x["record_id"] not in seen_src:
-                    seen_src.append(x["record_id"])
+                for rid in x.get("sources", [x.get("record_id")]):
+                    if rid and rid not in seen_src:
+                        seen_src.append(rid)
                 evidence.append({"row_id": x.get("row_id"), "record_id": x.get("record_id"),
+                                 "sources": x.get("sources", []), "pair_ids": x.get("pair_ids", []),
                                  "pattern": x.get("pattern"), "frequency": x.get("frequency", 1),
-                                 "condition": ct[:60], "suggestion": sg[:60]})
+                                 "condition_type": x.get("condition_type_verified"),
+                                 "original_condition": x.get("original_condition_text", ct),
+                                 "condition_refinement": x.get("condition_refinement", []),
+                                 "semantic_roles": x.get("semantic_roles", {}),
+                                 "semantic_role_links": x.get("semantic_role_links", []),
+                                 "condition": ct, "suggestion": sg})
             src_years = sorted({m[:4] for rid in seen_src
                                 for m in [str(rec_year.get(rid, ""))]
                                 if re.match(r"^(?:19|20)\d{2}", m)})
             G.add_node(cn, kind="条件", name=rep["condition_text"][:30],
-                       label=f'[{rep["condition_type"]}|{rep["pattern"].split("_")[0]}] {rep["condition_text"][:24]}',
-                       cond_type=rep["condition_type"], suggestion=_best_suggestion(members)[:100],
+                       label=rep["condition_text"][:24],
+                       cond_type=rep["condition_type_verified"],
+                       cond_types=json.dumps(sorted({x["condition_type_verified"] for x in members}), ensure_ascii=False),
+                       condition_label=rep.get("condition_label", ""),
+                       suggestion=_best_suggestion(members)[:100],
                        frequency=sum(x["frequency"] for x in members),
                        variants=json.dumps(seen_cond, ensure_ascii=False),
                        suggestions=json.dumps(seen_sugg, ensure_ascii=False),
@@ -326,20 +348,21 @@ def main() -> int:
                             if e["type"] == "景点POI"
                             and scenic in canonical_areas.get(e["canonical"], set())
                             and node_id("POI", scenic, resolve(scenic, e["canonical"])) in G]
-            if pois_in_text:
-                for poi in dict.fromkeys(pois_in_text):
-                    u = node_id("POI", scenic, poi)
-                    if G.has_edge(u, cn, key="条件建议"):
-                        G[u][cn]["条件建议"]["weight"] += m["frequency"]
-                    else:
-                        G.add_edge(u, cn, key="条件建议", relation="条件建议", weight=m["frequency"])
-                    cond_edges += 1
-            else:
-                u = node_id("景区", scenic, scenic)
-                G.add_edge(u, cn, key="条件建议", relation="条件建议", weight=m["frequency"])
-                cond_to_scenic += 1
+            targets = ([node_id("POI", scenic, poi) for poi in dict.fromkeys(pois_in_text)]
+                       if pois_in_text else [node_id("景区", scenic, scenic)])
+            for u in targets:
+                if G.has_edge(u, cn, key="条件建议"):
+                    G[u][cn]["条件建议"]["weight"] += m["frequency"]
+                    row_ids = json.loads(G[u][cn]["条件建议"]["row_ids"])
+                    row_ids.append(m["row_id"])
+                    G[u][cn]["条件建议"]["row_ids"] = json.dumps(row_ids)
+                else:
+                    G.add_edge(u, cn, key="条件建议", relation="条件建议", weight=m["frequency"],
+                               row_ids=json.dumps([m["row_id"]]))
 
-    print(json.dumps({"cond_raw_pairs": _stats.get("cond_raw"), "cond_cluster_nodes": _stats.get("cond_clusters")}, ensure_ascii=False))
+    print(json.dumps({"cond_pairs_input": _stats.get("cond_pairs_input"),
+                      "cond_pairs_with_condition": _stats.get("cond_pairs_with_condition"),
+                      "cond_cluster_nodes": _stats.get("cond_clusters")}, ensure_ascii=False))
 
     OUT.mkdir(parents=True, exist_ok=True)
     # Collateral cleanup of the non-route-context guard: transport-operation nodes etc. connected only via removed clauses become orphans — remove them
@@ -378,18 +401,35 @@ def main() -> int:
             "nodes": sub.number_of_nodes(), "edges": sub.number_of_edges(),
             "by_kind": dict(Counter(d.get("kind", "?") for _, d in sub.nodes(data=True))),
             "by_relation": dict(Counter(d.get("relation", "?") for _, _, d in sub.edges(data=True))),
-            "top_degree": [(sub.nodes[n].get("label", n), deg) for n, deg in degrees.most_common(8)],
+            "top_degree": [(sub.nodes[n].get("label", n), deg)
+                           for n, deg in sorted(degrees.items(), key=lambda x: (-x[1], x[0]))[:8]],
             "isolated_nodes": len(isolated),
         }
+    cond_edges_to_poi = sum(1 for u, v, d in G.edges(data=True)
+                            if d.get("relation") == "条件建议" and u.startswith("POI:"))
+    cond_edges_to_scenic = sum(1 for u, v, d in G.edges(data=True)
+                               if d.get("relation") == "条件建议" and u.startswith("景区:"))
     graph_stats = {
         "total_nodes": G.number_of_nodes(), "total_edges": G.number_of_edges(),
         "by_kind": dict(Counter(d.get("kind", "?") for _, d in G.nodes(data=True))),
         "by_relation": dict(Counter(d.get("relation", "?") for _, _, d in G.edges(data=True))),
-        "cond_edges_to_poi": cond_edges, "cond_edges_to_scenic": cond_to_scenic,
+        # Condition-edge counts are read back from the graph itself, so stats and graph_edges.csv recompute each other
+        "cond_edges_to_poi": cond_edges_to_poi, "cond_edges_to_scenic": cond_edges_to_scenic,
+        "cond_pairs_input": _stats["cond_pairs_input"],
+        "cond_pairs_with_condition": _stats["cond_pairs_with_condition"],
+        "cond_pairs_absent_skipped": _stats["cond_pairs_absent_skipped"],
+        "cond_pairs_absent_input": refinement_stats["input_rows"] - refinement_stats["nonempty_before"],
+        "cond_pairs_condition_removed": refinement_stats["nonempty_before"] - refinement_stats["nonempty_after"],
+        "cond_pairs_unusable_skipped": _stats["cond_pairs_unusable_skipped"],
+        "cond_pairs_refined": refinement_stats["changes"].get("changed_rows", 0),
+        "cond_cluster_nodes": _stats["cond_clusters"],
+        "order_direction": {"unopposed_edges": _dir_single, "opposed_pairs": _dir_opposed,
+                            "tied_pairs": _dir_tied},
         "per_scenic": per_scenic,
         "fusion_policy": {
             "entity_alignment": "实验2词典 canonical 为唯一键，景区命名空间隔离（五彩池/北海不跨景区合并）",
-            "source_merge": "先后边=官方1.0/条+游客0.5/条；条件边挂句中POI，无POI挂景区并计数",
+            "source_merge": "先后顺序保留全部方向；每条官方路线每方向1.0，每篇游客记录每方向0.5；官方方向优先推荐，纯游客等权标记 tied",
+            "condition_semantics": "同景区条件文本经空白与首尾标点规范化后精确合并；无显式条件（absent）的建议不进入条件层",
             "noise_filter": "仅词典内POI；游客序列需两端节点已存在；周边景点单列子类",
         },
     }

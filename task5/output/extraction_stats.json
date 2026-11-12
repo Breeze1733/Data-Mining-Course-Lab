@@ -1,4 +1,40 @@
 {
+ "semantic_roles": {
+  "tool": "LTP",
+  "package_version": "4.2.14",
+  "model": "local/ltp_model",
+  "model_file_sha256": "a64f412c8fc2181d228d1bea7da15f391dfe395f9073f97da250054f847869dc",
+  "tasks": [
+   "cws",
+   "srl"
+  ],
+  "selection": "inferred_or_complex_explicit",
+  "unique_sentences": 170,
+  "annotated_pairs": 190,
+  "sentences_with_predicates": 169,
+  "sentences_with_conditional_role": 4,
+  "pairs_with_conditional_role": 5,
+  "mapping_rows_with_linked_roles": 11
+ },
+ "condition_refinement": {
+  "input_rows": 949,
+  "nonempty_before": 542,
+  "nonempty_after": 524,
+  "changes": {
+   "changed_rows": 29,
+   "remove_note_heading": 1,
+   "remove_nonconditional_homograph": 8,
+   "remove_trigger_from_condition": 5,
+   "remove_incomplete_choice": 1,
+   "remove_condition_after_advice": 2,
+   "remove_instruction_as_condition": 5,
+   "remove_advice_adverb_from_condition": 1,
+   "remove_action_marker_from_crowd": 1,
+   "remove_partial_conjunction": 2,
+   "restore_condition_negation": 1,
+   "remove_heading_or_place_description": 2
+  }
+ },
  "raw_pairs": 963,
  "after_dedup": 949,
  "duplicates_merged": 14,
@@ -15,29 +51,29 @@
   "NEG": 143
  },
  "by_condition_type": {
-  "时间": 106,
+  "时间": 111,
   "一般": 293,
-  "其他": 281,
+  "其他": 279,
   "天气": 29,
   "拍照": 36,
   "预约票务": 41,
-  "住宿": 48,
+  "住宿": 47,
   "交通": 13,
   "人群": 35,
   "装备": 33,
-  "美食": 34,
-  "体力安全": 14
+  "美食": 33,
+  "体力安全": 13
  },
  "by_condition_type_verified": {
-  "时间": 52,
+  "时间": 57,
   "无": 412,
-  "其他": 356,
+  "其他": 352,
   "天气": 26,
   "装备": 45,
   "人群": 34,
   "预约票务": 8,
   "交通": 8,
-  "体力安全": 22
+  "体力安全": 21
  },
  "by_condition_kind": {
   "inferred": 104,
@@ -45,9 +81,9 @@
   "explicit": 447
  },
  "by_condition_kind_dedup": {
-  "inferred": 104,
-  "absent": 412,
-  "explicit": 447
+  "inferred": 93,
+  "absent": 431,
+  "explicit": 439
  },
  "by_pattern_condition_kind": {
   "建议推断": {
@@ -103,10 +139,10 @@
  "nonempty_condition_pairs": 551,
  "absent_condition_pairs": 412,
  "nonempty_condition_rate": 0.572,
- "nonempty_condition_rows": 542,
- "nonempty_condition_row_rate": 0.571,
- "nonempty_condition_rate_dedup": 0.572,
- "condition_type_mismatch": 110,
+ "nonempty_condition_rows": 524,
+ "nonempty_condition_row_rate": 0.552,
+ "nonempty_condition_rate_dedup": 0.552,
+ "condition_type_mismatch": 108,
  "label_like_nonempty": 0,
  "condition_span_invalid": 0,
  "sentence_max_len": 158,

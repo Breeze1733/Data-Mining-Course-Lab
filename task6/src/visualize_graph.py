@@ -37,7 +37,7 @@ def static_overview(graph: nx.MultiDiGraph) -> nx.MultiDiGraph:
     sub = graph.copy()
     # Keep only the top-N condition nodes by frequency so they do not drown the POI network
     conds = [(n, d.get("frequency", 1)) for n, d in sub.nodes(data=True) if d.get("kind") == "条件"]
-    keep = {n for n, f in sorted(conds, key=lambda x: -x[1])[:12] if f >= 2}
+    keep = {n for n, f in sorted(conds, key=lambda x: (-x[1], x[0]))[:12] if f >= 2}
     drop = [n for n, d in sub.nodes(data=True) if d.get("kind") == "条件" and n not in keep]
     sub.remove_nodes_from(drop)
     return sub

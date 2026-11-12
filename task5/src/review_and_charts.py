@@ -144,7 +144,8 @@ def score() -> None:
             continue
         for field in ("record_id", "pattern", "scenic_area",
                       "condition_text", "suggestion_text", "sentence"):
-            if r.get(field) != cur.get(field):
+            actual = cur.get("original_condition_text", cur.get(field)) if field == "condition_text" else cur.get(field)
+            if r.get(field) != actual:
                 drift.append((r["pair_id"], field))
     if drift:
         raise SystemExit(f"stale review sample: {len(drift)} drift(s); rerun --sample and re-annotate\n"
@@ -189,7 +190,7 @@ def score() -> None:
         "by_pattern": group(lambda r: r["pattern"]),
         "by_scenic": group(lambda r: r["scenic_area"]),
         "by_condition_kind": group(lambda r: r["condition_kind"]),
-        "alignment_with_current_extraction": {
+        "alignment_with_original_extraction": {
             "reviewed": n, "matched": n, "missing": 0, "content_drift": 0},
         "sample_meta": doc["sample_meta"],
         "annotated_by": doc["annotation"].get("annotated_by"),
@@ -293,7 +294,7 @@ def export_xlsx():
     ws = wb.active
     ws.title = "条件-建议映射表"
     headers = ["条件类型（核验）", "条件描述（原文）", "条件来源", "条件标签（旧口径）",
-               "建议内容", "触发词", "抽取模式", "景区", "频次", "条件位置", "来源记录（前5）"]
+               "建议内容", "触发词", "抽取模式", "景区", "频次", "条件位置", "来源记录（前5）", "LTP 条件与动作"]
     ws.append(headers)
     for c in ws[1]:
         c.font = Font(bold=True)
@@ -307,8 +308,9 @@ def export_xlsx():
                    (m.get("condition_label") or "")[:60],
                    m["suggestion_text"][:200], m["trigger"], m["pattern"],
                    m["scenic_area"], m["frequency"], span,
-                   "；".join(m["sources"][:5])])
-    for col, w in zip("ABCDEFGHIJK", (12, 34, 11, 22, 44, 8, 14, 9, 7, 8, 30)):
+                   "；".join(m["sources"][:5]),
+                   "；".join(f"{x['predicate']}[{x['role']}:{x['argument']}]" for x in m.get('semantic_role_links', []))])
+    for col, w in zip("ABCDEFGHIJKL", (12, 34, 11, 22, 44, 8, 14, 9, 7, 8, 30, 38)):
         ws.column_dimensions[col].width = w
     ws.freeze_panes = "A2"
 
@@ -329,7 +331,7 @@ def export_xlsx():
         f"（95%CI {review['strict_ci95']['lo']:.3f}–{review['strict_ci95']['hi']:.3f}）；"
         f"boundary {review['boundary_rate']:.0%}；"
         f"lenient {review['lenient_accuracy_correct_or_boundary']:.0%}；"
-        f"alignment {review['alignment_with_current_extraction']}")])
+                   f"alignment {review['alignment_with_original_extraction']}")])
     ws2.column_dimensions["A"].width = 26
     ws2.column_dimensions["B"].width = 110
 

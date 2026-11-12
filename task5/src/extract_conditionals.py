@@ -101,6 +101,9 @@ CONDITION_TYPES = [
 
 def classify_condition(text: str) -> str:
 
+    if re.search(r"时间(?:充足|允许)", text):
+        return "时间"
+
     for name, pat in CONDITION_TYPES:
 
         if pat.search(text):
@@ -356,6 +359,125 @@ def validate_pairs(pairs: list[dict]) -> None:
         errors.append("duplicate pair_id")
     if errors:
         raise SystemExit("condition validation failed:\n" + "\n".join(errors[:20]))
+
+
+def refine(row: dict) -> tuple[dict, list[str]]:
+    row = dict(row)
+    row['condition_refinement'] = []
+    original_kind = row.get('condition_kind')
+    text = row.get('condition_text', '')
+    span = row.get('condition_span')
+    if not text or not span:
+        return row, []
+
+    sent = row['sentence']
+    start, end = span
+    changes = []
+    if (row.get('pattern') == '显式条件' and row.get('trigger') == '…的话(裸)'
+            and text.startswith('果') and start > 0 and sent[start - 1:start + 1] == '如果'):
+        row.update(condition_text=text[1:], condition_span=[start + 1, end],
+                   original_condition_text=text, original_condition_span=span, original_condition_kind=row['condition_kind'],
+                   condition_refinement=['remove_partial_conjunction'])
+        return row, row['condition_refinement']
+    # “若干” and “若隐若现” are words, not the conditional conjunction “若”.
+    if (row.get('pattern') == '显式条件' and row.get('trigger') == '若'
+            and (text.startswith('干') or text.startswith('隐若现'))):
+        row.update(condition_text='', condition_span=None, condition_kind='absent',
+                   condition_absent_reason='nonconditional_homograph',
+                   original_condition_type_verified=row.get('condition_type_verified'), condition_type_verified='无',
+                   original_condition_text=text, original_condition_span=span, original_condition_kind=row['condition_kind'],
+                   condition_refinement=['remove_nonconditional_homograph'])
+        return row, row['condition_refinement']
+    if row.get('condition_kind') != 'inferred':
+        return row, []
+    # A preceding instruction is another recommendation, not a situation.
+    if re.match(r'^(?:\d+[.、]\s*)?(?:一定要|务必|记得|注意(?:看|查看|关注))', text):
+        row.update(condition_text='', condition_span=None, condition_kind='absent',
+                   condition_absent_reason='instruction_not_condition',
+                   original_condition_type_verified=row.get('condition_type_verified'), condition_type_verified='无',
+                   original_condition_text=text, original_condition_span=span, original_condition_kind=row['condition_kind'],
+                   condition_refinement=['remove_instruction_as_condition'])
+        return row, row['condition_refinement']
+    # A clothing-section heading and a place described as suitable are not conditions.
+    if (re.fullmatch(r'\s*\d*[.、]?\s*穿搭\s*[:：]?\s*建议\s*', text)
+            or re.fullmatch(r'.{0,20}(?:台阶|桥|广场|景点|景区|位置|区域|地方|路线)'
+                            r'(?:很|比较|非常|最)?适合', text)):
+        row.update(condition_text='', condition_span=None, condition_kind='absent',
+                   condition_absent_reason='description_not_condition',
+                   original_condition_type_verified=row.get('condition_type_verified'), condition_type_verified='无',
+                   original_condition_text=text, original_condition_span=span, original_condition_kind=row['condition_kind'],
+                   condition_refinement=['remove_heading_or_place_description'])
+        return row, row['condition_refinement']
+    # The crowd expression may start immediately after a negator: 没体力的 / 无体力的.
+    if row['pattern'] == '人群可以' and text.startswith('体力'):
+        prefix = sent[max(0, start - 2):start]
+        match = re.search(r'(没有|没|无|缺乏)$', prefix)
+        if match:
+            start -= len(match.group())
+            changes.append('restore_condition_negation')
+        crowd = sent[start:end]
+        adverb = re.search(r'(完全|都|也)$', crowd)
+        if adverb and len(crowd) > len(adverb.group()):
+            end -= len(adverb.group())
+            changes.append('remove_advice_adverb_from_condition')
+
+    if sent[start:end].startswith('备注:') or sent[start:end].startswith('备注：'):
+        start += 3
+        changes.append('remove_note_heading')
+    if (sent[start:end].endswith('需') and
+            re.search(r'(?:老人|小朋友|孩子|儿童|孕妇|游客)需$', sent[start:end])):
+        end -= 1
+        changes.append('remove_action_marker_from_crowd')
+
+    # An extraction marker ending the condition belongs to the advice, not the condition.
+    trigger = row.get('trigger', '')
+    if row['pattern'] in ('建议推断', '否定建议') and trigger:
+        cond = sent[start:end]
+        before_trigger = cond[:-len(trigger)] if cond.endswith(trigger) else ''
+        # Only trim where the remaining phrase itself names a concrete situation.
+        clear_situation = re.search(
+            r'(?:旺季|淡季|周末|节假日|国庆|春季|夏季|秋季|冬季|时间紧张|时间充足|时间充裕|'
+            r'体力好|体力不好|体力不足)(?:的|来)?$', before_trigger)
+        if before_trigger and clear_situation:
+            end -= len(trigger)
+            changes.append('remove_trigger_from_condition')
+
+    # A later clause with its own condition and action is a separate statement.
+    # Mere mention after advice is insufficient: “不要从东门进，新手避雷” applies to beginners.
+    advice_start = sent.find(row.get('suggestion_text', ''))
+    after_advice_clause = (advice_start >= 0 and start > advice_start and
+                           bool(re.search(r'[，,；;。！？!?)）]', sent[advice_start:start])) and
+                           bool(re.match(r'(?:的|朋友|游客|者|旅客|人|小孩|孩子|家长){0,3}'
+                                         r'(?:也|都)?(?:可|要|需|建议)', sent[end:end + 12])))
+    incomplete_choice = (row['pattern'] == '人群可以' and
+                         bool(re.fullmatch(r'可以选择\s*[:：]', row.get('suggestion_text', ''))))
+    if after_advice_clause or incomplete_choice:
+        row.update(condition_text='', condition_span=None, condition_kind='absent',
+                   condition_absent_reason='condition_after_advice' if after_advice_clause else 'incomplete_choice')
+        changes.append('remove_condition_after_advice' if after_advice_clause else 'remove_incomplete_choice')
+    else:
+        while end > start and sent[end - 1] in ' ，,；;：:':
+            end -= 1
+        if end > start:
+            row['condition_text'] = sent[start:end]
+            row['condition_span'] = [start, end]
+        else:
+            row.update(condition_text='', condition_span=None, condition_kind='absent',
+                       condition_absent_reason='empty_after_boundary_repair')
+            changes.append('empty_after_boundary_repair')
+
+    if row['condition_text'] != text and not changes:
+        changes.append('trim_condition_boundary')
+    if changes:
+        if not row['condition_text']:
+            row['original_condition_type_verified'] = row.get('condition_type_verified')
+            row['condition_type_verified'] = '无'
+        row['original_condition_kind'] = original_kind
+        row['original_condition_text'] = text
+        row['original_condition_span'] = span
+        row['condition_refinement'] = changes
+    return row, changes
+
 
 
 def extract_from_sentence(sent: str) -> list[dict]:
@@ -836,6 +958,94 @@ def norm(s: str) -> str:
     return re.sub(r"[\s，,。；;、！？!?\[\]()【】]+", "", s)
 
 
+def needs_semantic_roles(pair: dict) -> bool:
+    """Reserve LTP for inferred conditions and structurally complicated explicit clauses."""
+    kind = pair.get('condition_kind')
+    condition = pair.get('condition_text', '')
+    if kind == 'inferred':
+        return True
+    if kind != 'explicit' or not condition:
+        return False
+    trigger = pair.get('trigger', '')
+    return (trigger == '若' or '裸' in trigger or len(condition) > 30 or
+            bool(re.search(r'建议|推荐|最好|不要|不建议|可以', condition)))
+
+
+def link_semantic_roles(row: dict) -> list[dict]:
+    """Find LTP arguments matching this condition and a predicate in this advice."""
+    semantic = row.get('semantic_roles')
+    condition = re.sub(r'\s+', '', row.get('condition_text', ''))
+    sentence = row.get('sentence', '')
+    advice = row.get('suggestion_text', '')
+    advice_start = sentence.find(advice) if advice else -1
+    condition_span = row.get('condition_span')
+    if not semantic or not condition or advice_start < 0 or not condition_span:
+        return []
+    offsets = []
+    cursor = 0
+    for token in semantic['tokens']:
+        start = sentence.find(token, cursor)
+        if start < 0:
+            return []
+        offsets.append(start)
+        cursor = start + len(token)
+    links = []
+    for pred in semantic['predicates']:
+        index = pred['index']
+        if not 0 <= index < len(offsets) or not advice_start <= offsets[index] < advice_start + len(advice):
+            continue
+        for role, text, start, end in pred['arguments']:
+            if role not in {'A0', 'ARGM-CND', 'ARGM-TMP', 'ARGM-ADV'} or not (0 <= start <= end < len(offsets)):
+                continue
+            arg = re.sub(r'\s+', '', text)
+            overlap = max(offsets[start], condition_span[0]) < min(offsets[end] + len(semantic['tokens'][end]), condition_span[1])
+            similar = ((condition in arg and len(condition) / max(1, len(arg)) >= 0.5) or
+                       (arg in condition and len(arg) / max(1, len(condition)) >= 0.65))
+            if len(arg) >= 2 and overlap and similar:
+                links.append({'predicate': pred['predicate'], 'role': role, 'argument': text,
+                              'token_start': start, 'token_end': end})
+    return links
+
+
+def annotate_semantic_roles(pairs: list[dict], model_path: str) -> dict:
+    """Annotate selected difficult sentences; rules handle straightforward conditions."""
+    from importlib.metadata import version
+    import torch
+    from ltp import LTP
+
+    torch.set_num_threads(min(4, torch.get_num_threads()))
+    model = LTP(model_path)
+    selected = [p for p in pairs if needs_semantic_roles(p)]
+    sentences = list(dict.fromkeys(p['sentence'] for p in selected))
+    cache = {}
+    batch_size = 12
+    for pos in range(0, len(sentences), batch_size):
+        batch = sentences[pos:pos + batch_size]
+        output = model.pipeline(batch, tasks=['cws', 'srl'])
+        if len(output.cws) != len(batch) or len(output.srl) != len(batch):
+            raise ValueError('LTP returned a different number of results than input sentences')
+        for sentence, tokens, roles in zip(batch, output.cws, output.srl):
+            cache[sentence] = {'tokens': tokens, 'predicates': roles}
+        if (pos // batch_size + 1) % 10 == 0 or pos + batch_size >= len(sentences):
+            print(f'LTP semantic roles: {min(pos + batch_size, len(sentences))}/{len(sentences)} sentences', flush=True)
+    def has_condition(semantic):
+        return any(arg[0] == 'ARGM-CND' for pred in semantic['predicates'] for arg in pred['arguments'])
+    for pair in selected:
+        pair['semantic_roles'] = cache[pair['sentence']]
+    model_file = Path(model_path) / 'pytorch_model.bin'
+    model_sha256 = None
+    if model_file.is_file():
+        with model_file.open('rb') as fh:
+            model_sha256 = hashlib.file_digest(fh, 'sha256').hexdigest()
+    return {'tool': 'LTP', 'package_version': version('ltp'), 'model': model_path,
+            'model_file_sha256': model_sha256,
+            'tasks': ['cws', 'srl'], 'selection': 'inferred_or_complex_explicit',
+            'unique_sentences': len(sentences), 'annotated_pairs': len(selected),
+            'sentences_with_predicates': sum(bool(x['predicates']) for x in cache.values()),
+            'sentences_with_conditional_role': sum(has_condition(x) for x in cache.values()),
+            'pairs_with_conditional_role': sum(has_condition(p['semantic_roles']) for p in selected)}
+
+
 def main(argv=None) -> int:
 
     import argparse
@@ -845,6 +1055,9 @@ def main(argv=None) -> int:
     ap.add_argument("--no-attribution-filter", action="store_true",
 
                     help="关闭 P1 句级归属过滤（默认开启：景区外句子不产出条件建议对）")
+
+    ap.add_argument('--ltp-model', default=None,
+                    help='使用 LTP 模型目录或模型名执行分词和语义角色标注')
 
     args = ap.parse_args(argv)
 
@@ -979,6 +1192,8 @@ def main(argv=None) -> int:
 
     validate_pairs(all_pairs)
 
+    srl_stats = annotate_semantic_roles(all_pairs, args.ltp_model) if args.ltp_model else None
+
     # Dedup: same scenic area + condition provenance/label + normalized condition/advice text
 
     merged: dict[tuple, dict] = {}
@@ -1024,9 +1239,24 @@ def main(argv=None) -> int:
 
         m["frequency"] = len(m["sources"])
 
-        m["sources"] = list(dict.fromkeys(m["sources"]))[:10]
+        m["sources"] = list(dict.fromkeys(m["sources"]))
 
-        m["pair_ids"] = list(dict.fromkeys(m["pair_ids"]))[:10]
+        m["pair_ids"] = list(dict.fromkeys(m["pair_ids"]))
+
+    nonempty_before_refinement = sum(bool(m["condition_text"]) for m in mapping)
+    refined_mapping = []
+    refinement_counts = Counter()
+    for item in mapping:
+        corrected, changes = refine(item)
+        if corrected.get('semantic_roles'):
+            corrected['semantic_role_links'] = link_semantic_roles(corrected)
+        if changes:
+            refinement_counts["changed_rows"] += 1
+            refinement_counts.update(changes)
+        refined_mapping.append(corrected)
+    mapping = refined_mapping
+    if srl_stats is not None:
+        srl_stats['mapping_rows_with_linked_roles'] = sum(bool(m.get('semantic_role_links')) for m in mapping)
 
 
     OUT.mkdir(parents=True, exist_ok=True)
@@ -1053,6 +1283,15 @@ def main(argv=None) -> int:
         pattern_kind[p["pattern"]][p["condition_kind"]] += 1
 
     stats = {
+
+        "semantic_roles": srl_stats,
+
+        "condition_refinement": {
+            "input_rows": len(mapping),
+            "nonempty_before": nonempty_before_refinement,
+            "nonempty_after": sum(bool(m["condition_text"]) for m in mapping),
+            "changes": dict(refinement_counts),
+        },
 
         "raw_pairs": len(all_pairs),
 
