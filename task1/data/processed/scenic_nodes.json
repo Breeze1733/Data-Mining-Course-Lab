@@ -1,5 +1,5 @@
 {
- "source": "task1/scripts/expand_ctrip.py",
+ "source": "task1/scripts/build_scenic_nodes.py",
  "count": 71,
  "scenic_nodes": {
   "黄山": [
