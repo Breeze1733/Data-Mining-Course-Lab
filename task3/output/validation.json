@@ -2,14 +2,25 @@
  "official": {
   "routes": 46,
   "ordered_routes": 39,
-  "segments": 558,
+  "segments": 711,
   "route_steps": 414,
-  "narrative_segments": 144,
-  "span_exact": 557,
+  "narrative_segments": 297,
+  "span_exact": 710,
   "span_not_contiguous": 1,
   "span_missing": 0,
   "pois_in_order_mismatch": 0,
-  "time_hierarchy_records": 46
+  "time_hierarchy_records": 46,
+  "coverage": {
+   "raw_significant_chars": 13378,
+   "covered_significant_chars": 13244,
+   "excluded_significant_chars": 134,
+   "unaccounted_significant_chars": 0,
+   "repaired_narrative_segments": 153,
+   "repaired_narrative_chars": 6758,
+   "excluded_segments": 45,
+   "routes_with_unaccounted": 0,
+   "coverage_ratio": 1.0
+  }
  },
  "tourist": {
   "routes": 225,
@@ -33,6 +44,7 @@
   "spans_exact": true,
   "pois_in_order_consistent": true,
   "tourist_join_ok": true,
-  "tourist_allocation_population_ok": true
+  "tourist_allocation_population_ok": true,
+  "raw_coverage_accounted": true
  }
 }

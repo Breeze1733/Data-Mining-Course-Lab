@@ -180,6 +180,31 @@ def main() -> int:
                 span_missing += 1
             elif entry.get("span_status") == "exact" and source[entry["span"][0]:entry["span"][1]] != entry["text"]:
                 span_bad += 1
+    coverage = {
+        "raw_significant_chars": 0,
+        "covered_significant_chars": 0,
+        "excluded_significant_chars": 0,
+        "unaccounted_significant_chars": 0,
+        "repaired_narrative_segments": 0,
+        "repaired_narrative_chars": 0,
+        "excluded_segments": 0,
+        "routes_with_unaccounted": 0,
+    }
+    for p in parsed:
+        route_coverage = p.get("coverage", {})
+        coverage["raw_significant_chars"] += route_coverage.get("significant_chars", 0)
+        coverage["covered_significant_chars"] += route_coverage.get("covered_significant_chars", 0)
+        coverage["excluded_significant_chars"] += route_coverage.get("excluded_significant_chars", 0)
+        coverage["unaccounted_significant_chars"] += route_coverage.get("unaccounted_significant_chars", 0)
+        coverage["repaired_narrative_segments"] += route_coverage.get("repaired_narrative_segments", 0)
+        coverage["repaired_narrative_chars"] += route_coverage.get("repaired_narrative_chars", 0)
+        coverage["excluded_segments"] += route_coverage.get("excluded_segments", 0)
+        if route_coverage.get("unaccounted_significant_chars", 0):
+            coverage["routes_with_unaccounted"] += 1
+    coverage["coverage_ratio"] = round(
+        (coverage["covered_significant_chars"] + coverage["excluded_significant_chars"])
+        / coverage["raw_significant_chars"], 4
+    ) if coverage["raw_significant_chars"] else 1.0
     route_ids = {r["record_id"] for r in tourist_routes}
     hierarchy_ids = {r["record_id"] for r in tourist_records}
     route_counts = dict(Counter(r["scenic_area"] for r in tourist_routes))
@@ -200,6 +225,7 @@ def main() -> int:
                 1 for p in parsed
                 if p["pois_in_order"] != [poi["name"] for s in p["steps"] for poi in s["pois"]]),
             "time_hierarchy_records": len(hier_map),
+            "coverage": coverage,
         },
         "tourist": {
             "routes": len(tourist_routes),
@@ -216,6 +242,8 @@ def main() -> int:
             "pois_in_order_consistent": True,
             "tourist_join_ok": route_ids == hierarchy_ids,
             "tourist_allocation_population_ok": route_counts == allocation_counts,
+            "raw_coverage_accounted": coverage["unaccounted_significant_chars"] == 0
+            and coverage["routes_with_unaccounted"] == 0,
         },
     }
     validation["checks"]["pois_in_order_consistent"] = validation["official"]["pois_in_order_mismatch"] == 0

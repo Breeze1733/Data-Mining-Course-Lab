@@ -26,13 +26,35 @@
   "无标记（由时间范围推断）"
  ],
  "validation": {
-  "segments": 558,
+  "segments": 711,
   "route_steps": 414,
-  "narrative_segments": 144,
-  "span_exact": 557,
+  "narrative_segments": 297,
+  "span_exact": 710,
   "span_not_contiguous": 1,
   "span_missing": 0,
   "pois_in_order_mismatch": 0,
-  "station_steps_without_poi": 2
+  "station_steps_without_poi": 2,
+  "coverage": {
+   "raw_significant_chars": 13378,
+   "covered_significant_chars": 13244,
+   "excluded_significant_chars": 134,
+   "unaccounted_significant_chars": 0,
+   "repaired_narrative_segments": 153,
+   "repaired_narrative_chars": 6758,
+   "excluded_segments": 45,
+   "excluded_by_reason": {
+    "marker": {
+     "segments": 28,
+     "chars": 83
+    },
+    "already_covered_text": {
+     "segments": 17,
+     "chars": 56
+    }
+   },
+   "non_contiguous_entries": 1,
+   "routes_with_unaccounted": 0,
+   "coverage_ratio": 1.0
+  }
  }
 }

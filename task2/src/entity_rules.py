@@ -71,7 +71,10 @@ class DictMatcher:
         self.areas = sorted({e.area for e in pois})
 
     def find(self, text: str, scenic: str | None = None) -> list[dict]:
-        areas = ([scenic] if scenic in self.areas else []) + [a for a in self.areas if a != scenic]
+        # POIs are strictly scoped to the record's scenic area. Cross-area names
+        # are not the same entity; matching them would require a separate
+        # external-landmark dictionary, which this project does not have.
+        areas = list(self.areas) if scenic is None else ([scenic] if scenic in self.areas else [])
         candidates = []
         for area in areas:
             candidates.extend(self.gazetteer.iter_poi_matches(text, area))

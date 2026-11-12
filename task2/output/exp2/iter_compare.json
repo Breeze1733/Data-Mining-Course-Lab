@@ -7,9 +7,9 @@
     "transport": 9,
     "stopwords": 0
    },
-   "total_entities": 17062,
+   "total_entities": 16988,
    "by_type": {
-    "景点POI": 8339,
+    "景点POI": 8265,
     "交通方式": 1485,
     "时间节点": 7238
    }
@@ -21,9 +21,9 @@
     "transport": 31,
     "stopwords": 15
    },
-   "total_entities": 18975,
+   "total_entities": 18876,
    "by_type": {
-    "景点POI": 9758,
+    "景点POI": 9659,
     "交通方式": 1979,
     "时间节点": 7238
    }

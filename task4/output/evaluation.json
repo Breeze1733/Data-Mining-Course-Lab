@@ -1,6 +1,6 @@
 {
  "n": 180,
- "accuracy_overall": 0.633,
+ "accuracy_overall": 0.622,
  "abstention": {
   "note": "弃权=解析为 NONE（可解释的不定位）；覆盖率=1−弃权率，与准确率分开解读",
   "overall": {
@@ -38,7 +38,7 @@
   },
   "object": {
    "n": 45,
-   "accuracy": 0.689
+   "accuracy": 0.644
   },
   "person": {
    "n": 45,
@@ -52,7 +52,7 @@
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.658
+   "accuracy": 0.642
   },
   "test": {
    "n": 60,
@@ -70,10 +70,10 @@
   },
   "颐和园": {
    "n": 60,
-   "accuracy": 0.533,
+   "accuracy": 0.5,
    "ci95": {
-    "lo": 0.409,
-    "hi": 0.654
+    "lo": 0.377,
+    "hi": 0.623
    }
   },
   "黄山": {
@@ -88,10 +88,10 @@
  "accuracy_by_platform": {
   "CTRIP": {
    "n": 171,
-   "accuracy": 0.62,
+   "accuracy": 0.608,
    "ci95": {
-    "lo": 0.545,
-    "hi": 0.689
+    "lo": 0.533,
+    "hi": 0.678
    }
   },
   "XHS": {
@@ -104,7 +104,7 @@
   }
  },
  "errors_by_split": {
-  "dev": 41,
+  "dev": 43,
   "test": 25
  },
  "split_method": "文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
@@ -650,6 +650,26 @@
    "note": ""
   },
   {
+   "pronoun": "它",
+   "class": "object",
+   "scenic": "颐和园",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "gold": "北海",
+   "gold_kind": "POI",
+   "note": ""
+  },
+  {
+   "pronoun": "它",
+   "class": "object",
+   "scenic": "颐和园",
+   "pred": "颐和园",
+   "pred_kind": "景区名",
+   "gold": "北海",
+   "gold_kind": "POI",
+   "note": "北京北海，多景点游记"
+  },
+  {
    "pronoun": "这座",
    "class": "object",
    "scenic": "颐和园",
@@ -770,7 +790,7 @@
    "note": "先行词为“廊上斑驳的画”，归至长廊实体"
   }
  ],
- "kind_only_accuracy": 0.689,
+ "kind_only_accuracy": 0.678,
  "set_member_hit": {
   "n_set_cases": 47,
   "member_hits": 1,
@@ -1061,15 +1081,15 @@
   ]
  },
  "accuracy_ci95": {
-  "lo": 0.561,
-  "hi": 0.7
+  "lo": 0.55,
+  "hi": 0.69
  },
  "identity_ci95": {
-  "lo": 0.407,
-  "hi": 0.633
+  "lo": 0.38,
+  "hi": 0.607
  },
  "identity_scope": {
   "n_identity_checked": 71,
-  "identity_accuracy": 0.521
+  "identity_accuracy": 0.493
  }
 }

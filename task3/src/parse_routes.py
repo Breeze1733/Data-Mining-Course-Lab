@@ -122,6 +122,232 @@ def repair_spans(entries: list[dict], raw_text: str) -> None:
         last_end = start + len(text)
 
 
+_DAY_OR_PERIOD_MARKER_RE = re.compile(
+    r"^(?:[【\[\(（]\s*)?"
+    r"(?:第[一二三四五六七八九十\d]+[日天]|Day\s*\d+|[一二三四五六七八九十\d]+站)"
+    r"(?:\s*[·.、]\s*(?:上午|中午|下午|晚上|清晨|傍晚|全天|凌晨|深夜))?"
+    r"(?:\s*[】\]\)）])?[:：]?$"
+    r"|^(?:[【\[\(（]\s*)?(?:上午|中午|下午|晚上|清晨|傍晚|全天|凌晨|深夜)"
+    r"(?:\s*[】\]\)）])?[:：]?$"
+)
+
+
+def _is_significant_char(ch: str) -> bool:
+    """Characters that carry raw-route content (not separators or punctuation)."""
+    return bool(CJK_RE.match(ch)) or ch.isalnum()
+
+
+def _text_signature(text: str) -> str:
+    return "".join(ch for ch in text if _is_significant_char(ch))
+
+
+def _is_marker_fragment(text: str) -> bool:
+    stripped = text.strip()
+    if not stripped:
+        return True
+    if STOP_TOKEN.fullmatch(stripped):
+        return True
+    return bool(_DAY_OR_PERIOD_MARKER_RE.fullmatch(stripped))
+
+
+def _mark_interval(flags: list[bool], start: int, end: int) -> None:
+    for index in range(max(0, start), min(len(flags), end)):
+        flags[index] = True
+
+
+def _iter_raw_units(raw: str, fmt: str):
+    """Yield absolute (start, end) spans for the same units parse() walks."""
+    lines: list[tuple[str, int, int]] = []
+    position = 0
+    for line in raw.split("\n"):
+        stripped = line.strip()
+        if stripped:
+            start = raw.find(stripped, position)
+            if start < 0:
+                start = position
+            lines.append((stripped, start, start + len(stripped)))
+        position += len(line) + 1
+    if fmt in ("prose", "theme_prose"):
+        for line, line_start, _ in lines:
+            cursor = 0
+            for sentence in re.split(r"(?<=[。！？；])", line):
+                sentence = sentence.strip()
+                if not sentence:
+                    continue
+                index = line.find(sentence, cursor)
+                if index < 0:
+                    index = cursor
+                yield line_start + index, line_start + index + len(sentence)
+                cursor = index + len(sentence)
+    else:
+        for _, start, end in lines:
+            yield start, end
+
+
+def _uncovered_runs(start: int, end: int, covered: list[bool], excluded: list[bool],
+                    raw: str) -> list[tuple[int, int]]:
+    """Contiguous runs containing at least one significant, unaccounted character.
+
+    Runs may include punctuation/whitespace gaps, but stop at any covered or
+    explicitly excluded character.
+    """
+    runs: list[tuple[int, int]] = []
+    run_start = None
+    last_significant = None
+    for index in range(max(0, start), min(len(raw), end)):
+        if covered[index] or excluded[index]:
+            if run_start is not None:
+                runs.append((run_start, last_significant + 1))
+                run_start = last_significant = None
+            continue
+        if _is_significant_char(raw[index]):
+            if run_start is None:
+                run_start = index
+            last_significant = index
+    if run_start is not None:
+        runs.append((run_start, last_significant + 1))
+    return runs
+
+
+def _trim_run(raw: str, start: int, end: int) -> tuple[int, int]:
+    while start < end and not _is_significant_char(raw[start]):
+        start += 1
+    while end > start and not _is_significant_char(raw[end - 1]):
+        end -= 1
+    return start, end
+
+
+def _reconcile_coverage(route: dict, raw: str) -> None:
+    """Account for every raw character: parsed entry, explicit exclusion, or narrative repair.
+
+    The parser intentionally drops several fragment classes (long prose lines,
+    chain-dedup endpoints, arrow-chain housekeeping, KV metadata). Instead of
+    rewriting those rules, this reconciliation records exact raw spans for all
+    covered/excluded fragments and appends the remainder to narrative_segments.
+    """
+    steps = route["steps"]
+    narrative = route["narrative_segments"]
+    entries = steps + narrative
+    covered = [False] * len(raw)
+    excluded = [False] * len(raw)
+    entry_signatures: list[str] = []
+    context_entries: list[tuple[int, dict]] = []
+
+    for entry in entries:
+        text = entry.get("text") or ""
+        if not text:
+            continue
+        signature = _text_signature(text)
+        if signature:
+            entry_signatures.append(signature)
+        span = entry.get("span")
+        exact = (entry.get("span_status") == "exact" and isinstance(span, list)
+                 and len(span) == 2 and 0 <= span[0] < span[1] <= len(raw))
+        if exact:
+            _mark_interval(covered, span[0], span[1])
+            context_entries.append((span[0], entry))
+            continue
+        anchor = span[0] if isinstance(span, list) and span else 0
+        pieces = [text] + [piece for piece in re.split(r"[，,。；;、：:\s]+", text) if len(piece) >= 2]
+        for piece in pieces:
+            positions = [match.start() for match in re.finditer(re.escape(piece), raw)]
+            if not positions:
+                continue
+            start = min(positions, key=lambda position: abs(position - anchor))
+            _mark_interval(covered, start, start + len(piece))
+            if piece == text:
+                context_entries.append((start, entry))
+    context_entries.sort(key=lambda item: item[0])
+
+    excluded_segments: list[dict] = []
+    excluded_by_reason: dict[str, dict] = {}
+    repaired_chars = 0
+    repaired_segments = 0
+    next_segment_no = max((int(entry.get("segment_no") or 0) for entry in narrative), default=0) + 1
+
+    def context_for(position: int) -> tuple[int, str | None]:
+        day, period = 1, None
+        for start, entry in context_entries:
+            if start > position:
+                break
+            day = entry.get("day", day)
+            period = entry.get("period", period)
+        return day, period
+
+    def record_exclusion(start: int, end: int, reason: str) -> None:
+        text = raw[start:end]
+        _mark_interval(excluded, start, end)
+        excluded_segments.append({"text": text, "span": [start, end], "reason": reason})
+        slot = excluded_by_reason.setdefault(reason, {"segments": 0, "chars": 0})
+        slot["segments"] += 1
+        slot["chars"] += len(text)
+
+    def handle_run(start: int, end: int) -> None:
+        nonlocal repaired_chars, repaired_segments, next_segment_no
+        start, end = _trim_run(raw, start, end)
+        if start >= end:
+            return
+        text = raw[start:end]
+        if _is_marker_fragment(text):
+            record_exclusion(start, end, "marker")
+            return
+        signature = _text_signature(text)
+        if not signature:
+            return
+        if any(signature in known for known in entry_signatures):
+            record_exclusion(start, end, "already_covered_text")
+            return
+        day, period = context_for(start)
+        narrative.append({
+            "segment_no": next_segment_no,
+            "text": text,
+            "span": [start, end],
+            "span_status": "exact",
+            "day": day,
+            "period": period,
+            "step_kind": "叙述",
+            "source": "coverage_repair",
+            "reason": "uncovered_raw_fragment",
+        })
+        next_segment_no += 1
+        repaired_chars += len(text)
+        repaired_segments += 1
+        entry_signatures.append(signature)
+        _mark_interval(covered, start, end)
+
+    for unit_start, unit_end in _iter_raw_units(raw, route["format"]):
+        for run_start, run_end in _uncovered_runs(unit_start, unit_end, covered, excluded, raw):
+            handle_run(run_start, run_end)
+    # Safety net for significant characters outside parser units (e.g. a
+    # non-standard line ending or a unit boundary that split a fragment).
+    for run_start, run_end in _uncovered_runs(0, len(raw), covered, excluded, raw):
+        handle_run(run_start, run_end)
+
+    significant_chars = sum(1 for ch in raw if _is_significant_char(ch))
+    covered_significant = sum(1 for index, ch in enumerate(raw)
+                              if _is_significant_char(ch) and covered[index])
+    excluded_significant = sum(1 for index, ch in enumerate(raw)
+                               if _is_significant_char(ch) and excluded[index])
+    unaccounted = significant_chars - covered_significant - excluded_significant
+    route["excluded_segments"] = sorted(excluded_segments, key=lambda item: item["span"][0])
+    route["coverage"] = {
+        "raw_chars": len(raw),
+        "significant_chars": significant_chars,
+        "covered_significant_chars": covered_significant,
+        "excluded_significant_chars": excluded_significant,
+        "repaired_narrative_chars": repaired_chars,
+        "unaccounted_significant_chars": max(0, unaccounted),
+        "coverage_ratio": round((covered_significant + excluded_significant) / significant_chars, 4)
+        if significant_chars else 1.0,
+        "repaired_narrative_segments": repaired_segments,
+        "excluded_segments": len(excluded_segments),
+        "excluded_by_reason": excluded_by_reason,
+        "non_contiguous_entries": sum(1 for entry in entries if entry.get("span_status") != "exact"),
+    }
+    route["narrative_step_count"] = len(narrative)
+    route["segment_count"] = len(steps) + len(narrative)
+
+
 def split_with_spans(text: str, pattern: re.Pattern) -> list[tuple[str, int, int]]:
     """pattern.split(text) with each part's offsets, preserving empty parts."""
     parts = []
@@ -462,7 +688,7 @@ class RouteParser:
             s["step_no"] = i
         repair_spans(route_steps, text)
         repair_spans(narrative, text)
-        return {
+        parsed = {
             "route_id": route["route_id"], "scenic_area": route["scenic_area"],
             "route_title": route["title"], "source_record_id": route["source_record_id"],
             "source_url": route["source_url"], "ordered_route": route.get("ordered_route", True),
@@ -472,6 +698,8 @@ class RouteParser:
             "pois_in_order": [p["name"] for s in route_steps for p in s["pois"]],
             "steps": route_steps, "narrative_segments": narrative,
         }
+        _reconcile_coverage(parsed, text)
+        return parsed
 
     @staticmethod
     def _cn_day(text: str) -> int:
@@ -582,6 +810,39 @@ def main() -> int:
         1 for p in parsed_routes
         if p["pois_in_order"] != [poi["name"] for s in p["steps"] for poi in s["pois"]]
     )
+    coverage_totals = {
+        "raw_significant_chars": 0,
+        "covered_significant_chars": 0,
+        "excluded_significant_chars": 0,
+        "unaccounted_significant_chars": 0,
+        "repaired_narrative_segments": 0,
+        "repaired_narrative_chars": 0,
+        "excluded_segments": 0,
+        "excluded_by_reason": {},
+        "non_contiguous_entries": 0,
+    }
+    routes_with_unaccounted = 0
+    for parsed_route in parsed_routes:
+        coverage = parsed_route.get("coverage", {})
+        coverage_totals["raw_significant_chars"] += coverage.get("significant_chars", 0)
+        coverage_totals["covered_significant_chars"] += coverage.get("covered_significant_chars", 0)
+        coverage_totals["excluded_significant_chars"] += coverage.get("excluded_significant_chars", 0)
+        coverage_totals["unaccounted_significant_chars"] += coverage.get("unaccounted_significant_chars", 0)
+        coverage_totals["repaired_narrative_segments"] += coverage.get("repaired_narrative_segments", 0)
+        coverage_totals["repaired_narrative_chars"] += coverage.get("repaired_narrative_chars", 0)
+        coverage_totals["excluded_segments"] += coverage.get("excluded_segments", 0)
+        coverage_totals["non_contiguous_entries"] += coverage.get("non_contiguous_entries", 0)
+        if coverage.get("unaccounted_significant_chars", 0):
+            routes_with_unaccounted += 1
+        for reason, slot in coverage.get("excluded_by_reason", {}).items():
+            target = coverage_totals["excluded_by_reason"].setdefault(reason, {"segments": 0, "chars": 0})
+            target["segments"] += slot.get("segments", 0)
+            target["chars"] += slot.get("chars", 0)
+    coverage_totals["routes_with_unaccounted"] = routes_with_unaccounted
+    coverage_totals["coverage_ratio"] = round(
+        (coverage_totals["covered_significant_chars"] + coverage_totals["excluded_significant_chars"])
+        / coverage_totals["raw_significant_chars"], 4
+    ) if coverage_totals["raw_significant_chars"] else 1.0
     format_analysis["validation"] = {
         "segments": len(all_steps) + len(all_narrative),
         "route_steps": len(all_steps),
@@ -591,9 +852,21 @@ def main() -> int:
         "span_missing": span_missing,
         "pois_in_order_mismatch": poi_mismatch,
         "station_steps_without_poi": sum(1 for s in all_steps if s.get("station_tag") and not s["pois"]),
+        "coverage": coverage_totals,
     }
     assert span_missing == 0
     assert poi_mismatch == 0
+    assert coverage_totals["unaccounted_significant_chars"] == 0
+    assert coverage_totals["routes_with_unaccounted"] == 0
+    assert coverage_totals["coverage_ratio"] == 1.0
+    assert all(p["segment_count"] == p["step_count"] + p["narrative_step_count"] for p in parsed_routes)
+    for parsed_route in parsed_routes:
+        source = raw_by_id[parsed_route["route_id"]]
+        for entry in parsed_route["narrative_segments"]:
+            if entry.get("source") == "coverage_repair":
+                assert entry["span_status"] == "exact", (parsed_route["route_id"], entry)
+                start, end = entry["span"]
+                assert source[start:end] == entry["text"], (parsed_route["route_id"], entry["text"])
     (OUT / "route_format_analysis.json").write_text(json.dumps(format_analysis, ensure_ascii=False, indent=1), encoding="utf-8")
 
     # Name-normalization statistics
