@@ -58,11 +58,10 @@ plt.rcParams["axes.unicode_minus"] = False
 
 PERIODS = ("上午", "中午", "下午", "晚上")
 
-sys.path.insert(0, str(ROOT.parent / "common"))
-
-from entity_identity import build_poi_lookup
-
-POI_LOOKUP = build_poi_lookup(json.loads((TASK2 / "output/exp2/entity_dictionary.json").read_text(encoding="utf-8"))["poi"])
+_DICT = json.loads((TASK2 / "output/exp2/entity_dictionary.json").read_text(encoding="utf-8"))
+if "poi_lookup" not in _DICT:
+    raise SystemExit("entity_dictionary.json 缺少 poi_lookup；请先运行 task2/src/export_dictionary.py")
+POI_LOOKUP = {(r["scenic_area"], r["variant"]): r["canonical"] for r in _DICT["poi_lookup"]}
 
 
 def kendall_tau(a: list, b: list) -> float:

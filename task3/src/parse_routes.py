@@ -10,6 +10,7 @@ Usage: python src/parse_routes.py (inside the task1 venv, -X utf8)
 """
 from __future__ import annotations
 
+import hashlib
 import io
 import json
 import re
@@ -20,8 +21,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TASK2 = ROOT.parent / "task2"
 OUT = ROOT / "output"
-sys.path.insert(0, str(TASK2 / "src"))
-from extract_entities import DictMatcher, load_dictionary  # noqa: E402
 
 if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout, io.TextIOWrapper):
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
@@ -30,8 +29,29 @@ if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout,
 # Rule 1: dictionary canonical (清晏舫→石舫, 诺日朗游客中心→诺日朗中心, etc.)
 # Rule 2: geographic-qualifier stripping (黄山南大门/黄山风景区→南大门; strip the “XX景区” suffix)
 # Rule 3: same name, different places (五彩池) keep the scenic-area qualifier and are not forcibly merged
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "common"))
-from entity_identity import normalize  # noqa: E402
+# Rules are published by task2 in entity_dictionary.json; task3 never imports task2 code.
+_DICT_PATH = TASK2 / "output/exp2/entity_dictionary.json"
+if not _DICT_PATH.exists():
+    raise SystemExit("缺少 entity_dictionary.json；请先运行 task2/src/export_dictionary.py")
+_DICT = json.loads(_DICT_PATH.read_text(encoding="utf-8"))
+for _key in ("aliases", "normalization", "poi_lookup"):
+    if _key not in _DICT:
+        raise SystemExit(f"entity_dictionary.json 缺少 {_key}；请先运行 task2/src/export_dictionary.py")
+_UNSCOPED: dict[str, set[str]] = {}
+for _row in _DICT["aliases"]:
+    _UNSCOPED.setdefault(_row["alias"], set()).add(_row["canonical"])
+_NORMALIZATION = _DICT["normalization"]
+_SUFFIX_RE = re.compile("(?:" + "|".join(map(re.escape, _NORMALIZATION["suffixes"])) + ")$")
+
+
+def normalize(name: str) -> str:
+    targets = _UNSCOPED.get(name, set())
+    if len(targets) == 1:
+        name = next(iter(targets))
+    for prefix, short in _NORMALIZATION["prefix_map"].items():
+        if name.startswith(prefix) and name != prefix:
+            return normalize(short + name[len(prefix):])
+    return _SUFFIX_RE.sub("", name)
 
 
 CHAIN_SEP = re.compile(r"→|➝|➞|⇒|➤|─+|—+|–+")
@@ -103,6 +123,102 @@ def repair_spans(entries: list[dict], raw_text: str) -> None:
         last_end = start + len(text)
 
 
+def split_with_spans(text: str, pattern: re.Pattern) -> list[tuple[str, int, int]]:
+    """pattern.split(text) with each part's offsets, preserving empty parts."""
+    parts = []
+    last = 0
+    for match in pattern.finditer(text):
+        parts.append((text[last:match.start()], last, match.start()))
+        last = match.end()
+    parts.append((text[last:], last, len(text)))
+    return parts
+
+
+def _strip_offsets(text: str, offsets: list[int | None], chars: str | None = None):
+    """Reproduce str.strip(chars) while keeping each surviving character's raw offset."""
+    left, right = 0, len(text)
+    if chars is None:
+        while left < right and text[left].isspace():
+            left += 1
+        while right > left and text[right - 1].isspace():
+            right -= 1
+    else:
+        while left < right and text[left] in chars:
+            left += 1
+        while right > left and text[right - 1] in chars:
+            right -= 1
+    return text[left:right], offsets[left:right]
+
+
+def _remove_patterns(text: str, offsets: list[int | None], patterns) -> tuple[str, list[int | None]]:
+    """Remove every regex match, keeping surviving characters' offsets."""
+    keep = [True] * len(text)
+    for pattern in patterns:
+        for match in pattern.finditer(text):
+            for i in range(match.start(), match.end()):
+                keep[i] = False
+    return ("".join(text[i] for i in range(len(text)) if keep[i]),
+            [offsets[i] for i in range(len(text)) if keep[i]])
+
+
+def _clause_filter(text: str, offsets: list[int | None]) -> tuple[str, list[int | None]]:
+    """Apply NON_ROUTE_CLAUSE_RE clause filtering while carrying offsets."""
+    parts = split_with_spans(text, re.compile(r"[，,]"))
+    kept = [(part, start, end) for part, start, end in parts
+            if part.strip() and not NON_ROUTE_CLAUSE_RE.search(part)]
+    if not kept:
+        return "", []
+    new_offsets: list[int | None] = []
+    for index, (_, start, end) in enumerate(kept):
+        if index:
+            new_offsets.append(None)  # synthesized "，"
+        new_offsets.extend(offsets[start:end])
+    return "，".join(part for part, _, _ in kept), new_offsets
+
+
+def _compress_offsets(offsets: list[int | None]) -> list[tuple[int, int]]:
+    intervals: list[tuple[int, int]] = []
+    start = prev = None
+    for offset in offsets:
+        if offset is None:
+            if start is not None:
+                intervals.append((start, prev + 1))
+            start = prev = None
+            continue
+        if start is None:
+            start = offset
+        elif offset != prev + 1:
+            intervals.append((start, prev + 1))
+            start = offset
+        prev = offset
+    if start is not None:
+        intervals.append((start, prev + 1))
+    return intervals
+
+
+def _core_intervals(token: str, offsets: list[int | None]) -> list[tuple[int, int]]:
+    """Raw intervals of PAREN_RE.sub('', token).strip(' 　,，。;；')."""
+    keep = [True] * len(token)
+    for match in PAREN_RE.finditer(token):
+        for i in range(match.start(), match.end()):
+            keep[i] = False
+    core = "".join(token[i] for i in range(len(token)) if keep[i])
+    core_offsets = [offsets[i] for i in range(len(token)) if keep[i]]
+    _, stripped_offsets = _strip_offsets(core, core_offsets, " 　,，。;；")
+    return _compress_offsets(stripped_offsets)
+
+
+def _paren_intervals(token: str, offsets: list[int | None]) -> list[tuple[int, int]]:
+    intervals: list[tuple[int, int]] = []
+    for match in PAREN_RE.finditer(token):
+        intervals.extend(_compress_offsets(offsets[match.start(1):match.end(1)]))
+    return intervals
+
+
+def _inside(entity: dict, intervals: list[tuple[int, int]]) -> bool:
+    return any(start <= entity["start"] and entity["end"] <= end for start, end in intervals)
+
+
 def step_kind(step: dict) -> str:
     """A step label derived from its actual signals, not from a default."""
     if not step["pois"] and step["transport"]:
@@ -133,17 +249,37 @@ def classify_format(text: str, ordered: bool) -> str:
 
 
 class RouteParser:
-    def __init__(self, matcher: DictMatcher):
-        self.matcher = matcher
+    def __init__(self, annotations: dict[str, list[dict]]):
+        self.annotations = annotations
+        self._branch_entities: list[dict] = []
+        self._raw = ""
+        self._cursor = 0
 
-    def annotate(self, token: str, scenic: str | None = None) -> dict:
+    def _locate_offsets(self, token: str) -> list[int | None]:
+        """Fallback raw offsets for tokens whose span was not tracked."""
+        index = self._raw.find(token, self._cursor)
+        if index < 0:
+            index = self._raw.find(token)
+        if index < 0:
+            return [None] * len(token)
+        self._cursor = index + len(token)
+        return list(range(index, index + len(token)))
+
+    def annotate(self, token: str, scenic: str | None = None,
+                 offsets: list[int | None] | None = None) -> dict:
         """Parse a single chain node: POIs, transport, time, and notes."""
         note_parts = PAREN_RE.findall(token)
         core = PAREN_RE.sub("", token).strip(" 　,，。;；")
+        if offsets is None:
+            offsets = self._locate_offsets(token)
+        core_spans = _core_intervals(token, offsets)
+        paren_spans = _paren_intervals(token, offsets)
         pois, transports = [], []
-        for e in self.matcher.find(core, scenic):
+        for e in self._branch_entities:
+            if not _inside(e, core_spans):
+                continue
             if e["type"] == "景点POI":
-                if not e.get("in_scenic", True):
+                if scenic is not None and not e.get("in_scenic", True):
                     continue  # peripheral landmarks (logistics mentions such as 汤口镇/黄龙) are not route steps
                 pois.append({"name": e["canonical"], "mention": e["text"],
                              "normalized": normalize(e["canonical"])})
@@ -151,8 +287,9 @@ class RouteParser:
                 transports.append(e["canonical"])
         # Transport/time information inside parentheses
         paren_text = " ".join(note_parts)
-        for e in self.matcher.find(paren_text):
-            if e["type"] == "交通方式" and e["canonical"] not in transports:
+        for e in self._branch_entities:
+            if (e["type"] == "交通方式" and e["canonical"] not in transports
+                    and _inside(e, paren_spans)):
                 transports.append(e["canonical"])
         tr = TIME_RANGE_RE.search(paren_text) or TIME_RANGE_RE.search(core)
         dur = DUR_RE.search(paren_text) or DUR_RE.search(core)
@@ -165,17 +302,25 @@ class RouteParser:
             "note": "；".join(n for n in note_parts if not TIME_RANGE_RE.search(n) and not DUR_RE.search(n)),
         }
 
-    def parse_line(self, line: str, scenic: str | None = None) -> list[dict]:
+    def parse_line(self, line: str, scenic: str | None = None,
+                   offsets: list[int | None] | None = None) -> list[dict]:
         if not CJK_RE.search(line):
             return []
-        parts = [p for p in CHAIN_SEP.split(line) if p.strip()]
+        if offsets is None:
+            offsets = self._locate_offsets(line)
+        parts = [(part, start, end) for part, start, end in split_with_spans(line, CHAIN_SEP)
+                 if part.strip()]
         if len(parts) == 1:
-            return [self.annotate(line, scenic)] if len(line) <= 60 else []
-        return [self.annotate(p, scenic) for p in parts if p.strip() and not STOP_TOKEN.match(p.strip())]
+            return [self.annotate(line, scenic, offsets)] if len(line) <= 60 else []
+        return [self.annotate(part, scenic, offsets[start:end])
+                for part, start, end in parts if not STOP_TOKEN.match(part.strip())]
 
     def parse(self, route: dict) -> dict:
         text = route["raw_content"]
         scenic = route.get("scenic_area")
+        self._branch_entities = self.annotations[route["route_id"]]
+        self._raw = text
+        self._cursor = 0
         fmt = classify_format(text, route.get("ordered_route", True))
         steps: list[dict] = []
         day, period = 1, None
@@ -206,8 +351,10 @@ class RouteParser:
             lines = sents_with_span
         for line, line_start, line_end in lines:
             # Segment-level handling: day/period markers may appear at line start or mid-chain (e.g. “…—【第二日】丹霞峰…”)
-            for seg in CHAIN_SEP.split(line):
-                seg = seg.strip()
+            for seg_text, seg_start_in_line, seg_end_in_line in split_with_spans(line, CHAIN_SEP):
+                seg_offsets = list(range(line_start + seg_start_in_line,
+                                         line_start + seg_end_in_line))
+                seg, seg_offsets = _strip_offsets(seg_text, seg_offsets)
                 if not seg:
                     continue
                 mdp = DAY_PERIOD_MARK.search(seg)
@@ -221,14 +368,12 @@ class RouteParser:
                     period = None
                 if m := PERIOD_MARK.search(seg):
                     period = (m.group(1) or m.group(2))
-                seg_content = DAY_MARK.sub("", PERIOD_MARK.sub("", seg)).strip()
+                seg_content, seg_offsets = _remove_patterns(seg, seg_offsets, (PERIOD_MARK, DAY_MARK))
+                seg_content, seg_offsets = _strip_offsets(seg_content, seg_offsets)
                 # Clause-level context guard -- strip clauses of "未去/放弃/他人行程/背景罗列" (not visited / given up / others' itineraries / background lists) before parsing,
                 # so unvisited attractions and introductory listings are not taken as actual route passes (probes constructed to evidence the three mis-inclusion types)
                 if NON_ROUTE_CLAUSE_RE.search(seg_content):
-                    clauses = re.split(r"([，,])", seg_content)
-                    kept = [c for i, c in enumerate(clauses)
-                            if i % 2 == 0 and not NON_ROUTE_CLAUSE_RE.search(c)]
-                    seg_content = "，".join(c for c in kept if c.strip())
+                    seg_content, seg_offsets = _clause_filter(seg_content, seg_offsets)
                     if not seg_content.strip():
                         continue
                 if not seg_content:
@@ -241,17 +386,20 @@ class RouteParser:
                 # Station-list line (第一站：…)
                 if m := STATION_MARK.search(seg_content):
                     step_no += 1
-                    ann = self.annotate(seg_content)
+                    ann = self.annotate(seg_content, offsets=seg_offsets)
                     ann.update({"step_no": step_no, "day": day, "period": period,
                                 "station_tag": f"第{m.group(1)}站", "span": seg_span})
                     steps.append(ann)
                     continue
                 # KV field lines (活动路线：… / 活动时长：约2小时)
                 if fmt == "kv_route_line" and re.match(r"^[A-Za-z\u4e00-\u9fff]+[:：]", seg_content):
-                    label, _, val = seg_content.partition("：") if "：" in seg_content else seg_content.partition(":")
-                    label = label.rstrip(":：")
+                    if "：" in seg_content:
+                        label_raw, sep, val = seg_content.partition("：")
+                    else:
+                        label_raw, sep, val = seg_content.partition(":")
+                    label = label_raw.rstrip(":：")
                     if label == "活动路线":
-                        for sub in self.parse_line(val, scenic):
+                        for sub in self.parse_line(val, scenic, seg_offsets[len(label_raw) + len(sep):]):
                             step_no += 1
                             sub.update({"step_no": step_no, "day": day, "period": period,
                                         "span": seg_span})
@@ -261,11 +409,11 @@ class RouteParser:
                         if dur:
                             steps[-1]["duration"] = dur.group()
                     continue
-                segs = self.parse_line(seg_content, scenic)
+                segs = self.parse_line(seg_content, scenic, seg_offsets)
                 if not segs:
                     # Default handling for narrative sentences: keep the whole sentence as one potential step (retained when it contains a POI)
                     if fmt in ("prose", "theme_prose") and CJK_RE.search(seg_content):
-                        ann = self.annotate(seg_content)
+                        ann = self.annotate(seg_content, offsets=seg_offsets)
                         if ann["pois"] and len(seg_content) <= 140:
                             step_no += 1
                             ann.update({"step_no": step_no, "day": day, "period": period,
@@ -371,10 +519,22 @@ class RouteParser:
 
 
 def main() -> int:
-    entries, stopwords, _ = load_dictionary("refined")
-    matcher = DictMatcher(entries, stopwords)
     routes = [json.loads(l) for l in (ROOT.parent / "task1/data/raw/official_routes.jsonl").open(encoding="utf-8")]
-    parser = RouteParser(matcher)
+    ann_path = TASK2 / "output/exp2/official_route_entities.jsonl"
+    if not ann_path.exists():
+        raise SystemExit("缺少 official_route_entities.jsonl；请先运行 task2/src/extract_official_routes.py")
+    ann_records = {}
+    with ann_path.open(encoding="utf-8") as fh:
+        for line in fh:
+            rec = json.loads(line)
+            ann_records[rec["route_id"]] = rec
+    if set(ann_records) != {r["route_id"] for r in routes}:
+        raise SystemExit("official_route_entities.jsonl 的 route_id 与官方路线不一致；请重新运行 task2/src/extract_official_routes.py")
+    for route in routes:
+        expected = hashlib.sha256(route["raw_content"].encode("utf-8")).hexdigest()
+        if ann_records[route["route_id"]]["raw_content_sha256"] != expected:
+            raise SystemExit(f"官方路线标注已过期：{route['route_id']}；请重新运行 task2/src/extract_official_routes.py")
+    parser = RouteParser({route_id: rec["entities"] for route_id, rec in ann_records.items()})
 
     parsed_routes = []
     raw_by_id = {}

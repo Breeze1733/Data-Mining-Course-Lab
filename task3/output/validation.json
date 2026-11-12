@@ -2,10 +2,10 @@
  "official": {
   "routes": 46,
   "ordered_routes": 39,
-  "segments": 560,
-  "route_steps": 416,
+  "segments": 558,
+  "route_steps": 414,
   "narrative_segments": 144,
-  "span_exact": 559,
+  "span_exact": 557,
   "span_not_contiguous": 1,
   "span_missing": 0,
   "pois_in_order_mismatch": 0,
@@ -19,8 +19,8 @@
    "九寨沟": 80
   },
   "hierarchy_records": 225,
-  "hierarchy_with_time": 189,
-  "hierarchy_empty": 36,
+  "hierarchy_with_time": 188,
+  "hierarchy_empty": 37,
   "hierarchy_not_in_routes": 0,
   "routes_without_hierarchy": 0,
   "time_allocation_population": {
