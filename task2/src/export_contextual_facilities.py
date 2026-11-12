@@ -5,7 +5,6 @@ task2 entity code.
 """
 from __future__ import annotations
 
-import hashlib
 import json
 import sys
 from pathlib import Path
@@ -35,7 +34,6 @@ def main() -> int:
                 "record_id": row["record_id"],
                 "scenic_area": row["scenic_area"],
                 "text_type": row["text_type"],
-                "clean_content_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
                 "clean_char_count": len(text),
                 "entities": ents,
             }

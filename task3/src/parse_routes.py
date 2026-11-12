@@ -1,7 +1,7 @@
 """Experiment 3: structured parsing of official routes and time-hierarchy construction.
 
 Input: task1/data/raw/official_routes.jsonl (46 official route branches)
-       task2/output/exp2/{entity_dictionary.json, entities_refined.jsonl} (dictionary and entities)
+       task2/output/exp2/{entity_dictionary.json, official_route_entities.jsonl} (rules and route entities)
 Output: task3/output/
        route_format_analysis.json   format-pattern analysis
        name_normalization.json      name-normalization rules and application statistics
@@ -10,7 +10,6 @@ Usage: python src/parse_routes.py (inside the task1 venv, -X utf8)
 """
 from __future__ import annotations
 
-import hashlib
 import io
 import json
 import re
@@ -531,9 +530,12 @@ def main() -> int:
     if set(ann_records) != {r["route_id"] for r in routes}:
         raise SystemExit("official_route_entities.jsonl 的 route_id 与官方路线不一致；请重新运行 task2/src/extract_official_routes.py")
     for route in routes:
-        expected = hashlib.sha256(route["raw_content"].encode("utf-8")).hexdigest()
-        if ann_records[route["route_id"]]["raw_content_sha256"] != expected:
+        rec = ann_records[route["route_id"]]
+        raw = route["raw_content"]
+        if rec["raw_char_count"] != len(raw):
             raise SystemExit(f"官方路线标注已过期：{route['route_id']}；请重新运行 task2/src/extract_official_routes.py")
+        if any(raw[e["start"]:e["end"]] != e["text"] for e in rec["entities"]):
+            raise SystemExit(f"官方路线标注与原文不一致：{route['route_id']}；请重新运行 task2/src/extract_official_routes.py")
     parser = RouteParser({route_id: rec["entities"] for route_id, rec in ann_records.items()})
 
     parsed_routes = []

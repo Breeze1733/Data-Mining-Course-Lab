@@ -126,10 +126,16 @@ def main(argv=None) -> int:
     contextual_by_record = {}
     for line in contextual_path.open(encoding="utf-8"):
         rec = json.loads(line)
-        contextual_by_record[rec["record_id"]] = rec["entities"]
+        contextual_by_record[rec["record_id"]] = rec
     SCENIC_NAMES = {"黄山", "九寨沟", "颐和园"}
 
     rows = [json.loads(l) for l in (TASK1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8")]
+    clean_by_id = {row["record_id"]: row["clean_content"] for row in rows}
+    for record_id, rec in contextual_by_record.items():
+        text = clean_by_id.get(record_id)
+        if (text is None or rec["clean_char_count"] != len(text)
+                or any(text[e["start"]:e["end"]] != e["text"] for e in rec["entities"])):
+            raise ValueError(f"上下文设施实体已过期：{record_id}；请重新运行 task2/src/export_contextual_facilities.py")
     ents = {json.loads(l)["record_id"]: json.loads(l) for l in
             (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8")}
 
@@ -142,7 +148,7 @@ def main(argv=None) -> int:
             text = row["clean_content"]
             rec_ents = ents.get(row["record_id"], {}).get("entities", [])
             pois = [e for e in rec_ents if e["type"] == "景点POI" and e["subtype"] == "景点"]
-            pois += contextual_by_record.get(row["record_id"], [])
+            pois += contextual_by_record.get(row["record_id"], {"entities": []})["entities"]
             pois.sort(key=lambda e: (e["start"], e["end"]))
             transports = [e for e in rec_ents if e["type"] == "交通方式"]
             scenic_area = row["scenic_area"]

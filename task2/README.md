@@ -25,6 +25,8 @@ python task2/src/compare_iterations.py
 - `src/extract_official_routes.py`：为 task3 输出官方路线实体标注 `output/exp2/official_route_entities.jsonl`。
 - `src/export_contextual_facilities.py`：为 task4 输出设施邻近补全实体 `output/exp2/contextual_facility_entities.jsonl`。
 
+两个新产物不携带哈希字段；task3/task4 读取时用 `raw_char_count` / `clean_char_count` 与实体区间做新鲜度校验。task2 的词典、别名或标注变化后，需在 task3/task4 之前重新生成这些产物。
+
 baseline 与 refined 均聚焦于核心景区内实体识别（排除外部联游点与城际交通）。两组统计和图表位于 `figs/baseline/` 和 `figs/refined/`。下游统一读取入库的 `entities_refined.jsonl`。
 
 统计口径：task1 已在清洗阶段物理去重，输入为 267 条唯一记录。分景区核心榜见 `top_canonical_in_scenic` 与 `top_canonical_by_scenic`。时间实体 `canonical` 去除内部空白，`text` 保持原文切片，`start/end` 严格对应字符索引。地点别名与归一化规则由 task2 内部 `src/poi_aliases.py` 维护，并通过 `output/exp2/entity_dictionary.json` 的 `aliases`、`poi_lookup`、`normalization` 字段发布给下游；下游只读这些字段，不 import task2 代码。

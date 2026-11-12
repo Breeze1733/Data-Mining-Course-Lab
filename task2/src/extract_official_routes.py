@@ -5,7 +5,6 @@ task3 reads this artifact instead of importing task2 NER code. Only 景点POI an
 """
 from __future__ import annotations
 
-import hashlib
 import json
 import sys
 from pathlib import Path
@@ -41,7 +40,6 @@ def main() -> int:
                 "source_record_id": route["source_record_id"],
                 "scenic_area": route["scenic_area"],
                 "raw_char_count": len(raw),
-                "raw_content_sha256": hashlib.sha256(raw.encode("utf-8")).hexdigest(),
                 "entity_count": len(payload),
                 "entities": payload,
             }
