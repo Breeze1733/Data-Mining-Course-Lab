@@ -41,11 +41,6 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-
-from common.atomic import atomic_write_text
-
-
 ROOT = Path(__file__).resolve().parents[1]
 
 TASK1 = ROOT.parent / "task1"
@@ -1219,7 +1214,7 @@ def main(argv=None) -> int:
 
     _opp = [r for r in mapping if r.get("opposing")]
 
-    atomic_write_text(OUT / "opposing_pairs.json", json.dumps({
+    (OUT / "opposing_pairs.json").write_text(json.dumps({
 
         "n_marked_rows": len(_opp),
 
@@ -1263,9 +1258,9 @@ def main(argv=None) -> int:
 
             fh.write(json.dumps(p, ensure_ascii=False) + "\n")
 
-    atomic_write_text(OUT / "mapping_table.json",
+    (OUT / "mapping_table.json").write_text(
 
-        json.dumps(mapping, ensure_ascii=False, indent=1))
+        json.dumps(mapping, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
     kind_raw = Counter(p["condition_kind"] for p in all_pairs)
@@ -1355,7 +1350,7 @@ def main(argv=None) -> int:
 
     }
 
-    atomic_write_text(OUT / "extraction_stats.json", json.dumps(stats, ensure_ascii=False, indent=1))
+    (OUT / "extraction_stats.json").write_text(json.dumps(stats, ensure_ascii=False, indent=1), encoding="utf-8")
 
     print(json.dumps(stats, ensure_ascii=False, indent=1))
 

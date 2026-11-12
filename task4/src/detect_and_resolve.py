@@ -102,16 +102,11 @@ def split_sentences(text: str) -> list[tuple[int, int, str]]:
 
 def main(argv=None) -> int:
     import argparse
-    import jieba  # noqa: F401  (dictionary loading depends on jieba initialization)
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-attribution-filter", action="store_true",
                     help="关闭 P1 句级归属过滤（默认开启：景区外句中的实体不作消解候选）")
     args = ap.parse_args(argv)
-
-    sys.path.insert(0, str(TASK2 / "src"))
-    from extract_entities import DictMatcher, load_dictionary
-    from entity_rules import contextual_facility_places
 
     import bisect
     attr_spans: dict[str, tuple[list[int], list[str]]] = {}
@@ -122,11 +117,16 @@ def main(argv=None) -> int:
             labels = [x["label"] for x in rec["labels"]]
             attr_spans[rec["record_id"]] = (starts, labels)
 
-    entries, stopwords, _ = load_dictionary("refined")
-    matcher = DictMatcher(entries, stopwords)
     # Entity-area consistency: canonical -> scenic_areas (dictionary facts, for focus-area × entity-membership filtering)
     dict_data = json.loads((TASK2 / "output/exp2/entity_dictionary.json").read_text(encoding="utf-8"))
     poi2scenic = {e["name"]: e.get("scenic_areas", []) for e in dict_data["poi"]}
+    contextual_path = TASK2 / "output/exp2/contextual_facility_entities.jsonl"
+    if not contextual_path.exists():
+        raise FileNotFoundError(f"缺少 {contextual_path}；请先运行 task2/src/export_contextual_facilities.py")
+    contextual_by_record = {}
+    for line in contextual_path.open(encoding="utf-8"):
+        rec = json.loads(line)
+        contextual_by_record[rec["record_id"]] = rec["entities"]
     SCENIC_NAMES = {"黄山", "九寨沟", "颐和园"}
 
     rows = [json.loads(l) for l in (TASK1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8")]
@@ -142,7 +142,7 @@ def main(argv=None) -> int:
             text = row["clean_content"]
             rec_ents = ents.get(row["record_id"], {}).get("entities", [])
             pois = [e for e in rec_ents if e["type"] == "景点POI" and e["subtype"] == "景点"]
-            pois += contextual_facility_places(text, row["scenic_area"])
+            pois += contextual_by_record.get(row["record_id"], [])
             pois.sort(key=lambda e: (e["start"], e["end"]))
             transports = [e for e in rec_ents if e["type"] == "交通方式"]
             scenic_area = row["scenic_area"]
