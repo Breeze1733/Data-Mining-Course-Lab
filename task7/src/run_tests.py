@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from agent_cli import LLMClient, ReActAgent  # noqa: E402
+from agent_cli import ReActAgent, load_config  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -179,8 +179,8 @@ def main() -> int:
     ap.add_argument("--llm", action="store_true", required=True,
                     help="调用已配置的在线模型，结果写入 local/agent_llm/")
     ap.parse_args()
-    llm = LLMClient()
-    if not llm.available:
+    cfg = load_config()
+    if not cfg["available"]:
         ap.error("--llm 需要在 task7/config.json 配置 base_url、api_key 和 model")
     out = ROOT.parent / "local" / "agent_llm"
     trace_dir = out / "traces_llm"
@@ -190,11 +190,11 @@ def main() -> int:
     llm_responses = 0
     llm_fallbacks = 0
     for sc in SCENARIOS:
-        agent = ReActAgent(llm)
+        agent = ReActAgent(cfg)
         result = agent.run(sc["query"])
         checks = evaluate_scenario(sc, result)
         modes = {step.get("via") for step in result["trace"]}
-        llm_responses += bool(modes & {"hybrid", "llm"})
+        llm_responses += bool(modes & {"hybrid", "llm", "react"})
         llm_fallbacks += "fallback" in modes
         tool_calls = [t for t in result["trace"] if t.get("step") == "action"]
         passed = all(checks.values())

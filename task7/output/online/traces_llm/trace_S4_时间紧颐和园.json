@@ -7,9 +7,16 @@
   "days": 0.5,
   "days_explicit": true,
   "month": null,
-  "special": [],
+  "special": [
+   "省力"
+  ],
   "avoid": [],
-  "must": []
+  "must": [],
+  "entrance": null,
+  "exit_gate": null,
+  "explicit_fields": [
+   "days"
+  ]
  },
  "trace": [
   {
@@ -30,14 +37,21 @@
     "month": null,
     "special": [],
     "avoid": [],
-    "must": []
+    "must": [],
+    "entrance": null,
+    "exit_gate": null,
+    "explicit_fields": [
+     "days"
+    ]
    },
    "llm": {
     "scenic": "颐和园",
     "visitor_type": null,
     "days": 1,
     "month": null,
-    "special": []
+    "special": [
+     "省力"
+    ]
    },
    "result": {
     "scenic": "颐和园",
@@ -46,25 +60,74 @@
     "days": 0.5,
     "days_explicit": true,
     "month": null,
-    "special": [],
+    "special": [
+     "省力"
+    ],
     "avoid": [],
-    "must": []
+    "must": [],
+    "entrance": null,
+    "exit_gate": null,
+    "explicit_fields": [
+     "days"
+    ]
    }
   },
   {
+   "step": "thought",
+   "thought": "半天+特殊需求（如看日出）存在冲突，提示取舍"
+  },
+  {
    "step": "action",
-   "thought": "调用工具 query_pois，参数 {'scenic': '颐和园', 'visitor_type': None, 'limit': 5}",
+   "thought": "决定调用工具 query_pois",
+   "tool": "query_pois",
+   "args": {
+    "visitor_type": "",
+    "limit": 8,
+    "scenic": "颐和园"
+   },
+   "via": "react"
+  },
+  {
+   "step": "observation",
+   "tool": "query_pois",
+   "summary": "{\"scenic\": \"颐和园\", \"visitor_type\": null, \"pois\": [{\"poi\": \"佛香阁\", \"degree\": 67, \"mention_freq\": 209, \"periods\": [\"未标注时段\"], \"transports\": [], \"visitor_fit\": 0, \"visitor_caveats\": []},",
+   "via": "react"
+  },
+  {
+   "step": "action",
+   "thought": "决定调用工具 query_route",
+   "tool": "query_route",
+   "args": {
+    "scenic": "颐和园",
+    "days": 1
+   },
+   "via": "react"
+  },
+  {
+   "step": "observation",
+   "tool": "query_route",
+   "summary": "{\"route_id\": \"YHY-EXP09-R3\", \"route_title\": \"2026经典西南线赏花线\", \"scenic_area\": \"颐和园\", \"steps\": [{\"step_no\": 1, \"day\": 1, \"period\": null, \"pois\": [\"西门\"], \"transport\": [], \"time_range\": ",
+   "via": "react"
+  },
+  {
+   "step": "thought",
+   "via": "react",
+   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（2 次工具调用）"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_pois，参数 {'scenic': '颐和园', 'visitor_type': '体力有限', 'limit': 5}",
    "tool": "query_pois",
    "args": {
     "scenic": "颐和园",
-    "visitor_type": null,
+    "visitor_type": "体力有限",
     "limit": 5
    }
   },
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 5 个 POI：佛香阁、昆明湖、万寿山、西堤、长廊"
+   "summary": "返回 5 个 POI：昆明湖、画中游、佛香阁、万寿山、西堤"
   },
   {
    "step": "action",
@@ -78,15 +141,15 @@
   {
    "step": "observation",
    "tool": "query_route",
-   "summary": "路线 2026清明反向遛弯路线，共 14 步"
+   "summary": "路线 2026经典西南线赏花线，共 13 步"
   },
   {
    "step": "action",
-   "thought": "调用工具 query_conditions，参数 {'scenic': '颐和园', 'visitor_type': None}",
+   "thought": "调用工具 query_conditions，参数 {'scenic': '颐和园', 'visitor_type': '体力有限'}",
    "tool": "query_conditions",
    "args": {
     "scenic": "颐和园",
-    "visitor_type": null
+    "visitor_type": "体力有限"
    }
   },
   {
@@ -96,7 +159,7 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '颐和园', 'visitor_type': None, 'visitor_types': [], 'days': 0.5, 'days_explicit': True, 'month': None, 'special': [], 'avoid': [], 'must': []}；先查核心 POI（limit=5），再取官方路线做编排骨架，最后按游客类型取条件贴士"
+   "thought": "约束={'scenic': '颐和园', 'visitor_type': None, 'visitor_types': [], 'days': 0.5, 'days_explicit': True, 'month': None, 'special': ['省力'], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': None, 'explicit_fields': ['days']}；以 ReAct 收集的证据为基础，核对候选景点后进入确定性编排：官方路线做骨架，时间预算与可行性校验兜底"
   },
   {
    "step": "thought",
@@ -104,17 +167,17 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_order，参数 {'scenic': '颐和园', 'poi': '万寿山'}",
+   "thought": "调用工具 query_order，参数 {'scenic': '颐和园', 'poi': '昆明湖'}",
    "tool": "query_order",
    "args": {
     "scenic": "颐和园",
-    "poi": "万寿山"
+    "poi": "昆明湖"
    }
   },
   {
    "step": "observation",
    "tool": "query_order",
-   "summary": "后继：昆明湖、佛香阁、排云殿、智慧海"
+   "summary": "后继：万寿山、十七孔桥、长廊、西堤"
   },
   {
    "step": "thought",
@@ -123,34 +186,6 @@
   {
    "step": "thought",
    "thought": "时段预算：每日上限 3，总 1 天，裁剪 2 个 POI"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '万寿山'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "颐和园",
-    "poi": "万寿山"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 1 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '佛香阁'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "颐和园",
-    "poi": "佛香阁"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -164,7 +199,35 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
+   "summary": "返回 2 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '东宫门'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "颐和园",
+    "poi": "东宫门"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
    "summary": "返回 3 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '佛香阁'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "颐和园",
+    "poi": "佛香阁"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 4 条条件建议"
   },
   {
    "step": "thought",
@@ -177,17 +240,19 @@
   },
   {
    "step": "final",
-   "thought": "综合 POI 查询、官方路线模板与条件贴士，生成最终行程"
+   "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家上午好！半天颐和园精华游出发啦：上午咱们入园先游万寿山，接着打卡佛香阁，学生朋友记得顺便拜拜“逢考必过”！中午漫步昆明湖赏湖光山色。因时间有限已舍去西堤与长廊。温馨提示：老人与体力一般的朋友慎爬山登阁，可改沿湖赏景或乘船过湖；带娃家庭也请根据体力灵活取舍哦！",
+ "answer": "各位游客大家好！半日游颐和园，我们从东宫门进，先去昆明湖，中午登佛香阁。温馨提示：时间有限已裁剪长廊和十七孔桥。建议穿舒服的鞋子别穿高跟鞋；体力一般推荐乘船过湖很省力；体力好建议登佛香阁看美景，体力差可直接去画中游看湖景西山一样好看哦！",
  "plan": {
   "scenic": "颐和园",
   "days": 0.5,
   "visitor_type": null,
-  "special": [],
+  "special": [
+   "省力"
+  ],
   "special_notes": [
-   "时间预算限制：已裁剪 2 个景点（西堤, 长廊等），建议根据体力取舍"
+   "时间预算限制：已裁剪 2 个景点（长廊, 十七孔桥等），建议根据体力取舍"
   ],
   "trip_month": null,
   "itinerary": [
@@ -195,15 +260,15 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "万寿山",
+    "poi": "昆明湖",
     "transport_from_prev": "入园",
-    "note": ""
+    "note": "与游客类型适配"
    },
    {
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "佛香阁",
+    "poi": "东宫门",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -211,7 +276,7 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "昆明湖",
+    "poi": "佛香阁",
     "transport_from_prev": "步行",
     "note": ""
    }
@@ -219,38 +284,10 @@
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "游客为孩子",
-    "suggestion": "儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途中经过的14号至19号敌楼路段较为平坦,便于行走",
+    "condition": "体力差的朋友",
+    "suggestion": "可以不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)",
     "all_suggestions": [
-     "儿童:西线游相对容易,从14号敌楼出发,向20号敌楼前进,途中经过的14号至19号敌楼路段较为平坦,便于行走",
-     "儿童的科学乐园,小朋友们可以通过互动游戏来学习科学知识"
-    ],
-    "frequency": 2
-   },
-   {
-    "cond_type": "人群",
-    "condition": "游客为老人",
-    "suggestion": "别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景",
-    "all_suggestions": [
-     "别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "游客为学生",
-    "suggestion": "拜一下:来都来了,逢考必过",
-    "all_suggestions": [
-     "拜一下:来都来了,逢考必过"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "游客为体力差的朋友",
-    "suggestion": "不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)",
-    "all_suggestions": [
-     "不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)"
+     "可以不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)"
     ],
     "frequency": 1
    },
@@ -265,16 +302,26 @@
    },
    {
     "cond_type": "装备",
-    "condition": "装备条件（句内）",
-    "suggestion": "慎重考虑",
+    "condition": "✅穿舒服的鞋子",
+    "suggestion": "别穿高跟鞋",
     "all_suggestions": [
-     "慎重考虑"
+     "别穿高跟鞋"
+    ],
+    "frequency": 1
+   },
+   {
+    "cond_type": "体力安全",
+    "condition": "体力可以",
+    "suggestion": "建议上去看看非常的漂亮",
+    "all_suggestions": [
+     "建议上去看看非常的漂亮"
     ],
     "frequency": 1
    }
   ],
   "feasibility_warnings": [],
-  "template_route": "YHY-EXP05-R1 2026清明反向遛弯路线"
- },
- "elapsed": 19.18
+  "template_used": true,
+  "template_route": "YHY-EXP09-R3 2026经典西南线赏花线",
+  "template_src": "（参考官方路线 YHY-EXP09-R3 APEC世界文化遗产经典线）"
+ }
 }
