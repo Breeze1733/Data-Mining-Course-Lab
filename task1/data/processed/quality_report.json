@@ -6561,7 +6561,6 @@
     "content_scope",
     "author",
     "published_at",
-    "official_scope",
     "clean_content",
     "raw_char_count",
     "extracted_char_count",
@@ -6571,18 +6570,410 @@
     "canonical_source_url",
     "cleaning_counts",
     "quality_flags",
-    "duplicate_group",
-    "duplicate_role",
-    "duplicate_of",
     "dedup_weight",
-    "like_count"
+    "duplicate_group",
+    "duplicate_of",
+    "duplicate_role",
+    "like_count",
+    "official_scope"
   ],
   "xlsx_authoring": {
     "engine": "openpyxl",
     "script": "src/export_dataset_xlsx.py",
     "status": "generated"
   },
-  "xlsx_long_text_externalization": [],
+  "xlsx_long_text_externalization": [
+    {
+      "record_id": "CTRIP_3996366",
+      "field": "raw_content",
+      "characters": 69306,
+      "path": "long_text/0024_CTRIP_3996366_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4178417",
+      "field": "raw_content",
+      "characters": 78461,
+      "path": "long_text/0025_CTRIP_4178417_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4011856",
+      "field": "raw_content",
+      "characters": 72893,
+      "path": "long_text/0033_CTRIP_4011856_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3889684",
+      "field": "raw_content",
+      "characters": 40405,
+      "path": "long_text/0034_CTRIP_3889684_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4132000",
+      "field": "raw_content",
+      "characters": 82874,
+      "path": "long_text/0035_CTRIP_4132000_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4005841",
+      "field": "raw_content",
+      "characters": 96745,
+      "path": "long_text/0037_CTRIP_4005841_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4019387",
+      "field": "raw_content",
+      "characters": 331244,
+      "path": "long_text/0039_CTRIP_4019387_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4037923",
+      "field": "raw_content",
+      "characters": 97535,
+      "path": "long_text/0040_CTRIP_4037923_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3989929",
+      "field": "raw_content",
+      "characters": 38543,
+      "path": "long_text/0041_CTRIP_3989929_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4031821",
+      "field": "raw_content",
+      "characters": 61775,
+      "path": "long_text/0042_CTRIP_4031821_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4023752",
+      "field": "raw_content",
+      "characters": 491640,
+      "path": "long_text/0043_CTRIP_4023752_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3951546",
+      "field": "raw_content",
+      "characters": 45039,
+      "path": "long_text/0046_CTRIP_3951546_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3991429",
+      "field": "raw_content",
+      "characters": 49452,
+      "path": "long_text/0047_CTRIP_3991429_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3993157",
+      "field": "raw_content",
+      "characters": 64677,
+      "path": "long_text/0048_CTRIP_3993157_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4004475",
+      "field": "raw_content",
+      "characters": 38030,
+      "path": "long_text/0049_CTRIP_4004475_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4016094",
+      "field": "raw_content",
+      "characters": 40616,
+      "path": "long_text/0050_CTRIP_4016094_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4123390",
+      "field": "raw_content",
+      "characters": 34081,
+      "path": "long_text/0051_CTRIP_4123390_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3961636",
+      "field": "raw_content",
+      "characters": 46542,
+      "path": "long_text/0052_CTRIP_3961636_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_2953624",
+      "field": "raw_content",
+      "characters": 86597,
+      "path": "long_text/0053_CTRIP_2953624_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4034449",
+      "field": "raw_content",
+      "characters": 64478,
+      "path": "long_text/0057_CTRIP_4034449_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4011981",
+      "field": "raw_content",
+      "characters": 47050,
+      "path": "long_text/0059_CTRIP_4011981_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3999208",
+      "field": "raw_content",
+      "characters": 75853,
+      "path": "long_text/0066_CTRIP_3999208_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3995811",
+      "field": "raw_content",
+      "characters": 213305,
+      "path": "long_text/0067_CTRIP_3995811_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3963679",
+      "field": "raw_content",
+      "characters": 33223,
+      "path": "long_text/0068_CTRIP_3963679_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4006823",
+      "field": "raw_content",
+      "characters": 70555,
+      "path": "long_text/0070_CTRIP_4006823_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4109335",
+      "field": "raw_content",
+      "characters": 64759,
+      "path": "long_text/0075_CTRIP_4109335_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3539977",
+      "field": "raw_content",
+      "characters": 99884,
+      "path": "long_text/0078_CTRIP_3539977_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3976836",
+      "field": "raw_content",
+      "characters": 52721,
+      "path": "long_text/0080_CTRIP_3976836_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3970738",
+      "field": "raw_content",
+      "characters": 100267,
+      "path": "long_text/0088_CTRIP_3970738_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3971596",
+      "field": "raw_content",
+      "characters": 68725,
+      "path": "long_text/0089_CTRIP_3971596_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4005525",
+      "field": "raw_content",
+      "characters": 52607,
+      "path": "long_text/0090_CTRIP_4005525_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4002947",
+      "field": "raw_content",
+      "characters": 249128,
+      "path": "long_text/0091_CTRIP_4002947_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4114244",
+      "field": "raw_content",
+      "characters": 126643,
+      "path": "long_text/0092_CTRIP_4114244_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4066061",
+      "field": "raw_content",
+      "characters": 151061,
+      "path": "long_text/0093_CTRIP_4066061_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3996473",
+      "field": "raw_content",
+      "characters": 169546,
+      "path": "long_text/0094_CTRIP_3996473_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4019798",
+      "field": "raw_content",
+      "characters": 422529,
+      "path": "long_text/0095_CTRIP_4019798_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4059371",
+      "field": "raw_content",
+      "characters": 138872,
+      "path": "long_text/0099_CTRIP_4059371_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3969978",
+      "field": "raw_content",
+      "characters": 59944,
+      "path": "long_text/0100_CTRIP_3969978_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_2117447",
+      "field": "raw_content",
+      "characters": 72507,
+      "path": "long_text/0101_CTRIP_2117447_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3975883",
+      "field": "raw_content",
+      "characters": 39194,
+      "path": "long_text/0102_CTRIP_3975883_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4037691",
+      "field": "raw_content",
+      "characters": 128256,
+      "path": "long_text/0105_CTRIP_4037691_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4057070",
+      "field": "raw_content",
+      "characters": 43158,
+      "path": "long_text/0106_CTRIP_4057070_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4032329",
+      "field": "raw_content",
+      "characters": 97825,
+      "path": "long_text/0107_CTRIP_4032329_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4055037",
+      "field": "raw_content",
+      "characters": 77121,
+      "path": "long_text/0109_CTRIP_4055037_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4044973",
+      "field": "raw_content",
+      "characters": 60232,
+      "path": "long_text/0110_CTRIP_4044973_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3975508",
+      "field": "raw_content",
+      "characters": 88197,
+      "path": "long_text/0111_CTRIP_3975508_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4002122",
+      "field": "raw_content",
+      "characters": 46553,
+      "path": "long_text/0112_CTRIP_4002122_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3970034",
+      "field": "raw_content",
+      "characters": 52261,
+      "path": "long_text/0113_CTRIP_3970034_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3007155",
+      "field": "raw_content",
+      "characters": 100254,
+      "path": "long_text/0114_CTRIP_3007155_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3939862",
+      "field": "raw_content",
+      "characters": 70727,
+      "path": "long_text/0116_CTRIP_3939862_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4050446",
+      "field": "raw_content",
+      "characters": 55529,
+      "path": "long_text/0122_CTRIP_4050446_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4040944",
+      "field": "raw_content",
+      "characters": 53376,
+      "path": "long_text/0124_CTRIP_4040944_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4033780",
+      "field": "raw_content",
+      "characters": 64807,
+      "path": "long_text/0125_CTRIP_4033780_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4107245",
+      "field": "raw_content",
+      "characters": 45509,
+      "path": "long_text/0128_CTRIP_4107245_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_1336416",
+      "field": "raw_content",
+      "characters": 480211,
+      "path": "long_text/0132_CTRIP_1336416_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3941430",
+      "field": "raw_content",
+      "characters": 38720,
+      "path": "long_text/0135_CTRIP_3941430_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4046620",
+      "field": "raw_content",
+      "characters": 468302,
+      "path": "long_text/0136_CTRIP_4046620_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4114227",
+      "field": "raw_content",
+      "characters": 168411,
+      "path": "long_text/0137_CTRIP_4114227_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_3969287",
+      "field": "raw_content",
+      "characters": 84549,
+      "path": "long_text/0138_CTRIP_3969287_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4076734",
+      "field": "raw_content",
+      "characters": 127897,
+      "path": "long_text/0139_CTRIP_4076734_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4076286",
+      "field": "raw_content",
+      "characters": 102934,
+      "path": "long_text/0140_CTRIP_4076286_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4076390",
+      "field": "raw_content",
+      "characters": 93414,
+      "path": "long_text/0143_CTRIP_4076390_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4076742",
+      "field": "raw_content",
+      "characters": 37321,
+      "path": "long_text/0144_CTRIP_4076742_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4137972",
+      "field": "raw_content",
+      "characters": 43624,
+      "path": "long_text/0146_CTRIP_4137972_raw_content.txt"
+    },
+    {
+      "record_id": "CTRIP_4030611",
+      "field": "raw_content",
+      "characters": 145335,
+      "path": "long_text/0150_CTRIP_4030611_raw_content.txt"
+    }
+  ],
   "output_files": {
     "csv": "dataset_clean.csv",
     "jsonl": "dataset_clean.jsonl",

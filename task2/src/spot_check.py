@@ -51,7 +51,6 @@ def reconcile():
     }
     data["review_summary"] = summary
     path.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    (OUT / "spot_checks.json").write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(json.dumps(summary, ensure_ascii=False))
 
 
