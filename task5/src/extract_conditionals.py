@@ -1,71 +1,49 @@
 """Experiment 5: conditional sightseeing-advice extraction.
 
-
 Patterns (highest to lowest priority; each trigger site in a sentence becomes its own case):
 
   P1 explicit conditional conjunctions: 如果/假如/若是/要是/万一/一旦/只要/除非 + condition clause + (则/就/最好/建议…) advice clause
-
   P2 “…的话”: condition clause + 的话 + advice clause
-
   P3 “当/遇到…时”: time/situation condition + advice clause
-
   P4 建议/推荐/适合 + clause: condition inferred from crowd/situation words in the clause, defaulting to “一般建议”
-
   P5 crowd subject + 可以: 老人/孩子/情侣…可以… -> condition=人群
-
   P6 negative advice: 不要/别/避免/慎 + VP -> condition inferred from in-clause weather/equipment/time words
 
-Multi-advice sentences: advice clauses split on ； ； splitting on ， requires the second half to start with an advice verb (to avoid cutting verb-object phrases).
+Multi-advice sentences: advice clauses split on ；；splitting on ，requires the second half to start with an advice verb
+(to avoid cutting verb-object phrases).
 
-“可以” appears only in P5 (crowd subject) or the negative form; bare “可以” is usually a capability statement and is not extracted — boundary rules in the report.
+“可以” appears only in P5 (crowd subject) or the negative form; bare “可以” is usually a capability statement and is not
+extracted — boundary rules in the report.
 
 Output: output/conditional_pairs.jsonl (per pair), mapping_table.json (deduplicated mapping table), extraction_stats.json
-
 """
-
 from __future__ import annotations
 
-
 import hashlib
-
 import io
-
 import json
-
 import re
-
 import sys
-
 from collections import Counter, defaultdict
-
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
-
 TASK1 = ROOT.parent / "task1"
-
 OUT = ROOT / "output"
 
-
 if getattr(sys.stdout, "encoding", "") != "utf-8" and not isinstance(sys.stdout, io.TextIOWrapper):
-
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
-
 
 SENT_SPLIT = re.compile(r"[。！？\n]+")
 
-
 COND_MARKERS = ("如果", "假如", "假若", "若是", "若", "要是", "万一", "一旦", "只要", "除非")
 
-# Supplement action verbs — split into separate advice when an action verb follows a comma (common travel-advice verbs such as 穿/带/吃/住)
-
+# Supplement action verbs — split into separate advice when an action verb follows a comma
+# (common travel-advice verbs such as 穿/带/吃/住)
 SUGG_VERB = re.compile(r"^(则|就|那|然后|最好|建议|推荐|记得|千万|尽量|务必|一定要|可以|不妨|选择|改|换|提前|避开|放弃|考虑|穿|带|买|吃|住|坐|乘|走|游览|参观|步行|前往|返回|入住|预定|预约|排队|自驾|徒步|登|第[一二三四五六七八九十]+天)")
 
 CROWD_RE = re.compile(
-
     r"老人|老人小孩|带孩子|带娃|小孩|儿童|婴儿|亲子|情侣|夫妻|带老人|孕妇|腿脚|体力(不好|差|一般|有限)|新手|"
-
     r"第一次|学生|家庭|带娃|老人孩子|带小孩|恐高|晕车")
 
 WEATHER_RE = re.compile(r"下雨|下雨天|雨天|雨后|下雪|雪后|大雪|降雪|雨雪|云雾|大雾|结冰|冰面|雷雨|台风|大风|降温|天冷|天热|暴晒|高温|严寒|天气|气候")
@@ -73,7 +51,6 @@ WEATHER_RE = re.compile(r"下雨|下雨天|雨天|雨后|下雪|雪后|大雪|�
 EQUIP_RE = re.compile(r"带[上好]?|穿[上好]?|准备|备[用好]?|雨衣|雨伞|防晒|冲锋衣|羽绒服|登山杖|手套|水|食物|干粮|现金|充电宝")
 
 TIME_RE = re.compile(r"旺季|淡季|周末|节假日|黄金周|国庆|五一|寒暑假|季节|早上|清晨|上午|中午|下午|晚上|傍晚|夜晚|一天|两天|三天|"
-
                      r"时间紧|时间充裕|时间有限|春季|夏季|秋季|冬季|春天|夏天|秋天|冬天|红叶|花期|杜鹃|雪期|开园|闭园|淡季")
 
 TICKET_RE = re.compile(r"提前|预约|预订|门票|身份证|优惠|免票|抢票|放票")
@@ -84,102 +61,114 @@ SAFETY_RE = re.compile(r"高反|高原反应|缺氧|体力|悬崖|安全|危险|
 
 NEG_RE = re.compile(r"^(不要|别|避免|慎|切勿|忌)")
 
-
 CONDITION_TYPES = [
-
     ("天气", WEATHER_RE), ("人群", CROWD_RE), ("装备", EQUIP_RE), ("预约票务", TICKET_RE),
-
     ("交通", TRANSPORT_RE), ("体力安全", SAFETY_RE), ("时间", TIME_RE),
-
 ]
 
 
 def classify_condition(text: str) -> str:
-
     if re.search(r"时间(?:充足|允许)", text):
         return "时间"
-
     for name, pat in CONDITION_TYPES:
-
         if pat.search(text):
-
             return name
-
     return "其他"
 
 
 def crowd_subtype(text: str) -> str | None:
-
     for w, label in (("老人", "老人"), ("孩子", "孩子"), ("小孩", "孩子"), ("儿童", "孩子"), ("婴儿", "孩子"),
-
                      ("亲子", "亲子"), ("带娃", "亲子"), ("情侣", "情侣"), ("夫妻", "情侣"),
-
                      ("孕妇", "孕妇"), ("腿脚", "行动不便"), ("体力不好", "体力有限"), ("体力差", "体力有限"),
-
                      ("体力一般", "体力有限"), ("体力有限", "体力有限"), ("体力不足", "体力有限"),
-
                      ("体力不济", "体力有限"), ("新手", "新手"),
-
                      ("第一次", "初次游览"), ("学生", "学生"), ("家庭", "家庭"), ("恐高", "恐高"),
-
                      ("晕车", "晕车")):
-
         if w in text:
-
             return label
-
     return None
 
 
 def split_multi_suggestions(sugg: str) -> list[str]:
-
     parts = [s for s in re.split(r"[；;]", sugg) if s.strip()]
-
     if len(parts) == 1:
-
         parts = [sugg]
-
         # Split only when the post-comma half starts with an advice verb (to avoid cutting verb-object/noun phrases)
-
         for m in re.finditer(r"[，,]", sugg):
-
             tail = sugg[m.end():]
-
             if SUGG_VERB.match(tail):
-
                 parts = [sugg[:m.start()], tail]
-
                 break
-
     return [p.strip(" ，,。；;") for p in parts if p.strip(" ，,。；;")]
 
 
 # Polarity/boundary guards:
-
 # 1) platform boilerplate is not travel advice; 2) appeal/comment sentences are not advice for tourists;
-
 # 3) condition pairs in joint-tour city paragraphs carry little attribution value (苏州街 is a sight inside 颐和园 and must be excluded).
-
-PLATFORM_PHRASE_RE = re.compile(r"点赞|收藏|一键三连|评论区|私信|关注我们|转发|推荐阅读")
+PLATFORM_PHRASE_RE = re.compile(r"点赞|收藏|一键三连|评论区|私信|关注我们|转发|推荐阅读|#[一-龥A-Za-z]{2,}")
 
 # Guards for non-advice sentences:
-
 LYRICAL_RE = re.compile(r"人生|岁月|初心|青春|梦想|心态|老得太快|明白得太迟|否定了自己|自己的想法")
-
 COGNITIVE_RE = re.compile(r"^(不要|别)(认为|觉得|以为|担心)")
-
 RHETORIC_IFSAY_RE = re.compile(r"^如果说")
-
 APPEAL_RE = re.compile(r"管理部门|引起重视|呼吁")
-
 CITY_SKIP_RE = re.compile(r"青岛|南京|苏州(?!街)|无锡|厦门|天津|杭州|大连|哈尔滨|洛阳|西安")
 
 
 def skip_sentence(sent: str) -> bool:
-
     return bool(PLATFORM_PHRASE_RE.search(sent) or APPEAL_RE.search(sent)
-
                 or CITY_SKIP_RE.search(sent) or LYRICAL_RE.search(sent))
+
+
+# Off-domain guard: a "条件→建议" pair must be advice about touring the scenic area. Suggestions about
+# room amenities, food delivery, restaurant menus, ad promotions, or pure venting carry no touring
+# knowledge and are dropped pair-wise (reasons counted in extraction_stats.off_domain_filtered).
+OFF_LODGING_AMENITY_RE = re.compile(r"浴缸|泡澡|拖鞋|隔音|房卡|淋浴|热水器|枕头|床垫|大床|双床房|房间里|房间有|客房")
+OFF_DELIVERY_RE = re.compile(r"外卖|快递|跑腿|网购|淘宝|京东|拼多多|拼单|自热食品寄")
+OFF_MENU_RE = re.compile(r"人均\s*[0-9一二三四五六七八九十百]+|一人食|下馆子|点菜|菜单|招牌菜|菜市场")
+OFF_PROMO_RE = re.compile(r"新用户|大礼包|优惠券|首日免租金|返现|立减|红包|折扣券|广告")
+OFF_RANT_RE = re.compile(r"气死|无语|恶心|差评|坑爹|垃圾|宰客|挨宰|再也不来|失望透顶|没有基本素|窝在家里|居家隔离|宅家")
+OFF_PRICE_RANT_RE = re.compile(r"(?:也要|都要|就要|花了|居然|竟然)\s*[^。，；！？]{0,6}?\d+\s*元")
+OFF_WISH_RE = re.compile(r"^(我|我们)[^。！？；]{0,8}(希望|想|盼|打算|计划|准备|觉得|相信)")
+OFF_EXPERIENCE_RE = re.compile(r"我们?[^。！？；]{0,14}(?:冷到|累到|后悔|吓到|晕到)")
+OFF_RHETORIC_RE = re.compile(r"另当别论|另说|另议")
+ADVICE_HINT_RE = re.compile(r"要|记得|千万|最好|建议|不妨|注意|提前|可以|别|不要|避免|慎|务必|尽量|选择|避开|放弃|考虑|必须|需|值得|保证|容易|方便|适合|推荐")
+
+# Advice-shape gate: a kept suggestion must look prescriptive — an advice verb cue, a hortative
+# marker, a prescription verb, or a concrete equipment/ticket item. Trigger-carried patterns pass by
+# construction (可以/不要/须…); the gate only bites when even the trigger's tail has no prescriptive
+# form, which signals a trigger misfire on narration (poetry, essays, menu reviews).
+ADVICE_MARK_RE = re.compile(r"一定要|务必|记得|千万|最好|建议|推荐|不妨|注意|提前|可以|避开|放弃|考虑|尽量|慎|切勿|避免|必须|值得|必备|少不了|很有必要|要(?=[车带穿买记备提求注])|须")
+PRESCRIPTION_RE = re.compile(r"带|穿|买|住|坐|乘|走|游|玩|吃|喝|订|预约|租|停[车泊]|爬|登|排队|避|备|换|请|错峰|错开|包车|自驾|步行|下山|上山|进[山沟入园内]|门[进出]|赏(?![的了着])|观(?=[景赏察看])|拍(?=[照摄出])|摄[影像]|看|休[息整]|宿|安排|规划|省(?=[0-9一二三钱时间力气])|放缓|减速|慢[行跑]|缓行|安全行驶|错过|打卡")
+GATE_GEAR_RE = re.compile(r"雨衣|雨伞|雨具|冲锋衣|羽绒服|登山杖|手套|充电宝|干粮|现金|墨镜|太阳镜|氧气|冰爪|护膝|防晒|帽子|登山鞋|防滑鞋")
+
+
+def is_advice_shaped(sugg: str) -> bool:
+    return bool(SUGG_VERB.match(sugg) or ADVICE_MARK_RE.search(sugg)
+                or PRESCRIPTION_RE.search(sugg) or GATE_GEAR_RE.search(sugg) or TICKET_RE.search(sugg))
+
+
+def off_domain_reason(sent: str, cond: str, sugg: str) -> str | None:
+    """Classify why a pair is not scenic-touring advice, or None when it should be kept."""
+    if OFF_LODGING_AMENITY_RE.search(sugg) or OFF_LODGING_AMENITY_RE.search(cond):
+        return "lodging_amenity"
+    if OFF_EXPERIENCE_RE.search(sugg) or OFF_EXPERIENCE_RE.search(cond):
+        return "experience_narration"
+    if OFF_RHETORIC_RE.search(sugg):
+        return "rhetoric_fallback"
+    if OFF_PRICE_RANT_RE.search(sugg):
+        return "price_complaint"
+    if OFF_DELIVERY_RE.search(cond + " " + sugg):
+        return "delivery_online"
+    if OFF_MENU_RE.search(cond + " " + sugg) or OFF_MENU_RE.search(sent):
+        return "restaurant_menu"
+    if OFF_PROMO_RE.search(cond + " " + sugg):
+        return "promo_ad"
+    if OFF_WISH_RE.match(sugg):
+        return "first_person_wish"
+    if OFF_RANT_RE.search(sugg) and not ADVICE_HINT_RE.search(sugg):
+        return "rant"
+    return None
 
 
 _PHOTO_HINT = re.compile(r"拍照|出片|机位|镜头|拍摄|摄影|合影|角度|光线|构图")
@@ -318,7 +307,6 @@ def _assign_pair_id(p: dict, counter: list) -> str:
     Replaces the previous content-hash id, which served no integrity purpose for
     this identifier: the payload lives in the same record, dedup uses tuple
     comparison, and downstream task6 only reads the ``pair_ids`` list (not values).
-    Sequential ids are human-readable and stable in encounter order within a run.
     """
     counter[0] += 1
     p["pair_id"] = f"p{counter[0]:04d}"
@@ -364,12 +352,6 @@ def refine(row: dict) -> tuple[dict, list[str]]:
     sent = row['sentence']
     start, end = span
     changes = []
-    if (row.get('pattern') == '显式条件' and row.get('trigger') == '…的话(裸)'
-            and text.startswith('果') and start > 0 and sent[start - 1:start + 1] == '如果'):
-        row.update(condition_text=text[1:], condition_span=[start + 1, end],
-                   original_condition_text=text, original_condition_span=span, original_condition_kind=row['condition_kind'],
-                   condition_refinement=['remove_partial_conjunction'])
-        return row, row['condition_refinement']
     # “若干” and “若隐若现” are words, not the conditional conjunction “若”.
     if (row.get('pattern') == '显式条件' and row.get('trigger') == '若'
             and (text.startswith('干') or text.startswith('隐若现'))):
@@ -470,113 +452,75 @@ def refine(row: dict) -> tuple[dict, list[str]]:
     return row, changes
 
 
-
 def extract_from_sentence(sent: str) -> list[dict]:
-
     pairs = []
-
     seen_spans = set()
 
-
-    # Priority: otherwise-branch splitting (a better parse than the explicit-condition branch — store the mutually exclusive branches separately, no merging)
-
+    # Otherwise-branch splitting (a better parse than the explicit-condition branch — store the mutually
+    # exclusive branches separately, no merging)
     for m in re.finditer(r"(如果|要是|若)([^。！？；]{1,40}?)就([^，。！？；]{1,30})[，,]?否则([^。！？；]{1,40})", sent):
-
         branch_a_cond, branch_a_span = _group_span(sent, m, 2)
-
         branch_a_sugg = "就" + m.group(3).strip()
-
         branch_b_sugg = m.group(4).strip()
-
         pairs.append({"pattern": "显式条件", "trigger": m.group(1),
-
                       "suggestions": [branch_a_sugg], "sentence": sent,
-
                       **_cond(branch_a_cond, branch_a_span, "explicit")})
-
         pairs.append({"pattern": "显式条件", "trigger": m.group(1) + "(否则)",
-
                       "suggestions": [branch_b_sugg], "sentence": sent,
-
                       **_cond(branch_a_cond, branch_a_span, "explicit",
-
                              label="非" + branch_a_cond, negated=True)})
-
         seen_spans.add(m.start())
-
     if pairs:
-
         return pairs
 
-
-    # Explicit conditions (including the no-comma adjacent variants ”…的话就/可以/建议Y”, +4 real advice cases)
-
+    # Explicit conditions (including the no-comma adjacent variants ”…的话就/可以/建议Y”)
     # Reported-speech guard — the advice target of "导游说/司机说…如果…" is the narrator, not tourists
     if re.search(r"(?:导游|司机|师傅|工作人员|店员|讲解员)说[^。！？；]{0,8}(?:如果|要是|若)", sent):
         return pairs
 
-    for m in re.finditer(r"(如果|假如|假若|若是|(?<![宛仿相如自普兰沉聊日的])若|要是|万一|一旦|只要|除非)([^。！？；]{1,40}?)(的话)?[，,]", sent):
-
+    for m in re.finditer(r"(如果|假如|假若|若是|(?<![宛仿相如自普兰沉聊日的尔])若|要是|万一|一旦|只要|除非)([^。！？；]{1,40}?)(的话)?[，,]", sent):
         cond, cond_span = _group_span(sent, m, 2)
-
         rest = sent[m.end():].strip()
-
         if not rest:
-
             continue
-
         trigger = m.group(1) + ("…的话" if m.group(3) else "")
-
-        # Rhetorical guard on two fronts — "如果说" lands in the condition text (the conjunction group captures only 2 chars); reported speech
-        # (导游说/司机说…+如果) targets the narrator, not tourist advice
+        # Rhetorical guard on two fronts — "如果说" lands in the condition text (the conjunction group
+        # captures only 2 chars); reported speech targets the narrator, not tourist advice
         if (RHETORIC_IFSAY_RE.match(trigger) or cond.startswith("说")) and rest.startswith(("那么", "那 ")):
-
             continue  # "如果说X,那么Y" is parallel rhetoric, not conditional advice
-
         for sugg in split_multi_suggestions(rest):
-
             pairs.append({"pattern": "显式条件", "trigger": trigger,
-
                           "suggestions": [sugg], "sentence": sent,
-
                           **_cond(cond, cond_span, "explicit")})
-
         seen_spans.add(m.start())
 
     for m in re.finditer(r"(如果|要是|若|假如)([^。！？；，]{1,40}?的话)(?=[就才可以建议最好也])", sent):
-
         if m.start() in seen_spans:
-
             continue
-
         trigger = m.group(1) + "…的话(紧邻)"
-
         rest = sent[m.start(2) + len(m.group(2)):]
-
         if not rest or RHETORIC_IFSAY_RE.match(trigger):
-
             continue
-
         cond_text, cond_span = _group_span(sent, m, 2, suffix="的话")
-
         for sugg in split_multi_suggestions(rest):
-
             pairs.append({"pattern": "显式条件", "trigger": trigger,
-
                           "suggestions": [sugg], "sentence": sent,
-
                           **_cond(cond_text, cond_span, "explicit")})
-
         seen_spans.add(m.start())
 
-
-    # Extension A: bare "X的话，Y" (no 如果/要是 prefix) — "玩黄龙的话住松潘古城" (miss confirmed on the expanded sample)
+    # Extension A: bare "X的话，Y" (no 如果/要是 prefix) — "玩黄龙的话住松潘古城"
     for m in re.finditer(r"([一-龥A-Za-z0-9]{2,12})的话[，,]?\s*", sent):
         if m.start() in seen_spans:
             continue
         cond, cond_span = _group_span(sent, m, 1)
         if cond.startswith(("如果", "要是", "若", "假如", "既然", "就是说")):
             continue  # conjunction forms are handled by P1
+        # The bare variant must not re-handle conjunction sentences: P1 already extracted them, and a
+        # late anchor (matched from the conjunction's second character) would emit a near-duplicate
+        # pair whose condition text carries one stray leading character.
+        if any(mk in cond for mk in COND_MARKERS) or (cond and m.start() > 0
+                and (sent[m.start() - 1] + cond[0]) in ("如果", "要是", "假如", "若是", "假若")):
+            continue
         rest = sent[m.end():].strip()
         if not rest or not (SUGG_VERB.match(rest)
                             or re.match(r"(?:建议|最好|推荐|记得|不妨|务必|要|选|住|坐|乘|带|穿|备|订|避)", rest)):
@@ -609,6 +553,9 @@ def extract_from_sentence(sent: str) -> list[dict]:
         back = sent[max(0, m.start() - 12):m.start()]
         if re.search(r"(估计|可能|将|恐怕|也许|说不定)", back):
             continue  # predictive context ("估计不久将禁止"), not a current regulation
+        if m.group(1) == "不得" and not re.match(
+                r"(?:进入|入内|跨越|攀爬|触摸|投喂|吸烟|露营|生火|垂钓|游泳|停车|通行|驶入|携带|使用|飞|放|带|喂)", m.group(0)[2:]):
+            continue  # "不得不说/不得而知" discourse markers are not regulations
         pairs.append({"pattern": "否定建议", "trigger": m.group(1),
                       "suggestions": [m.group(0)], "sentence": sent, "condition_type": "一般",
                       **_cond("", None, "absent", label="入园/通行规定（句内）",
@@ -621,179 +568,97 @@ def extract_from_sentence(sent: str) -> list[dict]:
                       **_cond("", None, "absent", label="开放时间规定（句内）",
                              reason="regulation_not_conditional")})
 
-    # P7 by-regulation: conditional rule information from 按照/根据+要求/规定/政策/须知 (no explicit conditional conjunction)
-
+    # P7 by-regulation: conditional rule information from 按照/根据+要求/规定/政策/须知
     for m in re.finditer(r"((?:按照|根据|依据)[^。！？；]{0,16}?(?:要求|规定|政策|须知|提示))[^。！？；]{0,12}?[，,]\s*([^。！？；]{1,60})", sent):
-
         cond, cond_span = _group_span(sent, m, 1)
-
         rest = m.group(2).strip()
-
         if not rest:
-
             continue
-
         emitted = False
-
         for sugg in split_multi_suggestions(rest):
-
             if re.match(r"^[第其][一二三四五六七八九十]", sugg.strip()):
-
                 continue
-
             pairs.append({"pattern": "依据规定", "trigger": m.group(1),
-
                           "suggestions": [sugg], "sentence": sent,
-
                           "condition_type": "一般",
-
                           **_cond(cond, cond_span, "explicit")})
-
             emitted = True
-
         if emitted:
-
             seen_spans.add(m.start())
 
-    # 当/遇到…时 (time-point conditions)
-
+    # P3 当/遇到…时 (time-point conditions)
     for m in re.finditer(r"(?:当(?!时|初|年|地|下|然)|遇到|遇上|碰到)([^。！？；，]{1,24}?)(的时候|时)[，,]?", sent):
-
         if m.start() in seen_spans:
-
             continue
-
         cond, cond_span = _group_span(sent, m, 1)
-
         rest = sent[m.end():].strip()
-
         if not rest or not SUGG_VERB.search(rest[:12]):
-
             continue
-
         for sugg in split_multi_suggestions(rest):
-
             pairs.append({"pattern": "时点条件", "trigger": "当…时/遇到…时",
-
                           "suggestions": [sugg], "sentence": sent,
-
                           **_cond(cond, cond_span, "explicit")})
-
         seen_spans.add(m.start())
 
-
     if pairs:
-
         return pairs
 
-
-    # Advice class (with crowd/situation inference)
-
-    for m in re.finditer(r"((?<![不])建议(?!的话)|推荐|(?<![的])最好|尽量|务必|记得|千万|不妨|(?<![不合舒])适合|(?<![舒])适宜)([^。！？；]{1,60})", sent):
-
+    # P4 advice class (with crowd/situation inference)
+    for m in re.finditer(r"((?<![不])建议(?![的话])|推荐(?!了)|(?<![的])最好|尽量|务必|记得|记住|千万|不妨|(?<![不合舒])适合|(?<![舒])适宜|(?<!我)一定要|值得)([^。！？；]{1,60})", sent):
         clause = m.group(2).strip()
-
-        if m.group(1) == "最好" and clause.startswith("的"):
-
-            continue  # "最好的天气,就是…" is adjectival usage, not advice ("最好是+advice" kept)
-
+        # "最好的天气,就是…" copula rhetoric is dropped later by the advice-shape gate, while
+        # "最好的选择是直奔长海" style advice passes it — no trigger-level skip needed here.
         crowd = crowd_subtype(clause) or crowd_subtype(sent)
-
         advice_start = m.end(1)
-
         if crowd:
-
             cond_label, cond_type = f"游客为{crowd}", "人群"
-
             cond_fields = _infer_fields(sent, advice_start, ["人群"], cond_label)
-
         elif WEATHER_RE.search(sent):
-
             cond_label, cond_type = "天气条件（句内）", "天气"
-
             cond_fields = _infer_fields(sent, advice_start, ["天气"], cond_label)
-
         elif TIME_RE.search(sent):
-
             cond_label, cond_type = "时间条件（句内）", "时间"
-
             cond_fields = _infer_fields(sent, advice_start, ["时间"], cond_label)
-
         else:
-
             cond_label, cond_type = "一般建议", "一般"
-
             cond_fields = _infer_fields(sent, advice_start, ["装备"], cond_label)
-
         emitted = False
-
         for sugg in split_multi_suggestions(clause):
-
             if re.match(r"^[第其][一二三四五六七八九十]", sugg.strip()):
-
                 continue  # enumeration items ("第二,房卡") are not advice
-
             pairs.append({"pattern": "建议推断", "trigger": m.group(1),
-
                           "suggestions": [sugg], "sentence": sent,
-
                           "condition_type": cond_type, **cond_fields})
-
             emitted = True
-
         if emitted:
-
             return pairs
 
-
-    # Crowd subject + 可以
-
+    # P5 crowd subject + 可以
     for m in re.finditer(
-
             r"(老人|老人小孩|带孩子[^。！？；，]{0,6}|带娃|小孩|儿童|婴儿|亲子[^。！？；，]{0,4}|情侣|夫妻|"
-
             r"孕妇|腿脚[^。！？；，]{0,4}|体力[^。！？；，]{0,4}|新手|第一次[^。！？；，]{0,6}|学生|恐高|晕车)可以([^。！？；]{1,50})", sent):
-
         crowd, crowd_span = _group_span(sent, m, 1)
-
         segs = split_multi_suggestions(m.group(2))
-
-        # Extension: re-attach the leading "可以" verb cue to the first segment — advice starts from the verb
+        # Re-attach the leading "可以" verb cue to the first segment — advice starts from the verb
         # (without it "可以不下了" would be cut to "不下了" and the 3-char advice dropped by the minimum-length filter)
-
         if segs:
-
             segs[0] = "可以" + segs[0]
-
         for sugg in segs:
-
             pairs.append({"pattern": "人群可以", "trigger": "可以",
-
                           "suggestions": [sugg], "sentence": sent,
-
                           "condition_type": "人群",
-
                           **_cond(crowd, crowd_span, "inferred", f"游客为{crowd}")})
-
         return pairs
 
-
-    # Negative advice
-
-    for m in re.finditer(r"((?<!要)不要(?![要不要门票钱票])|不建议|不宜|(?<![特级区差分别参离告])别(?=[去走买坐赶忘信贪乱省图踩拒绝玩用管抢急费听折腾改])|避免|(?<![不])慎|切勿|(?<![禁])忌|(?<![要])不用(?=[去走买带])|不必(?=[去走买带])|无需|没必要)([^。！？；]{1,50})", sent):
-
+    # P6 negative advice
+    for m in re.finditer(r"((?<!要)不要(?![要不要门票钱票])|不建议|不宜|(?<![特级区差分别参离告])别(?=[去走买坐赶忘信贪乱省图踩拒绝玩用管抢急费听折腾改等着拖穿在太])|避免|(?<![不])慎|切勿|(?<![禁])忌|(?<![要])不用(?=[去走买带])|不必(?=[去走买带])|无需|没必要)([^。！？；]{1,50})", sent):
         clause = m.group(0).strip()
-
-        if re.match(r"不要(太多|要好|要太好|不要的)", clause):
-
-            continue  # colloquial exaggerated comparison ("好了不要太多"), not advice
-
+        if re.match(r"不要(太多|要好|要太好|不要的|太[好美妙棒])", clause):
+            continue  # colloquial exaggerated comparison ("好了不要太多/不要太美"), not advice
         if COGNITIVE_RE.match(clause):
-
             continue  # "不要认为/觉得/以为" polarity-reversing rhetoric, not pitfall-avoidance advice
-
-        # Extension: re-extend the verb phrase — the "带/穿/买/选…" phrase before the negative word belongs to the same advice
-        # (without it "带老人、小孩慎选" would keep only "慎选", dropping the 3-char advice "带老人、小孩")
+        # Re-extend the verb phrase — the "带/穿/买/选…" phrase before the negative word belongs to the
+        # same advice (without it "带老人、小孩慎选" would keep only "慎选", dropping the 3-char advice)
         back = sent[max(0, m.start(1) - 8):m.start(1)]
         back_m = re.search(r"(带|穿|买|选|点|准备|记得)([^，。！？；；]{0,6})$", back)
         advice_start = m.start(1)
@@ -801,151 +666,84 @@ def extract_from_sentence(sent: str) -> list[dict]:
             advice_start = max(0, m.start(1) - 8) + back_m.start()
             clause = back_m.group(0) + clause
         clause = clause.rstrip(")）]】")
-
         if WEATHER_RE.search(sent):
-
             cond_label, cond_type = "天气条件（句内）", "天气"
-
             cond_fields = _infer_fields(sent, advice_start, ["天气"], cond_label)
-
         elif TIME_RE.search(sent):
-
             cond_label, cond_type = "时间条件（句内）", "时间"
-
             cond_fields = _infer_fields(sent, advice_start, ["时间"], cond_label)
-
         elif EQUIP_RE.search(sent):
-
             cond_label, cond_type = "装备条件（句内）", "装备"
-
             cond_fields = _infer_fields(sent, advice_start, ["装备"], cond_label)
-
         else:
-
             cond_label, cond_type = "一般建议（避雷）", "一般"
-
             cond_fields = _infer_fields(sent, advice_start, ["人群", "装备"], cond_label)
         for sugg in split_multi_suggestions(clause):
-
             pairs.append({"pattern": "否定建议", "trigger": m.group(1),
-
                           "suggestions": [sugg], "sentence": sent,
-
                           "condition_type": cond_type, **cond_fields})
-
         return pairs
-
 
     return pairs
 
 
-# Opposing-advice auto-marking: within the same scenic area, negative vs affirmative advice sharing the same core coexist and cite each other's sources.
-
+# Opposing-advice auto-marking: within the same scenic area, negative vs affirmative advice sharing the
+# same core coexist and cite each other's sources.
 NEG_PREFIX_RE = re.compile(r"^(不要|不宜|不建议|别|切勿|避免|慎|忌|最好不|无法|不能)")
-
 AFF_HEDGE_RE = re.compile(r"^(最好|建议|推荐|可以|记得|务必|千万|尽量|不妨|适合|适宜)")
 
 
 def _norm_sugg(s: str) -> str:
-
     return re.sub(r"[\s，,。；;、！？!?]+", "", s)
 
 
 def mark_opposing(mapping: list[dict]) -> list[dict]:
-
     for idx, row in enumerate(mapping):
-
         row["row_id"] = idx
-
     by_scenic: dict[str, list[dict]] = {}
-
     for row in mapping:
-
         by_scenic.setdefault(row["scenic_area"], []).append(row)
-
-    marked = 0
-
     seen_pairs: set[tuple[int, int]] = set()
-
     for scenic, rows in by_scenic.items():
-
         for a in rows:
-
             na = _norm_sugg(a["suggestion_text"])
-
             ma = NEG_PREFIX_RE.match(na)
-
             if not ma or len(na) - ma.end() < 3:
-
                 continue
-
             core_a = na[ma.end():]
-
             for b in rows:
-
                 if b["row_id"] == a["row_id"]:
-
                     continue
-
                 nb = _norm_sugg(b["suggestion_text"])
-
                 mb = NEG_PREFIX_RE.match(nb)
-
                 if mb:
-
                     continue  # the counterpart must be affirmative
-
                 core_b = AFF_HEDGE_RE.sub("", nb)
-
                 if len(core_b) < 3:
-
                     continue
-
                 # Longest common prefix serves as the aligned term
-
                 lcp = 0
-
                 for ca, cb in zip(core_a, core_b):
-
                     if ca != cb:
-
                         break
-
                     lcp += 1
-
                 if lcp < 3:
-
                     continue
-
                 key = tuple(sorted((a["row_id"], b["row_id"])))
-
                 if key in seen_pairs:
-
                     continue
-
                 seen_pairs.add(key)
-
                 term = core_a[:lcp]
-
                 a.setdefault("opposing", {"term": term, "with": []})["with"].append(
-
                     {"row_id": b["row_id"], "suggestion": b["suggestion_text"][:40],
-
                      "sources": b.get("sources", [b.get("record_id", [])])[:2]})
-
                 b.setdefault("opposing", {"term": term, "with": []})["with"].append(
-
                     {"row_id": a["row_id"], "suggestion": a["suggestion_text"][:40],
-
                      "sources": a.get("sources", [a.get("record_id", [])])[:2]})
-
-                marked += 1
-
     return mapping
 
 
 def norm(s: str) -> str:
-
     return re.sub(r"[\s，,。；;、！？!?\[\]()【】]+", "", s)
 
 
@@ -999,7 +797,7 @@ def link_semantic_roles(row: dict) -> list[dict]:
 
 
 def annotate_semantic_roles(pairs: list[dict], model_path: str) -> dict:
-    """Annotate selected difficult sentences; rules handle straightforward conditions."""
+    """Annotate selected difficult sentences with LTP cws+srl; rules handle straightforward conditions."""
     from importlib.metadata import version
     import torch
     from ltp import LTP
@@ -1018,9 +816,11 @@ def annotate_semantic_roles(pairs: list[dict], model_path: str) -> dict:
         for sentence, tokens, roles in zip(batch, output.cws, output.srl):
             cache[sentence] = {'tokens': tokens, 'predicates': roles}
         if (pos // batch_size + 1) % 10 == 0 or pos + batch_size >= len(sentences):
-            print(f'LTP semantic roles: {min(pos + batch_size, len(sentences))}/{len(sentences)} sentences', flush=True)
+            print(f'LTP semantic roles: {min(pos + batch_size, len(sentences))}/{len(sentences)}', flush=True)
+
     def has_condition(semantic):
         return any(arg[0] == 'ARGM-CND' for pred in semantic['predicates'] for arg in pred['arguments'])
+
     for pair in selected:
         pair['semantic_roles'] = cache[pair['sentence']]
     model_file = Path(model_path) / 'pytorch_model.bin'
@@ -1038,138 +838,100 @@ def annotate_semantic_roles(pairs: list[dict], model_path: str) -> dict:
 
 
 def main(argv=None) -> int:
-
     import argparse
 
     ap = argparse.ArgumentParser()
-
     ap.add_argument("--no-attribution-filter", action="store_true",
-
                     help="关闭 P1 句级归属过滤（默认开启：景区外句子不产出条件建议对）")
-
     ap.add_argument('--ltp-model', default=None,
                     help='使用 LTP 模型目录或模型名执行分词和语义角色标注')
-
     args = ap.parse_args(argv)
 
-
     attr = None
-
     if not args.no_attribution_filter:
-
         import sys as _sys
-
         _sys.path.insert(0, str(ROOT.parent / "task4/src"))
-
         from attribute_sentences import Attributor, SENT_SPLIT as ATTR_SPLIT
-
         attr = Attributor()
 
-
     rows = [json.loads(l) for l in (TASK1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8")]
-
     all_pairs = []
-
+    off_domain = Counter()
     for row in rows:
-
         text = row["clean_content"]
-
         raw_sents = [s.strip() for s in SENT_SPLIT.split(text)]
-
         sent_labels = None
-
         if attr is not None:
-
             sent_labels = attr.attribute_record(row["scenic_area"], raw_sents,
-
                                                 text_type=row.get("text_type", "travelogue"))
-
         for sent, sent_lab in zip(raw_sents, sent_labels or [None] * len(raw_sents)):
-
             if sent_lab == "景区外":
-
                 continue  # P1 attribution filter: outside-area sentences produce no conditional-advice pairs
-
             if not (8 <= len(sent) <= 160):
-
                 continue
-
             if skip_sentence(sent):
-
                 continue  # platform boilerplate / appeal sentence / joint-tour city paragraph guard
-
             for p in extract_from_sentence(sent):
-
                 ctype = p.get("condition_type") or classify_condition(p.get("condition_text", ""))
-
                 cfields = {key: p.get(key) for key in (
                     "condition_text", "condition_span", "condition_kind",
                     "condition_label", "condition_absent_reason", "condition_negated")}
-
                 # Safety net: any pair that did not go through a condition-aware emit site
                 # must still satisfy the verbatim-or-absent invariant.
                 if not cfields["condition_kind"]:
-
                     if cfields["condition_text"]:
-
                         span, _ = _span_in(sent, cfields["condition_text"])
-
                         if span:
-
                             cfields.update(condition_span=span, condition_kind="explicit")
-
                         else:
-
                             cfields.update(condition_label=cfields["condition_text"],
-
                                            condition_text="", condition_span=None,
-
                                            condition_kind="absent",
-
                                            condition_absent_reason="label_unmapped")
-
                     else:
-
                         cfields.update(condition_kind="absent", condition_span=None,
-
                                        condition_absent_reason="no_keyword")
-
                 for sugg in p["suggestions"]:
-
                     if len(norm(sugg)) < 4:
-
                         continue
-
+                    reason = off_domain_reason(sent, cfields["condition_text"], sugg)
+                    if reason:
+                        off_domain[reason] += 1
+                        continue
+                    if not is_advice_shaped(sugg):
+                        off_domain["not_advice_shape"] += 1
+                        continue
+                    if sugg.endswith(("：", ":")):
+                        off_domain["heading_colon"] += 1
+                        continue
+                    if re.search(r"[吗呢嘛][!！]?$", sugg):
+                        off_domain["rhetoric_question"] += 1
+                        continue
+                    if OFF_PRICE_RANT_RE.search(sugg):
+                        off_domain["price_complaint"] += 1
+                        continue
                     polarity = "NEG" if p["pattern"] == "否定建议" else "POS"
                     all_pairs.append({"polarity": polarity,
-
                         "record_id": row["record_id"], "scenic_area": row["scenic_area"],
-
                         "source_platform": row["source_platform"], "text_type": row["text_type"],
-
                         "pattern": p["pattern"], "trigger": p["trigger"],
-
                         "condition_text": cfields["condition_text"],
-
                         "condition_span": cfields["condition_span"],
-
                         "condition_kind": cfields["condition_kind"],
-
                         "condition_label": cfields["condition_label"] or "",
-
                         "condition_absent_reason": cfields["condition_absent_reason"],
-
                         "condition_negated": bool(cfields["condition_negated"]),
-
                         "suggestion_text": sugg,
-
                         "condition_type": ctype, "sentence": p["sentence"],
-
                     })
 
-
-    # Condition-type refinement (batch)
+    # Condition-type refinement (batch). A nonempty condition text decides its own type; the
+    # pattern-assigned type only stands when the condition is absent or genuinely unclassifiable.
     for p in all_pairs:
+        if p["condition_text"]:
+            derived = classify_condition(p["condition_text"])
+            if derived != "其他":
+                p["condition_type"] = derived
         p["condition_type"] = refine_condition_type(
             p.get("condition_text", ""), p.get("suggestion_text", ""),
             p.get("condition_type", "其他"))
@@ -1186,52 +948,32 @@ def main(argv=None) -> int:
     srl_stats = annotate_semantic_roles(all_pairs, args.ltp_model) if args.ltp_model else None
 
     # Dedup: same scenic area + condition provenance/label + normalized condition/advice text
-
     merged: dict[tuple, dict] = {}
-
     near_dup = 0
-
     for p in all_pairs:
-
         key = (p["scenic_area"], p["condition_kind"], norm(p["condition_label"])[:24],
                norm(p["condition_text"])[:24], norm(p["suggestion_text"])[:40])
-
         if key in merged:
-
             merged[key]["sources"].append(p["record_id"])
-
             merged[key]["pair_ids"].append(p["pair_id"])
-
             near_dup += 1
-
             continue
-
         merged[key] = {**p, "sources": [p["record_id"]], "pair_ids": [p["pair_id"]]}
 
     mapping = list(merged.values())
-
     mapping = mark_opposing(mapping)
 
     _opp = [r for r in mapping if r.get("opposing")]
-
     (OUT / "opposing_pairs.json").write_text(json.dumps({
-
         "n_marked_rows": len(_opp),
-
         "pairs": [{"scenic_area": r["scenic_area"], "term": r["opposing"]["term"],
-
                    "suggestion": r["suggestion_text"][:60],
-
                    "opposing_with": r["opposing"]["with"], "sources": r.get("sources", [])[:3]}
-
                   for r in _opp]}, ensure_ascii=False, indent=1), encoding="utf-8")
 
     for m in mapping:
-
         m["frequency"] = len(m["sources"])
-
         m["sources"] = list(dict.fromkeys(m["sources"]))
-
         m["pair_ids"] = list(dict.fromkeys(m["pair_ids"]))
 
     nonempty_before_refinement = sum(bool(m["condition_text"]) for m in mapping)
@@ -1249,19 +991,12 @@ def main(argv=None) -> int:
     if srl_stats is not None:
         srl_stats['mapping_rows_with_linked_roles'] = sum(bool(m.get('semantic_role_links')) for m in mapping)
 
-
     OUT.mkdir(parents=True, exist_ok=True)
-
     with (OUT / "conditional_pairs.jsonl").open("w", encoding="utf-8") as fh:
-
         for p in all_pairs:
-
             fh.write(json.dumps(p, ensure_ascii=False) + "\n")
-
     (OUT / "mapping_table.json").write_text(
-
         json.dumps(mapping, ensure_ascii=False, indent=1), encoding="utf-8")
-
 
     kind_raw = Counter(p["condition_kind"] for p in all_pairs)
     kind_dedup = Counter()
@@ -1274,89 +1009,56 @@ def main(argv=None) -> int:
         pattern_kind[p["pattern"]][p["condition_kind"]] += 1
 
     stats = {
-
         "semantic_roles": srl_stats,
-
         "condition_refinement": {
             "input_rows": len(mapping),
             "nonempty_before": nonempty_before_refinement,
             "nonempty_after": sum(bool(m["condition_text"]) for m in mapping),
             "changes": dict(refinement_counts),
         },
-
         "raw_pairs": len(all_pairs),
-
         "after_dedup": len(mapping),
-
         "duplicates_merged": near_dup,
-
         "by_pattern": dict(Counter(p["pattern"] for p in all_pairs)),
         "by_polarity": dict(Counter(p.get("polarity", "POS") for p in all_pairs)),
-
         "by_condition_type": dict(Counter(p["condition_type"] for p in all_pairs)),
-
         "by_condition_type_verified": dict(Counter(p["condition_type_verified"] for p in all_pairs)),
-
         "by_condition_kind": dict(kind_raw),
-
         "by_condition_kind_dedup": dict(kind_dedup),
-
         "by_pattern_condition_kind": {k: dict(v) for k, v in pattern_kind.items()},
-
         "by_condition_label": dict(Counter(
             p["condition_label"] for p in all_pairs if p["condition_label"])),
-
         "by_absent_reason": dict(Counter(
             p["condition_absent_reason"] for p in all_pairs if p["condition_absent_reason"])),
-
         "nonempty_condition_pairs": nonempty_raw,
-
         "absent_condition_pairs": len(all_pairs) - nonempty_raw,
-
         "nonempty_condition_rate": round(nonempty_raw / max(1, len(all_pairs)), 3),
-
         "nonempty_condition_rows": sum(1 for m in mapping if m["condition_text"]),
-
         "nonempty_condition_row_rate": round(
             sum(1 for m in mapping if m["condition_text"]) / max(1, len(mapping)), 3),
-
         "nonempty_condition_rate_dedup": round(nonempty_dedup / max(1, len(all_pairs)), 3),
-
         "condition_type_mismatch": sum(
             1 for p in all_pairs
             if p["condition_text"] and p["condition_type_verified"] != p["condition_type"]),
-
         "label_like_nonempty": sum(
             1 for p in all_pairs
             if p["condition_text"] in LEGACY_LABELS or p["condition_text"].startswith("游客为")),
-
         "condition_span_invalid": 0,
-
         "sentence_max_len": max((len(p["sentence"]) for p in all_pairs), default=0),
-
         "sentence_truncated_pairs": sum(1 for p in all_pairs if len(p["sentence"]) > 160),
-
         "dedup_key_version": "v2:scenic|kind|label|condition|suggestion",
-
         "by_scenic": dict(Counter(p["scenic_area"] for p in all_pairs)),
-
         "by_text_type": dict(Counter(p["text_type"] for p in all_pairs)),
-
         "crowd_breakdown": dict(Counter(
-
             crowd_subtype(p["condition_text"] or p.get("condition_label", "")) or "未细分"
-
             for p in all_pairs if p["condition_type"] == "人群")),
-
+        "filtered": dict(off_domain),
+        "filtered_pairs": sum(off_domain.values()),
     }
-
     (OUT / "extraction_stats.json").write_text(json.dumps(stats, ensure_ascii=False, indent=1), encoding="utf-8")
-
     print(json.dumps(stats, ensure_ascii=False, indent=1))
-
     return 0
 
 
 if __name__ == "__main__":
-
     raise SystemExit(main())
