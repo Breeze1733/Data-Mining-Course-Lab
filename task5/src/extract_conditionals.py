@@ -138,12 +138,20 @@ ADVICE_HINT_RE = re.compile(r"要|记得|千万|最好|建议|不妨|注意|提�
 # marker, a prescription verb, or a concrete equipment/ticket item. Trigger-carried patterns pass by
 # construction (可以/不要/须…); the gate only bites when even the trigger's tail has no prescriptive
 # form, which signals a trigger misfire on narration (poetry, essays, menu reviews).
-ADVICE_MARK_RE = re.compile(r"一定要|务必|记得|千万|最好|建议|推荐|不妨|注意|提前|可以|避开|放弃|考虑|尽量|慎|切勿|避免|必须|值得|必备|少不了|很有必要|要(?=[车带穿买记备提求注])|须")
-PRESCRIPTION_RE = re.compile(r"带|穿|买|住|坐|乘|走|游|玩|吃|喝|订|预约|租|停[车泊]|爬|登|排队|避|备|换|请|错峰|错开|包车|自驾|步行|下山|上山|进[山沟入园内]|门[进出]|赏(?![的了着])|观(?=[景赏察看])|拍(?=[照摄出])|摄[影像]|看|休[息整]|宿|安排|规划|省(?=[0-9一二三钱时间力气])|放缓|减速|慢[行跑]|缓行|安全行驶|错过|打卡")
+ADVICE_MARK_RE = re.compile(r"一定要|务必|记得|千万|最好|建议|推荐|不妨|注意|提前|可以|避开|放弃|考虑|尽量|慎|切勿|避免|不去|别去|别走|不要|必须|值得|必备|少不了|很有必要|适合|适宜|要(?=[车带穿买记备提求注])|须")
+PRESCRIPTION_RE = re.compile(r"带|穿|买|住|坐|乘|走|游|玩|吃|喝|订|预约|租|停[车泊]|爬|登|排队|避|备|换|请|错峰|错开|包车|自驾|步行|下山|上山|进[山沟入园内]|门[进出]|前往|赏(?![的了着])|观(?=[景赏察看])|拍(?=[照摄出])|摄[影像]|看|休[息整]|宿|安排|规划|省(?=[0-9一二三钱时间力气])|放缓|减速|慢[行跑]|缓行|安全行驶|错过|打卡")
 GATE_GEAR_RE = re.compile(r"雨衣|雨伞|雨具|冲锋衣|羽绒服|登山杖|手套|充电宝|干粮|现金|墨镜|太阳镜|氧气|冰爪|护膝|防晒|帽子|登山鞋|防滑鞋")
 
 
-def is_advice_shaped(sugg: str) -> bool:
+def is_advice_shaped(sugg: str, cond: str = "") -> bool:
+    # A locative enumeration (“白鹅山庄所在的白鹅岭、北海宾馆附近的狮子峰…”) answers a where-condition
+    # with a place list instead of a verb phrase — keep it despite the missing prescription verb.
+    if "、" in sugg and re.search(r"所在|附近|位于", sugg):
+        return True
+    # A negative condition (“不去原始森林”) makes the pair advice even when the suggestion is a
+    # plain explanation (“其实大半天足矣”).
+    if cond and ADVICE_MARK_RE.search(cond):
+        return True
     return bool(SUGG_VERB.match(sugg) or ADVICE_MARK_RE.search(sugg)
                 or PRESCRIPTION_RE.search(sugg) or GATE_GEAR_RE.search(sugg) or TICKET_RE.search(sugg))
 
@@ -898,7 +906,7 @@ def main(argv=None) -> int:
                     if reason:
                         off_domain[reason] += 1
                         continue
-                    if not is_advice_shaped(sugg):
+                    if not is_advice_shaped(sugg, cfields["condition_text"]):
                         off_domain["not_advice_shape"] += 1
                         continue
                     if sugg.endswith(("：", ":")):

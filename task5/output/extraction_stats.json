@@ -1,83 +1,83 @@
 {
  "semantic_roles": null,
  "condition_refinement": {
-  "input_rows": 728,
-  "nonempty_before": 371,
-  "nonempty_after": 366,
+  "input_rows": 772,
+  "nonempty_before": 400,
+  "nonempty_after": 393,
   "changes": {
-   "changed_rows": 13,
+   "changed_rows": 16,
    "remove_note_heading": 1,
-   "remove_trigger_from_condition": 4,
-   "remove_condition_after_advice": 1,
+   "remove_trigger_from_condition": 5,
+   "remove_condition_after_advice": 2,
    "remove_advice_adverb_from_condition": 1,
    "remove_action_marker_from_crowd": 1,
    "remove_nonconditional_homograph": 1,
    "remove_instruction_as_condition": 2,
    "restore_condition_negation": 1,
-   "remove_heading_or_place_description": 1
+   "remove_heading_or_place_description": 2
   }
  },
- "raw_pairs": 739,
- "after_dedup": 728,
+ "raw_pairs": 783,
+ "after_dedup": 772,
  "duplicates_merged": 11,
  "by_pattern": {
-  "建议推断": 351,
-  "否定建议": 74,
-  "显式条件": 291,
+  "建议推断": 361,
+  "否定建议": 90,
+  "显式条件": 309,
   "依据规定": 17,
   "人群可以": 5,
   "句内条件": 1
  },
  "by_polarity": {
-  "POS": 665,
-  "NEG": 74
+  "POS": 693,
+  "NEG": 90
  },
  "by_condition_type": {
-  "时间": 90,
-  "一般": 225,
-  "天气": 29,
-  "拍照": 31,
-  "预约票务": 41,
-  "住宿": 44,
-  "装备": 32,
-  "其他": 169,
+  "时间": 97,
+  "一般": 238,
+  "天气": 30,
+  "拍照": 33,
+  "预约票务": 42,
+  "住宿": 45,
+  "装备": 34,
+  "其他": 181,
   "交通": 11,
-  "人群": 26,
+  "人群": 30,
   "美食": 25,
-  "体力安全": 16
+  "体力安全": 17
  },
  "by_condition_type_verified": {
-  "时间": 49,
-  "无": 360,
-  "天气": 22,
-  "其他": 225,
-  "装备": 28,
-  "人群": 26,
+  "时间": 54,
+  "无": 375,
+  "天气": 23,
+  "其他": 240,
+  "装备": 30,
+  "人群": 30,
+  "预约票务": 8,
   "交通": 6,
-  "体力安全": 16,
-  "预约票务": 7
+  "体力安全": 17
  },
  "by_condition_kind": {
-  "inferred": 83,
-  "absent": 360,
-  "explicit": 296
+  "inferred": 94,
+  "absent": 375,
+  "explicit": 314
  },
  "by_condition_kind_dedup": {
-  "inferred": 79,
-  "absent": 365,
-  "explicit": 295
+  "inferred": 88,
+  "absent": 382,
+  "explicit": 313
  },
  "by_pattern_condition_kind": {
   "建议推断": {
-   "inferred": 65,
-   "absent": 286
+   "inferred": 73,
+   "absent": 288
   },
   "否定建议": {
-   "absent": 61,
-   "inferred": 13
+   "absent": 74,
+   "inferred": 16
   },
   "显式条件": {
-   "explicit": 291
+   "explicit": 309
   },
   "依据规定": {
    "absent": 13,
@@ -91,16 +91,17 @@
   }
  },
  "by_condition_label": {
-  "时间条件（句内）": 71,
-  "一般建议": 253,
-  "天气条件（句内）": 21,
-  "一般建议（避雷）": 46,
+  "时间条件（句内）": 78,
+  "一般建议": 254,
+  "天气条件（句内）": 22,
+  "一般建议（避雷）": 61,
   "入园/通行规定（句内）": 20,
   "游客为孩子": 5,
   "开放时间规定（句内）": 2,
   "装备条件（句内）": 11,
-  "游客为体力有限": 2,
+  "游客为体力有限": 3,
   "游客为情侣": 2,
+  "游客为恐高": 1,
   "游客为初次游览": 1,
   "游客为家庭": 1,
   "游客为体力好的完全": 1,
@@ -112,46 +113,46 @@
   "游客为体力差的朋友": 1
  },
  "by_absent_reason": {
-  "no_keyword": 237,
-  "keyword_only_in_advice": 101,
+  "no_keyword": 250,
+  "keyword_only_in_advice": 103,
   "regulation_not_conditional": 22
  },
- "nonempty_condition_pairs": 379,
- "absent_condition_pairs": 360,
- "nonempty_condition_rate": 0.513,
- "nonempty_condition_rows": 366,
- "nonempty_condition_row_rate": 0.503,
- "nonempty_condition_rate_dedup": 0.506,
- "condition_type_mismatch": 56,
+ "nonempty_condition_pairs": 408,
+ "absent_condition_pairs": 375,
+ "nonempty_condition_rate": 0.521,
+ "nonempty_condition_rows": 393,
+ "nonempty_condition_row_rate": 0.509,
+ "nonempty_condition_rate_dedup": 0.512,
+ "condition_type_mismatch": 59,
  "label_like_nonempty": 0,
  "condition_span_invalid": 0,
  "sentence_max_len": 158,
  "sentence_truncated_pairs": 0,
  "dedup_key_version": "v2:scenic|kind|label|condition|suggestion",
  "by_scenic": {
-  "九寨沟": 327,
-  "颐和园": 137,
-  "黄山": 275
+  "九寨沟": 351,
+  "颐和园": 138,
+  "黄山": 294
  },
  "by_text_type": {
   "official_route": 13,
-  "travelogue": 726
+  "travelogue": 770
  },
  "crowd_breakdown": {
   "孩子": 5,
   "初次游览": 4,
+  "体力有限": 6,
   "行动不便": 1,
-  "体力有限": 4,
-  "恐高": 2,
+  "恐高": 3,
   "情侣": 2,
   "学生": 1,
   "家庭": 2,
+  "晕车": 3,
   "老人": 2,
-  "晕车": 2,
   "新手": 1
  },
  "filtered": {
-  "not_advice_shape": 292,
+  "not_advice_shape": 248,
   "heading_colon": 11,
   "promo_ad": 3,
   "first_person_wish": 5,
@@ -163,5 +164,5 @@
   "rhetoric_question": 1,
   "experience_narration": 1
  },
- "filtered_pairs": 321
+ "filtered_pairs": 277
 }

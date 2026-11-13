@@ -1,30 +1,30 @@
 {
- "total_nodes": 496,
- "total_edges": 2598,
+ "total_nodes": 518,
+ "total_edges": 2637,
  "by_kind": {
   "景区": 3,
   "景点": 159,
   "交通操作": 9,
   "时段": 6,
-  "条件": 319
+  "条件": 341
  },
  "by_relation": {
   "包含": 159,
-  "条件建议": 432,
+  "条件建议": 471,
   "先后顺序": 1807,
   "时段归属": 143,
   "交通方式": 57
  },
- "cond_edges_to_poi": 180,
- "cond_edges_to_scenic": 252,
- "cond_pairs_input": 728,
- "cond_pairs_with_condition": 366,
- "cond_pairs_absent_skipped": 362,
- "cond_pairs_absent_input": 357,
- "cond_pairs_condition_removed": 5,
+ "cond_edges_to_poi": 202,
+ "cond_edges_to_scenic": 269,
+ "cond_pairs_input": 772,
+ "cond_pairs_with_condition": 393,
+ "cond_pairs_absent_skipped": 379,
+ "cond_pairs_absent_input": 372,
+ "cond_pairs_condition_removed": 7,
  "cond_pairs_unusable_skipped": 0,
- "cond_pairs_refined": 13,
- "cond_cluster_nodes": 319,
+ "cond_pairs_refined": 16,
+ "cond_cluster_nodes": 341,
  "order_direction": {
   "unopposed_edges": 617,
   "opposed_pairs": 595,
@@ -32,34 +32,34 @@
  },
  "per_scenic": {
   "黄山": {
-   "nodes": 182,
-   "edges": 850,
+   "nodes": 193,
+   "edges": 877,
    "by_kind": {
+    "条件": 141,
     "景点": 46,
-    "条件": 130,
-    "景区": 1,
+    "时段": 1,
     "交通操作": 4,
-    "时段": 1
+    "景区": 1
    },
    "by_relation": {
     "先后顺序": 597,
     "时段归属": 24,
-    "条件建议": 172,
-    "包含": 46,
-    "交通方式": 11
+    "交通方式": 11,
+    "条件建议": 199,
+    "包含": 46
    },
    "top_degree": [
     [
      "黄山",
-     149
+     158
     ],
     [
      "光明顶",
-     69
+     72
     ],
     [
      "迎客松",
-     64
+     66
     ],
     [
      "天都峰",
@@ -71,44 +71,44 @@
     ],
     [
      "始信峰",
-     52
+     53
     ],
     [
      "玉屏楼",
-     52
+     53
     ],
     [
-     "云谷寺",
-     49
+     "莲花峰",
+     50
     ]
    ],
    "isolated_nodes": 0
   },
   "九寨沟": {
-   "nodes": 209,
-   "edges": 952,
+   "nodes": 220,
+   "edges": 964,
    "by_kind": {
+    "条件": 156,
     "景点": 56,
-    "条件": 145,
     "时段": 4,
-    "景区": 1,
-    "交通操作": 3
+    "交通操作": 3,
+    "景区": 1
    },
    "by_relation": {
     "先后顺序": 586,
+    "条件建议": 200,
     "时段归属": 78,
     "交通方式": 44,
-    "条件建议": 188,
     "包含": 56
    },
    "top_degree": [
     [
      "九寨沟",
-     170
+     178
     ],
     [
      "五花海",
-     64
+     66
     ],
     [
      "五彩池",
@@ -131,7 +131,7 @@
      53
     ],
     [
-     "犀牛海",
+     "原始森林",
      52
     ]
    ],
@@ -141,11 +141,11 @@
    "nodes": 105,
    "edges": 796,
    "by_kind": {
-    "景点": 57,
-    "条件": 44,
-    "景区": 1,
     "交通操作": 2,
-    "时段": 1
+    "条件": 44,
+    "景点": 57,
+    "时段": 1,
+    "景区": 1
    },
    "by_relation": {
     "先后顺序": 624,
