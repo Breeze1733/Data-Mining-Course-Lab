@@ -1,6 +1,6 @@
 {
  "n": 180,
- "accuracy_overall": 0.622,
+ "accuracy_overall": 0.661,
  "abstention": {
   "note": "弃权=解析为 NONE（可解释的不定位）；覆盖率=1−弃权率，与准确率分开解读",
   "overall": {
@@ -46,34 +46,34 @@
   },
   "set": {
    "n": 45,
-   "accuracy": 0.556
+   "accuracy": 0.711
   }
  },
  "accuracy_by_split": {
   "dev": {
    "n": 120,
-   "accuracy": 0.642
+   "accuracy": 0.683
   },
   "test": {
    "n": 60,
-   "accuracy": 0.583
+   "accuracy": 0.617
   }
  },
  "accuracy_by_scenic": {
   "九寨沟": {
    "n": 60,
-   "accuracy": 0.583,
+   "accuracy": 0.65,
    "ci95": {
-    "lo": 0.457,
-    "hi": 0.699
+    "lo": 0.524,
+    "hi": 0.758
    }
   },
   "颐和园": {
    "n": 60,
-   "accuracy": 0.5,
+   "accuracy": 0.55,
    "ci95": {
-    "lo": 0.377,
-    "hi": 0.623
+    "lo": 0.425,
+    "hi": 0.669
    }
   },
   "黄山": {
@@ -88,10 +88,10 @@
  "accuracy_by_platform": {
   "CTRIP": {
    "n": 171,
-   "accuracy": 0.608,
+   "accuracy": 0.649,
    "ci95": {
-    "lo": 0.533,
-    "hi": 0.678
+    "lo": 0.575,
+    "hi": 0.717
    }
   },
   "XHS": {
@@ -104,8 +104,8 @@
   }
  },
  "errors_by_split": {
-  "dev": 43,
-  "test": 25
+  "dev": 38,
+  "test": 23
  },
  "split_method": "文档分组：整文档划入 dev/test（rng42 确定性），无同文档泄漏",
  "errors": [
@@ -160,16 +160,6 @@
    "note": "小黄人项目角色"
   },
   {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "颐和园",
-   "pred": "noun:中心",
-   "pred_kind": "名词集合",
-   "gold": "太和殿/中和殿/保和殿三大殿",
-   "gold_kind": "集合-POI",
-   "note": "“其中”承接三大殿枚举"
-  },
-  {
    "pronoun": "这座",
    "class": "object",
    "scenic": "颐和园",
@@ -218,16 +208,6 @@
    "gold": "荷花市场",
    "gold_kind": "POI",
    "note": "多景点游记（什刹海段）"
-  },
-  {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "颐和园",
-   "pred": "noun:居住区",
-   "pred_kind": "其他",
-   "gold": "东四胡同群",
-   "gold_kind": "集合-其他",
-   "note": ""
   },
   {
    "pronoun": "这座",
@@ -390,16 +370,6 @@
    "note": "人称代词指景点集合，类别跨越 person→POI 集合"
   },
   {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "九寨沟",
-   "pred": "noun:下山",
-   "pred_kind": "名词集合",
-   "gold": "没有下来的两组人",
-   "gold_kind": "集合-人",
-   "note": "“其中”承接前句“两组人”"
-  },
-  {
    "pronoun": "此处",
    "class": "locative",
    "scenic": "九寨沟",
@@ -520,16 +490,6 @@
    "note": "多景点游记（郎木寺段）"
   },
   {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "九寨沟",
-   "pred": "noun:雕塑",
-   "pred_kind": "其他",
-   "gold": "窟龛与雕像",
-   "gold_kind": "集合-其他",
-   "note": ""
-  },
-  {
    "pronoun": "那里",
    "class": "locative",
    "scenic": "九寨沟",
@@ -558,16 +518,6 @@
    "gold": "扎如寺",
    "gold_kind": "POI",
    "note": "“寺院标志性建筑”即扎如寺（九寨沟周边）"
-  },
-  {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "九寨沟",
-   "pred": "noun:会议",
-   "pred_kind": "其他",
-   "gold": "五次重要会议",
-   "gold_kind": "集合-其他",
-   "note": "普通名词集合"
   },
   {
    "pronoun": "其中",
@@ -610,16 +560,6 @@
    "note": "前句偶遇的川大学生，非同行者"
   },
   {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "九寨沟",
-   "pred": "noun:地貌",
-   "pred_kind": "其他",
-   "gold": "冰川地貌类型",
-   "gold_kind": "集合-其他",
-   "note": "前句“悬冰川、冰斗冰川和平顶冰川”"
-  },
-  {
    "pronoun": "这里",
    "class": "locative",
    "scenic": "九寨沟",
@@ -638,16 +578,6 @@
    "gold": "无",
    "gold_kind": "无",
    "note": "“那边”指附近拍照点，文本无足够线索确定具体位置"
-  },
-  {
-   "pronoun": "其中",
-   "class": "set",
-   "scenic": "颐和园",
-   "pred": "noun:项目",
-   "pred_kind": "其他",
-   "gold": "718联合厂拆分后的各厂",
-   "gold_kind": "集合-其他",
-   "note": ""
   },
   {
    "pronoun": "它",
@@ -790,7 +720,7 @@
    "note": "先行词为“廊上斑驳的画”，归至长廊实体"
   }
  ],
- "kind_only_accuracy": 0.678,
+ "kind_only_accuracy": 0.717,
  "set_member_hit": {
   "n_set_cases": 47,
   "member_hits": 1,
@@ -817,7 +747,7 @@
    {
     "pronoun": "其中",
     "gold": "太和殿/中和殿/保和殿三大殿",
-    "pred": "noun:中心",
+    "pred": "preceding_set",
     "member_hit": false
    },
    {
@@ -835,7 +765,7 @@
    {
     "pronoun": "其中",
     "gold": "东四胡同群",
-    "pred": "noun:居住区",
+    "pred": "cataphoric_set",
     "member_hit": false
    },
    {
@@ -871,7 +801,7 @@
    {
     "pronoun": "其中",
     "gold": "72座峰",
-    "pred": "noun:座峰",
+    "pred": "cataphoric_set",
     "member_hit": false
    },
    {
@@ -907,7 +837,7 @@
    {
     "pronoun": "其中",
     "gold": "五个补给站",
-    "pred": "noun:补给站",
+    "pred": "one_of_set",
     "member_hit": false
    },
    {
@@ -919,7 +849,7 @@
    {
     "pronoun": "其中",
     "gold": "72个山峰",
-    "pred": "noun:山峰",
+    "pred": "cataphoric_set",
     "member_hit": false
    },
    {
@@ -949,7 +879,7 @@
    {
     "pronoun": "其中",
     "gold": "没有下来的两组人",
-    "pred": "noun:下山",
+    "pred": "person_set",
     "member_hit": false
    },
    {
@@ -973,7 +903,7 @@
    {
     "pronoun": "其中",
     "gold": "两种进酒店方式",
-    "pred": "noun:星宇",
+    "pred": "one_of_set",
     "member_hit": false
    },
    {
@@ -985,7 +915,7 @@
    {
     "pronoun": "其中",
     "gold": "窟龛与雕像",
-    "pred": "noun:雕塑",
+    "pred": "quant_subset",
     "member_hit": false
    },
    {
@@ -1009,7 +939,7 @@
    {
     "pronoun": "其中",
     "gold": "五次重要会议",
-    "pred": "noun:会议",
+    "pred": "quant_subset",
     "member_hit": false
    },
    {
@@ -1027,13 +957,13 @@
    {
     "pronoun": "其中",
     "gold": "冰川地貌类型",
-    "pred": "noun:地貌",
+    "pred": "cataphoric_set",
     "member_hit": false
    },
    {
     "pronoun": "其中",
     "gold": "718联合厂拆分后的各厂",
-    "pred": "noun:项目",
+    "pred": "one_of_set",
     "member_hit": false
    },
    {
@@ -1057,7 +987,7 @@
    {
     "pronoun": "其中",
     "gold": "外八庙十二座寺庙群",
-    "pred": "noun:寺庙",
+    "pred": "quant_subset",
     "member_hit": false
    },
    {
@@ -1081,8 +1011,8 @@
   ]
  },
  "accuracy_ci95": {
-  "lo": 0.55,
-  "hi": 0.69
+  "lo": 0.589,
+  "hi": 0.726
  },
  "identity_ci95": {
   "lo": 0.38,

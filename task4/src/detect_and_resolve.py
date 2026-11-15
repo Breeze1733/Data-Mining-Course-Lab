@@ -374,7 +374,7 @@ def main(argv=None) -> int:
                         if win_start <= e["start"] < doc_start and e["canonical"] not in pois_in_win:
                             pois_in_win.append(e["canonical"])
                     person_set = re.search(
-                        r"[一两二三四五六七八几]\s*[行位群批帮对].{0,4}"
+                        r"[一两二三四五六七八几]\s*[行位群批帮对组].{0,4}"
                         r"(人|游客|朋友|大爷|大妈|阿姨|大叔|同伴|姐妹|哥们)", window_text)
                     # POI enumeration: within the window in order of appearance, adjacent POIs separated only by 、/和/与/及-style connectors
                     win_pois = sorted((e for e in pois if win_start <= e["start"] < doc_start),
@@ -389,8 +389,42 @@ def main(argv=None) -> int:
                         window_text)
                     # Alternative means: in "可以X也可以Y", "其中" takes the set of means rather than a POI enumeration (1 case in the manual-annotation evaluation set)
                     alternatives = re.search(r"可以[^，。？！;；]{1,12}也可以", window_text)
+                    after_text = text[doc_start:doc_start + 26]
+                    # Quantity-set reference: "其中有两次(沙窝会议…)" / "其中最大的一尊位于…" — 其中 picks a
+                    # subset of a quantity-bearing set stated in the antecedent window ("5次重要会议",
+                    # "雕像700余尊") → noun set (2 manual-annotation cases). after_text starts with the
+                    # pronoun itself, so every anchor is written as 其中…
+                    quant_ref = re.search(
+                        r"^其中[有]?[两二三四五六七八九多][次尊个座条项批组轮]|"
+                        r"^其中(?:最大|最高|最深|最早|最著名|最完整)[^。！？；]{0,6}的?[一两三四五六七八九]?[尊个座条处]", after_text)
+                    # Cataphoric enumeration: members listed right after 其中
+                    # ("其中冰斗、U型谷、角峰和刀岭等…" "其中东四三条到八条…") → noun set.
+                    # the first item must directly follow 其中 (≤4 chars, no comma —
+                    # "穿梭在其中，近距离的与这水、树…" is not an enumeration);
+                    # separators exclude the comma — "其中一小部分,就这也…" is not an enumeration either.
+                    cataphoric_enum = re.search(
+                        r"^[^。！？；，,]{0,4}[一-龥A-Za-z0-9]{2,10}(?:[、和与及到至]\s*[一-龥A-Za-z0-9]{1,10}){1,5}", after_text)
+                    one_of_set = after_text.startswith("其中之一")
+                    # Same-sentence anaphoric enumeration whose members are re-referenced right after
+                    # 其中 ("以太和殿、中和殿、保和殿三大殿为中心,其中三大殿中的…") → POI set (1 case)
+                    sent_prefix = text[cur_sent_start:doc_start]
+                    same_sent_enum = re.search(
+                        r"[一-龥A-Za-z0-9]{2,10}(?:[、，和与及]\s*[一-龥A-Za-z0-9]{1,10}){1,6}", sent_prefix)
+                    enum_member_ref = bool(same_sent_enum and after_text[:8] and any(
+                        after_text[i:i + 3] in same_sent_enum.group(0)
+                        for i in range(len(after_text[:8]) - 2)))
                     if person_set:
                         case.update({"resolution": "person_set", "resolution_kind": "人称集合"})
+                    elif not qty_guard and alternatives:
+                        case.update({"resolution": "alternatives", "resolution_kind": "名词集合"})
+                    elif quant_ref:
+                        case.update({"resolution": "quant_subset", "resolution_kind": "名词集合"})
+                    elif cataphoric_enum:
+                        case.update({"resolution": "cataphoric_set", "resolution_kind": "名词集合"})
+                    elif one_of_set:
+                        case.update({"resolution": "one_of_set", "resolution_kind": "名词集合"})
+                    elif enum_member_ref:
+                        case.update({"resolution": "preceding_set", "resolution_kind": "前文POI集合"})
                     elif not qty_guard and alternatives:
                         case.update({"resolution": "alternatives", "resolution_kind": "名词集合"})
                     elif not qty_guard and enum_set:
