@@ -80,9 +80,9 @@
    "thought": "决定调用工具 query_pois",
    "tool": "query_pois",
    "args": {
-    "limit": 12,
+    "scenic": "九寨沟",
     "visitor_type": "",
-    "scenic": "九寨沟"
+    "limit": 10
    },
    "via": "react"
   },
@@ -102,8 +102,8 @@
    "tool": "query_conditions",
    "args": {
     "scenic": "九寨沟",
-    "limit": 6,
-    "visitor_type": ""
+    "visitor_type": "",
+    "limit": 6
    },
    "via": "react"
   },
@@ -122,45 +122,13 @@
   {
    "step": "observation",
    "tool": "query_conditions",
-   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"conditions\": [{\"cond_type\": \"人群\", \"condition\": \"体力不好\", \"suggestion\": \"那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车\", \"all_suggestions\": [\"不要在芦苇海停留",
-   "via": "react"
-  },
-  {
-   "step": "action",
-   "thought": "决定调用工具 query_poi_conditions",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "月亮湾"
-   },
-   "via": "react"
-  },
-  {
-   "step": "action",
-   "thought": "决定调用工具 query_order",
-   "tool": "query_order",
-   "args": {
-    "poi": "月亮湾",
-    "scenic": "九寨沟"
-   },
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "{\"error\": \"九寨沟 中未找到景点：月亮湾\"}",
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_order",
-   "summary": "{\"error\": \"九寨沟 中未找到景点：月亮湾\"}",
+   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"conditions\": [{\"cond_type\": \"人群\", \"condition\": \"晕车\", \"suggestion\": \"晕车药(p8)吃了坐一路山路一点问题没有\", \"all_suggestions\": [\"买好晕车贴或者晕车药\", \"晕车药(p8)吃了坐一路山",
    "via": "react"
   },
   {
    "step": "thought",
    "via": "react",
-   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（5 次工具调用）"
+   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（3 次工具调用）"
   },
   {
    "step": "action",
@@ -219,17 +187,17 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_order，参数 {'scenic': '九寨沟', 'poi': '五花海'}",
+   "thought": "调用工具 query_order，参数 {'scenic': '九寨沟', 'poi': '原始森林'}",
    "tool": "query_order",
    "args": {
     "scenic": "九寨沟",
-    "poi": "五花海"
+    "poi": "原始森林"
    }
   },
   {
    "step": "observation",
    "tool": "query_order",
-   "summary": "后继：珍珠滩、珍珠滩瀑布、五彩池、镜海"
+   "summary": "后继：芳草海、箭竹海、日则沟、天鹅海"
   },
   {
    "step": "thought",
@@ -237,7 +205,21 @@
   },
   {
    "step": "thought",
-   "thought": "时段预算：每日上限 5，总 1 天，裁剪 2 个 POI"
+   "thought": "时段预算：每日上限 5，总 1 天，裁剪 3 个 POI"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '原始森林'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "原始森林"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 6 条条件建议"
   },
   {
    "step": "action",
@@ -265,7 +247,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -279,7 +261,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 1 条条件建议"
+   "summary": "返回 0 条条件建议"
   },
   {
    "step": "action",
@@ -293,25 +275,11 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗瀑布'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "诺日朗瀑布"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 3 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "thought",
-   "thought": "可行性校验：0 条封禁/不建议提示"
+   "thought": "可行性校验：1 条封禁/不建议提示；已附加到对应站点"
   },
   {
    "step": "render",
@@ -323,7 +291,7 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家早！今天九寨精华一日游：上午游览五花海、镜海；中午乘车去长海；下午漫步五彩池，最后看诺日朗瀑布。\n\n提示：月亮湾非沟内景点；因时间已裁剪犀牛海、树正群海。山路多请备好晕车药；体力弱的朋友千万别在芦苇海下车逗留，这里无换乘点，得走很远到盆景滩才能坐车哦！",
+ "answer": "九寨沟一日精华游行程如下：上午入园前往原始森林（建议根据体力取舍，大半天足矣），步行游览五花海，随后乘车或徒步至镜海；下午乘观光车前往长海，步行游览五彩池。\n提示：必去月亮湾看看（请确认景区名称）。受时间预算限制，已裁剪诺日朗瀑布、犀牛海、树正群海等3个景点，建议根据体力取舍。易晕车者请提前备好晕车药。",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -331,7 +299,7 @@
   "special": [],
   "special_notes": [
    "必去：月亮湾看看 未在九寨沟景点库中找到，请确认名称或咨询景区",
-   "时间预算限制：已裁剪 2 个景点（犀牛海, 树正群海等），建议根据体力取舍"
+   "时间预算限制：已裁剪 3 个景点（诺日朗瀑布, 犀牛海, 树正群海等），建议根据体力取舍"
   ],
   "trip_month": null,
   "itinerary": [
@@ -339,66 +307,58 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "五花海",
+    "poi": "原始森林",
     "transport_from_prev": "入园",
-    "note": ""
+    "note": "⚠ 不去原始森林——其实大半天足矣（证据年份 2022）"
    },
    {
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "镜海",
-    "transport_from_prev": "乘坐徒步",
+    "poi": "五花海",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "长海",
-    "transport_from_prev": "乘坐观光车",
+    "poi": "镜海",
+    "transport_from_prev": "乘坐徒步",
     "note": ""
    },
    {
     "order": 4,
     "day": 1,
     "period": "下午",
-    "poi": "五彩池",
-    "transport_from_prev": "步行",
+    "poi": "长海",
+    "transport_from_prev": "乘坐观光车",
     "note": ""
    },
    {
     "order": 5,
     "day": 1,
     "period": "下午",
-    "poi": "诺日朗瀑布",
-    "transport_from_prev": "徒步",
+    "poi": "五彩池",
+    "transport_from_prev": "步行",
     "note": ""
    }
   ],
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "体力不好",
-    "suggestion": "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车",
-    "all_suggestions": [
-     "不要在芦苇海停留",
-     "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车"
-    ],
-    "frequency": 2
-   },
-   {
-    "cond_type": "人群",
     "condition": "晕车",
-    "suggestion": "的晕车药(p8)吃了坐一路山路一点问题没有",
+    "suggestion": "晕车药(p8)吃了坐一路山路一点问题没有",
     "all_suggestions": [
      "买好晕车贴或者晕车药",
-     "的晕车药(p8)吃了坐一路山路一点问题没有"
+     "晕车药(p8)吃了坐一路山路一点问题没有"
     ],
     "frequency": 2
    }
   ],
-  "feasibility_warnings": [],
+  "feasibility_warnings": [
+   "原始森林：不去原始森林——其实大半天足矣（证据年份 2022）"
+  ],
   "template_used": true,
   "template_route": "JZG-EXP01-R1 一日精华游",
   "template_src": "（参考官方路线 JZG-EXP01-R1 2016版一日游）"

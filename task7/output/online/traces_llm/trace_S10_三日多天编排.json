@@ -7,7 +7,9 @@
   "days": 3,
   "days_explicit": true,
   "month": null,
-  "special": [],
+  "special": [
+   "省力"
+  ],
   "avoid": [],
   "must": [],
   "entrance": null,
@@ -47,7 +49,9 @@
     "visitor_type": null,
     "days": 3,
     "month": null,
-    "special": []
+    "special": [
+     "省力"
+    ]
    },
    "result": {
     "scenic": "九寨沟",
@@ -56,7 +60,9 @@
     "days": 3,
     "days_explicit": true,
     "month": null,
-    "special": [],
+    "special": [
+     "省力"
+    ],
     "avoid": [],
     "must": [],
     "entrance": null,
@@ -71,9 +77,9 @@
    "thought": "决定调用工具 query_pois",
    "tool": "query_pois",
    "args": {
-    "limit": 14,
     "visitor_type": "",
-    "scenic": "九寨沟"
+    "scenic": "九寨沟",
+    "limit": 14
    },
    "via": "react"
   },
@@ -82,8 +88,8 @@
    "thought": "决定调用工具 query_route",
    "tool": "query_route",
    "args": {
-    "days": 3,
-    "scenic": "九寨沟"
+    "scenic": "九寨沟",
+    "days": 3
    },
    "via": "react"
   },
@@ -92,9 +98,9 @@
    "thought": "决定调用工具 query_conditions",
    "tool": "query_conditions",
    "args": {
-    "limit": 6,
     "visitor_type": "",
-    "scenic": "九寨沟"
+    "scenic": "九寨沟",
+    "limit": 6
    },
    "via": "react"
   },
@@ -113,7 +119,7 @@
   {
    "step": "observation",
    "tool": "query_conditions",
-   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"conditions\": [{\"cond_type\": \"人群\", \"condition\": \"体力不好\", \"suggestion\": \"那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车\", \"all_suggestions\": [\"不要在芦苇海停留",
+   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"conditions\": [{\"cond_type\": \"人群\", \"condition\": \"晕车\", \"suggestion\": \"晕车药(p8)吃了坐一路山路一点问题没有\", \"all_suggestions\": [\"买好晕车贴或者晕车药\", \"晕车药(p8)吃了坐一路山",
    "via": "react"
   },
   {
@@ -123,11 +129,11 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_pois，参数 {'scenic': '九寨沟', 'visitor_type': None, 'limit': 12}",
+   "thought": "调用工具 query_pois，参数 {'scenic': '九寨沟', 'visitor_type': '体力有限', 'limit': 12}",
    "tool": "query_pois",
    "args": {
     "scenic": "九寨沟",
-    "visitor_type": null,
+    "visitor_type": "体力有限",
     "limit": 12
    }
   },
@@ -152,11 +158,11 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_conditions，参数 {'scenic': '九寨沟', 'visitor_type': None}",
+   "thought": "调用工具 query_conditions，参数 {'scenic': '九寨沟', 'visitor_type': '体力有限'}",
    "tool": "query_conditions",
    "args": {
     "scenic": "九寨沟",
-    "visitor_type": null
+    "visitor_type": "体力有限"
    }
   },
   {
@@ -166,7 +172,12 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 3, 'days_explicit': True, 'month': None, 'special': [], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': None, 'explicit_fields': ['days']}；以 ReAct 收集的证据为基础，核对候选景点后进入确定性编排：官方路线做骨架，时间预算与可行性校验兜底"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 3, 'days_explicit': True, 'month': None, 'special': ['省力'], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': None, 'explicit_fields': ['days']}；以 ReAct 收集的证据为基础，核对候选景点后进入确定性编排：官方路线做骨架，时间预算与可行性校验兜底"
+  },
+  {
+   "step": "thought",
+   "via": "fallback",
+   "thought": "模型候选不足（12/12），按图谱热度补足：[]"
   },
   {
    "step": "thought",
@@ -216,7 +227,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 7 条条件建议"
+   "summary": "返回 6 条条件建议"
   },
   {
    "step": "action",
@@ -244,7 +255,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 1 条条件建议"
+   "summary": "返回 0 条条件建议"
   },
   {
    "step": "action",
@@ -272,7 +283,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -286,7 +297,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -344,12 +355,14 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家跟我走：\n\nD1从**沟口**入园，去**诺日朗**和**长海**，**原始森林**大半天足矣建议不去；D2看**五花海**、**五彩池**、**镜海**与**诺日朗瀑布**；D3逛**犀牛海**、**树正群海**、**树正寨**与**箭竹海**。\n\n提示：长途尽量坐座，短站可站着；体力差别在芦苇海停留，因道路狭窄无换乘点，需长距离走到盆景滩乘车！",
+ "answer": "九寨沟3日省力行程：第1天由沟口入园，上午至原始森林（⚠不去原始森林——其实大半天足矣），中午至诺日朗，下午至长海。第2天上午徒步五花海、步行五彩池，中午至镜海，下午至诺日朗瀑布。第3天上午步行犀牛海与树正群海，中午至箭竹海，下午至芦苇海。\n\n提示：芦苇海路窄无换乘点需长途步行至盆景滩乘车，请谨慎驾驶安全第一，注意补水休息与饮食健康。",
  "plan": {
   "scenic": "九寨沟",
   "days": 3,
   "visitor_type": null,
-  "special": [],
+  "special": [
+   "省力"
+  ],
   "special_notes": [],
   "trip_month": null,
   "itinerary": [
@@ -437,7 +450,7 @@
     "order": 11,
     "day": 3,
     "period": "中午",
-    "poi": "树正寨",
+    "poi": "箭竹海",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -445,7 +458,7 @@
     "order": 12,
     "day": 3,
     "period": "下午",
-    "poi": "箭竹海",
+    "poi": "芦苇海",
     "transport_from_prev": "步行",
     "note": ""
    }
@@ -454,19 +467,37 @@
    {
     "cond_type": "人群",
     "condition": "体力不好",
-    "suggestion": "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车",
+    "suggestion": "不要在芦苇海停留,那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车",
     "all_suggestions": [
-     "不要在芦苇海停留",
-     "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车"
+     "不要在芦苇海停留,那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车"
+    ],
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "为了加水和休息",
+    "suggestion": "走这条路,都需格外小心",
+    "all_suggestions": [
+     "就算再老练的司机",
+     "走这条路,都需格外小心"
     ],
     "frequency": 2
    },
    {
-    "cond_type": "人群",
-    "condition": "第一次",
-    "suggestion": "坐在座位上,其他站与站之间较短可以直接站",
+    "cond_type": "装备",
+    "condition": "真的没有准备",
+    "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
     "all_suggestions": [
-     "坐在座位上,其他站与站之间较短可以直接站"
+     "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本"
+    ],
+    "frequency": 1
+   },
+   {
+    "cond_type": "装备",
+    "condition": "地震断裂带",
+    "suggestion": "慎驾驶,安全第一",
+    "all_suggestions": [
+     "慎驾驶,安全第一"
     ],
     "frequency": 1
    }

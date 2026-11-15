@@ -80,9 +80,9 @@
    "thought": "决定调用工具 query_pois",
    "tool": "query_pois",
    "args": {
-    "visitor_type": "",
+    "limit": 10,
     "scenic": "九寨沟",
-    "limit": 12
+    "visitor_type": ""
    },
    "via": "react"
   },
@@ -101,19 +101,9 @@
    "thought": "决定调用工具 query_conditions",
    "tool": "query_conditions",
    "args": {
-    "scenic": "九寨沟",
     "visitor_type": "",
-    "limit": 6
-   },
-   "via": "react"
-  },
-  {
-   "step": "action",
-   "thought": "决定调用工具 query_poi_conditions",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "原始森林"
+    "limit": 6,
+    "scenic": "九寨沟"
    },
    "via": "react"
   },
@@ -132,19 +122,13 @@
   {
    "step": "observation",
    "tool": "query_conditions",
-   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"conditions\": [{\"cond_type\": \"人群\", \"condition\": \"体力不好\", \"suggestion\": \"那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车\", \"all_suggestions\": [\"不要在芦苇海停留",
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "{\"poi\": \"原始森林\", \"scenic\": \"九寨沟\", \"conditions\": [{\"condition\": \"时间充裕\", \"suggestion\": \"不妨徒步原始森林,到山顶享受“上帝视角”下静如处子的芳草海,别有一番风味,美不胜收\", \"cond_type\": \"时间\", \"frequency\": 1, \"source_years\": ",
+   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"conditions\": [{\"cond_type\": \"人群\", \"condition\": \"晕车\", \"suggestion\": \"晕车药(p8)吃了坐一路山路一点问题没有\", \"all_suggestions\": [\"买好晕车贴或者晕车药\", \"晕车药(p8)吃了坐一路山",
    "via": "react"
   },
   {
    "step": "thought",
    "via": "react",
-   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（4 次工具调用）"
+   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（3 次工具调用）"
   },
   {
    "step": "action",
@@ -235,7 +219,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 7 条条件建议"
+   "summary": "返回 6 条条件建议"
   },
   {
    "step": "action",
@@ -263,7 +247,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -277,7 +261,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 1 条条件建议"
+   "summary": "返回 0 条条件建议"
   },
   {
    "step": "action",
@@ -291,7 +275,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "thought",
@@ -307,7 +291,7 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家带好随身物品，咱们九寨沟一日游出发啦！上午入园先去原始森林，再漫步五花海；中午打卡镜海；下午乘观光车游览长海，最后步行至五彩池。\n\n提醒大家：因时间有限已裁剪诺日朗瀑布等景点，原始森林大半天足矣，建议依体力取舍；体力较弱的朋友千万别在芦苇海停留，那里道路狭窄无换乘点，需长途步行到盆景滩乘车哦！",
+ "answer": "九寨沟一日精华游行程：上午入园游览原始森林（注：若体力有限不去原始森林，大半天足矣），步行至五花海，随后乘车徒步游览镜海；下午乘观光车前往长海，步行游览五彩池。提示：山路较多，晕车者建议提前服用晕车药。受时间预算限制，诺日朗瀑布、犀牛海、树正群海等3个景点已裁剪，建议根据实际体力取舍。",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -363,11 +347,11 @@
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "体力不好",
-    "suggestion": "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车",
+    "condition": "晕车",
+    "suggestion": "晕车药(p8)吃了坐一路山路一点问题没有",
     "all_suggestions": [
-     "不要在芦苇海停留",
-     "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车"
+     "买好晕车贴或者晕车药",
+     "晕车药(p8)吃了坐一路山路一点问题没有"
     ],
     "frequency": 2
    }

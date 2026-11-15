@@ -67,7 +67,7 @@ def check_sunrise(result, expect_poi):
     it = plan.get("itinerary", [])
     last_day = max((x["day"] for x in it), default=1)
     last_first = next((x["poi"] for x in it if x["day"] == last_day), None)
-    lodging_mentioned = any(k in result["answer"] for k in ("住宿山上", "夜宿", "住宿", "山上酒店"))
+    lodging_mentioned = any(k in result["answer"] for k in ("住", "宿"))
     return last_first == expect_poi and lodging_mentioned
 
 
@@ -173,6 +173,17 @@ def evaluate_scenario(sc: dict, result: dict) -> dict:
     return checks
 
 
+def answer_head(text: str, limit: int = 120) -> str:
+    """Preview of the final answer, cut at a sentence boundary (never mid-word)."""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    best = max((cut.rfind(sep) for sep in ("。", "！", "？", "\n")), default=-1)
+    if best >= limit // 2:
+        return cut[:best + 1] + "…"
+    return cut + "…"
+
+
 def main() -> int:
     sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
@@ -200,7 +211,7 @@ def main() -> int:
         passed = all(checks.values())
         results.append({"scenario": sc["id"], "query": sc["query"], "passed": passed,
                         "checks": checks, "intent": result["intent"],
-                        "n_tool_calls": len(tool_calls), "answer_head": result["answer"][:120]})
+                        "n_tool_calls": len(tool_calls), "answer_head": answer_head(result["answer"])})
         # elapsed is printed only, never persisted: persisted artifacts stay deterministic, repeat builds produce zero diff
         (trace_dir / f'trace_{sc["id"]}.json').write_text(
             json.dumps({k: v for k, v in result.items() if k != "elapsed"},

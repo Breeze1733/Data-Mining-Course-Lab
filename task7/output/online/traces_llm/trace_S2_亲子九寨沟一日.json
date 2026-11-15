@@ -50,7 +50,7 @@
    },
    "llm": {
     "scenic": "九寨沟",
-    "visitor_type": "亲子",
+    "visitor_type": "孩子",
     "days": 1,
     "month": null,
     "special": []
@@ -82,7 +82,7 @@
    "args": {
     "scenic": "九寨沟",
     "visitor_type": "孩子",
-    "limit": 8
+    "limit": 10
    },
    "via": "react"
   },
@@ -102,8 +102,8 @@
    "tool": "query_conditions",
    "args": {
     "visitor_type": "孩子",
-    "limit": 6,
-    "scenic": "九寨沟"
+    "scenic": "九寨沟",
+    "limit": 6
    },
    "via": "react"
   },
@@ -126,74 +126,9 @@
    "via": "react"
   },
   {
-   "step": "action",
-   "thought": "决定调用工具 query_conditions",
-   "tool": "query_conditions",
-   "args": {
-    "visitor_type": "",
-    "scenic": "九寨沟",
-    "limit": 6
-   },
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_conditions",
-   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"conditions\": [{\"cond_type\": \"人群\", \"condition\": \"体力不好\", \"suggestion\": \"那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车\", \"all_suggestions\": [\"不要在芦苇海停留",
-   "via": "react"
-  },
-  {
-   "step": "action",
-   "thought": "决定调用工具 query_poi_conditions",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "五花海"
-   },
-   "via": "react"
-  },
-  {
-   "step": "action",
-   "thought": "决定调用工具 query_poi_conditions",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "五彩池"
-   },
-   "via": "react"
-  },
-  {
-   "step": "action",
-   "thought": "决定调用工具 query_poi_conditions",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "诺日朗瀑布"
-   },
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "{\"poi\": \"五花海\", \"scenic\": \"九寨沟\", \"conditions\": [{\"condition\": \"分配到左线直接诺日朗换成去右线的车\", \"suggestion\": \"直接到原始森林徒步三公里,感受沐光森林,再依次打卡箭竹海(有很多野鸭)、箭竹海瀑布瀑布以及五花海(最佳游览时间正午时分)、珍珠滩、镜海等右线精华\", \"cond_ty",
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "{\"poi\": \"五彩池\", \"scenic\": \"九寨沟\", \"conditions\": [{\"condition\": \"能够顺着台阶下到五彩池边\", \"suggestion\": \"默默地许个愿,再爬上189级台阶\", \"cond_type\": \"其他\", \"frequency\": 2, \"source_years\": \"[\\\"2021\\\"]\"}, {\"c",
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "{\"poi\": \"诺日朗瀑布\", \"scenic\": \"九寨沟\", \"conditions\": [{\"condition\": \"时间来不及诺日朗瀑布舍弃\", \"suggestion\": \"乘车至犀牛海\", \"cond_type\": \"其他\", \"frequency\": 2, \"source_years\": \"[]\"}, {\"condition\": \"不在这里",
-   "via": "react"
-  },
-  {
    "step": "thought",
    "via": "react",
-   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（7 次工具调用）"
+   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（3 次工具调用）"
   },
   {
    "step": "action",
@@ -298,7 +233,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -312,7 +247,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 1 条条件建议"
+   "summary": "返回 0 条条件建议"
   },
   {
    "step": "action",
@@ -326,7 +261,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -356,14 +291,14 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大小朋友们好！今天九寨沟一日游这样走：上午入园先看五花海，再去镜海；中午乘车打卡长海；下午漫步五彩池，最后看壮观的诺日朗瀑布。\n\n为了照顾孩子体力，已裁剪犀牛海和树正瀑布，大家量力游览。山路行走需格外小心；千万别为了省钱不吃饭，吃饱保体力，安全第一！",
+ "answer": "九寨沟一日精华游行程如下：上午入园游览五花海，后徒步至镜海；中午乘观光车前往长海；下午步行游览五彩池，再徒步至诺日朗瀑布。提示：因水量不足，参观完五彩池后建议直接乘车回诺日朗中心站；请注意及时补充体力。受时间预算限制已裁剪犀牛海、树正群海等2个景点，建议根据孩子体力取舍。",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
   "visitor_type": "孩子",
   "special": [],
   "special_notes": [
-   "时间预算限制：已裁剪 2 个景点（犀牛海, 树正瀑布等），建议根据体力取舍"
+   "时间预算限制：已裁剪 2 个景点（犀牛海, 树正群海等），建议根据体力取舍"
   ],
   "trip_month": null,
   "itinerary": [
@@ -411,11 +346,11 @@
   "tips": [
    {
     "cond_type": "装备",
-    "condition": "为了加水和休息",
-    "suggestion": "走这条路,都需格外小心",
+    "condition": "由于现在上季海和下季海的水量不足",
+    "suggestion": "参观完五彩池后,直接坐车回到诺日朗中心站,水量充沛时",
     "all_suggestions": [
-     "就算再老练的司机",
-     "走这条路,都需格外小心"
+     "参观完五彩池后,直接坐车回到诺日朗中心站,水量充沛时",
+     "可以徒步前往游览"
     ],
     "frequency": 2
    },
@@ -425,24 +360,6 @@
     "suggestion": "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本",
     "all_suggestions": [
      "也不要为了省几块钱而冒险不吃,毕竟好的身体才是一切的根本"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "装备",
-    "condition": "地震断裂带",
-    "suggestion": "慎驾驶,安全第一",
-    "all_suggestions": [
-     "慎驾驶,安全第一"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "装备",
-    "condition": "枯水如黄龙",
-    "suggestion": "确实可以略过",
-    "all_suggestions": [
-     "确实可以略过"
     ],
     "frequency": 1
    }

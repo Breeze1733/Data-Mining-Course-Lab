@@ -124,7 +124,10 @@ class IntentParser:
             merged = dict(rule_intent)
             if merged.get("scenic") in (None, "未知") and llm_intent.get("scenic"):
                 merged["scenic"] = llm_intent["scenic"]
-            if not merged.get("visitor_type") and llm_intent.get("visitor_type"):
+            # visitor_type is rule-authoritative: the lexicon table decides. The LLM may not invent
+            # a visitor group the query never mentions ("快速逛一遍" is not 体力有限).
+            if not merged.get("visitor_type") and llm_intent.get("visitor_type") \
+                    and any(re.search(pat, query) for _v, pat in VISITOR_PATTERNS):
                 merged["visitor_type"] = llm_intent["visitor_type"]
             merged_days = self._merge_days(merged.get("days"), merged.get("days_explicit", False),
                                             llm_intent.get("days"))
@@ -469,6 +472,15 @@ class ReActAgent:
         template = best_route["route_title"] if best_route else ""
         _sunrise_poi = None
         ordered = self._order_pois(scenic, selected, template_pos)
+        # Entrance-first heuristic: a gate POI (name ends with 门) is where visitors physically
+        # enter, even when no explicit entrance constraint was parsed — starting anywhere else
+        # reads as walking out of the park first.
+        gate_first = next((p for p in ordered if p.endswith("门")), None)
+        if gate_first and ordered[0] != gate_first:
+            ordered.remove(gate_first)
+            ordered.insert(0, gate_first)
+            trace.append({"step": "thought",
+                          "thought": f"入口前置：门类景点 {gate_first} 置于行程首站"})
         if entrance_label and entrance_label in ordered:
             ordered.remove(entrance_label)
             ordered.insert(0, entrance_label)
@@ -774,7 +786,8 @@ class ReActAgent:
                 return f'乘坐{sorted(shared)[0]}'
         return "步行"
 
-    POLISH_PROMPT = """你是导游。把下面的结构化行程改写成 150 字以内的中文行程说明，按时间顺序、口语化、
+    POLISH_PROMPT = """你是旅游规划助手。把下面的结构化行程改写成 150 字以内的中文行程说明：按时间顺序直接陈述，
+不要任何招呼语或开场客套（如“两位好”“叔叔阿姨好”“大家好”之类一律不要），不要与行程无关的铺垫和空话，
 保留全部景点名与提示。行程 JSON："""
 
     def _render(self, plan: dict, trace: list) -> str:

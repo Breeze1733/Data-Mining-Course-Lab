@@ -51,10 +51,11 @@
    "llm": {
     "scenic": "黄山",
     "visitor_type": null,
-    "days": 0.5,
+    "days": 1,
     "month": null,
     "special": [
-     "看日出"
+     "看日出",
+     "省力"
     ]
    },
    "result": {
@@ -103,20 +104,9 @@
    "via": "react"
   },
   {
-   "step": "action",
-   "thought": "决定调用工具 query_conditions",
-   "tool": "query_conditions",
-   "args": {
-    "visitor_type": "",
-    "limit": 6,
-    "scenic": "黄山"
-   },
-   "via": "react"
-  },
-  {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "{\"scenic\": \"黄山\", \"visitor_type\": null, \"pois\": [{\"poi\": \"光明顶\", \"degree\": 72, \"mention_freq\": 372, \"periods\": [\"未标注时段\"], \"transports\": [], \"visitor_fit\": 0, \"visitor_caveats\": []}, ",
+   "summary": "{\"scenic\": \"黄山\", \"visitor_type\": null, \"pois\": [{\"poi\": \"光明顶\", \"degree\": 71, \"mention_freq\": 372, \"periods\": [\"未标注时段\"], \"transports\": [], \"visitor_fit\": 0, \"visitor_caveats\": []}, ",
    "via": "react"
   },
   {
@@ -126,47 +116,26 @@
    "via": "react"
   },
   {
+   "step": "action",
+   "thought": "决定调用工具 query_conditions",
+   "tool": "query_conditions",
+   "args": {
+    "scenic": "黄山",
+    "limit": 5,
+    "visitor_type": ""
+   },
+   "via": "react"
+  },
+  {
    "step": "observation",
    "tool": "query_conditions",
    "summary": "{\"scenic\": \"黄山\", \"visitor_type\": null, \"conditions\": [{\"cond_type\": \"人群\", \"condition\": \"你是第一次去黄山\", \"suggestion\": \"最好要熟悉的当地人带,我们这次通过我的朋友,带我们游玩黄山(没带我们走弯路,全程没有购物也没有隐形消费,非常热情,有问必答,专业的事",
    "via": "react"
   },
   {
-   "step": "action",
-   "thought": "决定调用工具 query_poi_conditions",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "黄山",
-    "poi": "光明顶"
-   },
-   "via": "react"
-  },
-  {
-   "step": "action",
-   "thought": "决定调用工具 query_poi_conditions",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "黄山",
-    "poi": "始信峰"
-   },
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "{\"poi\": \"光明顶\", \"scenic\": \"黄山\", \"conditions\": [{\"condition\": \"多人出行:位置最好的是光明顶山庄\", \"suggestion\": \"(在天都峰开放前)不推荐住玉屏楼宾馆,位置偏,价格高\", \"cond_type\": \"其他\", \"frequency\": 3, \"source_years\": \"[\\\"2",
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "{\"poi\": \"始信峰\", \"scenic\": \"黄山\", \"conditions\": [{\"condition\": \"只一天建议带上石笋缸\", \"suggestion\": \"竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲花亭(不去莲花峰)—迎客松—玉屏索道\", \"cond_type\": \"装备\", \"frequency\"",
-   "via": "react"
-  },
-  {
    "step": "thought",
    "via": "react",
-   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（5 次工具调用）"
+   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（3 次工具调用）"
   },
   {
    "step": "action",
@@ -217,21 +186,21 @@
   },
   {
    "step": "thought",
-   "thought": "编排骨架：模板“冬季南门一日游”覆盖已选 POI 的 100%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
+   "thought": "编排骨架：模板“南门一日游方案2”覆盖已选 POI 的 75%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
   },
   {
    "step": "action",
-   "thought": "调用工具 query_order，参数 {'scenic': '黄山', 'poi': '迎客松'}",
+   "thought": "调用工具 query_order，参数 {'scenic': '黄山', 'poi': '光明顶'}",
    "tool": "query_order",
    "args": {
     "scenic": "黄山",
-    "poi": "迎客松"
+    "poi": "光明顶"
    }
   },
   {
    "step": "observation",
    "tool": "query_order",
-   "summary": "后继：天都峰、玉屏楼、莲花峰、光明顶"
+   "summary": "后继：鳌鱼峰、飞来石、天都峰、白云宾馆"
   },
   {
    "step": "thought",
@@ -239,35 +208,7 @@
   },
   {
    "step": "thought",
-   "thought": "时段预算：每日上限 3，总 1 天，裁剪 2 个 POI"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '迎客松'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "黄山",
-    "poi": "迎客松"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 9 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '鳌鱼峰'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "黄山",
-    "poi": "鳌鱼峰"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
+   "thought": "时段预算：每日上限 3，总 1 天，裁剪 1 个 POI"
   },
   {
    "step": "action",
@@ -281,11 +222,39 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 11 条条件建议"
+   "summary": "返回 10 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '迎客松'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "黄山",
+    "poi": "迎客松"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 8 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '玉屏楼'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "黄山",
+    "poi": "玉屏楼"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 6 条条件建议"
   },
   {
    "step": "thought",
-   "thought": "可行性校验：6 条封禁/不建议提示；已附加到对应站点"
+   "thought": "可行性校验：3 条封禁/不建议提示；已附加到对应站点"
   },
   {
    "step": "render",
@@ -297,7 +266,7 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "提示：半日游难以兼顾看日出——日出需要清晨身处山顶，通常要求前晚住宿山上。建议改为两日行程（首日上山宿山顶，次日看日出后下山），或舍弃看日出安排。\n\n大家上午好！咱们半日行程这样走：上午入园先看【迎客松】，接着徒步登【鳌鱼峰】，中午直奔【光明顶】。\n\n温馨提示：因时间有限，已为您舍去飞来石和始信峰。若遇莲花峰封山可选登天都峰，但注意登天都后无法坐索道下山。腿脚不便可绕开一线天；恐高及体力一般者量力而行；初次来的朋友建议请当地向导带路更省心！",
+ "answer": "提示：半日游难以兼顾看日出——日出需要清晨身处山顶，通常要求前晚住宿山上。建议改为两日行程（首日上山宿山顶，次日看日出后下山），或舍弃看日出安排。\n\n黄山半日看日出行程：上午入园至光明顶，随后步行前往迎客松（若登天都峰需步行下山，无法乘索道）。中午抵达玉屏楼。\n\n提示：时间预算有限已裁剪始信峰，建议量力而行；建议由熟人带领游玩；恐高或腿脚不便者请合理绕行。",
  "plan": {
   "scenic": "黄山",
   "days": 0.5,
@@ -306,7 +275,7 @@
    "看日出"
   ],
   "special_notes": [
-   "时间预算限制：已裁剪 2 个景点（飞来石, 始信峰等），建议根据体力取舍"
+   "时间预算限制：已裁剪 1 个景点（始信峰等），建议根据体力取舍"
   ],
   "trip_month": null,
   "itinerary": [
@@ -314,15 +283,15 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "迎客松",
+    "poi": "光明顶",
     "transport_from_prev": "入园",
-    "note": "⚠ 莲花峰封山可选择登天都峰——然后登天都,然后步行下山,登天都就无法乘索道下山（证据年份 2021"
+    "note": ""
    },
    {
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "鳌鱼峰",
+    "poi": "迎客松",
     "transport_from_prev": "步行",
     "note": "⚠ 莲花峰封山可选择登天都峰——然后登天都,然后步行下山,登天都就无法乘索道下山（证据年份 2021"
    },
@@ -330,9 +299,9 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "光明顶",
+    "poi": "玉屏楼",
     "transport_from_prev": "步行",
-    "note": "⚠ 只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步"
+    "note": "⚠ 莲花峰封山可选择登天都峰——然后登天都,然后步行下山,登天都就无法乘索道下山（证据年份 2021"
    }
   ],
   "tips": [
@@ -396,13 +365,10 @@
   "feasibility_warnings": [
    "迎客松：莲花峰封山可选择登天都峰——然后登天都,然后步行下山,登天都就无法乘索道下山（证据年份 2021）",
    "迎客松：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下（证据年份 2021）",
-   "迎客松：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
-   "鳌鱼峰：莲花峰封山可选择登天都峰——然后登天都,然后步行下山,登天都就无法乘索道下山（证据年份 2021）",
-   "鳌鱼峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
-   "光明顶：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲"
+   "玉屏楼：莲花峰封山可选择登天都峰——然后登天都,然后步行下山,登天都就无法乘索道下山（证据年份 2021）"
   ],
   "template_used": true,
   "template_route": "HS-EXTRA1-R2 冬季南门二日游",
-  "template_src": "（参考官方路线 HS-EXTRA1-R2 冬季南门一日游）"
+  "template_src": "（参考官方路线 HS-EXTRA1-R2 南门一日游方案2）"
  }
 }

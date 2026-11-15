@@ -71,8 +71,9 @@
    "thought": "决定调用工具 query_pois",
    "tool": "query_pois",
    "args": {
-    "limit": 8,
-    "scenic": "九寨沟"
+    "limit": 10,
+    "scenic": "九寨沟",
+    "visitor_type": ""
    },
    "via": "react"
   },
@@ -83,16 +84,6 @@
    "args": {
     "scenic": "九寨沟",
     "days": 1
-   },
-   "via": "react"
-  },
-  {
-   "step": "action",
-   "thought": "决定调用工具 query_conditions",
-   "tool": "query_conditions",
-   "args": {
-    "limit": 6,
-    "scenic": "九寨沟"
    },
    "via": "react"
   },
@@ -109,31 +100,9 @@
    "via": "react"
   },
   {
-   "step": "observation",
-   "tool": "query_conditions",
-   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"conditions\": [{\"cond_type\": \"人群\", \"condition\": \"体力不好\", \"suggestion\": \"那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车\", \"all_suggestions\": [\"不要在芦苇海停留",
-   "via": "react"
-  },
-  {
-   "step": "action",
-   "thought": "决定调用工具 query_poi_conditions",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "长海"
-   },
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "{\"poi\": \"长海\", \"scenic\": \"九寨沟\", \"conditions\": [{\"condition\": \"长海是母亲\", \"suggestion\": \"那远处的雪山就是大山般的父亲\", \"cond_type\": \"其他\", \"frequency\": 1, \"source_years\": \"[\\\"2021\\\"]\"}]}",
-   "via": "react"
-  },
-  {
    "step": "thought",
    "via": "react",
-   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（4 次工具调用）"
+   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（2 次工具调用）"
   },
   {
    "step": "action",
@@ -214,7 +183,7 @@
   },
   {
    "step": "thought",
-   "thought": "时段预算：每日上限 5，总 1 天，裁剪 2 个 POI"
+   "thought": "时段预算：每日上限 5，总 1 天，裁剪 3 个 POI"
   },
   {
    "step": "thought",
@@ -232,7 +201,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 7 条条件建议"
+   "summary": "返回 6 条条件建议"
   },
   {
    "step": "action",
@@ -250,17 +219,17 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗'}",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '镜海'}",
    "tool": "query_poi_conditions",
    "args": {
     "scenic": "九寨沟",
-    "poi": "诺日朗"
+    "poi": "镜海"
    }
   },
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 5 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -274,7 +243,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -302,7 +271,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 1 条条件建议"
+   "summary": "返回 0 条条件建议"
   },
   {
    "step": "thought",
@@ -337,7 +306,7 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家跟我走！今天九寨沟行程：上午建议不去原始森林（其实大半天足矣）直奔五花海；中午在诺日朗；下午赏五彩池与诺日朗瀑布；晚上到出口长海。\n\n提示：因时间限制已裁剪犀牛海等，请按体力取舍；初次来长途尽量坐座位；体力弱别在芦苇海停留，因道路窄无换乘点，需长距离步行至盆景滩乘车！\n动线参考（图谱先后顺序边，1 跳）：长海 → 诺日朗中心",
+ "answer": "九寨沟一日游行程：上午入园前往原始森林（建议根据体力取舍，可不去），步行游览五花海，乘车徒步至镜海；下午步行游览五彩池，徒步参观诺日朗瀑布；傍晚步行至长海（出口已在行程中）。提示：时间预算有限已裁剪3个景点，建议根据体力取舍；晕车者请提前备好晕车药。\n动线参考（图谱先后顺序边，1 跳）：长海 → 诺日朗中心",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -345,7 +314,7 @@
   "special": [],
   "special_notes": [
    "出口：长海 已在行程中",
-   "时间预算限制：已裁剪 2 个景点（犀牛海, 长海等），建议根据体力取舍"
+   "时间预算限制：已裁剪 3 个景点（犀牛海, 树正群海, 长海等），建议根据体力取舍"
   ],
   "trip_month": null,
   "itinerary": [
@@ -369,8 +338,8 @@
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "诺日朗",
-    "transport_from_prev": "步行",
+    "poi": "镜海",
+    "transport_from_prev": "乘坐徒步",
     "note": ""
    },
    {
@@ -401,13 +370,31 @@
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "体力不好",
-    "suggestion": "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车",
+    "condition": "晕车",
+    "suggestion": "晕车药(p8)吃了坐一路山路一点问题没有",
     "all_suggestions": [
-     "不要在芦苇海停留",
-     "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车"
+     "买好晕车贴或者晕车药",
+     "晕车药(p8)吃了坐一路山路一点问题没有"
     ],
     "frequency": 2
+   },
+   {
+    "cond_type": "人群",
+    "condition": "是家庭出游",
+    "suggestion": "不妨选择吃一顿丰盛的中餐",
+    "all_suggestions": [
+     "不妨选择吃一顿丰盛的中餐"
+    ],
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "恐高",
+    "suggestion": "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满",
+    "all_suggestions": [
+     "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满"
+    ],
+    "frequency": 1
    },
    {
     "cond_type": "人群",
@@ -415,6 +402,24 @@
     "suggestion": "坐在座位上,其他站与站之间较短可以直接站",
     "all_suggestions": [
      "坐在座位上,其他站与站之间较短可以直接站"
+    ],
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "夫妻",
+    "suggestion": "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!",
+    "all_suggestions": [
+     "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!"
+    ],
+    "frequency": 1
+   },
+   {
+    "cond_type": "人群",
+    "condition": "家庭",
+    "suggestion": "吃起来新鲜可口,在如此童话森林中来一场英式下午茶会,应该是旅行中最难忘的回忆吧!",
+    "all_suggestions": [
+     "吃起来新鲜可口,在如此童话森林中来一场英式下午茶会,应该是旅行中最难忘的回忆吧!"
     ],
     "frequency": 1
    }

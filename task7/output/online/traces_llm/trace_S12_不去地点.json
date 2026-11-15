@@ -86,7 +86,7 @@
    "thought": "决定调用工具 query_pois",
    "tool": "query_pois",
    "args": {
-    "limit": 10,
+    "limit": 12,
     "scenic": "九寨沟",
     "visitor_type": ""
    },
@@ -107,9 +107,9 @@
    "thought": "决定调用工具 query_conditions",
    "tool": "query_conditions",
    "args": {
-    "limit": 6,
+    "scenic": "九寨沟",
     "visitor_type": "",
-    "scenic": "九寨沟"
+    "limit": 6
    },
    "via": "react"
   },
@@ -128,7 +128,7 @@
   {
    "step": "observation",
    "tool": "query_conditions",
-   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"conditions\": [{\"cond_type\": \"人群\", \"condition\": \"体力不好\", \"suggestion\": \"那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车\", \"all_suggestions\": [\"不要在芦苇海停留",
+   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"conditions\": [{\"cond_type\": \"人群\", \"condition\": \"晕车\", \"suggestion\": \"晕车药(p8)吃了坐一路山路一点问题没有\", \"all_suggestions\": [\"买好晕车贴或者晕车药\", \"晕车药(p8)吃了坐一路山",
    "via": "react"
   },
   {
@@ -189,21 +189,21 @@
   },
   {
    "step": "thought",
-   "thought": "编排骨架：模板“2016版一日游”覆盖已选 POI 的 100%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
+   "thought": "编排骨架：模板“2016版一日游”覆盖已选 POI 的 88%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
   },
   {
    "step": "action",
-   "thought": "调用工具 query_order，参数 {'scenic': '九寨沟', 'poi': '五花海'}",
+   "thought": "调用工具 query_order，参数 {'scenic': '九寨沟', 'poi': '沟口'}",
    "tool": "query_order",
    "args": {
     "scenic": "九寨沟",
-    "poi": "五花海"
+    "poi": "沟口"
    }
   },
   {
    "step": "observation",
    "tool": "query_order",
-   "summary": "后继：珍珠滩、珍珠滩瀑布、五彩池、镜海"
+   "summary": "后继：长海、日则沟、五彩池、原始森林"
   },
   {
    "step": "thought",
@@ -211,7 +211,35 @@
   },
   {
    "step": "thought",
-   "thought": "时段预算：每日上限 5，总 1 天，裁剪 2 个 POI"
+   "thought": "时段预算：每日上限 5，总 1 天，裁剪 3 个 POI"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '沟口'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "沟口"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 3 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '长海'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "长海"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 0 条条件建议"
   },
   {
    "step": "action",
@@ -229,34 +257,6 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '镜海'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "镜海"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '长海'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "长海"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 1 条条件建议"
-  },
-  {
-   "step": "action",
    "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '五彩池'}",
    "tool": "query_poi_conditions",
    "args": {
@@ -267,7 +267,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 6 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -297,7 +297,7 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家好！今天九寨一日游为避人流省体力，已裁剪原始森林、犀牛海和树正群海。\n\n咱们上午先游五花海、镜海；中午坐车上长海；下午漫步五彩池，最后看壮观的诺日朗瀑布。\n\n特别提醒大家：若体力有限，千万别在芦苇海停留，那里道路窄没换乘点，得走很远到盆景滩才能坐车哦！",
+ "answer": "九寨沟一日精华游：上午从沟口入园，乘观光车前往长海，随后乘车至五花海；下午步行游览五彩池，再徒步至诺日朗瀑布。\n提示：晕车者建议提前服用晕车药以应对山路。\n注：已按要求避开原始森林；受时间预算限制，已裁剪镜海、犀牛海、树正群海等3个景点，建议根据体力取舍。",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -307,7 +307,7 @@
   ],
   "special_notes": [
    "已按您的要求避开：原始森林（未纳入行程）",
-   "时间预算限制：已裁剪 2 个景点（犀牛海, 树正群海等），建议根据体力取舍"
+   "时间预算限制：已裁剪 3 个景点（镜海, 犀牛海, 树正群海等），建议根据体力取舍"
   ],
   "trip_month": null,
   "itinerary": [
@@ -315,7 +315,7 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "五花海",
+    "poi": "沟口",
     "transport_from_prev": "入园",
     "note": ""
    },
@@ -323,15 +323,15 @@
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "镜海",
-    "transport_from_prev": "乘坐徒步",
+    "poi": "长海",
+    "transport_from_prev": "乘坐观光车",
     "note": ""
    },
    {
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "长海",
+    "poi": "五花海",
     "transport_from_prev": "乘坐观光车",
     "note": ""
    },
@@ -355,11 +355,11 @@
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "体力不好",
-    "suggestion": "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车",
+    "condition": "晕车",
+    "suggestion": "晕车药(p8)吃了坐一路山路一点问题没有",
     "all_suggestions": [
-     "不要在芦苇海停留",
-     "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车"
+     "买好晕车贴或者晕车药",
+     "晕车药(p8)吃了坐一路山路一点问题没有"
     ],
     "frequency": 2
    }

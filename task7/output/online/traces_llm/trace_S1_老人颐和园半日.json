@@ -99,8 +99,8 @@
    "tool": "query_pois",
    "args": {
     "visitor_type": "老人",
-    "scenic": "颐和园",
-    "limit": 8
+    "limit": 8,
+    "scenic": "颐和园"
    },
    "via": "react"
   },
@@ -119,9 +119,9 @@
    "thought": "决定调用工具 query_conditions",
    "tool": "query_conditions",
    "args": {
-    "scenic": "颐和园",
+    "limit": 6,
     "visitor_type": "老人",
-    "limit": 6
+    "scenic": "颐和园"
    },
    "via": "react"
   },
@@ -144,41 +144,9 @@
    "via": "react"
   },
   {
-   "step": "action",
-   "thought": "决定调用工具 query_poi_conditions",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "颐和园",
-    "poi": "万寿山"
-   },
-   "via": "react"
-  },
-  {
-   "step": "action",
-   "thought": "决定调用工具 query_poi_conditions",
-   "tool": "query_poi_conditions",
-   "args": {
-    "poi": "佛香阁",
-    "scenic": "颐和园"
-   },
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "{\"poi\": \"万寿山\", \"scenic\": \"颐和园\", \"conditions\": [{\"condition\": \"站在万寿山顶的佛香阁上俯看\", \"suggestion\": \"则整个园林将尽收眼底\", \"cond_type\": \"其他\", \"frequency\": 1, \"source_years\": \"[\\\"2020\\\"]\"}]}",
-   "via": "react"
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "{\"poi\": \"佛香阁\", \"scenic\": \"颐和园\", \"conditions\": [{\"condition\": \"站在万寿山顶的佛香阁上俯看\", \"suggestion\": \"则整个园林将尽收眼底\", \"cond_type\": \"其他\", \"frequency\": 1, \"source_years\": \"[\\\"2020\\\"]\"}, {\"condit",
-   "via": "react"
-  },
-  {
    "step": "thought",
    "via": "react",
-   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（5 次工具调用）"
+   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（3 次工具调用）"
   },
   {
    "step": "action",
@@ -235,21 +203,25 @@
   },
   {
    "step": "thought",
-   "thought": "编排骨架：模板“颐和园东宫门红色游”覆盖已选 POI 的 40%；query_route 返回的路线覆盖率不足，另选覆盖最高者；覆盖率不足 60%，改用图谱先后边拓扑排序"
+   "thought": "入口前置：门类景点 东宫门 置于行程首站"
+  },
+  {
+   "step": "thought",
+   "thought": "编排骨架：模板“APEC世界文化遗产经典线”覆盖已选 POI 的 50%；query_route 返回的路线覆盖率不足，另选覆盖最高者；覆盖率不足 60%，改用图谱先后边拓扑排序"
   },
   {
    "step": "action",
-   "thought": "调用工具 query_order，参数 {'scenic': '颐和园', 'poi': '昆明湖'}",
+   "thought": "调用工具 query_order，参数 {'scenic': '颐和园', 'poi': '东宫门'}",
    "tool": "query_order",
    "args": {
     "scenic": "颐和园",
-    "poi": "昆明湖"
+    "poi": "东宫门"
    }
   },
   {
    "step": "observation",
    "tool": "query_order",
-   "summary": "后继：万寿山、十七孔桥、长廊、西堤"
+   "summary": "后继：仁寿殿、北宫门、新建宫门、文昌院"
   },
   {
    "step": "thought",
@@ -257,21 +229,7 @@
   },
   {
    "step": "thought",
-   "thought": "时段预算：每日上限 3，总 1 天，裁剪 2 个 POI"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '昆明湖'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "颐和园",
-    "poi": "昆明湖"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
+   "thought": "时段预算：每日上限 3，总 1 天，裁剪 1 个 POI"
   },
   {
    "step": "action",
@@ -289,17 +247,31 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '谐趣园'}",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '昆明湖'}",
    "tool": "query_poi_conditions",
    "args": {
     "scenic": "颐和园",
-    "poi": "谐趣园"
+    "poi": "昆明湖"
    }
   },
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 0 条条件建议"
+   "summary": "返回 2 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '颐和园', 'poi': '长廊'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "颐和园",
+    "poi": "长廊"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 2 条条件建议"
   },
   {
    "step": "thought",
@@ -315,7 +287,7 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "叔叔阿姨好！咱们半日游主打省力：上午先赏【昆明湖】，再漫步到【东宫门】，中午游览【谐趣园】。\n\n因时间限制，【长廊】和【十七孔桥】已帮大家裁剪，可依体力取舍。千万别走中轴线爬山，沿湖走或乘船过湖最轻松；请一定穿舒服的鞋子、别穿高跟鞋，咱们慢走看景不费腿！",
+ "answer": "上午从东宫门入园，步行游览昆明湖，中午漫步长廊。\n提示：受时间限制已裁剪十七孔桥等景点，建议根据体力取舍。带老人游玩切勿走中轴线爬山，以免体力不支，建议沿湖边平缓路线赏景。",
  "plan": {
   "scenic": "颐和园",
   "days": 0.5,
@@ -324,7 +296,7 @@
    "省力"
   ],
   "special_notes": [
-   "时间预算限制：已裁剪 2 个景点（长廊, 十七孔桥等），建议根据体力取舍"
+   "时间预算限制：已裁剪 1 个景点（十七孔桥等），建议根据体力取舍"
   ],
   "trip_month": null,
   "itinerary": [
@@ -332,23 +304,23 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "昆明湖",
+    "poi": "东宫门",
     "transport_from_prev": "入园",
-    "note": "与游客类型适配"
+    "note": ""
    },
    {
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "东宫门",
+    "poi": "昆明湖",
     "transport_from_prev": "步行",
-    "note": ""
+    "note": "与游客类型适配"
    },
    {
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "谐趣园",
+    "poi": "长廊",
     "transport_from_prev": "步行",
     "note": ""
    }
@@ -356,46 +328,10 @@
   "tips": [
    {
     "cond_type": "人群",
-    "condition": "有带老人或小朋友的游客",
-    "suggestion": "慎重考虑",
-    "all_suggestions": [
-     "慎重考虑"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
     "condition": "带老人",
     "suggestion": "别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景",
     "all_suggestions": [
      "别走中轴线爬山上去,才爬了两层就把人累的心脏都快跳出来了,果断放弃下山沿湖边看风景"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "体力差的朋友",
-    "suggestion": "可以不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)",
-    "all_suggestions": [
-     "可以不登,去下一站画中游同样好看)——画中游(在半山腰,俯瞰昆明湖,远眺西山)"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "体力一般或者不想走太多",
-    "suggestion": "中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较完整的湖景视角",
-    "all_suggestions": [
-     "中间“乘船过湖”这一步其实很值得保留,既省体力,也能看到比较完整的湖景视角"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "装备",
-    "condition": "✅穿舒服的鞋子",
-    "suggestion": "别穿高跟鞋",
-    "all_suggestions": [
-     "别穿高跟鞋"
     ],
     "frequency": 1
    }
