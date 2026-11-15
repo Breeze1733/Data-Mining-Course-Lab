@@ -39,7 +39,7 @@ COND_MARKERS = ("如果", "假如", "假若", "若是", "若", "要是", "万一
 
 # Supplement action verbs — split into separate advice when an action verb follows a comma
 # (common travel-advice verbs such as 穿/带/吃/住)
-SUGG_VERB = re.compile(r"^(则|就|那|然后|最好|建议|推荐|记得|千万|尽量|务必|一定要|可以|不妨|选择|改|换|提前|避开|放弃|考虑|穿|带|买|吃|住|坐|乘|走|游览|参观|步行|前往|返回|入住|预定|预约|排队|自驾|徒步|登|第[一二三四五六七八九十]+天)")
+SUGG_VERB = re.compile(r"^(则|就|那(?=就)|然后|最好|建议|推荐|记得|千万|尽量|务必|一定要|可以|不妨|选择|改|换|提前|避开|放弃|考虑|穿|带|买|吃|住|坐|乘|走|游览|参观|步行|前往|返回|入住|预定|预约|排队|自驾|徒步|登|第[一二三四五六七八九十]+天)")
 
 CROWD_RE = re.compile(
     r"老人|老人小孩|带孩子|带娃|小孩|儿童|婴儿|亲子|情侣|夫妻|带老人|孕妇|腿脚|体力(不好|差|一般|有限)|新手|"
@@ -108,7 +108,8 @@ PLATFORM_PHRASE_RE = re.compile(r"点赞|收藏|一键三连|评论区|私信|�
 
 # Guards for non-advice sentences:
 LYRICAL_RE = re.compile(r"人生|岁月|初心|青春|梦想|心态|老得太快|明白得太迟|否定了自己|自己的想法|"
-                        r"菩提|即心即佛|那就是佛|放慢生活的节奏|向往已久的宁静生活|童话里的")
+                        r"菩提|即心即佛|那就是佛|放慢生活的节奏|向往已久的宁静生活|童话里的|"
+                        r"雄奇俊丽|沧海云雾|茅塞顿开|妙笔生花|文思枯竭")
 COGNITIVE_RE = re.compile(r"^(不要|别)(认为|觉得|以为|担心)")
 RHETORIC_IFSAY_RE = re.compile(r"^如果说")
 APPEAL_RE = re.compile(r"管理部门|引起重视|呼吁")
@@ -131,6 +132,13 @@ OFF_PROMO_RE = re.compile(r"新用户|大礼包|优惠券|首日免租金|返现
 OFF_RANT_RE = re.compile(r"气死|无语|恶心|差评|坑爹|垃圾|宰客|挨宰|再也不来|失望透顶|没有基本素|窝在家里|居家隔离|宅家")
 OFF_PRICE_RANT_RE = re.compile(r"(?:也要|都要|就要|花了|居然|竟然)\s*[^。，；！？]{0,6}?\d+\s*元")
 OFF_WISH_RE = re.compile(r"^(我|我们)[^。！？；]{0,8}(希望|想|盼|打算|计划|准备|觉得|相信)")
+# First-person past-tense narration ("我宁可吃2顿烤鱼" "俺是深刻的体会了" "我们跟他说放我们下车"):
+# a suggestion that opens with a first-person pronoun (never the advice target) and recounts what the
+# author did is a travelogue fragment, not advice. 我建议/我们建议 stays exempt — that IS advice.
+OFF_NARRATION_RE = re.compile(
+    r"^(?:我|俺|我们)(?!建议)[^。！？；]{0,30}(?:了|过|当时|那次|后来|宁可|只好|干脆|跟他|给她)|"
+    r"(?:我|我们)[^。！？；]{0,10}(?:跟|给|让)(?:他|她|它)(?:说|讲|带|下车)|"
+    r"(?:我|俺)(?:完全|真的|实在)?(?:无法|不能|不想|宁可)")
 # Famous attractions outside the three supported scenic areas (Beijing city sights for 颐和园 corpus,
 # Sichuan neighbours for 九寨沟 corpus, national classics). Checked on condition+suggestion text only —
 # the full sentence may legitimately mention them (e.g. 黄龙九寨站 is a station name).
@@ -162,6 +170,29 @@ def is_advice_shaped(sugg: str, cond: str = "") -> bool:
         return True
     return bool(SUGG_VERB.match(sugg) or ADVICE_MARK_RE.search(sugg)
                 or PRESCRIPTION_RE.search(sugg) or GATE_GEAR_RE.search(sugg) or TICKET_RE.search(sugg))
+
+
+# Fragment rejection: very short suggestions that are a bare verb or a verb+directional complement
+# (“不建议走” “一定要用起来” “不要错过”) name no object to act on and cannot be followed. V一V
+# reduplication (“爬一爬”) reads as a complete imperative; 安全/预定/预订 are self-contained
+# instructions — both stay exempt.
+FRAGMENT_PREFIX_RE = re.compile(r"^(?:不要|别|不建议|无需|没必要|不宜|尽量|务必|记得|一定要|要|可以|最好|建议|避免|慎|切忌|千万|避开|放弃|考虑|提前|注意)+")
+FRAGMENT_TAIL_RE = re.compile(r"[哦呀啊哈呗啦~哟]+$")
+FRAGMENT_DIR_RE = re.compile(r"^[一-龥]{1,2}(?:起来|下去|过来|出来|出去|一下)$")
+FRAGMENT_REDUP_RE = re.compile(r"^[一-龥]一[一-龥]$")
+FRAGMENT_SELF_OK_RE = re.compile(r"安全|预定|预订|防晒|保暖|补水|环保")
+
+
+def is_fragment(sugg: str) -> bool:
+    if len(norm(sugg)) > 6:
+        return False
+    core = FRAGMENT_TAIL_RE.sub("", FRAGMENT_PREFIX_RE.sub("", sugg)).strip(" ，,。；;！？!?)）]】")
+    if not core or FRAGMENT_REDUP_RE.match(core):
+        return not core
+    if FRAGMENT_DIR_RE.match(core):
+        return True
+    return len(core) <= 2 and not GATE_GEAR_RE.search(core) and not TICKET_RE.search(core) \
+        and not FRAGMENT_SELF_OK_RE.search(core)
 
 
 def off_domain_reason(sent: str, cond: str, sugg: str) -> str | None:
@@ -884,6 +915,16 @@ def main(argv=None) -> int:
                     if not is_advice_shaped(sugg, cfields["condition_text"]):
                         off_domain["not_advice_shape"] += 1
                         continue
+                    if is_fragment(sugg):
+                        off_domain["fragment"] += 1
+                        continue
+                    if OFF_NARRATION_RE.search(sugg):
+                        off_domain["narration"] += 1
+                        continue
+                    # Boundary repair, not a drop: post-split fragments starting with 的 are clause
+                    # residue (“的选择是直奔长海…”) — trim the particle and keep the advice.
+                    if sugg.startswith("的") and len(sugg) > 8:
+                        sugg = sugg[1:]
                     if sugg.endswith(("：", ":")):
                         off_domain["heading_colon"] += 1
                         continue

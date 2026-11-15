@@ -1,30 +1,30 @@
 {
- "total_nodes": 506,
- "total_edges": 2620,
+ "total_nodes": 490,
+ "total_edges": 2604,
  "by_kind": {
   "景区": 3,
   "景点": 159,
   "交通操作": 9,
   "时段": 6,
-  "条件": 329
+  "条件": 313
  },
  "by_relation": {
   "包含": 159,
-  "条件建议": 454,
+  "条件建议": 438,
   "先后顺序": 1807,
   "时段归属": 143,
   "交通方式": 57
  },
- "cond_edges_to_poi": 195,
- "cond_edges_to_scenic": 259,
- "cond_pairs_input": 765,
- "cond_pairs_with_condition": 379,
- "cond_pairs_absent_skipped": 386,
- "cond_pairs_absent_input": 379,
+ "cond_edges_to_poi": 192,
+ "cond_edges_to_scenic": 246,
+ "cond_pairs_input": 722,
+ "cond_pairs_with_condition": 357,
+ "cond_pairs_absent_skipped": 365,
+ "cond_pairs_absent_input": 358,
  "cond_pairs_condition_removed": 7,
  "cond_pairs_unusable_skipped": 0,
  "cond_pairs_refined": 16,
- "cond_cluster_nodes": 329,
+ "cond_cluster_nodes": 313,
  "order_direction": {
   "unopposed_edges": 617,
   "opposed_pairs": 595,
@@ -32,26 +32,26 @@
  },
  "per_scenic": {
   "黄山": {
-   "nodes": 188,
-   "edges": 865,
+   "nodes": 183,
+   "edges": 860,
    "by_kind": {
+    "条件": 131,
     "景点": 46,
-    "条件": 136,
-    "时段": 1,
+    "景区": 1,
     "交通操作": 4,
-    "景区": 1
+    "时段": 1
    },
    "by_relation": {
     "先后顺序": 597,
     "时段归属": 24,
+    "条件建议": 182,
     "交通方式": 11,
-    "条件建议": 187,
     "包含": 46
    },
    "top_degree": [
     [
      "黄山",
-     154
+     149
     ],
     [
      "光明顶",
@@ -85,26 +85,26 @@
    "isolated_nodes": 0
   },
   "九寨沟": {
-   "nodes": 214,
-   "edges": 960,
+   "nodes": 203,
+   "edges": 949,
    "by_kind": {
-    "条件": 150,
+    "条件": 139,
     "景点": 56,
     "景区": 1,
-    "时段": 4,
-    "交通操作": 3
+    "交通操作": 3,
+    "时段": 4
    },
    "by_relation": {
     "先后顺序": 586,
     "时段归属": 78,
-    "条件建议": 196,
     "交通方式": 44,
+    "条件建议": 185,
     "包含": 56
    },
    "top_degree": [
     [
      "九寨沟",
-     173
+     165
     ],
     [
      "五花海",
@@ -115,10 +115,6 @@
      61
     ],
     [
-     "长海",
-     60
-    ],
-    [
      "五彩池",
      59
     ],
@@ -127,11 +123,15 @@
      59
     ],
     [
+     "长海",
+     59
+    ],
+    [
      "沟口",
      53
     ],
     [
-     "原始森林",
+     "犀牛海",
      52
     ]
    ],
@@ -142,17 +142,17 @@
    "edges": 795,
    "by_kind": {
     "条件": 43,
+    "交通操作": 2,
     "景点": 57,
-    "景区": 1,
     "时段": 1,
-    "交通操作": 2
+    "景区": 1
    },
    "by_relation": {
     "先后顺序": 624,
     "时段归属": 41,
     "条件建议": 71,
-    "包含": 57,
-    "交通方式": 2
+    "交通方式": 2,
+    "包含": 57
    },
    "top_degree": [
     [

@@ -3,7 +3,7 @@
  "n_requested": 48,
  "samples": [
   {
-   "row_id": 708,
+   "row_id": 665,
    "pattern": "人群可以",
    "scenic_area": "颐和园",
    "condition_text": "体力好的",
@@ -14,7 +14,7 @@
    "note": "人群主语+可以，建议成立"
   },
   {
-   "row_id": 639,
+   "row_id": 598,
    "pattern": "人群可以",
    "scenic_area": "九寨沟",
    "condition_text": "体力不足",
@@ -25,7 +25,7 @@
    "note": "建议成立，尾部括号为切分小瑕疵"
   },
   {
-   "row_id": 481,
+   "row_id": 449,
    "pattern": "依据规定",
    "scenic_area": "九寨沟",
    "condition_text": "按照当前防疫要求",
@@ -36,7 +36,7 @@
    "note": "防疫规定，适用条件明确"
   },
   {
-   "row_id": 480,
+   "row_id": 448,
    "pattern": "依据规定",
    "scenic_area": "九寨沟",
    "condition_text": "按照最新防疫政策",
@@ -47,7 +47,7 @@
    "note": "防疫规定"
   },
   {
-   "row_id": 638,
+   "row_id": 597,
    "pattern": "句内条件",
    "scenic_area": "九寨沟",
    "condition_text": "高反情况出现",
@@ -58,51 +58,62 @@
    "note": "句内条件-建议成对"
   },
   {
-   "row_id": 753,
+   "row_id": 536,
    "pattern": "否定建议",
-   "scenic_area": "颐和园",
+   "scenic_area": "黄山",
    "condition_text": "",
-   "suggestion_text": "不建议东宫门进,旅行团扎堆,人山人海",
-   "sentence": "不建议东宫门进,旅行团扎堆,人山人海",
-   "verdict": "correct",
-   "issue": "",
-   "note": "入口避雷建议"
-  },
-  {
-   "row_id": 540,
-   "pattern": "否定建议",
-   "scenic_area": "颐和园",
-   "condition_text": "",
-   "suggestion_text": "不建议走",
-   "sentence": "再往上,基本沿着佛香阁的外墙,已经没有正经路了,就是这种行人踩出来的山路,没有台阶,只能手脚并用,岁数大的人不建议走",
+   "suggestion_text": "然后再原路上来,也不会太累",
+   "sentence": "西海大峡谷的一二环没必要走,直接白云宾馆这边朝步仙桥再下一小会,不要下到底,景色就已经很不错了,然后再原路上来,也不会太累",
    "verdict": "boundary",
    "issue": "边界切分",
-   "note": "「不建议走」缺宾语"
+   "note": "原路返回信息，建议性弱"
   },
   {
-   "row_id": 754,
+   "row_id": 132,
    "pattern": "否定建议",
-   "scenic_area": "颐和园",
+   "scenic_area": "黄山",
    "condition_text": "",
-   "suggestion_text": "不要硬打卡全部点位,挑重点慢走细逛",
-   "sentence": "园子面积巨大,不要硬打卡全部点位,挑重点慢走细逛",
+   "suggestion_text": "不允许搭帐篷",
+   "sentence": "我们是到汤口第二天上的黄山,原本计划两到三天完成黄山的所有景点,但是因为景区防疫要求,不允许搭帐篷,我们错过了日出",
    "verdict": "correct",
    "issue": "",
-   "note": "错峰避雷"
+   "note": "搭帐篷禁令"
   },
   {
-   "row_id": 352,
+   "row_id": 8,
+   "pattern": "否定建议",
+   "scenic_area": "黄山",
+   "condition_text": "",
+   "suggestion_text": "点,但可以避免道路上的拥堵,节省体力时间,又可游玩精华景区",
+   "sentence": "此条路线虽然舍弃了前山景点,但可以避免道路上的拥堵,节省体力时间,又可游玩精华景区",
+   "verdict": "boundary",
+   "issue": "边界切分",
+   "note": "首字残片「点,」，避堵建议成立"
+  },
+  {
+   "row_id": 466,
    "pattern": "否定建议",
    "scenic_area": "九寨沟",
    "condition_text": "",
-   "suggestion_text": "不要期望和她们商量让你插下队,素质很一般",
-   "sentence": "也不要期望和她们商量让你插下队,素质很一般",
+   "suggestion_text": "避免发生高原反应",
+   "sentence": "这样也是为了节省体力,避免发生高原反应",
    "verdict": "correct",
    "issue": "",
-   "note": "插队避雷"
+   "note": "高反预防"
   },
   {
-   "row_id": 187,
+   "row_id": 325,
+   "pattern": "否定建议",
+   "scenic_area": "九寨沟",
+   "condition_text": "",
+   "suggestion_text": "不得入内",
+   "sentence": "可怜我们后面有几个游客因为现金不足,到了景区门口而不得入内",
+   "verdict": "correct",
+   "issue": "",
+   "note": "入内禁令"
+  },
+  {
+   "row_id": 179,
    "pattern": "否定建议",
    "scenic_area": "黄山",
    "condition_text": "身体准备:犯肠胃炎体力减半登黄山算是对我的意志力的挑战了",
@@ -113,150 +124,128 @@
    "note": "登山饮食建议"
   },
   {
-   "row_id": 334,
-   "pattern": "否定建议",
-   "scenic_area": "九寨沟",
-   "condition_text": "",
-   "suggestion_text": "不允许下水的",
-   "sentence": "海子的水碧蓝清澈,一望到底,但景区是决不允许下水的",
-   "verdict": "correct",
-   "issue": "",
-   "note": "下水禁令"
-  },
-  {
-   "row_id": 398,
-   "pattern": "建议推断",
-   "scenic_area": "九寨沟",
-   "condition_text": "",
-   "suggestion_text": "坐左边(靠近司机的那一边),因为除了日则沟的景点是在右边的,其他两条沟的风景都是在左边的",
-   "sentence": "从景区门口上行坐车,建议坐左边(靠近司机的那一边),因为除了日则沟的景点是在右边的,其他两条沟的风景都是在左边的",
-   "verdict": "correct",
-   "issue": "",
-   "note": "观光车座位选择建议"
-  },
-  {
-   "row_id": 55,
+   "row_id": 556,
    "pattern": "建议推断",
    "scenic_area": "黄山",
    "condition_text": "",
-   "suggestion_text": "带个装满水的保温杯即可,山上也有灌水的地方",
-   "sentence": "建议自带干粮,冬季登山注意地面湿滑,带个装满水的保温杯即可,山上也有灌水的地方",
+   "suggestion_text": "走天都峰、光明顶、猴子观海,全程走走歇歇",
+   "sentence": "9月19日购票,一定要上下都坐索道,走天都峰、光明顶、猴子观海,全程走走歇歇",
    "verdict": "correct",
    "issue": "",
-   "note": "补水装备建议"
+   "note": "走歇结合路线建议"
   },
   {
-   "row_id": 89,
+   "row_id": 216,
    "pattern": "建议推断",
    "scenic_area": "黄山",
    "condition_text": "",
-   "suggestion_text": "选择一次索道",
-   "sentence": "黄山有三个大门,90%游客都选择南大门(汤口)上山,前山上后山下,或者后山上前山下,为了节省时间,尽量选择一次索道",
+   "suggestion_text": "是一人一张床(地铺也成),能洗热水澡的,实在不行能有热水喝、能洗个热水脚的也成,价钱嘛自然是越低约好喽",
+   "sentence": "天下还是好人多呀^_^ 我刚刚把一半茶叶蛋放到嘴里,小卖部的售货员就问我,我们是不是在找住处(我一个劲儿的点头),他问我要什么标准的,我说能住就行,最好是一人一张床(地铺也成),能洗热水澡的,实在不行能有热水喝、能洗个热水脚的也成,价钱嘛自然是越低约好喽",
    "verdict": "correct",
    "issue": "",
-   "note": "索道选择建议"
+   "note": "住宿条件建议"
   },
   {
-   "row_id": 380,
+   "row_id": 79,
+   "pattern": "建议推断",
+   "scenic_area": "黄山",
+   "condition_text": "",
+   "suggestion_text": "坐地轨小火车上来,走十分钟到白云宾馆,第二天别去光明顶看日出,因为日出很难看到,没意思",
+   "sentence": "游黄山最好在山上住一夜,正常情况下后山上游北海景区、飞来石,到排云亭下西海大峡谷,经过一环、二环到谷底,坐地轨小火车上来,走十分钟到白云宾馆,第二天别去光明顶看日出,因为日出很难看到,没意思",
+   "verdict": "correct",
+   "issue": "",
+   "note": "地轨+日出现实提示"
+  },
+  {
+   "row_id": 613,
    "pattern": "建议推断",
    "scenic_area": "九寨沟",
    "condition_text": "",
-   "suggestion_text": "自行准备些简单的干粮和热水,到时候美景当前简单的食物也会分外可口的",
-   "sentence": "C.食-景区诺日朗有餐食供应但口碑不佳,建议自行准备些简单的干粮和热水,到时候美景当前简单的食物也会分外可口的",
+   "suggestion_text": "带个冲锋衣",
+   "sentence": "3.注意看天气预报最好带个冲锋衣,带点零食,景区食物很贵",
    "verdict": "correct",
    "issue": "",
-   "note": "干粮准备建议"
+   "note": "冲锋衣装备"
   },
   {
-   "row_id": 117,
+   "row_id": 550,
    "pattern": "建议推断",
    "scenic_area": "黄山",
    "condition_text": "",
-   "suggestion_text": "不要赶在正中午或傍晚出山,适当提前以避开人群",
-   "sentence": "2. 黄山景区常年爆满,在出山时乘车可能要排队很久,建议不要赶在正中午或傍晚出山,适当提前以避开人群",
+   "suggestion_text": "可以先坐火车下到谷底,再从一环二环爬上来,这样可以不走重复的路",
+   "sentence": "推荐可以先坐火车下到谷底,再从一环二环爬上来,这样可以不走重复的路",
    "verdict": "correct",
    "issue": "",
-   "note": "出山时间避峰"
+   "note": "谷底往返不重复路线"
   },
   {
-   "row_id": 161,
+   "row_id": 530,
    "pattern": "建议推断",
    "scenic_area": "黄山",
    "condition_text": "",
-   "suggestion_text": "住山顶,一是节省体力,二是可以看日落、日出",
-   "sentence": "建议住山顶,一是节省体力,二是可以看日落、日出;住山顶,除了贵点,没毛病",
+   "suggestion_text": "走一环二环下坡路(从山顶走到谷底),再从谷底坐网红小火车上到山顶",
+   "sentence": "西海大峡谷都是很陡的坡,建议走一环二环下坡路(从山顶走到谷底),再从谷底坐网红小火车上到山顶",
    "verdict": "correct",
    "issue": "",
-   "note": "山顶住宿建议"
+   "note": "一环二环+小火车路线"
   },
   {
-   "row_id": 682,
+   "row_id": 311,
    "pattern": "建议推断",
    "scenic_area": "九寨沟",
    "condition_text": "",
-   "suggestion_text": "可以选择一个瀑布去看)",
-   "sentence": "p4箭竹海瀑布推荐(海子都大差不差,看到后面审美疲劳了,可以选择一个瀑布去看)",
+   "suggestion_text": "坐在靠近沟谷的一侧为好",
+   "sentence": "以我所见,应趁早进沟,坐观光车直达原始森林,接着乘车下行到箭竹海,中间的剑岩悬泉、芳草海、天鹅湖不停车,记得坐在靠近沟谷的一侧为好",
    "verdict": "correct",
    "issue": "",
-   "note": "瀑布选择建议"
+   "note": "沟谷侧座位建议"
   },
   {
-   "row_id": 467,
+   "row_id": 419,
    "pattern": "建议推断",
    "scenic_area": "九寨沟",
    "condition_text": "",
-   "suggestion_text": "放在 水里 ,避免水平线出现分割感",
-   "sentence": "2、使用广角镜头可以将人物和风景完美的结合在一起,注意人物的头部尽量放在 水里 ,避免水平线出现分割感",
-   "verdict": "correct",
-   "issue": "",
-   "note": "拍照构图建议"
-  },
-  {
-   "row_id": 168,
-   "pattern": "建议推断",
-   "scenic_area": "黄山",
-   "condition_text": "",
-   "suggestion_text": "提前去抢站位",
-   "sentence": "住白云宾馆或光明顶山庄,看日出日落地点在光明顶,光明顶看日出日落都很好,就是人非常多,要很早去,要不然都挤不进去;爱好摄影的,一定要提前去抢站位",
-   "verdict": "correct",
-   "issue": "",
-   "note": "站位抢拍建议"
-  },
-  {
-   "row_id": 719,
-   "pattern": "建议推断",
-   "scenic_area": "颐和园",
-   "condition_text": "",
-   "suggestion_text": "穿舒适运动鞋!逛完轻松万步起步,别穿新鞋磨脚~",
-   "sentence": "4. 一定要穿舒适运动鞋!逛完轻松万步起步,别穿新鞋磨脚~",
-   "verdict": "correct",
-   "issue": "",
-   "note": "穿鞋建议"
-  },
-  {
-   "row_id": 764,
-   "pattern": "建议推断",
-   "scenic_area": "颐和园",
-   "condition_text": "",
-   "suggestion_text": "买联票更省心",
-   "sentence": "• 佛香阁、德和园等景点需要单独购票,建议买联票更省心",
-   "verdict": "correct",
-   "issue": "",
-   "note": "联票建议"
-  },
-  {
-   "row_id": 109,
-   "pattern": "建议推断",
-   "scenic_area": "黄山",
-   "condition_text": "",
-   "suggestion_text": "爬,雄奇俊丽,沧海云雾说的大概就是这个",
-   "sentence": "但是,莲花峰和一线天,非常值得爬,雄奇俊丽,沧海云雾说的大概就是这个",
+   "suggestion_text": "长时间游玩",
+   "sentence": "树正沟、日则沟:景点密集,建议长时间游玩",
    "verdict": "incorrect",
-   "issue": "误抽",
-   "note": "散文描写「雄奇俊丽」"
+   "issue": "边界切分",
+   "note": "「长时间游玩」残片"
   },
   {
-   "row_id": 227,
+   "row_id": 571,
+   "pattern": "建议推断",
+   "scenic_area": "黄山",
+   "condition_text": "",
+   "suggestion_text": "、哪些可以放弃,我再慢慢写",
+   "sentence": "具体每一段累不累、哪些地方值得、哪些可以放弃,我再慢慢写",
+   "verdict": "incorrect",
+   "issue": "边界切分",
+   "note": "顿号残头+作者旁白"
+  },
+  {
+   "row_id": 213,
+   "pattern": "建议推断",
+   "scenic_area": "黄山",
+   "condition_text": "",
+   "suggestion_text": "不要带香烟和明火上山,谢谢您的环保举动",
+   "sentence": "所以大家最好不要带香烟和明火上山,谢谢您的环保举动",
+   "verdict": "correct",
+   "issue": "",
+   "note": "防火禁明火建议"
+  },
+  {
+   "row_id": 232,
+   "pattern": "建议推断",
+   "scenic_area": "黄山",
+   "condition_text": "",
+   "suggestion_text": "大家尽量以独卫床为主(性价比最高),标间价格过贵,公卫条件过差",
+   "sentence": "***另外这里建议大家尽量以独卫床为主(性价比最高),标间价格过贵,公卫条件过差",
+   "verdict": "correct",
+   "issue": "",
+   "note": "独卫床住宿建议"
+  },
+  {
+   "row_id": 217,
    "pattern": "建议推断",
    "scenic_area": "黄山",
    "condition_text": "",
@@ -267,18 +256,73 @@
    "note": "个人经历叙述"
   },
   {
-   "row_id": 485,
+   "row_id": 387,
    "pattern": "建议推断",
    "scenic_area": "九寨沟",
-   "condition_text": "体力不好",
-   "suggestion_text": "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车",
-   "sentence": "接着就到了主干线沿途的风景了,沿着诺日朗瀑布依次往下走,体力不好的朋友千万不要在芦苇海停留,那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车",
-   "verdict": "correct",
-   "issue": "",
-   "note": "体力差→步行提示"
+   "condition_text": "",
+   "suggestion_text": "这个纸包鱼的,我们不太能吃辣就选了豆豉味的,还挺下饭的",
+   "sentence": "相对而言,还是很推荐这个纸包鱼的,我们不太能吃辣就选了豆豉味的,还挺下饭的",
+   "verdict": "incorrect",
+   "issue": "误抽",
+   "note": "纸包鱼用餐个人经历"
   },
   {
-   "row_id": 274,
+   "row_id": 537,
+   "pattern": "建议推断",
+   "scenic_area": "黄山",
+   "condition_text": "",
+   "suggestion_text": "索道,能省3h+景点都在索道上来之后,以及黄山的特点是上上下下翻山越岭,想爬山别急",
+   "sentence": "1. 建议索道,能省3h+景点都在索道上来之后,以及黄山的特点是上上下下翻山越岭,想爬山别急,坐玩索道后还有的爬",
+   "verdict": "correct",
+   "issue": "",
+   "note": "索道省时建议"
+  },
+  {
+   "row_id": 263,
+   "pattern": "建议推断",
+   "scenic_area": "九寨沟",
+   "condition_text": "雨衣雨具:高原地区天气无常",
+   "suggestion_text": "雨衣,比较方便",
+   "sentence": "雨衣雨具:高原地区天气无常,雨具为旅行必备物品,建议雨衣,比较方便",
+   "verdict": "boundary",
+   "issue": "边界切分",
+   "note": "条件残头「雨衣雨具:」，带雨衣成立"
+  },
+  {
+   "row_id": 518,
+   "pattern": "建议推断",
+   "scenic_area": "颐和园",
+   "condition_text": "",
+   "suggestion_text": "游览的园林风光景点",
+   "sentence": "颐和园作为中国古代园林建筑史上的瑰宝,不但具有极高的历史文化价值,同时也是园林史是的艺术典范,是十分适合游览的园林风光景点",
+   "verdict": "incorrect",
+   "issue": "边界切分",
+   "note": "「游览的园林风光景点」残片"
+  },
+  {
+   "row_id": 640,
+   "pattern": "建议推断",
+   "scenic_area": "九寨沟",
+   "condition_text": "一天时间玩比较有限",
+   "suggestion_text": "选择一部分慢慢逛,抛弃剩余部分,或者多玩一两天",
+   "sentence": "5.沟里很大,一天时间玩比较有限,建议选择一部分慢慢逛,抛弃剩余部分,或者多玩一两天",
+   "verdict": "correct",
+   "issue": "",
+   "note": "时间有限取舍建议"
+  },
+  {
+   "row_id": 420,
+   "pattern": "建议推断",
+   "scenic_area": "九寨沟",
+   "condition_text": "",
+   "suggestion_text": "坐观光车抵达Y字两个顶端处(长海或原始森林),由里往外游览",
+   "sentence": "1日游 追求高效,建议坐观光车抵达Y字两个顶端处(长海或原始森林),由里往外游览",
+   "verdict": "correct",
+   "issue": "",
+   "note": "观光车由里往外路线"
+  },
+  {
+   "row_id": 260,
    "pattern": "建议推断",
    "scenic_area": "九寨沟",
    "condition_text": "",
@@ -289,290 +333,246 @@
    "note": "防晒建议"
   },
   {
-   "row_id": 126,
+   "row_id": 320,
    "pattern": "建议推断",
-   "scenic_area": "黄山",
+   "scenic_area": "九寨沟",
    "condition_text": "",
-   "suggestion_text": "在山下购买轻便可及时充饥提供能量的食物",
-   "sentence": "建议在山下购买轻便可及时充饥提供能量的食物",
-   "verdict": "correct",
-   "issue": "",
-   "note": "山下购粮建议"
+   "suggestion_text": "则中午在万年寺吃素斋(20),不去则到乐山再吃(我选择不去,直接乐山)",
+   "sentence": "去万年寺(去万佛寺就建议不去这了),则中午在万年寺吃素斋(20),不去则到乐山再吃(我选择不去,直接乐山)",
+   "verdict": "incorrect",
+   "issue": "非游览主题",
+   "note": "万年寺/乐山跨景区就餐计划"
   },
   {
-   "row_id": 713,
+   "row_id": 641,
    "pattern": "建议推断",
+   "scenic_area": "九寨沟",
+   "condition_text": "把上午阳光最好",
+   "suggestion_text": "时间留给五花海绝对没错",
+   "sentence": "把上午阳光最好的时间留给五花海绝对没错",
+   "verdict": "correct",
+   "issue": "",
+   "note": "的-修剪生效，五花海光线建议"
+  },
+  {
+   "row_id": 365,
+   "pattern": "建议推断",
+   "scenic_area": "九寨沟",
+   "condition_text": "",
+   "suggestion_text": "高原安,于是我就在TB上斥巨资又买了2盒高原安",
+   "sentence": "后来看到有去过 西藏 的小伙伴推荐高原安,于是我就在TB上斥巨资又买了2盒高原安",
+   "verdict": "boundary",
+   "issue": "边界切分",
+   "note": "带高原安成立，购买叙述为尾"
+  },
+  {
+   "row_id": 272,
+   "pattern": "建议推断",
+   "scenic_area": "九寨沟",
+   "condition_text": "",
+   "suggestion_text": ",无论是七八个小时的大巴,还是上山下山的酸痛,她的美都可以治愈,这是一种让人陶醉得无法自拔的美",
+   "sentence": "如果说九寨沟的海子是大自然的佳作的话,那么五花海就是大自然的神作!看到她,你会觉得这几天所有的辛苦都是值得的,无论是七八个小时的大巴,还是上山下山的酸痛,她的美都可以治愈,这是一种让人陶醉得无法自拔的美;这是一种无法用任何语言去形容的美;这是一种让人心甘情愿历经千辛万苦去寻找的美",
+   "verdict": "incorrect",
+   "issue": "非游览主题",
+   "note": "抒情残片「陶醉得无法自拔」"
+  },
+  {
+   "row_id": 98,
+   "pattern": "显式条件",
+   "scenic_area": "黄山",
+   "condition_text": "多人出行:位置最好的是光明顶山庄",
+   "suggestion_text": "(在天都峰开放前)不推荐住玉屏楼宾馆,位置偏,价格高",
+   "sentence": "3.如果多人出行:位置最好的是光明顶山庄,性价比高;舒适度最高的是白云宾馆和西海饭店;(在天都峰开放前)不推荐住玉屏楼宾馆,位置偏,价格高",
+   "verdict": "correct",
+   "issue": "",
+   "note": "玉屏楼宾馆避雷"
+  },
+  {
+   "row_id": 439,
+   "pattern": "显式条件",
+   "scenic_area": "九寨沟",
+   "condition_text": "你能申请到无人机许可",
+   "suggestion_text": "一定要记得带上所有的电池",
+   "sentence": "6、当然最绝妙的角度肯定是航拍啦!如果你能申请到无人机许可,一定要记得带上所有的电池",
+   "verdict": "correct",
+   "issue": "",
+   "note": "无人机电池装备建议"
+  },
+  {
+   "row_id": 317,
+   "pattern": "显式条件",
+   "scenic_area": "九寨沟",
+   "condition_text": "无人地抄下来",
+   "suggestion_text": "可带回家,也可存在这里,倒有意趣",
+   "sentence": "里面有个免费的抄经处,随意选段经文,有笔墨伺候好了,旁若无人地抄下来,可带回家,也可存在这里,倒有意趣",
+   "verdict": "boundary",
+   "issue": "边界切分",
+   "note": "抄录体验语义模糊"
+  },
+  {
+   "row_id": 644,
+   "pattern": "显式条件",
+   "scenic_area": "九寨沟",
+   "condition_text": "预报晴天",
+   "suggestion_text": "大概可以扩展至早上10点-下午4点,实在太阴需要取舍的话,一定把最美的,密集的景点留给11-14点这个放晴概率最高时间",
+   "sentence": "另外阴天来的UU也不用太担心,我们这两天预报都是纯阴天结果每天都有3-4小时放晴,如果预报晴天的话,大概可以扩展至早上10点-下午4点,实在太阴需要取舍的话,一定把最美的,密集的景点留给11-14点这个放晴概率最高时间",
+   "verdict": "correct",
+   "issue": "",
+   "note": "晴天取舍与时段建议"
+  },
+  {
+   "row_id": 548,
+   "pattern": "显式条件",
+   "scenic_area": "黄山",
+   "condition_text": "要去云谷索道下山",
+   "suggestion_text": "或者是去后山看看,绕不开光明顶,还要再爬一次光明顶,而之前去一环二环",
+   "sentence": "3)火车上山后是到天海站,之后如果要去云谷索道下山,或者是去后山看看,绕不开光明顶,还要再爬一次光明顶,而之前去一环二环,就已经爬了一次光明顶",
+   "verdict": "correct",
+   "issue": "",
+   "note": "后山路线信息"
+  },
+  {
+   "row_id": 192,
+   "pattern": "显式条件",
+   "scenic_area": "黄山",
+   "condition_text": "坐缆车下车就可去了",
+   "suggestion_text": "我们徒步上山就还要再换一辆景区交通才能到徒步登山口",
+   "sentence": "六月的黄山,连绵的小雨空气中都带有云雾的味道,早上7点半我们就从酒店出发,酒店派车给我们送到南大门换乘站,从这里我们换乘景区交通到慈光阁,如果坐缆车下车就可去了,我们徒步上山就还要再换一辆景区交通才能到徒步登山口",
+   "verdict": "boundary",
+   "issue": "边界切分",
+   "note": "缆车/徒步对比信息"
+  },
+  {
+   "row_id": 218,
+   "pattern": "显式条件",
+   "scenic_area": "黄山",
+   "condition_text": "给他60元的介绍费---朋友们",
+   "suggestion_text": "可千万要坚持住,别动摇啊",
+   "sentence": "玉屏楼宾馆还是四星级呢,我们怀着期待与不确定的心情(从玉屏索道站返回玉屏楼宾馆的沿途,有好几个似乎是山上挑夫的人跟我们说玉屏楼没住的地方啦,劝我们跟他们走,能找到好的住处,只要给他60元的介绍费---朋友们,可千万要坚持住,别动摇啊",
+   "verdict": "incorrect",
+   "issue": "误抽",
+   "note": "拉客经历叙述"
+  },
+  {
+   "row_id": 18,
+   "pattern": "显式条件",
    "scenic_area": "颐和园",
-   "condition_text": "",
-   "suggestion_text": "懒人走的路线,不仅可以拍到爆火的机位,还不费腿~",
-   "sentence": "今天整理了一份超适合懒人走的路线,不仅可以拍到爆火的机位,还不费腿~",
-   "verdict": "correct",
-   "issue": "",
-   "note": "省力路线+机位建议"
-  },
-  {
-   "row_id": 397,
-   "pattern": "建议推断",
-   "scenic_area": "九寨沟",
-   "condition_text": "",
-   "suggestion_text": "少走点路,努力地继续往前挪动,在还剩1公里的地方,我们跟他说放我们下车自己走过去吧,因为实在是走比车快了",
-   "sentence": "司机小哥人非常好,想让我们尽量少走点路,努力地继续往前挪动,在还剩1公里的地方,我们跟他说放我们下车自己走过去吧,因为实在是走比车快了",
-   "verdict": "incorrect",
-   "issue": "误抽",
-   "note": "下车协商个人经历"
-  },
-  {
-   "row_id": 470,
-   "pattern": "建议推断",
-   "scenic_area": "九寨沟",
-   "condition_text": "",
-   "suggestion_text": "那幽幽的蓝深邃迷人",
-   "sentence": "依稀记得夏季来此的情景,雪山脚下的长海呈墨蓝色,那幽幽的蓝深邃迷人",
+   "condition_text": "把这个伤疤不时揭一揭",
+   "suggestion_text": "也许是对历史的最好纪念",
+   "sentence": "那是对历史的一段惨痛回忆,俗话说好了伤疤忘了疼,如果把这个伤疤不时揭一揭的话,也许是对历史的最好纪念",
    "verdict": "incorrect",
    "issue": "非游览主题",
-   "note": "「幽幽的蓝」抒情描写"
+   "note": "伤疤历史感怀"
   },
   {
-   "row_id": 563,
-   "pattern": "建议推断",
+   "row_id": 335,
+   "pattern": "显式条件",
+   "scenic_area": "九寨沟",
+   "condition_text": "各位只是游览观光",
+   "suggestion_text": "走是走不下来的",
+   "sentence": "如果各位只是游览观光,那车票是必须要购买的,不然景区内全程60公里,走是走不下来的",
+   "verdict": "correct",
+   "issue": "",
+   "note": "观光走不完提示"
+  },
+  {
+   "row_id": 567,
+   "pattern": "显式条件",
    "scenic_area": "黄山",
    "condition_text": "",
-   "suggestion_text": "带好护膝)",
-   "sentence": "11:00走完一循环外循环(很多是下坡的山路,一定要带好护膝)",
+   "suggestion_text": "另外准备了雨衣(提前看了天气说要下雨)、纸巾、充电宝,这些提前买好,会省很多,山脚底下能买但很贵且质量不咋地,山上就更别说了",
+   "sentence": "我们根据自身需求,准备了防晒服、矿泉水、功能饮料、若干饼干巧克力面包等,另外准备了雨衣(提前看了天气说要下雨)、纸巾、充电宝,这些提前买好,会省很多,山脚底下能买但很贵且质量不咋地,山上就更别说了",
    "verdict": "correct",
    "issue": "",
-   "note": "护膝装备建议"
+   "note": "山下购物建议"
   },
   {
-   "row_id": 425,
-   "pattern": "建议推断",
-   "scenic_area": "九寨沟",
-   "condition_text": "可能是因为淡季的缘故",
-   "suggestion_text": "穷游人士入住",
-   "sentence": "当晚入住九寨沟沟口的宾馆,环境都一般,可能是因为淡季的缘故,价格都比较便宜,适宜穷游人士入住,步行至九寨入口10分钟,非常便捷",
-   "verdict": "boundary",
-   "issue": "条件不匹配",
-   "note": "淡季推断与穷游住宿关联弱"
-  },
-  {
-   "row_id": 697,
-   "pattern": "建议推断",
-   "scenic_area": "九寨沟",
-   "condition_text": "",
-   "suggestion_text": "在环形栈道走一圈,这个点太阳已经出来了,照得每个角度的海子颜色都不一样,五眼六色的特别漂亮,这段路游客较多",
-   "sentence": "9:30坐观光车到五花海p5p6p7,建议在环形栈道走一圈,这个点太阳已经出来了,照得每个角度的海子颜色都不一样,五眼六色的特别漂亮,这段路游客较多",
-   "verdict": "correct",
-   "issue": "",
-   "note": "环形栈道光线建议"
-  },
-  {
-   "row_id": 642,
-   "pattern": "建议推断",
-   "scenic_area": "九寨沟",
-   "condition_text": "",
-   "suggestion_text": "说可以直接舍弃,但是长海和镜海一样都是非常辽阔的海子,我完全无法割舍",
-   "sentence": "虽然左线很多人建议说可以直接舍弃,但是长海和镜海一样都是非常辽阔的海子,我完全无法割舍",
-   "verdict": "incorrect",
-   "issue": "误抽",
-   "note": "「无法割舍」个人偏好"
-  },
-  {
-   "row_id": 396,
-   "pattern": "显式条件",
-   "scenic_area": "九寨沟",
-   "condition_text": "你直接住在距离沟口1公里的小镇上",
-   "suggestion_text": "那里的住宿条件可能会相对差一点,但住得近在旅游旺季真的是一个神仙选择",
-   "sentence": "除非你直接住在距离沟口1公里的小镇上,那里的住宿条件可能会相对差一点,但住得近在旅游旺季真的是一个神仙选择",
-   "verdict": "correct",
-   "issue": "",
-   "note": "住沟口小镇权衡建议"
-  },
-  {
-   "row_id": 415,
-   "pattern": "显式条件",
-   "scenic_area": "九寨沟",
-   "condition_text": "还能选择",
-   "suggestion_text": "我宁可吃2顿烤鱼",
-   "sentence": "不过如果还能选择,我宁可吃2顿烤鱼",
-   "verdict": "incorrect",
-   "issue": "误抽",
-   "note": "「宁可吃2顿烤鱼」个人偏好"
-  },
-  {
-   "row_id": 211,
+   "row_id": 45,
    "pattern": "显式条件",
    "scenic_area": "黄山",
-   "condition_text": "热",
-   "suggestion_text": "海拔不够高,爬山累的不行,手脚都痛,我已经做好不去黄山的准备了",
-   "sentence": "实话说,武夷山比我想象得差了那么点意思,消费也不低,一家人差不多花了1500的门票、竹筏还有摆渡车票,景色跟丹霞山很相似,主要是热,海拔不够高,爬山累的不行,手脚都痛,我已经做好不去黄山的准备了",
-   "verdict": "incorrect",
-   "issue": "误抽",
-   "note": "条件残片「热」+不去黄山经历"
+   "condition_text": "看黄山日落",
+   "suggestion_text": "推荐以下几处地点:西海排云亭、丹霞峰顶、飞来石、光明顶、步仙桥、莲花峰等处",
+   "sentence": "看黄山日落的话,推荐以下几处地点:西海排云亭、丹霞峰顶、飞来石、光明顶、步仙桥、莲花峰等处",
+   "verdict": "correct",
+   "issue": "",
+   "note": "日落点位推荐"
   },
   {
-   "row_id": 468,
+   "row_id": 286,
    "pattern": "显式条件",
    "scenic_area": "九寨沟",
-   "condition_text": "你刚好穿的是黄色的服装",
-   "suggestion_text": "就会营造出完美的对比色",
-   "sentence": "3、使用中长焦镜头,站在楼梯朝下俯拍,可将人物压缩进池水中,如果你刚好穿的是黄色的服装,就会营造出完美的对比色",
+   "condition_text": "时间允许",
+   "suggestion_text": "可以去中查沟当地藏民家喝一次正宗的酥油茶,以及吃高山土豆,真的超级好吃",
+   "sentence": "如果时间允许,可以去中查沟当地藏民家喝一次正宗的酥油茶,以及吃高山土豆,真的超级好吃",
    "verdict": "correct",
    "issue": "",
-   "note": "黄衣拍照建议"
+   "note": "藏民家体验建议"
   },
   {
-   "row_id": 167,
-   "pattern": "显式条件",
-   "scenic_area": "黄山",
-   "condition_text": "想去天都峰",
-   "suggestion_text": "就一定要住白云宾馆或光明顶山庄",
-   "sentence": "如果住在狮林、北海宾馆(目前停业装修)、西海饭店或者排云型旅,第一天行程轻松,第二天行程比较紧张,如果想去天都峰,就一定要住白云宾馆或光明顶山庄",
-   "verdict": "correct",
-   "issue": "",
-   "note": "想去天都峰→住宿建议"
-  },
-  {
-   "row_id": 604,
-   "pattern": "显式条件",
-   "scenic_area": "黄山",
-   "condition_text": "计划27号登山",
-   "suggestion_text": "那么25号晚8点就要预约27号的天都峰门票(这个点放票),卡点约到应该不难",
-   "sentence": "除大门票之外,天都峰需要额外预约(免费),如果计划27号登山,那么25号晚8点就要预约27号的天都峰门票(这个点放票),卡点约到应该不难",
-   "verdict": "correct",
-   "issue": "",
-   "note": "放票时间预约建议"
-  },
-  {
-   "row_id": 406,
+   "row_id": 625,
    "pattern": "显式条件",
    "scenic_area": "九寨沟",
-   "condition_text": "国庆或者高峰期出游",
-   "suggestion_text": "还是建议住得离沟口越近越好,现在沟口小镇上蛮繁华的,KFC、巴蜀大将火锅,汽锅鱼好像都有",
-   "sentence": "3.如果国庆或者高峰期出游,还是建议住得离沟口越近越好,现在沟口小镇上蛮繁华的,KFC、巴蜀大将火锅,汽锅鱼好像都有,吃喝不愁,关键是万一叫不到车,走1公里也就到了",
-   "verdict": "correct",
-   "issue": "",
-   "note": "高峰期住沟口建议"
-  },
-  {
-   "row_id": 273,
-   "pattern": "显式条件",
-   "scenic_area": "九寨沟",
-   "condition_text": "用餐人少",
-   "suggestion_text": "还可以试试石锅藏香鸡",
-   "sentence": "如果用餐人少的话,还可以试试石锅藏香鸡",
-   "verdict": "correct",
-   "issue": "",
-   "note": "用餐建议"
-  },
-  {
-   "row_id": 676,
-   "pattern": "显式条件",
-   "scenic_area": "九寨沟",
-   "condition_text": "是不想去的线",
-   "suggestion_text": "需下车换乘)",
-   "sentence": "(如果是不想去的线,需下车换乘)",
-   "verdict": "correct",
-   "issue": "",
-   "note": "换乘规定"
-  },
-  {
-   "row_id": 103,
-   "pattern": "显式条件",
-   "scenic_area": "黄山",
-   "condition_text": "文思枯竭",
-   "suggestion_text": "只要到此一游,便会茅塞顿开,妙笔生花",
-   "sentence": "传说古代文人墨客如果文思枯竭,只要到此一游,便会茅塞顿开,妙笔生花",
-   "verdict": "incorrect",
-   "issue": "非游览主题",
-   "note": "「妙笔生花」文思散文"
-  },
-  {
-   "row_id": 175,
-   "pattern": "显式条件",
-   "scenic_area": "黄山",
-   "condition_text": "可以",
-   "suggestion_text": "会选择在光明顶这附近上个洗手间",
-   "sentence": "若可以,会选择在光明顶这附近上个洗手间,吃点食物",
+   "condition_text": "为了把阳光最好的时间留给五花海",
+   "suggestion_text": "不然到五花海太早光线不行",
+   "sentence": "箭竹海下车后可以步行到熊猫海作为开胃小菜,这两处景色在九寨沟只能算一般般,但对初次来九寨沟的人作为开胃小菜也够了,这里步行主要是为了把阳光最好的时间留给五花海,不然到五花海太早光线不行",
    "verdict": "boundary",
    "issue": "边界切分",
-   "note": "条件残片「可以」，洗手间位置信息"
+   "note": "条件切分糊，光线时机成立"
   },
   {
-   "row_id": 84,
+   "row_id": 125,
    "pattern": "显式条件",
    "scenic_area": "黄山",
-   "condition_text": "听说山上虽然有卖东西的地方",
-   "suggestion_text": "但是价格好贵,我们想着尽量省点钱",
-   "sentence": "主要是听说山上虽然有卖东西的地方,但是价格好贵,我们想着尽量省点钱,就备了点矿泉水,泡面还有饼干,士力架",
-   "verdict": "incorrect",
-   "issue": "误抽",
-   "note": "省钱经历叙述"
+   "condition_text": "莲花峰封山可选择登天都峰",
+   "suggestion_text": "然后登天都,然后步行下山,登天都就无法乘索道下山",
+   "sentence": "(PS:若是莲花峰封山可选择登天都峰,即鳌鱼峰后前往玉屏楼迎客松,然后登天都,然后步行下山,登天都就无法乘索道下山",
+   "verdict": "correct",
+   "issue": "",
+   "note": "莲花峰封山绕行建议"
   },
   {
-   "row_id": 264,
+   "row_id": 46,
    "pattern": "显式条件",
-   "scenic_area": "九寨沟",
-   "condition_text": "担心不能早起",
-   "suggestion_text": "一定要用起来",
-   "sentence": "如果担心不能早起,那床头柜边的蓝牙小音响,一定要用起来",
+   "scenic_area": "黄山",
+   "condition_text": "只是贪方便",
+   "suggestion_text": "就选择住在光明顶附近",
+   "sentence": "总结一下,如果只是贪方便,就选择住在光明顶附近",
+   "verdict": "correct",
+   "issue": "",
+   "note": "贪方便住光明顶"
+  },
+  {
+   "row_id": 105,
+   "pattern": "显式条件",
+   "scenic_area": "黄山",
+   "condition_text": "只有一天时间",
+   "suggestion_text": "强烈建议从千山做玉屏索道上午,因为千山风景多,路途险,并且耗费体力,后山相对容易,把千山的精华景点走完,根据时间可以选择不同的下山路线",
+   "sentence": "如果只有一天时间的话,强烈建议从千山做玉屏索道上午,因为千山风景多,路途险,并且耗费体力,后山相对容易,把千山的精华景点走完,根据时间可以选择不同的下山路线",
+   "verdict": "correct",
+   "issue": "",
+   "note": "一日游索道建议"
+  },
+  {
+   "row_id": 42,
+   "pattern": "显式条件",
+   "scenic_area": "黄山",
+   "condition_text": "山高",
+   "suggestion_text": "就肯定会有云海",
+   "sentence": "很多人会觉得只要山高,就肯定会有云海",
    "verdict": "boundary",
    "issue": "边界切分",
-   "note": "「一定要用起来」缺宾语"
+   "note": "山高云海为信息非建议"
   },
   {
-   "row_id": 325,
-   "pattern": "显式条件",
-   "scenic_area": "九寨沟",
-   "condition_text": "为了加水和休息",
-   "suggestion_text": "走这条路,都需格外小心",
-   "sentence": "汽车中途停过几次,主要是为了加水和休息,就算再老练的司机,走这条路,都需格外小心",
-   "verdict": "boundary",
-   "issue": "条件不匹配",
-   "note": "条件切分糊，小心提示成立"
-  },
-  {
-   "row_id": 498,
-   "pattern": "显式条件",
-   "scenic_area": "九寨沟",
-   "condition_text": "不信",
-   "suggestion_text": "建议你去感受一下那美妙的快乐吧",
-   "sentence": "你若不信,建议你去感受一下那美妙的快乐吧",
-   "verdict": "incorrect",
-   "issue": "误抽",
-   "note": "「不信」+感受快乐，散文"
-  },
-  {
-   "row_id": 149,
+   "row_id": 190,
    "pattern": "显式条件",
    "scenic_area": "黄山",
-   "condition_text": "不是长期运动爱好登山",
-   "suggestion_text": "最好不要轻易尝试",
-   "sentence": "3、焦村镇西大门,这条线是驴友徒步线路,没有索道,优点是一路上几乎碰不到人,99.9%的人不会从西大门进入,缺点是线路长,特别考验体力,如果不是长期运动爱好登山,最好不要轻易尝试",
+   "condition_text": "不去看飞来石",
+   "suggestion_text": "超近路就是可以直接到达这里",
+   "sentence": "刚才在光明顶分道口时,要是不去看飞来石,超近路就是可以直接到达这里",
    "verdict": "correct",
    "issue": "",
-   "note": "体力避雷建议"
-  },
-  {
-   "row_id": 561,
-   "pattern": "显式条件",
-   "scenic_area": "黄山",
-   "condition_text": "天气好",
-   "suggestion_text": "可以直接在这里就能看到云海)",
-   "sentence": "7:00白鹅岭下3云海(缆车如果天气好的话,可以直接在这里就能看到云海)",
-   "verdict": "correct",
-   "issue": "",
-   "note": "天气好→看云海"
-  },
-  {
-   "row_id": 653,
-   "pattern": "显式条件",
-   "scenic_area": "九寨沟",
-   "condition_text": "去芦苇海",
-   "suggestion_text": "要在火花海下车,沿着一路往下走",
-   "sentence": "树正寨往下走的芦苇海很值得一看,去芦苇海的话要在火花海下车,沿着一路往下走",
-   "verdict": "correct",
-   "issue": "",
-   "note": "芦苇海下车路线"
+   "note": "飞来石捷径路线"
   }
  ],
  "miss_samples": [
@@ -721,17 +721,16 @@
   "n": 52,
   "total_sampled": 52,
   "verdicts": {
-   "correct": 37,
-   "boundary": 5,
-   "incorrect": 10
+   "correct": 35,
+   "boundary": 8,
+   "incorrect": 9
   },
-  "strict_precision": 0.712,
-  "lenient_precision": 0.808,
+  "strict_precision": 0.673,
+  "lenient_precision": 0.827,
   "issues": {
-   "边界切分": 3,
-   "误抽": 8,
-   "非游览主题": 2,
-   "条件不匹配": 2
+   "边界切分": 11,
+   "误抽": 3,
+   "非游览主题": 3
   },
   "miss_check": {
    "n": 20,

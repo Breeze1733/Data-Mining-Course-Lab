@@ -1,8 +1,8 @@
 {
  "condition_refinement": {
-  "input_rows": 765,
-  "nonempty_before": 386,
-  "nonempty_after": 379,
+  "input_rows": 722,
+  "nonempty_before": 364,
+  "nonempty_after": 357,
   "changes": {
    "changed_rows": 16,
    "remove_note_heading": 1,
@@ -16,67 +16,67 @@
    "remove_heading_or_place_description": 2
   }
  },
- "raw_pairs": 779,
- "after_dedup": 765,
+ "raw_pairs": 736,
+ "after_dedup": 722,
  "duplicates_merged": 14,
  "by_pattern": {
-  "建议推断": 363,
-  "否定建议": 97,
-  "显式条件": 296,
+  "建议推断": 350,
+  "否定建议": 88,
+  "显式条件": 275,
   "依据规定": 17,
   "人群可以": 5,
   "句内条件": 1
  },
  "by_polarity": {
-  "POS": 682,
-  "NEG": 97
+  "POS": 648,
+  "NEG": 88
  },
  "by_condition_type": {
-  "时间": 94,
-  "一般": 256,
-  "天气": 30,
+  "时间": 91,
+  "一般": 241,
+  "天气": 28,
   "拍照": 33,
-  "预约票务": 42,
+  "预约票务": 39,
   "住宿": 34,
-  "装备": 32,
-  "其他": 174,
+  "装备": 30,
+  "其他": 159,
   "交通": 12,
-  "人群": 30,
-  "美食": 25,
+  "人群": 29,
+  "美食": 23,
   "体力安全": 17
  },
  "by_condition_type_verified": {
-  "时间": 52,
-  "无": 385,
-  "天气": 23,
-  "其他": 230,
-  "装备": 28,
-  "人群": 30,
-  "预约票务": 8,
+  "时间": 51,
+  "无": 364,
+  "天气": 22,
+  "其他": 214,
+  "装备": 26,
+  "人群": 29,
   "交通": 6,
-  "体力安全": 17
+  "体力安全": 17,
+  "预约票务": 7
  },
  "by_condition_kind": {
-  "inferred": 93,
-  "absent": 385,
-  "explicit": 301
+  "inferred": 92,
+  "absent": 364,
+  "explicit": 280
  },
  "by_condition_kind_dedup": {
-  "inferred": 87,
-  "absent": 392,
-  "explicit": 300
+  "inferred": 86,
+  "absent": 371,
+  "explicit": 279
  },
  "by_pattern_condition_kind": {
   "建议推断": {
-   "inferred": 72,
-   "absent": 291
+   "inferred": 71,
+   "absent": 279
   },
   "否定建议": {
-   "absent": 81,
+   "absent": 72,
    "inferred": 16
   },
   "显式条件": {
-   "explicit": 296
+   "explicit": 275
   },
   "依据规定": {
    "absent": 13,
@@ -90,15 +90,15 @@
   }
  },
  "by_condition_label": {
-  "时间条件（句内）": 77,
-  "一般建议": 257,
-  "天气条件（句内）": 22,
-  "一般建议（避雷）": 61,
+  "时间条件（句内）": 75,
+  "一般建议": 248,
+  "天气条件（句内）": 21,
+  "一般建议（避雷）": 52,
   "入园/通行规定（句内）": 28,
   "游客为孩子": 5,
   "开放时间规定（句内）": 1,
   "装备条件（句内）": 11,
-  "游客为体力有限": 3,
+  "游客为体力有限": 2,
   "游客为情侣": 2,
   "游客为恐高": 1,
   "游客为初次游览": 1,
@@ -112,35 +112,35 @@
   "游客为体力差的朋友": 1
  },
  "by_absent_reason": {
-  "no_keyword": 251,
-  "keyword_only_in_advice": 105,
+  "no_keyword": 233,
+  "keyword_only_in_advice": 102,
   "regulation_not_conditional": 29
  },
- "nonempty_condition_pairs": 394,
- "absent_condition_pairs": 385,
- "nonempty_condition_rate": 0.506,
- "nonempty_condition_rows": 379,
- "nonempty_condition_row_rate": 0.495,
- "nonempty_condition_rate_dedup": 0.497,
- "condition_type_mismatch": 56,
+ "nonempty_condition_pairs": 372,
+ "absent_condition_pairs": 364,
+ "nonempty_condition_rate": 0.505,
+ "nonempty_condition_rows": 357,
+ "nonempty_condition_row_rate": 0.494,
+ "nonempty_condition_rate_dedup": 0.496,
+ "condition_type_mismatch": 55,
  "label_like_nonempty": 0,
  "condition_span_invalid": 0,
  "sentence_max_len": 158,
  "sentence_truncated_pairs": 0,
  "dedup_key_version": "v2:scenic|kind|label|condition|suggestion",
  "by_scenic": {
-  "九寨沟": 354,
-  "颐和园": 136,
-  "黄山": 289
+  "九寨沟": 326,
+  "颐和园": 134,
+  "黄山": 276
  },
  "by_text_type": {
   "official_route": 13,
-  "travelogue": 766
+  "travelogue": 723
  },
  "crowd_breakdown": {
   "孩子": 5,
   "初次游览": 4,
-  "体力有限": 6,
+  "体力有限": 5,
   "行动不便": 1,
   "恐高": 3,
   "情侣": 2,
@@ -151,11 +151,13 @@
   "新手": 1
  },
  "filtered": {
-  "not_advice_shape": 242,
+  "not_advice_shape": 248,
   "heading_colon": 11,
-  "cross_area": 10,
+  "narration": 5,
+  "cross_area": 9,
+  "fragment": 13,
   "promo_ad": 3,
-  "first_person_wish": 5,
+  "first_person_wish": 6,
   "lodging_amenity": 6,
   "price_complaint": 1,
   "restaurant_menu": 1,
@@ -164,5 +166,5 @@
   "rhetoric_question": 2,
   "experience_narration": 1
  },
- "filtered_pairs": 284
+ "filtered_pairs": 308
 }
