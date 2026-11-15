@@ -1,30 +1,30 @@
 {
- "total_nodes": 518,
- "total_edges": 2637,
+ "total_nodes": 514,
+ "total_edges": 2635,
  "by_kind": {
   "景区": 3,
   "景点": 159,
   "交通操作": 9,
   "时段": 6,
-  "条件": 341
+  "条件": 337
  },
  "by_relation": {
   "包含": 159,
-  "条件建议": 471,
+  "条件建议": 469,
   "先后顺序": 1807,
   "时段归属": 143,
   "交通方式": 57
  },
- "cond_edges_to_poi": 202,
- "cond_edges_to_scenic": 269,
- "cond_pairs_input": 772,
- "cond_pairs_with_condition": 393,
- "cond_pairs_absent_skipped": 379,
- "cond_pairs_absent_input": 372,
+ "cond_edges_to_poi": 204,
+ "cond_edges_to_scenic": 265,
+ "cond_pairs_input": 779,
+ "cond_pairs_with_condition": 389,
+ "cond_pairs_absent_skipped": 390,
+ "cond_pairs_absent_input": 383,
  "cond_pairs_condition_removed": 7,
  "cond_pairs_unusable_skipped": 0,
  "cond_pairs_refined": 16,
- "cond_cluster_nodes": 341,
+ "cond_cluster_nodes": 337,
  "order_direction": {
   "unopposed_edges": 617,
   "opposed_pairs": 595,
@@ -32,26 +32,26 @@
  },
  "per_scenic": {
   "黄山": {
-   "nodes": 193,
-   "edges": 877,
+   "nodes": 191,
+   "edges": 875,
    "by_kind": {
-    "条件": 141,
+    "条件": 139,
     "景点": 46,
-    "时段": 1,
+    "景区": 1,
     "交通操作": 4,
-    "景区": 1
+    "时段": 1
    },
    "by_relation": {
     "先后顺序": 597,
     "时段归属": 24,
+    "条件建议": 197,
     "交通方式": 11,
-    "条件建议": 199,
     "包含": 46
    },
    "top_degree": [
     [
      "黄山",
-     158
+     156
     ],
     [
      "光明顶",
@@ -85,37 +85,37 @@
    "isolated_nodes": 0
   },
   "九寨沟": {
-   "nodes": 220,
+   "nodes": 218,
    "edges": 964,
    "by_kind": {
-    "条件": 156,
     "景点": 56,
+    "条件": 154,
     "时段": 4,
     "交通操作": 3,
     "景区": 1
    },
    "by_relation": {
     "先后顺序": 586,
-    "条件建议": 200,
     "时段归属": 78,
+    "条件建议": 200,
     "交通方式": 44,
     "包含": 56
    },
    "top_degree": [
     [
      "九寨沟",
-     178
+     176
     ],
     [
      "五花海",
-     66
-    ],
-    [
-     "五彩池",
-     60
+     65
     ],
     [
      "诺日朗",
+     61
+    ],
+    [
+     "五彩池",
      60
     ],
     [
@@ -141,11 +141,11 @@
    "nodes": 105,
    "edges": 796,
    "by_kind": {
-    "交通操作": 2,
     "条件": 44,
     "景点": 57,
-    "时段": 1,
-    "景区": 1
+    "交通操作": 2,
+    "景区": 1,
+    "时段": 1
    },
    "by_relation": {
     "先后顺序": 624,
