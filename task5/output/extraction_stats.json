@@ -1,9 +1,9 @@
 {
  "semantic_roles": null,
  "condition_refinement": {
-  "input_rows": 772,
-  "nonempty_before": 400,
-  "nonempty_after": 393,
+  "input_rows": 779,
+  "nonempty_before": 396,
+  "nonempty_after": 389,
   "changes": {
    "changed_rows": 16,
    "remove_note_heading": 1,
@@ -17,40 +17,40 @@
    "remove_heading_or_place_description": 2
   }
  },
- "raw_pairs": 783,
- "after_dedup": 772,
- "duplicates_merged": 11,
+ "raw_pairs": 793,
+ "after_dedup": 779,
+ "duplicates_merged": 14,
  "by_pattern": {
-  "建议推断": 361,
-  "否定建议": 90,
-  "显式条件": 309,
+  "建议推断": 368,
+  "否定建议": 97,
+  "显式条件": 305,
   "依据规定": 17,
   "人群可以": 5,
   "句内条件": 1
  },
  "by_polarity": {
-  "POS": 693,
-  "NEG": 90
+  "POS": 696,
+  "NEG": 97
  },
  "by_condition_type": {
   "时间": 97,
-  "一般": 238,
+  "一般": 258,
   "天气": 30,
   "拍照": 33,
   "预约票务": 42,
-  "住宿": 45,
+  "住宿": 35,
   "装备": 34,
-  "其他": 181,
-  "交通": 11,
+  "其他": 180,
+  "交通": 12,
   "人群": 30,
   "美食": 25,
   "体力安全": 17
  },
  "by_condition_type_verified": {
   "时间": 54,
-  "无": 375,
+  "无": 389,
   "天气": 23,
-  "其他": 240,
+  "其他": 236,
   "装备": 30,
   "人群": 30,
   "预约票务": 8,
@@ -59,25 +59,25 @@
  },
  "by_condition_kind": {
   "inferred": 94,
-  "absent": 375,
-  "explicit": 314
+  "absent": 389,
+  "explicit": 310
  },
  "by_condition_kind_dedup": {
   "inferred": 88,
-  "absent": 382,
-  "explicit": 313
+  "absent": 396,
+  "explicit": 309
  },
  "by_pattern_condition_kind": {
   "建议推断": {
    "inferred": 73,
-   "absent": 288
+   "absent": 295
   },
   "否定建议": {
-   "absent": 74,
+   "absent": 81,
    "inferred": 16
   },
   "显式条件": {
-   "explicit": 309
+   "explicit": 305
   },
   "依据规定": {
    "absent": 13,
@@ -91,13 +91,13 @@
   }
  },
  "by_condition_label": {
-  "时间条件（句内）": 78,
-  "一般建议": 254,
+  "时间条件（句内）": 79,
+  "一般建议": 260,
   "天气条件（句内）": 22,
   "一般建议（避雷）": 61,
-  "入园/通行规定（句内）": 20,
+  "入园/通行规定（句内）": 28,
   "游客为孩子": 5,
-  "开放时间规定（句内）": 2,
+  "开放时间规定（句内）": 1,
   "装备条件（句内）": 11,
   "游客为体力有限": 3,
   "游客为情侣": 2,
@@ -113,30 +113,30 @@
   "游客为体力差的朋友": 1
  },
  "by_absent_reason": {
-  "no_keyword": 250,
-  "keyword_only_in_advice": 103,
-  "regulation_not_conditional": 22
+  "no_keyword": 254,
+  "keyword_only_in_advice": 106,
+  "regulation_not_conditional": 29
  },
- "nonempty_condition_pairs": 408,
- "absent_condition_pairs": 375,
- "nonempty_condition_rate": 0.521,
- "nonempty_condition_rows": 393,
- "nonempty_condition_row_rate": 0.509,
- "nonempty_condition_rate_dedup": 0.512,
- "condition_type_mismatch": 59,
+ "nonempty_condition_pairs": 404,
+ "absent_condition_pairs": 389,
+ "nonempty_condition_rate": 0.509,
+ "nonempty_condition_rows": 389,
+ "nonempty_condition_row_rate": 0.499,
+ "nonempty_condition_rate_dedup": 0.501,
+ "condition_type_mismatch": 56,
  "label_like_nonempty": 0,
  "condition_span_invalid": 0,
  "sentence_max_len": 158,
  "sentence_truncated_pairs": 0,
  "dedup_key_version": "v2:scenic|kind|label|condition|suggestion",
  "by_scenic": {
-  "九寨沟": 351,
-  "颐和园": 138,
+  "九寨沟": 360,
+  "颐和园": 139,
   "黄山": 294
  },
  "by_text_type": {
   "official_route": 13,
-  "travelogue": 770
+  "travelogue": 780
  },
  "crowd_breakdown": {
   "孩子": 5,
@@ -152,7 +152,7 @@
   "新手": 1
  },
  "filtered": {
-  "not_advice_shape": 248,
+  "not_advice_shape": 243,
   "heading_colon": 11,
   "promo_ad": 3,
   "first_person_wish": 5,
@@ -161,8 +161,8 @@
   "restaurant_menu": 1,
   "rhetoric_fallback": 1,
   "delivery_online": 1,
-  "rhetoric_question": 1,
+  "rhetoric_question": 2,
   "experience_narration": 1
  },
- "filtered_pairs": 277
+ "filtered_pairs": 273
 }
