@@ -3,6 +3,7 @@
   "coverage": "游客路线与官方 POI 全集的交集 / 官方全集（均值）",
   "jaccard": "交集 / 并集（均值）",
   "order_tau": "公共 POI≥5 时，游客序列与最佳匹配官方序列的 Kendall tau（取各官方路线中的最大值，均值）",
+  "movement_note": "游客序列按移动动词上下文过滤（movement_sequence：前往/抵达/步行等从句中的提及才算行程停靠；推荐从句中的提及只记录不排序），route_type 区分 行程叙述/混合/推荐清单；无移动上下文的路线回退全序列",
   "time_allocation": "官方按时段累计时长占比；游客按文本时段词+时刻落点计数占比，且只统计 tourist_routes 的同一批路线"
  },
  "by_scenic_area": {
@@ -57,6 +58,15 @@
    "jaccard_mean": 0.363,
    "order_tau_mean": 0.676,
    "n_order_pairs": 80,
+   "movement_coverage_mean": 0.218,
+   "movement_jaccard_mean": 0.213,
+   "movement_order_tau_mean": 0.694,
+   "n_movement_pairs": 69,
+   "route_types": {
+    "混合": 39,
+    "行程叙述": 32,
+    "推荐清单": 9
+   },
    "n_tourists_unmatched": 0,
    "matching_rule": "每条游客路线取各官方路线中公共POI≥5 的最大 tau（择优，敏感性见 tau_aggregation_sensitivity）",
    "official_has_time_info": true,
@@ -171,6 +181,15 @@
    "jaccard_mean": 0.294,
    "order_tau_mean": 0.29,
    "n_order_pairs": 53,
+   "movement_coverage_mean": 0.198,
+   "movement_jaccard_mean": 0.189,
+   "movement_order_tau_mean": 0.367,
+   "n_movement_pairs": 35,
+   "route_types": {
+    "混合": 23,
+    "行程叙述": 16,
+    "推荐清单": 24
+   },
    "n_tourists_unmatched": 10,
    "matching_rule": "每条游客路线取各官方路线中公共POI≥5 的最大 tau（择优，敏感性见 tau_aggregation_sensitivity）",
    "official_has_time_info": false,
@@ -263,6 +282,15 @@
    "jaccard_mean": 0.366,
    "order_tau_mean": 0.535,
    "n_order_pairs": 82,
+   "movement_coverage_mean": 0.283,
+   "movement_jaccard_mean": 0.258,
+   "movement_order_tau_mean": 0.472,
+   "n_movement_pairs": 67,
+   "route_types": {
+    "行程叙述": 40,
+    "混合": 29,
+    "推荐清单": 13
+   },
    "n_tourists_unmatched": 0,
    "matching_rule": "每条游客路线取各官方路线中公共POI≥5 的最大 tau（择优，敏感性见 tau_aggregation_sensitivity）",
    "official_has_time_info": false,

@@ -64,6 +64,37 @@ if "poi_lookup" not in _DICT:
 POI_LOOKUP = {(r["scenic_area"], r["variant"]): r["canonical"] for r in _DICT["poi_lookup"]}
 
 
+# Movement vs recommendation context: a POI mention inside a movement clause (前往/抵达/步行…) reads
+# as an actually-visited stop; a mention inside a recommendation clause (值得/推荐/必去…) reads as a
+# suggestion. The comparison metrics run on the movement-filtered sequence; the full reading-order
+# sequence is still kept (poi_sequence) because the task6 graph accumulates precedence evidence from
+# every mention, not only from movement clauses.
+MOVE_CUE_RE = re.compile(
+    r"前往|抵达|来到|到达|走到|驱车|乘车|坐车|包车|自驾|步行|返回|回到|出发|赶往|下山|上山|"
+    r"途经|路过|经过|沿着|顺着|进入|入园|开到|飞到|爬到|漫步|逛到|去了|玩了|看完|直奔|先去|再去|再到|绕到|折返")
+REC_CUE_RE = re.compile(r"值得|推荐|建议|必去|值得一|打卡|别忘了|记得去|别错过|不妨|可以去")
+CLAUSE_SPLIT_RE = re.compile(r"[。！？；\n]")
+
+
+def _clause_of(text: str, start: int, end: int) -> str:
+
+    """The clause (sentence-delimiter bounded) containing the [start, end) span."""
+
+    if not text or start >= len(text):
+
+        return ""
+
+    left = 0
+
+    for m in CLAUSE_SPLIT_RE.finditer(text, 0, start):
+
+        left = m.end()
+
+    right = CLAUSE_SPLIT_RE.search(text, end)
+
+    return text[left:(right.end() if right else len(text))]
+
+
 def kendall_tau(a: list, b: list) -> float:
 
     """Kendall tau between two sequences (different orderings of the same set)."""
@@ -101,6 +132,10 @@ def extract_tourist_routes() -> list[dict]:
 
     ents = [json.loads(l) for l in (TASK2 / "output/exp2/entities_refined.jsonl").open(encoding="utf-8")]
 
+    texts = {r["record_id"]: r["clean_content"]
+
+             for r in (json.loads(l) for l in (TASK1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8") if l.strip())}
+
     routes = []
 
     for rec in ents:
@@ -109,7 +144,11 @@ def extract_tourist_routes() -> list[dict]:
 
             continue
 
+        text = texts.get(rec["record_id"], "")
+
         pois = []
+
+        movement = []
 
         for e in rec["entities"]:
 
@@ -121,9 +160,35 @@ def extract_tourist_routes() -> list[dict]:
 
                     pois.append(e["canonical"])
 
+                clause = _clause_of(text, e.get("start", -1), e.get("end", -1))
+
+                if MOVE_CUE_RE.search(clause):
+
+                    movement.append(e["canonical"])
+
+                elif REC_CUE_RE.search(clause):
+
+                    pass  # recommendation context: mentioned, but not sequenced as movement
+
+        movement_seq = [p for i, p in enumerate(movement) if i == 0 or p != movement[i - 1]]
+
+        movement_distinct = list(dict.fromkeys(movement))
+
         distinct = list(dict.fromkeys(pois))
 
         if len(distinct) >= 4:
+
+            if len(movement_distinct) >= 4 and len(movement_distinct) >= 0.6 * len(distinct):
+
+                route_type = "行程叙述"
+
+            elif len(movement_distinct) <= 1:
+
+                route_type = "推荐清单"
+
+            else:
+
+                route_type = "混合"
 
             routes.append({
 
@@ -135,9 +200,15 @@ def extract_tourist_routes() -> list[dict]:
 
                 "n_distinct": len(distinct),
 
+                "movement_sequence": movement_seq, "movement_distinct": movement_distinct,
+
+                "route_type": route_type,
+
                 # po_sequence keeps backtracking and repeated visits (consecutive duplicates already merged); graph edges use the full sequence;
 
-                # distinct_pois is only for the set-based criterion of coverage/tau
+                # distinct_pois is only for the set-based criterion of coverage/tau;
+
+                # movement_sequence filters mentions to movement clauses — the comparison metrics use it
 
             })
 
@@ -358,8 +429,13 @@ def main() -> int:
         tourists_here = [t for t in tourists if t["scenic_area"] == scenic]
 
         coverages, jaccards, taus = [], [], []
+        m_coverages, m_jaccards, m_taus = [], [], []
+        route_types: Counter = Counter()
 
         for t in tourists_here:
+
+            route_types[t.get("route_type", "未标注")] += 1
+            mseq = t.get("movement_distinct") or t["distinct_pois"]
 
             tset = set(t["distinct_pois"])
 
@@ -370,6 +446,12 @@ def main() -> int:
             coverages.append(len(common) / len(oset))
 
             jaccards.append(len(common) / len(tset | oset))
+
+            m_common = set(mseq) & oset
+
+            m_coverages.append(len(m_common) / len(oset))
+
+            m_jaccards.append(len(m_common) / len(set(mseq) | oset))
 
             best_tau = None
 
@@ -392,6 +474,22 @@ def main() -> int:
             if best_tau is not None:
 
                 taus.append(best_tau)
+
+            # Movement-filtered order signal: the same best-match tau rule on the movement sequence
+            # (POI mentions inside movement clauses only). Reported ALONGSIDE the primary metrics —
+            # shorter sequences make coverage definitionally lower, so movement coverage/tau is a
+            # lens on recommendation-noise removal, not a replacement criterion.
+            m_best_tau = None
+            for o in officials:
+                o_mset = set(o["norm_sequence"])
+                m_t_common = [q for q in mseq if q in o_mset]
+                m_common = [p for p in o["norm_sequence"] if p in set(mseq)]
+                if len(m_common) >= 5:
+                    tau = kendall_tau(m_t_common, m_common)
+                    if tau == tau and (m_best_tau is None or tau > m_best_tau):
+                        m_best_tau = tau
+            if m_best_tau is not None:
+                m_taus.append(m_best_tau)
 
             # Extension: aggregation-rule sensitivity (all valid tau pairs for this tourist route)
             all_taus = []
@@ -484,6 +582,18 @@ def main() -> int:
             "order_tau_mean": round(sum(taus) / len(taus), 3) if taus else None,
 
             "n_order_pairs": len(taus),
+
+            # Movement-filtered lens (reported alongside, not replacing the primary criteria):
+            # coverage is definitionally lower (shorter sequences); tau removes recommendation noise.
+            "movement_coverage_mean": round(sum(m_coverages) / len(m_coverages), 3) if m_coverages else None,
+
+            "movement_jaccard_mean": round(sum(m_jaccards) / len(m_jaccards), 3) if m_jaccards else None,
+
+            "movement_order_tau_mean": round(sum(m_taus) / len(m_taus), 3) if m_taus else None,
+
+            "n_movement_pairs": len(m_taus),
+
+            "route_types": dict(route_types),
             # Unmatched samples -- number of tourist routes with < 5 common POIs (tau not computable) and a note on the matching rule
             "n_tourists_unmatched": len(tourists_here) - len(taus),
             "matching_rule": "每条游客路线取各官方路线中公共POI≥5 的最大 tau（择优，敏感性见 tau_aggregation_sensitivity）",
@@ -533,6 +643,7 @@ def main() -> int:
             "jaccard": "交集 / 并集（均值）",
 
             "order_tau": "公共 POI≥5 时，游客序列与最佳匹配官方序列的 Kendall tau（取各官方路线中的最大值，均值）",
+            "movement_note": "游客序列按移动动词上下文过滤（movement_sequence：前往/抵达/步行等从句中的提及才算行程停靠；推荐从句中的提及只记录不排序），route_type 区分 行程叙述/混合/推荐清单；无移动上下文的路线回退全序列",
 
             "time_allocation": "官方按时段累计时长占比；游客按文本时段词+时刻落点计数占比，且只统计 tourist_routes 的同一批路线",
 
