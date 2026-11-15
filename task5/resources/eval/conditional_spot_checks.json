@@ -725,8 +725,8 @@
    "boundary": 8,
    "incorrect": 9
   },
-  "strict_precision": 0.673,
-  "lenient_precision": 0.827,
+  "precision": 0.827,
+  "precision_note": "正确与边界判定合计（宽松口径）：边界=切分/条件推断瑕疵但核心语义成立",
   "issues": {
    "边界切分": 11,
    "误抽": 3,

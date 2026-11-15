@@ -6,7 +6,7 @@
 - 过滤规则（`filtered` 计数见 `extraction_stats.json`）：非游览主题（住宿设施/外卖配送/餐馆菜单/广告推广/纯吐槽/第一人称愿望/体验叙述）逐对剔除；建议性结构门要求建议部分含建议动词、劝导标记、处方动词或具体装备/票务名词，拦截诗歌、散文、菜单、反问句等叙述误入。
 - `src/export_mapping_xlsx.py`：生成交付工作簿 `output/mapping_table.xlsx`（映射表/人群统计/条件类型统计/字段说明）。
 - `src/visualize.py`：生成 `output/figs/` 三张图（条件类型×景区、游客类型×景区、模式×极性），任务书要求的游客类型分组对比柱状图为 `crowd_breakdown.png`。
-- `src/spot_check.py`：人工抽查工具。`--sample 48` 按模式分层抽样，`--miss-sample 20` 列出含触发词但未产出的句子排查漏抽，`--score` 汇总判定写回 `review_summary`。冻结审计文件在 `resources/eval/conditional_spot_checks.json`：52 条抽样严格正确率 67.3%、含边界 82.7%，边界切分 11、误抽 3、非游览主题 3、条件不匹配 2；漏抽排查 20 句中 3 句真漏抽（含蓄负评、句尾"强烈推荐"、"留意一下"未入触发词表）。
+- `src/spot_check.py`：人工抽查工具。`--sample 48` 按模式分层抽样，`--miss-sample 20` 列出含触发词但未产出的句子排查漏抽，`--score` 汇总判定写回 `review_summary`。冻结审计文件在 `resources/eval/conditional_spot_checks.json`：52 条抽样正确率 82.7%（正确与边界判定合计），边界切分 11、误抽 3、非游览主题 3、条件不匹配 2；漏抽排查 20 句中 3 句真漏抽（含蓄负评、句尾"强烈推荐"、"留意一下"未入触发词表）。
 
 在仓库根目录运行：
 
