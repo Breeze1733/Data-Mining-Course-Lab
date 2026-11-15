@@ -292,22 +292,22 @@
  },
  "edge_relation_distribution": {
   "包含": 159,
-  "条件建议": 469,
+  "条件建议": 454,
   "先后顺序": 1807,
   "时段归属": 143,
   "交通方式": 57
  },
  "isolated_nodes": [],
  "roundtrip": {
-  "csv_nodes": 514,
-  "csv_edges": 2635,
-  "graphml_nodes": 514,
-  "graphml_edges": 2635,
+  "csv_nodes": 506,
+  "csv_edges": 2620,
+  "graphml_nodes": 506,
+  "graphml_edges": 2620,
   "ok": true
  },
  "provenance": {
-  "cond_nodes_checked": 337,
-  "cond_nodes_with_evidence": 337,
+  "cond_nodes_checked": 329,
+  "cond_nodes_with_evidence": 329,
   "cond_nodes_placeholder_named": 0,
   "order_edges_checked": 1564,
   "order_edges_with_records": 1564,

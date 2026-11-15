@@ -19,7 +19,6 @@ Output: output/conditional_pairs.jsonl (per pair), mapping_table.json (deduplica
 """
 from __future__ import annotations
 
-import hashlib
 import io
 import json
 import re
@@ -108,7 +107,8 @@ def split_multi_suggestions(sugg: str) -> list[str]:
 PLATFORM_PHRASE_RE = re.compile(r"点赞|收藏|一键三连|评论区|私信|关注我们|转发|推荐阅读|#[一-龥A-Za-z]{2,}")
 
 # Guards for non-advice sentences:
-LYRICAL_RE = re.compile(r"人生|岁月|初心|青春|梦想|心态|老得太快|明白得太迟|否定了自己|自己的想法")
+LYRICAL_RE = re.compile(r"人生|岁月|初心|青春|梦想|心态|老得太快|明白得太迟|否定了自己|自己的想法|"
+                        r"菩提|即心即佛|那就是佛|放慢生活的节奏|向往已久的宁静生活|童话里的")
 COGNITIVE_RE = re.compile(r"^(不要|别)(认为|觉得|以为|担心)")
 RHETORIC_IFSAY_RE = re.compile(r"^如果说")
 APPEAL_RE = re.compile(r"管理部门|引起重视|呼吁")
@@ -123,13 +123,21 @@ def skip_sentence(sent: str) -> bool:
 # Off-domain guard: a "条件→建议" pair must be advice about touring the scenic area. Suggestions about
 # room amenities, food delivery, restaurant menus, ad promotions, or pure venting carry no touring
 # knowledge and are dropped pair-wise (reasons counted in extraction_stats.off_domain_filtered).
-OFF_LODGING_AMENITY_RE = re.compile(r"浴缸|泡澡|拖鞋|隔音|房卡|淋浴|热水器|枕头|床垫|大床|双床房|房间里|房间有|客房")
+OFF_LODGING_AMENITY_RE = re.compile(r"浴缸|泡澡|拖鞋|隔音|房卡|淋浴|热水器|枕头|床垫|大床|双床房|房间里|房间有|客房|"
+                                    r"电视|空调|无线网|[Ww]i-?[Ff]i|遥控器|吹风机|热水壶")
 OFF_DELIVERY_RE = re.compile(r"外卖|快递|跑腿|网购|淘宝|京东|拼多多|拼单|自热食品寄")
 OFF_MENU_RE = re.compile(r"人均\s*[0-9一二三四五六七八九十百]+|一人食|下馆子|点菜|菜单|招牌菜|菜市场")
 OFF_PROMO_RE = re.compile(r"新用户|大礼包|优惠券|首日免租金|返现|立减|红包|折扣券|广告")
 OFF_RANT_RE = re.compile(r"气死|无语|恶心|差评|坑爹|垃圾|宰客|挨宰|再也不来|失望透顶|没有基本素|窝在家里|居家隔离|宅家")
 OFF_PRICE_RANT_RE = re.compile(r"(?:也要|都要|就要|花了|居然|竟然)\s*[^。，；！？]{0,6}?\d+\s*元")
 OFF_WISH_RE = re.compile(r"^(我|我们)[^。！？；]{0,8}(希望|想|盼|打算|计划|准备|觉得|相信)")
+# Famous attractions outside the three supported scenic areas (Beijing city sights for 颐和园 corpus,
+# Sichuan neighbours for 九寨沟 corpus, national classics). Checked on condition+suggestion text only —
+# the full sentence may legitimately mention them (e.g. 黄龙九寨站 is a station name).
+CROSS_AREA_RE = re.compile(
+    r"故宫|紫禁城|天坛|圆明园|香山|北海公园|景山公园|雍和宫|恭王府|什刹海|南锣鼓巷|十三陵|八达岭|慕田峪|长城|"
+    r"黄龙(?!九寨)|都江堰|四姑娘山|毕棚沟|达古冰川|神木垒|蒙顶山|碧峰峡|峨眉|乐山大佛|青城山|若尔盖|红原|康定|新都桥|稻城|"
+    r"三清山|庐山|泰山|华山|武夷山|张家界|乌镇|西塘|丽江古城|凤凰古城|洱海|桂林|阳朔")
 OFF_EXPERIENCE_RE = re.compile(r"我们?[^。！？；]{0,14}(?:冷到|累到|后悔|吓到|晕到)")
 OFF_RHETORIC_RE = re.compile(r"另当别论|另说|另议")
 ADVICE_HINT_RE = re.compile(r"要|记得|千万|最好|建议|不妨|注意|提前|可以|别|不要|避免|慎|务必|尽量|选择|避开|放弃|考虑|必须|需|值得|保证|容易|方便|适合|推荐")
@@ -172,6 +180,8 @@ def off_domain_reason(sent: str, cond: str, sugg: str) -> str | None:
         return "restaurant_menu"
     if OFF_PROMO_RE.search(cond + " " + sugg):
         return "promo_ad"
+    if CROSS_AREA_RE.search(cond + " " + sugg):
+        return "cross_area"
     if OFF_WISH_RE.match(sugg):
         return "first_person_wish"
     if OFF_RANT_RE.search(sugg) and not ADVICE_HINT_RE.search(sugg):
@@ -812,111 +822,19 @@ def norm(s: str) -> str:
     return re.sub(r"[\s，,。；;、！？!?\[\]()【】]+", "", s)
 
 
-def needs_semantic_roles(pair: dict) -> bool:
-    """Reserve LTP for inferred conditions and structurally complicated explicit clauses."""
-    kind = pair.get('condition_kind')
-    condition = pair.get('condition_text', '')
-    if kind == 'inferred':
-        return True
-    if kind != 'explicit' or not condition:
-        return False
-    trigger = pair.get('trigger', '')
-    return (trigger == '若' or '裸' in trigger or len(condition) > 30 or
-            bool(re.search(r'建议|推荐|最好|不要|不建议|可以', condition)))
-
-
-def link_semantic_roles(row: dict) -> list[dict]:
-    """Find LTP arguments matching this condition and a predicate in this advice."""
-    semantic = row.get('semantic_roles')
-    condition = re.sub(r'\s+', '', row.get('condition_text', ''))
-    sentence = row.get('sentence', '')
-    advice = row.get('suggestion_text', '')
-    advice_start = sentence.find(advice) if advice else -1
-    condition_span = row.get('condition_span')
-    if not semantic or not condition or advice_start < 0 or not condition_span:
-        return []
-    offsets = []
-    cursor = 0
-    for token in semantic['tokens']:
-        start = sentence.find(token, cursor)
-        if start < 0:
-            return []
-        offsets.append(start)
-        cursor = start + len(token)
-    links = []
-    for pred in semantic['predicates']:
-        index = pred['index']
-        if not 0 <= index < len(offsets) or not advice_start <= offsets[index] < advice_start + len(advice):
-            continue
-        for role, text, start, end in pred['arguments']:
-            if role not in {'A0', 'ARGM-CND', 'ARGM-TMP', 'ARGM-ADV'} or not (0 <= start <= end < len(offsets)):
-                continue
-            arg = re.sub(r'\s+', '', text)
-            overlap = max(offsets[start], condition_span[0]) < min(offsets[end] + len(semantic['tokens'][end]), condition_span[1])
-            similar = ((condition in arg and len(condition) / max(1, len(arg)) >= 0.5) or
-                       (arg in condition and len(arg) / max(1, len(condition)) >= 0.65))
-            if len(arg) >= 2 and overlap and similar:
-                links.append({'predicate': pred['predicate'], 'role': role, 'argument': text,
-                              'token_start': start, 'token_end': end})
-    return links
-
-
-def annotate_semantic_roles(pairs: list[dict], model_path: str) -> dict:
-    """Annotate selected difficult sentences with LTP cws+srl; rules handle straightforward conditions."""
-    from importlib.metadata import version
-    import torch
-    from ltp import LTP
-
-    torch.set_num_threads(min(4, torch.get_num_threads()))
-    model = LTP(model_path)
-    selected = [p for p in pairs if needs_semantic_roles(p)]
-    sentences = list(dict.fromkeys(p['sentence'] for p in selected))
-    cache = {}
-    batch_size = 12
-    for pos in range(0, len(sentences), batch_size):
-        batch = sentences[pos:pos + batch_size]
-        output = model.pipeline(batch, tasks=['cws', 'srl'])
-        if len(output.cws) != len(batch) or len(output.srl) != len(batch):
-            raise ValueError('LTP returned a different number of results than input sentences')
-        for sentence, tokens, roles in zip(batch, output.cws, output.srl):
-            cache[sentence] = {'tokens': tokens, 'predicates': roles}
-        if (pos // batch_size + 1) % 10 == 0 or pos + batch_size >= len(sentences):
-            print(f'LTP semantic roles: {min(pos + batch_size, len(sentences))}/{len(sentences)}', flush=True)
-
-    def has_condition(semantic):
-        return any(arg[0] == 'ARGM-CND' for pred in semantic['predicates'] for arg in pred['arguments'])
-
-    for pair in selected:
-        pair['semantic_roles'] = cache[pair['sentence']]
-    model_file = Path(model_path) / 'pytorch_model.bin'
-    model_sha256 = None
-    if model_file.is_file():
-        with model_file.open('rb') as fh:
-            model_sha256 = hashlib.file_digest(fh, 'sha256').hexdigest()
-    return {'tool': 'LTP', 'package_version': version('ltp'), 'model': model_path,
-            'model_file_sha256': model_sha256,
-            'tasks': ['cws', 'srl'], 'selection': 'inferred_or_complex_explicit',
-            'unique_sentences': len(sentences), 'annotated_pairs': len(selected),
-            'sentences_with_predicates': sum(bool(x['predicates']) for x in cache.values()),
-            'sentences_with_conditional_role': sum(has_condition(x) for x in cache.values()),
-            'pairs_with_conditional_role': sum(has_condition(p['semantic_roles']) for p in selected)}
-
-
 def main(argv=None) -> int:
     import argparse
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-attribution-filter", action="store_true",
                     help="关闭 P1 句级归属过滤（默认开启：景区外句子不产出条件建议对）")
-    ap.add_argument('--ltp-model', default=None,
-                    help='使用 LTP 模型目录或模型名执行分词和语义角色标注')
     args = ap.parse_args(argv)
 
     attr = None
     if not args.no_attribution_filter:
         import sys as _sys
         _sys.path.insert(0, str(ROOT.parent / "task4/src"))
-        from attribute_sentences import Attributor, SENT_SPLIT as ATTR_SPLIT
+        from attribute_sentences import Attributor
         attr = Attributor()
 
     rows = [json.loads(l) for l in (TASK1 / "data/processed/dataset_clean.jsonl").open(encoding="utf-8")]
@@ -1010,8 +928,6 @@ def main(argv=None) -> int:
 
     validate_pairs(all_pairs)
 
-    srl_stats = annotate_semantic_roles(all_pairs, args.ltp_model) if args.ltp_model else None
-
     # Dedup: same scenic area + condition provenance/label + normalized condition/advice text
     merged: dict[tuple, dict] = {}
     near_dup = 0
@@ -1046,15 +962,11 @@ def main(argv=None) -> int:
     refinement_counts = Counter()
     for item in mapping:
         corrected, changes = refine(item)
-        if corrected.get('semantic_roles'):
-            corrected['semantic_role_links'] = link_semantic_roles(corrected)
         if changes:
             refinement_counts["changed_rows"] += 1
             refinement_counts.update(changes)
         refined_mapping.append(corrected)
     mapping = refined_mapping
-    if srl_stats is not None:
-        srl_stats['mapping_rows_with_linked_roles'] = sum(bool(m.get('semantic_role_links')) for m in mapping)
 
     OUT.mkdir(parents=True, exist_ok=True)
     with (OUT / "conditional_pairs.jsonl").open("w", encoding="utf-8") as fh:
@@ -1074,7 +986,6 @@ def main(argv=None) -> int:
         pattern_kind[p["pattern"]][p["condition_kind"]] += 1
 
     stats = {
-        "semantic_roles": srl_stats,
         "condition_refinement": {
             "input_rows": len(mapping),
             "nonempty_before": nonempty_before_refinement,
