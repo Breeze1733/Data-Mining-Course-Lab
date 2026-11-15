@@ -86,8 +86,8 @@
    "thought": "决定调用工具 query_pois",
    "tool": "query_pois",
    "args": {
+    "limit": 10,
     "scenic": "九寨沟",
-    "limit": 12,
     "visitor_type": ""
    },
    "via": "react"
@@ -108,15 +108,15 @@
    "tool": "query_conditions",
    "args": {
     "limit": 6,
-    "scenic": "九寨沟",
-    "visitor_type": ""
+    "visitor_type": "",
+    "scenic": "九寨沟"
    },
    "via": "react"
   },
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"pois\": [{\"poi\": \"五花海\", \"degree\": 66, \"mention_freq\": 283, \"periods\": [\"上午\", \"下午\", \"未标注时段\"], \"transports\": [\"徒步\", \"观光车\"], \"visitor_fit\": 0, ",
+   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"pois\": [{\"poi\": \"五花海\", \"degree\": 65, \"mention_freq\": 283, \"periods\": [\"上午\", \"下午\", \"未标注时段\"], \"transports\": [\"徒步\", \"观光车\"], \"visitor_fit\": 0, ",
    "via": "react"
   },
   {
@@ -149,7 +149,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 8 个 POI：五花海、五彩池、长海、诺日朗、诺日朗瀑布、沟口"
+   "summary": "返回 8 个 POI：五花海、诺日朗、五彩池、长海、诺日朗瀑布、沟口"
   },
   {
    "step": "action",
@@ -211,7 +211,7 @@
   },
   {
    "step": "thought",
-   "thought": "时段预算：每日上限 5，总 1 天，裁剪 3 个 POI"
+   "thought": "时段预算：每日上限 5，总 1 天，裁剪 2 个 POI"
   },
   {
    "step": "action",
@@ -225,7 +225,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -297,7 +297,7 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "大家好！今天咱们玩转九寨沟一日游。上午入园先打卡**五花海**，接着徒步去**镜海**；中午坐观光车上**长海**，下午步行看**五彩池**，最后徒步到**诺日朗瀑布**。\n\n**温馨提示**：为避开人流，原始森林未纳入行程；因时间有限，已裁剪犀牛海、树正群海、树正寨等3个景点，您可按体力取舍。另外，山路多弯，易晕车的朋友记得提前备好晕车药哦！",
+ "answer": "大家好！今天九寨一日游为避人流省体力，已裁剪原始森林、犀牛海和树正群海。\n\n咱们上午先游五花海、镜海；中午坐车上长海；下午漫步五彩池，最后看壮观的诺日朗瀑布。\n\n特别提醒大家：若体力有限，千万别在芦苇海停留，那里道路窄没换乘点，得走很远到盆景滩才能坐车哦！",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -307,7 +307,7 @@
   ],
   "special_notes": [
    "已按您的要求避开：原始森林（未纳入行程）",
-   "时间预算限制：已裁剪 3 个景点（犀牛海, 树正群海, 树正寨等），建议根据体力取舍"
+   "时间预算限制：已裁剪 2 个景点（犀牛海, 树正群海等），建议根据体力取舍"
   ],
   "trip_month": null,
   "itinerary": [
@@ -362,52 +362,6 @@
      "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车"
     ],
     "frequency": 2
-   },
-   {
-    "cond_type": "人群",
-    "condition": "晕车",
-    "suggestion": "的晕车药(p8)吃了坐一路山路一点问题没有",
-    "all_suggestions": [
-     "买好晕车贴或者晕车药",
-     "的晕车药(p8)吃了坐一路山路一点问题没有"
-    ],
-    "frequency": 2
-   },
-   {
-    "cond_type": "人群",
-    "condition": "是家庭出游",
-    "suggestion": "不妨选择吃一顿丰盛的中餐",
-    "all_suggestions": [
-     "不妨选择吃一顿丰盛的中餐"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "恐高",
-    "suggestion": "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满",
-    "all_suggestions": [
-     "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "第一次",
-    "suggestion": "坐在座位上,其他站与站之间较短可以直接站",
-    "all_suggestions": [
-     "坐在座位上,其他站与站之间较短可以直接站"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "夫妻",
-    "suggestion": "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!",
-    "all_suggestions": [
-     "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!"
-    ],
-    "frequency": 1
    }
   ],
   "feasibility_warnings": [],

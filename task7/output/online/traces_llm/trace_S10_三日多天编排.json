@@ -7,9 +7,7 @@
   "days": 3,
   "days_explicit": true,
   "month": null,
-  "special": [
-   "省力"
-  ],
+  "special": [],
   "avoid": [],
   "must": [],
   "entrance": null,
@@ -49,9 +47,7 @@
     "visitor_type": null,
     "days": 3,
     "month": null,
-    "special": [
-     "省力"
-    ]
+    "special": []
    },
    "result": {
     "scenic": "九寨沟",
@@ -60,9 +56,7 @@
     "days": 3,
     "days_explicit": true,
     "month": null,
-    "special": [
-     "省力"
-    ],
+    "special": [],
     "avoid": [],
     "must": [],
     "entrance": null,
@@ -77,9 +71,9 @@
    "thought": "决定调用工具 query_pois",
    "tool": "query_pois",
    "args": {
-    "scenic": "九寨沟",
     "limit": 14,
-    "visitor_type": ""
+    "visitor_type": "",
+    "scenic": "九寨沟"
    },
    "via": "react"
   },
@@ -88,8 +82,8 @@
    "thought": "决定调用工具 query_route",
    "tool": "query_route",
    "args": {
-    "scenic": "九寨沟",
-    "days": 3
+    "days": 3,
+    "scenic": "九寨沟"
    },
    "via": "react"
   },
@@ -107,7 +101,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"pois\": [{\"poi\": \"五花海\", \"degree\": 66, \"mention_freq\": 283, \"periods\": [\"上午\", \"下午\", \"未标注时段\"], \"transports\": [\"徒步\", \"观光车\"], \"visitor_fit\": 0, ",
+   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"pois\": [{\"poi\": \"五花海\", \"degree\": 65, \"mention_freq\": 283, \"periods\": [\"上午\", \"下午\", \"未标注时段\"], \"transports\": [\"徒步\", \"观光车\"], \"visitor_fit\": 0, ",
    "via": "react"
   },
   {
@@ -129,18 +123,18 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_pois，参数 {'scenic': '九寨沟', 'visitor_type': '体力有限', 'limit': 12}",
+   "thought": "调用工具 query_pois，参数 {'scenic': '九寨沟', 'visitor_type': None, 'limit': 12}",
    "tool": "query_pois",
    "args": {
     "scenic": "九寨沟",
-    "visitor_type": "体力有限",
+    "visitor_type": null,
     "limit": 12
    }
   },
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 12 个 POI：芦苇海、盆景滩、五花海、五彩池、长海、诺日朗"
+   "summary": "返回 12 个 POI：五花海、诺日朗、五彩池、长海、诺日朗瀑布、沟口"
   },
   {
    "step": "action",
@@ -158,11 +152,11 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_conditions，参数 {'scenic': '九寨沟', 'visitor_type': '体力有限'}",
+   "thought": "调用工具 query_conditions，参数 {'scenic': '九寨沟', 'visitor_type': None}",
    "tool": "query_conditions",
    "args": {
     "scenic": "九寨沟",
-    "visitor_type": "体力有限"
+    "visitor_type": null
    }
   },
   {
@@ -172,34 +166,43 @@
   },
   {
    "step": "thought",
-   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 3, 'days_explicit': True, 'month': None, 'special': ['省力'], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': None, 'explicit_fields': ['days']}；以 ReAct 收集的证据为基础，核对候选景点后进入确定性编排：官方路线做骨架，时间预算与可行性校验兜底"
+   "thought": "约束={'scenic': '九寨沟', 'visitor_type': None, 'visitor_types': [], 'days': 3, 'days_explicit': True, 'month': None, 'special': [], 'avoid': [], 'must': [], 'entrance': None, 'exit_gate': None, 'explicit_fields': ['days']}；以 ReAct 收集的证据为基础，核对候选景点后进入确定性编排：官方路线做骨架，时间预算与可行性校验兜底"
   },
   {
    "step": "thought",
-   "via": "fallback",
-   "thought": "模型候选不足（12/12），按图谱热度补足：[]"
-  },
-  {
-   "step": "thought",
-   "thought": "编排骨架：模板“2016版二日游”覆盖已选 POI 的 100%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
+   "thought": "编排骨架：模板“2016版二日游”覆盖已选 POI 的 92%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
   },
   {
    "step": "action",
-   "thought": "调用工具 query_order，参数 {'scenic': '九寨沟', 'poi': '原始森林'}",
+   "thought": "调用工具 query_order，参数 {'scenic': '九寨沟', 'poi': '沟口'}",
    "tool": "query_order",
    "args": {
     "scenic": "九寨沟",
-    "poi": "原始森林"
+    "poi": "沟口"
    }
   },
   {
    "step": "observation",
    "tool": "query_order",
-   "summary": "后继：芳草海、箭竹海、日则沟、天鹅海"
+   "summary": "后继：长海、日则沟、五彩池、原始森林"
   },
   {
    "step": "thought",
    "thought": "query_order 后继校验：无已选后继，维持现有顺序"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '沟口'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "沟口"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -217,31 +220,17 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '箭竹海'}",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗'}",
    "tool": "query_poi_conditions",
    "args": {
     "scenic": "九寨沟",
-    "poi": "箭竹海"
+    "poi": "诺日朗"
    }
   },
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '五花海'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "五花海"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 5 条条件建议"
   },
   {
    "step": "action",
@@ -259,6 +248,20 @@
   },
   {
    "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '五花海'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "五花海"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 3 条条件建议"
+  },
+  {
+   "step": "action",
    "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '五彩池'}",
    "tool": "query_poi_conditions",
    "args": {
@@ -273,20 +276,6 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗瀑布'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "诺日朗瀑布"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 3 条条件建议"
-  },
-  {
-   "step": "action",
    "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '镜海'}",
    "tool": "query_poi_conditions",
    "args": {
@@ -298,6 +287,20 @@
    "step": "observation",
    "tool": "query_poi_conditions",
    "summary": "返回 4 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '诺日朗瀑布'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "九寨沟",
+    "poi": "诺日朗瀑布"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -328,20 +331,6 @@
    "summary": "返回 4 条条件建议"
   },
   {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '九寨沟', 'poi': '树正寨'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "九寨沟",
-    "poi": "树正寨"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
-  },
-  {
    "step": "thought",
    "thought": "可行性校验：1 条封禁/不建议提示；已附加到对应站点"
   },
@@ -355,14 +344,12 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "哈喽！这趟九寨沟3日省力游跟我走：第一天入园，**原始森林**咱们直接略过（大半天足矣），步行去**箭竹海**，徒步**五花海**，再坐车去**长海**。第二天步行打卡**五彩池**与**诺日朗瀑布**，中午乘车徒步**镜海**，下午步行到**犀牛海**。第三天漫步**树正群海**与**树正寨**，中午经**芦苇海**到下午的**盆景滩**。\n⚠️**导游贴心提示**：体力不好的朋友注意啦，芦苇海别久留；且盆景滩附近无换乘点，需步行较长距离去乘车哦！",
+ "answer": "大家跟我走：\n\nD1从**沟口**入园，去**诺日朗**和**长海**，**原始森林**大半天足矣建议不去；D2看**五花海**、**五彩池**、**镜海**与**诺日朗瀑布**；D3逛**犀牛海**、**树正群海**、**树正寨**与**箭竹海**。\n\n提示：长途尽量坐座，短站可站着；体力差别在芦苇海停留，因道路狭窄无换乘点，需长距离走到盆景滩乘车！",
  "plan": {
   "scenic": "九寨沟",
   "days": 3,
   "visitor_type": null,
-  "special": [
-   "省力"
-  ],
+  "special": [],
   "special_notes": [],
   "trip_month": null,
   "itinerary": [
@@ -370,24 +357,24 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "原始森林",
+    "poi": "沟口",
     "transport_from_prev": "入园",
-    "note": "⚠ 不去原始森林——其实大半天足矣（证据年份 2022）"
+    "note": ""
    },
    {
     "order": 2,
     "day": 1,
     "period": "上午",
-    "poi": "箭竹海",
+    "poi": "原始森林",
     "transport_from_prev": "步行",
-    "note": ""
+    "note": "⚠ 不去原始森林——其实大半天足矣（证据年份 2022）"
    },
    {
     "order": 3,
     "day": 1,
     "period": "中午",
-    "poi": "五花海",
-    "transport_from_prev": "徒步",
+    "poi": "诺日朗",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
@@ -395,22 +382,22 @@
     "day": 1,
     "period": "下午",
     "poi": "长海",
-    "transport_from_prev": "乘坐观光车",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 5,
     "day": 2,
     "period": "上午",
-    "poi": "五彩池",
-    "transport_from_prev": "步行",
+    "poi": "五花海",
+    "transport_from_prev": "徒步",
     "note": ""
    },
    {
     "order": 6,
     "day": 2,
     "period": "上午",
-    "poi": "诺日朗瀑布",
+    "poi": "五彩池",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -419,14 +406,14 @@
     "day": 2,
     "period": "中午",
     "poi": "镜海",
-    "transport_from_prev": "乘坐徒步",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 8,
     "day": 2,
     "period": "下午",
-    "poi": "犀牛海",
+    "poi": "诺日朗瀑布",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -434,7 +421,7 @@
     "order": 9,
     "day": 3,
     "period": "上午",
-    "poi": "树正群海",
+    "poi": "犀牛海",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -442,7 +429,7 @@
     "order": 10,
     "day": 3,
     "period": "上午",
-    "poi": "树正寨",
+    "poi": "树正群海",
     "transport_from_prev": "步行",
     "note": ""
    },
@@ -450,17 +437,17 @@
     "order": 11,
     "day": 3,
     "period": "中午",
-    "poi": "芦苇海",
+    "poi": "树正寨",
     "transport_from_prev": "步行",
-    "note": "与游客类型适配"
+    "note": ""
    },
    {
     "order": 12,
     "day": 3,
     "period": "下午",
-    "poi": "盆景滩",
+    "poi": "箭竹海",
     "transport_from_prev": "步行",
-    "note": "与游客类型适配"
+    "note": ""
    }
   ],
   "tips": [
@@ -473,6 +460,15 @@
      "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车"
     ],
     "frequency": 2
+   },
+   {
+    "cond_type": "人群",
+    "condition": "第一次",
+    "suggestion": "坐在座位上,其他站与站之间较短可以直接站",
+    "all_suggestions": [
+     "坐在座位上,其他站与站之间较短可以直接站"
+    ],
+    "frequency": 1
    }
   ],
   "feasibility_warnings": [

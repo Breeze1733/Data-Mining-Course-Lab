@@ -60,10 +60,8 @@
     "scenic": "黄山",
     "visitor_type": null,
     "days": 3,
-    "month": 12,
-    "special": [
-     "避开人流"
-    ]
+    "month": null,
+    "special": []
    },
    "result": {
     "scenic": "黄山",
@@ -94,9 +92,9 @@
    "thought": "决定调用工具 query_pois",
    "tool": "query_pois",
    "args": {
-    "scenic": "黄山",
-    "limit": 14,
-    "visitor_type": ""
+    "limit": 15,
+    "visitor_type": "",
+    "scenic": "黄山"
    },
    "via": "react"
   },
@@ -105,8 +103,8 @@
    "thought": "决定调用工具 query_route",
    "tool": "query_route",
    "args": {
-    "scenic": "黄山",
-    "days": 3
+    "days": 3,
+    "scenic": "黄山"
    },
    "via": "react"
   },
@@ -115,9 +113,9 @@
    "thought": "决定调用工具 query_conditions",
    "tool": "query_conditions",
    "args": {
-    "scenic": "黄山",
     "limit": 6,
-    "visitor_type": ""
+    "visitor_type": "",
+    "scenic": "黄山"
    },
    "via": "react"
   },
@@ -144,8 +142,18 @@
    "thought": "决定调用工具 query_poi_conditions",
    "tool": "query_poi_conditions",
    "args": {
+    "poi": "西海大峡谷",
+    "scenic": "黄山"
+   },
+   "via": "react"
+  },
+  {
+   "step": "action",
+   "thought": "决定调用工具 query_poi_conditions",
+   "tool": "query_poi_conditions",
+   "args": {
     "scenic": "黄山",
-    "poi": "西海大峡谷"
+    "poi": "天都峰"
    },
    "via": "react"
   },
@@ -156,9 +164,15 @@
    "via": "react"
   },
   {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "{\"poi\": \"天都峰\", \"scenic\": \"黄山\", \"conditions\": [{\"condition\": \"莲花峰封山可选择登天都峰\", \"suggestion\": \"然后登天都,然后步行下山,登天都就无法乘索道下山\", \"cond_type\": \"体力安全\", \"frequency\": 2, \"source_years\": \"[\\\"2021\\",
+   "via": "react"
+  },
+  {
    "step": "thought",
    "via": "react",
-   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（4 次工具调用）"
+   "thought": "ReAct 收束：模型认为证据足够，产出规划依据（5 次工具调用）"
   },
   {
    "step": "action",
@@ -213,53 +227,25 @@
   },
   {
    "step": "thought",
-   "thought": "编排骨架：模板“南门二日游”覆盖已选 POI 的 62%；query_route 返回的路线覆盖率不足，另选覆盖最高者"
+   "thought": "编排骨架：模板“冬季南门二日游”覆盖已选 POI 的 62%；query_route 返回的路线入选"
   },
   {
    "step": "action",
-   "thought": "调用工具 query_order，参数 {'scenic': '黄山', 'poi': '排云亭'}",
+   "thought": "调用工具 query_order，参数 {'scenic': '黄山', 'poi': '光明顶'}",
    "tool": "query_order",
    "args": {
     "scenic": "黄山",
-    "poi": "排云亭"
+    "poi": "光明顶"
    }
   },
   {
    "step": "observation",
    "tool": "query_order",
-   "summary": "后继：西海大峡谷、飞来石、西海、光明顶"
+   "summary": "后继：鳌鱼峰、飞来石、天都峰、白云宾馆"
   },
   {
    "step": "thought",
    "thought": "query_order 后继校验：无已选后继，维持现有顺序"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '排云亭'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "黄山",
-    "poi": "排云亭"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 1 条条件建议"
-  },
-  {
-   "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '西海'}",
-   "tool": "query_poi_conditions",
-   "args": {
-    "scenic": "黄山",
-    "poi": "西海"
-   }
-  },
-  {
-   "step": "observation",
-   "tool": "query_poi_conditions",
-   "summary": "返回 2 条条件建议"
   },
   {
    "step": "action",
@@ -274,6 +260,20 @@
    "step": "observation",
    "tool": "query_poi_conditions",
    "summary": "返回 11 条条件建议"
+  },
+  {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '白云宾馆'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "黄山",
+    "poi": "白云宾馆"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 4 条条件建议"
   },
   {
    "step": "action",
@@ -319,11 +319,11 @@
   },
   {
    "step": "action",
-   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '北海'}",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '排云亭'}",
    "tool": "query_poi_conditions",
    "args": {
     "scenic": "黄山",
-    "poi": "北海"
+    "poi": "排云亭"
    }
   },
   {
@@ -374,12 +374,26 @@
    "summary": "返回 3 条条件建议"
   },
   {
+   "step": "action",
+   "thought": "调用工具 query_poi_conditions，参数 {'scenic': '黄山', 'poi': '鳌鱼峰'}",
+   "tool": "query_poi_conditions",
+   "args": {
+    "scenic": "黄山",
+    "poi": "鳌鱼峰"
+   }
+  },
+  {
+   "step": "observation",
+   "tool": "query_poi_conditions",
+   "summary": "返回 2 条条件建议"
+  },
+  {
    "step": "thought",
    "thought": "时段窗口扫描：1 条条件节点含月份窗口且与出行月 12 不符，已生成时段提示"
   },
   {
    "step": "thought",
-   "thought": "可行性校验：10 条封禁/不建议提示；已附加到对应站点"
+   "thought": "可行性校验：12 条封禁/不建议提示；已附加到对应站点"
   },
   {
    "step": "render",
@@ -391,7 +405,7 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "欢迎来到黄山3日游！我们避开人流与莲花峰。\nD1：入园经排云亭、西海到光明顶，后乘云谷索道至白鹅岭。\nD2：游始信峰、北海、迎客松、天都峰与飞来石，夜宿白云宾馆。\nD3：乘西海大峡谷缆车至玉屏楼。\n💡提示：12月出游请核对开放情况；登天都峰则无法乘索道下山；建议找熟悉当地人带路更省心！",
+ "answer": "大家好！黄山3日游行程来啦：\n\nD1登**光明顶**，去**云谷寺**乘索道至**白鹅岭**，游**始信峰**；  \nD2探**排云亭**、看**迎客松**，登**天都峰**（注意：登峰后无法乘索道下山），再游**飞来石**与**鳌鱼峰**，晚宿**白云宾馆**；  \nD3走**百步云梯**、访**玉屏楼**，赏**猴子观海**。\n\n提示：已为您避开莲花峰；12月出行请提前确认景点开放情况，注意保暖防滑！",
  "plan": {
   "scenic": "黄山",
   "days": 3,
@@ -409,36 +423,20 @@
     "order": 1,
     "day": 1,
     "period": "上午",
-    "poi": "排云亭",
+    "poi": "光明顶",
     "transport_from_prev": "入园",
-    "note": ""
+    "note": "⚠ 只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步"
    },
    {
     "order": 2,
     "day": 1,
-    "period": "上午",
-    "poi": "西海",
+    "period": "中午",
+    "poi": "云谷寺",
     "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 3,
-    "day": 1,
-    "period": "中午",
-    "poi": "光明顶",
-    "transport_from_prev": "步行",
-    "note": "⚠ 只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步"
-   },
-   {
-    "order": 4,
-    "day": 1,
-    "period": "下午",
-    "poi": "云谷寺",
-    "transport_from_prev": "云谷索道",
-    "note": ""
-   },
-   {
-    "order": 5,
     "day": 1,
     "period": "下午",
     "poi": "白鹅岭",
@@ -446,39 +444,39 @@
     "note": ""
    },
    {
-    "order": 6,
-    "day": 2,
-    "period": "上午",
+    "order": 4,
+    "day": 1,
+    "period": "下午",
     "poi": "始信峰",
     "transport_from_prev": "步行",
     "note": "⚠ 只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步"
    },
    {
-    "order": 7,
+    "order": 5,
     "day": 2,
     "period": "上午",
-    "poi": "北海",
+    "poi": "排云亭",
     "transport_from_prev": "步行",
     "note": ""
    },
    {
-    "order": 8,
+    "order": 6,
     "day": 2,
-    "period": "中午",
+    "period": "上午",
     "poi": "迎客松",
     "transport_from_prev": "步行",
     "note": "⚠ 莲花峰封山可选择登天都峰——然后登天都,然后步行下山,登天都就无法乘索道下山（证据年份 2021"
    },
    {
-    "order": 9,
+    "order": 7,
     "day": 2,
-    "period": "下午",
+    "period": "中午",
     "poi": "天都峰",
     "transport_from_prev": "步行",
     "note": "⚠ 莲花峰封山可选择登天都峰——然后登天都,然后步行下山,登天都就无法乘索道下山（证据年份 2021"
    },
    {
-    "order": 10,
+    "order": 8,
     "day": 2,
     "period": "下午",
     "poi": "飞来石",
@@ -486,7 +484,15 @@
     "note": "⚠ 不去看飞来石——超近路就是可以直接到达这里（证据年份 2023）"
    },
    {
-    "order": 11,
+    "order": 9,
+    "day": 2,
+    "period": "下午",
+    "poi": "鳌鱼峰",
+    "transport_from_prev": "步行",
+    "note": "⚠ 莲花峰封山可选择登天都峰——然后登天都,然后步行下山,登天都就无法乘索道下山（证据年份 2021"
+   },
+   {
+    "order": 10,
     "day": 2,
     "period": "晚上",
     "poi": "白云宾馆",
@@ -494,18 +500,26 @@
     "note": "，建议宿此"
    },
    {
+    "order": 11,
+    "day": 3,
+    "period": "上午",
+    "poi": "百步云梯",
+    "transport_from_prev": "步行",
+    "note": ""
+   },
+   {
     "order": 12,
     "day": 3,
     "period": "上午",
-    "poi": "西海大峡谷",
-    "transport_from_prev": "观光缆车",
+    "poi": "玉屏楼",
+    "transport_from_prev": "步行",
     "note": ""
    },
    {
     "order": 13,
     "day": 3,
     "period": "中午",
-    "poi": "玉屏楼",
+    "poi": "猴子观海",
     "transport_from_prev": "步行",
     "note": ""
    }
@@ -578,10 +592,12 @@
    "天都峰：去天都峰——强烈建议从云谷索道上山,爬天都峰,是从迎客松再往前走,去天都峰就没法坐玉屏索道下（证据年份 2021）",
    "天都峰：想云谷上玉屏下——那我感觉大概率是没啥力气的,而且时间也来不及,老道口下午3点关闭,新道口下午1点",
    "飞来石：不去看飞来石——超近路就是可以直接到达这里（证据年份 2023）",
+   "鳌鱼峰：莲花峰封山可选择登天都峰——然后登天都,然后步行下山,登天都就无法乘索道下山（证据年份 2021）",
+   "鳌鱼峰：只一天建议带上石笋缸——竖琴松,不去始信峰)—白鹅山庄—701电视台—光明顶—天海—鳌鱼峰—百步云梯—莲",
    "黄山（时段提示）：条件建议集中于4/5/6/7/8/9/10/11月，您计划的12月不在其中——是按照整体景致的话最适合游玩的是是4-11月份，请确认当期景点开放情况"
   ],
   "template_used": true,
   "template_route": "HS-EXTRA1-R2 冬季南门二日游",
-  "template_src": "（参考官方路线 HS-EXTRA1-R2 南门二日游）"
+  "template_src": "（参考官方路线 HS-EXTRA1-R2 冬季南门二日游）"
  }
 }

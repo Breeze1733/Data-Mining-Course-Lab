@@ -81,8 +81,8 @@
    "tool": "query_pois",
    "args": {
     "visitor_type": "",
-    "limit": 10,
-    "scenic": "九寨沟"
+    "scenic": "九寨沟",
+    "limit": 12
    },
    "via": "react"
   },
@@ -91,8 +91,8 @@
    "thought": "决定调用工具 query_route",
    "tool": "query_route",
    "args": {
-    "days": 1,
-    "scenic": "九寨沟"
+    "scenic": "九寨沟",
+    "days": 1
    },
    "via": "react"
   },
@@ -101,8 +101,8 @@
    "thought": "决定调用工具 query_conditions",
    "tool": "query_conditions",
    "args": {
-    "visitor_type": "",
     "scenic": "九寨沟",
+    "visitor_type": "",
     "limit": 6
    },
    "via": "react"
@@ -112,15 +112,15 @@
    "thought": "决定调用工具 query_poi_conditions",
    "tool": "query_poi_conditions",
    "args": {
-    "poi": "原始森林",
-    "scenic": "九寨沟"
+    "scenic": "九寨沟",
+    "poi": "原始森林"
    },
    "via": "react"
   },
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"pois\": [{\"poi\": \"五花海\", \"degree\": 66, \"mention_freq\": 283, \"periods\": [\"上午\", \"下午\", \"未标注时段\"], \"transports\": [\"徒步\", \"观光车\"], \"visitor_fit\": 0, ",
+   "summary": "{\"scenic\": \"九寨沟\", \"visitor_type\": null, \"pois\": [{\"poi\": \"五花海\", \"degree\": 65, \"mention_freq\": 283, \"periods\": [\"上午\", \"下午\", \"未标注时段\"], \"transports\": [\"徒步\", \"观光车\"], \"visitor_fit\": 0, ",
    "via": "react"
   },
   {
@@ -159,7 +159,7 @@
   {
    "step": "observation",
    "tool": "query_pois",
-   "summary": "返回 8 个 POI：五花海、五彩池、长海、诺日朗、诺日朗瀑布、沟口"
+   "summary": "返回 8 个 POI：五花海、诺日朗、五彩池、长海、诺日朗瀑布、沟口"
   },
   {
    "step": "action",
@@ -249,7 +249,7 @@
   {
    "step": "observation",
    "tool": "query_poi_conditions",
-   "summary": "返回 4 条条件建议"
+   "summary": "返回 3 条条件建议"
   },
   {
    "step": "action",
@@ -307,7 +307,7 @@
    "thought": "综合 ReAct 证据、官方路线模板与条件贴士，生成最终行程"
   }
  ],
- "answer": "九寨沟一日精华游来啦！上午入园直奔**原始森林**（体力有限可取舍），步行到**五花海**，再徒步去**镜海**。下午坐观光车到**长海**，步行打卡**五彩池**。\n\n**温馨提示**：山路多请备好晕车药；若时间紧，诺日朗瀑布、犀牛海、树正群海等3个景点建议按体力取舍哦！",
+ "answer": "大家带好随身物品，咱们九寨沟一日游出发啦！上午入园先去原始森林，再漫步五花海；中午打卡镜海；下午乘观光车游览长海，最后步行至五彩池。\n\n提醒大家：因时间有限已裁剪诺日朗瀑布等景点，原始森林大半天足矣，建议依体力取舍；体力较弱的朋友千万别在芦苇海停留，那里道路狭窄无换乘点，需长途步行到盆景滩乘车哦！",
  "plan": {
   "scenic": "九寨沟",
   "days": 1,
@@ -370,52 +370,6 @@
      "那边由于道路狭窄,所以并没有设立换乘点,需要步行很长一段距离到达盆景滩乘车"
     ],
     "frequency": 2
-   },
-   {
-    "cond_type": "人群",
-    "condition": "晕车",
-    "suggestion": "的晕车药(p8)吃了坐一路山路一点问题没有",
-    "all_suggestions": [
-     "买好晕车贴或者晕车药",
-     "的晕车药(p8)吃了坐一路山路一点问题没有"
-    ],
-    "frequency": 2
-   },
-   {
-    "cond_type": "人群",
-    "condition": "是家庭出游",
-    "suggestion": "不妨选择吃一顿丰盛的中餐",
-    "all_suggestions": [
-     "不妨选择吃一顿丰盛的中餐"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "恐高",
-    "suggestion": "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满",
-    "all_suggestions": [
-     "一定不要睁开眼睛,真的太刺激了!随着索道上升,视野逐渐脱离了山谷的束缚,被远方其他的高山填满"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "第一次",
-    "suggestion": "坐在座位上,其他站与站之间较短可以直接站",
-    "all_suggestions": [
-     "坐在座位上,其他站与站之间较短可以直接站"
-    ],
-    "frequency": 1
-   },
-   {
-    "cond_type": "人群",
-    "condition": "夫妻",
-    "suggestion": "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!",
-    "all_suggestions": [
-     "楼主不能吃辣,但也都能接受,它不是纯辣而是很香,香味勾的很想吃!完全推荐!"
-    ],
-    "frequency": 1
    }
   ],
   "feasibility_warnings": [
