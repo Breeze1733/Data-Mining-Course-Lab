@@ -138,7 +138,7 @@ ADVICE_HINT_RE = re.compile(r"要|记得|千万|最好|建议|不妨|注意|提�
 # marker, a prescription verb, or a concrete equipment/ticket item. Trigger-carried patterns pass by
 # construction (可以/不要/须…); the gate only bites when even the trigger's tail has no prescriptive
 # form, which signals a trigger misfire on narration (poetry, essays, menu reviews).
-ADVICE_MARK_RE = re.compile(r"一定要|务必|记得|千万|最好|建议|推荐|不妨|注意|提前|可以|避开|放弃|考虑|尽量|慎|切勿|避免|不去|别去|别走|不要|必须|值得|必备|少不了|很有必要|适合|适宜|要(?=[车带穿买记备提求注])|须")
+ADVICE_MARK_RE = re.compile(r"不允许|禁止|不得|严禁|一定要|务必|记得|千万|最好|建议|推荐|不妨|注意|提前|可以|避开|放弃|考虑|尽量|慎|切勿|避免|不去|别去|别走|不要|必须|值得|必备|少不了|很有必要|适合|适宜|要(?=[车带穿买记备提求注])|须")
 PRESCRIPTION_RE = re.compile(r"带|穿|买|住|坐|乘|走|游|玩|吃|喝|订|预约|租|停[车泊]|爬|登|排队|避|备|换|请|错峰|错开|包车|自驾|步行|下山|上山|进[山沟入园内]|门[进出]|前往|赏(?![的了着])|观(?=[景赏察看])|拍(?=[照摄出])|摄[影像]|看|休[息整]|宿|安排|规划|省(?=[0-9一二三钱时间力气])|放缓|减速|慢[行跑]|缓行|安全行驶|错过|打卡")
 GATE_GEAR_RE = re.compile(r"雨衣|雨伞|雨具|冲锋衣|羽绒服|登山杖|手套|充电宝|干粮|现金|墨镜|太阳镜|氧气|冰爪|护膝|防晒|帽子|登山鞋|防滑鞋")
 
@@ -181,8 +181,12 @@ def off_domain_reason(sent: str, cond: str, sugg: str) -> str | None:
 
 _PHOTO_HINT = re.compile(r"拍照|出片|机位|镜头|拍摄|摄影|合影|角度|光线|构图")
 _TICKET_HINT = re.compile(r"门票|联票|买票|票价|预约|免费|半价|优惠|一卡通|票")
-_LODGING_HINT = re.compile(r"住|酒店|民宿|宾馆|客栈|床位|帐篷|标间|多人间|入住|过夜|夜宿")
-_FOOD_HINT = re.compile(r"吃|餐|食|饭|菜|小吃|美食|特产|零食|面包|泡面|自热")
+_LODGING_HINT = re.compile(
+    r"酒店|民宿|宾馆|客栈|床位|帐篷|标间|多人间|入住|过夜|夜宿|住宿|"
+    r"(?<![记家撑仗停抓稳忍禁恋受持坚保维留站堵居不])(?<![A-Za-z])住"
+    r"(?!客|户|宅|手|口|嘴|持|院|房)")
+_FOOD_HINT = re.compile(
+    r"吃(?![^，,。；;！？!?\s]{0,3}药)|餐|食|饭|菜|小吃|美食|特产|零食|面包|泡面|自热")
 
 
 def refine_condition_type(cond_text: str, sugg_text: str, current: str) -> str:
@@ -202,6 +206,44 @@ def refine_condition_type(cond_text: str, sugg_text: str, current: str) -> str:
 
 
 CLAUSE_DELIM = re.compile(r"[，,；;。！？!?\n]")
+
+# Extension A (bare "…的话") helpers. The condition is the whole clause before 的话; the old
+# fixed-width left scan dropped the leading characters of long conditions.
+A2_ENUM_PREFIX = re.compile(r"^\s*(?:\d+[.、)）]|[A-Za-z][.、)）]|[（(]\d+[)）])\s*")
+A2_DISCOURSE_PREFIX = re.compile(
+    r"^(?:但(?!凡)|但是|然而|所以|因此|另外|此外|其实|总之|然后(?:是)?|其他参考[:：]?)\s*")
+A2_META_RE = re.compile(r"一句话|来形容|游记|攻略")
+
+
+def _clause_start(sent: str, idx: int) -> int:
+    """Start of the clause containing idx; an unclosed "(" opens a parenthetical clause."""
+    left = 0
+    for cm in CLAUSE_DELIM.finditer(sent, 0, idx):
+        left = cm.end()
+    opens = list(re.finditer(r"[（(]", sent[left:idx]))
+    if opens:
+        o = left + opens[-1].start()
+        if sent.find("）", o, idx) < 0 and sent.find(")", o, idx) < 0:
+            left = o + 1
+    return left
+
+
+def _a2_condition(sent: str, idx: int):
+    """(condition, span) for the bare "X的话" at idx; span is exact on the sentence."""
+    left = _clause_start(sent, idx)
+    cond = sent[left:idx].strip()
+    for _ in range(3):
+        nxt = A2_DISCOURSE_PREFIX.sub("", A2_ENUM_PREFIX.sub("", cond)).strip()
+        if nxt == cond:
+            break
+        cond = nxt
+    if not cond:
+        return "", None
+    a = sent.rfind(cond, left, idx)
+    if a < 0 or sent[a:a + len(cond)] != cond:
+        return "", None
+    return cond, [a, a + len(cond)]
+
 
 LEGACY_LABELS = {
     "一般建议", "一般建议（避雷）", "时间条件（句内）", "天气条件（句内）",
@@ -463,6 +505,7 @@ def refine(row: dict) -> tuple[dict, list[str]]:
 def extract_from_sentence(sent: str) -> list[dict]:
     pairs = []
     seen_spans = set()
+    conditional_emitted = False  # regulation-only pairs must not suppress the negative-advice pass
 
     # Otherwise-branch splitting (a better parse than the explicit-condition branch — store the mutually
     # exclusive branches separately, no merging)
@@ -500,6 +543,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
             pairs.append({"pattern": "显式条件", "trigger": trigger,
                           "suggestions": [sugg], "sentence": sent,
                           **_cond(cond, cond_span, "explicit")})
+            conditional_emitted = True
         seen_spans.add(m.start())
 
     for m in re.finditer(r"(如果|要是|若|假如)([^。！？；，]{1,40}?的话)(?=[就才可以建议最好也])", sent):
@@ -514,33 +558,40 @@ def extract_from_sentence(sent: str) -> list[dict]:
             pairs.append({"pattern": "显式条件", "trigger": trigger,
                           "suggestions": [sugg], "sentence": sent,
                           **_cond(cond_text, cond_span, "explicit")})
+            conditional_emitted = True
         seen_spans.add(m.start())
 
     # Extension A: bare "X的话，Y" (no 如果/要是 prefix) — "玩黄龙的话住松潘古城"
-    for m in re.finditer(r"([一-龥A-Za-z0-9]{2,12})的话[，,]?\s*", sent):
-        if m.start() in seen_spans:
+    for m in re.finditer(r"的话[，,]?\s*", sent):
+        cond, cond_span = _a2_condition(sent, m.start())
+        if not cond or not (2 <= len(cond) <= 40):
             continue
-        cond, cond_span = _group_span(sent, m, 1)
-        if cond.startswith(("如果", "要是", "若", "假如", "既然", "就是说")):
+        if any(mk in cond for mk in COND_MARKERS):
             continue  # conjunction forms are handled by P1
-        # The bare variant must not re-handle conjunction sentences: P1 already extracted them, and a
-        # late anchor (matched from the conjunction's second character) would emit a near-duplicate
-        # pair whose condition text carries one stray leading character.
-        if any(mk in cond for mk in COND_MARKERS) or (cond and m.start() > 0
-                and (sent[m.start() - 1] + cond[0]) in ("如果", "要是", "假如", "若是", "假若")):
+        if cond.startswith(("否则", "不然", "要不")):
             continue
-        rest = sent[m.end():].strip()
-        if not rest or not (SUGG_VERB.match(rest)
-                            or re.match(r"(?:建议|最好|推荐|记得|不妨|务必|要|选|住|坐|乘|带|穿|备|订|避)", rest)):
+        if A2_META_RE.search(cond):
+            continue  # "如要用一句话来形容的话" is discourse, not a situation condition
+        # Do not let one advice swallow the next conditional clause: "A的话做B，C的话做D"
+        nxt = sent.find("的话", m.end())
+        advice_end = _clause_start(sent, nxt) if nxt >= 0 else len(sent)
+        rest = sent[m.end():max(m.end(), advice_end)].strip()
+        if not rest or rest.startswith("那么"):
+            continue  # "X的话，那么Y" is parallel rhetoric, not conditional advice
+        if rest.startswith("那") and "说" in cond:
             continue
-        for sugg in split_multi_suggestions(rest[:40]):
+        if not (SUGG_VERB.match(rest)
+                or re.match(r"(?:建议|最好|推荐|记得|不妨|务必|要|选|住|坐|乘|带|穿|备|订|避)", rest)):
+            continue
+        for sugg in split_multi_suggestions(rest):
             pairs.append({"pattern": "显式条件", "trigger": "…的话(裸)",
                           "suggestions": [sugg], "sentence": sent,
                           **_cond(cond, cond_span, "explicit")})
+            conditional_emitted = True
         seen_spans.add(m.start())
 
     # Extension B: space-separated "condition occurrence + imperative" — "高反情况出现 路上随时休息补氧"
-    for m in re.finditer(r"([一-龥A-Za-z0-9]{2,14}(?:出现|的时候?))[ 　]+([一-龥][^。！？；]{1,28})", sent):
+    for m in re.finditer(r"([一-龥A-Za-z0-9]{2,14}(?:出现|的时候?))[ 　]+([一-龥][^。！？；]+)", sent):
         cond, cond_span = _group_span(sent, m, 1)
         rest = m.group(2).strip()
         if not re.search(r"(?:休息|补氧|带上?|备|穿|涂|错峰|排队|慢行|提前)", rest[:10]):
@@ -549,15 +600,17 @@ def extract_from_sentence(sent: str) -> list[dict]:
                       "suggestions": [rest], "sentence": sent,
                       "condition_type": "体力安全" if ("高反" in cond or "体力" in cond) else "一般",
                       **_cond(cond, cond_span, "explicit")})
+        conditional_emitted = True
 
     # Extension C: must-do/no-entry regulations ("你需要乘坐新国线登山车"/"私家车不允许进入")
-    for m in re.finditer(r"(需要?|须)(乘坐?|购买|预订|预约)[^。！？；，]{1,26}", sent):
+    for m in re.finditer(r"(?<![不无毋非])(必须|需要?|须)(乘坐?|购买|预订|预约)"
+                         r"[^。！？；，,()（）【】、➡→]*", sent):
         pairs.append({"pattern": "依据规定", "trigger": m.group(1) + m.group(2),
                       "suggestions": [m.group(0)], "sentence": sent,
                       "condition_type": "预约票务" if ("订" in m.group(2) or "预约" in m.group(2)) else "交通",
                       **_cond("", None, "absent", label="入园/通行规定（句内）",
                              reason="regulation_not_conditional")})
-    for m in re.finditer(r"(不允许|禁止|不得)[^。！？；，]{1,26}", sent):
+    for m in re.finditer(r"(?<![不])(不允许|禁止|不得)[^。！？；，,()（）【】、➡→]+", sent):
         back = sent[max(0, m.start() - 12):m.start()]
         if re.search(r"(估计|可能|将|恐怕|也许|说不定)", back):
             continue  # predictive context ("估计不久将禁止"), not a current regulation
@@ -569,15 +622,15 @@ def extract_from_sentence(sent: str) -> list[dict]:
                       **_cond("", None, "absent", label="入园/通行规定（句内）",
                              reason="regulation_not_conditional")})
     # Extension D: note + closure/not-open regulations ("需要注意的是北京很多景点周一都不开放")
-    for m in re.finditer(r"(需要注意的是?|注意)[^。！？；]{0,18}(不开放|闭馆|关闭|停运|暂停开放)[^。！？；]{0,20}", sent):
+    for m in re.finditer(r"(需要注意的是?|注意)[^。！？；]{0,18}(不开放|闭馆|关闭|停运|暂停开放)[^。！？；]+", sent):
         pairs.append({"pattern": "依据规定", "trigger": m.group(1),
-                      "suggestions": [m.group(0)[:40]], "sentence": sent,
+                      "suggestions": [m.group(0)], "sentence": sent,
                       "condition_type": "时间",
                       **_cond("", None, "absent", label="开放时间规定（句内）",
                              reason="regulation_not_conditional")})
 
     # P7 by-regulation: conditional rule information from 按照/根据+要求/规定/政策/须知
-    for m in re.finditer(r"((?:按照|根据|依据)[^。！？；]{0,16}?(?:要求|规定|政策|须知|提示))[^。！？；]{0,12}?[，,]\s*([^。！？；]{1,60})", sent):
+    for m in re.finditer(r"((?:按照|根据|依据)[^。！？；]{0,16}?(?:要求|规定|政策|须知|提示))[^。！？；]{0,12}?[，,]\s*([^。！？；]+)", sent):
         cond, cond_span = _group_span(sent, m, 1)
         rest = m.group(2).strip()
         if not rest:
@@ -591,6 +644,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
                           "condition_type": "一般",
                           **_cond(cond, cond_span, "explicit")})
             emitted = True
+            conditional_emitted = True
         if emitted:
             seen_spans.add(m.start())
 
@@ -606,45 +660,48 @@ def extract_from_sentence(sent: str) -> list[dict]:
             pairs.append({"pattern": "时点条件", "trigger": "当…时/遇到…时",
                           "suggestions": [sugg], "sentence": sent,
                           **_cond(cond, cond_span, "explicit")})
+            conditional_emitted = True
         seen_spans.add(m.start())
 
-    if pairs:
+    if conditional_emitted:
         return pairs
 
-    # P4 advice class (with crowd/situation inference)
-    for m in re.finditer(r"((?<![不])建议(?![的话])|推荐(?!了)|(?<![的])最好|尽量|务必|记得|记住|千万|不妨|(?<![不合舒])适合|(?<![舒])适宜|(?<!我)一定要|值得)([^。！？；]{1,60})", sent):
-        clause = m.group(2).strip()
-        # "最好的天气,就是…" copula rhetoric is dropped later by the advice-shape gate, while
-        # "最好的选择是直奔长海" style advice passes it — no trigger-level skip needed here.
-        crowd = crowd_subtype(clause) or crowd_subtype(sent)
-        advice_start = m.end(1)
-        if crowd:
-            cond_label, cond_type = f"游客为{crowd}", "人群"
-            cond_fields = _infer_fields(sent, advice_start, ["人群"], cond_label)
-        elif WEATHER_RE.search(sent):
-            cond_label, cond_type = "天气条件（句内）", "天气"
-            cond_fields = _infer_fields(sent, advice_start, ["天气"], cond_label)
-        elif TIME_RE.search(sent):
-            cond_label, cond_type = "时间条件（句内）", "时间"
-            cond_fields = _infer_fields(sent, advice_start, ["时间"], cond_label)
-        else:
-            cond_label, cond_type = "一般建议", "一般"
-            cond_fields = _infer_fields(sent, advice_start, ["装备"], cond_label)
-        emitted = False
-        for sugg in split_multi_suggestions(clause):
-            if re.match(r"^[第其][一二三四五六七八九十]", sugg.strip()):
-                continue  # enumeration items ("第二,房卡") are not advice
-            pairs.append({"pattern": "建议推断", "trigger": m.group(1),
-                          "suggestions": [sugg], "sentence": sent,
-                          "condition_type": cond_type, **cond_fields})
-            emitted = True
-        if emitted:
-            return pairs
+    # P4 advice class (with crowd/situation inference). Regulation-only pairs must not suppress
+    # P5/P6, but P4 over-fires on regulation sentences (headings/narration), so it stays gated.
+    if not pairs:
+        for m in re.finditer(r"((?<![不])建议(?![的话])|推荐(?!了)|(?<![的])最好|尽量|务必|记得|记住|千万|不妨|(?<![不合舒])适合|(?<![舒])适宜|(?<!我)一定要|值得)([^。！？；]+)", sent):
+            clause = m.group(2).strip()
+            # "最好的天气,就是…" copula rhetoric is dropped later by the advice-shape gate, while
+            # "最好的选择是直奔长海" style advice passes it — no trigger-level skip needed here.
+            crowd = crowd_subtype(clause) or crowd_subtype(sent)
+            advice_start = m.end(1)
+            if crowd:
+                cond_label, cond_type = f"游客为{crowd}", "人群"
+                cond_fields = _infer_fields(sent, advice_start, ["人群"], cond_label)
+            elif WEATHER_RE.search(sent):
+                cond_label, cond_type = "天气条件（句内）", "天气"
+                cond_fields = _infer_fields(sent, advice_start, ["天气"], cond_label)
+            elif TIME_RE.search(sent):
+                cond_label, cond_type = "时间条件（句内）", "时间"
+                cond_fields = _infer_fields(sent, advice_start, ["时间"], cond_label)
+            else:
+                cond_label, cond_type = "一般建议", "一般"
+                cond_fields = _infer_fields(sent, advice_start, ["装备"], cond_label)
+            emitted = False
+            for sugg in split_multi_suggestions(clause):
+                if re.match(r"^[第其][一二三四五六七八九十]", sugg.strip()):
+                    continue  # enumeration items ("第二,房卡") are not advice
+                pairs.append({"pattern": "建议推断", "trigger": m.group(1),
+                              "suggestions": [sugg], "sentence": sent,
+                              "condition_type": cond_type, **cond_fields})
+                emitted = True
+            if emitted:
+                return pairs
 
     # P5 crowd subject + 可以
     for m in re.finditer(
             r"(老人|老人小孩|带孩子[^。！？；，]{0,6}|带娃|小孩|儿童|婴儿|亲子[^。！？；，]{0,4}|情侣|夫妻|"
-            r"孕妇|腿脚[^。！？；，]{0,4}|体力[^。！？；，]{0,4}|新手|第一次[^。！？；，]{0,6}|学生|恐高|晕车)可以([^。！？；]{1,50})", sent):
+            r"孕妇|腿脚[^。！？；，]{0,4}|体力[^。！？；，]{0,4}|新手|第一次[^。！？；，]{0,6}|学生|恐高|晕车)可以([^。！？；]+)", sent):
         crowd, crowd_span = _group_span(sent, m, 1)
         segs = split_multi_suggestions(m.group(2))
         # Re-attach the leading "可以" verb cue to the first segment — advice starts from the verb
@@ -659,7 +716,7 @@ def extract_from_sentence(sent: str) -> list[dict]:
         return pairs
 
     # P6 negative advice
-    for m in re.finditer(r"((?<!要)不要(?![要不要门票钱票])|不建议|不宜|(?<![特级区差分别参离告])别(?=[去走买坐赶忘信贪乱省图踩拒绝玩用管抢急费听折腾改等着拖穿在太])|避免|(?<![不])慎|切勿|(?<![禁])忌|(?<![要])不用(?=[去走买带])|不必(?=[去走买带])|无需|没必要)([^。！？；]{1,50})", sent):
+    for m in re.finditer(r"((?<!要)不要(?![要不要门票钱票])|不建议|不宜|(?<![特级区差分别参离告])别(?=[去走买坐赶忘信贪乱省图踩拒绝玩用管抢急费听折腾改等着拖穿在太])|避免|(?<![不])慎|切勿|(?<![禁])忌|(?<![要])不用(?=[去走买带])|不必(?=[去走买带])|无需|没必要)([^。！？；]+)", sent):
         clause = m.group(0).strip()
         if re.match(r"不要(太多|要好|要太好|不要的|太[好美妙棒])", clause):
             continue  # colloquial exaggerated comparison ("好了不要太多/不要太美"), not advice
@@ -912,7 +969,7 @@ def main(argv=None) -> int:
                     if sugg.endswith(("：", ":")):
                         off_domain["heading_colon"] += 1
                         continue
-                    if re.search(r"[吗呢嘛][!！]?$", sugg):
+                    if re.search(r"[吗呢嘛][!！?？]?$", sugg):
                         off_domain["rhetoric_question"] += 1
                         continue
                     if OFF_PRICE_RANT_RE.search(sugg):
