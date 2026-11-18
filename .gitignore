@@ -1,34 +1,20 @@
-# Python（对全部 task 生效；统一使用根目录 .venv 共享环境）
+# Python .venv 环境
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 
-# Node（task1 浏览器采集）
+# Node
 node_modules/
 
-# 密钥与环境变量（任何层级，严禁入库）
+# 密钥与环境变量
 .env
 .env.*
 !.env.example
 
-# 系统与办公临时文件
+# 系统临时文件
 .DS_Store
 Thumbs.db
 *.tmp
 *.log
 ~$*.docx
-
-# 根目录保持纯脚本入口，防止误建的 Python 工程文件入库
-/.python-version
-/uv.lock
-/pyproject.toml
-/CLAUDE.md
-
-# 本地资料、诊断脚本和打包结果
-/local/
-
-# 可由离线脚本生成的中间产物
-/task2/output/exp2/entities_baseline.jsonl
-/task3/output/tourist_time_hierarchy.jsonl
-/task4/output/resolved_examples.json
